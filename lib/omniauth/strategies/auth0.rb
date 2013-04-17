@@ -3,9 +3,11 @@ require "omniauth-oauth2"
 module OmniAuth
   module Strategies
     class Auth0 < OmniAuth::Strategies::OAuth2
-      def initialize(args = {})
+      def initialize(app, args = {})
         super
+        self.options.client_options.site = "https://#{args[:namespace]}"
         self.options.client_options.authorize_url = "https://#{args[:namespace]}/authorize"
+        self.options.client_options.token_url = "https://#{args[:namespace]}/oauth/token"
       end
 
       PASSTHROUGHS = %w[
@@ -19,9 +21,9 @@ module OmniAuth
       option :name, "auth0"
 
       def authorize_params
-        super.tap do |params|
+        super.tap do |param|
           PASSTHROUGHS.each do |p|
-            params[p.to_sym] = request.params[p] if request.params[p]
+            param[p.to_sym] = request.params[p] if request.params[p]
           end
         end
       end

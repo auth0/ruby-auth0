@@ -9,7 +9,7 @@ require 'omniauth'
 require 'ruby-auth0'
 
 RSpec.configure do |config|
-  config.include WebMock::API
-  config.include Rack::Test::Methods
-  config.extend  OmniAuth::Test::StrategyMacros, :type => :strategy
+  config.include	WebMock::API
+  config.include	Rack::Test::Methods
+  config.extend		OmniAuth::Test::StrategyMacros, :type => :strategy
 end
