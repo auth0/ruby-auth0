@@ -28,7 +28,7 @@ module OmniAuth
         end
       end
 
-      uid { access_token.params['account'] }
+      uid { raw_info['_id'] }
 
       extra do
         { :raw_info => raw_info }
@@ -36,11 +36,15 @@ module OmniAuth
 
       info do
         {
-            :name => retrieve_info["name"],
-            :email => retrieve_info["email"],
-            :description => retrieve_info["description"],
-            :image => retrieve_info["thumbnail_url"],
-            :urls => { :url => retrieve_info["url"]}
+          :email => raw_info["email"],
+          :family_name => raw_info["family_name"],
+          :gender => raw_info["gender"],
+          :given_name => raw_info["given_name"],
+          :name => raw_info["name"],
+          :locale => raw_info["locale"],
+          :nickname => raw_info["nickname"],
+          :picture => raw_info["picture"],
+          :user_id => raw_info["user_id"],
         }
       end
 
@@ -49,16 +53,6 @@ module OmniAuth
           access_token.options[:mode] = :query
           access_token.options[:param_name] = :access_token
           access_token.get("/profiles").parsed
-        end
-      end
-
-      private
-
-      def retrieve_info
-        @info ||= begin
-          access_token.options[:mode] = :query
-          access_token.options[:param_name] = :access_token
-          access_token.get("/profile").parsed
         end
       end
     end
