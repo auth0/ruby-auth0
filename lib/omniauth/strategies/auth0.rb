@@ -28,7 +28,7 @@ module OmniAuth
         end
       end
 
-      uid { raw_info['_id'] }
+      uid { raw_info['user_id'] }
 
       extra do
         { :raw_info => raw_info }
@@ -36,15 +36,13 @@ module OmniAuth
 
       info do
         {
-          :email => raw_info["email"],
-          :family_name => raw_info["family_name"],
-          :gender => raw_info["gender"],
-          :given_name => raw_info["given_name"],
           :name => raw_info["name"],
-          :locale => raw_info["locale"],
+          :email => raw_info["email"],
           :nickname => raw_info["nickname"],
-          :picture => raw_info["picture"],
-          :user_id => raw_info["user_id"],
+          :first_name => raw_info["given_name"],
+          :last_name => raw_info["family_name"],
+          :location => raw_info["locale"],
+          :image => raw_info["picture"]
         }
       end
 
@@ -52,7 +50,7 @@ module OmniAuth
         @raw_info ||= begin
           access_token.options[:mode] = :query
           access_token.options[:param_name] = :access_token
-          access_token.get("/profiles").parsed
+          access_token.get("/identities").parsed
         end
       end
     end

@@ -80,36 +80,36 @@ describe OmniAuth::Strategies::Auth0 do
       subject.stub(:raw_info) { @raw_info }
     end
 
+    it 'returns the uid (required)' do
+      subject.uid.should eq('google-oauth2|102835921788417079450')
+    end
+
+    it 'returns the name (required)' do
+      subject.info[:name].should eq('FirstName LastName')
+    end
+
     it 'returns the email' do
       subject.info[:email].should eq('user@mail.com')
     end
 
-    it 'returns the family name' do
-      subject.info[:family_name].should eq('LastName')
+    it 'returns the nickname' do
+      subject.info[:nickname].should eq('nick')
     end
 
-    it 'returns the given name' do
-      subject.info[:given_name].should eq('FirstName')
+    it 'returns the last name' do
+      subject.info[:last_name].should eq('LastName')
     end
 
-    it 'returns the gender' do
-      subject.info[:gender].should eq('male')
+    it 'returns the first name' do
+      subject.info[:first_name].should eq('FirstName')
     end
 
-    it 'returns the locale' do
-      subject.info[:locale].should eq('en')
+    it 'returns the location' do
+      subject.info[:location].should eq('en')
     end
 
-    it 'returns the name' do
-      subject.info[:name].should eq('FirstName LastName')
-    end
-
-    it 'returns the picture' do
-      subject.info[:picture].should eq('pic')
-    end
-
-    it 'returns the user_id' do
-      subject.info[:user_id].should eq('google-oauth2|102835921788417079450')
+    it 'returns the image' do
+      subject.info[:image].should eq('pic')
     end
   end
 end
