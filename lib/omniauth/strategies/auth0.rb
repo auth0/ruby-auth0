@@ -8,6 +8,8 @@ module OmniAuth
         self.options.client_options.site = "https://#{args[:namespace]}"
         self.options.client_options.authorize_url = "https://#{args[:namespace]}/authorize"
         self.options.client_options.token_url = "https://#{args[:namespace]}/oauth/token"
+        self.options.token_params.client_id = args[:client_id]
+        self.options.token_params.client_secret = args[:client_secret]
       end
 
       PASSTHROUGHS = %w[
@@ -19,6 +21,13 @@ module OmniAuth
       ]
 
       option :name, "auth0"
+
+      option :token_params, {
+        :client_id => '',
+        :client_secret => '',
+        :type => 'web_server',
+        :grant_type => 'client_credentials'
+      }
 
       def authorize_params
         super.tap do |param|

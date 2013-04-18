@@ -12,6 +12,9 @@ describe OmniAuth::Strategies::Auth0 do
     @request.stub(:params) { {} }
     @request.stub(:cookies) { {} }
     @request.stub(:env) { {} }
+
+    @session = double('Session')
+    @session.stub(:delete).with('omniauth.state').and_return('state')
   end
 
   after do
@@ -19,7 +22,10 @@ describe OmniAuth::Strategies::Auth0 do
   end
 
   subject do
-    OmniAuth::Strategies::Auth0.new(app, :namespace => "tenny.auth0.com:3000").tap do |strategy|
+    OmniAuth::Strategies::Auth0.new(app, 
+      :namespace => "tenny.auth0.com:3000", 
+      :client_id => "client_id", 
+      :client_secret => 'client_secret').tap do |strategy|
       strategy.stub(:request) { @request }
     end
   end
@@ -54,7 +60,7 @@ describe OmniAuth::Strategies::Auth0 do
     end
   end
 
-  context "info" do
+  describe "callback phase" do
     before :each do
       @raw_info = {
         "_id" => "165dabb5140ee2cc66b5137912ccd760",
@@ -80,36 +86,47 @@ describe OmniAuth::Strategies::Auth0 do
       subject.stub(:raw_info) { @raw_info }
     end
 
-    it 'returns the uid (required)' do
-      subject.uid.should eq('google-oauth2|102835921788417079450')
+    context "info" do
+      it 'returns the uid (required)' do
+        subject.uid.should eq('google-oauth2|102835921788417079450')
+      end
+
+      it 'returns the name (required)' do
+        subject.info[:name].should eq('FirstName LastName')
+      end
+
+      it 'returns the email' do
+        subject.info[:email].should eq('user@mail.com')
+      end
+
+      it 'returns the nickname' do
+        subject.info[:nickname].should eq('nick')
+      end
+
+      it 'returns the last name' do
+        subject.info[:last_name].should eq('LastName')
+      end
+
+      it 'returns the first name' do
+        subject.info[:first_name].should eq('FirstName')
+      end
+
+      it 'returns the location' do
+        subject.info[:location].should eq('en')
+      end
+
+      it 'returns the image' do
+        subject.info[:image].should eq('pic')
+      end
     end
 
-    it 'returns the name (required)' do
-      subject.info[:name].should eq('FirstName LastName')
-    end
-
-    it 'returns the email' do
-      subject.info[:email].should eq('user@mail.com')
-    end
-
-    it 'returns the nickname' do
-      subject.info[:nickname].should eq('nick')
-    end
-
-    it 'returns the last name' do
-      subject.info[:last_name].should eq('LastName')
-    end
-
-    it 'returns the first name' do
-      subject.info[:first_name].should eq('FirstName')
-    end
-
-    it 'returns the location' do
-      subject.info[:location].should eq('en')
-    end
-
-    it 'returns the image' do
-      subject.info[:image].should eq('pic')
+    context "get token" do
+      it 'params' do
+        subject.token_params.to_hash(:symbolize_keys => true)[:client_id].should eq 'client_id'
+        subject.token_params.to_hash(:symbolize_keys => true)[:client_secret].should eq 'client_secret'
+        subject.token_params.to_hash(:symbolize_keys => true)[:type].should eq 'web_server'
+        subject.token_params.to_hash(:symbolize_keys => true)[:grant_type].should eq 'client_credentials'
+     end
     end
   end
 end
