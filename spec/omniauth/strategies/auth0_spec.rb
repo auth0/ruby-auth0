@@ -121,12 +121,35 @@ describe OmniAuth::Strategies::Auth0 do
     end
 
     context "get token" do
+      before :each do
+        @access_token = double('OAuth2::AccessToken')
+        @access_token.stub(:token)
+        @access_token.stub(:expires?)
+        @access_token.stub(:expires_at)
+        @access_token.stub(:refresh_token)
+        subject.stub(:access_token) { @access_token }
+      end
+
       it 'params' do
         subject.token_params.to_hash(:symbolize_keys => true)[:client_id].should eq 'client_id'
         subject.token_params.to_hash(:symbolize_keys => true)[:client_secret].should eq 'client_secret'
         subject.token_params.to_hash(:symbolize_keys => true)[:type].should eq 'web_server'
         subject.token_params.to_hash(:symbolize_keys => true)[:grant_type].should eq 'client_credentials'
-     end
+      end
+
+      it 'returns a Hash' do
+        subject.credentials.should be_a(Hash)
+      end
+      
+      it 'returns the token' do
+        @access_token.stub(:token) { 
+          {
+            :access_token => "OTqSFa9zrh0VRGAZHH4QPJISCoynRwSy9FocUazuaU950EVcISsJo3pST11iTCiI", 
+            :token_type => "bearer"
+          } }
+        subject.credentials['token'][:access_token].should eq('OTqSFa9zrh0VRGAZHH4QPJISCoynRwSy9FocUazuaU950EVcISsJo3pST11iTCiI')
+        subject.credentials['token'][:token_type].should eq('bearer')
+      end
     end
   end
 end
