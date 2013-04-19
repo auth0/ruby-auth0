@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "ruby-auth0/version"
+require "auth0/version"
 
 Gem::Specification.new do |s|
   s.name        = "auth0"
-  s.version     = Ruby::Auth0::VERSION
+  s.version     = Auth0::VERSION
   s.authors     = ["Ezequiel Morito"]
   s.email       = ["me@ezequielmorito.com.ar"]
   s.homepage    = "https://github.com/auth0/ruby-auth0"
