@@ -3,31 +3,23 @@ require "omniauth-oauth2"
 module OmniAuth
   module Strategies
     class Auth0 < OmniAuth::Strategies::OAuth2
-      def initialize(app, args = {})
-        super
-        self.options.client_options.site = "https://#{args[:namespace]}"
-        self.options.client_options.authorize_url = "https://#{args[:namespace]}/authorize"
-        self.options.client_options.token_url = "https://#{args[:namespace]}/oauth/token"
-        self.options.token_params.client_id = args[:client_id]
-        self.options.token_params.client_secret = args[:client_secret]
-      end
-
       PASSTHROUGHS = %w[
-        client_id
-        response_type
-        redirect_uri
-        state
         connection
+        redirect_uri
       ]
 
       option :name, "auth0"
+      option :namespace, nil
 
-      option :token_params, {
-        :client_id => '',
-        :client_secret => '',
-        :type => 'web_server',
-        :grant_type => 'client_credentials'
-      }
+      args [:client_id, :client_secret, :namespace]
+
+      def initialize(app, *args, &block)
+        super
+        @options.client_options.site          = "https://#{options[:namespace]}"
+        @options.client_options.authorize_url = "https://#{options[:namespace]}/authorize"
+        @options.client_options.token_url     = "https://#{options[:namespace]}/oauth/token"
+        @options.client_options.userinfo_url  = "https://#{options[:namespace]}/userinfo"
+      end
 
       def authorize_params
         super.tap do |param|
@@ -37,7 +29,7 @@ module OmniAuth
         end
       end
 
-      uid { raw_info['user_id'] }
+      uid { raw_info["user_id"] }
 
       extra do
         { :raw_info => raw_info }
@@ -56,11 +48,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= begin
-          access_token.options[:mode] = :query
-          access_token.options[:param_name] = :access_token
-          access_token.get("/identities").parsed
-        end
+        @raw_info ||= access_token.get(options.client_options.userinfo_url).parsed
       end
     end
   end

@@ -23,9 +23,7 @@ describe OmniAuth::Strategies::Auth0 do
 
   subject do
     OmniAuth::Strategies::Auth0.new(app, 
-      :namespace => "tenny.auth0.com:3000", 
-      :client_id => "client_id", 
-      :client_secret => 'client_secret').tap do |strategy|
+        "client_id", "client_secret", "tenny.auth0.com:3000").tap do |strategy|
       strategy.stub(:request) { @request }
     end
   end
@@ -55,8 +53,11 @@ describe OmniAuth::Strategies::Auth0 do
     end
 
     it "authorize params" do
-      subject.stub(:request) { double('Request', {:params => { "connection" => "google-oauth2" }, :env => {}}) }
+      subject.stub(:request) { double('Request', {:params => { 
+        "connection" => "google-oauth2", "redirect_uri" => "redirect_uri" }, :env => {}}) }
       subject.authorize_params.include?("connection").should == true
+      subject.authorize_params.include?("state").should == true
+      subject.authorize_params.include?("redirect_uri").should == true
     end
   end
 
@@ -128,13 +129,6 @@ describe OmniAuth::Strategies::Auth0 do
         @access_token.stub(:expires_at)
         @access_token.stub(:refresh_token)
         subject.stub(:access_token) { @access_token }
-      end
-
-      it 'params' do
-        subject.token_params.to_hash(:symbolize_keys => true)[:client_id].should eq 'client_id'
-        subject.token_params.to_hash(:symbolize_keys => true)[:client_secret].should eq 'client_secret'
-        subject.token_params.to_hash(:symbolize_keys => true)[:type].should eq 'web_server'
-        subject.token_params.to_hash(:symbolize_keys => true)[:grant_type].should eq 'client_credentials'
       end
 
       it 'returns a Hash' do
