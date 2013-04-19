@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "ruby-auth0/version"
 
 Gem::Specification.new do |s|
-  s.name        = "ruby-auth0"
+  s.name        = "auth0"
   s.version     = Ruby::Auth0::VERSION
   s.authors     = ["Ezequiel Morito"]
   s.email       = ["me@ezequielmorito.com.ar"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Ruby client library for the Auth0 platform.}
   s.description = %q{Ruby client library for the Auth0 platform.}
 
-  s.rubyforge_project = "ruby-auth0"
+  s.rubyforge_project = "auth0"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
