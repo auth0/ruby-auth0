@@ -10,11 +10,14 @@ module OmniAuth
 
       option :name, "auth0"
       option :namespace, nil
+      option :provider_ignores_state, true
 
-      args [:client_id, :client_secret, :namespace]
+      args [:client_id, :client_secret, :namespace, :provider_ignores_state]
 
       def initialize(app, *args, &block)
         super
+        @options.provider_ignores_state = args[3] unless args[3].nil?
+
         @options.client_options.site          = "https://#{options[:namespace]}"
         @options.client_options.authorize_url = "https://#{options[:namespace]}/authorize"
         @options.client_options.token_url     = "https://#{options[:namespace]}/oauth/token"

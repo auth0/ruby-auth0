@@ -18,6 +18,8 @@ on the [Auth0 Page](https://app.auth0.com).
       provider :auth0, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'], ENV['YOUR_NAMESPACE']
     end
 
+> Optional you can set the `:provider_ignores_state` passing a fourth parameter. By default it is true.
+
 ## Connections
 
 You can authorize many connections through Auth0. Link to
