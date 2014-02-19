@@ -5,8 +5,8 @@ require "auth0/version"
 Gem::Specification.new do |s|
   s.name        = "auth0"
   s.version     = Auth0::VERSION
-  s.authors     = ["Ezequiel Morito"]
-  s.email       = ["me@ezequielmorito.com.ar"]
+  s.authors     = ["Auth0", "Ezequiel Morito", "Jose Romaniello"]
+  s.email       = ["support@auth0.com"]
   s.homepage    = "https://github.com/auth0/ruby-auth0"
   s.summary     = %q{Ruby client library for the Auth0 platform.}
   s.description = %q{Ruby client library for the Auth0 platform.}
@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'omniauth', '~> 1.0'
-  s.add_dependency 'omniauth-oauth2', '~> 1.0'
+  s.add_runtime_dependency 'omniauth-oauth2', '~> 1.1'
+
   s.add_development_dependency 'rspec', '~> 2.7'
   s.add_development_dependency 'rack-test'
   s.add_development_dependency 'simplecov'
