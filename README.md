@@ -1,8 +1,6 @@
 # OmniAuth Auth0
 
-This is the official OmniAuth strategy for authenticating to Auth0. To
-use it, you'll need to sign up for an OAuth2 Application ID and Secret
-on the [Auth0 Page](https://app.auth0.com).
+This is the official OmniAuth strategy for authenticating to [Auth0](https://auth0.com).
 
 ## Basic Usage
 
