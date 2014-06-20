@@ -16,6 +16,10 @@ module OmniAuth
 
       def initialize(app, *args, &block)
         super
+
+        warn "[DEPRECATION] The omniauth strategy in this gem is deprecated."
+        warn "[DEPRECATION] Please use the gem omniauth-auth0."
+
         @options.provider_ignores_state = args[3] unless args[3].nil?
 
         @options.client_options.site          = "https://#{options[:namespace]}"

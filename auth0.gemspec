@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'omniauth-oauth2', '~> 1.1'
+  s.add_runtime_dependency 'httparty', '~> 0.13'
 
   s.add_development_dependency 'rspec', '~> 2.7'
   s.add_development_dependency 'rack-test'
