@@ -1,7 +1,12 @@
-## Ruby client for [Auth0](https://auth0.com)
+Ruby client for [Auth0](https://auth0.com)
 
 > This used to be the omniauth strategy for [Auth0](https://auth0.com) but now is a client for the Auth0 api. The omniauth strategy has been moved to [omniauth-auth0](https://github.com/auth0/omniauth-auth0).
 
+## Installation
+
+```
+$ gem install gibbon
+```
 
 ## Basic usage
 
@@ -19,4 +24,4 @@ puts auth0.get_connections;
 
 ## License
 
-MIT 2014 - Auth0
+MIT 2014 - Auth0 INC.
