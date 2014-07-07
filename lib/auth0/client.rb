@@ -29,4 +29,9 @@ class Auth0Client
     response = self.class.get("/api/connections", { headers: @headers })
     response.body
   end
+
+  def delete_user(id)
+    response = self.class.delete("/api/users/#{id}", { headers: @headers })
+    response.body
+  end
 end
