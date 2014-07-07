@@ -5,7 +5,7 @@ Ruby client for [Auth0](https://auth0.com)
 ## Installation
 
 ```
-$ gem install gibbon
+$ gem install auth0
 ```
 
 ## Basic usage
