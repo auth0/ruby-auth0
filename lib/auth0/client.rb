@@ -34,4 +34,17 @@ class Auth0Client
     response = self.class.delete("/api/users/#{id}", { headers: @headers })
     response.body
   end
+
+  def delegation(options)
+    response = self.class.post("/delegation", {
+                body: {
+                  client_id: options[:client_id],
+                  grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                  id_token: options[:id_token],
+                  target: options[:target],
+                  scope: "open_id"
+                }
+              })
+    response.body
+  end
 end
