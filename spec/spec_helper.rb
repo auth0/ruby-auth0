@@ -12,6 +12,6 @@ RSpec.configure do |config|
   config.include	WebMock::API
   config.include	Rack::Test::Methods
   config.extend		OmniAuth::Test::StrategyMacros, :type => :strategy
-  config.color_enabled = true
+  config.color = true
   config.formatter = 'documentation'
 end
