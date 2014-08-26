@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require auth0-widget
 //= require jquery_ujs
 //= require_tree .

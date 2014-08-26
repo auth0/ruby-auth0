@@ -1,7 +1,7 @@
-#Auth0 + Ruby on Rails API Seed
-This is the seed project you need to use if you're going to create a Ruby on Rails API. You'll mostly use this API either for a SPA or a Mobile app. If you just want to create a Regular NodeJS WebApp, please check this [other seed project]()
+#Auth0 + Ruby on Rails WebApp Seed
+This is the seed project you need to use if you're going to create a regular WebApp with Ruby on Rails. If you want to build a Ruby On Rails API that will be used with a SPA or a Mobile device, please check this [other seed project]()
 
-This example is deployed at Heroku at http://auth0-rorapi-sample.herokuapp.com/ping
+This example is deployed at Heroku at http://auth0-ror-webapp-sample.herokuapp.com/
 
 #Running the example
 In order to run the example you need to have ruby installed.
