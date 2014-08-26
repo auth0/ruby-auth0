@@ -1,5 +1,5 @@
 #Auth0 + Ruby on Rails WebApp Seed
-This is the seed project you need to use if you're going to create a regular WebApp with Ruby on Rails. If you want to build a Ruby On Rails API that will be used with a SPA or a Mobile device, please check this [other seed project]()
+This is the seed project you need to use if you're going to create a regular WebApp with Ruby on Rails. If you want to build a Ruby On Rails API that will be used with a SPA or a Mobile device, please check this [other seed project](https://github.com/auth0/ruby-auth0/tree/master/examples/ruby-on-rails-api)
 
 This example is deployed at Heroku at http://auth0-ror-webapp-sample.herokuapp.com/
 
