@@ -6,7 +6,7 @@ This example is deployed at Heroku at http://auth0-ror-webapp-sample.herokuapp.c
 #Running the example
 In order to run the example you need to have ruby installed.
 
-You also need to set the ClientSecret and ClientId for your Auth0 app as enviroment variables with the following names respectively: AUTH0_CLIENT_SECRET and AUTH0_CLIENT_ID.
+You also need to set the ClientSecret and ClientId for your Auth0 app as enviroment variables with the following names respectively: AUTH0_CLIENT_SECRET, AUTH0_CLIENT_ID, AUTH0_DOMAIN and AUTH0_CALLBACK_URL.
 
 For that, if you just create a file named .env in the directory and set the values like the following, the app will just work:
 
@@ -14,8 +14,7 @@ For that, if you just create a file named .env in the directory and set the valu
 # .env file
 AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_CLIENT_ID=myCoolClientId
+AUTH0_DOMAIN=samples.auth0.com
+AUTH0_CALLBACK_URL=localhost:3000
 ````
-
-Once you've set those 2 enviroment variables, just run node server.js and try calling [http://localhost:3000/ping](http://localhost:3000/ping)
-
-You can then try to do a GET to [http://localhost:3000/secured/ping](http://localhost:3000/secured/ping) which will throw an error if you don't send the JWT in the header.
+Once you've set those 4 enviroment variables, just run `rails s` and try calling [http://localhost:3000/](http://localhost:3000/)
