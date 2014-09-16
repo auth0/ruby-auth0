@@ -1,3 +1,5 @@
+require 'uri'
+require 'json'
 require 'httparty'
 
 class Auth0Client
@@ -27,6 +29,26 @@ class Auth0Client
 
   def get_connections
     response = self.class.get("/api/connections", { headers: @headers })
+    response.body
+  end
+
+  def impersonate_user(id, options)
+    fail "#{__method__}: No id" if id.to_s.empty?
+
+    uri = URI.escape("/users/#{id}/impersonate")
+    response = self.class.post(uri, {
+      headers: @headers.merge({ 'Content-Type' => 'application/json' }),
+      body: {
+        protocol: options.fetch(:protocol),
+        impersonator_id: options.fetch(:impersonator_id),
+        client_id: options.fetch(:client_id),
+        additionalParameters: {
+          response_type: options[:response_type],
+          scope: options[:scope],
+          callback_url: options[:callback_url],
+        }
+      }.to_json
+    })
     response.body
   end
 
