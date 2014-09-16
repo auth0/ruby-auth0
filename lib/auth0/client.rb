@@ -1,4 +1,7 @@
+require 'json'
 require 'httparty'
+
+class Auth0ApiError < StandardError ; end
 
 class Auth0Client
   include HTTParty
@@ -28,6 +31,24 @@ class Auth0Client
   def get_connections
     response = self.class.get("/api/connections", { headers: @headers })
     response.body
+  end
+
+  def create_user(options)
+    response = self.class.post("/api/users/", {
+      headers: @headers.merge({ 'Content-Type' => 'application/json' }),
+      body: {
+        email: options.fetch(:email),
+        password: options.fetch(:password),
+        connection: options.fetch(:connection),
+        email_verified: options.fetch(:email_verified),
+      }.to_json
+    })
+
+    if response.code == 200
+      response.body
+    else
+      raise Auth0ApiError, response.body
+    end
   end
 
   def delete_user(id)
