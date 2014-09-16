@@ -1,0 +1,5 @@
+var widget = new Auth0Widget({
+  domain:         '<%= Rails.application.secrets.auth0_domain %>',
+  clientID:       '<%= Rails.application.secrets.auth0_client_id %>',
+  callbackURL:    '<%= Rails.application.secrets.auth0_callback_url %>' || 'http://localhost:3000/auth/auth0/callback'
+});
