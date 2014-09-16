@@ -32,6 +32,7 @@ class Auth0Client
   end
 
   def delete_user(id)
+    fail "#{__method__}: No id" if id.to_s.empty?
 
     uri = URI.escape("/api/users/#{id}")
     response = self.class.delete(uri, { headers: @headers })
