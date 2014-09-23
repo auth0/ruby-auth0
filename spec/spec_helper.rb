@@ -10,6 +10,6 @@ require 'auth0'
 RSpec.configure do |config|
   config.include	WebMock::API
   config.include	Rack::Test::Methods
-  config.color_enabled = true
+  config.color = true
   config.formatter = 'documentation'
 end
