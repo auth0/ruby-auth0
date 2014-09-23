@@ -1,3 +1,4 @@
+require 'uri'
 require 'httparty'
 
 class Auth0Client
@@ -31,7 +32,10 @@ class Auth0Client
   end
 
   def delete_user(id)
-    response = self.class.delete("/api/users/#{id}", { headers: @headers })
+    fail "#{__method__}: No id" if id.to_s.empty?
+
+    uri = URI.escape("/api/users/#{id}")
+    response = self.class.delete(uri, { headers: @headers })
     response.body
   end
 
