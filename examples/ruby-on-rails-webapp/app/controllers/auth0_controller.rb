@@ -9,7 +9,6 @@ class Auth0Controller < ApplicationController
   end
 
   def failure
-    #show a failure page
     @error_msg = request.params['message']
   end
 end
