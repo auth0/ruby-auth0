@@ -1,0 +1,29 @@
+module Auth0
+  module Mixins
+    # here's the proxy for HTTParty, we're building all request on that gem for now, if you want to feel free to use your own http client
+    module HTTPartyProxy
+      # proxying requests from instance methods to HTTParty class methods
+      %i(get post put patch delete).each do |method|
+        define_method(method) do |path, body={}|
+          safe_path = URI.escape(path)
+          result = self.class.send(method, safe_path, body: body.to_json)
+          response_body =
+            begin
+              JSON.parse(result.body.to_s)
+            rescue JSON::ParserError
+              result.body
+            end
+          case result.code
+          when 200...226 then response_body
+          when 400 then raise Auth0::BadRequest, response_body
+          when 401 then raise Auth0::Unauthorized, response_body
+          when 404 then raise Auth0::NotFound, response_body
+          when 500 then raise Auth0::ServerError, response_body
+          else
+            raise Auth0::Unsupported, response_body
+          end
+        end
+      end
+    end
+  end
+end

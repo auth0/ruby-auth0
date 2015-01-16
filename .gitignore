@@ -1,3 +1,8 @@
 .ruby-version
 coverage
 *.gem
+.ruby-gemset
+*.swp
+*.swo
+spec/auth0.yml
+.yardoc
