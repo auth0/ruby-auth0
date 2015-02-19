@@ -1,5 +1,10 @@
-var widget = new Auth0Widget({
-  domain:         '<%= Rails.application.secrets.auth0_domain %>',
-  clientID:       '<%= Rails.application.secrets.auth0_client_id %>',
-  callbackURL:    'http://localhost:3000/auth/auth0/callback' // use this in production  '<%= Rails.application.secrets.auth0_callback_url %>'
-});
+var lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', '<%= Rails.application.secrets.auth0_domain %>');
+function signin() {
+	lock.show({
+	    callbackURL: 'http://localhost:3000/auth/auth0/callback', // use this in production  '<%= Rails.application.secrets.auth0_callback_url %>'
+	    responseType: 'code', 
+	    authParams: {
+	    	scope: 'openid profile'
+	  	}
+	});
+}

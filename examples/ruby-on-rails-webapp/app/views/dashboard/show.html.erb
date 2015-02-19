@@ -5,6 +5,7 @@
             <h1 id="logo"><img src="//cdn.auth0.com/samples/auth0_logo_final_blue_RGB.png" /></h1>
             <img class="avatar" src="<%= @user[:info][:image] %>"/>
             <h2>Welcome <%= @user[:info][:name] %></h2>
+            <pre><%= JSON.pretty_generate(@user[:info]) %></pre>
           </div>
         </div>
     </div>

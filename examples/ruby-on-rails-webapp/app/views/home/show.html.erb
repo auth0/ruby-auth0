@@ -1,5 +1,5 @@
 <% content_for :cdn_code do %>
-  <%= javascript_include_tag '//cdn.auth0.com/w2/auth0-widget-5.js' %>
+  <%= javascript_include_tag '//cdn.auth0.com/js/lock-7.0.min.js' %>
 <% end %>
 <div class="home">
     <div class="container">
@@ -8,7 +8,7 @@
             <img src="https://i.cloudup.com/StzWWrY34s.png" />
             <h3>Auth0 Example</h3>
             <p>Zero friction identity infrastructure, built for developers</p>
-            <a class="btn btn-primary btn-lg btn-login btn-block" onclick="widget.signin()">SignIn</a>
+            <a class="btn btn-primary btn-lg btn-login btn-block" onclick="signin()">SignIn</a>
           </div>
         </div>
     </div>
