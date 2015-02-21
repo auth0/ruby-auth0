@@ -14,5 +14,5 @@ Dir[("./spec/support/**/*.rb")].each { |f| require f }
 RSpec.configure do |config|
   config.include	WebMock::API
   config.include	Rack::Test::Methods
-  config.fail_fast = true
+#  config.fail_fast = true
 end

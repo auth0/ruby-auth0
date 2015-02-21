@@ -6,7 +6,12 @@ module Auth0
       %i(get post put patch delete).each do |method|
         define_method(method) do |path, body={}|
           safe_path = URI.escape(path)
-          result = self.class.send(method, safe_path, body: body.to_json)
+          body = body.delete_if {|k,v| v.nil? }
+          if method == :get
+            result = self.class.send(method, safe_path, query: body)
+          else
+            result = self.class.send(method, safe_path, body: body.to_json)
+          end
           response_body =
             begin
               JSON.parse(result.body.to_s)
@@ -17,6 +22,7 @@ module Auth0
           when 200...226 then response_body
           when 400 then raise Auth0::BadRequest, response_body
           when 401 then raise Auth0::Unauthorized, response_body
+          when 403 then raise Auth0::AccessDenied, response_body
           when 404 then raise Auth0::NotFound, response_body
           when 500 then raise Auth0::ServerError, response_body
           else
