@@ -1,11 +1,14 @@
 module Auth0
   module Api
     module V2
+      # https://auth0.com/docs/apiv2#!/stats
       module Stats
+        #https://auth0.com/docs/apiv2#!/stats/get_active_users
         def active_users
           get(path)
         end
 
+        #https://auth0.com/docs/apiv2#!/stats/get_daily
         def daily_stats(from, to)
           request_params = {
             from: from,

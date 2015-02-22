@@ -1,7 +1,10 @@
 module Auth0
   module Api
     module V2
+      # Describing all simple routes
       module Router
+        private
+        # Building simple routes. mb should be removed
         def path
           routes = {
             blacklisted_tokens:       "/api/v2/blacklists/tokens",

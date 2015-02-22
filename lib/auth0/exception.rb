@@ -18,4 +18,5 @@ class Auth0::BadRequest    < Auth0::Exception; end
 class Auth0::UserIdIsBlank < Auth0::Exception; end
 # Api v2 access denied
 class Auth0::AccessDenied  < Auth0::Exception; end
+# Invalid parameter passed, e.g. empty where ID is required
 class Auth0::InvalidParameter < Auth0::Exception; end

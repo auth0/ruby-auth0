@@ -5,6 +5,8 @@ module Auth0
       # Default initialization mechanism, moved here to keep Auth0::Client clear
       # accepts hash as parameter
       # you can get all required fields from here: https://auth0.com/docs/auth-api
+      #
+      # To run using api v2, pass protocols: "v2" when creating a client
       def initialize(config)
         options = Hash[config.map{|(k,v)| [k.to_sym,v]}]
         self.class.base_uri "https://#{options[:namespace]}"

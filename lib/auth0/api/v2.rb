@@ -6,6 +6,7 @@ require "auth0/api/v2/jobs"
 require "auth0/api/v2/stats"
 module Auth0
   module Api
+    # https://auth0.com/docs/apiv2
     module V2
       include Auth0::Api::V2::Router
       include Auth0::Api::V2::Clients

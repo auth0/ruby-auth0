@@ -45,6 +45,11 @@ describe Auth0::Mixins::HTTPartyProxy do
         expect{@instance.send(http_method,"/test")}.to raise_error(Auth0::BadRequest)
       end
 
+      it "should raise Auth0::AccessDenied on send http #{http_method} method to path defined through HTTParty when 403" do
+        allow(DummyClassForProxy).to receive(http_method).with("http://login.auth0.com/test", :query => {})
+        expect(DummyClassForProxy).to receive(http_method).with("/test", :query => {}).and_return(StubResponse.new({}, false, 403))
+        expect{@instance.send(http_method,"/test")}.to raise_error(Auth0::AccessDenied)
+      end
       it "should raise Auth0::ServerError on send http #{http_method} method to path defined through HTTParty when 500 received" do
         allow(DummyClassForProxy).to receive(http_method).with("http://login.auth0.com/test", :query => {})
         expect(DummyClassForProxy).to receive(http_method).with("/test", :query => {}).and_return(StubResponse.new({}, false, 500))
