@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    auth0 (2.2.0)
+    auth0 (2.2.1)
       httparty (~> 0.13)
 
 GEM
@@ -24,7 +24,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    json (1.8.1)
+    json (1.8.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     rack (1.5.2)
