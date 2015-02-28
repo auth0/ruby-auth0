@@ -21,7 +21,6 @@ describe Auth0::Client do
     it {expect(subject).not_to be_a Auth0::Api::V2::Jobs}
     it {expect(subject).not_to be_a Auth0::Api::V2::Stats}
     it {expect(subject).not_to be_a Auth0::Api::V2::Blacklists}
-    it {expect(subject).not_to be_a Auth0::Api::V2::Router}
   end
   context "V2 modules to be included" do
     let(:subject){Auth0::Client.new({protocols: "v2"})}
@@ -34,7 +33,6 @@ describe Auth0::Client do
     it {expect(subject).to be_a Auth0::Api::V2}
     it {expect(subject).to be_a Auth0::Api::V2::Clients}
     it {expect(subject).to be_a Auth0::Api::V2::Users}
-    it {expect(subject).to be_a Auth0::Api::V2::Router}
     it {expect(subject).to be_a Auth0::Api::V2::Stats}
     it {expect(subject).to be_a Auth0::Api::V2::Jobs}
     it {expect(subject).to be_a Auth0::Api::V2::Blacklists}

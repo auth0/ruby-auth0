@@ -14,12 +14,14 @@ module Auth0
                               exclude_fields: exclude_fields,
                               q:              q
                             }
+          path = "/api/v2/users"
           get(path, request_params)
         end
         alias :get_users :users
 
         #https://auth0.com/docs/apiv2#!/users/post_users
         def create_user(name, options={})
+          path = "/api/v2/users"
           request_params = Hash[options.map{|(k,v)| [k.to_sym,v]}]
           request_params[:name] = name
           post(path, request_params)
@@ -27,6 +29,7 @@ module Auth0
 
         #https://auth0.com/docs/apiv2#!/users/delete_users
         def delete_users
+          path = "/api/v2/users"
           delete(path)
         end
 

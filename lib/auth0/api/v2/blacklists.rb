@@ -5,6 +5,7 @@ module Auth0
       module Blacklists
         # https://auth0.com/docs/apiv2#!/blacklists/get_tokens
         def blacklisted_tokens
+          path = "/api/v2/blacklists/tokens"
           get(path)
         end
 
@@ -14,6 +15,7 @@ module Auth0
             jti: jti,
             aud: aud
           }
+          path = "/api/v2/blacklists/tokens"
           post(path, request_params)
         end
       end

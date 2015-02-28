@@ -3,7 +3,6 @@ describe Auth0::Api::V2::Users do
   before :all do
     dummy_instance = DummyClass.new
     dummy_instance.extend(Auth0::Api::V2::Users)
-    dummy_instance.extend(Auth0::Api::V2::Router)
     @instance = dummy_instance
   end
 

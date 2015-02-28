@@ -3,7 +3,6 @@ describe Auth0::Api::V2::Blacklists do
   before :all do
     dummy_instance = DummyClass.new
     dummy_instance.extend(Auth0::Api::V2::Blacklists)
-    dummy_instance.extend(Auth0::Api::V2::Router)
     @instance = dummy_instance
   end
 

@@ -5,6 +5,7 @@ module Auth0
       module Clients
         #https://auth0.com/docs/apiv2#!/clients/get_clients
         def clients(options={})
+          path = "/api/v2/clients"
           get(path, options)
         end
         alias :get_clients :clients
@@ -13,6 +14,7 @@ module Auth0
         def create_client(name, options={})
           request_params = Hash[options.map{|(k,v)| [k.to_sym,v]}]
           request_params[:name] = name
+          path = "/api/v2/clients"
           post(path, request_params)
         end
 
