@@ -1,4 +1,6 @@
 require "spec_helper"
+require "securerandom"
+
 describe Auth0::Api::V1::Users do
   before :all do
     dummy_instance = DummyClass.new
