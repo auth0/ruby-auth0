@@ -6,14 +6,14 @@ module Auth0
       # accepts hash as parameter
       # you can get all required fields from here: https://auth0.com/docs/auth-api
       #
-      # To run using api v2, pass protocols: "v2" when creating a client
+      # To run using api v2, pass api_version: 2 when creating a client
       def initialize(config)
         options = Hash[config.map{|(k,v)| [k.to_sym,v]}]
         self.class.base_uri "https://#{options[:namespace]}"
         self.class.headers "Content-Type"  => 'application/json'
-        if options[:protocols].to_s.include?("v2")
+        if options[:protocols].to_s.include?("v2") or options[:api_version] === 2
           self.extend Auth0::Api::V2
-          @token = options[:access_token]
+          @token = options[:access_token] or options[:token]
         else
           self.extend Auth0::Api::V1
           self.extend Auth0::Api::AuthenticationEndpoints

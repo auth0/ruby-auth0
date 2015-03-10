@@ -22,6 +22,19 @@ auth0 = Auth0Client.new(
 puts auth0.get_connections;
 ```
 
+Using [APIv2](https://auth0.com/docs/apiv2)
+
+```ruby
+require "auth0"
+
+auth0 = Auth0Client.new(
+  :api_version => 2,
+  :token => "YOUR JWT HERE"
+);
+
+puts auth0.get_users;
+```
+
 ## License
 
 MIT 2014 - Auth0 INC.
