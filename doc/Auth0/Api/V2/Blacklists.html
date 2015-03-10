@@ -88,7 +88,19 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p><a
+href="https://auth0.com/docs/apiv2#!/blacklists">auth0.com/docs/apiv2#!/blacklists</a></p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -189,22 +201,24 @@ href="https://auth0.com/docs/apiv2#!/blacklists/post_tokens">auth0.com/docs/apiv
       <pre class="lines">
 
 
-11
-12
 13
 14
 15
 16
-17</pre>
+17
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/blacklists.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/blacklists.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_token_to_blacklist'>add_token_to_blacklist</span><span class='lparen'>(</span><span class='id identifier rubyid_jti'>jti</span><span class='comma'>,</span> <span class='id identifier rubyid_aud'>aud</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>jti:</span> <span class='id identifier rubyid_jti'>jti</span><span class='comma'>,</span>
     <span class='label'>aud:</span> <span class='id identifier rubyid_aud'>aud</span>
   <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/blacklists/tokens</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -239,14 +253,16 @@ href="https://auth0.com/docs/apiv2#!/blacklists/get_tokens">auth0.com/docs/apiv2
       <pre class="lines">
 
 
-6
 7
-8</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/blacklists.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/blacklists.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_blacklisted_tokens'>blacklisted_tokens</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/blacklists/tokens</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -259,7 +275,7 @@ href="https://auth0.com/docs/apiv2#!/blacklists/get_tokens">auth0.com/docs/apiv2
 </div>
 
     <div id="footer">
-  Generated on Mon Feb 23 01:12:53 2015 by
+  Generated on Tue Mar 10 22:05:55 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
