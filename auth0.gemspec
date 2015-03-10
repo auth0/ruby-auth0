@@ -20,10 +20,11 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'httparty', '~> 0.13'
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3.1.0', '>= 3.1.0'
   s.add_development_dependency 'rack-test', '~> 0'
   s.add_development_dependency 'simplecov', '~> 0'
-  s.add_development_dependency 'webmock', '~> 0'
+  s.add_development_dependency 'webmock'
   s.add_development_dependency 'byebug', '~> 0'
   s.add_development_dependency 'faker', '~> 0'
   s.add_development_dependency 'yard', '~> 0'

@@ -6,3 +6,4 @@ coverage
 *.swo
 spec/auth0.yml
 .yardoc
+Gemfile.lock
