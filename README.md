@@ -1,8 +1,6 @@
-Ruby client for [Auth0](https://auth0.com)
+Ruby api client for [Auth0](https://auth0.com)
 
 [![Build Status](https://travis-ci.org/auth0/ruby-auth0.svg?branch=master)](https://travis-ci.org/auth0/ruby-auth0)
-
-> This used to be the omniauth strategy for [Auth0](https://auth0.com) but now is a client for the Auth0 api. The omniauth strategy has been moved to [omniauth-auth0](https://github.com/auth0/omniauth-auth0).
 
 ## Installation
 
