@@ -5,7 +5,7 @@ require "auth0/version"
 Gem::Specification.new do |s|
   s.name        = "auth0"
   s.version     = Auth0::VERSION
-  s.authors     = ["Auth0", "Ezequiel Morito", "Jose Romaniello"]
+  s.authors     = ["Auth0", "Ezequiel Morito", "Jose Romaniello", "Petroe Ivan"]
   s.email       = ["support@auth0.com"]
   s.homepage    = "https://github.com/auth0/ruby-auth0"
   s.summary     = %q{Ruby client library for the Auth0 platform.}
@@ -20,10 +20,12 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'httparty', '~> 0.13'
 
-  s.add_development_dependency 'rspec', '~> 2.7'
+  s.add_development_dependency 'rspec', '~> 3.1.0', '>= 3.1.0'
   s.add_development_dependency 'rack-test'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'webmock'
-
+  s.add_development_dependency 'byebug'
+  s.add_development_dependency 'faker'
+  s.add_development_dependency 'yard'
   s.license = 'MIT'
 end

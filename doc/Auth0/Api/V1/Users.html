@@ -1,0 +1,1617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Auth0::Api::V1::Users
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../../../';
+  framesUrl = "../../../frames.html#!Auth0/Api/V1/Users.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../../_index.html">Index (U)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Auth0.html" title="Auth0 (module)">Auth0</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Api.html" title="Auth0::Api (module)">Api</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Auth0::Api::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">Users</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../../../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../../../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Auth0::Api::V1::Users
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../V1.html" title="Auth0::Api::V1 (module)">Auth0::Api::V1</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/auth0/api/v1/users.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#users" target="_parent" title="https://auth0.com/docs/api#users">https://auth0.com/docs/api#users</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#change_password_ticket-instance_method" title="#change_password_ticket (instance method)">- (Object) <strong>change_password_ticket</strong>(user_id, new_password, result_url = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket">https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#client_users-instance_method" title="#client_users (instance method)">- (Object) <strong>client_users</strong>(client_id = @client_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-clients–client-id–users" target="_parent" title="https://auth0.com/docs/api#!#get–api-clients–client-id–users">https://auth0.com/docs/api#!#get–api-clients–client-id–users</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection_users-instance_method" title="#connection_users (instance method)">- (Object) <strong>connection_users</strong>(connection_name, search = nil) </a>
+    
+
+    
+      (also: #search_connection_users)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-connections–connection–users" target="_parent" title="https://auth0.com/docs/api#!#get–api-connections–connection–users">https://auth0.com/docs/api#!#get–api-connections–connection–users</a>
+<a href="https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-">https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_public_key-instance_method" title="#create_public_key (instance method)">- (Object) <strong>create_public_key</strong>(user_id, device, public_key) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–publickey" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–publickey">https://auth0.com/docs/api#!#post–api-users–user_id–publickey</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_user-instance_method" title="#create_user (instance method)">- (Object) <strong>create_user</strong>(email, password, connection_name, request_params = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#post–api-users" target="_parent" title="https://auth0.com/docs/api#!#post–api-users">https://auth0.com/docs/api#!#post–api-users</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_user-instance_method" title="#delete_user (instance method)">- (Object) <strong>delete_user</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id-">https://auth0.com/docs/api#!#delete–api-users–user_id-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_users-instance_method" title="#delete_users (instance method)">- (Object) <strong>delete_users</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#delete–api-users" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users">https://auth0.com/docs/api#!#delete–api-users</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enterpriseconnections_users-instance_method" title="#enterpriseconnections_users (instance method)">- (Object) <strong>enterpriseconnections_users</strong>(search_criteria = nil, per_page = 500) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-">https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#patch_user_metadata-instance_method" title="#patch_user_metadata (instance method)">- (Object) <strong>patch_user_metadata</strong>(user_id, metadata = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#patch–api-users–user_id–metadata" target="_parent" title="https://auth0.com/docs/api#!#patch–api-users–user_id–metadata">https://auth0.com/docs/api#!#patch–api-users–user_id–metadata</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#revoke_user_device_public_key-instance_method" title="#revoke_user_device_public_key (instance method)">- (Object) <strong>revoke_user_device_public_key</strong>(user_id, device) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-">https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#revoke_user_refresh_token-instance_method" title="#revoke_user_refresh_token (instance method)">- (Object) <strong>revoke_user_refresh_token</strong>(user_id, refresh_token) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-">https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_verification_email-instance_method" title="#send_verification_email (instance method)">- (Object) <strong>send_verification_email</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email">https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#socialconnections_users-instance_method" title="#socialconnections_users (instance method)">- (Object) <strong>socialconnections_users</strong>(search_criteria = nil, per_page = 500) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-">https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_user_email-instance_method" title="#update_user_email (instance method)">- (Object) <strong>update_user_email</strong>(user_id, email, verify = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–email" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–email">https://auth0.com/docs/api#!#put–api-users–user_id–email</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_user_metadata-instance_method" title="#update_user_metadata (instance method)">- (Object) <strong>update_user_metadata</strong>(user_id, metadata = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–metadata" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–metadata">https://auth0.com/docs/api#!#put–api-users–user_id–metadata</a> This will
+overwrite user&#39;s metadata, be really carefull, preffer using patch
+instead.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_user_password-instance_method" title="#update_user_password (instance method)">- (Object) <strong>update_user_password</strong>(user_id, password, verify = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–password" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–password">https://auth0.com/docs/api#!#put–api-users–user_id–password</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_user_password_using_email-instance_method" title="#update_user_password_using_email (instance method)">- (Object) <strong>update_user_password_using_email</strong>(email, password, connection_name, verify = true) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#put–api-users–email–password" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–email–password">https://auth0.com/docs/api#!#put–api-users–email–password</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user-instance_method" title="#user (instance method)">- (Object) <strong>user</strong>(user_id) </a>
+    
+
+    
+      (also: #get_user)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-users–user_id-" target="_parent" title="https://auth0.com/docs/api#!#get–api-users–user_id-">https://auth0.com/docs/api#!#get–api-users–user_id-</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_devices-instance_method" title="#user_devices (instance method)">- (Object) <strong>user_devices</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-users–user_id–devices" target="_parent" title="https://auth0.com/docs/api#!#get–api-users–user_id–devices">https://auth0.com/docs/api#!#get–api-users–user_id–devices</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#users-instance_method" title="#users (instance method)">- (Object) <strong>users</strong>(search = nil) </a>
+    
+
+    
+      (also: #users_search, #get_users)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#get–api-users" target="_parent" title="https://auth0.com/docs/api#!#get–api-users">https://auth0.com/docs/api#!#get–api-users</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verification_ticket-instance_method" title="#verification_ticket (instance method)">- (Object) <strong>verification_ticket</strong>(user_id, result_url = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket">https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket</a>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="change_password_ticket-instance_method">
+  
+    - (<tt>Object</tt>) <strong>change_password_ticket</strong>(user_id, new_password, result_url = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket">https://auth0.com/docs/api#!#post–api-users–user_id–change_password_ticket</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_change_password_ticket'>change_password_ticket</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_new_password'>new_password</span><span class='comma'>,</span> <span class='id identifier rubyid_result_url'>result_url</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>newPassword</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_new_password'>new_password</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resultUrl</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_result_url'>result_url</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/change_password_ticket</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="client_users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>client_users</strong>(client_id = @client_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-clients–client-id–users" target="_parent" title="https://auth0.com/docs/api#!#get–api-clients–client-id–users">https://auth0.com/docs/api#!#get–api-clients–client-id–users</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_client_users'>client_users</span><span class='lparen'>(</span><span class='id identifier rubyid_client_id'>client_id</span><span class='op'>=</span><span class='ivar'>@client_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/clients/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_client_id'>client_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/users</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connection_users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>connection_users</strong>(connection_name, search = nil) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='search_connection_users-instance_method'>search_connection_users</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-connections–connection–users" target="_parent" title="https://auth0.com/docs/api#!#get–api-connections–connection–users">https://auth0.com/docs/api#!#get–api-connections–connection–users</a>
+<a href="https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-">https://auth0.com/docs/api#!#get–api-connections–connection–users-search–criteria-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_connection_users'>connection_users</span><span class='lparen'>(</span><span class='id identifier rubyid_connection_name'>connection_name</span><span class='comma'>,</span> <span class='id identifier rubyid_search'>search</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/connections/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_connection_name'>connection_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/users</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>?search=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_public_key-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_public_key</strong>(user_id, device, public_key) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–publickey" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–publickey">https://auth0.com/docs/api#!#post–api-users–user_id–publickey</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_public_key'>create_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_device'>device</span><span class='comma'>,</span> <span class='id identifier rubyid_public_key'>public_key</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/public_key</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>device:</span> <span class='id identifier rubyid_device'>device</span><span class='comma'>,</span> <span class='label'>public_key:</span> <span class='id identifier rubyid_public_key'>public_key</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_user-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_user</strong>(email, password, connection_name, request_params = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#post–api-users" target="_parent" title="https://auth0.com/docs/api#!#post–api-users">https://auth0.com/docs/api#!#post–api-users</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_user'>create_user</span><span class='lparen'>(</span><span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='id identifier rubyid_connection_name'>connection_name</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>email:</span> <span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='label'>password:</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='label'>connection:</span> <span class='id identifier rubyid_connection_name'>connection_name</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_request_params'>request_params</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_user-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_user</strong>(user_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id-">https://auth0.com/docs/api#!#delete–api-users–user_id-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../UserIdIsBlank.html" title="Auth0::UserIdIsBlank (class)">Auth0::UserIdIsBlank</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 143</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_user'>delete_user</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>Auth0</span><span class='op'>::</span><span class='const'>UserIdIsBlank</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>if you want to remove all users user delete_users method</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_users</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#delete–api-users" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users">https://auth0.com/docs/api#!#delete–api-users</a></p>
+
+<p>This will remove all your users</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_users'>delete_users</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enterpriseconnections_users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>enterpriseconnections_users</strong>(search_criteria = nil, per_page = 500) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-">https://auth0.com/docs/api#!#get–api-enterpriseconnections-users-search–criteria-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_enterpriseconnections_users'>enterpriseconnections_users</span><span class='lparen'>(</span><span class='id identifier rubyid_search_criteria'>search_criteria</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='op'>=</span><span class='int'>500</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/enterpriseconnections/users?search=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_search_criteria'>search_criteria</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;per_page=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_per_page'>per_page</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="patch_user_metadata-instance_method">
+  
+    - (<tt>Object</tt>) <strong>patch_user_metadata</strong>(user_id, metadata = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#patch–api-users–user_id–metadata" target="_parent" title="https://auth0.com/docs/api#!#patch–api-users–user_id–metadata">https://auth0.com/docs/api#!#patch–api-users–user_id–metadata</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_patch_user_metadata'>patch_user_metadata</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/metadata</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_patch'>patch</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="revoke_user_device_public_key-instance_method">
+  
+    - (<tt>Object</tt>) <strong>revoke_user_device_public_key</strong>(user_id, device) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-">https://auth0.com/docs/api#!#delete–api-users–user_id–publickey-device–device-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_revoke_user_device_public_key'>revoke_user_device_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_device'>device</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/publickey?device=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_device'>device</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="revoke_user_refresh_token-instance_method">
+  
+    - (<tt>Object</tt>) <strong>revoke_user_refresh_token</strong>(user_id, refresh_token) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-" target="_parent" title="https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-">https://auth0.com/docs/api#!#delete–api-users–user_id–refresh_tokens–refresh_token-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_revoke_user_refresh_token'>revoke_user_refresh_token</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_refresh_token'>refresh_token</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/refresh_tokens/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_refresh_token'>refresh_token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_verification_email-instance_method">
+  
+    - (<tt>Object</tt>) <strong>send_verification_email</strong>(user_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email">https://auth0.com/docs/api#!#post–api-users–user_id–send_verification_email</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_send_verification_email'>send_verification_email</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/send_verification_email</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="socialconnections_users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>socialconnections_users</strong>(search_criteria = nil, per_page = 500) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-">https://auth0.com/docs/api#!#get–api-socialconnections-users-search–criteria-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_socialconnections_users'>socialconnections_users</span><span class='lparen'>(</span><span class='id identifier rubyid_search_criteria'>search_criteria</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_per_page'>per_page</span><span class='op'>=</span><span class='int'>500</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/socialconnections/users?search=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_search_criteria'>search_criteria</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;per_page=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_per_page'>per_page</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_user_email-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_user_email</strong>(user_id, email, verify = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–email" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–email">https://auth0.com/docs/api#!#put–api-users–user_id–email</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_user_email'>update_user_email</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='id identifier rubyid_verify'>verify</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/email</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>email:</span> <span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='label'>verify:</span> <span class='id identifier rubyid_verify'>verify</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_user_metadata-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_user_metadata</strong>(user_id, metadata = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–metadata" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–metadata">https://auth0.com/docs/api#!#put–api-users–user_id–metadata</a> This will
+overwrite user&#39;s metadata, be really carefull, preffer using patch
+instead</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_user_metadata'>update_user_metadata</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/metadata</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_user_password-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_user_password</strong>(user_id, password, verify = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#put–api-users–user_id–password" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–user_id–password">https://auth0.com/docs/api#!#put–api-users–user_id–password</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_user_password'>update_user_password</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='id identifier rubyid_verify'>verify</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/password</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>password:</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='label'>verify:</span> <span class='id identifier rubyid_verify'>verify</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_user_password_using_email-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_user_password_using_email</strong>(email, password, connection_name, verify = true) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#put–api-users–email–password" target="_parent" title="https://auth0.com/docs/api#!#put–api-users–email–password">https://auth0.com/docs/api#!#put–api-users–email–password</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_user_password_using_email'>update_user_password_using_email</span><span class='lparen'>(</span><span class='id identifier rubyid_email'>email</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span> <span class='id identifier rubyid_connection_name'>connection_name</span><span class='comma'>,</span> <span class='id identifier rubyid_verify'>verify</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>email:</span>      <span class='id identifier rubyid_email'>email</span><span class='comma'>,</span>
+    <span class='label'>password:</span>   <span class='id identifier rubyid_password'>password</span><span class='comma'>,</span>
+    <span class='label'>connection:</span> <span class='id identifier rubyid_connection_name'>connection_name</span><span class='comma'>,</span>
+    <span class='label'>verify:</span>     <span class='id identifier rubyid_verify'>verify</span>
+  <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_content'>/password</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="user-instance_method">
+  
+    - (<tt>Object</tt>) <strong>user</strong>(user_id) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='get_user-instance_method'>get_user</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-users–user_id-" target="_parent" title="https://auth0.com/docs/api#!#get–api-users–user_id-">https://auth0.com/docs/api#!#get–api-users–user_id-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_user'>user</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="user_devices-instance_method">
+  
+    - (<tt>Object</tt>) <strong>user_devices</strong>(user_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-users–user_id–devices" target="_parent" title="https://auth0.com/docs/api#!#get–api-users–user_id–devices">https://auth0.com/docs/api#!#get–api-users–user_id–devices</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_user_devices'>user_devices</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/devices</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="users-instance_method">
+  
+    - (<tt>Object</tt>) <strong>users</strong>(search = nil) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='users_search-instance_method'>users_search</span>, <span id='get_users-instance_method'>get_users</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#get–api-users" target="_parent" title="https://auth0.com/docs/api#!#get–api-users">https://auth0.com/docs/api#!#get–api-users</a></p>
+
+<p><a href="https://auth0.com/docs/api#!#get–api-users-search–criteria-" target="_parent" title="https://auth0.com/docs/api#!#get–api-users-search–criteria-">https://auth0.com/docs/api#!#get–api-users-search–criteria-</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_users'>users</span><span class='lparen'>(</span><span class='id identifier rubyid_search'>search</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>?search=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="verification_ticket-instance_method">
+  
+    - (<tt>Object</tt>) <strong>verification_ticket</strong>(user_id, result_url = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket" target="_parent" title="https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket">https://auth0.com/docs/api#!#post–api-users–user_id–verification_ticket</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v1/users.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_verification_ticket'>verification_ticket</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_result_url'>result_url</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resultUrl</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_result_url'>result_url</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/verification_ticket</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_request_params'>request_params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Feb 23 01:12:53 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>
