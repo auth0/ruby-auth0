@@ -88,7 +88,19 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p><a
+href="https://auth0.com/docs/apiv2#!/stats">auth0.com/docs/apiv2#!/stats</a></p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -189,14 +201,16 @@ href="https://auth0.com/docs/apiv2#!/stats/get_active_users">auth0.com/docs/apiv
       <pre class="lines">
 
 
-6
 7
-8</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/stats.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/stats.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_active_users'>active_users</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/stats/active-users</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -231,18 +245,20 @@ href="https://auth0.com/docs/apiv2#!/stats/get_daily">auth0.com/docs/apiv2#!/sta
       <pre class="lines">
 
 
-11
-12
 13
 14
 15
 16
-17</pre>
+17
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/stats.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/auth0/api/v2/stats.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_daily_stats'>daily_stats</span><span class='lparen'>(</span><span class='id identifier rubyid_from'>from</span><span class='comma'>,</span> <span class='id identifier rubyid_to'>to</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/v2/stats/daily</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_request_params'>request_params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>from:</span> <span class='id identifier rubyid_from'>from</span><span class='comma'>,</span>
     <span class='label'>to:</span> <span class='id identifier rubyid_to'>to</span>
@@ -259,7 +275,7 @@ href="https://auth0.com/docs/apiv2#!/stats/get_daily">auth0.com/docs/apiv2#!/sta
 </div>
 
     <div id="footer">
-  Generated on Mon Feb 23 01:12:53 2015 by
+  Generated on Tue Mar 10 22:05:55 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>

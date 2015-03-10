@@ -88,13 +88,25 @@ href="https://github.com/auth0/omniauth-auth0">omniauth-auth0</a>.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">auth0</span>.<span class="ruby-identifier">get_connections</span>;
 </pre>
 
+<p>Using <a href="https://auth0.com/docs/apiv2">APIv2</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;auth0&quot;</span>
+
+<span class="ruby-identifier">auth0</span> = <span class="ruby-constant">Auth0Client</span>.<span class="ruby-identifier">new</span>(
+  :<span class="ruby-identifier">api_version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>,
+  :<span class="ruby-identifier">token</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;YOUR JWT HERE&quot;</span>
+);
+
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">auth0</span>.<span class="ruby-identifier">get_users</span>;
+</pre>
+
 <h2 id="label-License">License</h2>
 
 <p>MIT 2014 - Auth0 INC.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Mon Feb 23 01:12:53 2015 by
+  Generated on Tue Mar 10 22:05:55 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
