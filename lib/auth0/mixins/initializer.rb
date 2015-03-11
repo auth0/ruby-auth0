@@ -21,7 +21,7 @@ module Auth0
           @client_secret  = options[:client_secret]
           @token          = obtain_access_token
         end
-        self.class.headers "Authorization" => "Bearer #{options[:access_token]}"
+        self.class.headers "Authorization" => "Bearer #{@token}"
       end
 
       # including initializer in top of klass
