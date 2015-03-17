@@ -24,7 +24,7 @@ module Auth0
         # @deprecated use {#patch_client}
         # {https://auth0.com/docs/api#!#put--api-clients--client-id-}
         def update_client(name, callbacks="", client_id=@client_id)
-          warn "This endpoint has been deprecated in favor of PUT."
+          warn "This endpoint has been deprecated in favor of PATCH."
           path = "/api/clients/#{client_id}"
           request_params = {
                             name: name,

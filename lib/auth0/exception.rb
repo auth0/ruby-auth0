@@ -20,3 +20,7 @@ class Auth0::UserIdIsBlank < Auth0::Exception; end
 class Auth0::AccessDenied  < Auth0::Exception; end
 # Invalid parameter passed, e.g. empty where ID is required
 class Auth0::InvalidParameter < Auth0::Exception; end
+# Invalid Auth0 credentials either client_id/secret for API v1 or JWT for API v2/
+class Auth0::InvalidCredentials < Auth0::Exception; end
+# Invalid Auth0 API namespace
+class Auth0::InvalidApiNamespace < Auth0::Exception; end

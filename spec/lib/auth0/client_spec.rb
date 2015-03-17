@@ -1,10 +1,12 @@
 require "spec_helper"
 describe Auth0::Client do
   context "V1 modules to be included" do
-    let(:subject){Auth0::Client.new({})}
+    let(:subject){Auth0::Client.new(client_id: "client_id", client_secret: "client_secret", namespace: "samples.auth0.com")}
+
     before :each do
       allow_any_instance_of(Auth0::Api::AuthenticationEndpoints).to receive(:obtain_access_token)
     end
+
     it {expect(subject).to be_a HTTParty}
     it {expect(subject).to be_a Auth0::Mixins}
     it {expect(subject).to be_a Auth0::Mixins::Initializer}
@@ -23,7 +25,7 @@ describe Auth0::Client do
     it {expect(subject).not_to be_a Auth0::Api::V2::Blacklists}
   end
   context "V2 modules to be included" do
-    let(:subject){Auth0::Client.new({protocols: "v2"})}
+    let(:subject){Auth0::Client.new({protocols: "v2", access_token: "token", namespace: "samples.auth0.com"})}
     before :each do
       expect_any_instance_of(Auth0::Api::AuthenticationEndpoints).not_to receive(:obtain_access_token)
     end
