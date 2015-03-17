@@ -6,13 +6,11 @@ SimpleCov.start do
 end
 require 'rspec'
 require 'rack/test'
-require 'webmock/rspec'
 require 'byebug'
 require 'auth0'
 Dir[("./lib/**/*.rb")].each { |f| require f }
 Dir[("./spec/support/**/*.rb")].each { |f| require f }
 RSpec.configure do |config|
-  config.include	WebMock::API
   config.include	Rack::Test::Methods
 #  config.fail_fast = true
 end
