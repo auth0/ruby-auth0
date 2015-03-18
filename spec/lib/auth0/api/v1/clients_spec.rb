@@ -44,7 +44,7 @@ describe Auth0::Api::V1::Clients do
     end
 
     it "is expected to make warn on deprecated endpoint" do
-      expect(@instance).to receive(:warn).with("This endpoint has been deprecated in favor of PUT.")
+      expect(@instance).to receive(:warn).with("This endpoint has been deprecated in favor of PATCH.")
       @instance.update_client("test")
     end
   end
