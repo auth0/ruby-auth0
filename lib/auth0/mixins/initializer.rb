@@ -13,7 +13,7 @@ module Auth0
         self.class.headers "Content-Type"  => 'application/json'
         if options[:protocols].to_s.include?("v2") or options[:api_version] === 2
           self.extend Auth0::Api::V2
-          @token = options[:access_token] or options[:token]
+          @token = (options[:access_token] or options[:token])
         else
           self.extend Auth0::Api::V1
           self.extend Auth0::Api::AuthenticationEndpoints
