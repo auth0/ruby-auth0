@@ -27,7 +27,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context ".login" do
     it {expect(@instance).to respond_to(:signup)}
     it "is expected to make post to /oauth/ro" do
-      expect(@instance).to receive(:post).with("/oauth/ro", {client_id: nil, username:"test@test.com", password: "password", connection: "Username-Password-Authentication", scope: "openid", grand_type: "password", id_token: nil})
+      expect(@instance).to receive(:post).with("/oauth/ro", {client_id: nil, username:"test@test.com", password: "password", connection: "Username-Password-Authentication", scope: "openid", grant_type: "password", id_token: nil})
       @instance.login("test@test.com", "password")
     end
   end

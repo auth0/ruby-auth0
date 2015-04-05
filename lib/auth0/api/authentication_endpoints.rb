@@ -33,7 +33,7 @@ module Auth0
           password:   password,
           scope:      scope,
           connection: connection_name,
-          grand_type: "password",
+          grant_type: "password",
           id_token:   id_token
         }
         post("/oauth/ro", request_params)
