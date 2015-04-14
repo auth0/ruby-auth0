@@ -42,6 +42,6 @@ describe Auth0::Client do
     it {expect(subject).not_to be_a Auth0::Api::V1::Clients}
     it {expect(subject).not_to be_a Auth0::Api::V1::Rules}
     it {expect(subject).not_to be_a Auth0::Api::V1::Logs}
-    it {expect(subject).not_to be_a Auth0::Api::AuthenticationEndpoints}
+    it {expect(subject).to be_a Auth0::Api::AuthenticationEndpoints}
   end
 end
