@@ -10,5 +10,4 @@ module Credentials
 	def v2_creds
 		{token: ENV["MASTER_JWT"], api_version: 2, namespace: ENV["NAMESPACE"]}
 	end
-
 end
