@@ -26,6 +26,22 @@ module Auth0
         post("/delegation", request_params)
       end
 
+      # {https://auth0.com/docs/auth-api#!#post--users--user_id--impersonate}
+      def impersonate(user_id, app_client_id, impersonator_id, options)
+        request_params = {
+          protocol:         options.fetch(:protocol, "oauth2"),
+          impersonator_id:  impersonator_id,
+          client_id:        app_client_id,
+          additionalParameters: {
+            response_type:  options.fetch(:response_type, "code"),
+            state:          options.fetch(:state, ""),
+            scope:          options.fetch(:scope, "openid"),
+            callback_url:   options.fetch(:callback_url, ""),
+          }
+        }
+        post("/users/#{user_id}/impersonate", request_params)
+      end
+
       # {https://auth0.com/docs/auth-api#!#post--oauth-ro}
       def login(username, password, scope = "openid", id_token=nil, connection_name="Username-Password-Authentication")
         request_params = {

@@ -30,6 +30,18 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
+  context ".impersonate" do
+    let(:user_id)         {"some_user_id"}
+    let(:app_client_id)   {"some_app_client_id"}
+    let(:impersonator_id) {"some_impersonator_id"}
+
+    it {expect(@instance).to respond_to(:impersonate)}
+    it "is expected to make post request to '/users/{user_id}/impersonate'" do
+      expect(@instance).to receive(:post).with("/users/#{user_id}/impersonate",{:protocol=>"oauth2", :impersonator_id=>impersonator_id, :client_id=>app_client_id, :additionalParameters=>{:response_type=>"code", :state=>"", :scope=>"openid", :callback_url=>""}})
+      @instance.impersonate(user_id, app_client_id, impersonator_id, {})
+    end
+  end
+
   context ".login" do
     it {expect(@instance).to respond_to(:signup)}
     it "is expected to make post to /oauth/ro" do
