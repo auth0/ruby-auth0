@@ -29,6 +29,7 @@ require "auth0"
 
 auth0 = Auth0Client.new(
   :api_version => 2,
+  :client_id => "YOUR CLIENT ID",
   :token => "YOUR JWT HERE",
   :namespace => "<YOUR ACCOUNT>.auth0.com"
 );

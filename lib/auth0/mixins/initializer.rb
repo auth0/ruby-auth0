@@ -11,12 +11,13 @@ module Auth0
         options = Hash[config.map{|(k,v)| [k.to_sym,v]}]
         self.class.base_uri "https://#{options[:namespace]}"
         self.class.headers "Content-Type"  => 'application/json'
+        self.extend Auth0::Api::AuthenticationEndpoints
         if options[:protocols].to_s.include?("v2") or options[:api_version] === 2
           self.extend Auth0::Api::V2
-          @token = (options[:access_token] or options[:token])
+          @client_id      = options[:client_id]
+          @token          = (options[:access_token] or options[:token])
         else
           self.extend Auth0::Api::V1
-          self.extend Auth0::Api::AuthenticationEndpoints
           @client_id      = options[:client_id]
           @client_secret  = options[:client_secret]
           @token          = obtain_access_token

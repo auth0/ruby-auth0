@@ -36,12 +36,12 @@ describe Auth0::Client do
     it {expect(subject).to be_a Auth0::Api::V2::Stats}
     it {expect(subject).to be_a Auth0::Api::V2::Jobs}
     it {expect(subject).to be_a Auth0::Api::V2::Blacklists}
+    it {expect(subject).to be_a Auth0::Api::AuthenticationEndpoints}
     it {expect(subject).not_to be_a Auth0::Api::V1}
     it {expect(subject).not_to be_a Auth0::Api::V1::Users}
     it {expect(subject).not_to be_a Auth0::Api::V1::Connections}
     it {expect(subject).not_to be_a Auth0::Api::V1::Clients}
     it {expect(subject).not_to be_a Auth0::Api::V1::Rules}
     it {expect(subject).not_to be_a Auth0::Api::V1::Logs}
-    it {expect(subject).not_to be_a Auth0::Api::AuthenticationEndpoints}
   end
 end
