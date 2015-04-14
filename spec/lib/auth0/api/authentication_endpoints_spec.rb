@@ -19,8 +19,14 @@ describe Auth0::Api::AuthenticationEndpoints do
   context ".delegation" do
     it {expect(@instance).to respond_to(:delegation)}
     it "is expected to make post request to '/delegation'" do
-      expect(@instance).to receive(:post).with("/delegation",{:client_id=>nil, :grant_type=>"urn:ietf:params:oauth:grant-type:jwt-bearer", :id_token=>"token", :target=>"target", :scope=>""})
+      expect(@instance).to receive(:post).with("/delegation",{:client_id=>nil, :grant_type=>"urn:ietf:params:oauth:grant-type:jwt-bearer", :id_token=>"token", :target=>"target", :scope=>"", api_type: "app"})
       @instance.delegation("token", "target", "")
+    end
+    it "is expected to make post request to '/delegation' with specified api_type" do
+      expect(@instance).to receive(:post).with("/delegation",{:client_id=>nil, :grant_type=>"urn:ietf:params:oauth:grant-type:jwt-bearer", 
+                                                              :id_token=>"", :target=>"", :scope=>"", 
+                                                              api_type: "salesforce_api"})
+      @instance.delegation("", "", "", "salesforce_api")
     end
   end
 
