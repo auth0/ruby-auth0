@@ -14,12 +14,13 @@ module Auth0
       end
 
       # {https://auth0.com/docs/auth-api#!#post--delegation}
-      def delegation(id_token, target, scope = "openid")
+      def delegation(id_token, target, scope = "openid", api_type = "app")
         request_params = {
                       client_id:  @client_id,
                       grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
                       id_token:   id_token,
                       target:     target,
+                      api_type:   api_type,
                       scope:      scope
         }
         post("/delegation", request_params)
