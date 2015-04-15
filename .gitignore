@@ -7,3 +7,4 @@ coverage
 spec/auth0.yml
 .yardoc
 Gemfile.lock
+.env

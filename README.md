@@ -1,6 +1,9 @@
 Ruby api client for [Auth0](https://auth0.com)
 
 [![Build Status](https://travis-ci.org/auth0/ruby-auth0.svg?branch=master)](https://travis-ci.org/auth0/ruby-auth0)
+[![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
+[![Coverage Status](https://coveralls.io/repos/auth0/ruby-auth0/badge.svg)](https://coveralls.io/r/auth0/ruby-auth0)
+[![Dependency Status](https://gemnasium.com/auth0/ruby-auth0.svg)](https://gemnasium.com/auth0/ruby-auth0)
 
 ## Installation
 

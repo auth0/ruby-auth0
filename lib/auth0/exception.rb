@@ -15,8 +15,12 @@ class Auth0::ServerError   < Auth0::Exception; end
 # exception for incorrect request, you've sent wrong params
 class Auth0::BadRequest    < Auth0::Exception; end
 # exception for unset user_id, this might cause removal of all users, or other unexpected bahaviour
-class Auth0::UserIdIsBlank < Auth0::Exception; end
+class Auth0::MissingUserId < Auth0::Exception; end
 # Api v2 access denied
 class Auth0::AccessDenied  < Auth0::Exception; end
 # Invalid parameter passed, e.g. empty where ID is required
 class Auth0::InvalidParameter < Auth0::Exception; end
+# Invalid Auth0 credentials either client_id/secret for API v1 or JWT for API v2/
+class Auth0::InvalidCredentials < Auth0::Exception; end
+# Invalid Auth0 API namespace
+class Auth0::InvalidApiNamespace < Auth0::Exception; end

@@ -141,7 +141,7 @@ module Auth0
 
         # {https://auth0.com/docs/api#!#delete--api-users--user_id-}
         def delete_user(user_id)
-          raise Auth0::UserIdIsBlank, "if you want to remove all users user delete_users method" if user_id.to_s.empty?
+          raise Auth0::MissingUserId, "if you want to remove all users user delete_users method" if user_id.to_s.empty?
           path = "/api/users/#{user_id}"
           delete(path)
         end

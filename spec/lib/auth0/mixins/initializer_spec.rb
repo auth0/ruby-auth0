@@ -1,4 +1,5 @@
 require "spec_helper"
+
 class MockClass
   attr_reader :token 
   include Auth0::Mixins::Initializer
@@ -6,7 +7,7 @@ class MockClass
 end
 
 describe Auth0::Mixins::Initializer do
-  let(:params) { {  } }
+  let(:params) { { namespace: 'samples.auth0.com' } }
   let(:instance) { DummyClassForProxy.include(described_class).new(params) }
   context 'api v2' do
     before do
