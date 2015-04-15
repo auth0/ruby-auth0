@@ -21,9 +21,9 @@ describe Auth0::Client do
 	it_should_behave_like "invalid credentials", {client_id: "client_id", client_secret: "secret"}, Auth0::InvalidApiNamespace
 	it_should_behave_like "invalid credentials", {api_version: 2, token: "token"}, Auth0::InvalidApiNamespace
 
-	let(:valid_v1_credentials) { {client_id: ENV["CLIENT_ID"], client_secret: ENV["CLIENT_SECRET"], namespace: ENV["NAMESPACE"]} }
+	let(:valid_v1_credentials) { {client_id: ENV["CLIENT_ID"], client_secret: ENV["CLIENT_SECRET"], domain: ENV["DOMAIN"]} }
 	let(:token) { ENV["MASTER_JWT"] }
-	let(:v2_credentials) { {namespace: ENV["NAMESPACE"], api_version: 2} }
+	let(:v2_credentials) { {domain: ENV["DOMAIN"], api_version: 2} }
 	
 	shared_examples "valid credentials" do
 		it { expect { Auth0Client.new(credentials) }.to_not raise_error }

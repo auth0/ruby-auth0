@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec', '~> 4.5'
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'pry', '~> 0.10'
+  s.add_development_dependency 'pry-nav', '~> 0.2.4'
   s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
   s.add_development_dependency 'rack-test', '~> 0.6'
   s.add_development_dependency 'simplecov', '~> 0.9'
