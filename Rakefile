@@ -15,9 +15,10 @@ begin
 		t.pattern = FileList["spec/lib/auth0/**/*#{ENV['PATTERN']}*_spec.rb"]
 	end
 
-	task :default => :spec
+	desc "Run All Suites"
+	RSpec::Core::RakeTask.new(:all)
 
-	task :all => [:spec, :integration]
+	task :default => :spec
 rescue LoadError
 	#No RSpec
 end
