@@ -4,3 +4,4 @@ source "http://rubygems.org"
 gemspec
 
 gem 'terminal-notifier-guard', require: false
+gem 'coveralls', require: false
