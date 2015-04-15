@@ -28,6 +28,12 @@ describe Auth0::Api::AuthenticationEndpoints do
                                                               api_type: "salesforce_api"})
       @instance.delegation("", "", "", "salesforce_api")
     end
+    it "allows to pass extra parameters" do
+      expect(@instance).to receive(:post).with("/delegation",{:client_id=>nil, :grant_type=>"urn:ietf:params:oauth:grant-type:jwt-bearer", 
+                                                              :id_token=>"", :target=>"", :scope=>"", :api_type => "",
+                                                               :community_name => 'test-community', community_url: 'test-url'})
+      @instance.delegation("", "", "", "", community_name: 'test-community', community_url: 'test-url')
+    end
   end
 
   context ".impersonate" do
