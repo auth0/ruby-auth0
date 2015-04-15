@@ -12,4 +12,6 @@ describe Auth0::Api::V2::Clients do
 
   it { expect { client.delete_client(existing_client["client_id"]) }.to_not raise_error }
 
+  it { expect(client.client(existing_client["client_id"])).to include("client_id" => existing_client["client_id"]) }
+
 end

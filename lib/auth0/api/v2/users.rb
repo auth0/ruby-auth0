@@ -44,7 +44,7 @@ module Auth0
 
         #https://auth0.com/docs/apiv2#!/users/delete_users_by_id
         def delete_user(user_id)
-          raise Auth0::UserIdIsBlank, "if you want to remove all users user delete_users method" if user_id.to_s.empty?
+          raise Auth0::MissingUserId, "Must supply a valid user_id" if user_id.nil? or user_id.to_s.empty?
           path = "/api/v2/users/" + user_id.to_s
           delete(path)
         end

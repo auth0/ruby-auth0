@@ -49,7 +49,7 @@ describe Auth0::Api::V2::Users do
 
     it "is expected not to call delete to /api/v2/users if user_id is blank" do
       expect(@instance).not_to receive(:delete)
-      expect{@instance.delete_user("")}.to raise_exception(Auth0::UserIdIsBlank)
+      expect{@instance.delete_user("")}.to raise_exception(Auth0::MissingUserId)
     end
   end
 

@@ -7,7 +7,7 @@ SimpleCov.start do
 end
 require 'rspec'
 require 'rack/test'
-require 'byebug'
+require 'faker'
 require 'auth0'
 Dir[("./lib/**/*.rb")].each { |f| require f }
 Dir[("./spec/support/**/*.rb")].each { |f| require f }
@@ -20,5 +20,6 @@ RSpec.configure do |config|
     .clients
     .select { |client| client["name"] != "DefaultApp" and not client["global"] }
     .each { |client| v2_client.delete_client(client["client_id"]) }
+    v2_client.delete_users
   end
 end
