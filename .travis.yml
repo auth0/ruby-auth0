@@ -8,4 +8,4 @@ rvm:
   - 2.1.0
   - 2.2.1
 
-script: MODE=full bundle exec rake all
+script: ./build_travis.sh
