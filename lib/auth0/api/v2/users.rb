@@ -5,15 +5,16 @@ module Auth0
       module Users
         #https://auth0.com/docs/apiv2#!/users/get_users
         def users( per_page: nil, page: nil, include_totals: nil, sort: nil, connection: nil, fields: nil, exclude_fields: nil, q: nil )
-          request_params = {  per_page:       per_page,
-                              page:           page,
-                              include_totals: include_totals,
-                              sort:           sort,
-                              connection:     connection,
-                              fields:         fields,
-                              exclude_fields: exclude_fields,
-                              q:              q
-                            }
+          request_params = {
+            per_page:       per_page,
+            page:           page,
+            include_totals: include_totals,
+            sort:           sort,
+            connection:     connection,
+            fields:         fields,
+            exclude_fields: exclude_fields,
+            q:              q
+          }
           path = "/api/v2/users"
           get(path, request_params)
         end
@@ -36,9 +37,10 @@ module Auth0
         #https://auth0.com/docs/apiv2#!/users/get_users_by_id
         def user(user_id, fields: nil, exclude_fields: nil)
           path = "/api/v2/users/" + user_id.to_s
-          request_params = {  fields:         fields,
-                              exclude_fields: exclude_fields
-                            }
+          request_params = {
+            fields:         fields,
+            exclude_fields: exclude_fields
+          }
           get(path, request_params)
         end
 

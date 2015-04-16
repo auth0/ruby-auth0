@@ -12,8 +12,8 @@ module Auth0
           acceptable_params = %i(take from search_criteria page per_page sort fields exclude_fields)
           options.reject! do |key,value|
             if key.nil? ||\
-               value.nil? ||\
-               !acceptable_params.include?(key.to_sym)
+                value.nil? ||\
+                !acceptable_params.include?(key.to_sym)
               warn "#{key} is not in acceptable params list: #{acceptable_params}"
               true
             end

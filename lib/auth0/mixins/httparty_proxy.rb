@@ -13,11 +13,11 @@ module Auth0
             result = self.class.send(method, safe_path, body: body.to_json)
           end
           response_body =
-            begin
-              JSON.parse(result.body.to_s)
-            rescue JSON::ParserError
-              result.body
-            end
+          begin
+            JSON.parse(result.body.to_s)
+          rescue JSON::ParserError
+            result.body
+          end
           case result.code
           when 200...226 then response_body
           when 400 then raise Auth0::BadRequest, response_body

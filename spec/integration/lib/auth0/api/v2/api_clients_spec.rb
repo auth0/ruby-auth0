@@ -3,7 +3,7 @@ describe Auth0::Api::V2::Clients do
 
   let(:client) { Auth0Client.new(v2_creds) }
   let(:existing_client) { client.create_client("existing") }
-  
+
   it { expect(client.clients).to_not be_empty }
 
   it { expect(client.create_client("ClientV2", {custom_login_page_off: true})).to include("name" => "ClientV2", "custom_login_page_off" => true) }

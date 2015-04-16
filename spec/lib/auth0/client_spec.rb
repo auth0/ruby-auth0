@@ -47,7 +47,7 @@ describe Auth0::Client do
     before :each do
       allow_any_instance_of(Auth0::Api::AuthenticationEndpoints).to receive(:obtain_access_token).and_return "token"
     end
-    
+
     context "with namespace" do
 
       let(:subject) { Auth0::Client.new(client_id: "client_id", client_secret: "client_secret", namespace: "samples.auth0.com") }
@@ -67,7 +67,7 @@ describe Auth0::Client do
     end
 
     context "with version" do
-      
+
       let(:subject) { Auth0::Client.new(client_id: "client_id", client_secret: "client_secret", domain: "samples.auth0.com", api_version: 1) }
 
       it_should_behave_like "v1 API client"
@@ -102,7 +102,7 @@ describe Auth0::Client do
     end
 
     context "with version" do
-      
+
       let(:subject) { Auth0::Client.new(api_version: 2, access_token: "access_token", domain: "samples.auth0.com") }
 
       it_should_behave_like "v2 API client"

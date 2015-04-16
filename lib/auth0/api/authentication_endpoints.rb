@@ -6,9 +6,9 @@ module Auth0
       # {https://auth0.com/docs/auth-api#!#post--oauth-access_token}
       def obtain_access_token
         request_params = {
-            client_id:      @client_id,
-            client_secret:  @client_secret,
-            grant_type:     'client_credentials'
+          client_id:      @client_id,
+          client_secret:  @client_secret,
+          grant_type:     'client_credentials'
         }
         post("/oauth/token", request_params)["access_token"]
       end
@@ -16,12 +16,12 @@ module Auth0
       # {https://auth0.com/docs/auth-api#!#post--delegation}
       def delegation(id_token, target, scope = "openid", api_type = "app", extra_parameters = {})
         request_params = {
-                      client_id:  @client_id,
-                      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-                      id_token:   id_token,
-                      target:     target,
-                      api_type:   api_type,
-                      scope:      scope
+          client_id:  @client_id,
+          grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+          id_token:   id_token,
+          target:     target,
+          api_type:   api_type,
+          scope:      scope
         }.merge(extra_parameters)
         post("/delegation", request_params)
       end

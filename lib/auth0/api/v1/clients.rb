@@ -15,9 +15,9 @@ module Auth0
         def create_client(name, callbacks="")
           path = "/api/clients"
           request_params = {
-                           name: name,
-                           callbacks: callbacks
-                          }
+            name: name,
+            callbacks: callbacks
+          }
           post(path, request_params)
         end
 
@@ -27,9 +27,9 @@ module Auth0
           warn "This endpoint has been deprecated in favor of PATCH."
           path = "/api/clients/#{client_id}"
           request_params = {
-                            name: name,
-                            callbacks: callbacks
-                         }
+            name: name,
+            callbacks: callbacks
+          }
           put(path, request_params)
         end
 
@@ -37,9 +37,9 @@ module Auth0
         def patch_client(name, callbacks="", client_id=@client_id)
           path = "/api/clients/#{client_id}"
           request_params = {
-                            name: name,
-                            callbacks: callbacks
-                         }
+            name: name,
+            callbacks: callbacks
+          }
           patch(path, request_params)
         end
       end

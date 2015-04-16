@@ -25,24 +25,26 @@ module Auth0
         # {https://auth0.com/docs/api#!#post--api-connections}
         def create_connection(connection_name, strategy, tenant_domain, domain_aliases=nil)
           path = "/api/connections"
-          request_params = { name: connection_name,
-                           strategy: strategy,
-                           options: {
-                             tenant_domain: tenant_domain,
-                             domain_aliases: domain_aliases
-                           }
-                          }
+          request_params = {
+            name: connection_name,
+            strategy: strategy,
+            options: {
+              tenant_domain: tenant_domain,
+              domain_aliases: domain_aliases
+            }
+          }
           post(path, request_params)
         end
 
         # {https://auth0.com/docs/api#!#put--api-connections--connection-name-}
         def update_connection(connection_name, tenant_domain, status=true)
           path = "/api/connections/#{connection_name}"
-          request_params = {  status: status,
-                            options: {
-                              tenant_domain: tenant_domain
-                            }
-                          }
+          request_params = {
+            status: status,
+            options: {
+              tenant_domain: tenant_domain
+            }
+          }
           put(path, request_params)
         end
       end

@@ -14,11 +14,12 @@ module Auth0
         # https://auth0.com/docs/api#!#post--api-rules
         def create_rule(name, script, order=nil,status=true)
           path = "/api/rules"
-          request_params = { name: name,
-                           status: status,
-                           script: script,
-                           order: order
-                          }
+          request_params = {
+            name: name,
+            status: status,
+            script: script,
+            order: order
+          }
           post(path, request_params)
         end
 
@@ -26,10 +27,10 @@ module Auth0
         def update_rule(name, script, order=nil,status=true)
           path = "/api/rules/#{name}"
           request_params = {
-                           status: status,
-                           script: script,
-                           order: order
-                          }
+            status: status,
+            script: script,
+            order: order
+          }
           put(path, request_params)
         end
 
