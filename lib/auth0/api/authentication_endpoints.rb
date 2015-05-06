@@ -32,6 +32,7 @@ module Auth0
           protocol:         options.fetch(:protocol, "oauth2"),
           impersonator_id:  impersonator_id,
           client_id:        app_client_id,
+          ttl:              options.fetch(:ttl, 120),
           additionalParameters: {
             response_type:  options.fetch(:response_type, "code"),
             state:          options.fetch(:state, ""),
