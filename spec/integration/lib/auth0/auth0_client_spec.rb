@@ -42,4 +42,28 @@ describe Auth0::Client do
     let(:credentials) { v2_credentials.merge({access_token: ENV["MASTER_JWT"]}) }
   end
 
+  context "client headers" do
+    let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: 'abc123', domain: 'myhost.auth0.com'})) }
+    let(:headers) { client.class.headers }
+
+    it "has the correct headers present" do
+      headers.keys.sort.should eql ['Authorization', 'Content-Type', 'X-Auth0-Client', 'X-Auth0-Client-Version']
+    end
+
+    it "uses the correct access token" do
+      headers['Authorization'].should eql "Bearer abc123"
+    end
+
+    it "is always json" do
+      headers['Content-Type'] = 'application/json'
+    end
+
+    it "sets the ruby version" do
+      headers['X-Auth0-Client'].should eql "Ruby/#{RUBY_VERSION}"
+    end
+
+    it "sets the client version" do
+      headers['X-Auth0-Client-Version'].should eql Auth0::VERSION
+    end
+  end
 end
