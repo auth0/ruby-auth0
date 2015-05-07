@@ -33,8 +33,8 @@ module Auth0
       def client_headers
         {
           'Content-Type' => 'application/json',
-          'X-Auth0-Client' => "Ruby/#{RUBY_VERSION}",
-          'X-Auth0-Client-Version' => Auth0::VERSION
+          'User-Agent' => "Ruby/#{RUBY_VERSION}",
+          'X-Auth0-Client' => Auth0::VERSION
         }
       end
 

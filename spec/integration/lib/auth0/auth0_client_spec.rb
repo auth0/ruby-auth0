@@ -47,7 +47,7 @@ describe Auth0::Client do
     let(:headers) { client.class.headers }
 
     it "has the correct headers present" do
-      headers.keys.sort.should eql ['Authorization', 'Content-Type', 'X-Auth0-Client', 'X-Auth0-Client-Version']
+      headers.keys.sort.should eql ['Authorization', 'Content-Type', 'User-Agent', 'X-Auth0-Client']
     end
 
     it "uses the correct access token" do
@@ -59,11 +59,11 @@ describe Auth0::Client do
     end
 
     it "sets the ruby version" do
-      headers['X-Auth0-Client'].should eql "Ruby/#{RUBY_VERSION}"
+      headers['User-Agent'].should eql "Ruby/#{RUBY_VERSION}"
     end
 
     it "sets the client version" do
-      headers['X-Auth0-Client-Version'].should eql Auth0::VERSION
+      headers['X-Auth0-Client'].should eql Auth0::VERSION
     end
   end
 end
