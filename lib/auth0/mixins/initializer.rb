@@ -34,7 +34,7 @@ module Auth0
         {
           'Content-Type' => 'application/json',
           'User-Agent' => "Ruby/#{RUBY_VERSION}",
-          'X-Auth0-Client' => Auth0::VERSION
+          'X-Auth0-Client' => "Ruby/#{Auth0::VERSION}"
         }
       end
 

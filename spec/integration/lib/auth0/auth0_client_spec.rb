@@ -63,7 +63,7 @@ describe Auth0::Client do
     end
 
     it "sets the client version" do
-      headers['X-Auth0-Client'].should eql Auth0::VERSION
+      headers['X-Auth0-Client'].should eql "Ruby/#{Auth0::VERSION}"
     end
   end
 end
