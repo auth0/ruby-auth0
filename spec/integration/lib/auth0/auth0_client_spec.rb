@@ -47,23 +47,23 @@ describe Auth0::Client do
     let(:headers) { client.class.headers }
 
     it "has the correct headers present" do
-      headers.keys.sort.should eql ['Authorization', 'Content-Type', 'User-Agent', 'X-Auth0-Client']
+      expect(headers.keys.sort).to eql ['Authorization', 'Content-Type', 'User-Agent', 'X-Auth0-Client']
     end
 
     it "uses the correct access token" do
-      headers['Authorization'].should eql "Bearer abc123"
+      expect(headers['Authorization']).to eql "Bearer abc123"
     end
 
     it "is always json" do
-      headers['Content-Type'] = 'application/json'
+      expect(headers['Content-Type']).to eql 'application/json'
     end
 
     it "sets the ruby version" do
-      headers['User-Agent'].should eql "Ruby/#{RUBY_VERSION}"
+      expect(headers['User-Agent']).to eql "Ruby/#{RUBY_VERSION}"
     end
 
     it "sets the client version" do
-      headers['X-Auth0-Client'].should eql "Ruby/#{Auth0::VERSION}"
+      expect(headers['X-Auth0-Client']).to eql "Ruby/#{Auth0::VERSION}"
     end
   end
 end
