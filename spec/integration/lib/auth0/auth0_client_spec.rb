@@ -63,7 +63,7 @@ describe Auth0::Client do
     end
 
     it "sets the client version" do
-      expect(headers['Auth0-Client']).to eql "Ruby/#{Auth0::VERSION}"
+      expect(headers['Auth0-Client']).to eql "ruby-auth0/#{Auth0::VERSION}"
     end
   end
 end
