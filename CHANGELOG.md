@@ -1,10 +1,20 @@
 # Change Log
 
-## [Unreleased](https://github.com/auth0/ruby-auth0/tree/HEAD)
+## [v3.5.0](https://github.com/auth0/ruby-auth0/tree/v3.5.0) (2015-05-21)
 
-[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.3.0...HEAD)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.4.0...v3.5.0)
+
+**Merged pull requests:**
+
+- Client information headers [\#31](https://github.com/auth0/ruby-auth0/pull/31) ([benschwarz](https://github.com/benschwarz))
+
+## [v3.4.0](https://github.com/auth0/ruby-auth0/tree/v3.4.0) (2015-05-07)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.3.0...v3.4.0)
 
 **Closed issues:**
+
+- Changelog [\#29](https://github.com/auth0/ruby-auth0/issues/29)
 
 - Tag releases [\#16](https://github.com/auth0/ruby-auth0/issues/16)
 
