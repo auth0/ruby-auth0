@@ -31,10 +31,12 @@ module Auth0
       private
 
       def client_headers
+        client_info = JSON.dump({name: 'ruby-auth0', version: Auth0::VERSION})
+
         {
           'Content-Type' => 'application/json',
           'User-Agent' => "Ruby/#{RUBY_VERSION}",
-          'Auth0-Client' => "Ruby/#{Auth0::VERSION}"
+          'Auth0-Client' => Base64.urlsafe_encode64(client_info)
         }
       end
 

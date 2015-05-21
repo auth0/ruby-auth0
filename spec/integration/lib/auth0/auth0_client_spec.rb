@@ -46,6 +46,10 @@ describe Auth0::Client do
     let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: 'abc123', domain: 'myhost.auth0.com'})) }
     let(:headers) { client.class.headers }
 
+    let(:base64_token) {
+      Base64.urlsafe_encode64('{"name":"ruby-auth0","version":"'+Auth0::VERSION+'"}')
+    }
+
     it "has the correct headers present" do
       expect(headers.keys.sort).to eql ['Auth0-Client', 'Authorization', 'Content-Type', 'User-Agent']
     end
@@ -63,7 +67,7 @@ describe Auth0::Client do
     end
 
     it "sets the client version" do
-      expect(headers['Auth0-Client']).to eql "Ruby/#{Auth0::VERSION}"
+      expect(headers['Auth0-Client']).to eql base64_token
     end
   end
 end
