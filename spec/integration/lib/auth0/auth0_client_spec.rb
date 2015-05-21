@@ -42,28 +42,15 @@ describe Auth0::Client do
     let(:credentials) { v2_credentials.merge({access_token: ENV["MASTER_JWT"]}) }
   end
 
-  context "client headers" do
-    let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: 'abc123', domain: 'myhost.auth0.com'})) }
+  describe "client headers" do
+    let(:access_token) { 'abc123' }
+    let(:domain) { 'myhost.auth0.com' }
+    let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: access_token, domain: domain})) }
+
     let(:headers) { client.class.headers }
-
-    it "has the correct headers present" do
-      expect(headers.keys.sort).to eql ['Auth0-Client', 'Authorization', 'Content-Type', 'User-Agent']
-    end
-
-    it "uses the correct access token" do
-      expect(headers['Authorization']).to eql "Bearer abc123"
-    end
-
-    it "is always json" do
-      expect(headers['Content-Type']).to eql 'application/json'
-    end
-
-    it "sets the ruby version" do
-      expect(headers['User-Agent']).to eql "Ruby/#{RUBY_VERSION}"
-    end
-
-    it "sets the client version" do
-      expect(headers['Auth0-Client']).to eql "ruby-auth0/#{Auth0::VERSION}"
-    end
+    specify { expect(headers).to include("Auth0-Client" => "ruby-auth0/#{Auth0::VERSION}") }
+    specify { expect(headers).to include("User-Agent" => "Ruby/#{RUBY_VERSION}") }
+    specify { expect(headers).to include("Authorization" => "Bearer #{access_token}") }
+    specify { expect(headers).to include("Content-Type" => "application/json") }
   end
 end
