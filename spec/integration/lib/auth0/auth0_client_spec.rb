@@ -42,7 +42,6 @@ describe Auth0::Client do
     let(:credentials) { v2_credentials.merge({access_token: ENV["MASTER_JWT"]}) }
   end
 
-<<<<<<< HEAD
   context "client headers" do
     let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: 'abc123', domain: 'myhost.auth0.com'})) }
     let(:headers) { client.class.headers }
@@ -70,17 +69,5 @@ describe Auth0::Client do
     it "sets the client version" do
       expect(headers['Auth0-Client']).to eql base64_token
     end
-=======
-  describe "client headers" do
-    let(:access_token) { 'abc123' }
-    let(:domain) { 'myhost.auth0.com' }
-    let(:client) { Auth0::Client.new(v2_credentials.merge({access_token: access_token, domain: domain})) }
-
-    let(:headers) { client.class.headers }
-    specify { expect(headers).to include("Auth0-Client" => "ruby-auth0/#{Auth0::VERSION}") }
-    specify { expect(headers).to include("User-Agent" => "Ruby/#{RUBY_VERSION}") }
-    specify { expect(headers).to include("Authorization" => "Bearer #{access_token}") }
-    specify { expect(headers).to include("Content-Type" => "application/json") }
->>>>>>> origin/master
   end
 end
