@@ -20,7 +20,6 @@ describe Auth0::Api::V2::Users do
     let(:users) { client.users() }
 
     it { expect(users.size).to be > 0 }
-    it { expect(users.find {|user| user["email"] == email}).to_not be_nil }
 
     context "#filters" do
       it { expect(client.users(per_page: 1).size).to be 1 }

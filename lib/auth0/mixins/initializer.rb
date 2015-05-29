@@ -12,9 +12,7 @@ module Auth0
         domain = api_domain options
         raise InvalidApiNamespace, "Api namespace must supply an API domain" if domain.nil?
         self.class.base_uri "https://#{domain}"
-
-        self.class.headers client_headers
-
+        self.class.headers client_headers(config)
         self.extend Auth0::Api::AuthenticationEndpoints
         @client_id      = options[:client_id]
         initialize_v2(options) if api_v2?(options)
@@ -30,14 +28,19 @@ module Auth0
 
       private
 
-      def client_headers
+      def client_headers(config)
         client_info = JSON.dump({name: 'ruby-auth0', version: Auth0::VERSION})
 
-        {
-          'Content-Type' => 'application/json',
-          'User-Agent' => "Ruby/#{RUBY_VERSION}",
-          'Auth0-Client' => Base64.urlsafe_encode64(client_info)
+        headers = {
+          'Content-Type' => 'application/json'
         }
+
+        if !config[:opt_out_sdk_info]
+          headers['User-Agent'] = "Ruby/#{RUBY_VERSION}"
+          headers['Auth0-Client'] = Base64.urlsafe_encode64(client_info)
+        end
+
+        headers
       end
 
       def api_domain(options)
