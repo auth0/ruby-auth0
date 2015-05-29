@@ -29,12 +29,18 @@ module Auth0
       private
 
       def client_headers(config)
-        sdk_headers = {
-          'Content-Type' => 'application/json',
+        client_info = JSON.dump({name: 'ruby-auth0', version: Auth0::VERSION})
+
+        headers = {
+          'Content-Type' => 'application/json'
         }
-        sdk_headers['User-Agent'] = "Ruby/#{RUBY_VERSION}" if not config[:opt_out_sdk_info]
-        sdk_headers['Auth0-Client'] = "ruby-auth0/#{Auth0::VERSION}" if not config[:opt_out_sdk_info]
-        sdk_headers
+
+        if !config[:opt_out_sdk_info]
+          headers['User-Agent'] = "Ruby/#{RUBY_VERSION}"
+          headers['Auth0-Client'] = Base64.urlsafe_encode64(client_info)
+        end
+
+        headers
       end
 
       def api_domain(options)
