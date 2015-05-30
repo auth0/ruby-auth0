@@ -16,6 +16,8 @@ class Auth0::ServerError   < Auth0::Exception; end
 class Auth0::BadRequest    < Auth0::Exception; end
 # exception for unset user_id, this might cause removal of all users, or other unexpected bahaviour
 class Auth0::MissingUserId < Auth0::Exception; end
+# exception for an unset connection_id
+class Auth0::MissingConnectionId < Auth0::Exception; end
 # Api v2 access denied
 class Auth0::AccessDenied  < Auth0::Exception; end
 # Invalid parameter passed, e.g. empty where ID is required
