@@ -24,7 +24,7 @@ describe Auth0::Api::V2::Users do
     context "#filters" do
       it { expect(client.users(per_page: 1).size).to be 1 }
       it { expect(client.users(per_page: 1, fields: [:picture, :email, :user_id].join(',')).first).to include("email", "user_id", "picture") }
-      it { expect(client.users(per_page: 1, fields: [:picture, :email, :user_id].join(','), exclude_fields: true).first).to_not include("email", "user_id", "picture") }
+      it { expect(client.users(per_page: 1, fields: [:email].join(',')).first).to_not include("user_id", "picture") }
     end
 
   end
@@ -37,7 +37,7 @@ describe Auth0::Api::V2::Users do
 
     context "#filters" do
       it { expect(client.user(user["user_id"], fields: [:picture, :email, :user_id].join(','))).to include("email", "user_id", "picture") }
-      it { expect(client.user(user["user_id"], fields: [:picture, :email, :user_id].join(','), exclude_fields: true)).to_not include("email", "user_id", "picture") }
+      it { expect(client.user(user["user_id"], fields: [:email].join(','))).to_not include("user_id", "picture") }
     end
 
   end
