@@ -3,7 +3,7 @@ describe Auth0::Api::V1::Users do
 
   let(:client) { Auth0Client.new(v1_creds) }
   let(:username) { Faker::Internet.user_name }
-  let(:email) { Faker::Internet.safe_email("#{username}#{entity_suffix}") }
+  let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
   let(:password) { Faker::Internet.password }
   let(:connection) { "Username-Password-Authentication" }
   let!(:user) { client.create_user(email, password, connection, {

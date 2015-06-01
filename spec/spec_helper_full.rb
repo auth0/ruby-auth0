@@ -29,6 +29,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Credentials
   config.after(:suite) do
+    puts "Cleaning up for #{entity_suffix}"
     v2_client = Auth0Client.new({token: ENV["MASTER_JWT"], api_version: 2, domain: ENV["DOMAIN"]})
     v2_client
     .clients
@@ -38,5 +39,6 @@ RSpec.configure do |config|
     .users
     .select { |user| user["email"].split("@").first.include? entity_suffix }
     .each { |user| v2_client.delete_user(user["user_id"])}
+    puts "Finished cleaning up for #{entity_suffix}"
   end
 end
