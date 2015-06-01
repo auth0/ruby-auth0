@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.6.0](https://github.com/auth0/ruby-auth0/tree/v3.6.0) (2015-06-01)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.5.0...v3.6.0)
+
+**Merged pull requests:**
+
+- Remove exclude\_fields parameter for getting users [\#34](https://github.com/auth0/ruby-auth0/pull/34) ([hzalaz](https://github.com/hzalaz))
+
+- Add connections [\#33](https://github.com/auth0/ruby-auth0/pull/33) ([taylorfinnell](https://github.com/taylorfinnell))
+
+- Use client header spec as per documentation [\#32](https://github.com/auth0/ruby-auth0/pull/32) ([benschwarz](https://github.com/benschwarz))
+
 ## [v3.5.0](https://github.com/auth0/ruby-auth0/tree/v3.5.0) (2015-05-21)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.4.0...v3.5.0)
