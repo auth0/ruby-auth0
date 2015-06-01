@@ -10,7 +10,7 @@ describe Auth0::Api::V2::Users do
     it {expect(@instance).to respond_to(:users)}
     it {expect(@instance).to respond_to(:get_users)}
     it "is expected to call /api/v2/users" do
-      expect(@instance).to receive(:get).with("/api/v2/users",{:per_page=>nil, :page=>nil, :include_totals=>nil, :sort=>nil, :connection=>nil, :fields=>nil, :exclude_fields=>nil, :q=>nil})
+      expect(@instance).to receive(:get).with("/api/v2/users",{:per_page=>nil, :page=>nil, :include_totals=>nil, :sort=>nil, :connection=>nil, :fields=>nil, :q=>nil})
       expect{@instance.users}.not_to raise_error
     end
   end
@@ -18,7 +18,7 @@ describe Auth0::Api::V2::Users do
   context ".user" do
     it {expect(@instance).to respond_to(:user)}
     it "is expected to call get request to /api/v2/users/USER_ID" do
-      expect(@instance).to receive(:get).with("/api/v2/users/USER_ID", {fields: nil, exclude_fields: nil})
+      expect(@instance).to receive(:get).with("/api/v2/users/USER_ID", {fields: nil})
       expect{@instance.user("USER_ID")}.not_to raise_error
     end
   end
