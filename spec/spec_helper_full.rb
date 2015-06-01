@@ -36,7 +36,7 @@ RSpec.configure do |config|
     .each { |client| v2_client.delete_client(client["client_id"]) }
     v2_client
     .users
-    .select { |user| user["email"].split("@").first.end_with? entity_suffix }
+    .select { |user| user["email"].split("@").first.include? entity_suffix }
     .each { |user| v2_client.delete_user(user["user_id"])}
   end
 end
