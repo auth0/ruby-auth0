@@ -14,6 +14,11 @@ module Auth0
             fields:         fields,
             q:              q
           }
+
+          if request_params[:q]
+            request_params[:search_engine] = :v2
+          end
+
           path = "/api/v2/users"
           get(path, request_params)
         end
