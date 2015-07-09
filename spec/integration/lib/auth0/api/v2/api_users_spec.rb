@@ -7,7 +7,6 @@ describe Auth0::Api::V2::Users do
   let(:password) { Faker::Internet.password }
   let(:connection) { "Username-Password-Authentication" }
   let!(:user) { client.create_user(username, {
-                                     "username" => username,
                                      "email" => email,
                                      "password" => password,
                                      "email_verified" => false,
@@ -48,7 +47,6 @@ describe Auth0::Api::V2::Users do
 
     it { should include("user_id", "identities") }
     it { should include(
-           "username" => username,
            "email" => email,
            "email_verified" => false,
     )}
