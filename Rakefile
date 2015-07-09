@@ -1,7 +1,6 @@
 #!/usr/bin/env rake
 require "bundler/gem_tasks"
 
-puts "Entity suffix is #{ENV["TRAVIS_JOB_ID"] || "_local"}"
 begin
   require 'rspec/core/rake_task'
 
