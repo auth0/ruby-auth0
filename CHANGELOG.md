@@ -1,5 +1,15 @@
 # Change Log
 
+## [v3.6.1](https://github.com/auth0/ruby-auth0/tree/v3.6.1) (2015-07-09)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.6.0...v3.6.1)
+
+**Merged pull requests:**
+
+- set the search engine if a query is set [\#36](https://github.com/auth0/ruby-auth0/pull/36) ([taylorfinnell](https://github.com/taylorfinnell))
+
+- email validation is broken by \_, which breaks the tests [\#35](https://github.com/auth0/ruby-auth0/pull/35) ([taylorfinnell](https://github.com/taylorfinnell))
+
 ## [v3.6.0](https://github.com/auth0/ruby-auth0/tree/v3.6.0) (2015-06-01)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.5.0...v3.6.0)
