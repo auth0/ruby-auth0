@@ -6,4 +6,5 @@ gemspec
 group :development do
   gem 'terminal-notifier-guard', require: false
   gem 'coveralls', require: false
+  gem 'rubocop', require: false
 end
