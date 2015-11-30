@@ -1,8 +1,8 @@
-require "auth0/api/v1/users"
-require "auth0/api/v1/clients"
-require "auth0/api/v1/connections"
-require "auth0/api/v1/rules"
-require "auth0/api/v1/logs"
+require 'auth0/api/v1/users'
+require 'auth0/api/v1/clients'
+require 'auth0/api/v1/connections'
+require 'auth0/api/v1/rules'
+require 'auth0/api/v1/logs'
 module Auth0
   # Space for all API calls
   module Api

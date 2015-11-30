@@ -5,15 +5,15 @@ module Auth0
       module Rules
         # https://auth0.com/docs/api#!#get--api-rules
         def rules
-          path = "/api/rules"
+          path = '/api/rules'
           get(path)
         end
 
-        alias :get_rules :rules
+        alias_method :get_rules, :rules
 
         # https://auth0.com/docs/api#!#post--api-rules
-        def create_rule(name, script, order=nil,status=true)
-          path = "/api/rules"
+        def create_rule(name, script, order = nil, status = true)
+          path = '/api/rules'
           request_params = {
             name: name,
             status: status,
@@ -24,7 +24,7 @@ module Auth0
         end
 
         # https://auth0.com/docs/api#!#put--api-rules--rule-name-
-        def update_rule(name, script, order=nil,status=true)
+        def update_rule(name, script, order = nil, status = true)
           path = "/api/rules/#{name}"
           request_params = {
             status: status,

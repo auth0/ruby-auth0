@@ -1,2 +1,2 @@
-class StubResponse<Struct.new(:body, :success?, :code)
+class StubResponse < Struct.new(:body, :success?, :code)
 end

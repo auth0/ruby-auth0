@@ -4,9 +4,9 @@ module Auth0
     module HTTPartyProxy
       # proxying requests from instance methods to HTTParty class methods
       %i(get post put patch delete).each do |method|
-        define_method(method) do |path, body={}|
+        define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
-          body = body.delete_if {|k,v| v.nil? }
+          body = body.delete_if { |_k, v| v.nil? }
           if method == :get
             result = self.class.send(method, safe_path, query: body)
           else
@@ -20,13 +20,13 @@ module Auth0
           end
           case result.code
           when 200...226 then response_body
-          when 400 then raise Auth0::BadRequest, response_body
-          when 401 then raise Auth0::Unauthorized, response_body
-          when 403 then raise Auth0::AccessDenied, response_body
-          when 404 then raise Auth0::NotFound, response_body
-          when 500 then raise Auth0::ServerError, response_body
+          when 400 then fail Auth0::BadRequest, response_body
+          when 401 then fail Auth0::Unauthorized, response_body
+          when 403 then fail Auth0::AccessDenied, response_body
+          when 404 then fail Auth0::NotFound, response_body
+          when 500 then fail Auth0::ServerError, response_body
           else
-            raise Auth0::Unsupported, response_body
+            fail Auth0::Unsupported, response_body
           end
         end
       end

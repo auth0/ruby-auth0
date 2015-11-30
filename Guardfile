@@ -5,9 +5,9 @@ group :unit_test do
     # run every updated spec file
     watch(%r{^spec/.+_spec\.rb$})
     # run the lib specs when a file in lib/ changes
-    watch(%r{^lib/(.+)\.rb$}) { "spec" }
+    watch(%r{^lib/(.+)\.rb$}) { 'spec' }
     # run all test for helper changes
-    watch('spec/spec_helper.rb')  { "spec" }
+    watch('spec/spec_helper.rb') { 'spec' }
   end
 end
 
@@ -16,19 +16,19 @@ group :integration do
     # run every updated spec file
     watch(%r{^spec/.+_spec\.rb$})
     # run the lib specs when a file in lib/ changes
-    watch(%r{^lib/(.+)\.rb$}) { "spec" }
+    watch(%r{^lib/(.+)\.rb$}) { 'spec' }
     # run all test for helper changes
-    watch('spec/spec_helper.rb')  { "spec" }
+    watch('spec/spec_helper.rb') { 'spec' }
   end
 end
 
 group :full do
-  guard 'rspec', cmd: "MODE=full bundle exec rspec --drb --format Fuubar --color" do
+  guard 'rspec', cmd: 'MODE=full bundle exec rspec --drb --format Fuubar --color' do
     # run every updated spec file
     watch(%r{^spec/.+_spec\.rb$})
     # run the lib specs when a file in lib/ changes
-    watch(%r{^lib/(.+)\.rb$}) { "spec" }
+    watch(%r{^lib/(.+)\.rb$}) { 'spec' }
     # run all test for helper changes
-    watch('spec/spec_helper.rb')  { "spec" }
+    watch('spec/spec_helper.rb') { 'spec' }
   end
 end
