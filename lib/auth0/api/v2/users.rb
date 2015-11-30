@@ -4,15 +4,15 @@ module Auth0
       # https://auth0.com/docs/apiv2#!/users
       module Users
         # https://auth0.com/docs/apiv2#!/users/get_users
-        def users(per_page: nil, page: nil, include_totals: nil, sort: nil, connection: nil, fields: nil, q: nil)
+        def users(options = {})
           request_params = {
-            per_page:       per_page,
-            page:           page,
-            include_totals: include_totals,
-            sort:           sort,
-            connection:     connection,
-            fields:         fields,
-            q:              q
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil),
+            sort:           options.fetch(:sort, nil),
+            connection:     options.fetch(:connection, nil),
+            fields:         options.fetch(:fields, nil),
+            q:              options.fetch(:q, nil)
           }
 
           request_params[:search_engine] = :v2 if request_params[:q]

@@ -60,13 +60,13 @@ module Auth0
       end
 
       def api_v2?(options)
-        options[:protocols].to_s.include?('v2') || options[:api_version] === 2
+        options[:protocols].to_s.include?('v2') || options[:api_version] == 2
       end
 
       def api_v1?(options)
         version = options[:api_version] || 1
         protocol = options[:protocols].to_s
-        !protocol.include?('v2') && (protocol.include?('v1') || version === 1)
+        !protocol.include?('v2') && (protocol.include?('v1') || version == 1)
       end
     end
   end
