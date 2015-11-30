@@ -1,34 +1,5 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
  RunRailsCops: true
  Exclude:
    - bin/**/*
    - vendor/**/*
-
-Style/DoubleNegation:
- Enabled: false
-
-Style/SpaceInsideBrackets:
- Enabled: false
-
-Style/Documentation:
- Enabled: false
-
-Rails/ActionFilter:
- Enabled: false
-
-Rails/Delegate:
- Enabled: false
-
-Lint/UnderscorePrefixedVariableName:
- Enabled: false
-
-Lint/Loop:
- Enabled: false
-
-Lint/HandleExceptions:
- Enabled: false
-
-Style/EachWithObject:
- Enabled: false

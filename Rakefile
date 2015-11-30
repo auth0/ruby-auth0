@@ -2,6 +2,9 @@
 require 'bundler/gem_tasks'
 
 begin
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+
   require 'rspec/core/rake_task'
 
   desc 'Run Integration Tests'
@@ -17,7 +20,7 @@ begin
   desc 'Run All Suites'
   RSpec::Core::RakeTask.new(:all)
 
-  task default: :spec
+  task default: [ :rubocop, :spec ]
 rescue LoadError
   # No RSpec
 end
