@@ -3,6 +3,8 @@ module Auth0
     # {https://auth0.com/docs/auth-api}
     # Describing functionality of auth0 authentication endpoints
     module AuthenticationEndpoints
+      UP_AUTH = 'Username-Password-Authentication'
+
       # {https://auth0.com/docs/auth-api#!#post--oauth-access_token}
       def obtain_access_token
         request_params = {
@@ -44,7 +46,8 @@ module Auth0
       end
 
       # {https://auth0.com/docs/auth-api#!#post--oauth-ro}
-      def login(username, password, scope = 'openid', id_token = nil, connection_name = 'Username-Password-Authentication')
+
+      def login(username, password, scope = 'openid', id_token = nil, connection_name = UP_AUTH)
         request_params = {
           client_id:  @client_id,
           username:   username,
@@ -58,7 +61,7 @@ module Auth0
       end
 
       # {https://auth0.com/docs/auth-api#!#post--dbconnections-signup}
-      def signup(email, password, connection_name = 'Username-Password-Authentication')
+      def signup(email, password, connection_name = UP_AUTH)
         request_params = {
           client_id:  @client_id,
           email:      email,
@@ -69,7 +72,7 @@ module Auth0
       end
 
       # {https://auth0.com/docs/auth-api#!#post--dbconnections-change_password}
-      def change_password(email, password, connection_name = 'Username-Password-Authentication')
+      def change_password(email, password, connection_name = UP_AUTH)
         request_params = {
           client_id:  @client_id,
           email:      email,

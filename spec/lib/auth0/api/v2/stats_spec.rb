@@ -15,7 +15,7 @@ describe Auth0::Api::V2::Stats do
   context '.daily_stats' do
     it { expect(@instance).to respond_to(:daily_stats) }
     it 'expect client to send get to /api/v2/stats/daily' do
-      expect(@instance).to receive(:get).with('/api/v2/stats/daily', { from: '20120222', to: '20151222' })
+      expect(@instance).to receive(:get).with('/api/v2/stats/daily', from: '20120222', to: '20151222')
       expect { @instance.daily_stats('20120222', '20151222') }.not_to raise_error
     end
   end

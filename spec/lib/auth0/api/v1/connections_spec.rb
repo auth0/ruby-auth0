@@ -43,7 +43,14 @@ describe Auth0::Api::V1::Connections do
                  }
               }
       expect(@instance).to receive(:post).with('/api/connections', params)
-      expect { @instance.create_connection('Some Test name', 'Unpredictable', 'google.com', 'test.google.com,auth0.com') }.not_to raise_error
+      expect do
+        @instance.create_connection(
+          'Some Test name',
+          'Unpredictable',
+          'google.com',
+          'test.google.com,auth0.com'
+        )
+      end.not_to raise_error
     end
   end
   context '.update_connection' do

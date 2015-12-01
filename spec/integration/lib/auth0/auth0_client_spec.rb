@@ -11,16 +11,25 @@ describe Auth0::Client do
   end
 
   it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com' }, Auth0::InvalidCredentials
-  it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com', client_id: 'client_id' }, Auth0::InvalidCredentials
-  it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com', client_secret: 'secret' }, Auth0::InvalidCredentials
-  it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com', api_version: 2 }, Auth0::InvalidCredentials
+  it_should_behave_like 'invalid credentials', {
+    namespace: 'samples.auth0.com', client_id: 'client_id' }, Auth0::InvalidCredentials
+  it_should_behave_like 'invalid credentials', {
+    namespace: 'samples.auth0.com', client_secret: 'secret' }, Auth0::InvalidCredentials
+  it_should_behave_like 'invalid credentials', {
+    namespace: 'samples.auth0.com', api_version: 2 }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {}
   it_should_behave_like 'invalid credentials', api_version: 2
   it_should_behave_like 'invalid credentials', api_version: 1
-  it_should_behave_like 'invalid credentials', { client_id: 'client_id', client_secret: 'secret' }, Auth0::InvalidApiNamespace
-  it_should_behave_like 'invalid credentials', { api_version: 2, token: 'token' }, Auth0::InvalidApiNamespace
+  it_should_behave_like 'invalid credentials', {
+    client_id: 'client_id', client_secret: 'secret' }, Auth0::InvalidApiNamespace
+  it_should_behave_like 'invalid credentials', {
+    api_version: 2, token: 'token' }, Auth0::InvalidApiNamespace
 
-  let(:valid_v1_credentials) { { client_id: ENV['CLIENT_ID'], client_secret: ENV['CLIENT_SECRET'], domain: ENV['DOMAIN'] } }
+  let(:valid_v1_credentials) do
+    { client_id: ENV['CLIENT_ID'],
+      client_secret: ENV['CLIENT_SECRET'],
+      domain: ENV['DOMAIN'] }
+  end
   let(:token) { ENV['MASTER_JWT'] }
   let(:v2_credentials) { { domain: ENV['DOMAIN'], api_version: 2 } }
 
@@ -50,7 +59,7 @@ describe Auth0::Client do
     end
 
     it 'has the correct headers present' do
-      expect(headers.keys.sort).to eql ['Auth0-Client', 'Authorization', 'Content-Type', 'User-Agent']
+      expect(headers.keys.sort).to eql(['Auth0-Client', 'Authorization', 'Content-Type', 'User-Agent'])
     end
 
     it 'uses the correct access token' do

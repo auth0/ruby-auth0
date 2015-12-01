@@ -12,8 +12,9 @@ describe Auth0::Api::V2::Clients do
       expect(@instance).to receive(:get).with('/api/v2/clients', {})
       expect { @instance.clients }.not_to raise_error
     end
-    it 'is expected to send get request to /api/v2/clients?fields=name&exclude_fields=false' do
-      expect(@instance).to receive(:get).with('/api/v2/clients', { exclude_fields: false, fields: [:name] })
+    it 'is expected to send get request to
+      /api/v2/clients?fields=name&exclude_fields=false' do
+      expect(@instance).to receive(:get).with('/api/v2/clients', exclude_fields: false, fields: [:name])
       expect { @instance.clients(exclude_fields: false, fields: [:name]) }.not_to raise_error
     end
   end
@@ -23,7 +24,8 @@ describe Auth0::Api::V2::Clients do
       expect(@instance).to receive(:get).with('/api/v2/clients/1', {})
       expect { @instance.client(1) }.not_to raise_error
     end
-    it 'is expected to send get request to /api/v2/clients?fields=name&exclude_fields=false' do
+    it 'is expected to send get request to
+      /api/v2/clients?fields=name&exclude_fields=false' do
       expect(@instance).to receive(:get).with('/api/v2/clients/1', exclude_fields: false, fields: [:name])
       expect { @instance.client(1, exclude_fields: false, fields: [:name]) }.not_to raise_error
     end

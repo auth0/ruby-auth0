@@ -38,7 +38,7 @@ module Auth0
 
         # https://auth0.com/docs/apiv2#!/users/get_users_by_id
         def user(user_id, fields: nil)
-          path = '/api/v2/users/' + user_id.to_s
+          path = "/api/v2/users/#{user_id}"
           request_params = {
             fields:         fields
           }
@@ -48,13 +48,13 @@ module Auth0
         # https://auth0.com/docs/apiv2#!/users/delete_users_by_id
         def delete_user(user_id)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.nil? || user_id.to_s.empty?
-          path = '/api/v2/users/' + user_id.to_s
+          path = "/api/v2/users/#{user_id}"
           delete(path)
         end
 
         # https://auth0.com/docs/apiv2#!/users/patch_users_by_id
         def patch_user(user_id, options)
-          path = '/api/v2/users/' + user_id
+          path = "/api/v2/users/#{user_id}"
           patch(path, options)
         end
 

@@ -1,12 +1,13 @@
 module Auth0
   module Mixins
-    # here's the proxy for HTTParty, we're building all request on that gem for now, if you want to feel free to use your own http client
+    # here's the proxy for HTTParty, we're building all request on that gem
+    # for now, if you want to feel free to use your own http client
     module HTTPartyProxy
       # proxying requests from instance methods to HTTParty class methods
       %i(get post put patch delete).each do |method|
         define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
-          body = body.delete_if { |_k, v| v.nil? }
+          body = body.delete_if { |_, v| v.nil? }
           if method == :get
             result = self.class.send(method, safe_path, query: body)
           else

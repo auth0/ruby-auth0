@@ -46,7 +46,8 @@ describe Auth0::Api::V1::Users do
       expect { @instance.connection_users('CONNECTION_ID') }.not_to raise_error
     end
 
-    it 'is expected to call /api/connections/CONNECTION_ID/users?search=search_criteria when search is search_criteria' do
+    it 'is expected to call
+      /api/connections/CONNECTION_ID/users?search=search_criteria when search is search_criteria' do
       expect(@instance).to receive(:get).with('/api/connections/CONNECTION_ID/users?search=search_criteria')
       expect { @instance.connection_users('CONNECTION_ID', 'search_criteria') }.not_to raise_error
     end
@@ -96,7 +97,11 @@ describe Auth0::Api::V1::Users do
   context '.create_user' do
     it { expect(@instance).to respond_to(:create_user) }
     it 'is expected to call post to /api/users' do
-      expect(@instance).to receive(:post).with('/api/users', { email: 'test@test.com', password: 'password', connection: 'conn' })
+      expect(@instance).to receive(:post).with(
+        '/api/users',
+        email: 'test@test.com',
+        password: 'password',
+        connection: 'conn')
       @instance.create_user('test@test.com', 'password', 'conn')
     end
   end
@@ -113,7 +118,9 @@ describe Auth0::Api::V1::Users do
     it { expect(@instance).to respond_to(:change_password_ticket) }
     it 'is expected to call post to /api/users/USERID/change_password_ticket' do
       password = SecureRandom.hex
-      expect(@instance).to receive(:post).with('/api/users/USERID/change_password_ticket', 'newPassword' => password, 'resultUrl' => nil)
+      expect(@instance).to receive(:post).with(
+        '/api/users/USERID/change_password_ticket',
+        'newPassword' => password, 'resultUrl' => nil)
       @instance.change_password_ticket 'USERID', password
     end
   end
@@ -121,11 +128,16 @@ describe Auth0::Api::V1::Users do
   context '.verification_ticket' do
     it { expect(@instance).to respond_to(:verification_ticket) }
     it 'is expected to call post to /api/users/userId/verification_ticket if resulturl is set' do
-      expect(@instance).to receive(:post).with('/api/users/auth0|tdasfasdfasdfa/verification_ticket', 'resultUrl' => 'google.com')
+      expect(@instance).to receive(:post).with(
+        '/api/users/auth0|tdasfasdfasdfa/verification_ticket',
+        'resultUrl' => 'google.com')
       @instance.verification_ticket('auth0|tdasfasdfasdfa', 'google.com')
     end
-    it 'is expected to call post to /api/users/userId/verification_ticket if result url is empty' do
-      expect(@instance).to receive(:post).with('/api/users/auth0|tdasfasdfasdfa/verification_ticket', 'resultUrl' => nil)
+    it 'is expected to call post to /api/users/userId/verification_ticket
+      if result url is empty' do
+      expect(@instance).to receive(:post).with(
+        '/api/users/auth0|tdasfasdfasdfa/verification_ticket',
+        'resultUrl' => nil)
       @instance.verification_ticket('auth0|tdasfasdfasdfa')
     end
   end
@@ -133,7 +145,9 @@ describe Auth0::Api::V1::Users do
   context '.create_public_key' do
     it { expect(@instance).to respond_to(:create_public_key) }
     it 'is expected to call post to /api/users/userId/public_key' do
-      expect(@instance).to receive(:post).with('/api/users/auth0|tdasfasdfasdfa/public_key', device: 'device22', public_key: 'SuperSecurePK')
+      expect(@instance).to receive(:post).with(
+        '/api/users/auth0|tdasfasdfasdfa/public_key',
+        device: 'device22', public_key: 'SuperSecurePK')
       @instance.create_public_key('auth0|tdasfasdfasdfa', 'device22', 'SuperSecurePK')
     end
   end
@@ -157,7 +171,10 @@ describe Auth0::Api::V1::Users do
   context '.update_user_password' do
     it { expect(@instance).to respond_to(:update_user_password) }
     it 'is expected to call put to /api/users/auth0|tdasfasdfasdfa/password' do
-      expect(@instance).to receive(:put).with('/api/users/auth0|tdasfasdfasdfa/password', { password: 'password', verify: true })
+      expect(@instance).to receive(:put).with(
+        '/api/users/auth0|tdasfasdfasdfa/password',
+        password: 'password',
+        verify: true)
       @instance.update_user_password('auth0|tdasfasdfasdfa', 'password')
     end
   end
@@ -165,8 +182,14 @@ describe Auth0::Api::V1::Users do
   context '.update_user_password_using_email' do
     it { expect(@instance).to respond_to(:update_user_password_using_email) }
     it 'is expected to call put to /api/users/email@email.com/password' do
-      expect(@instance).to receive(:put).with('/api/users/email@email.com/password', email: 'email@email.com', password: 'password', connection: 'Con', verify: true)
-      @instance.update_user_password_using_email('email@email.com', 'password', 'Con')
+      expect(@instance).to receive(:put).with(
+        '/api/users/email@email.com/password',
+        email: 'email@email.com',
+        password: 'password',
+        connection: 'Con',
+        verify: true)
+      @instance.update_user_password_using_email(
+        'email@email.com', 'password', 'Con')
     end
   end
 

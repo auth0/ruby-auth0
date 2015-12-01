@@ -19,7 +19,7 @@ describe Auth0::Api::V1::Clients do
     it 'is expected to send post request to /api/clients' do
       client_name = 'ClientRandomName'
       callbacks = 'Some absolutely random stuff here'
-      expect(@instance).to receive(:post).with('/api/clients', { name: client_name, callbacks: callbacks })
+      expect(@instance).to receive(:post).with('/api/clients', name: client_name, callbacks: callbacks)
       expect { @instance.create_client(client_name, callbacks) }.not_to raise_error
     end
   end
@@ -29,7 +29,7 @@ describe Auth0::Api::V1::Clients do
     it 'is expected to send post request to /api/clients' do
       client_name = 'Some random name'
       callbacks =   'Some random stuff'
-      expect(@instance).to receive(:post).with('/api/clients', { name: client_name, callbacks: callbacks })
+      expect(@instance).to receive(:post).with('/api/clients', name: client_name, callbacks: callbacks)
       expect { @instance.create_client(client_name, callbacks) }.not_to raise_error
     end
   end

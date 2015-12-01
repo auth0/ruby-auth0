@@ -5,10 +5,7 @@ describe Auth0::Api::V1::Users do
   let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
   let(:password) { Faker::Internet.password }
   let(:connection) { 'Username-Password-Authentication' }
-  let!(:user) do
-    client.create_user(email, password, connection,     'username' => username,
-                                                        'email_verified' => false)
-  end
+  let!(:user) { client.create_user(email, password, connection, 'username' => username, 'email_verified' => false) }
 
   describe '.users' do
     let(:users) { client.users }

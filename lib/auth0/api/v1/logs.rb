@@ -3,21 +3,15 @@ module Auth0
     module V1
       # {https://auth0.com/docs/api#logs}
       module Logs
-        # {https://auth0.com/docs/api#!#get--api-logs-page--number--per_page--items--sort--field----1-1--fields--fields--exclude_fields-true-false-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-search--criteria-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-from--checkpointId--take--count-}
+        # https://auth0.com/docs/api/v1#!#logs
         def logs(options = {})
           acceptable_params = %i(take from search_criteria page per_page sort fields exclude_fields)
           options.reject! do |key, value|
-            next unless key.nil? || \
-                        value.nil? || \
-                        !acceptable_params.include?(key.to_sym)
+            next unless key.nil? || value.nil? || !acceptable_params.include?(key.to_sym)
             warn "#{key} is not in acceptable params list: #{acceptable_params}"
             true
           end
-          path = '/api/logs?' + URI.encode_www_form(options)
+          path = "/api/logs?#{URI.encode_www_form(options)}"
           get(path)
         end
 

@@ -1,6 +1,7 @@
 module Auth0
   module Api
     module V2
+      # https://auth0.com/docs/api/v2#!/Connections
       module Connections
         def connections(strategy: nil, fields: nil, include_fields: true)
           request_params = {
@@ -20,7 +21,7 @@ module Auth0
         end
 
         def connection(connection_id, fields: nil, include_fields: true)
-          path = '/api/v2/connections/' + connection_id.to_s
+          path = "/api/v2/connections/#{connection_id}"
           request_params = {
             fields:         fields,
             include_fields: include_fields
@@ -36,7 +37,7 @@ module Auth0
 
         def update_connection(connection_id, body)
           fail Auth0::MissingConnectionId, 'you must specify a connection id' if connection_id.to_s.empty?
-          path = '/api/v2/connections/' + connection_id.to_s
+          path = "/api/v2/connections/#{connection_id}"
           patch(path, body)
         end
       end

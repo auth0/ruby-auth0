@@ -23,7 +23,10 @@ describe Auth0::Api::V2::Connections do
     context '#filters' do
       it { expect(client.connections(strategy: strategy).size).to be > 0 }
       it { expect(client.connections(strategy: strategy, fields: [:name].join(',')).first).to include('name') }
-      it { expect(client.connections(strategy: strategy, fields: [:name].join(','), include_fields: false).first).to_not include('name') }
+      it do
+        expect(client.connections(strategy: strategy, fields: [:name].join(','), include_fields: false).first).to_not(
+          include('name'))
+      end
     end
   end
 
@@ -34,7 +37,10 @@ describe Auth0::Api::V2::Connections do
 
     context '#filters' do
       it { expect(client.connection(connection['id'], fields: [:name, :id].join(','))).to include('id', 'name') }
-      it { expect(client.connection(connection['id'], fields: [:name, :id].join(','), include_fields: false)).to_not include('id', 'name') }
+      it do
+        expect(client.connection(connection['id'], fields: [:name, :id].join(','), include_fields: false)).to_not(
+          include('id', 'name'))
+      end
     end
   end
 
@@ -42,21 +48,16 @@ describe Auth0::Api::V2::Connections do
     let(:subject) { connection }
 
     it { should include('id', 'name') }
-    it do
-      should include(
-        'name' => connection['name']
-      )
-    end
+    it { should include('name' => connection['name']) }
   end
 
   describe '.delete_connection' do
     it { expect { client.delete_connection connection['id'] }.to_not raise_error }
-
     it { expect { client.delete_connection '' }.to raise_error(Auth0::MissingConnectionId) }
   end
 
   describe '.update_connection' do
     new_name = SecureRandom.uuid[0..25]
-    it { expect(client.update_connection(connection['id'], { 'name' => new_name })).to include('name' => new_name) }
+    it { expect(client.update_connection(connection['id'], 'name' => new_name)).to include('name' => new_name) }
   end
 end

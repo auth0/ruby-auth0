@@ -20,7 +20,9 @@ describe Auth0::Api::V1::Logs do
     end
 
     it 'should raise warn if any garbage params are passed' do
-      error_message = 'random_stuff is not in acceptable params list: [:take, :from, :search_criteria, :page, :per_page, :sort, :fields, :exclude_fields]'
+      error_message = 'random_stuff is not in acceptable params list: '\
+        '[:take, :from, :search_criteria, :page, :per_page, :sort, :fields, '\
+        ':exclude_fields]'
       expect(@instance).to receive(:warn).with(error_message)
       @instance.logs('per_page' => 500, page: 3, random_stuff: 7)
     end

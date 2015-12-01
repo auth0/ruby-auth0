@@ -11,10 +11,11 @@ describe Auth0::Api::V2::Connections do
     it { expect(@instance).to respond_to(:get_connections) }
 
     it 'is expected to call /api/v2/connections' do
-      expect(@instance).to receive(:get).with('/api/v2/connections',         strategy: nil,
-                                                                             fields: nil,
-                                                                             include_fields: true)
-
+      expect(@instance).to receive(:get).with(
+        '/api/v2/connections',
+        strategy: nil,
+        fields: nil,
+        include_fields: true)
       expect { @instance.connections }.not_to raise_error
     end
   end
@@ -46,7 +47,8 @@ describe Auth0::Api::V2::Connections do
       @instance.delete_connection('connectionId')
     end
 
-    it 'is expected not to call delete to /api/v2/connections if connection_id is blank' do
+    it 'is expected not to call delete to /api/v2/connections
+      if connection_id is blank' do
       expect(@instance).not_to receive(:delete)
       expect { @instance.delete_connection('') }.to raise_exception(Auth0::MissingConnectionId)
     end
@@ -60,7 +62,8 @@ describe Auth0::Api::V2::Connections do
       @instance.update_connection('connectionId', body)
     end
 
-    it 'is expected not to call delete to /api/v2/connections if connection_id is blank' do
+    it 'is expected not to call delete to /api/v2/connections
+      if connection_id is blank' do
       expect(@instance).not_to receive(:patch)
       expect { @instance.delete_connection('') }.to raise_exception(Auth0::MissingConnectionId)
     end

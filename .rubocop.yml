@@ -1,5 +1,7 @@
+inherit_from: .rubocop_todo.yml
 AllCops:
  RunRailsCops: true
  Exclude:
    - bin/**/*
    - vendor/**/*
+   - auth0.gemspec

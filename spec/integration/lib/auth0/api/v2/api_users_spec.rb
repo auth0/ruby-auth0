@@ -6,11 +6,11 @@ describe Auth0::Api::V2::Users do
   let(:password) { Faker::Internet.password }
   let(:connection) { 'Username-Password-Authentication' }
   let!(:user) do
-    client.create_user(username,                                      'email' => email,
-                                                                      'password' => password,
-                                                                      'email_verified' => false,
-                                                                      'connection' => connection,
-                                                                      'app_metadata' => {})
+    client.create_user(username,  'email' => email,
+                                  'password' => password,
+                                  'email_verified' => false,
+                                  'connection' => connection,
+                                  'app_metadata' => {})
   end
 
   describe '.users' do
@@ -20,7 +20,10 @@ describe Auth0::Api::V2::Users do
 
     context '#filters' do
       it { expect(client.users(per_page: 1).size).to be 1 }
-      it { expect(client.users(per_page: 1, fields: [:picture, :email, :user_id].join(',')).first).to include('email', 'user_id', 'picture') }
+      it do
+        expect(client.users(per_page: 1, fields: [:picture, :email, :user_id].join(',')).first).to(
+          include('email', 'user_id', 'picture'))
+      end
       it { expect(client.users(per_page: 1, fields: [:email].join(',')).first).to_not include('user_id', 'picture') }
     end
   end
@@ -31,7 +34,10 @@ describe Auth0::Api::V2::Users do
     it { should include('email' => email, 'name' => username) }
 
     context '#filters' do
-      it { expect(client.user(user['user_id'], fields: [:picture, :email, :user_id].join(','))).to include('email', 'user_id', 'picture') }
+      it do
+        expect(client.user(user['user_id'], fields: [:picture, :email, :user_id].join(','))).to(
+          include('email', 'user_id', 'picture'))
+      end
       it { expect(client.user(user['user_id'], fields: [:email].join(','))).to_not include('user_id', 'picture') }
     end
   end
@@ -40,21 +46,15 @@ describe Auth0::Api::V2::Users do
     let(:subject) { user }
 
     it { should include('user_id', 'identities') }
-    it do
-      should include(
-        'email' => email,
-        'email_verified' => false
-      )
-    end
+    it { expect(client.patch_user(user['user_id'], 'email_verified' => true)).to include('email_verified' => true) }
   end
 
   describe '.delete_user' do
     it { expect { client.delete_user user['user_id'] }.to_not raise_error }
-
     it { expect { client.delete_user '' }.to raise_error(Auth0::MissingUserId) }
   end
 
   describe '.patch_user' do
-    it { expect(client.patch_user(user['user_id'], 'email_verified' => true)).to include('email_verified' => true) }
+    it { expect(client.patch_user(user['user_id'], 'email_verified' => true)).to(include('email_verified' => true)) }
   end
 end

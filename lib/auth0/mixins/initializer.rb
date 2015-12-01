@@ -6,19 +6,14 @@ module Auth0
       # accepts hash as parameter
       # you can get all required fields from here: https://auth0.com/docs/auth-api
       #
-      # To run using api v2, pass api_version: 2 when creating a client
+      # By Default API v2
       def initialize(config)
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        domain = api_domain options
-        fail InvalidApiNamespace, 'Api namespace must supply an API domain' if domain.nil?
-        self.class.base_uri "https://#{domain}"
+        self.class.base_uri base_url(options)
         self.class.headers client_headers(config)
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
-        initialize_v2(options) if api_v2?(options)
-        initialize_v1(options) if api_v1?(options)
-        fail InvalidCredentials, 'Must supply a valid API token' if @token.nil?
-        self.class.headers 'Authorization' => "Bearer #{@token}"
+        initialize_api(options)
       end
 
       # including initializer in top of klass
@@ -27,6 +22,18 @@ module Auth0
       end
 
       private
+
+      def initialize_api(options)
+        api_v1?(options) ? initialize_v1(options) : initialize_v2(options)
+        fail InvalidCredentials, 'Must supply a valid API token' if @token.nil?
+        self.class.headers 'Authorization' => "Bearer #{@token}"
+      end
+
+      def base_url(options)
+        domain = options[:domain] || options[:namespace]
+        fail InvalidApiNamespace, 'Api namespace must supply an API domain' if domain.nil?
+        "https://#{domain}"
+      end
 
       def client_headers(config)
         client_info = JSON.dump(name: 'ruby-auth0', version: Auth0::VERSION)
@@ -43,10 +50,6 @@ module Auth0
         headers
       end
 
-      def api_domain(options)
-        options[:domain] || options[:namespace]
-      end
-
       def initialize_v2(options)
         extend Auth0::Api::V2
         @token = options[:access_token] || options[:token]
@@ -57,10 +60,6 @@ module Auth0
         @client_secret = options[:client_secret]
         fail InvalidCredentials, 'Invalid API v1 client_id and client_secret' if @client_id.nil? || @client_secret.nil?
         @token = obtain_access_token
-      end
-
-      def api_v2?(options)
-        options[:protocols].to_s.include?('v2') || options[:api_version] == 2
       end
 
       def api_v1?(options)

@@ -20,7 +20,7 @@ module Auth0
 
         # https://auth0.com/docs/apiv2#!/clients/get_clients_by_id
         def client(client_id, options = {})
-          path = '/api/v2/clients/' + client_id.to_s
+          path = "/api/v2/clients/#{client_id}"
           get(path, options)
         end
 

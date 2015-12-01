@@ -9,9 +9,11 @@ module Auth0
           get(path)
         end
 
-        # HTTParty doesn't support multipart upload, will move this functionality to a separate PR
+        # HTTParty doesn't support multipart upload, will move this
+        # functionality to a separate PR
         # https://auth0.com/docs/apiv2#!/jobs/post_users_imports
-        def create_job(_users_file, _connection_name)
+        # rubocop:disable UnusedMethodArgument
+        def create_job(users_file, connection_name)
           fail NotImplementedError
         end
       end
