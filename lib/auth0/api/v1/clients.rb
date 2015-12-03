@@ -5,15 +5,15 @@ module Auth0
       module Clients
         # {https://auth0.com/docs/api#!#get--api-clients}
         def clients
-          path = "/api/clients"
+          path = '/api/clients'
           get(path)
         end
 
-        alias :get_clients :clients
+        alias_method :get_clients, :clients
 
         # {https://auth0.com/docs/api#!#post--api-clients}
-        def create_client(name, callbacks="")
-          path = "/api/clients"
+        def create_client(name, callbacks = '')
+          path = '/api/clients'
           request_params = {
             name: name,
             callbacks: callbacks
@@ -23,8 +23,8 @@ module Auth0
 
         # @deprecated use {#patch_client}
         # {https://auth0.com/docs/api#!#put--api-clients--client-id-}
-        def update_client(name, callbacks="", client_id=@client_id)
-          warn "This endpoint has been deprecated in favor of PATCH."
+        def update_client(name, callbacks = '', client_id = @client_id)
+          warn 'This endpoint has been deprecated in favor of PATCH.'
           path = "/api/clients/#{client_id}"
           request_params = {
             name: name,
@@ -34,7 +34,7 @@ module Auth0
         end
 
         # {https://auth0.com/docs/api#!#patch--api-clients--client-id-}
-        def patch_client(name, callbacks="", client_id=@client_id)
+        def patch_client(name, callbacks = '', client_id = @client_id)
           path = "/api/clients/#{client_id}"
           request_params = {
             name: name,

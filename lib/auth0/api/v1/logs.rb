@@ -3,26 +3,19 @@ module Auth0
     module V1
       # {https://auth0.com/docs/api#logs}
       module Logs
-        # {https://auth0.com/docs/api#!#get--api-logs-page--number--per_page--items--sort--field----1-1--fields--fields--exclude_fields-true-false-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-search--criteria-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-from--checkpointId--take--count-}
-        def logs(options={})
+        # https://auth0.com/docs/api/v1#!#logs
+        def logs(options = {})
           acceptable_params = %i(take from search_criteria page per_page sort fields exclude_fields)
-          options.reject! do |key,value|
-            if key.nil? ||\
-                value.nil? ||\
-                !acceptable_params.include?(key.to_sym)
-              warn "#{key} is not in acceptable params list: #{acceptable_params}"
-              true
-            end
+          options.reject! do |key, value|
+            next unless key.nil? || value.nil? || !acceptable_params.include?(key.to_sym)
+            warn "#{key} is not in acceptable params list: #{acceptable_params}"
+            true
           end
-          path= "/api/logs?"+URI.encode_www_form(options)
+          path = "/api/logs?#{URI.encode_www_form(options)}"
           get(path)
         end
 
-        alias :search_logs :logs
+        alias_method :search_logs, :logs
 
         # {https://auth0.com/docs/api#!#get--api-logs--_id-}
         def log(id)
@@ -31,7 +24,7 @@ module Auth0
         end
 
         # {https://auth0.com/docs/api#!#get--api-users--user_id--logs-page--number--per_page--items-}
-        def user_logs(user_id, page=0, per_page=50)
+        def user_logs(user_id, page = 0, per_page = 50)
           path = "/api/users/#{user_id}/logs?page=#{page}&per_page=#{per_page}"
           get(path)
         end

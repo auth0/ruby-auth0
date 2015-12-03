@@ -1,6 +1,7 @@
 module Auth0
   module Api
     module V2
+      # https://auth0.com/docs/api/v2#!/Connections
       module Connections
         def connections(strategy: nil, fields: nil, include_fields: true)
           request_params = {
@@ -8,19 +9,19 @@ module Auth0
             fields: fields,
             include_fields: include_fields
           }
-          path = "/api/v2/connections"
+          path = '/api/v2/connections'
           get(path, request_params)
         end
-        alias :get_connections :connections
+        alias_method :get_connections, :connections
 
         def create_connection(body)
-          path = "/api/v2/connections"
+          path = '/api/v2/connections'
           request_params = body
-          post(path, request_params )
+          post(path, request_params)
         end
 
         def connection(connection_id, fields: nil, include_fields: true)
-          path = "/api/v2/connections/" + connection_id.to_s
+          path = "/api/v2/connections/#{connection_id}"
           request_params = {
             fields:         fields,
             include_fields: include_fields
@@ -29,14 +30,14 @@ module Auth0
         end
 
         def delete_connection(connection_id)
-          raise Auth0::MissingConnectionId, "you must specify a connection id" if connection_id.to_s.empty?
+          fail Auth0::MissingConnectionId, 'you must specify a connection id' if connection_id.to_s.empty?
           path = "/api/v2/connections/#{connection_id}"
           delete(path)
         end
 
         def update_connection(connection_id, body)
-          raise Auth0::MissingConnectionId, "you must specify a connection id" if connection_id.to_s.empty?
-          path = "/api/v2/connections/" + connection_id.to_s
+          fail Auth0::MissingConnectionId, 'you must specify a connection id' if connection_id.to_s.empty?
+          path = "/api/v2/connections/#{connection_id}"
           patch(path, body)
         end
       end

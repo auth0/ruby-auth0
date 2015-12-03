@@ -1,9 +1,9 @@
-require "auth0/api/v2/clients"
-require "auth0/api/v2/users"
-require "auth0/api/v2/blacklists"
-require "auth0/api/v2/jobs"
-require "auth0/api/v2/stats"
-require "auth0/api/v2/connections"
+require 'auth0/api/v2/clients'
+require 'auth0/api/v2/users'
+require 'auth0/api/v2/blacklists'
+require 'auth0/api/v2/jobs'
+require 'auth0/api/v2/stats'
+require 'auth0/api/v2/connections'
 
 module Auth0
   module Api
