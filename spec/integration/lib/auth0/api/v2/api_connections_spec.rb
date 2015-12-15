@@ -58,6 +58,11 @@ describe Auth0::Api::V2::Connections do
 
   describe '.update_connection' do
     new_name = SecureRandom.uuid[0..25]
-    it { expect(client.update_connection(connection['id'], 'name' => new_name)).to include('name' => new_name) }
+    let(:options) { { username: new_name } }
+    it do
+      expect(
+        client.update_connection(connection['id'], 'options' => options)['options']
+      ).to include('username' => new_name)
+    end
   end
 end
