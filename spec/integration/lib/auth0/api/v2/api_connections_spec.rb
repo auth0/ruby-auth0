@@ -1,17 +1,17 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Connections do
-  let(:client) { Auth0Client.new(v2_creds) }
+  attr_reader :client, :connection, :strategy, :name, :enabled_clients, :options
 
-  let(:name) { SecureRandom.uuid[0..25] }
-  let(:strategy) { 'google-oauth2' }
-  let(:options) { {} }
-  let(:enabled_clients) { [] }
-
-  let!(:connection) do
-    client.create_connection(name: name,
-                             strategy: strategy,
-                             options: options,
-                             enabled_clients: enabled_clients)
+  before(:all) do
+    @client = Auth0Client.new(v2_creds)
+    @name = "#{SecureRandom.uuid[0..25]}#{entity_suffix}"
+    @strategy = 'google-oauth2'
+    @options = {}
+    @enabled_clients = []
+    @connection = client.create_connection(name: name,
+                                           strategy: strategy,
+                                           options: options,
+                                           enabled_clients: enabled_clients)
   end
 
   describe '.connections' do
@@ -57,12 +57,25 @@ describe Auth0::Api::V2::Connections do
   end
 
   describe '.update_connection' do
+    let!(:connection_to_update) do
+      client.create_connection(name: "#{SecureRandom.uuid[0..25]}#{entity_suffix}",
+                               strategy: strategy,
+                               options: options,
+                               enabled_clients: enabled_clients)
+    end
     new_name = SecureRandom.uuid[0..25]
     let(:options) { { username: new_name } }
     it do
       expect(
-        client.update_connection(connection['id'], 'options' => options)['options']
+        client.update_connection(connection_to_update['id'], 'options' => options)['options']
       ).to include('username' => new_name)
     end
+  end
+
+  after(:all) do
+    client
+      .connections
+      .select { |connection| connection['name'].include?(entity_suffix) }
+      .each { |connection| client.delete_connection(connection['id']) }
   end
 end
