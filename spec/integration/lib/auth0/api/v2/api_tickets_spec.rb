@@ -7,11 +7,10 @@ describe Auth0::Api::V2::Tickets do
     username = Faker::Internet.user_name
     email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
     password = Faker::Internet.password
-    connection = 'Username-Password-Authentication'
     @user = client.create_user(username,  'email' => email,
                                           'password' => password,
                                           'email_verified' => false,
-                                          'connection' => connection,
+                                          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
                                           'app_metadata' => {})
   end
 
