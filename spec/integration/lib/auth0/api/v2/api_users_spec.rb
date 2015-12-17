@@ -4,12 +4,11 @@ describe Auth0::Api::V2::Users do
   let(:username) { Faker::Internet.user_name }
   let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
   let(:password) { Faker::Internet.password }
-  let(:connection) { 'Username-Password-Authentication' }
   let!(:user) do
     client.create_user(username,  'email' => email,
                                   'password' => password,
                                   'email_verified' => false,
-                                  'connection' => connection,
+                                  'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
                                   'app_metadata' => {})
   end
 
