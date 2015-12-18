@@ -4,12 +4,14 @@ module Auth0
     # for now, if you want to feel free to use your own http client
     module HTTPartyProxy
       # proxying requests from instance methods to HTTParty class methods
-      %i(get post put patch delete).each do |method|
+      %i(get post post_file put patch delete).each do |method|
         define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
           if method == :get
             result = self.class.send(method, safe_path, query: body)
+          elsif method == :post_file
+            result = self.class.send(:post, safe_path, body: body, detect_mime_type: true)
           else
             result = self.class.send(method, safe_path, body: body.to_json)
           end
