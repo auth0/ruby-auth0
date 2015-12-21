@@ -12,6 +12,7 @@ module Auth0
             sort:           options.fetch(:sort, nil),
             connection:     options.fetch(:connection, nil),
             fields:         options.fetch(:fields, nil),
+            include_fields: options.fetch(:include_fields, nil),
             q:              options.fetch(:q, nil)
           }
 
@@ -37,30 +38,51 @@ module Auth0
         end
 
         # https://auth0.com/docs/apiv2#!/users/get_users_by_id
-        def user(user_id, fields: nil)
+        def user(user_id, fields: nil, include_fields: true)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "/api/v2/users/#{user_id}"
           request_params = {
-            fields:         fields
+            fields:         fields,
+            include_fields: include_fields
           }
           get(path, request_params)
         end
 
         # https://auth0.com/docs/apiv2#!/users/delete_users_by_id
         def delete_user(user_id)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.nil? || user_id.to_s.empty?
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "/api/v2/users/#{user_id}"
           delete(path)
         end
 
         # https://auth0.com/docs/apiv2#!/users/patch_users_by_id
         def patch_user(user_id, options)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          fail Auth0::InvalidParameter, 'Must supply a valid body' if options.to_s.empty?
           path = "/api/v2/users/#{user_id}"
           patch(path, options)
         end
 
         # https://auth0.com/docs/apiv2#!/users/delete_multifactor_by_provider
         def delete_user_provider(user_id, provider_name)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          fail Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
           path = "/api/v2/users/#{user_id}/multifactor/#{provider_name}"
+          delete(path)
+        end
+
+        def link_user_account(user_id, body)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+          path = "/api/v2/users/#{user_id}/identities"
+          post(path, body)
+        end
+
+        def unlink_users_account(user_id, provider, secondary_user_id)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          fail Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
+          fail Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
+          path = "/api/v2/users/#{user_id}/identities/#{provider}/#{secondary_user_id}"
           delete(path)
         end
       end
