@@ -18,6 +18,7 @@ describe Auth0::Api::V2::Users do
         sort: nil,
         connection: nil,
         fields: nil,
+        include_fields: nil,
         q: nil)
       expect { @instance.users }.not_to raise_error
     end
@@ -26,9 +27,10 @@ describe Auth0::Api::V2::Users do
   context '.user' do
     it { expect(@instance).to respond_to(:user) }
     it 'is expected to call get request to /api/v2/users/USER_ID' do
-      expect(@instance).to receive(:get).with('/api/v2/users/USER_ID', fields: nil)
+      expect(@instance).to receive(:get).with('/api/v2/users/USER_ID', fields: nil, include_fields: true)
       expect { @instance.user('USER_ID') }.not_to raise_error
     end
+    it { expect { @instance.user('') }.to raise_error 'Must supply a valid user_id' }
   end
 
   context '.create_user' do
@@ -94,5 +96,39 @@ describe Auth0::Api::V2::Users do
         connection: 'conn',
         name: 'name')
     end
+    it { expect { @instance.patch_user('', 'body') }.to raise_error 'Must supply a valid user_id' }
+    it { expect { @instance.patch_user('UserId', '') }.to raise_error 'Must supply a valid body' }
+  end
+
+  context '.link_user_account' do
+    it { expect(@instance).to respond_to(:link_user_account) }
+    it 'is expected to call post to /api/v2/users/UserId/identities' do
+      expect(@instance).to receive(:post).with('/api/v2/users/UserID/identities', body: 'json body')
+      @instance.link_user_account('UserID', body: 'json body')
+    end
+    it { expect { @instance.link_user_account('', 'body') }.to raise_error 'Must supply a valid user_id' }
+    it { expect { @instance.link_user_account('UserId', '') }.to raise_error 'Must supply a valid body' }
+  end
+
+  context '.unlink_users_account' do
+    it { expect(@instance).to respond_to(:unlink_users_account) }
+    it 'is expected to call delete to /api/v2/users/UserId/identities' do
+      expect(@instance).to receive(:delete).with('/api/v2/users/UserID/identities/provider_name/Secondary_User_ID')
+      @instance.unlink_users_account('UserID', 'provider_name', 'Secondary_User_ID')
+    end
+    it { expect { @instance.unlink_users_account('', 'pro', 'SUserID') }.to raise_error 'Must supply a valid user_id' }
+    it { expect { @instance.unlink_users_account('UID', nil, 'SUID') }.to raise_error 'Must supply a valid provider' }
+    it do
+      expect { @instance.unlink_users_account('UID', 'pro', nil) }.to raise_error 'Must supply a valid secondary user_id'
+    end
+  end
+
+  context '.delete_user_provider' do
+    it { expect(@instance).to respond_to(:delete_user_provider) }
+    it 'is expected to call delete to /api/v2/users/User_ID/multifactor/provider_name' do
+      expect(@instance).to receive(:delete).with('/api/v2/users/User_ID/multifactor/provider_name')
+      @instance.delete_user_provider('User_ID', 'provider_name')
+    end
+    it { expect { @instance.delete_user_provider(nil, 'test') }.to raise_error 'Must supply a valid user_id' }
   end
 end
