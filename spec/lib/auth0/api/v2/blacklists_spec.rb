@@ -20,5 +20,6 @@ describe Auth0::Api::V2::Blacklists do
       expect(@instance).to receive(:post).with('/api/v2/blacklists/tokens', aud: 'aud', jti: 'jti')
       @instance.add_token_to_blacklist('jti', 'aud')
     end
+    it { expect { @instance.add_token_to_blacklist('', '') }.to raise_error 'you must specify a valid JTI' }
   end
 end
