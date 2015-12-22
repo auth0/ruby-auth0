@@ -11,6 +11,7 @@ module Auth0
 
         # https://auth0.com/docs/apiv2#!/blacklists/post_tokens
         def add_token_to_blacklist(jti, aud = nil)
+          fail Auth0::MissingParameter, 'you must specify a valid JTI' if jti.to_s.empty?
           request_params = {
             jti: jti,
             aud: aud
