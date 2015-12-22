@@ -20,8 +20,6 @@ module Auth0
   class MissingUserId < Auth0::Exception; end
   # exception for unset client_id
   class MissingClientId < Auth0::Exception; end
-  # exception for an unset connection_id
-  class MissingConnectionId < Auth0::Exception; end
   # exception for an unset parameter
   class MissingParameter < Auth0::Exception; end
   # Api v2 access denied
