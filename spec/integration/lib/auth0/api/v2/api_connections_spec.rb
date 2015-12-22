@@ -53,7 +53,6 @@ describe Auth0::Api::V2::Connections do
 
   describe '.delete_connection' do
     it { expect { client.delete_connection connection['id'] }.to_not raise_error }
-    it { expect { client.delete_connection '' }.to raise_error(Auth0::MissingConnectionId) }
   end
 
   describe '.update_connection' do
@@ -66,10 +65,27 @@ describe Auth0::Api::V2::Connections do
     new_name = SecureRandom.uuid[0..25]
     let(:options) { { username: new_name } }
     it do
-      expect(
-        client.update_connection(connection_to_update['id'], 'options' => options)['options']
-      ).to include('username' => new_name)
+      expect(client.update_connection(connection_to_update['id'], 'options' => options)['options']).to include(
+        'username' => new_name)
     end
+  end
+
+  describe '.delete_connection_user' do
+    let(:username) { Faker::Internet.user_name }
+    let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
+    let(:password) { Faker::Internet.password }
+    let!(:user_to_delete) do
+      client.create_user(username,  'email' => email,
+                                    'password' => password,
+                                    'email_verified' => false,
+                                    'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+                                    'app_metadata' => {})
+    end
+    let(:connection) do
+      client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }
+    end
+
+    it { expect(client.delete_connection_user(connection['id'], email)).to be_nil }
   end
 
   after(:all) do
