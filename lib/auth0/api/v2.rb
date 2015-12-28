@@ -6,6 +6,7 @@ require 'auth0/api/v2/jobs'
 require 'auth0/api/v2/rules'
 require 'auth0/api/v2/stats'
 require 'auth0/api/v2/users'
+require 'auth0/api/v2/tenants'
 require 'auth0/api/v2/tickets'
 
 module Auth0
@@ -20,6 +21,7 @@ module Auth0
       include Auth0::Api::V2::Rules
       include Auth0::Api::V2::Stats
       include Auth0::Api::V2::Users
+      include Auth0::Api::V2::Tenants
       include Auth0::Api::V2::Tickets
     end
   end
