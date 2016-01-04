@@ -5,18 +5,45 @@ module Auth0
       module Tickets
         attr_reader :path
 
-        # https://auth0.com/docs/api/v2#!/Tickets/post_email_verification
-        def post_email_verification(body)
-          fail Auth0::InvalidParameter, 'Must supply a valid body to post an email verification' if body.to_s.empty?
+        # Create an email verification ticket
+        # @see https://auth0.com/docs/api/v2#!/Tickets/post_email_verification
+        # @param user_id [string] The user_id of for which the ticket is to be created
+        # @param result_url [string] The user will be redirected to this endpoint once the ticket is used
+        # @return [json] Returns ticket url
+        def post_email_verification(user_id, result_url: nil)
+          if user_id.to_s.empty?
+            fail Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
+          end
           path = '/api/v2/tickets/email-verification'
-          post(path, body)
+          request_params = {
+            user_id: user_id,
+            result_url: result_url
+          }
+          post(path, request_params)
         end
 
-        # https://auth0.com/docs/api/v2#!/Tickets/post_password_change
-        def post_password_change(body)
-          fail Auth0::InvalidParameter, 'Must supply a valid body to post a password-change' if body.to_s.empty?
+        # Create a password change ticket
+        # @see https://auth0.com/docs/api/v2#!/Tickets/post_password_change
+        # @param new_password [string] The password to set for the user once the ticket is used
+        # @param user_id [string] The user_id of for which the ticket is to be created
+        # @param result_url [string] The user will be redirected to this endpoint once the ticket is used
+        # @param connection_id [string] The connection that provides the identity for which the password is to be
+        # changed. If sending this parameter, the email is also required and the user_id is invalid
+        # @param email [string] The user's email
+        # @return [json] Returns ticket url
+        def post_password_change(new_password, user_id: nil, result_url: nil, connection_id: nil, email: nil)
+          if new_password.to_s.empty?
+            fail Auth0::InvalidParameter, 'Must supply a valid new password to post a password-change'
+          end
           path = '/api/v2/tickets/password-change'
-          post(path, body)
+          request_params = {
+            user_id: user_id,
+            result_url: result_url,
+            new_password: new_password,
+            connection_id: connection_id,
+            email: email
+          }
+          post(path, request_params)
         end
       end
     end

@@ -9,15 +9,15 @@ describe Auth0::Api::V1::Users do
                        'username' => username, 'email_verified' => false)
   end
 
-  describe '.users' do
-    let(:users) { client.users }
+  # describe '.users' do
+  # let(:users) { client.users }
 
-    it { expect(users.size).to be > 0 }
+  # it { expect(users.size).to be > 0 }
 
-    # context '#filters' do
-    #   it { expect(client.users("email: #{email}").size).to be 1 }
-    # end
-  end
+  # context '#filters' do
+  #   it { expect(client.users("email: #{email}").size).to be 1 }
+  # end
+  # end
 
   describe '.user' do
     let(:subject) { client.user(user['user_id']) }
