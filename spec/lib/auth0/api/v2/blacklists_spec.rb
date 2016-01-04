@@ -9,7 +9,7 @@ describe Auth0::Api::V2::Blacklists do
   context '.blacklisted_tokens' do
     it { expect(@instance).to respond_to(:blacklisted_tokens) }
     it 'is expected to call /api/v2/blacklists/tokens' do
-      expect(@instance).to receive(:get).with('/api/v2/blacklists/tokens')
+      expect(@instance).to receive(:get).with('/api/v2/blacklists/tokens', aud: nil)
       expect { @instance.blacklisted_tokens }.not_to raise_error
     end
   end

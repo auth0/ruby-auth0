@@ -21,10 +21,10 @@ describe Auth0::Api::V2::Tenants do
 
   describe '.get_tenant_settings' do
     it { expect(client.get_tenant_settings).to include(body) }
-    
-    let(:tenant_setting_fields) {client.get_tenant_settings(fields: 'picture_url')}
-    it { expect(tenant_setting_fields).to_not include({'friendly_name' => 'My Company'}) }
-    it { expect(tenant_setting_fields).to include({'picture_url' => 'https://mycompany.org/logo.png'}) }
+
+    let(:tenant_setting_fields) { client.get_tenant_settings(fields: 'picture_url') }
+    it { expect(tenant_setting_fields).to_not include('friendly_name' => 'My Company') }
+    it { expect(tenant_setting_fields).to include('picture_url' => 'https://mycompany.org/logo.png') }
   end
 
   describe '.update_tenant_settings' do

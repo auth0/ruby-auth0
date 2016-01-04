@@ -104,7 +104,7 @@ describe Auth0::Api::V2::Users do
     end
 
     let(:body_link) { { 'provider' => 'auth0', 'user_id' => link_user['user_id'] } }
-    skip "Link user account examples are skipped to avoid errors on users deletion" do
+    skip 'Link user account examples are skipped to avoid errors on users deletion' do
       it do
         expect(
           client.link_user_account(primary_user['user_id'], body_link).first

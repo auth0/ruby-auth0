@@ -19,25 +19,15 @@ describe Auth0::Api::V2::Tickets do
   end
 
   describe '.post_email_verification' do
-    let(:body_email) do
-      {
-        'result_url' => 'http://myapp.com/callback',
-        'user_id' => user['user_id']
-      }
-    end
-    let(:email_verification) { client.post_email_verification(body_email) }
+    let(:email_verification) { client.post_email_verification(user['user_id'], result_url: 'http://myapp.com/callback') }
     it { expect(email_verification).to include('ticket') }
   end
 
   describe '.post_password_change' do
-    let(:body_password) do
-      {
-        'result_url' => 'http://myapp.com/callback',
-        'user_id' => user['user_id'],
-        'new_password' => 'secret'
-      }
+    let(:password_change) do
+      client.post_password_change('secret', user_id: user['user_id'],
+                                            result_url: 'http://myapp.com/callback')
     end
-    let(:password_change) { client.post_password_change(body_password) }
     it { expect(password_change).to include('ticket') }
   end
 end
