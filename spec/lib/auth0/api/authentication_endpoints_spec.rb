@@ -54,6 +54,19 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
+  context '.refresh_delegation' do
+    it { expect(@instance).to respond_to(:refresh_delegation) }
+    it "is expected to make post request to '/delegation'" do
+      expect(@instance).to receive(:post).with(
+        '/delegation',
+        client_id: nil,
+        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        refresh_token: '', target: '', api_type: '', scope: '',
+        additional_parameter: 'parameter')
+        @instance.refresh_delegation('', '', '', '', additional_parameter: 'parameter')
+    end
+  end
+
   context '.impersonate' do
     let(:user_id)         { 'some_user_id' }
     let(:app_client_id)   { 'some_app_client_id' }
