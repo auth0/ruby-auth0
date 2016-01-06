@@ -28,6 +28,19 @@ module Auth0
         post('/delegation', request_params)
       end
 
+      # {https://auth0.com/docs/auth-api#!#post--delegation}
+      def refresh_delegation(refresh_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
+        request_params = {
+          client_id:      @client_id,
+          grant_type:     'urn:ietf:params:oauth:grant-type:jwt-bearer',
+          refresh_token:  refresh_token,
+          target:         target,
+          api_type:       api_type,
+          scope:          scope
+        }.merge(extra_parameters)
+        post('/delegation', request_params)
+      end
+
       # {https://auth0.com/docs/auth-api#!#post--users--user_id--impersonate}
       def impersonate(user_id, app_client_id, impersonator_id, options)
         request_params = {
