@@ -18,7 +18,7 @@ module Auth0
         end
 
         # Adds the token identified by the jti to a blacklist for the tenant.
-        # @see https://auth0.com/docs/apiv2#!/blacklists/post_tokens
+        # @see https://auth0.com/docs/api/v2#!/blacklists/post_tokens
         # @param jti [string] The jti of the JWT to blacklist
         # @param aud [string] The JWT's aud claim. The client_id of the client for which it was issued
         # @return [json] Returns the blacklisted token

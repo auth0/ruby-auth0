@@ -4,7 +4,7 @@ module Auth0
       # Methods to use the client endpoints
       module Clients
         # Retrieves a list of all client applications. Accepts a list of fields to include or exclude.
-        # @see https://auth0.com/docs/apiv2#!/clients/get_clients
+        # @see https://auth0.com/docs/api/v2#!/clients/get_clients
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
         # @param include_fields [boolean] if the fields specified are to be included in the result, false otherwise
         #
@@ -21,7 +21,7 @@ module Auth0
         alias_method :get_clients, :clients
 
         # Creates a new client application.
-        # @see https://auth0.com/docs/apiv2#!/clients/post_clients
+        # @see https://auth0.com/docs/api/v2#!/clients/post_clients
         # @param name [string] The name of the client. Must contain at least one character. Does not allow '<' or '>'
         # @param options [hash] The Hash options used to define the client's properties.
         # @return  [json] Returns the created client application.

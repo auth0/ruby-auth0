@@ -1,7 +1,7 @@
 module Auth0
   module Api
     module V2
-      # https://auth0.com/docs/api/v2#!/Tickets
+      # Methods to use the tickets endpoints
       module Tickets
         attr_reader :path
 
