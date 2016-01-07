@@ -2,7 +2,7 @@ module Auth0
   module Api
     module V2
       module Connections
-        def connections(strategy: nil, fields: nil, include_fields: true)
+        def connections(strategy=nil, fields= nil, include_fields=true)
           request_params = {
             strategy: strategy,
             fields: fields,
@@ -19,8 +19,8 @@ module Auth0
           post(path, request_params )
         end
 
-        def connection(connection_id, fields: nil, include_fields: true)
-          path = "/api/v2/connections/" + connection_id.to_s
+        def connection(connection_id, fields=nil, include_fields=true)
+          path = "/api/v2/connections/#{connection_id}"
           request_params = {
             fields:         fields,
             include_fields: include_fields

@@ -4,7 +4,7 @@ module Auth0
       #https://auth0.com/docs/apiv2#!/users
       module Users
         #https://auth0.com/docs/apiv2#!/users/get_users
-        def users( per_page: nil, page: nil, include_totals: nil, sort: nil, connection: nil, fields: nil, q: nil )
+        def users( per_page= nil, page = nil, include_totals=nil, sort= nil, connection= nil, fields= nil, q=nil )
           request_params = {
             per_page:       per_page,
             page:           page,
@@ -38,9 +38,9 @@ module Auth0
           delete(path)
         end
 
-        #https://auth0.com/docs/apiv2#!/users/get_users_by_id
-        def user(user_id, fields: nil)
-          path = "/api/v2/users/" + user_id.to_s
+        # https://auth0.com/docs/apiv2#!/users/get_users_by_id
+        def user(user_id, fields=nil)
+          path = "/api/v2/users/#{user_id}"
           request_params = {
             fields:         fields,
           }

@@ -3,8 +3,8 @@ module Auth0
     # here's the proxy for HTTParty, we're building all request on that gem for now, if you want to feel free to use your own http client
     module HTTPartyProxy
       # proxying requests from instance methods to HTTParty class methods
-      %i(get post put patch delete).each do |method|
-        define_method(method) do |path, body={}|
+      [:get, :post, :put, :patch, :delete].each do |method|
+        define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
           body = body.delete_if {|k,v| v.nil? }
           if method == :get

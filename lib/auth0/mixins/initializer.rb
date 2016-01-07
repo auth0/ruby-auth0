@@ -22,9 +22,10 @@ module Auth0
       end
 
       # including initializer in top of klass
-      def self.included(klass)
-        klass.send :prepend, Initializer
-      end
+      ###
+      #def self.included(klass)
+      #  klass.send :prepend, Initializer
+      #end
 
       private
 

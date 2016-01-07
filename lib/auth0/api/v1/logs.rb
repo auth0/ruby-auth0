@@ -3,14 +3,10 @@ module Auth0
     module V1
       # {https://auth0.com/docs/api#logs}
       module Logs
-        # {https://auth0.com/docs/api#!#get--api-logs-page--number--per_page--items--sort--field----1-1--fields--fields--exclude_fields-true-false-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-search--criteria-}
-        #
-        # {https://auth0.com/docs/api#!#get--api-logs-from--checkpointId--take--count-}
-        def logs(options={})
-          acceptable_params = %i(take from search_criteria page per_page sort fields exclude_fields)
-          options.reject! do |key,value|
+        # https://auth0.com/docs/api/v1#!#logs
+        def logs(options = {})
+          acceptable_params = [:take, :from, :search_criteria, :page, :per_page, :sort, :fields, :exclude_fields]
+          options.reject! do |key, value|
             if key.nil? ||\
                 value.nil? ||\
                 !acceptable_params.include?(key.to_sym)
