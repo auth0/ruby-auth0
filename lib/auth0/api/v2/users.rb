@@ -1,10 +1,10 @@
 module Auth0
   module Api
     module V2
-      # https://auth0.com/docs/apiv2#!/users
+      # Methods to use the users endpoints
       module Users
         # Retrieves a list of existing users.
-        # @see https://auth0.com/docs/apiv2#!/users/get_users
+        # @see https://auth0.com/docs/api/v2#!/Users/get_users
         # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100
         # @param page [integer]  The page number. Zero based
         # @param include_totals [boolean] true if a query summary must be included in the result
@@ -38,7 +38,7 @@ module Auth0
         # Creates a new user according to optional parameters received.
         # The attribute connection is always mandatory but depending on the type of connection you are using there
         # could be others too. For instance, Auth0 DB Connections require email and password.
-        # @see https://auth0.com/docs/apiv2#!/users/post_users
+        # @see https://auth0.com/docs/api/v2#!/Users/post_users
         # @param name [string] the user name
         # @param connection [string] The connection the user belongs to
         #
@@ -51,14 +51,14 @@ module Auth0
         end
 
         # Delete all users - USE WITH CAUTION
-        # @see https://auth0.com/docs/apiv2#!/users/delete_users
+        # @see https://auth0.com/docs/api/v2#!/Users/delete_users
         def delete_users
           path = '/api/v2/users'
           delete(path)
         end
 
         # Retrieves a user given a user_id
-        # @see https://auth0.com/docs/apiv2#!/users/get_users_by_id
+        # @see https://auth0.com/docs/api/v2#!/Users/get_users_by_id
         # @param user_id [string] The user_id of the user to retrieve
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
         # @param include_fields [boolean] if the fields specified are to be included in the result, false otherwise.
@@ -75,7 +75,7 @@ module Auth0
         end
 
         # Deletes a single user given its id
-        # @see https://auth0.com/docs/apiv2#!/users/delete_users_by_id
+        # @see https://auth0.com/docs/api/v2#!/Users/delete_users_by_id
         # @param user_id [string] The user_id of the user to delete
         def delete_user(user_id)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
@@ -94,7 +94,7 @@ module Auth0
         # If you are updating email_verified, phone_verified, username or password you need to specify the connection
         # property too.
         # If your are updating email or phone_number you need to specify the connection and the client_id properties.
-        # @see https://auth0.com/docs/apiv2#!/users/patch_users_by_id
+        # @see https://auth0.com/docs/api/v2#!/Users/patch_users_by_id
         # @param user_id [string] The user_id of the user to update.
         # @param options [hash] The optional parametes to update
         #
@@ -107,7 +107,7 @@ module Auth0
         end
 
         # Delete a user's multifactor provider
-        # @see https://auth0.com/docs/apiv2#!/users/delete_multifactor_by_provider
+        # @see https://auth0.com/docs/api/v2#!/Users/delete_multifactor_by_provider
         # @param user_id [string] The user_id of the user to delete
         # @param provider_name [string] The multifactor provider. Supported values 'duo' or 'google-authenticator'
         def delete_user_provider(user_id, provider_name)

@@ -1,12 +1,12 @@
 module Auth0
   module Api
     module V2
-      # https://auth0.com/docs/apiv2#!/jobs
+      # Methods to use the jobs endpoints
       module Jobs
         attr_reader :base_path
 
         # Retrieves a job. Useful to check its status.
-        # @see https://auth0.com/docs/apiv2#!/jobs/get_jobs_by_job_id
+        # @see https://auth0.com/docs/api/v2#!/Jobs/get_jobs_by_job_id
         # @param job_id [string] The id of the job
         #
         # @return [json] the job status and properties
@@ -18,7 +18,7 @@ module Auth0
 
         # Imports users to a connection from a file using a long running job.
         # Important: The documentation for the file format is at https://docs.auth0.com/bulk-import.
-        # @see https://auth0.com/docs/apiv2#!/jobs/post_users_imports
+        # @see https://auth0.com/docs/api/v2#!/Jobs/post_users_imports
         # @param users_file [file] A file containing the users to import
         # @param connection_id [string] The connection id of the connection to which users will be inserted
         #

@@ -9,15 +9,15 @@ describe Auth0::Api::V1::Users do
                        'username' => username, 'email_verified' => false)
   end
 
-  skip "Users examples are skipped" do
+  skip 'Users examples are skipped' do
     describe '.users' do
-    let(:users) { client.users }
+      let(:users) { client.users }
 
-    it { expect(users.size).to be > 0 }
+      it { expect(users.size).to be > 0 }
 
-    context '#filters' do
-      it { expect(client.users("email: #{email}").size).to be 1 }
-    end
+      context '#filters' do
+        it { expect(client.users("email: #{email}").size).to be 1 }
+      end
     end
   end
 
