@@ -15,6 +15,7 @@ begin
   desc 'Build Documentation'
   YARD::Rake::YardocTask.new(:documentation) do |t|
     t.files = DOC_FILES
+    t.options = ['-p', 'doc_config/templates']
   end
 
   desc 'Publish SDK documentation'
