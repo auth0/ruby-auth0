@@ -32,7 +32,7 @@ describe Auth0::Api::V2::Jobs do
       let(:imported_users) { client.import_users(users_file, connection_id) }
       it do
         expect(imported_users).to include(
-          'connection' => 'Username-Password-Authentication',
+          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
           'status' => 'pending',
           'type' => 'users_import')
       end
