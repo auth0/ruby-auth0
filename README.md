@@ -19,7 +19,20 @@ gem 'auth0'
 
 ## Basic usage
 
-Using [APIv1](https://auth0.com/docs/api)
+Using [APIv2](https://auth0.com/docs/api/v2)
+
+```ruby
+require "auth0"
+
+auth0 = Auth0Client.new(
+  :token => "YOUR JWT HERE",
+  :domain => "<YOUR ACCOUNT>.auth0.com"
+)
+
+puts auth0.get_users
+```
+
+Using [APIv1](https://auth0.com/docs/api/v1)
 
 ```ruby
 require "auth0"
@@ -32,21 +45,6 @@ auth0 = Auth0Client.new(
 
 puts auth0.get_users
 ```
-
-Using [APIv2](https://auth0.com/docs/apiv2)
-
-```ruby
-require "auth0"
-
-auth0 = Auth0Client.new(
-  :api_version => 2,
-  :token => "YOUR JWT HERE",
-  :domain => "<YOUR ACCOUNT>.auth0.com"
-)
-
-puts auth0.get_users
-```
-
 
 ## What is Auth0?
 

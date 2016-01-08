@@ -4,16 +4,20 @@ describe Auth0::Api::V1::Users do
   let(:username) { Faker::Internet.user_name }
   let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
   let(:password) { Faker::Internet.password }
-  let(:connection) { 'Username-Password-Authentication' }
-  let!(:user) { client.create_user(email, password, connection, 'username' => username, 'email_verified' => false) }
+  let!(:user) do
+    client.create_user(email, password, Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+                       'username' => username, 'email_verified' => false)
+  end
 
-  describe '.users' do
-    let(:users) { client.users }
+  skip 'Users examples are skipped' do
+    describe '.users' do
+      let(:users) { client.users }
 
-    it { expect(users.size).to be > 0 }
+      it { expect(users.size).to be > 0 }
 
-    context '#filters' do
-      it { expect(client.users("email: #{email}").size).to be 1 }
+      context '#filters' do
+        it { expect(client.users("email: #{email}").size).to be 1 }
+      end
     end
   end
 

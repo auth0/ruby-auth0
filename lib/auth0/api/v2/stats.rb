@@ -1,22 +1,39 @@
 module Auth0
   module Api
     module V2
-      # https://auth0.com/docs/apiv2#!/stats
+      # Methods to use the stats endpoints
       module Stats
-        # https://auth0.com/docs/apiv2#!/stats/get_active_users
+        attr_reader :stats_path
+
+        # Gets the active users count (logged in during the last 30 days).
+        # @see https://auth0.com/docs/api/v2#!/Stats/get_active_users
+        #
+        # @return [integer] Returns numbers
         def active_users
-          path = '/api/v2/stats/active-users'
+          path = "#{stats_path}/active-users"
           get(path)
         end
 
-        # https://auth0.com/docs/apiv2#!/stats/get_daily
+        # Gets the daily stats for a particular period.
+        # @see https://auth0.com/docs/api/v2#!/Stats/get_daily
+        # @param from [string]  The first day of the period (inclusive) in YYYYMMDD format.
+        # @param to [string] The last day of the period (inclusive) in YYYYMMDD format.
+        #
+        # @return [json] Returns the daily stats.
         def daily_stats(from, to)
-          path = '/api/v2/stats/daily'
+          path = "#{stats_path}/daily"
           request_params = {
             from: from,
             to: to
           }
           get(path, request_params)
+        end
+
+        private
+
+        # Stats API path
+        def stats_path
+          @stats_path ||= '/api/v2/stats'
         end
       end
     end
