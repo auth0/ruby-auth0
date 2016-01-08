@@ -37,7 +37,7 @@ module Auth0
         end
 
         # https://auth0.com/docs/apiv2#!/users/get_users_by_id
-        def user(user_id, fields: nil)
+        def user(user_id, fields=nil)
           path = "/api/v2/users/#{user_id}"
           request_params = {
             fields:         fields

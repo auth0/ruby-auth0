@@ -3,7 +3,7 @@ module Auth0
     module V2
       # https://auth0.com/docs/api/v2#!/Connections
       module Connections
-        def connections(strategy: nil, fields: nil, include_fields: true)
+        def connections(strategy=nil, fields= nil, include_fields=true)
           request_params = {
             strategy: strategy,
             fields: fields,
@@ -20,7 +20,7 @@ module Auth0
           post(path, request_params)
         end
 
-        def connection(connection_id, fields: nil, include_fields: true)
+        def connection(connection_id, fields=nil, include_fields=true)
           path = "/api/v2/connections/#{connection_id}"
           request_params = {
             fields:         fields,
