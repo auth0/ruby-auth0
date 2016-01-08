@@ -1,4 +1,4 @@
-require 'httparty'
+require 'httmultiparty'
 require 'uri'
 require 'auth0/mixins/httparty_proxy'
 require 'auth0/mixins/initializer'
