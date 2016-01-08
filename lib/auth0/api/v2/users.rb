@@ -3,6 +3,8 @@ module Auth0
     module V2
       # Methods to use the users endpoints
       module Users
+        attr_reader :users_path
+
         # Retrieves a list of existing users.
         # @see https://auth0.com/docs/api/v2#!/Users/get_users
         # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100
@@ -27,11 +29,8 @@ module Auth0
             include_fields: options.fetch(:include_fields, nil),
             q:              options.fetch(:q, nil)
           }
-
           request_params[:search_engine] = :v2 if request_params[:q]
-
-          path = '/api/v2/users'
-          get(path, request_params)
+          get(users_path, request_params)
         end
         alias_method :get_users, :users
 
@@ -44,17 +43,15 @@ module Auth0
         #
         # @return [json]
         def create_user(name, options = {})
-          path = '/api/v2/users'
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:name] = name
-          post(path, request_params)
+          post(users_path, request_params)
         end
 
         # Delete all users - USE WITH CAUTION
         # @see https://auth0.com/docs/api/v2#!/Users/delete_users
         def delete_users
-          path = '/api/v2/users'
-          delete(path)
+          delete(users_path)
         end
 
         # Retrieves a user given a user_id
@@ -66,7 +63,7 @@ module Auth0
         # @return [json] the user with the given user_id if exists
         def user(user_id, fields: nil, include_fields: true)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          path = "/api/v2/users/#{user_id}"
+          path = "#{users_path}/#{user_id}"
           request_params = {
             fields:         fields,
             include_fields: include_fields
@@ -79,7 +76,7 @@ module Auth0
         # @param user_id [string] The user_id of the user to delete
         def delete_user(user_id)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          path = "/api/v2/users/#{user_id}"
+          path = "#{users_path}/#{user_id}"
           delete(path)
         end
 
@@ -96,14 +93,14 @@ module Auth0
         # If your are updating email or phone_number you need to specify the connection and the client_id properties.
         # @see https://auth0.com/docs/api/v2#!/Users/patch_users_by_id
         # @param user_id [string] The user_id of the user to update.
-        # @param options [hash] The optional parametes to update
+        # @param body [hash] The optional parametes to update
         #
         # @return [json] the updated user
-        def patch_user(user_id, options)
+        def patch_user(user_id, body)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid body' if options.to_s.empty?
-          path = "/api/v2/users/#{user_id}"
-          patch(path, options)
+          fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+          path = "#{users_path}/#{user_id}"
+          patch(path, body)
         end
 
         # Delete a user's multifactor provider
@@ -113,7 +110,7 @@ module Auth0
         def delete_user_provider(user_id, provider_name)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
-          path = "/api/v2/users/#{user_id}/multifactor/#{provider_name}"
+          path = "#{users_path}/#{user_id}/multifactor/#{provider_name}"
           delete(path)
         end
 
@@ -133,7 +130,7 @@ module Auth0
         def link_user_account(user_id, body)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
-          path = "/api/v2/users/#{user_id}/identities"
+          path = "#{users_path}/#{user_id}/identities"
           post(path, body)
         end
 
@@ -148,8 +145,15 @@ module Auth0
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
-          path = "/api/v2/users/#{user_id}/identities/#{provider}/#{secondary_user_id}"
+          path = "#{users_path}/#{user_id}/identities/#{provider}/#{secondary_user_id}"
           delete(path)
+        end
+
+        private
+
+        # Users API path
+        def users_path
+          @users_path ||= '/api/v2/users'
         end
       end
     end

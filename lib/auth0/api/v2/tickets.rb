@@ -3,7 +3,7 @@ module Auth0
     module V2
       # Methods to use the tickets endpoints
       module Tickets
-        attr_reader :path
+        attr_reader :tickets_path
 
         # Create an email verification ticket
         # @see https://auth0.com/docs/api/v2#!/Tickets/post_email_verification
@@ -14,7 +14,7 @@ module Auth0
           if user_id.to_s.empty?
             fail Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
           end
-          path = '/api/v2/tickets/email-verification'
+          path = "#{tickets_path}/email-verification"
           request_params = {
             user_id: user_id,
             result_url: result_url
@@ -35,7 +35,7 @@ module Auth0
           if new_password.to_s.empty?
             fail Auth0::InvalidParameter, 'Must supply a valid new password to post a password-change'
           end
-          path = '/api/v2/tickets/password-change'
+          path = "#{tickets_path}/password-change"
           request_params = {
             user_id: user_id,
             result_url: result_url,
@@ -44,6 +44,13 @@ module Auth0
             email: email
           }
           post(path, request_params)
+        end
+
+        private
+
+        # Tickets API path
+        def tickets_path
+          @tickets_path ||= '/api/v2/tickets'
         end
       end
     end
