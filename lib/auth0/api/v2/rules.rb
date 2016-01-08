@@ -3,6 +3,8 @@ module Auth0
     module V2
       # Methods to use the rules endpoints
       module Rules
+        attr_reader :rules_path
+
         # Retrieves a list of all rules. Accepts a list of fields to include or exclude.
         # The enabled parameter can be specified to get enabled or disabled rules.
         # The rule's stage of executing could be set to the following values login_success,
@@ -21,8 +23,7 @@ module Auth0
             include_fields:   include_fields,
             stage:            stage
           }
-          path = '/api/v2/rules'
-          get(path, request_params)
+          get(rules_path, request_params)
         end
 
         alias_method :get_rules, :rules
@@ -36,7 +37,7 @@ module Auth0
         # @return [json] Returns the rule.
         def rule(rule_id, fields: nil, include_fields: nil)
           fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
-          path = "/api/v2/rules/#{rule_id}"
+          path = "#{rules_path}/#{rule_id}"
           request_params = {
             fields:   fields,
             include_fields:   include_fields
@@ -60,7 +61,6 @@ module Auth0
         def create_rule(name, script, order = nil, enabled = true, stage = 'login_success')
           fail Auth0::InvalidParameter, 'Must supply a valid name' if name.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid script' if script.to_s.empty?
-          path = '/api/v2/rules'
           request_params = {
             name: name,
             enabled: enabled,
@@ -68,7 +68,7 @@ module Auth0
             order: order,
             stage: stage
           }
-          post(path, request_params)
+          post(rules_path, request_params)
         end
 
         # Updates a rule.
@@ -79,7 +79,7 @@ module Auth0
         def update_rule(rule_id, fields_to_update = {})
           fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
 
-          path = "/api/v2/rules/#{rule_id}"
+          path = "#{rules_path}/#{rule_id}"
           patch(path, fields_to_update)
         end
 
@@ -88,8 +88,15 @@ module Auth0
         # @param rule_id [string] The id of the rule to retrieve
         def delete_rule(rule_id)
           fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
-          path = "/api/v2/rules/#{rule_id}"
+          path = "#{rules_path}/#{rule_id}"
           delete(path)
+        end
+
+        private
+
+        # Rules API path
+        def rules_path
+          @rules_path ||= '/api/v2/rules'
         end
       end
     end

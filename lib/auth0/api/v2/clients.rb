@@ -3,6 +3,8 @@ module Auth0
     module V2
       # Methods to use the client endpoints
       module Clients
+        attr_reader :clients_path
+
         # Retrieves a list of all client applications. Accepts a list of fields to include or exclude.
         # @see https://auth0.com/docs/api/v2#!/clients/get_clients
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
@@ -15,8 +17,7 @@ module Auth0
             fields: fields,
             include_fields: include_fields
           }
-          path = '/api/v2/clients'
-          get(path, request_params)
+          get(clients_path, request_params)
         end
         alias_method :get_clients, :clients
 
@@ -29,8 +30,7 @@ module Auth0
           fail Auth0::MissingParameter, 'Must specify a valid client name' if name.to_s.empty?
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:name] = name
-          path = '/api/v2/clients'
-          post(path, request_params)
+          post(clients_path, request_params)
         end
 
         # Retrieves a client by its id.
@@ -46,7 +46,7 @@ module Auth0
             fields: fields,
             include_fields: include_fields
           }
-          path = "/api/v2/clients/#{client_id}"
+          path = "#{clients_path}/#{client_id}"
           get(path, request_params)
         end
 
@@ -55,7 +55,7 @@ module Auth0
         # @param client_id [string] The id of the client to delete
         def delete_client(client_id)
           fail Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
-          path = "/api/v2/clients/#{client_id}"
+          path = "#{clients_path}/#{client_id}"
           delete(path)
         end
 
@@ -66,8 +66,15 @@ module Auth0
         def patch_client(client_id, options)
           fail Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           fail Auth0::MissingParameter, 'Must specify a valid body' if options.to_s.empty?
-          path = "/api/v2/clients/#{client_id}"
+          path = "#{clients_path}/#{client_id}"
           patch(path, options)
+        end
+
+        private
+
+        # Clients API path
+        def clients_path
+          @clients_path ||= '/api/v2/clients'
         end
       end
     end

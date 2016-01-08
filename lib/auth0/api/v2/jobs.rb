@@ -3,7 +3,7 @@ module Auth0
     module V2
       # Methods to use the jobs endpoints
       module Jobs
-        attr_reader :base_path
+        attr_reader :jobs_path
 
         # Retrieves a job. Useful to check its status.
         # @see https://auth0.com/docs/api/v2#!/Jobs/get_jobs_by_job_id
@@ -12,7 +12,7 @@ module Auth0
         # @return [json] the job status and properties
         def get_job(job_id)
           fail Auth0::InvalidParameter, 'Must specify a job id' if job_id.to_s.empty?
-          path = "#{base_path}/#{job_id}"
+          path = "#{jobs_path}/#{job_id}"
           get(path)
         end
 
@@ -30,7 +30,7 @@ module Auth0
             users: users_file,
             connection_id: connection_id
           }
-          path = "#{base_path}/users-imports"
+          path = "#{jobs_path}/users-imports"
           post_file(path, request_params)
         end
 
@@ -41,14 +41,15 @@ module Auth0
         # @return [json] the job status and properties
         def send_verification_email(user_id)
           fail Auth0::InvalidParameter, 'Must specify a user id' if user_id.to_s.empty?
-          path = "#{base_path}/verification-email"
+          path = "#{jobs_path}/verification-email"
           post(path, user_id)
         end
 
         private
 
-        def base_path
-          @base_path ||= '/api/v2/jobs'
+        # Jobs API path
+        def jobs_path
+          @jobs_path ||= '/api/v2/jobs'
         end
       end
     end

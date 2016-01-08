@@ -3,6 +3,8 @@ module Auth0
     module V2
       # Methods to use the connections endpoints
       module Connections
+        attr_reader :connections_path
+
         # Retrieves every connection matching the specified strategy. All connections are retrieved if no strategy is
         # being specified. Accepts a list of fields to include or exclude in the resulting list of connection objects.
         # @see https://auth0.com/docs/api/v2#!/Connections/get_connections
@@ -17,8 +19,7 @@ module Auth0
             fields: fields,
             include_fields: include_fields
           }
-          path = '/api/v2/connections'
-          get(path, request_params)
+          get(connections_path, request_params)
         end
         alias_method :get_connections, :connections
 
@@ -29,9 +30,8 @@ module Auth0
         # @return  [json] Returns the created connection.
         def create_connection(body)
           fail Auth0::InvalidParameter, 'Must specify a body to create a connection' if body.to_s.empty?
-          path = '/api/v2/connections'
           request_params = body
-          post(path, request_params)
+          post(connections_path, request_params)
         end
 
         # Retrieves a connection by its id.
@@ -43,7 +43,7 @@ module Auth0
         # @return [json] Returns the matching connection
         def connection(connection_id, fields: nil, include_fields: true)
           fail Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
-          path = "/api/v2/connections/#{connection_id}"
+          path = "#{connections_path}/#{connection_id}"
           request_params = {
             fields:         fields,
             include_fields: include_fields
@@ -56,7 +56,7 @@ module Auth0
         # @param connection_id [string] The id of the connection to delete
         def delete_connection(connection_id)
           fail Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
-          path = "/api/v2/connections/#{connection_id}"
+          path = "#{connections_path}/#{connection_id}"
           delete(path)
         end
 
@@ -70,7 +70,7 @@ module Auth0
         def delete_connection_user(connection_id, user_email)
           fail Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid user email' if user_email.to_s.empty?
-          path = "/api/v2/connections/#{connection_id}/users?email=#{user_email}"
+          path = "#{connections_path}/#{connection_id}/users?email=#{user_email}"
           delete(path)
         end
 
@@ -82,8 +82,15 @@ module Auth0
         # @return  [json] Returns the updated connection.
         def update_connection(connection_id, body)
           fail Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
-          path = "/api/v2/connections/#{connection_id}"
+          path = "#{connections_path}/#{connection_id}"
           patch(path, body)
+        end
+
+        private
+
+        # Connections API path
+        def connections_path
+          @connections_path ||= '/api/v2/connections'
         end
       end
     end

@@ -75,11 +75,11 @@ describe Auth0::Api::V2::Connections do
     let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
     let(:password) { Faker::Internet.password }
     let!(:user_to_delete) do
-      client.create_user(username,  'email' => email,
-                                    'password' => password,
-                                    'email_verified' => false,
-                                    'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                    'app_metadata' => {})
+      client.create_user(username,  email: email,
+                                    password: password,
+                                    email_verified: false,
+                                    connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+                                    app_metadata: {})
     end
     let(:connection) do
       client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }

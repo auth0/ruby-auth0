@@ -27,6 +27,8 @@ module Auth0
           patch(tenant_path, body)
         end
 
+        private
+
         # Tenants settings API path
         def tenant_path
           @tenant_path ||= '/api/v2/tenants/settings'

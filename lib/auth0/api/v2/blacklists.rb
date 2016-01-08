@@ -3,6 +3,8 @@ module Auth0
     module V2
       # Methods to use the blacklist endpoints
       module Blacklists
+        attr_reader :blacklists_path
+
         # Retrieves the jti and aud of all tokens in the blacklist.
         # @see https://auth0.com/docs/api/v2#!/Blacklists/get_tokens
         # @param aud [string] The JWT's aud claim. The client_id of the client for which it was issued
@@ -10,11 +12,10 @@ module Auth0
         # @return [json] Returns the blacklisted tokens
         #
         def blacklisted_tokens(aud = nil)
-          path = '/api/v2/blacklists/tokens'
           request_params = {
             aud: aud
           }
-          get(path, request_params)
+          get(blacklists_path, request_params)
         end
 
         # Adds the token identified by the jti to a blacklist for the tenant.
@@ -29,8 +30,14 @@ module Auth0
             jti: jti,
             aud: aud
           }
-          path = '/api/v2/blacklists/tokens'
-          post(path, request_params)
+          post(blacklists_path, request_params)
+        end
+
+        private
+
+        # Blacklists API path
+        def blacklists_path
+          @blacklists_path ||= '/api/v2/blacklists/tokens'
         end
       end
     end
