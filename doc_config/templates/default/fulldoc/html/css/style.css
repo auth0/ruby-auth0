@@ -312,6 +312,10 @@ p.inherited {
 }
 #filecontents dl.box .r1, dl.box .r1 { background: #eee; }
 
+dl.box * {
+  box-sizing: content-box;
+}
+
 ul.toplevel { list-style: none; padding-left: 0; font-size: 1.1em; }
 .index_inline_list { padding-left: 0; font-size: 1.1em; }
 .index_inline_list li { list-style: none; display: inline; padding: 7px 12px; line-height: 35px; }
