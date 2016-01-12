@@ -420,7 +420,6 @@ ul.fullTree li:last-child { padding-bottom: 0; }
 .showAll ul.fullTree { display: block; }
 .showAll .inheritName { display: none; }
 
-/*#search { position: absolute; right: 14px; top: 0px; }*/
 #search { float: right; top:30px; }
 #search a:link, #search a:visited {
   display: block;
