@@ -89,7 +89,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         "/users/#{user_id}/impersonate",
         protocol: 'oauth2',
-        impersonator_id: impersonator_id, client_id: app_client_id, ttl: 120,
+        impersonator_id: impersonator_id, client_id: app_client_id,
         additionalParameters: {
           response_type: 'code', state: '',
           scope: 'openid', callback_url: '' })
@@ -103,8 +103,8 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         '/oauth/ro',
         client_id: nil, username: 'test@test.com',
-        password: 'password', connection: 'Username-Password-Authentication',
-        scope: 'openid', grant_type: 'password', id_token: nil)
+        password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
+       grant_type: 'password', id_token: nil, device: nil)
       @instance.login('test@test.com', 'password')
     end
   end
