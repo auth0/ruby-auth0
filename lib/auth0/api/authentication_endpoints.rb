@@ -242,6 +242,30 @@ module Auth0
       def user_info
         get('/userinfo')
       end
+
+      # Returns an authorization URL, triggers a redirect.
+      # @see https://auth0.com/docs/auth-api#!#get--authorize_social
+      # @param redirect_uri [string] Url to redirect after authorization
+      # @param options [hash] Can contain response_type, connection, state and additional_parameters.
+      # @return [url] Authorization URL.
+      def authorization_url(redirect_uri, options = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
+        request_params = {
+          client_id: @client_id,
+          response_type: options.fetch(:connection, 'code'),
+          connection: options.fetch(:connection, nil),
+          redirect_url: redirect_uri,
+          state: options.fetch(:state, nil)
+        }.merge(options.fetch(:additional_parameters, {}))
+
+        URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
+      end
+
+      private
+
+      def to_query(hash)
+        hash.map { |k, v| "#{k}=#{URI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
+      end
     end
   end
 end
