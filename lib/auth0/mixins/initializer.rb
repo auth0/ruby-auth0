@@ -31,7 +31,7 @@ module Auth0
 
       def base_url(options)
         @domain = options[:domain] || options[:namespace]
-        fail InvalidApiNamespace, 'Api namespace must supply an API domain' if @domain.nil?
+        fail InvalidApiNamespace, 'Api namespace must supply an API domain' if @domain.to_s.empty?
         "https://#{@domain}"
       end
 

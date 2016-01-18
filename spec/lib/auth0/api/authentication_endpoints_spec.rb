@@ -264,7 +264,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.samlp_url' do
     it { expect(@instance).to respond_to(:samlp_url) }
     it 'is expected to get the samlp url' do
-      expect(@instance.samlp_url().to_s).to eq(
+      expect(@instance.samlp_url.to_s).to eq(
         "https://#{@instance.domain}/samlp/?connection=Username-Password-Authentication")
     end
     it 'is expected to get the samlp url with fb connection' do
@@ -276,7 +276,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.wsfed_url' do
     it { expect(@instance).to respond_to(:wsfed_url) }
     it 'is expected to get the wsfed url' do
-      expect(@instance.wsfed_url().to_s).to eq(
+      expect(@instance.wsfed_url.to_s).to eq(
         "https://#{@instance.domain}/wsfed/?whr=Username-Password-Authentication")
     end
     it 'is expected to get the wsfed url with fb connection' do
