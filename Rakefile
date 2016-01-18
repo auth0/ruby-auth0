@@ -10,7 +10,7 @@ begin
   RuboCop::RakeTask.new(:rubocop)
 
   require 'yard'
-  DOC_FILES = ['lib/auth0/api/v2/*.rb', 'lib/auth0/api/authentication_endpoints']
+  DOC_FILES = ['lib/auth0/api/v2/*.rb', 'lib/auth0/api/authentication_endpoints.rb']
 
   desc 'Build Documentation'
   YARD::Rake::YardocTask.new(:documentation) do |t|
