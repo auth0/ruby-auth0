@@ -31,88 +31,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
-  context '.delegation' do
-    it { expect(@instance).to respond_to(:delegation) }
-    it "is expected to make post request to '/delegation'" do
-      expect(@instance).to receive(:post).with(
-        '/delegation',
-        client_id: nil,
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        id_token: 'token',
-        target: 'target',
-        scope: '',
-        api_type: 'app')
-      @instance.delegation('token', 'target', '')
-    end
-    it "is expected to make post request to '/delegation'
-      with specified api_type" do
-      expect(@instance).to receive(:post).with(
-        '/delegation',
-        client_id: nil,
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        id_token: '', target: '', scope: '',
-        api_type: 'salesforce_api')
-      @instance.delegation('', '', '', 'salesforce_api')
-    end
-    it 'allows to pass extra parameters' do
-      expect(@instance).to receive(:post).with(
-        '/delegation',
-        client_id: nil,
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        id_token: '', target: '', scope: '', api_type: '',
-        community_name: 'test-community', community_url: 'test-url')
-      @instance.delegation(
-        '', '', '', '',
-        community_name: 'test-community', community_url: 'test-url')
-    end
-  end
-
-  context '.refresh_delegation' do
-    it { expect(@instance).to respond_to(:refresh_delegation) }
-    it "is expected to make post request to '/delegation'" do
-      expect(@instance).to receive(:post).with(
-        '/delegation',
-        client_id: nil,
-        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-        refresh_token: '', target: '', api_type: '', scope: '',
-        additional_parameter: 'parameter')
-        @instance.refresh_delegation('', '', '', '', additional_parameter: 'parameter')
-    end
-  end
-
-  context '.refresh_delegation' do
-    it { expect(@instance).to respond_to(:refresh_delegation) }
-    it "is expected to make post request to '/delegation'" do
-      expect(@instance).to receive(:post).with(
-        '/delegation',
-        client_id: nil,
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        refresh_token: '', target: '', api_type: '', scope: '',
-        additional_parameter: 'parameter')
-      @instance.refresh_delegation('', '', '', '', additional_parameter: 'parameter')
-    end
-  end
-
-  context '.impersonate' do
-    let(:user_id)         { 'some_user_id' }
-    let(:app_client_id)   { 'some_app_client_id' }
-    let(:impersonator_id) { 'some_impersonator_id' }
-
-    it { expect(@instance).to respond_to(:impersonate) }
-    it "is expected to make post request to '/users/{user_id}/impersonate'" do
-      expect(@instance).to receive(:post).with(
-        "/users/#{user_id}/impersonate",
-        protocol: 'oauth2',
-        impersonator_id: impersonator_id, client_id: app_client_id,
-        additionalParameters: {
-          response_type: 'code', state: '',
-          scope: 'openid', callback_url: '' })
-      @instance.impersonate(user_id, app_client_id, impersonator_id, {})
-    end
-  end
-
   context '.login' do
-    it { expect(@instance).to respond_to(:signup) }
+    it { expect(@instance).to respond_to(:login) }
     it 'is expected to make post to /oauth/ro' do
       expect(@instance).to receive(:post).with(
         '/oauth/ro',
@@ -121,28 +41,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'password', id_token: nil, device: nil)
       @instance.login('test@test.com', 'password')
     end
-  end
-
-  context '.phone_login' do
-    let(:phone_number) { Faker::PhoneNumber.cell_phone }
-    let(:code) { Faker::Number.number(10) }
-    it { expect(@instance).to respond_to(:phone_login) }
-    it 'is expected to make post to /oauth/ro' do
-      expect(@instance).to receive(:post).with(
-        '/oauth/ro',
-        client_id: nil, username: phone_number,
-        password: code, connection: 'sms',
-        scope: 'openid', grant_type: 'password')
-      @instance.phone_login(phone_number, code)
-    end
-  end
-
-  context '.unlink_user' do
-    it { expect(@instance).to respond_to(:phone_login) }
-    it 'is expected to make post to /unlink' do
-      expect(@instance).to receive(:post).with('/unlink', access_token: 'access-token', user_id: 'user-id')
-      @instance.unlink_user('access-token', 'user-id')
-    end
+    it { expect { @instance.login('', '') }.to raise_error 'Must supply a valid username' }
+    it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
   end
 
   context '.signup' do
@@ -154,7 +54,10 @@ describe Auth0::Api::AuthenticationEndpoints do
         password: 'password', connection: 'User')
       @instance.signup('test@test.com', 'password', 'User')
     end
+    it { expect { @instance.signup('', '') }.to raise_error 'Must supply a valid email' }
+    it { expect { @instance.signup('email', '') }.to raise_error 'Must supply a valid password' }
   end
+
   context '.change_password' do
     it { expect(@instance).to respond_to(:change_password) }
     it 'is expected to make post to /dbconnections/change_password' do
@@ -164,6 +67,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         password: 'password', connection: 'User')
       @instance.change_password('test@test.com', 'password', 'User')
     end
+    it { expect { @instance.change_password('', '', '') }.to raise_error 'Must supply a valid email' }
   end
 
   context '.start_passwordless_email_flow' do
@@ -180,6 +84,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         })
       @instance.start_passwordless_email_flow('test@test.com', 'link', scope: 'scope', protocol: 'protocol')
     end
+    it { expect { @instance.start_passwordless_email_flow('', '', '') }.to raise_error 'Must supply a valid email' }
   end
 
   context '.start_passwordless_sms_flow' do
@@ -193,22 +98,23 @@ describe Auth0::Api::AuthenticationEndpoints do
         phone_number: phone_number)
       @instance.start_passwordless_sms_flow(phone_number)
     end
+    it { expect { @instance.start_passwordless_sms_flow('') }.to raise_error 'Must supply a valid phone number' }
   end
 
-  context '.token_info' do
-    it { expect(@instance).to respond_to(:token_info) }
-    it 'is expected to make post to /tokeinfo' do
-      expect(@instance).to receive(:post).with('/tokeninfo', id_token: 'SomerandomToken')
-      @instance.token_info('SomerandomToken')
+  context '.phone_login' do
+    let(:phone_number) { Faker::PhoneNumber.cell_phone }
+    let(:code) { Faker::Number.number(10) }
+    it { expect(@instance).to respond_to(:phone_login) }
+    it 'is expected to make post to /oauth/ro' do
+      expect(@instance).to receive(:post).with(
+        '/oauth/ro',
+        client_id: nil, username: phone_number,
+        password: code, connection: 'sms',
+        scope: 'openid', grant_type: 'password')
+      @instance.phone_login(phone_number, code)
     end
-  end
-
-  context '.user_info' do
-    it { expect(@instance).to respond_to(:user_info) }
-    it 'is expected to make post to /userinfo' do
-      expect(@instance).to receive(:get).with('/userinfo')
-      @instance.user_info
-    end
+    it { expect { @instance.phone_login('', '') }.to raise_error 'Must supply a valid phone number' }
+    it { expect { @instance.phone_login('phone', '') }.to raise_error 'Must supply a valid code' }
   end
 
   context '.saml_metadata' do
@@ -218,6 +124,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:get).with("/samlp/metadata/#{client_id}")
       @instance.saml_metadata(client_id)
     end
+    it { expect { @instance.saml_metadata('') }.to raise_error 'Must supply a valid client_id' }
   end
 
   context '.wsfed_metadata' do
@@ -244,6 +151,103 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
         "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1")
+    end
+  end
+
+  context '.token_info' do
+    it { expect(@instance).to respond_to(:token_info) }
+    it 'is expected to make post to /tokeinfo' do
+      expect(@instance).to receive(:post).with('/tokeninfo', id_token: 'SomerandomToken')
+      @instance.token_info('SomerandomToken')
+    end
+    it { expect { @instance.token_info('') }.to raise_error 'Must supply a valid id_token' }
+  end
+
+  context '.refresh_delegation' do
+    it { expect(@instance).to respond_to(:refresh_delegation) }
+    it "is expected to make post request to '/delegation'" do
+      expect(@instance).to receive(:post).with(
+        '/delegation',
+        client_id: nil,
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        refresh_token: 'id_token', target: '', api_type: '', scope: '',
+        additional_parameter: 'parameter')
+      @instance.refresh_delegation('id_token', '', '', '', additional_parameter: 'parameter')
+    end
+    it { expect { @instance.refresh_delegation('', '', '', '') }.to raise_error 'Must supply a valid token to refresh' }
+  end
+
+  context '.delegation' do
+    it { expect(@instance).to respond_to(:delegation) }
+    it "is expected to make post request to '/delegation'" do
+      expect(@instance).to receive(:post).with(
+        '/delegation',
+        client_id: nil,
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        id_token: 'token',
+        target: 'target',
+        scope: '',
+        api_type: 'app')
+      @instance.delegation('token', 'target', '')
+    end
+    it "is expected to make post request to '/delegation'
+      with specified api_type" do
+      expect(@instance).to receive(:post).with(
+        '/delegation',
+        client_id: nil,
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        id_token: 'id_token', target: '', scope: '',
+        api_type: 'salesforce_api')
+      @instance.delegation('id_token', '', '', 'salesforce_api')
+    end
+    it 'allows to pass extra parameters' do
+      expect(@instance).to receive(:post).with(
+        '/delegation',
+        client_id: nil,
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        id_token: 'id_token', target: '', scope: '', api_type: '',
+        community_name: 'test-community', community_url: 'test-url')
+      @instance.delegation(
+        'id_token', '', '', '',
+        community_name: 'test-community', community_url: 'test-url')
+    end
+    it { expect { @instance.delegation('', nil, nil, nil) }.to raise_error 'Must supply a valid id_token' }
+  end
+
+  context '.impersonate' do
+    let(:user_id)         { 'some_user_id' }
+    let(:app_client_id)   { 'some_app_client_id' }
+    let(:impersonator_id) { 'some_impersonator_id' }
+
+    it { expect(@instance).to respond_to(:impersonate) }
+    it "is expected to make post request to '/users/{user_id}/impersonate'" do
+      expect(@instance).to receive(:post).with(
+        "/users/#{user_id}/impersonate",
+        protocol: 'oauth2',
+        impersonator_id: impersonator_id, client_id: app_client_id,
+        additionalParameters: {
+          response_type: 'code', state: '',
+          scope: 'openid', callback_url: '' })
+      @instance.impersonate(user_id, app_client_id, impersonator_id, {})
+    end
+    it { expect { @instance.impersonate('', '', '', '') }.to raise_error 'Must supply a valid user_id' }
+  end
+
+  context '.unlink_user' do
+    it { expect(@instance).to respond_to(:unlink_user) }
+    it 'is expected to make post to /unlink' do
+      expect(@instance).to receive(:post).with('/unlink', access_token: 'access-token', user_id: 'user-id')
+      @instance.unlink_user('access-token', 'user-id')
+    end
+    it { expect { @instance.unlink_user('', '') }.to raise_error 'Must supply a valid access_token' }
+    it { expect { @instance.unlink_user('token', '') }.to raise_error 'Must supply a valid user_id' }
+  end
+
+  context '.user_info' do
+    it { expect(@instance).to respond_to(:user_info) }
+    it 'is expected to make post to /userinfo' do
+      expect(@instance).to receive(:get).with('/userinfo')
+      @instance.user_info
     end
   end
 end

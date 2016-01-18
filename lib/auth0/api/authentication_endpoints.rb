@@ -31,6 +31,8 @@ module Auth0
       # Active Directory/LDAP, Windows Azure AD and ADF
       # @return [json] Returns the access token and id token
       def login(username, password, id_token = nil, connection_name = UP_AUTH, options = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
+        fail Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
         request_params = {
           client_id:  @client_id,
           username:   username,
@@ -51,6 +53,8 @@ module Auth0
       # @param connection_name [string] Connection name. Works for database connections.
       # @return [json] Returns the created user
       def signup(email, password, connection_name = UP_AUTH)
+        fail Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
+        fail Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
         request_params = {
           client_id:  @client_id,
           email:      email,
@@ -67,6 +71,7 @@ module Auth0
       # @param password [string] User's new password
       # @param connection_name [string] Connection name. Works for database connections.
       def change_password(email, password, connection_name = UP_AUTH)
+        fail Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
           client_id:  @client_id,
           email:      email,
@@ -82,6 +87,7 @@ module Auth0
       # @param send [string] Defaults to 'link'. Can be 'code'. You can then authenticate with this user opening the link
       # @param auth_params [hash] Append/override parameters to the link (like scope, redirect_uri, protocol, etc.)
       def start_passwordless_email_flow(email, send = 'link', auth_params = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
           client_id:    @client_id,
           email:        email,
@@ -95,6 +101,7 @@ module Auth0
       # @see https://auth0.com/docs/auth-api#!#post--with_sms
       # @param phone_number [string] User's phone number.
       def start_passwordless_sms_flow(phone_number)
+        fail Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
         request_params = {
           client_id:  @client_id,
           connection: 'sms',
@@ -109,6 +116,8 @@ module Auth0
       # @param code [string] Verification code.
       # @return [json] Returns the access token and id token
       def phone_login(phone_number, code, scope = 'openid')
+        fail Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
+        fail Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
         request_params = {
           client_id:  @client_id,
           username:   phone_number,
@@ -125,6 +134,7 @@ module Auth0
       # @param client_id [string] Client id
       # @return [xml] SAML 2.0 metadata
       def saml_metadata(client_id)
+        fail Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
         get("/samlp/metadata/#{client_id}")
       end
 
@@ -140,6 +150,7 @@ module Auth0
       # @param id_token [string] Token's id.
       # @return User information associated with the user id (sub property) of the token.
       def token_info(id_token)
+        fail Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
         request_params = { id_token: id_token }
         post('/tokeninfo', request_params)
       end
@@ -154,6 +165,7 @@ module Auth0
       # @param extra_parameters [hash] Extra parameters.
       # @return [json] Returns the refreshed delegation token
       def refresh_delegation(refresh_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid token to refresh' if refresh_token.to_s.empty?
         request_params = {
           client_id:      @client_id,
           grant_type:     'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -175,6 +187,7 @@ module Auth0
       # @param extra_parameters [hash] Extra parameters.
       # @return [json] Returns the refreshed delegation token
       def delegation(id_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
         request_params = {
           client_id:  @client_id,
           grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -194,6 +207,7 @@ module Auth0
       # @param options [string] Additional Parameters
       # @return [string] Impersonation URL
       def impersonate(user_id, app_client_id, impersonator_id, options)
+        fail Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
         request_params = {
           protocol:         options.fetch(:protocol, 'oauth2'),
           impersonator_id:  impersonator_id,
@@ -213,6 +227,8 @@ module Auth0
       # @param access_token [string] Logged-in user access token
       # @param user_id [string] User Id
       def unlink_user(access_token, user_id)
+        fail Auth0::InvalidParameter, 'Must supply a valid access_token' if access_token.to_s.empty?
+        fail Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
         request_params = {
           access_token:  access_token,
           user_id: user_id
