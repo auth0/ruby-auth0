@@ -5,6 +5,7 @@ module Auth0
     # Methods to use the authentication endpoints
     module AuthenticationEndpoints
       UP_AUTH = 'Username-Password-Authentication'
+      JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
 
       # Retrives an access token
       # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
@@ -39,9 +40,9 @@ module Auth0
           password:   password,
           scope:      options.fetch(:scope, 'openid'),
           connection: connection_name,
-          grant_type:  options.fetch(:grant_type, password),
+          grant_type: options.fetch(:grant_type, password),
           id_token:   id_token,
-          device:      options.fetch(:device, nil)
+          device:     options.fetch(:device, nil)
         }
         post('/oauth/ro', request_params)
       end
@@ -103,8 +104,8 @@ module Auth0
       def start_passwordless_sms_flow(phone_number)
         fail Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
         request_params = {
-          client_id:  @client_id,
-          connection: 'sms',
+          client_id:    @client_id,
+          connection:   'sms',
           phone_number: phone_number
         }
         post('/passwordless/start', request_params)
@@ -168,7 +169,7 @@ module Auth0
         fail Auth0::InvalidParameter, 'Must supply a valid token to refresh' if refresh_token.to_s.empty?
         request_params = {
           client_id:      @client_id,
-          grant_type:     'urn:ietf:params:oauth:grant-type:jwt-bearer',
+          grant_type:     JWT_BEARER,
           refresh_token:  refresh_token,
           target:         target,
           api_type:       api_type,
@@ -190,7 +191,7 @@ module Auth0
         fail Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
         request_params = {
           client_id:  @client_id,
-          grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+          grant_type: JWT_BEARER,
           id_token:   id_token,
           target:     target,
           api_type:   api_type,
