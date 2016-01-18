@@ -3,6 +3,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   before :all do
     dummy_instance = DummyClass.new
     dummy_instance.extend(Auth0::Api::AuthenticationEndpoints)
+
     @instance = dummy_instance
   end
 
@@ -117,7 +118,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/ro',
         client_id: nil, username: 'test@test.com',
         password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
-       grant_type: 'password', id_token: nil, device: nil)
+        grant_type: 'password', id_token: nil, device: nil)
       @instance.login('test@test.com', 'password')
     end
   end
@@ -224,6 +225,25 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /wsfed/FederationMetadata/2007-06/FederationMetadata.xml' do
       expect(@instance).to receive(:get).with('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
       @instance.wsfed_metadata
+    end
+  end
+
+  context '.authorization_url' do
+    let(:redirect_url) { 'http://redirect.com' }
+    it { expect(@instance).to respond_to(:authorization_url) }
+    it 'is expected to return an authorization url' do
+      expect(@instance.authorization_url(redirect_url).to_s).to eq(
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}")
+    end
+    let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_url, additional_parameters).to_s).to eq(
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&aparam1=test1")
+    end
+    let(:state) { { state: 'state1' } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1")
     end
   end
 end
