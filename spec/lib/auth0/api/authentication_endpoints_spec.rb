@@ -252,4 +252,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
 
+  context '.logout_url' do
+    let(:return_to) { 'http://returnto.com' }
+    it { expect(@instance).to respond_to(:logout_url) }
+    it 'is expected to return a logout url' do
+      expect(@instance.logout_url(return_to).to_s).to eq(
+        "https://#{@instance.domain}/logout?returnTo=#{return_to}")
+    end
+  end
 end
