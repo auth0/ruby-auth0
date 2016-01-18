@@ -260,6 +260,18 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
       end
 
+      # Returns an logout  URL, triggers the logout flow.
+      # @see https://auth0.com/docs/auth-api#!#get--logout
+      # @param return_to [string] Url to redirect after authorization
+      # @return [url] Logout URL.
+      def logout_url(return_to)
+        request_params = {
+          returnTo: return_to
+        }
+
+        URI::HTTPS.build(host: @domain, path: '/logout', query: to_query(request_params))
+      end
+
       private
 
       def to_query(hash)

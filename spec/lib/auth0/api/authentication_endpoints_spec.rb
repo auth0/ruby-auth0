@@ -152,8 +152,8 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
         "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1")
     end
+    it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
-
   context '.token_info' do
     it { expect(@instance).to respond_to(:token_info) }
     it 'is expected to make post to /tokeinfo' do
@@ -248,6 +248,15 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /userinfo' do
       expect(@instance).to receive(:get).with('/userinfo')
       @instance.user_info
+    end
+  end
+
+  context '.logout_url' do
+    let(:return_to) { 'http://returnto.com' }
+    it { expect(@instance).to respond_to(:logout_url) }
+    it 'is expected to return a logout url' do
+      expect(@instance.logout_url(return_to).to_s).to eq(
+        "https://#{@instance.domain}/logout?returnTo=#{return_to}")
     end
   end
 end
