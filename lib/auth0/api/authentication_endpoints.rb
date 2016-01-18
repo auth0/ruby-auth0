@@ -272,6 +272,29 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/logout', query: to_query(request_params))
       end
 
+      # Returns a samlp URL. The SAML Request AssertionConsumerServiceURL will be used to POST back the assertion
+      # and it has to match with the application callback URL.
+      # @see https://auth0.com/docs/auth-api#get--samlp--client_id-
+      # @param connection [string] to login with a specific provider.
+      # @return [url] samlp URL.
+      def samlp_url(connection = UP_AUTH)
+        request_params = {
+          connection: connection
+        }
+        URI::HTTPS.build(host: @domain, path: "/samlp/#{@client_id}", query: to_query(request_params))
+      end
+
+      # Returns a wsfed URL.
+      # @see https://auth0.com/docs/auth-api#get--wsfed--client_id-
+      # @param connection [string] to login with a specific provider.
+      # @return [url] wsfed URL.
+      def wsfed_url(connection = UP_AUTH)
+        request_params = {
+          whr: connection
+        }
+        URI::HTTPS.build(host: @domain, path: "/wsfed/#{@client_id}", query: to_query(request_params))
+      end
+
       private
 
       def to_query(hash)
