@@ -57,6 +57,7 @@ module Auth0
           path = "/api/v2/users/#{user_id}"
           patch(path, options)
         end
+        alias_method :update_user, :patch_user
 
         # https://auth0.com/docs/apiv2#!/users/delete_multifactor_by_provider
         def delete_user_provider(user_id, provider_name)
