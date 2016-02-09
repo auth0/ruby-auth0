@@ -54,12 +54,15 @@ module Auth0
 
         # https://auth0.com/docs/apiv2#!/users/patch_users_by_id
         def patch_user(user_id, options)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.nil? || user_id.to_s.empty?
           path = "/api/v2/users/#{user_id}"
           patch(path, options)
         end
+        alias_method :update_user, :patch_user
 
         # https://auth0.com/docs/apiv2#!/users/delete_multifactor_by_provider
         def delete_user_provider(user_id, provider_name)
+          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.nil? || user_id.to_s.empty?
           path = "/api/v2/users/#{user_id}/multifactor/#{provider_name}"
           delete(path)
         end
