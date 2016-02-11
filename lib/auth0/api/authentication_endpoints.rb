@@ -250,6 +250,7 @@ module Auth0
       # @param options [hash] Can contain response_type, connection, state and additional_parameters.
       # @return [url] Authorization URL.
       def authorization_url(redirect_uri, options = {})
+        fail Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
         request_params = {
           client_id: @client_id,
           response_type: options.fetch(:connection, 'code'),
