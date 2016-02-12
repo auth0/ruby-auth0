@@ -3,9 +3,33 @@ require 'bundler/gem_tasks'
 
 begin
   require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
 
   require 'rspec/core/rake_task'
+
+  desc 'Run Rubocop'
+  RuboCop::RakeTask.new(:rubocop)
+
+  require 'yard'
+  DOC_FILES = ['lib/auth0/api/v2/*.rb', 'lib/auth0/api/authentication_endpoints.rb']
+
+  desc 'Build Documentation'
+  YARD::Rake::YardocTask.new(:documentation) do |t|
+    t.files = DOC_FILES
+    t.options = ['-p', 'doc_config/templates']
+  end
+
+  desc 'Publish SDK documentation'
+  task :publish do
+    sh 'rake documentation'
+    sh 'cp -R doc /tmp/ruby-auth0-doc'
+    sh 'git checkout gh-pages'
+    sh 'cp -R /tmp/ruby-auth0-doc/* .'
+    sh 'rm -rf /tmp/ruby-auth0-doc'
+    sh 'git add .'
+    sh 'git commit -am "Rebuild documentation"'
+    sh 'git push origin gh-pages'
+    sh 'git checkout master'
+  end
 
   desc 'Run Integration Tests'
   RSpec::Core::RakeTask.new(:integration) do |t|
