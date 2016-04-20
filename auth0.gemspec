@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ['support@auth0.com']
   s.homepage    = 'https://github.com/auth0/ruby-auth0'
   s.summary     = 'Auth0 API Client'
-  s.description = 'Ruby client library for the Auth0 API.'
+  s.description = 'Ruby toolkit for Auth0 API https://auth0.com.'
 
   s.rubyforge_project = 'auth0'
 
