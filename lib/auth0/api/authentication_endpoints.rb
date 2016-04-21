@@ -209,6 +209,8 @@ module Auth0
       # @return [string] Impersonation URL
       def impersonate(user_id, app_client_id, impersonator_id, options)
         fail Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
+        fail Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
+        set_authorization_header obtain_access_token
         request_params = {
           protocol:         options.fetch(:protocol, 'oauth2'),
           impersonator_id:  impersonator_id,
@@ -220,7 +222,9 @@ module Auth0
             callback_url:   options.fetch(:callback_url, '')
           }
         }
-        post("/users/#{user_id}/impersonate", request_params)
+        result = post("/users/#{user_id}/impersonate", request_params)
+        set_authorization_header @token
+        result
       end
 
       # Unlinks a User
