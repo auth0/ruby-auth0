@@ -218,7 +218,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:user_id)         { 'some_user_id' }
     let(:app_client_id)   { 'some_app_client_id' }
     let(:impersonator_id) { 'some_impersonator_id' }
-    @instance.client_secret = 'some_global_secret'
+
     it { expect(@instance).to respond_to(:impersonate) }
     it "is expected to make post request to '/users/{user_id}/impersonate'" do
       expect(@instance).to receive(:post).with(
