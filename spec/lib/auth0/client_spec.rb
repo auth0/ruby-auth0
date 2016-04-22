@@ -83,19 +83,19 @@ describe Auth0::Client do
     end
 
     context 'with namespace' do
-      let(:subject) { Auth0::Client.new(protocols: 'v2', client_id: 'client_id', client_secret: 'client_secret', access_token: 'access_token', namespace: 'samples.auth0.com') }
+      let(:subject) { Auth0::Client.new(protocols: 'v2', access_token: 'access_token', namespace: 'samples.auth0.com') }
       it_should_behave_like 'v2 API client'
       it_should_behave_like 'authentication API client'
     end
 
     context 'with domain' do
-      let(:subject) { Auth0::Client.new(protocols: 'v2', client_id: 'client_id', client_secret: 'client_secret', access_token: 'access_token', domain: 'samples.auth0.com') }
+      let(:subject) { Auth0::Client.new(protocols: 'v2', access_token: 'access_token', domain: 'samples.auth0.com') }
       it_should_behave_like 'v2 API client'
       it_should_behave_like 'authentication API client'
     end
 
     context 'with version' do
-      let(:subject) { Auth0::Client.new(api_version: 2, client_id: 'client_id', client_secret: 'client_secret', access_token: 'access_token', domain: 'samples.auth0.com') }
+      let(:subject) { Auth0::Client.new(api_version: 2, access_token: 'access_token', domain: 'samples.auth0.com') }
       it_should_behave_like 'v2 API client'
       it_should_behave_like 'authentication API client'
     end
