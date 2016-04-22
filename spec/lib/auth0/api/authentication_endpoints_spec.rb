@@ -220,7 +220,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:impersonator_id) { 'some_impersonator_id' }
 
     it { expect(@instance).to respond_to(:impersonate) }
-    '''it "is expected to make post request to '/users/{user_id}/impersonate'" do
+    =begin
+    it "is expected to make post request to '/users/{user_id}/impersonate'" do
       expect(@instance).to receive(:post).with(
         "/users/#{user_id}/impersonate",
         protocol: 'oauth2',
@@ -229,7 +230,8 @@ describe Auth0::Api::AuthenticationEndpoints do
           response_type: 'code', state: '',
           scope: 'openid', callback_url: '' })
       @instance.impersonate(user_id, app_client_id, impersonator_id, {})
-    end'''
+    end
+    =end
     it { expect { @instance.impersonate(user_id, app_client_id, impersonator_id, {}) }.to raise_error 'Must supply client_secret' }
     it { expect { @instance.impersonate('', '', '', '') }.to raise_error 'Must supply a valid user_id' }
   end
