@@ -23,13 +23,13 @@ module Auth0
           end
           case result.code
           when 200...226 then response_body
-          when 400 then fail Auth0::BadRequest, response_body
-          when 401 then fail Auth0::Unauthorized, response_body
-          when 403 then fail Auth0::AccessDenied, response_body
-          when 404 then fail Auth0::NotFound, response_body
-          when 500 then fail Auth0::ServerError, response_body
+          when 400 then fail Auth0::BadRequest, response_body.to_json
+          when 401 then fail Auth0::Unauthorized, response_body.to_json
+          when 403 then fail Auth0::AccessDenied, response_body.to_json
+          when 404 then fail Auth0::NotFound, response_body.to_json
+          when 500 then fail Auth0::ServerError, response_body.to_json
           else
-            fail Auth0::Unsupported, response_body
+            fail Auth0::Unsupported, response_body.to_json
           end
         end
       end
