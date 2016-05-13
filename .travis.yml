@@ -1,9 +1,11 @@
+---
 language: ruby
 sudo: false
 cache: bundler
 rvm:
-- 2.1.0
-- 2.2.1
+  - 2.1.9
+  - 2.2.5
+  - 2.3.1
 script: "./build_travis.sh"
 after_success: "./deploy_documentation.sh"
 deploy:
