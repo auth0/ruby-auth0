@@ -21,12 +21,16 @@ module Auth0
         klass.send :prepend, Initializer
       end
 
+      def set_authorization_header(token)
+        self.class.headers 'Authorization' => "Bearer #{token}"
+      end
+
       private
 
       def initialize_api(options)
         api_v1?(options) ? initialize_v1(options) : initialize_v2(options)
         fail InvalidCredentials, 'Must supply a valid API token' if @token.nil?
-        self.class.headers 'Authorization' => "Bearer #{@token}"
+        set_authorization_header(@token)
       end
 
       def base_url(options)
@@ -52,6 +56,7 @@ module Auth0
 
       def initialize_v2(options)
         extend Auth0::Api::V2
+        @client_secret = options[:client_secret]
         @token = options[:access_token] || options[:token]
       end
 

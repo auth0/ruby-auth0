@@ -1,4 +1,5 @@
 bin/
+!examples/ruby-on-rails-api/bin/
 vendor/
 doc/
 .DS_Store
