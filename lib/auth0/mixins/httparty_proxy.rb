@@ -8,14 +8,13 @@ module Auth0
         define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
-          if method == :get
-            result = self.class.send(method, safe_path, query: body)
-          elsif method == :post_file
-            result = self.class.send(:post, safe_path, body: body, detect_mime_type: true)
-          else
-            result = self.class.send(method, safe_path, body: body.to_json)
-          end
-
+          result = if method == :get
+                     self.class.send(method, safe_path, query: body)
+                   elsif method == :post_file
+                     self.class.send(:post, safe_path, body: body, detect_mime_type: true)
+                   else
+                     self.class.send(method, safe_path, body: body.to_json)
+                   end
           case result.code
           when 200...226 then safe_parse_json(result.body)
           when 400       then fail Auth0::BadRequest, result.body

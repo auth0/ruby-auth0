@@ -16,8 +16,8 @@ require 'faker'
 require 'auth0'
 require 'pry'
 
-Dir[('./lib/**/*.rb')].each { |f| require f }
-Dir[('./spec/support/**/*.rb')].each { |f| require f }
+Dir['./lib/**/*.rb'].each { |f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 def entity_suffix
   (ENV['TRAVIS_JOB_ID'] || 'local').delete('_')

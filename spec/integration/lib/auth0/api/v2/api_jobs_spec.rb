@@ -25,9 +25,9 @@ describe Auth0::Api::V2::Jobs do
       end
       let(:connection_id) do
         client.connections
-          .find do |connection|
-            connection['name'].include?(Auth0::Api::AuthenticationEndpoints::UP_AUTH)
-          end['id']
+              .find do |connection|
+          connection['name'].include?(Auth0::Api::AuthenticationEndpoints::UP_AUTH)
+        end['id']
       end
       let(:imported_users) { client.import_users(users_file, connection_id) }
       it do

@@ -13,7 +13,7 @@ describe Auth0::Api::V2::Emails do
   let(:name) { 'mandrill' }
   let(:enabled) { true }
   let(:credentials) { { 'api_key' => 'api_key' } }
-  let(:settings) { { 'first_setting' =>  'first_setting_set', 'second_setting' => 'second_setting_set' } }
+  let(:settings) { { 'first_setting' => 'first_setting_set', 'second_setting' => 'second_setting_set' } }
   let(:body) do
     { 'name' => name,
       'enabled' => enabled,

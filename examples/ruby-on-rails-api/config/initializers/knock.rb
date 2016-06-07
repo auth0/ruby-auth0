@@ -1,6 +1,5 @@
 require 'base64'
 Knock.setup do |config|
-
   ## Current user retrieval when validating token
   ## --------------------------------------------
   ##
@@ -14,7 +13,7 @@ Knock.setup do |config|
   # !!!
   # This is only to make the example test cases pass, you should use a real
   # user model in your app instead.
-  config.current_user_from_token = -> (claims) {{ id: claims['sub'] }}
+  config.current_user_from_token = -> (claims) { { id: claims['sub'] } }
 
   ## Expiration claim
   ## ----------------
@@ -23,7 +22,6 @@ Knock.setup do |config|
   ##
   ## Default:
   # config.token_lifetime = 1.day
-
 
   ## Audience claim
   ## --------------
@@ -37,7 +35,6 @@ Knock.setup do |config|
   ## If using Auth0, uncomment the line below
   config.token_audience = -> { Rails.application.secrets.auth0_client_id }
 
-
   ## Signature key
   ## -------------
   ##
@@ -47,11 +44,10 @@ Knock.setup do |config|
   # config.token_secret_signature_key = -> { Rails.application.secrets.secret_key_base }
 
   ## If using Auth0, uncomment the line below
-  #config.token_secret_signature_key = -> { JWT.base64url_decode Rails.application.secrets.auth0_client_secret }
-  config.token_secret_signature_key = -> {
+  # config.token_secret_signature_key = -> { JWT.base64url_decode Rails.application.secrets.auth0_client_secret }
+  config.token_secret_signature_key = lambda {
     secret = Rails.application.secrets.auth0_client_secret
     secret += '=' * (4 - secret.length.modulo(4))
     Base64.decode64(secret.tr('-_', '+/'))
   }
-
 end

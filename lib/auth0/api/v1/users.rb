@@ -13,8 +13,8 @@ module Auth0
           get(path)
         end
 
-        alias_method :users_search, :users
-        alias_method :get_users, :users
+        alias users_search users
+        alias get_users users
 
         # {https://auth0.com/docs/api#!#get--api-users--user_id-}
         def user(user_id)
@@ -22,7 +22,7 @@ module Auth0
           get(path)
         end
 
-        alias_method :get_user, :user
+        alias get_user user
 
         # {https://auth0.com/docs/api#!#get--api-users--user_id--devices}
         def user_devices(user_id)
@@ -38,7 +38,7 @@ module Auth0
           get(path)
         end
 
-        alias_method :search_connection_users, :connection_users
+        alias search_connection_users connection_users
 
         # {https://auth0.com/docs/api#!#get--api-enterpriseconnections-users-search--criteria-}
         def enterpriseconnections_users(search_criteria = nil, per_page = 500)

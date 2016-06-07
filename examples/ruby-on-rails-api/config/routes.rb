@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'ping' => 'ping#ping'
   get 'secured/ping' => 'secured_ping#ping'
   # The priority is based upon order of creation: first created -> highest priority.

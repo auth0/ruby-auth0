@@ -7,14 +7,14 @@ module Auth0
         def connections
           get('/api/connections')
         end
-        alias_method :get_connections, :connections
+        alias get_connections connections
 
         # {https://auth0.com/docs/api#!#get--api-connections--connection-name-}
         def connection(connection_name)
           path = "/api/connections/#{connection_name}"
           get(path)
         end
-        alias_method :get_connection, :connection
+        alias get_connection connection
 
         # {https://auth0.com/docs/api#!#delete--api-connections--connection-name-}
         def delete_connection(connection_name)

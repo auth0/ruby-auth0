@@ -32,7 +32,7 @@ module Auth0
           request_params[:search_engine] = :v2 if request_params[:q]
           get(users_path, request_params)
         end
-        alias_method :get_users, :users
+        alias get_users users
 
         # Creates a new user according to optional parameters received.
         # The attribute connection is always mandatory but depending on the type of connection you are using there

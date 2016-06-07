@@ -4,8 +4,8 @@ module Auth0
     # {https://auth0.com/docs/auth-api}
     # Methods to use the authentication endpoints
     module AuthenticationEndpoints
-      UP_AUTH = 'Username-Password-Authentication'
-      JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+      UP_AUTH = 'Username-Password-Authentication'.freeze
+      JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
       # Retrives an access token
       # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
@@ -203,27 +203,14 @@ module Auth0
       # Retrives an impersonation URL to login as another user
       # @see https://auth0.com/docs/auth-api#!#post--users--user_id--impersonate
       # @param user_id [string] Impersonate user id
-      # @param app_client_id [string] Application client id
-      # @param impersonator_id [string] Impersonator user id id.
       # @param options [string] Additional Parameters
       # @return [string] Impersonation URL
-      def impersonate(user_id, app_client_id, impersonator_id, options)
+      def impersonate(user_id, options)
         fail Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
         fail Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
-        set_authorization_header obtain_access_token
-        request_params = {
-          protocol:         options.fetch(:protocol, 'oauth2'),
-          impersonator_id:  impersonator_id,
-          client_id:        app_client_id,
-          additionalParameters: {
-            response_type:  options.fetch(:response_type, 'code'),
-            state:          options.fetch(:state, ''),
-            scope:          options.fetch(:scope, 'openid'),
-            callback_url:   options.fetch(:callback_url, '')
-          }
-        }
-        result = post("/users/#{user_id}/impersonate", request_params)
-        set_authorization_header @token
+        authorization_header obtain_access_token
+        result = post("/users/#{user_id}/impersonate", impersonate_request_params(options))
+        authorization_header @token
         result
       end
 
@@ -305,6 +292,16 @@ module Auth0
 
       def to_query(hash)
         hash.map { |k, v| "#{k}=#{URI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
+      end
+
+      def impersonate_request_params
+        {
+          client_id: @client_id,
+          response_type: options.fetch(:connection, 'code'),
+          connection: options.fetch(:connection, nil),
+          redirect_url: redirect_uri,
+          state: options.fetch(:state, nil)
+        }.merge(options.fetch(:additional_parameters, {}))
       end
     end
   end

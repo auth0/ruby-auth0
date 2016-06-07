@@ -215,25 +215,23 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   context '.impersonate' do
-    let(:user_id)         { 'some_user_id' }
-    let(:app_client_id)   { 'some_app_client_id' }
-    let(:impersonator_id) { 'some_impersonator_id' }
-
+    let(:user_id) { 'some_user_id' }
     it { expect(@instance).to respond_to(:impersonate) }
-=begin
-    it "is expected to make post request to '/users/{user_id}/impersonate'" do
-      expect(@instance).to receive(:post).with(
-        "/users/#{user_id}/impersonate",
-        protocol: 'oauth2',
-        impersonator_id: impersonator_id, client_id: app_client_id,
-        additionalParameters: {
-          response_type: 'code', state: '',
-          scope: 'openid', callback_url: '' })
-      @instance.impersonate(user_id, app_client_id, impersonator_id, {})
+    #     it "is expected to make post request to '/users/{user_id}/impersonate'" do
+    #       expect(@instance).to receive(:post).with(
+    #         "/users/#{user_id}/impersonate",
+    #         protocol: 'oauth2',
+    #         impersonator_id: impersonator_id, client_id: app_client_id,
+    #         additionalParameters: {
+    #           response_type: 'code', state: '',
+    #           scope: 'openid', callback_url: '' })
+    #       @instance.impersonate(user_id, app_client_id, impersonator_id, {})
+    #     end
+    it do
+      expect { @instance.impersonate(user_id, {}) }.to raise_error(
+        'Must supply client_secret')
     end
-=end
-    it { expect { @instance.impersonate(user_id, app_client_id, impersonator_id, {}) }.to raise_error 'Must supply client_secret' }
-    it { expect { @instance.impersonate('', '', '', '') }.to raise_error 'Must supply a valid user_id' }
+    it { expect { @instance.impersonate('', '') }.to raise_error 'Must supply a valid user_id' }
   end
 
   context '.unlink_user' do

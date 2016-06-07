@@ -21,7 +21,7 @@ module Auth0
           }
           get(connections_path, request_params)
         end
-        alias_method :get_connections, :connections
+        alias get_connections connections
 
         # Creates a new connection according to the JSON object received in body.
         # @see https://auth0.com/docs/api/v2#!/Connections/post_connections

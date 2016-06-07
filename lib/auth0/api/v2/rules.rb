@@ -26,7 +26,7 @@ module Auth0
           get(rules_path, request_params)
         end
 
-        alias_method :get_rules, :rules
+        alias get_rules rules
 
         # Retrieves a rule by its ID. Accepts a list of fields to include or exclude in the result.
         # @see https://auth0.com/docs/api/v2#!/Rules/get_rules_by_id
@@ -45,7 +45,7 @@ module Auth0
           get(path, request_params)
         end
 
-        alias_method :get_rule, :rule
+        alias get_rule rule
 
         # Creates a new rule according to the JSON object received in body.
         # @see https://auth0.com/docs/api/v2#!/Rules/post_rules
