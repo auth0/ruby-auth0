@@ -1,4 +1,6 @@
+require 'json'
 require 'spec_helper'
+
 describe Auth0::Mixins::HTTPartyProxy do
   before :all do
     dummy_instance = DummyClassForProxy.new
@@ -142,6 +144,19 @@ describe Auth0::Mixins::HTTPartyProxy do
         expect(DummyClassForProxy).to receive(http_method).with('/te%20st', body: '{}')
           .and_return(StubResponse.new('{}', true, 200))
         expect { @instance.send(http_method, '/te st') }.not_to raise_error
+      end
+
+      it "should give the JSON representation of the error as the error message" do
+        allow(DummyClassForProxy).to receive(http_method).with('http://login.auth0.com/test', body: '{}')
+        res = JSON.generate({
+          "statusCode"=>404,
+          "error"=>"Bad Request",
+          "message"=>"Path validation error: 'String does not match pattern ^.+\\|.+$: 3241312' on property id (The user_id of the user to retrieve).",
+          "errorCode"=>"invalid_uri"
+        })
+        expect(DummyClassForProxy).to receive(http_method).with('/test', body: '{}')
+          .and_return(StubResponse.new(res, false, 404))
+        expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound, res)
       end
     end
   end

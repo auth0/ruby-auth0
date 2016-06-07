@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 gemspec
 
 group :development do
-  gem 'terminal-notifier-guard', require: false
+  gem 'terminal-notifier-guard', require: false unless ENV['TRAVIS']
   gem 'coveralls', require: false
   gem 'rubocop', require: false
   gem 'yard', require: false
