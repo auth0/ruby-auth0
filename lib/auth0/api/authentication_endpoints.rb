@@ -91,9 +91,10 @@ module Auth0
         fail Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
           client_id:    @client_id,
+          connection: 'email',
           email:        email,
           send:         send,
-          auth_params:  auth_params
+          authParams:  auth_params
         }
         post('/passwordless/start', request_params)
       end
