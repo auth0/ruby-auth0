@@ -9,6 +9,7 @@ require 'auth0/api/v2/users'
 require 'auth0/api/v2/tenants'
 require 'auth0/api/v2/tickets'
 require 'auth0/api/v2/logs'
+require 'auth0/api/v2/resource_servers'
 
 module Auth0
   module Api
@@ -25,6 +26,7 @@ module Auth0
       include Auth0::Api::V2::Tenants
       include Auth0::Api::V2::Tickets
       include Auth0::Api::V2::Logs
+      include Auth0::Api::V2::ResourceServers
     end
   end
 end
