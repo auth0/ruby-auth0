@@ -12,7 +12,8 @@ module Credentials
   end
 
   def v2_creds
-    { token: ENV['MASTER_JWT'],
+    { client_id: ENV['CLIENT_ID'],
+      token: ENV['MASTER_JWT'],
       api_version: 2,
       domain: ENV['DOMAIN'] }
   end
