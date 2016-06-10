@@ -8,7 +8,7 @@ module Auth0
         # Gets the active users count (logged in during the last 30 days).
         # @see https://auth0.com/docs/api/v2#!/Stats/get_active_users
         #
-        # @return [integer] Returns numbers
+        # @return [integer] Returns the active users count.
         def active_users
           path = "#{stats_path}/active-users"
           get(path)
@@ -16,7 +16,7 @@ module Auth0
 
         # Gets the daily stats for a particular period.
         # @see https://auth0.com/docs/api/v2#!/Stats/get_daily
-        # @param from [string]  The first day of the period (inclusive) in YYYYMMDD format.
+        # @param from [string] The first day of the period (inclusive) in YYYYMMDD format.
         # @param to [string] The last day of the period (inclusive) in YYYYMMDD format.
         #
         # @return [json] Returns the daily stats.

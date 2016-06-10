@@ -7,17 +7,17 @@ module Auth0
 
         # Retrieves a list of existing users.
         # @see https://auth0.com/docs/api/v2#!/Users/get_users
-        # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100
-        # @param page [integer]  The page number. Zero based
-        # @param include_totals [boolean] true if a query summary must be included in the result
-        # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending
-        # @param connection [string] Connection filter
+        # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        # @param page [integer]  The page number. Zero based.
+        # @param include_totals [boolean] True if a query summary must be included in the result.
+        # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
+        # @param connection [string] Connection filter.
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] if the fields specified are to be included in the result, false otherwise.
+        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         # @param q [string] Query in Lucene query string syntax. Only fields in app_metadata, user_metadata or the
         # normalized user profile are searchable.
         #
-        # @return [json] The list of existing users.
+        # @return [json] Returns the list of existing users.
         def users(options = {})
           request_params = {
             per_page:       options.fetch(:per_page, nil),
@@ -38,10 +38,10 @@ module Auth0
         # The attribute connection is always mandatory but depending on the type of connection you are using there
         # could be others too. For instance, Auth0 DB Connections require email and password.
         # @see https://auth0.com/docs/api/v2#!/Users/post_users
-        # @param name [string] the user name
-        # @param connection [string] The connection the user belongs to
+        # @param name [string] The user name.
+        # @param connection [string] The connection the user belongs to.
         #
-        # @return [json]
+        # @return [json] Returns the created user.
         def create_user(name, options = {})
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:name] = name
@@ -56,11 +56,11 @@ module Auth0
 
         # Retrieves a user given a user_id
         # @see https://auth0.com/docs/api/v2#!/Users/get_users_by_id
-        # @param user_id [string] The user_id of the user to retrieve
+        # @param user_id [string] The user_id of the user to retrieve.
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] if the fields specified are to be included in the result, false otherwise.
+        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #
-        # @return [json] the user with the given user_id if exists
+        # @return [json] Returns the user with the given user_id if it exists.
         def user(user_id, fields: nil, include_fields: true)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}"
@@ -73,7 +73,7 @@ module Auth0
 
         # Deletes a single user given its id
         # @see https://auth0.com/docs/api/v2#!/Users/delete_users_by_id
-        # @param user_id [string] The user_id of the user to delete
+        # @param user_id [string] The user_id of the user to delete.
         def delete_user(user_id)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}"
@@ -93,9 +93,9 @@ module Auth0
         # If your are updating email or phone_number you need to specify the connection and the client_id properties.
         # @see https://auth0.com/docs/api/v2#!/Users/patch_users_by_id
         # @param user_id [string] The user_id of the user to update.
-        # @param body [hash] The optional parametes to update
+        # @param body [hash] The optional parametes to update.
         #
-        # @return [json] the updated user
+        # @return [json] Returns the updated user.
         def patch_user(user_id, body)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
@@ -105,8 +105,8 @@ module Auth0
 
         # Delete a user's multifactor provider
         # @see https://auth0.com/docs/api/v2#!/Users/delete_multifactor_by_provider
-        # @param user_id [string] The user_id of the user to delete
-        # @param provider_name [string] The multifactor provider. Supported values 'duo' or 'google-authenticator'
+        # @param user_id [string] The user_id of the user to delete the multifactor provider from.
+        # @param provider_name [string] The multifactor provider. Supported values 'duo' or 'google-authenticator'.
         def delete_user_provider(user_id, provider_name)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
@@ -126,7 +126,7 @@ module Auth0
         # @param user_id [string] The user_id of the primary identity where you are linking the secondary account to.
         # @param body [string] the options to link the account to.
         #
-        # @return [json] the new array of the primary account identities.
+        # @return [json] Returns the new array of the primary account identities.
         def link_user_account(user_id, body)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
@@ -140,7 +140,7 @@ module Auth0
         # @param provider [string] The type of identity provider.
         # @param secondary_user_id [string] The unique identifier for the user for the identity.
         #
-        # @return [json] the array of the unlinked account identities.
+        # @return [json] Returns the array of the unlinked account identities.
         def unlink_users_account(user_id, provider, secondary_user_id)
           fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           fail Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
