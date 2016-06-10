@@ -42,6 +42,5 @@ describe Auth0::Api::V2::ResourceServers do
 
   describe '.delete_resource_server' do
     it { expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error }
-    it { expect { client.delete_resource_server '' }.to raise_error(Auth0::InvalidParameter) }
   end
 end

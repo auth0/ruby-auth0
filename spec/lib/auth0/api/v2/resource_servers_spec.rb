@@ -39,6 +39,12 @@ describe Auth0::Api::V2::ResourceServers do
     it 'expect to raise an error when calling with empty identifier' do
       expect { @instance.create_resource_server(nil) }.to raise_error 'Must supply a valid resource server id'
     end
+    it 'expect to raise an error when name contains < or > characters' do
+      expect { @instance.create_resource_server('test', name: '<') }.to raise_error(
+        'Name must contain at least one character. Does not allow "<" or ">"')
+      expect { @instance.create_resource_server('test', name: '>') }.to raise_error(
+        'Name must contain at least one character. Does not allow "<" or ">"')
+    end
   end
 
   context '.delete_resource_server' do
