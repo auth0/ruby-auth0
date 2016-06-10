@@ -110,11 +110,12 @@ describe Auth0::Api::V2::Users do
           client.link_user_account(primary_user['user_id'], body_link).first
         ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
       end
-    end
-    it do
-      expect(
-        client.unlink_users_account(primary_user['user_id'], 'auth0', link_user['user_id']).first
-      ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
+
+      it do
+        expect(
+          client.unlink_users_account(primary_user['user_id'], 'auth0', link_user['user_id']).first
+        ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
+      end
     end
   end
 end
