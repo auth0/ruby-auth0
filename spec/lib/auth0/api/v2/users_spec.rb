@@ -19,7 +19,8 @@ describe Auth0::Api::V2::Users do
         connection: nil,
         fields: nil,
         include_fields: nil,
-        q: nil)
+        q: nil
+      )
       expect { @instance.users }.not_to raise_error
     end
   end
@@ -41,12 +42,14 @@ describe Auth0::Api::V2::Users do
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
       @instance.create_user(
         'name',
         email: 'test@test.com',
         password: 'password',
-        connection: 'conn')
+        connection: 'conn'
+      )
     end
   end
 
@@ -68,7 +71,8 @@ describe Auth0::Api::V2::Users do
     it 'is expected not to call delete to /api/v2/users if user_id is blank' do
       expect(@instance).not_to receive(:delete)
       expect { @instance.delete_user('') }.to raise_exception(
-        Auth0::MissingUserId)
+        Auth0::MissingUserId
+      )
     end
   end
 
@@ -88,13 +92,15 @@ describe Auth0::Api::V2::Users do
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
       @instance.patch_user(
         'UserID',
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
     end
     it { expect { @instance.patch_user('', 'body') }.to raise_error 'Must supply a valid user_id' }
     it { expect { @instance.patch_user('UserId', '') }.to raise_error 'Must supply a valid body' }

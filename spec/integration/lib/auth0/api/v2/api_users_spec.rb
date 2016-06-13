@@ -51,7 +51,8 @@ describe Auth0::Api::V2::Users do
     context '#filters' do
       it do
         expect(client.user(user['user_id'], fields: [:picture, :email, :user_id].join(','))).to(
-          include('email', 'user_id', 'picture'))
+          include('email', 'user_id', 'picture')
+        )
       end
       it { expect(client.user(user['user_id'], fields: [:email].join(','))).to_not include('user_id', 'picture') }
     end

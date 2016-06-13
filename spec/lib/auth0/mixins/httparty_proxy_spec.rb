@@ -55,7 +55,8 @@ describe Auth0::Mixins::HTTPartyProxy do
         expect(DummyClassForProxy).to receive(http_method).with('/test', query: {})
           .and_return(StubResponse.new({}, false, 400))
         expect { @instance.send(http_method, '/test') }.to raise_error(
-          Auth0::BadRequest)
+          Auth0::BadRequest
+        )
       end
 
       it "should raise Auth0::AccessDenied on send http #{http_method} method

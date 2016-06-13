@@ -11,10 +11,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:obtain_access_token) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials')
+        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials'
+      )
         .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials')
+        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials'
+      )
       expect(@instance.obtain_access_token).to eql 'AccessToken'
     end
   end
@@ -23,10 +25,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:obtain_access_token) }
     it "is expected to make post request to '/oauth/access_token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid')
+        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid'
+      )
         .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid')
+        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid'
+      )
       expect(@instance.obtain_access_token('access_token', 'facebook', 'openid')).to eql 'AccessToken'
     end
   end
@@ -38,7 +42,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/ro',
         client_id: nil, username: 'test@test.com',
         password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
-        grant_type: 'password', id_token: nil, device: nil)
+        grant_type: 'password', id_token: nil, device: nil
+      )
       @instance.login('test@test.com', 'password')
     end
     it { expect { @instance.login('', '') }.to raise_error 'Must supply a valid username' }
@@ -51,7 +56,8 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         '/dbconnections/signup',
         client_id: nil, email: 'test@test.com',
-        password: 'password', connection: 'User')
+        password: 'password', connection: 'User'
+      )
       @instance.signup('test@test.com', 'password', 'User')
     end
     it { expect { @instance.signup('', '') }.to raise_error 'Must supply a valid email' }
@@ -64,7 +70,8 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         '/dbconnections/change_password',
         client_id: nil, email: 'test@test.com',
-        password: 'password', connection: 'User')
+        password: 'password', connection: 'User'
+      )
       @instance.change_password('test@test.com', 'password', 'User')
     end
     it { expect { @instance.change_password('', '', '') }.to raise_error 'Must supply a valid email' }
@@ -81,7 +88,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         auth_params: {
           scope: 'scope',
           protocol: 'protocol'
-        })
+        }
+      )
       @instance.start_passwordless_email_flow('test@test.com', 'link', scope: 'scope', protocol: 'protocol')
     end
     it { expect { @instance.start_passwordless_email_flow('', '', '') }.to raise_error 'Must supply a valid email' }
@@ -95,7 +103,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/passwordless/start',
         client_id: nil,
         connection: 'sms',
-        phone_number: phone_number)
+        phone_number: phone_number
+      )
       @instance.start_passwordless_sms_flow(phone_number)
     end
     it { expect { @instance.start_passwordless_sms_flow('') }.to raise_error 'Must supply a valid phone number' }
@@ -110,7 +119,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/ro',
         client_id: nil, username: phone_number,
         password: code, connection: 'sms',
-        scope: 'openid', grant_type: 'password')
+        scope: 'openid', grant_type: 'password'
+      )
       @instance.phone_login(phone_number, code)
     end
     it { expect { @instance.phone_login('', '') }.to raise_error 'Must supply a valid phone number' }
@@ -140,17 +150,20 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:authorization_url) }
     it 'is expected to return an authorization url' do
       expect(@instance.authorization_url(redirect_url).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}")
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}"
+      )
     end
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, additional_parameters).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&aparam1=test1")
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&aparam1=test1"
+      )
     end
     let(:state) { { state: 'state1' } }
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1")
+        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1"
+      )
     end
     it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
@@ -171,7 +184,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_id: nil,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         refresh_token: 'id_token', target: '', api_type: '', scope: '',
-        additional_parameter: 'parameter')
+        additional_parameter: 'parameter'
+      )
       @instance.refresh_delegation('id_token', '', '', '', additional_parameter: 'parameter')
     end
     it { expect { @instance.refresh_delegation('', '', '', '') }.to raise_error 'Must supply a valid token to refresh' }
@@ -187,7 +201,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         id_token: 'token',
         target: 'target',
         scope: '',
-        api_type: 'app')
+        api_type: 'app'
+      )
       @instance.delegation('token', 'target', '')
     end
     it "is expected to make post request to '/delegation'
@@ -197,7 +212,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_id: nil,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         id_token: 'id_token', target: '', scope: '',
-        api_type: 'salesforce_api')
+        api_type: 'salesforce_api'
+      )
       @instance.delegation('id_token', '', '', 'salesforce_api')
     end
     it 'allows to pass extra parameters' do
@@ -206,10 +222,12 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_id: nil,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         id_token: 'id_token', target: '', scope: '', api_type: '',
-        community_name: 'test-community', community_url: 'test-url')
+        community_name: 'test-community', community_url: 'test-url'
+      )
       @instance.delegation(
         'id_token', '', '', '',
-        community_name: 'test-community', community_url: 'test-url')
+        community_name: 'test-community', community_url: 'test-url'
+      )
     end
     it { expect { @instance.delegation('', nil, nil, nil) }.to raise_error 'Must supply a valid id_token' }
   end
@@ -229,7 +247,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     #     end
     it do
       expect { @instance.impersonate(user_id, {}) }.to raise_error(
-        'Must supply client_secret')
+        'Must supply client_secret'
+      )
     end
     it { expect { @instance.impersonate('', '') }.to raise_error 'Must supply a valid user_id' }
   end
@@ -257,7 +276,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:logout_url) }
     it 'is expected to return a logout url' do
       expect(@instance.logout_url(return_to).to_s).to eq(
-        "https://#{@instance.domain}/logout?returnTo=#{return_to}")
+        "https://#{@instance.domain}/logout?returnTo=#{return_to}"
+      )
     end
   end
 
@@ -265,11 +285,13 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:samlp_url) }
     it 'is expected to get the samlp url' do
       expect(@instance.samlp_url.to_s).to eq(
-        "https://#{@instance.domain}/samlp/?connection=Username-Password-Authentication")
+        "https://#{@instance.domain}/samlp/?connection=Username-Password-Authentication"
+      )
     end
     it 'is expected to get the samlp url with fb connection' do
       expect(@instance.samlp_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/samlp/?connection=facebook")
+        "https://#{@instance.domain}/samlp/?connection=facebook"
+      )
     end
   end
 
@@ -277,11 +299,13 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:wsfed_url) }
     it 'is expected to get the wsfed url' do
       expect(@instance.wsfed_url.to_s).to eq(
-        "https://#{@instance.domain}/wsfed/?whr=Username-Password-Authentication")
+        "https://#{@instance.domain}/wsfed/?whr=Username-Password-Authentication"
+      )
     end
     it 'is expected to get the wsfed url with fb connection' do
       expect(@instance.wsfed_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/wsfed/?whr=facebook")
+        "https://#{@instance.domain}/wsfed/?whr=facebook"
+      )
     end
   end
 end

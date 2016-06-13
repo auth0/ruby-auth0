@@ -20,7 +20,8 @@ describe Auth0::Api::V2::Logs do
         include_fields: nil,
         include_totals: nil,
         from: nil,
-        take: nil)
+        take: nil
+      )
       expect { @instance.logs }.not_to raise_error
     end
     it 'is expect to rise an error when take is higher than 100' do

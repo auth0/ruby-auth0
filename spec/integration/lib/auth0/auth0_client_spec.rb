@@ -12,18 +12,23 @@ describe Auth0::Client do
 
   it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com' }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', client_id: 'client_id' }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', client_id: 'client_id'
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', client_secret: 'secret' }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', client_secret: 'secret'
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', api_version: 2 }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', api_version: 2
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {}
   it_should_behave_like 'invalid credentials', api_version: 2
   it_should_behave_like 'invalid credentials', api_version: 1
   it_should_behave_like 'invalid credentials', {
-    client_id: 'client_id', client_secret: 'secret' }, Auth0::InvalidApiNamespace
+    client_id: 'client_id', client_secret: 'secret'
+  }, Auth0::InvalidApiNamespace
   it_should_behave_like 'invalid credentials', {
-    api_version: 2, token: 'token' }, Auth0::InvalidApiNamespace
+    api_version: 2, token: 'token'
+  }, Auth0::InvalidApiNamespace
 
   let(:valid_v1_credentials) do
     { client_id: ENV['CLIENT_ID'],

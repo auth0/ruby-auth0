@@ -19,7 +19,8 @@ describe Auth0::Api::V2::Tenants do
     end
     it 'expect client to rasie error when calling with empty body' do
       expect { @instance.update_tenant_settings(nil) }.to raise_error(
-        'Must supply a valid body to update tenant settings')
+        'Must supply a valid body to update tenant settings'
+      )
     end
   end
 end

@@ -25,7 +25,8 @@ describe Auth0::Api::V2::Emails do
     let!(:email_provider) { client.configure_provider(body) }
     it do
       expect(email_provider).to include(
-        'name' => name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => settings)
+        'name' => name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => settings
+      )
     end
   end
 
@@ -37,12 +38,15 @@ describe Auth0::Api::V2::Emails do
     context '#filters' do
       it do
         expect(
-          client.get_provider(fields: [:name, :enabled, :credentials].join(','), include_fields: true)).to(
-            include('name', 'enabled', 'credentials'))
+          client.get_provider(fields: [:name, :enabled, :credentials].join(','), include_fields: true)
+        ).to(
+          include('name', 'enabled', 'credentials')
+        )
       end
       it do
         expect(
-          client.get_provider(fields: [:enabled].join(','), include_fields: false).first).to_not(include('enabled'))
+          client.get_provider(fields: [:enabled].join(','), include_fields: false).first
+        ).to_not(include('enabled'))
       end
     end
   end
@@ -58,9 +62,12 @@ describe Auth0::Api::V2::Emails do
     end
     it do
       expect(
-        client.update_provider(update_body)).to(
-          include(
-            'name' => update_name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => update_settings))
+        client.update_provider(update_body)
+      ).to(
+        include(
+          'name' => update_name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => update_settings
+        )
+      )
     end
   end
 

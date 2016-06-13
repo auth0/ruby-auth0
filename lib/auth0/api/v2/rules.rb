@@ -36,7 +36,7 @@ module Auth0
         #
         # @return [json] Returns the rule.
         def rule(rule_id, fields: nil, include_fields: nil)
-          fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
           path = "#{rules_path}/#{rule_id}"
           request_params = {
             fields:   fields,
@@ -59,8 +59,8 @@ module Auth0
         #
         # @return [json] Returns the created rule.
         def create_rule(name, script, order = nil, enabled = true, stage = 'login_success')
-          fail Auth0::InvalidParameter, 'Must supply a valid name' if name.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid script' if script.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid name' if name.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid script' if script.to_s.empty?
           request_params = {
             name: name,
             enabled: enabled,
@@ -78,7 +78,7 @@ module Auth0
         #
         # @return [json] Returns the updated rule.
         def update_rule(rule_id, fields_to_update = {})
-          fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
 
           path = "#{rules_path}/#{rule_id}"
           patch(path, fields_to_update)
@@ -88,7 +88,7 @@ module Auth0
         # @see https://auth0.com/docs/api/v2#!/Rules/delete_rules_by_id
         # @param rule_id [string] The id of the rule to delete.
         def delete_rule(rule_id)
-          fail Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
           path = "#{rules_path}/#{rule_id}"
           delete(path)
         end

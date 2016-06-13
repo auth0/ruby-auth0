@@ -30,7 +30,8 @@ module Auth0
             strategy: strategy,
             options: {
               tenant_domain: tenant_domain,
-              domain_aliases: domain_aliases }
+              domain_aliases: domain_aliases
+            }
           }
           post(path, request_params)
         end

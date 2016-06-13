@@ -17,12 +17,12 @@ module Auth0
                    end
           case result.code
           when 200...226 then safe_parse_json(result.body)
-          when 400       then fail Auth0::BadRequest, result.body
-          when 401       then fail Auth0::Unauthorized, result.body
-          when 403       then fail Auth0::AccessDenied, result.body
-          when 404       then fail Auth0::NotFound, result.body
-          when 500       then fail Auth0::ServerError, result.body
-          else                fail Auth0::Unsupported, result.body
+          when 400       then raise Auth0::BadRequest, result.body
+          when 401       then raise Auth0::Unauthorized, result.body
+          when 403       then raise Auth0::AccessDenied, result.body
+          when 404       then raise Auth0::NotFound, result.body
+          when 500       then raise Auth0::ServerError, result.body
+          else                raise Auth0::Unsupported, result.body
           end
         end
       end

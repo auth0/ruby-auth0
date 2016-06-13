@@ -33,7 +33,8 @@ RSpec.configure do |config|
   config.after(:suite) do
     puts "Cleaning up for #{entity_suffix}"
     v2_client = Auth0Client.new(
-      token: ENV['MASTER_JWT'], api_version: 2, domain: ENV['DOMAIN'])
+      token: ENV['MASTER_JWT'], api_version: 2, domain: ENV['DOMAIN']
+    )
     v2_client
       .clients
       .select { |client| client['name'] != 'DefaultApp' && !client['global'] && client['name'].include?(entity_suffix) }

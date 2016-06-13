@@ -17,8 +17,7 @@ describe Auth0::Api::V2::Jobs do
           'user_metadata' => {
             'theme' => 'light'
           }
-        }
-        ]
+        }]
       end
       let(:users_file) do
         File.new('temp.json', 'w+') { |f| f.write(file_content) }
@@ -34,12 +33,14 @@ describe Auth0::Api::V2::Jobs do
         expect(imported_users).to include(
           'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
           'status' => 'pending',
-          'type' => 'users_import')
+          'type' => 'users_import'
+        )
       end
       let(:import_job_id) { imported_users['id'] }
       it do
         expect(client.get_job(import_job_id)).to include(
-          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH, 'type' => 'users_import', 'id' => import_job_id)
+          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH, 'type' => 'users_import', 'id' => import_job_id
+        )
       end
     end
 
@@ -56,7 +57,8 @@ describe Auth0::Api::V2::Jobs do
       let(:email_job_id) { email_verification_job['id'] }
       it do
         expect(client.get_job(email_job_id)).to include(
-          'status' => 'completed', 'type' => 'verification_email', 'id' => email_job_id)
+          'status' => 'completed', 'type' => 'verification_email', 'id' => email_job_id
+        )
       end
     end
 

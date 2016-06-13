@@ -70,7 +70,8 @@ describe Auth0::Client do
           client_id: 'client_id',
           client_secret: 'client_secret',
           domain: 'samples.auth0.com',
-          api_version: 1)
+          api_version: 1
+        )
       end
       it_should_behave_like 'v1 API client'
       it_should_behave_like 'authentication API client'

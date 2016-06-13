@@ -28,7 +28,8 @@ describe Auth0::Api::V2::ResourceServers do
         signing_alg: 'signing_alg',
         signing_secret: 'signing_secret',
         token_lifetime: 'token_lifetime',
-        scopes: 'scopes')
+        scopes: 'scopes'
+      )
 
       @instance.create_resource_server('test', name: 'name',
                                                signing_alg: 'signing_alg',
@@ -41,9 +42,11 @@ describe Auth0::Api::V2::ResourceServers do
     end
     it 'expect to raise an error when name contains < or > characters' do
       expect { @instance.create_resource_server('test', name: '<') }.to raise_error(
-        'Name must contain at least one character. Does not allow "<" or ">"')
+        'Name must contain at least one character. Does not allow "<" or ">"'
+      )
       expect { @instance.create_resource_server('test', name: '>') }.to raise_error(
-        'Name must contain at least one character. Does not allow "<" or ">"')
+        'Name must contain at least one character. Does not allow "<" or ">"'
+      )
     end
   end
 

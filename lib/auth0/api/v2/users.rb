@@ -62,7 +62,7 @@ module Auth0
         #
         # @return [json] Returns the user with the given user_id if it exists.
         def user(user_id, fields: nil, include_fields: true)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}"
           request_params = {
             fields:         fields,
@@ -75,7 +75,7 @@ module Auth0
         # @see https://auth0.com/docs/api/v2#!/Users/delete_users_by_id
         # @param user_id [string] The user_id of the user to delete.
         def delete_user(user_id)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}"
           delete(path)
         end
@@ -97,8 +97,8 @@ module Auth0
         #
         # @return [json] Returns the updated user.
         def patch_user(user_id, body)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
           path = "#{users_path}/#{user_id}"
           patch(path, body)
         end
@@ -108,8 +108,8 @@ module Auth0
         # @param user_id [string] The user_id of the user to delete the multifactor provider from.
         # @param provider_name [string] The multifactor provider. Supported values 'duo' or 'google-authenticator'.
         def delete_user_provider(user_id, provider_name)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
           path = "#{users_path}/#{user_id}/multifactor/#{provider_name}"
           delete(path)
         end
@@ -128,8 +128,8 @@ module Auth0
         #
         # @return [json] Returns the new array of the primary account identities.
         def link_user_account(user_id, body)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
           path = "#{users_path}/#{user_id}/identities"
           post(path, body)
         end
@@ -142,9 +142,9 @@ module Auth0
         #
         # @return [json] Returns the array of the unlinked account identities.
         def unlink_users_account(user_id, provider, secondary_user_id)
-          fail Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          fail Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
-          fail Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
           path = "#{users_path}/#{user_id}/identities/#{provider}/#{secondary_user_id}"
           delete(path)
         end

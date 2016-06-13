@@ -11,7 +11,7 @@ module Auth0
         #
         # @return [json] Returns the resource server.
         def resource_server(resource_server_id)
-          fail Auth0::InvalidParameter, 'Must supply a valid resource server id' if resource_server_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid resource server id' if resource_server_id.to_s.empty?
           path = "#{resource_servers_path}/#{resource_server_id}"
           get(path)
         end
@@ -31,9 +31,9 @@ module Auth0
         #
         # @return [json] Returns the resource server.
         def create_resource_server(identifier, options = {})
-          fail Auth0::InvalidParameter, 'Must supply a valid resource server id' if identifier.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid resource server id' if identifier.to_s.empty?
           if ['<', '>'].include?(options.fetch(:name, ''))
-            fail Auth0::InvalidParameter, 'Name must contain at least one character. Does not allow "<" or ">"'
+            raise Auth0::InvalidParameter, 'Name must contain at least one character. Does not allow "<" or ">"'
           end
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:identifier] = identifier
@@ -44,7 +44,7 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Resource_Servers/delete_resource_servers_by_id
         # @param resource_server_id [string] The id of the resource server to delete.
         def delete_resource_server(resource_server_id)
-          fail Auth0::InvalidParameter, 'Must supply a valid resource server id' if resource_server_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid resource server id' if resource_server_id.to_s.empty?
           path = "#{resource_servers_path}/#{resource_server_id}"
           delete(path)
         end

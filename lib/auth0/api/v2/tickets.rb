@@ -13,7 +13,7 @@ module Auth0
         # @return [json] Returns the created ticket url.
         def post_email_verification(user_id, result_url: nil)
           if user_id.to_s.empty?
-            fail Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
+            raise Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
           end
           path = "#{tickets_path}/email-verification"
           request_params = {
@@ -35,7 +35,7 @@ module Auth0
         # @return [json] Returns the created ticket url.
         def post_password_change(new_password, user_id: nil, result_url: nil, connection_id: nil, email: nil)
           if new_password.to_s.empty?
-            fail Auth0::InvalidParameter, 'Must supply a valid new password to post a password-change'
+            raise Auth0::InvalidParameter, 'Must supply a valid new password to post a password-change'
           end
           path = "#{tickets_path}/password-change"
           request_params = {

@@ -44,7 +44,8 @@ describe Auth0::Api::V2::Rules do
   describe '.rule' do
     it do
       expect(client.rule(enabled_rule['id'])).to(
-        include('stage' => enabled_rule['stage'], 'order' => enabled_rule['order'], 'script' => enabled_rule['script']))
+        include('stage' => enabled_rule['stage'], 'order' => enabled_rule['order'], 'script' => enabled_rule['script'])
+      )
     end
 
     context '#filters' do

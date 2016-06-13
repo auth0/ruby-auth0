@@ -17,7 +17,8 @@ describe Auth0::Api::V2::ResourceServers do
       expect(client.resource_server(resource_server['id'])).to(
         include('identifier' => resource_server['identifier'], 'id' => resource_server['id'],
                 'signing_alg' => resource_server['signing_alg'],
-                'token_lifetime' => resource_server['token_lifetime']))
+                'token_lifetime' => resource_server['token_lifetime'])
+      )
     end
   end
 

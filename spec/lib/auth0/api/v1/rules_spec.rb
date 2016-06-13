@@ -20,7 +20,8 @@ describe Auth0::Api::V1::Rules do
     it 'is expected to call post /api/rules' do
       expect(@instance).to receive(:post).with(
         '/api/rules',
-        name: 'test', script: 'script', order: 'order', status: 'status')
+        name: 'test', script: 'script', order: 'order', status: 'status'
+      )
       expect { @instance.create_rule('test', 'script', 'order', 'status') }.not_to raise_error
     end
   end
