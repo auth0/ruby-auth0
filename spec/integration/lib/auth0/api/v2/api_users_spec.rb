@@ -118,4 +118,29 @@ describe Auth0::Api::V2::Users do
       end
     end
   end
+
+  describe '.user_logs' do
+    it 'is expected that the user logs contain a success signup log entry' do
+      wait 30 do
+        user_logs = client.user_logs(user['user_id'])
+        expect(user_logs.size).to be > 0
+        expect(find_success_signup_log_by_email(user['email'], user_logs)).to_not be_empty
+      end
+    end
+
+    context '#filters' do
+      it do
+        wait 30 do
+          expect(client.user_logs(user['user_id'], per_page: 1).size).to be 1
+        end
+      end
+    end
+  end
+
+  def find_success_signup_log_by_email(email, logs)
+    logs.find do |log|
+      log['type'] == 'ss' &&
+        log['details']['body']['email'] == email
+    end
+  end
 end

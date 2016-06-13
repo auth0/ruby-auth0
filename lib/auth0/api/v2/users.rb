@@ -149,6 +149,29 @@ module Auth0
           delete(path)
         end
 
+        # Retrieve every log event for a specific user id
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_logs_by_user
+        # @param user_id [string] The user_id of the logs to retrieve.
+        # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        # @param page [integer]  The page number. Zero based.
+        # @param include_totals [boolean] True if a query summary must be included in the result.
+        # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
+        #
+        # @return [json] Returns the list of existing log entries for the given user_id.
+        def user_logs(user_id, options = {})
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          path = "#{users_path}/#{user_id}/logs"
+          request_params = {
+            user_id:        user_id,
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil),
+            sort:           options.fetch(:sort, nil)
+          }
+          get(path, request_params)
+        end
+        alias get_user_log_events user_logs
+
         private
 
         # Users API path

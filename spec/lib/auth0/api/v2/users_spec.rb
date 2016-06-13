@@ -131,4 +131,21 @@ describe Auth0::Api::V2::Users do
     end
     it { expect { @instance.delete_user_provider(nil, 'test') }.to raise_error 'Must supply a valid user_id' }
   end
+
+  context '.user_logs' do
+    it { expect(@instance).to respond_to(:user_logs) }
+    it { expect(@instance).to respond_to(:get_user_log_events) }
+    it 'is expected to call /api/v2/USER_ID/logs' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/logs',
+        user_id: 'USER_ID',
+        per_page: nil,
+        page: nil,
+        include_totals: nil,
+        sort: nil
+      )
+      expect { @instance.user_logs('USER_ID') }.not_to raise_error
+    end
+    it { expect { @instance.user_logs('') }.to raise_error 'Must supply a valid user_id' }
+  end
 end
