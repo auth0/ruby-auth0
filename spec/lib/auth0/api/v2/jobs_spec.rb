@@ -28,7 +28,7 @@ describe Auth0::Api::V2::Jobs do
     it { expect(@instance).to respond_to(:send_verification_email) }
     it 'expect client to send post to /api/v2/jobs/verification-email' do
       expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', user_id: 'user_id')
-      expect { @instance.send_verification_email(user_id: 'user_id') }.not_to raise_error
+      expect { @instance.send_verification_email('user_id') }.not_to raise_error
     end
     it { expect { @instance.send_verification_email('') }.to raise_error('Must specify a user id') }
   end

@@ -51,7 +51,7 @@ describe Auth0::Api::V2::Jobs do
                                       'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
                                       'app_metadata' => {})
       end
-      let(:email_verification_job) { client.send_verification_email(user_id: user['user_id']) }
+      let(:email_verification_job) { client.send_verification_email(user['user_id']) }
       it { expect(email_verification_job).to include('status' => 'pending', 'type' => 'verification_email') }
       let(:email_job_id) { email_verification_job['id'] }
       it do
