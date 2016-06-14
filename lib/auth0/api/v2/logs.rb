@@ -34,10 +34,10 @@ module Auth0
             take: options.fetch(:take, nil)
           }
           if request_params[:take].to_i > 100
-            fail Auth0::MissingParameter, 'The total amount of entries to retrieve should be less than 100'
+            fail Auth0::InvalidParameter, 'The total amount of entries to retrieve should be less than 100'
           end
           if request_params[:per_page].to_i > 100
-            fail Auth0::MissingParameter, 'The total amount of entries per page should be less than 100'
+            fail Auth0::InvalidParameter, 'The total amount of entries per page should be less than 100'
           end
           get(logs_path, request_params)
         end
