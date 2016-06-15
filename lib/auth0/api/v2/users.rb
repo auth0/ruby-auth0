@@ -158,6 +158,7 @@ module Auth0
         # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
         #
         # @return [json] Returns the list of existing log entries for the given user_id.
+        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         def user_logs(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}/logs"
@@ -168,6 +169,13 @@ module Auth0
             include_totals: options.fetch(:include_totals, nil),
             sort:           options.fetch(:sort, nil)
           }
+          if request_params[:per_page].to_i > 100
+            raise Auth0::InvalidParameter, 'The total amount of entries per page should be less than 100'
+          end
+          sort_pattern = /^(([a-zA-Z0-9_\.]+))\:(1|-1)$/
+          if !request_params[:sort].nil? && !sort_pattern.match(request_params[:sort])
+            raise Auth0::InvalidParameter, 'Sort does not match pattern ^(([a-zA-Z0-9_\\.]+))\\:(1|-1)$'
+          end
           get(path, request_params)
         end
         alias get_user_log_events user_logs

@@ -153,5 +153,15 @@ describe Auth0::Api::V2::Users do
       expect { @instance.user_logs('USER_ID') }.not_to raise_error
     end
     it { expect { @instance.user_logs('') }.to raise_error 'Must supply a valid user_id' }
+    it 'is expected to raise an error when per_page is higher than 100' do
+      expect { @instance.user_logs('USER_ID', per_page: rand(101..2000)) }.to raise_error(
+        'The total amount of entries per page should be less than 100'
+      )
+    end
+    it 'is expected to raise an error when sort does not match pattern' do
+      expect { @instance.user_logs('USER_ID', sort: 'no match') }.to raise_error(
+        'Sort does not match pattern ^(([a-zA-Z0-9_\\.]+))\\:(1|-1)$'
+      )
+    end
   end
 end
