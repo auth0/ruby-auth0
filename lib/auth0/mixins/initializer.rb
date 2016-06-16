@@ -25,12 +25,23 @@ module Auth0
         self.class.headers 'Authorization' => "Bearer #{token}"
       end
 
+      def authorization_header_basic(options)
+        connection_id = options.fetch(:connection_id, Auth0::Api::AuthenticationEndpoints::UP_AUTH)
+        user = options.fetch(:user, nil)
+        password = options.fetch(:password, nil)
+        self.class.headers 'Authorization' => "Basic #{Base64.strict_encode64("#{connection_id}\\#{user}:#{password}")}"
+      end
+
       private
 
       def initialize_api(options)
         api_v1?(options) ? initialize_v1(options) : initialize_v2(options)
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
-        authorization_header(@token)
+        if options.fetch(:authorization, nil) == 'Basic'
+          authorization_header_basic(options)
+        else
+          authorization_header(@token)
+        end
       end
 
       def base_url(options)

@@ -2,6 +2,7 @@ require 'auth0/api/v2/blacklists'
 require 'auth0/api/v2/clients'
 require 'auth0/api/v2/client_grants'
 require 'auth0/api/v2/connections'
+require 'auth0/api/v2/device_credentials'
 require 'auth0/api/v2/emails'
 require 'auth0/api/v2/jobs'
 require 'auth0/api/v2/rules'
@@ -21,6 +22,7 @@ module Auth0
       include Auth0::Api::V2::Clients
       include Auth0::Api::V2::ClientGrants
       include Auth0::Api::V2::Connections
+      include Auth0::Api::V2::DeviceCredentials
       include Auth0::Api::V2::Emails
       include Auth0::Api::V2::Jobs
       include Auth0::Api::V2::Rules
