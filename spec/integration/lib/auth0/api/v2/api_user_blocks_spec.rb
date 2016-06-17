@@ -13,16 +13,6 @@ describe Auth0::Api::V2::UserBlocks do
                                             'email_verified' => true,
                                             'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
                                             'app_metadata' => {})
-      100.times do
-        begin
-          client.login(email, 'invalid password')
-        rescue Auth0::Unauthorized
-          next
-        rescue Auth0::Unsupported => e
-          puts e.message
-          break
-        end
-      end
     end
 
     after(:all) do
@@ -30,19 +20,26 @@ describe Auth0::Api::V2::UserBlocks do
     end
 
     describe '.user_blocks' do
-      let(:user_blocks) { client.user_blocks(email) }
+      let(:user_blocks) do
+        block_user(email)
+        client.user_blocks(email)
+      end
       it { expect(user_blocks['blocked_for'].size).to be > 0 }
       it { expect(user_blocks['blocked_for'].first['identifier']).to eq email }
     end
 
     describe '.user_blocks_by_id' do
-      let(:user_blocks) { client.user_blocks_by_id(user['user_id']) }
+      let(:user_blocks) do
+        block_user(email)
+        client.user_blocks_by_id(user['user_id'])
+      end
       it { expect(user_blocks['blocked_for'].size).to be > 0 }
       it { expect(user_blocks['blocked_for'].first['identifier']).to eq email }
     end
 
     describe '.delete_user_blocks' do
       let(:user_blocks) do
+        block_user(email)
         client.delete_user_blocks(email)
         client.user_blocks(email)
       end
@@ -51,10 +48,26 @@ describe Auth0::Api::V2::UserBlocks do
 
     describe '.delete_user_blocks_by_id' do
       let(:user_blocks) do
+        block_user(email)
         client.delete_user_blocks_by_id(user['user_id'])
         client.user_blocks(email)
       end
       it { expect(user_blocks['blocked_for']).to eq [] }
+    end
+  end
+
+  private
+
+  def block_user(email)
+    100.times do
+      begin
+        client.login(email, 'invalid password')
+      rescue Auth0::Unauthorized
+        next
+      rescue Auth0::Unsupported => e
+        puts e.message
+        break
+      end
     end
   end
 end
