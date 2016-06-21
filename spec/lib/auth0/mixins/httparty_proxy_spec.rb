@@ -8,7 +8,7 @@ describe Auth0::Mixins::HTTPartyProxy do
     @instance = dummy_instance
   end
 
-  %i(get).each do |http_method|
+  %i(get delete).each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTParty" do
@@ -83,7 +83,7 @@ describe Auth0::Mixins::HTTPartyProxy do
     end
   end
 
-  %i(post put patch delete).each do |http_method|
+  %i(post put patch).each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTParty" do

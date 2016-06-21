@@ -8,7 +8,7 @@ module Auth0
         define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
-          result = if method == :get
+          result = if [:get, :delete].include?(method)
                      self.class.send(method, safe_path, query: body)
                    elsif method == :post_file
                      self.class.send(:post, safe_path, body: body, detect_mime_type: true)
