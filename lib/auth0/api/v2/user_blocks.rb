@@ -12,8 +12,10 @@ module Auth0
         # @return [json] the user blocks
         def user_blocks(identifier)
           raise Auth0::InvalidParameter, 'Must specify a valid identifier' if identifier.to_s.empty?
-          path = "#{user_blocks_path}?identifier=#{identifier}"
-          get(path)
+          request_params = {
+            identifier: identifier
+          }
+          get(user_blocks_path, request_params)
         end
 
         # Deletes the user blocks
@@ -21,8 +23,11 @@ module Auth0
         # @param identifier [string]  Should be any of: username, phone_number, email.
         def delete_user_blocks(identifier)
           raise Auth0::InvalidParameter, 'Must specify a valid identifier' if identifier.to_s.empty?
-          path = "#{user_blocks_path}?identifier=#{identifier}"
-          delete(path)
+          #path = "#{user_blocks_path}?identifier=#{identifier}"
+          request_params = {
+            identifier: identifier
+          }
+          delete(user_blocks_path, request_params)
         end
 
         # Retrieves a user's blocks
