@@ -2,7 +2,7 @@ require 'spec_helper'
 describe Auth0::Api::V2::UserBlocks do
   attr_reader :client, :user, :email
 
-  skip "User blocks examples are skipped since is #logins exceeds free tenant limits" do
+  skip 'User blocks examples are skipped since is #logins exceeds free tenant limits' do
     before(:all) do
       @client = Auth0Client.new(v2_creds)
       username = Faker::Internet.user_name

@@ -23,7 +23,7 @@ module Auth0
         # @param identifier [string]  Should be any of: username, phone_number, email.
         def delete_user_blocks(identifier)
           raise Auth0::InvalidParameter, 'Must specify a valid identifier' if identifier.to_s.empty?
-          #path = "#{user_blocks_path}?identifier=#{identifier}"
+          # path = "#{user_blocks_path}?identifier=#{identifier}"
           request_params = {
             identifier: identifier
           }
