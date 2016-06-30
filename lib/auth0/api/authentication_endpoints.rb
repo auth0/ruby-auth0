@@ -213,7 +213,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
         raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
-        set_authorization_header obtain_access_token
+        authorization_header obtain_access_token
         request_params = {
           protocol:         options.fetch(:protocol, 'oauth2'),
           impersonator_id:  impersonator_id,
@@ -226,7 +226,7 @@ module Auth0
           }
         }
         result = post("/users/#{user_id}/impersonate", request_params)
-        set_authorization_header @token
+        authorization_header @token
         result
       end
 
