@@ -1,4 +1,4 @@
 class DummyClassForProxy
-  include HTTMultiParty
-  base_uri 'http://auth0.com'
+  include Auth0::Mixins::HTTPProxy
+  @base_uri = 'http://auth0.com'
 end

@@ -9,8 +9,9 @@ module Auth0
       # By Default API v2
       def initialize(config)
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        self.class.base_uri base_url(options)
-        self.class.headers client_headers(config)
+        @base_uri = base_url(options)
+        @headers = client_headers(config)
+        @timeout = options[:timeout] || 10
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
         initialize_api(options)
@@ -22,14 +23,14 @@ module Auth0
       end
 
       def authorization_header(token)
-        self.class.headers 'Authorization' => "Bearer #{token}"
+        add_headers('Authorization' => "Bearer #{token}")
       end
 
       def authorization_header_basic(options)
         connection_id = options.fetch(:connection_id, Auth0::Api::AuthenticationEndpoints::UP_AUTH)
         user = options.fetch(:user, nil)
         password = options.fetch(:password, nil)
-        self.class.headers 'Authorization' => "Basic #{Base64.strict_encode64("#{connection_id}\\#{user}:#{password}")}"
+        add_headers('Authorization' => "Basic #{Base64.strict_encode64("#{connection_id}\\#{user}:#{password}")}")
       end
 
       private

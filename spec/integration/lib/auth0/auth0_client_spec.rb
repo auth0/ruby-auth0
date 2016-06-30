@@ -57,7 +57,7 @@ describe Auth0::Client do
 
   context 'client headers' do
     let(:client) { Auth0::Client.new(v2_credentials.merge(access_token: 'abc123', domain: 'myhost.auth0.com')) }
-    let(:headers) { client.class.headers }
+    let(:headers) { client.headers }
 
     let(:base64_token) do
       Base64.urlsafe_encode64('{"name":"ruby-auth0","version":"' + Auth0::VERSION + '"}')
