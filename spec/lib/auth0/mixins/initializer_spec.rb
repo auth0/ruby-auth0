@@ -3,7 +3,7 @@ require 'spec_helper'
 class MockClass
   attr_reader :token
   include Auth0::Mixins::Initializer
-  include HTTMultiParty
+  include Auth0::Mixins::HTTPProxy
 end
 
 describe Auth0::Mixins::Initializer do
