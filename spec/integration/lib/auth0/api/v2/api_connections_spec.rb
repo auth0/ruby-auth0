@@ -18,7 +18,7 @@ describe Auth0::Api::V2::Connections do
     let(:connections) { client.connections }
 
     it { expect(connections.size).to be > 0 }
-    it { expect(connections.find { |con| con['name'] == name }).to_not be_nil }
+    it { expect(connections.find { |con| con['name'] == name }).to_not be_empty }
 
     context '#filters' do
       it { expect(client.connections(strategy: strategy).size).to be > 0 }
@@ -88,7 +88,7 @@ describe Auth0::Api::V2::Connections do
       client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }
     end
 
-    it { expect(client.delete_connection_user(connection['id'], email)).to be_nil }
+    it { expect(client.delete_connection_user(connection['id'], email)).to be_empty }
   end
 
   after(:all) do

@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'httmultiparty', '~> 0.3.16'
+  s.add_runtime_dependency 'rest-client', '~> 1.8.0'
 
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'fuubar', '~> 2.0'
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-nav', '~> 0.2.4'
   s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
   s.add_development_dependency 'rack-test', '~> 0.6'
+  s.add_development_dependency 'rack', '~> 1.6.4'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 1.4'
   s.add_development_dependency 'yard', '~> 0.8'

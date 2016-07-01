@@ -4,7 +4,7 @@ describe Auth0::Api::V2::Blacklists do
   let(:token) { 'faketoken' }
 
   describe '.add_token_to_blacklist' do
-    it { expect(client.add_token_to_blacklist(token)).to be_nil }
+    it { expect(client.add_token_to_blacklist(token)).to be_empty }
   end
 
   describe '.blacklisted_tokens' do
