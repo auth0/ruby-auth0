@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'base64'
 describe Auth0::Api::V2::DeviceCredentials do
-  attr_reader :user, :user_client, :basic_client, :existing_device_credentials
+  attr_reader :user, :client, :basic_client, :existing_device_credentials
 
   before(:all) do
-    client = Auth0Client.new(v2_creds)
+    @client = Auth0Client.new(v2_creds)
     username = Faker::Internet.user_name
     email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
     password = Faker::Internet.password
@@ -29,9 +29,6 @@ describe Auth0::Api::V2::DeviceCredentials do
   end
 
   after(:all) do
-    # Workaround to prevent instance constructor from overwritting class variable (header)
-    # TODO: fix instance / class isssue from aut0 proxy and remove line below.
-    client = Auth0Client.new(v2_creds)
     client.delete_user(user['user_id'])
   end
 

@@ -25,7 +25,6 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   after(:all) do
-    client = Auth0Client.new(v2_creds)
     client.delete_user(impersonate_user['user_id'])
     client.delete_user(impersonator_user['user_id'])
   end
