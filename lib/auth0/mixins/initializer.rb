@@ -36,7 +36,7 @@ module Auth0
       private
 
       def initialize_api(options)
-        api_v1?(options) ? initialize_v1(options) : initialize_v2(options)
+        api_v2?(options) ? initialize_v2(options) : initialize_v1(options)
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
         if options.fetch(:authorization, nil) == 'Basic'
           authorization_header_basic(options)
@@ -79,10 +79,10 @@ module Auth0
         @token = obtain_access_token
       end
 
-      def api_v1?(options)
-        version = options[:api_version] || 1
+      def api_v2?(options)
+        version = options[:api_version] || 2
         protocol = options[:protocols].to_s
-        !protocol.include?('v2') && (protocol.include?('v1') || version == 1)
+        !protocol.include?('v1') && (protocol.include?('v2') || version == 2)
       end
     end
   end
