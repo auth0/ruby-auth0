@@ -260,7 +260,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
         request_params = {
           client_id: @client_id,
-          response_type: options.fetch(:connection, 'code'),
+          response_type: options.fetch(:response_type, 'code'),
           connection: options.fetch(:connection, nil),
           redirect_url: redirect_uri,
           state: options.fetch(:state, nil)

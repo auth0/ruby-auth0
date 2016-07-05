@@ -165,6 +165,12 @@ describe Auth0::Api::AuthenticationEndpoints do
         "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1"
       )
     end
+    let(:connection) { { connection: 'connection-1' } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_url, connection).to_s).to eq(
+        "https://#{@instance.domain}/authorize?response_type=code&connection=connection-1&redirect_url=#{redirect_url}"
+      )
+    end
     it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
   context '.token_info' do
