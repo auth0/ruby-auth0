@@ -22,6 +22,28 @@ module Auth0
         end
       end
 
+      # Gets the user tokens using the code obtained through passive authentication in the specified connection
+      # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
+      # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
+      # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
+      # @param redirect_uri [string] Url to redirect after authorization
+      # @param redirect_uri [string] The access code obtained through passive authentication
+      # @return [json] Returns the access_token and id_token
+      def obtain_user_tokens(code, redirect_uri, connection = 'facebook', scope = 'openid')
+        raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
+        request_params = {
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          connection:    connection,
+          grant_type:    'authorization_code',
+          code:          code,
+          scope:         scope,
+          redirect_uri:  redirect_uri
+        }
+        post('/oauth/token', request_params)
+      end
+
       # Logins using username/password
       # @see https://auth0.com/docs/auth-api#!#post--oauth-ro
       # @param username [string] Username
@@ -261,8 +283,9 @@ module Auth0
           client_id: @client_id,
           response_type: options.fetch(:response_type, 'code'),
           connection: options.fetch(:connection, nil),
-          redirect_url: redirect_uri,
-          state: options.fetch(:state, nil)
+          redirect_uri: redirect_uri,
+          state: options.fetch(:state, nil),
+          scope: options.fetch(:scope, nil)
         }.merge(options.fetch(:additional_parameters, {}))
 
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))

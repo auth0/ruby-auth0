@@ -37,6 +37,24 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
+  context '.obtain_user_tokens' do
+    it { expect(@instance).to respond_to(:obtain_user_tokens) }
+    it "is expected to make post request to '/oauth/token'" do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
+                        connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
+      )
+        .and_return('user_tokens' => 'UserToken')
+      expect(@instance).to receive(:post).with(
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
+                        connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
+      )
+      expect(@instance.obtain_user_tokens('code', 'uri')['user_tokens']).to eq 'UserToken'
+    end
+    it { expect { @instance.obtain_user_tokens('', '') }.to raise_error 'Must supply a valid code' }
+    it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
+  end
+
   context '.login' do
     it { expect(@instance).to respond_to(:login) }
     it 'is expected to make post to /oauth/ro' do
