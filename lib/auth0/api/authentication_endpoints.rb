@@ -90,10 +90,11 @@ module Auth0
       def start_passwordless_email_flow(email, send = 'link', auth_params = {})
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
-          client_id:    @client_id,
-          email:        email,
-          send:         send,
-          auth_params:  auth_params
+          client_id:   @client_id,
+          connection:  "email",
+          email:       email,
+          send:        send,
+          authParams:  auth_params
         }
         post('/passwordless/start', request_params)
       end
@@ -132,11 +133,9 @@ module Auth0
 
       # Retrives the SAML 2.0 metadata
       # @see https://auth0.com/docs/auth-api#!#get--samlp--client_id-
-      # @param client_id [string] Client id
       # @return [xml] SAML 2.0 metadata
-      def saml_metadata(client_id)
-        raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
-        get("/samlp/metadata/#{client_id}")
+      def saml_metadata
+        get("/samlp/metadata/#{@client_id}")
       end
 
       # Retrives the WS-Federation metadata
