@@ -3,7 +3,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   attr_reader :client, :impersonate_user, :impersonator_user, :global_client, :password
 
   before(:all) do
-    client = Auth0Client.new(v2_creds)
+    @client = Auth0Client.new(v2_creds)
     impersonate_username = Faker::Internet.user_name
     impersonate_email = "#{entity_suffix}#{Faker::Internet.safe_email(impersonate_username)}"
     @password = Faker::Internet.password
@@ -46,6 +46,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:signup_email) { "#{entity_suffix}#{Faker::Internet.safe_email(signup_username)}" }
     let(:signup) { global_client.signup(signup_email, password) }
     it { expect(signup).to(include('_id', 'email')) }
+    it { expect(signup['email']).to eq signup_email }
   end
 
   describe '.change_password' do
@@ -59,13 +60,15 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:start_passwordless_email_flow) do
       global_client.start_passwordless_email_flow(impersonate_user['email'])
     end
-    it { expect(start_passwordless_email_flow).to eq '"We\'ve just sent you an email to reset your password."' }
+    it { expect(start_passwordless_email_flow['email']).to eq impersonate_user['email'] }
+    it { expect(start_passwordless_email_flow).to(include('_id', 'email')) }
   end
 
   skip '.start_passwordless_sms_flow' do
-    let(:phone_number) { '+123456778' }
+    let(:phone_number) { '+19143686854' }
     let(:start_passwordless_sms_flow) { global_client.start_passwordless_sms_flow(phone_number) }
-    it { expect(start_passwordless_sms_flow).to eq '"We\'ve just sent you an email to reset your password."' }
+    it { expect(start_passwordless_sms_flow['phone_number']).to eq phone_number }
+    it { expect(start_passwordless_sms_flow).to(include('_id', 'phone_number', 'request_language')) }
   end
 
   describe '.saml_metadata' do
@@ -82,13 +85,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:id_token) { global_client.login(impersonate_user['email'], password)['id_token'] }
     let(:token_info) { global_client.token_info(id_token) }
     it { expect(token_info).to(include('email', 'clientID', 'global_client_id')) }
-  end
-
-  skip '.refresh_delegation' do
-    let(:access_token) { global_client.login(impersonate_user['email'], password)['access_token'] }
-    let(:target) { global_client.clients[0]['clientID'] }
-    let(:refresh_delegation) { global_client.refresh_delegation(access_token, target) }
-    it { expect(refresh_delegation).to(include('email', 'clientID', 'global_client_id')) }
   end
 
   describe '.delegation' do
@@ -111,14 +107,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(unlink_user).to eq 'OK' }
   end
 
-  skip '.user_info' do
-    let(:user_info) { global_client.user_info }
-    it { expect(user_info).to eq 'OK' }
-  end
-
-  skip '.authorization_url' do
-    let(:uri) { 'new_uri' }
-    let(:authorization_url) { global_client.authorization_url(uri) }
-    it { expect(get(authorization_url)).to eq 'OK' }
+  describe '.user_info' do
+    let(:access_token) { global_client.login(impersonate_user['email'], password)['access_token'] }
+    let(:credentials) { { client_id: ENV['CLIENT_ID'], token: access_token, domain: ENV['DOMAIN'] } }
+    let(:client) { Auth0Client.new(credentials) }
+    let(:user_info) { client.user_info }
+    it { expect(user_info['email']).to eq impersonate_user['email'] }
+    it { expect(user_info).to(include('clientID', 'identities', 'nickname', 'picture')) }
   end
 end

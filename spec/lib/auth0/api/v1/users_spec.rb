@@ -89,7 +89,7 @@ describe Auth0::Api::V1::Users do
       @instance.client_users('test_client_id')
     end
     it 'is expected to call /api/client//users if no client_id passed' do
-      expect(@instance).to receive(:get).with('/api/clients//users')
+      expect(@instance).to receive(:get).with("/api/clients/#{@instance.client_id}/users")
       expect { @instance.client_users }.not_to raise_error
     end
   end

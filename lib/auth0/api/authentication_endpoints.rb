@@ -91,7 +91,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
           client_id:   @client_id,
-          connection:  "email",
+          connection:  'email',
           email:       email,
           send:        send,
           authParams:  auth_params

@@ -11,11 +11,11 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:obtain_access_token) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
       )
         .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/token', client_id: nil, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
       )
       expect(@instance.obtain_access_token).to eql 'AccessToken'
     end
@@ -25,11 +25,13 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:obtain_access_token) }
     it "is expected to make post request to '/oauth/access_token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid'
+        '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
+                               scope: 'openid'
       )
         .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: nil, access_token: 'access_token', connection: 'facebook', scope: 'openid'
+        '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
+                               scope: 'openid'
       )
       expect(@instance.obtain_access_token('access_token', 'facebook', 'openid')).to eql 'AccessToken'
     end
@@ -40,7 +42,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /oauth/ro' do
       expect(@instance).to receive(:post).with(
         '/oauth/ro',
-        client_id: nil, username: 'test@test.com',
+        client_id: @instance.client_id, username: 'test@test.com',
         password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
         grant_type: 'password', id_token: nil, device: nil
       )
@@ -55,7 +57,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /dbconnections/signup' do
       expect(@instance).to receive(:post).with(
         '/dbconnections/signup',
-        client_id: nil, email: 'test@test.com',
+        client_id: @instance.client_id, email: 'test@test.com',
         password: 'password', connection: 'User'
       )
       @instance.signup('test@test.com', 'password', 'User')
@@ -69,7 +71,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /dbconnections/change_password' do
       expect(@instance).to receive(:post).with(
         '/dbconnections/change_password',
-        client_id: nil, email: 'test@test.com',
+        client_id: @instance.client_id, email: 'test@test.com',
         password: 'password', connection: 'User'
       )
       @instance.change_password('test@test.com', 'password', 'User')
@@ -82,10 +84,11 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /passwordless/start' do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
-        client_id: nil,
+        client_id: @instance.client_id,
+        connection:  'email',
         email: 'test@test.com',
         send: 'link',
-        auth_params: {
+        authParams: {
           scope: 'scope',
           protocol: 'protocol'
         }
@@ -101,7 +104,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /passwordless/start' do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
-        client_id: nil,
+        client_id: @instance.client_id,
         connection: 'sms',
         phone_number: phone_number
       )
@@ -117,7 +120,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to make post to /oauth/ro' do
       expect(@instance).to receive(:post).with(
         '/oauth/ro',
-        client_id: nil, username: phone_number,
+        client_id: @instance.client_id, username: phone_number,
         password: code, connection: 'sms',
         scope: 'openid', grant_type: 'password'
       )
@@ -128,13 +131,11 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   context '.saml_metadata' do
-    let(:client_id) { 'client-id' }
     it { expect(@instance).to respond_to(:saml_metadata) }
     it 'is expected to make post to /samlp/metadata/client-id' do
-      expect(@instance).to receive(:get).with("/samlp/metadata/#{client_id}")
-      @instance.saml_metadata(client_id)
+      expect(@instance).to receive(:get).with("/samlp/metadata/#{@instance.client_id}")
+      @instance.saml_metadata
     end
-    it { expect { @instance.saml_metadata('') }.to raise_error 'Must supply a valid client_id' }
   end
 
   context '.wsfed_metadata' do
@@ -150,25 +151,29 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:authorization_url) }
     it 'is expected to return an authorization url' do
       expect(@instance.authorization_url(redirect_url).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}"
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        "redirect_url=#{redirect_url}"
       )
     end
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, additional_parameters).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&aparam1=test1"
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        "redirect_url=#{redirect_url}&aparam1=test1"
       )
     end
     let(:state) { { state: 'state1' } }
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&redirect_url=#{redirect_url}&state=state1"
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        "redirect_url=#{redirect_url}&state=state1"
       )
     end
     let(:connection) { { connection: 'connection-1' } }
     it 'is expected to return an authorization url with additionalParameters' do
       expect(@instance.authorization_url(redirect_url, connection).to_s).to eq(
-        "https://#{@instance.domain}/authorize?response_type=code&connection=connection-1&redirect_url=#{redirect_url}"
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        "connection=connection-1&redirect_url=#{redirect_url}"
       )
     end
     it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
@@ -187,7 +192,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it "is expected to make post request to '/delegation'" do
       expect(@instance).to receive(:post).with(
         '/delegation',
-        client_id: nil,
+        client_id: @instance.client_id,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         refresh_token: 'id_token', target: '', api_type: '', scope: '',
         additional_parameter: 'parameter'
@@ -202,7 +207,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it "is expected to make post request to '/delegation'" do
       expect(@instance).to receive(:post).with(
         '/delegation',
-        client_id: nil,
+        client_id: @instance.client_id,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         id_token: 'token',
         target: 'target',
@@ -215,7 +220,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       with specified api_type" do
       expect(@instance).to receive(:post).with(
         '/delegation',
-        client_id: nil,
+        client_id: @instance.client_id,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         id_token: 'id_token', target: '', scope: '',
         api_type: 'salesforce_api'
@@ -225,7 +230,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'allows to pass extra parameters' do
       expect(@instance).to receive(:post).with(
         '/delegation',
-        client_id: nil,
+        client_id: @instance.client_id,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         id_token: 'id_token', target: '', scope: '', api_type: '',
         community_name: 'test-community', community_url: 'test-url'
@@ -297,12 +302,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:samlp_url) }
     it 'is expected to get the samlp url' do
       expect(@instance.samlp_url.to_s).to eq(
-        "https://#{@instance.domain}/samlp/?connection=Username-Password-Authentication"
+        "https://#{@instance.domain}/samlp/#{@instance.client_id}?connection=Username-Password-Authentication"
       )
     end
     it 'is expected to get the samlp url with fb connection' do
       expect(@instance.samlp_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/samlp/?connection=facebook"
+        "https://#{@instance.domain}/samlp/#{@instance.client_id}?connection=facebook"
       )
     end
   end
@@ -311,12 +316,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:wsfed_url) }
     it 'is expected to get the wsfed url' do
       expect(@instance.wsfed_url.to_s).to eq(
-        "https://#{@instance.domain}/wsfed/?whr=Username-Password-Authentication"
+        "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=Username-Password-Authentication"
       )
     end
     it 'is expected to get the wsfed url with fb connection' do
       expect(@instance.wsfed_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/wsfed/?whr=facebook"
+        "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=facebook"
       )
     end
   end
