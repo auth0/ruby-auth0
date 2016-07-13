@@ -51,7 +51,8 @@ describe Auth0::Api::V2::Users do
     context '#filters' do
       it do
         expect(client.user(user['user_id'], fields: [:picture, :email, :user_id].join(','))).to(
-          include('email', 'user_id', 'picture'))
+          include('email', 'user_id', 'picture')
+        )
       end
       it { expect(client.user(user['user_id'], fields: [:email].join(','))).to_not include('user_id', 'picture') }
     end
@@ -110,11 +111,37 @@ describe Auth0::Api::V2::Users do
           client.link_user_account(primary_user['user_id'], body_link).first
         ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
       end
+
+      it do
+        expect(
+          client.unlink_users_account(primary_user['user_id'], 'auth0', link_user['user_id']).first
+        ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
+      end
     end
-    it do
-      expect(
-        client.unlink_users_account(primary_user['user_id'], 'auth0', link_user['user_id']).first
-      ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
+  end
+
+  describe '.user_logs' do
+    it 'is expected that the user logs contain a success signup log entry' do
+      wait 30 do
+        user_logs = client.user_logs(user['user_id'])
+        expect(user_logs.size).to be > 0
+        expect(find_success_signup_log_by_email(user['email'], user_logs)).to_not be_empty
+      end
+    end
+
+    context '#filters' do
+      it do
+        wait 30 do
+          expect(client.user_logs(user['user_id'], per_page: 1).size).to be 1
+        end
+      end
+    end
+  end
+
+  def find_success_signup_log_by_email(email, logs)
+    logs.find do |log|
+      log['type'] == 'ss' &&
+        log['details']['body']['email'] == email
     end
   end
 end

@@ -15,7 +15,8 @@ describe Auth0::Api::V2::Connections do
         '/api/v2/connections',
         strategy: nil,
         fields: nil,
-        include_fields: true)
+        include_fields: true
+      )
       expect { @instance.connections }.not_to raise_error
     end
   end

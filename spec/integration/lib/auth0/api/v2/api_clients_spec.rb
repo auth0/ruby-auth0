@@ -50,7 +50,8 @@ describe Auth0::Api::V2::Clients do
   describe '.create_client' do
     it do
       expect(client.create_client(client_name, custom_login_page_on: false)).to(
-        include('name' => client_name, 'custom_login_page_on' => false))
+        include('name' => client_name, 'custom_login_page_on' => false)
+      )
     end
     it { expect { client.create_client('', custom_login_page_on: false) }.to raise_error(Auth0::MissingParameter) }
   end
@@ -61,7 +62,9 @@ describe Auth0::Api::V2::Clients do
         client.patch_client(
           existing_client['client_id'],
           custom_login_page_on: false,
-          sso: true)).to(include('custom_login_page_on' => false, 'sso' => true))
+          sso: true
+        )
+      ).to(include('custom_login_page_on' => false, 'sso' => true))
     end
     it { expect { client.patch_client('', custom_login_page_on: false) }.to raise_error(Auth0::MissingClientId) }
   end

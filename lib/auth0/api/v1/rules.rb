@@ -9,7 +9,7 @@ module Auth0
           get(path)
         end
 
-        alias_method :get_rules, :rules
+        alias get_rules rules
 
         # https://auth0.com/docs/api#!#post--api-rules
         def create_rule(name, script, order = nil, status = true)

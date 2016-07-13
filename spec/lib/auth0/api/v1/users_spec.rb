@@ -101,7 +101,8 @@ describe Auth0::Api::V1::Users do
         '/api/users',
         email: 'test@test.com',
         password: 'password',
-        connection: 'conn')
+        connection: 'conn'
+      )
       @instance.create_user('test@test.com', 'password', 'conn')
     end
   end
@@ -120,7 +121,8 @@ describe Auth0::Api::V1::Users do
       password = SecureRandom.hex
       expect(@instance).to receive(:post).with(
         '/api/users/USERID/change_password_ticket',
-        'newPassword' => password, 'resultUrl' => nil)
+        'newPassword' => password, 'resultUrl' => nil
+      )
       @instance.change_password_ticket 'USERID', password
     end
   end
@@ -130,14 +132,16 @@ describe Auth0::Api::V1::Users do
     it 'is expected to call post to /api/users/userId/verification_ticket if resulturl is set' do
       expect(@instance).to receive(:post).with(
         '/api/users/auth0|tdasfasdfasdfa/verification_ticket',
-        'resultUrl' => 'google.com')
+        'resultUrl' => 'google.com'
+      )
       @instance.verification_ticket('auth0|tdasfasdfasdfa', 'google.com')
     end
     it 'is expected to call post to /api/users/userId/verification_ticket
       if result url is empty' do
       expect(@instance).to receive(:post).with(
         '/api/users/auth0|tdasfasdfasdfa/verification_ticket',
-        'resultUrl' => nil)
+        'resultUrl' => nil
+      )
       @instance.verification_ticket('auth0|tdasfasdfasdfa')
     end
   end
@@ -147,7 +151,8 @@ describe Auth0::Api::V1::Users do
     it 'is expected to call post to /api/users/userId/public_key' do
       expect(@instance).to receive(:post).with(
         '/api/users/auth0|tdasfasdfasdfa/public_key',
-        device: 'device22', public_key: 'SuperSecurePK')
+        device: 'device22', public_key: 'SuperSecurePK'
+      )
       @instance.create_public_key('auth0|tdasfasdfasdfa', 'device22', 'SuperSecurePK')
     end
   end
@@ -174,7 +179,8 @@ describe Auth0::Api::V1::Users do
       expect(@instance).to receive(:put).with(
         '/api/users/auth0|tdasfasdfasdfa/password',
         password: 'password',
-        verify: true)
+        verify: true
+      )
       @instance.update_user_password('auth0|tdasfasdfasdfa', 'password')
     end
   end
@@ -187,9 +193,11 @@ describe Auth0::Api::V1::Users do
         email: 'email@email.com',
         password: 'password',
         connection: 'Con',
-        verify: true)
+        verify: true
+      )
       @instance.update_user_password_using_email(
-        'email@email.com', 'password', 'Con')
+        'email@email.com', 'password', 'Con'
+      )
     end
   end
 

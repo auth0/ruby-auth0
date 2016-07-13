@@ -1,7 +1,6 @@
 require 'test_helper'
-
+# Secure Ping Controller Test
 class SecuredPingControllerTest < ActionController::TestCase
-
   def with_a_valid_token
     @user = { id: 1 }
     @token = Knock::AuthToken.new(payload: { sub: @user[:id] }).token
