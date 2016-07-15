@@ -165,33 +165,33 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   context '.authorization_url' do
-    let(:redirect_url) { 'http://redirect.com' }
+    let(:redirect_uri) { 'http://redirect.com' }
     it { expect(@instance).to respond_to(:authorization_url) }
     it 'is expected to return an authorization url' do
-      expect(@instance.authorization_url(redirect_url).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri).to_s).to eq(
         "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_url=#{redirect_url}"
+        "redirect_uri=#{redirect_uri}"
       )
     end
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_url, additional_parameters).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, additional_parameters).to_s).to eq(
         "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_url=#{redirect_url}&aparam1=test1"
+        "redirect_uri=#{redirect_uri}&aparam1=test1"
       )
     end
     let(:state) { { state: 'state1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_url, state).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, state).to_s).to eq(
         "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_url=#{redirect_url}&state=state1"
+        "redirect_uri=#{redirect_uri}&state=state1"
       )
     end
     let(:connection) { { connection: 'connection-1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_url, connection).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, connection).to_s).to eq(
         "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "connection=connection-1&redirect_url=#{redirect_url}"
+        "connection=connection-1&redirect_uri=#{redirect_uri}"
       )
     end
     it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
