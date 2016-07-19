@@ -1,18 +1,4 @@
 # Change Log
-
-[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.0.0...HEAD)
-
-**Closed issues:**
-
-- Exception messages are ruby hash string literals [\#63](https://github.com/auth0/ruby-auth0/issues/63)
-- Implement API v2 [\#38](https://github.com/auth0/ruby-auth0/issues/38)
-
-**Merged pull requests:**
-
-- Use JSON \(result.body\) for exception messages in requests [\#67](https://github.com/auth0/ruby-auth0/pull/67) ([ianks](https://github.com/ianks))
-- fixed rails api doesn't start, now impersionated links works with v2 [\#62](https://github.com/auth0/ruby-auth0/pull/62) ([Amialc](https://github.com/Amialc))
-- Add api v2 log endpoints to the gem [\#59](https://github.com/auth0/ruby-auth0/pull/59) ([LindseyB](https://github.com/LindseyB))
-
 ## [v4.0.0](https://github.com/auth0/ruby-auth0/tree/v4.0.0) (2016-02-12)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.6.1...v4.0.0)
 
