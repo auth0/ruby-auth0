@@ -33,10 +33,7 @@ module Auth0
         # @param email [string] The user's email.
         #
         # @return [json] Returns the created ticket url.
-        def post_password_change(new_password, user_id: nil, result_url: nil, connection_id: nil, email: nil)
-          if new_password.to_s.empty?
-            raise Auth0::InvalidParameter, 'Must supply a valid new password to post a password-change'
-          end
+        def post_password_change(new_password: nil, user_id: nil, result_url: nil, connection_id: nil, email: nil)
           path = "#{tickets_path}/password-change"
           request_params = {
             user_id: user_id,
