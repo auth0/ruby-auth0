@@ -78,7 +78,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_id: nil,
         email: 'test@test.com',
         send: 'link',
-        auth_params: {
+        connection: 'email',
+        authParams: {
           scope: 'scope',
           protocol: 'protocol'
         })
