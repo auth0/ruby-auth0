@@ -25,8 +25,8 @@ describe Auth0::Api::V2::Tickets do
 
   describe '.post_password_change' do
     let(:password_change) do
-      client.post_password_change('secret', user_id: user['user_id'],
-                                            result_url: 'http://myapp.com/callback')
+      client.post_password_change(new_password: 'secret', user_id: user['user_id'],
+                                  result_url: 'http://myapp.com/callback')
     end
     it { expect(password_change).to include('ticket') }
   end

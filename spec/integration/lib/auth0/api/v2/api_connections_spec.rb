@@ -18,14 +18,15 @@ describe Auth0::Api::V2::Connections do
     let(:connections) { client.connections }
 
     it { expect(connections.size).to be > 0 }
-    it { expect(connections.find { |con| con['name'] == name }).to_not be_nil }
+    it { expect(connections.find { |con| con['name'] == name }).to_not be_empty }
 
     context '#filters' do
       it { expect(client.connections(strategy: strategy).size).to be > 0 }
       it { expect(client.connections(strategy: strategy, fields: [:name].join(',')).first).to include('name') }
       it do
         expect(client.connections(strategy: strategy, fields: [:name].join(','), include_fields: false).first).to_not(
-          include('name'))
+          include('name')
+        )
       end
     end
   end
@@ -39,7 +40,8 @@ describe Auth0::Api::V2::Connections do
       it { expect(client.connection(connection['id'], fields: [:name, :id].join(','))).to include('id', 'name') }
       it do
         expect(client.connection(connection['id'], fields: [:name, :id].join(','), include_fields: false)).to_not(
-          include('id', 'name'))
+          include('id', 'name')
+        )
       end
     end
   end
@@ -66,7 +68,8 @@ describe Auth0::Api::V2::Connections do
     let(:options) { { username: new_name } }
     it do
       expect(client.update_connection(connection_to_update['id'], 'options' => options)['options']).to include(
-        'username' => new_name)
+        'username' => new_name
+      )
     end
   end
 
@@ -85,7 +88,7 @@ describe Auth0::Api::V2::Connections do
       client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }
     end
 
-    it { expect(client.delete_connection_user(connection['id'], email)).to be_nil }
+    it { expect(client.delete_connection_user(connection['id'], email)).to be_empty }
   end
 
   after(:all) do

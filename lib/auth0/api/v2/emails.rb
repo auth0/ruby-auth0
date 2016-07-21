@@ -8,7 +8,7 @@ module Auth0
         # Get all the email providers.
         # @see https://auth0.com/docs/api/v2#!/Emails/get_provider
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] if the fields specified are to be included in the result, false otherwise.
+        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #
         # @return [json] Returns the existing email providers.
         def get_provider(fields: nil, include_fields: nil)
@@ -21,11 +21,9 @@ module Auth0
 
         # Configure a new email provider.
         # @see https://auth0.com/docs/api/v2#!/Emails/post_provider
-        # @param body [hash] The Hash options used to spcify the email provider's properties.
-        #
-        # @return [json] Returns the created email provider.
+        # @param body [hash] The Hash options used to specify the email provider's properties.
         def configure_provider(body)
-          fail Auth0::InvalidParameter, 'Must supply a valid body to create an email provider' if body.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body to create an email provider' if body.to_s.empty?
           post(email_path, body)
         end
 
@@ -39,11 +37,11 @@ module Auth0
 
         # Updates the configured email provider.
         # @see https://auth0.com/docs/api/v2#!/Emails/patch_provider
-        # @param body [hash] The Hash options used to spcify the email provider's properties.
+        # @param body [hash] The Hash options used to specify the email provider's properties.
         #
         # @return [json] Returns the updated email provider.
         def update_provider(body)
-          fail Auth0::InvalidParameter, 'Must supply a valid body to update an email provider' if body.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body to update an email provider' if body.to_s.empty?
           patch(email_path, body)
         end
 

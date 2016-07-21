@@ -15,7 +15,7 @@ module Auth0
           get(path)
         end
 
-        alias_method :search_logs, :logs
+        alias search_logs logs
 
         # {https://auth0.com/docs/api#!#get--api-logs--_id-}
         def log(id)

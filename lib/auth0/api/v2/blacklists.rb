@@ -25,7 +25,7 @@ module Auth0
         # @return [json] Returns the blacklisted token
         #
         def add_token_to_blacklist(jti, aud = nil)
-          fail Auth0::MissingParameter, 'Must specify a valid JTI' if jti.to_s.empty?
+          raise Auth0::MissingParameter, 'Must specify a valid JTI' if jti.to_s.empty?
           request_params = {
             jti: jti,
             aud: aud

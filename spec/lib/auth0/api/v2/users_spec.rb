@@ -19,7 +19,8 @@ describe Auth0::Api::V2::Users do
         connection: nil,
         fields: nil,
         include_fields: nil,
-        q: nil)
+        q: nil
+      )
       expect { @instance.users }.not_to raise_error
     end
   end
@@ -41,12 +42,14 @@ describe Auth0::Api::V2::Users do
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
       @instance.create_user(
         'name',
         email: 'test@test.com',
         password: 'password',
-        connection: 'conn')
+        connection: 'conn'
+      )
     end
   end
 
@@ -68,7 +71,8 @@ describe Auth0::Api::V2::Users do
     it 'is expected not to call delete to /api/v2/users if user_id is blank' do
       expect(@instance).not_to receive(:delete)
       expect { @instance.delete_user('') }.to raise_exception(
-        Auth0::MissingUserId)
+        Auth0::MissingUserId
+      )
     end
   end
 
@@ -88,13 +92,15 @@ describe Auth0::Api::V2::Users do
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
       @instance.patch_user(
         'UserID',
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
-        name: 'name')
+        name: 'name'
+      )
     end
     it { expect { @instance.patch_user('', 'body') }.to raise_error 'Must supply a valid user_id' }
     it { expect { @instance.patch_user('UserId', '') }.to raise_error 'Must supply a valid body' }
@@ -130,5 +136,32 @@ describe Auth0::Api::V2::Users do
       @instance.delete_user_provider('User_ID', 'provider_name')
     end
     it { expect { @instance.delete_user_provider(nil, 'test') }.to raise_error 'Must supply a valid user_id' }
+  end
+
+  context '.user_logs' do
+    it { expect(@instance).to respond_to(:user_logs) }
+    it { expect(@instance).to respond_to(:get_user_log_events) }
+    it 'is expected to call /api/v2/USER_ID/logs' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/logs',
+        user_id: 'USER_ID',
+        per_page: nil,
+        page: nil,
+        include_totals: nil,
+        sort: nil
+      )
+      expect { @instance.user_logs('USER_ID') }.not_to raise_error
+    end
+    it { expect { @instance.user_logs('') }.to raise_error 'Must supply a valid user_id' }
+    it 'is expected to raise an error when per_page is higher than 100' do
+      expect { @instance.user_logs('USER_ID', per_page: rand(101..2000)) }.to raise_error(
+        'The total amount of entries per page should be less than 100'
+      )
+    end
+    it 'is expected to raise an error when sort does not match pattern' do
+      expect { @instance.user_logs('USER_ID', sort: 'no match') }.to raise_error(
+        'Sort does not match pattern ^(([a-zA-Z0-9_\\.]+))\\:(1|-1)$'
+      )
+    end
   end
 end

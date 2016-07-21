@@ -17,7 +17,8 @@ describe Auth0::Api::V2::Jobs do
     it { expect(@instance).to respond_to(:import_users) }
     it 'expect client to send post to /api/v2/jobs/users-imports' do
       expect(@instance).to receive(:post_file).with(
-        '/api/v2/jobs/users-imports', users: 'file', connection_id: 'connnection_id')
+        '/api/v2/jobs/users-imports', users: 'file', connection_id: 'connnection_id'
+      )
       expect { @instance.import_users('file', 'connnection_id') }.not_to raise_error
     end
     it { expect { @instance.import_users('', 'connnection_id') }.to raise_error('Must specify a valid file') }
@@ -28,7 +29,7 @@ describe Auth0::Api::V2::Jobs do
     it { expect(@instance).to respond_to(:send_verification_email) }
     it 'expect client to send post to /api/v2/jobs/verification-email' do
       expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', user_id: 'user_id')
-      expect { @instance.send_verification_email(user_id: 'user_id') }.not_to raise_error
+      expect { @instance.send_verification_email('user_id') }.not_to raise_error
     end
     it { expect { @instance.send_verification_email('') }.to raise_error('Must specify a user id') }
   end

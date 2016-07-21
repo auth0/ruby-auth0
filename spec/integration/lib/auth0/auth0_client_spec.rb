@@ -12,26 +12,32 @@ describe Auth0::Client do
 
   it_should_behave_like 'invalid credentials', { namespace: 'samples.auth0.com' }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', client_id: 'client_id' }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', client_id: 'client_id'
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', client_secret: 'secret' }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', client_secret: 'secret'
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {
-    namespace: 'samples.auth0.com', api_version: 2 }, Auth0::InvalidCredentials
+    namespace: 'samples.auth0.com', api_version: 2
+  }, Auth0::InvalidCredentials
   it_should_behave_like 'invalid credentials', {}
   it_should_behave_like 'invalid credentials', api_version: 2
   it_should_behave_like 'invalid credentials', api_version: 1
   it_should_behave_like 'invalid credentials', {
-    client_id: 'client_id', client_secret: 'secret' }, Auth0::InvalidApiNamespace
+    client_id: 'client_id', client_secret: 'secret'
+  }, Auth0::InvalidApiNamespace
   it_should_behave_like 'invalid credentials', {
-    api_version: 2, token: 'token' }, Auth0::InvalidApiNamespace
+    api_version: 2, token: 'token'
+  }, Auth0::InvalidApiNamespace
 
   let(:valid_v1_credentials) do
     { client_id: ENV['CLIENT_ID'],
       client_secret: ENV['CLIENT_SECRET'],
-      domain: ENV['DOMAIN'] }
+      domain: ENV['DOMAIN'],
+      api_version: 1 }
   end
   let(:token) { ENV['MASTER_JWT'] }
-  let(:v2_credentials) { { domain: ENV['DOMAIN'], api_version: 2 } }
+  let(:v2_credentials) { { domain: ENV['DOMAIN'] } }
 
   shared_examples 'valid credentials' do
     it { expect { Auth0Client.new(credentials) }.to_not raise_error }
@@ -39,9 +45,6 @@ describe Auth0::Client do
 
   it_should_behave_like 'valid credentials' do
     let(:credentials) { valid_v1_credentials }
-  end
-  it_should_behave_like 'valid credentials' do
-    let(:credentials) { valid_v1_credentials.merge(api_version: 1) }
   end
   it_should_behave_like 'valid credentials' do
     let(:credentials) { v2_credentials.merge(token: token) }
@@ -52,7 +55,7 @@ describe Auth0::Client do
 
   context 'client headers' do
     let(:client) { Auth0::Client.new(v2_credentials.merge(access_token: 'abc123', domain: 'myhost.auth0.com')) }
-    let(:headers) { client.class.headers }
+    let(:headers) { client.headers }
 
     let(:base64_token) do
       Base64.urlsafe_encode64('{"name":"ruby-auth0","version":"' + Auth0::VERSION + '"}')

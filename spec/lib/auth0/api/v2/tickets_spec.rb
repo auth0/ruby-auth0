@@ -12,20 +12,17 @@ describe Auth0::Api::V2::Tickets do
     end
     it 'expect client to rasie error when calling with empty body' do
       expect { @instance.post_email_verification(nil) }.to raise_error(
-        'Must supply a valid user id to post an email verification')
+        'Must supply a valid user id to post an email verification'
+      )
     end
   end
   context '.post_password_change' do
     it { expect(@instance).to respond_to(:post_password_change) }
     it 'expect client to send post to /api/v2/tickets/password-change with body' do
       expect(@instance).to receive(:post).with('/api/v2/tickets/password-change', user_id: nil, result_url: nil,
-                                                                                  new_password: 'new_pass',
+                                                                                  new_password: nil,
                                                                                   connection_id: nil, email: nil)
-      expect { @instance.post_password_change('new_pass') }.not_to raise_error
-    end
-    it 'expect client to rasie error when calling with empty body' do
-      expect { @instance.post_password_change(nil) }.to raise_error(
-        'Must supply a valid new password to post a password-change')
+      expect { @instance.post_password_change }.not_to raise_error
     end
   end
 end

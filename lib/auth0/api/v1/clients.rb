@@ -9,7 +9,7 @@ module Auth0
           get(path)
         end
 
-        alias_method :get_clients, :clients
+        alias get_clients clients
 
         # {https://auth0.com/docs/api#!#post--api-clients}
         def create_client(name, callbacks = '')

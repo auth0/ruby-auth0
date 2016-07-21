@@ -25,8 +25,9 @@ Using [APIv2](https://auth0.com/docs/api/v2)
 require "auth0"
 
 auth0 = Auth0Client.new(
+  :client_id => "YOUR CLIENT ID"
   :token => "YOUR JWT HERE",
-  :domain => "<YOUR ACCOUNT>.auth0.com"
+  :domain => "<YOUR ACCOUNT>.auth0.com"  
 )
 
 puts auth0.get_users
@@ -40,7 +41,24 @@ require "auth0"
 auth0 = Auth0Client.new(
   :client_id => "YOUR CLIENT ID",
   :client_secret => "YOUR CLIENT SECRET",
-  :domain => "<YOUR ACCOUNT>.auth0.com"
+  :domain => "<YOUR ACCOUNT>.auth0.com",
+  :api_version => "1"
+)
+
+puts auth0.get_users
+```
+
+### Timeout
+You can setup a custom timeout in the Auth0Client. By default it is set to 10 minutes.
+
+```ruby
+require "auth0"
+
+auth0 = Auth0Client.new(
+  :client_id => "YOUR CLIENT ID"
+  :token => "YOUR JWT HERE",
+  :domain => "<YOUR ACCOUNT>.auth0.com",
+  :timeout => 15
 )
 
 puts auth0.get_users
