@@ -64,6 +64,16 @@ auth0 = Auth0Client.new(
 puts auth0.get_users
 ```
 
+## API Documentation
+
+Build API docs locally
+
+``` bash
+bundle exec rake documentation
+```
+
+To view API docs, go to `doc` folder and open `index.html`
+
 ## What is Auth0?
 
 Auth0 helps you to:
