@@ -102,6 +102,7 @@ module Auth0
           path = "#{users_path}/#{user_id}"
           patch(path, body)
         end
+        alias update_user patch_user
 
         # Delete a user's multifactor provider
         # @see https://auth0.com/docs/api/v2#!/Users/delete_multifactor_by_provider
