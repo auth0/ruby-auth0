@@ -28,7 +28,7 @@ auth0 = Auth0Client.new(
   :client_id => "YOUR CLIENT ID",
   :token => "YOUR JWT HERE",
   :domain => "<YOUR ACCOUNT>.auth0.com",
-  :api_version => "2"
+  :api_version => 2
 )
 
 puts auth0.get_users
