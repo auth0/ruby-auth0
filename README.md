@@ -25,7 +25,7 @@ Using [APIv2](https://auth0.com/docs/api/v2)
 require "auth0"
 
 auth0 = Auth0Client.new(
-  :client_id => "YOUR CLIENT ID"
+  :client_id => "YOUR CLIENT ID",
   :token => "YOUR JWT HERE",
   :domain => "<YOUR ACCOUNT>.auth0.com"  
 )
