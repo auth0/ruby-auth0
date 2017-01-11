@@ -6,7 +6,7 @@ module Auth0
       attr_accessor :headers, :base_uri, :timeout
 
       # proxying requests from instance methods to HTTP class methods
-      %i(get post post_file put patch delete).each do |method|
+      [:get, :post, :post_file, :put, :patch, :delete].each do |method|
         define_method(method) do |path, body = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
