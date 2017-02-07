@@ -274,12 +274,13 @@ module Auth0
 
       # Returns an authorization URL, triggers a redirect.
       # @see https://auth0.com/docs/auth-api#!#get--authorize_social
+      # @param audience [string] The unique identifier of the target API you want to access.
       # @param redirect_uri [string] Url to redirect after authorization
       # @param options [hash] Can contain response_type, connection, state and additional_parameters.
       # @return [url] Authorization URL.
-      def authorization_url(redirect_uri, options = {})
-        raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
+      def authorization_url(audience, redirect_uri, options = {})
         request_params = {
+          audience: audience,
           client_id: @client_id,
           response_type: options.fetch(:response_type, 'code'),
           connection: options.fetch(:connection, nil),

@@ -166,35 +166,36 @@ describe Auth0::Api::AuthenticationEndpoints do
 
   context '.authorization_url' do
     let(:redirect_uri) { 'http://redirect.com' }
+    let(:audience) { 'http://api-url.com' }
     it { expect(@instance).to respond_to(:authorization_url) }
     it 'is expected to return an authorization url' do
-      expect(@instance.authorization_url(redirect_uri).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+      expect(@instance.authorization_url(audience, redirect_uri).to_s).to eq(
+        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&response_type=code&"\
         "redirect_uri=#{redirect_uri}"
       )
     end
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, additional_parameters).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+      expect(@instance.authorization_url(audience, redirect_uri, additional_parameters).to_s).to eq(
+        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&response_type=code&"\
         "redirect_uri=#{redirect_uri}&aparam1=test1"
       )
     end
     let(:state) { { state: 'state1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, state).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+      expect(@instance.authorization_url(audience, redirect_uri, state).to_s).to eq(
+        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&response_type=code&"\
         "redirect_uri=#{redirect_uri}&state=state1"
       )
     end
     let(:connection) { { connection: 'connection-1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, connection).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+      expect(@instance.authorization_url(audience, redirect_uri, connection).to_s).to eq(
+        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&response_type=code&"\
         "connection=connection-1&redirect_uri=#{redirect_uri}"
       )
     end
-    it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
+    it { expect { @instance.authorization_url('', '') }.not_to raise_error 'Must supply a valid redirect_uri' }
   end
   context '.token_info' do
     it { expect(@instance).to respond_to(:token_info) }
