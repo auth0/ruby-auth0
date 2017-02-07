@@ -190,6 +190,7 @@ module Auth0
         get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
       end
 
+      # @deprecated use {#patch_client}
       # Validates a JSON Web Token (signature and expiration)
       # @see https://auth0.com/docs/auth-api#!#post--tokeninfo
       # @param id_token [string] Token's id.
@@ -315,16 +316,17 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
       end
 
-      # Returns an logout  URL, triggers the logout flow.
-      # @see https://auth0.com/docs/auth-api#!#get--logout
+      # Returns a logout  URL, triggers the logout flow.
+      # @see https://auth0.com/docs/api/authentication#logout
       # @param return_to [string] Url to redirect after authorization
+      # @param federated [string] Add this querystring parameter to the logout URL, to log the user out of their identity provider.
       # @return [url] Logout URL.
-      def logout_url(return_to)
+      def logout_url(return_to, federated = nil)
         request_params = {
           returnTo: return_to
         }
 
-        URI::HTTPS.build(host: @domain, path: '/logout', query: to_query(request_params))
+        URI::HTTPS.build(host: @domain, path: '/v2/logout', query: to_query(request_params))
       end
 
       # Returns a samlp URL. The SAML Request AssertionConsumerServiceURL will be used to POST back the assertion

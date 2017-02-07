@@ -331,7 +331,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:logout_url) }
     it 'is expected to return a logout url' do
       expect(@instance.logout_url(return_to).to_s).to eq(
-        "https://#{@instance.domain}/logout?returnTo=#{return_to}"
+        "https://#{@instance.domain}/v2/logout?returnTo=#{return_to}"
       )
     end
   end
