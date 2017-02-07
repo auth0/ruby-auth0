@@ -27,7 +27,7 @@ module Auth0
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
       # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
       # @param redirect_uri [string] Url to redirect after authorization
-      # @param redirect_uri [string] The access code obtained through passive authentication
+      # @param code [string] The access code obtained through passive authentication
       # @return [json] Returns the access_token and id_token
       def obtain_user_tokens(code, redirect_uri, connection = 'facebook', scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
@@ -40,6 +40,29 @@ module Auth0
           code:          code,
           scope:         scope,
           redirect_uri:  redirect_uri
+        }
+        post('/oauth/token', request_params)
+      end
+
+      # This is the OAuth 2.0 grant that highly trusted apps utilize in order to access an API
+      # @see https://auth0.com/docs/api/authentication#resource-owner-password
+      # @param grant_type [string] Denotes the flow you are using. For Resource Owner Password use password. To add realm support use http://auth0.com/oauth/grant-type/password-realm.
+      # @param username [string] Resource Owner's identifier.
+      # @param password [string] Resource Owner's secret.
+      # @param audience [string] API Identifier that the client is requesting access to.
+      # @param scope [string] String value of the different scopes the client is asking for. Multiple scopes are separated with whitespace.
+      # @return [json] Returns the access_token and id_token
+      def obtain_user_tokens_ro(username, password, audience = nil, scope = 'openid')
+        raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
+        request_params = {
+          grant_type:    'password',
+          username:      username,
+          password:      password,
+          audience:      audience,
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          scope:         scope
         }
         post('/oauth/token', request_params)
       end
