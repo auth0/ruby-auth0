@@ -36,7 +36,8 @@ module Auth0
       private
 
       def initialize_api(options)
-        api_v2?(options) ? initialize_v2(options) : initialize_v1(options)
+        raise InvalidApiNamespace, 'Must supply a valid API version. v1 API is deprecated.' unless api_v2?(options)
+        initialize_v2(options)
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
         if options.fetch(:authorization, nil) == 'Basic'
           authorization_header_basic(options)
@@ -69,14 +70,7 @@ module Auth0
       def initialize_v2(options)
         extend Auth0::Api::V2
         @client_secret = options[:client_secret]
-        @token = options[:access_token] || options[:token]
-      end
-
-      def initialize_v1(options)
-        extend Auth0::Api::V1
-        @client_secret = options[:client_secret]
-        raise InvalidCredentials, 'Invalid API v1 client_id and client_secret' if @client_id.nil? || @client_secret.nil?
-        @token = obtain_access_token
+        @token = options[:token] ? options[:token] : obtain_access_token
       end
 
       def api_v2?(options)
