@@ -46,11 +46,13 @@ module Auth0
 
       # This is the OAuth 2.0 grant that highly trusted apps utilize in order to access an API
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
-      # @param grant_type [string] Denotes the flow you are using. For Resource Owner Password use password. To add realm support use http://auth0.com/oauth/grant-type/password-realm.
+      # @param grant_type [string] Denotes the flow you are using. For Resource Owner Password use password.
+      #   To add realm support use http://auth0.com/oauth/grant-type/password-realm.
       # @param username [string] Resource Owner's identifier.
       # @param password [string] Resource Owner's secret.
       # @param audience [string] API Identifier that the client is requesting access to.
-      # @param scope [string] String value of the different scopes the client is asking for. Multiple scopes are separated with whitespace.
+      # @param scope [string] String value of the different scopes the client is asking for.
+      #   Multiple scopes are separated with whitespace.
       # @return [json] Returns the access_token and id_token
       def obtain_user_tokens_ro(username, password, audience = nil, scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
@@ -62,6 +64,23 @@ module Auth0
           audience:      audience,
           client_id:     @client_id,
           client_secret: @client_secret,
+          scope:         scope
+        }
+        post('/oauth/token', request_params)
+      end
+
+      # Refresh the user tokens using the code obtained through passive authentication in the specified connection
+      # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
+      # @param refresh_token [string] The refresh token issued to the client.
+      # @param scope [string] Defaults to offline_access. Can be 'openid name email', 'openid offline_access'
+      # @return [json] Returns the access_token and id_token
+      def refresh_token(refresh_token, scope = nil)
+        raise Auth0::InvalidParameter, 'Must supply a valid refresh_token' if refresh_token.to_s.empty?
+        request_params = {
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          grant_type:    'refresh_token',
+          refresh_token: refresh_token,
           scope:         scope
         }
         post('/oauth/token', request_params)
@@ -319,7 +338,8 @@ module Auth0
       # Returns a logout  URL, triggers the logout flow.
       # @see https://auth0.com/docs/api/authentication#logout
       # @param return_to [string] Url to redirect after authorization
-      # @param federated [string] Add this querystring parameter to the logout URL, to log the user out of their identity provider.
+      # @param federated [string] Add this querystring parameter to the logout URL,
+      #   to log the user out of their identity provider.
       # @return [url] Logout URL.
       def logout_url(return_to, federated = nil)
         request_params = {
