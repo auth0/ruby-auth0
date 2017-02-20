@@ -350,6 +350,12 @@ describe Auth0::Api::AuthenticationEndpoints do
         "https://#{@instance.domain}/v2/logout?returnTo=#{return_to}"
       )
     end
+    let(:federated) { true }
+    it 'is expected to return a federated logout url' do
+      expect(@instance.logout_url(return_to, federated).to_s).to eq(
+        "https://#{@instance.domain}/v2/logout?returnTo=#{return_to}&federated"
+      )
+    end
   end
 
   context '.samlp_url' do

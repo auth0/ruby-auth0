@@ -351,15 +351,16 @@ module Auth0
       # Returns a logout  URL, triggers the logout flow.
       # @see https://auth0.com/docs/api/authentication#logout
       # @param return_to [string] Url to redirect after authorization
-      # @param federated [string] Add this querystring parameter to the logout URL,
-      #   to log the user out of their identity provider.
+      # @param federated [boolean] Set to true to log the user out of their identity provider.
       # @return [url] Logout URL.
-      def logout_url(return_to, federated = nil)
+      def logout_url(return_to, federated = false)
         request_params = {
           returnTo: return_to
         }
+        query = to_query(request_params)
+        query += '&federated' if federated
 
-        URI::HTTPS.build(host: @domain, path: '/v2/logout', query: to_query(request_params))
+        URI::HTTPS.build(host: @domain, path: '/v2/logout', query: query)
       end
 
       # Returns a samlp URL. The SAML Request AssertionConsumerServiceURL will be used to POST back the assertion
