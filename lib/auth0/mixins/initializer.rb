@@ -70,7 +70,7 @@ module Auth0
       def initialize_v2(options)
         extend Auth0::Api::V2
         @client_secret = options[:client_secret]
-        @token = options[:access_token] || options[:token] || obtain_access_token
+        @token = options[:access_token] || options[:token]
       end
 
       def api_v2?(options)

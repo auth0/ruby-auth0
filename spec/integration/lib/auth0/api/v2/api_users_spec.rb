@@ -21,8 +21,8 @@ describe Auth0::Api::V2::Users do
       it { expect(client.users(per_page: 1).size).to be 1 }
       it do
         expect(
-          client.users(per_page: 1, fields: [:picture, :email, :user_id].join(','), include_fields: true).first
-        ).to(include('email', 'user_id', 'picture'))
+          client.users(per_page: 1, fields: [:picture, :name, :user_id].join(','), include_fields: true).first
+        ).to(include('name', 'user_id', 'picture'))
       end
       it { expect(client.users(per_page: 1, fields: [:email].join(',')).first).to_not include('user_id', 'picture') }
       it do

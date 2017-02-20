@@ -43,7 +43,7 @@ describe Auth0::Client do
     it { expect { Auth0Client.new(credentials) }.to_not raise_error }
   end
 
-  it_should_behave_like 'valid credentials' do
+  it_should_behave_like 'invalid credentials' do
     let(:credentials) { valid_v1_credentials }
   end
   it_should_behave_like 'valid credentials' do

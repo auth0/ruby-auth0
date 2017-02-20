@@ -31,8 +31,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     client.delete_user(impersonator_user['user_id'])
   end
 
-  describe '.obtain_access_token' do
-    let(:acces_token) { global_client.obtain_access_token }
+  describe '.client_credentials' do
+    let(:acces_token) { global_client.client_credentials }
     it { expect(acces_token).to_not be_nil }
   end
 

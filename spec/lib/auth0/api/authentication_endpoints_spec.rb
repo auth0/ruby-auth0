@@ -7,17 +7,19 @@ describe Auth0::Api::AuthenticationEndpoints do
     @instance = dummy_instance
   end
 
-  context '.obtain_access_token' do
-    it { expect(@instance).to respond_to(:obtain_access_token) }
+  context '.client_credentials' do
+    it { expect(@instance).to respond_to(:client_credentials) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials',
+                              audience: nil
       )
         .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials',
+                              audience: nil
       )
-      expect(@instance.obtain_access_token).to eql 'AccessToken'
+      expect(@instance.client_credentials).to eql 'AccessToken'
     end
   end
 
@@ -42,12 +44,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
-                        connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
+                        code: 'code', scope: 'openid', redirect_uri: 'uri'
       )
         .and_return('user_tokens' => 'UserToken')
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
-                        connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
+                        code: 'code', scope: 'openid', redirect_uri: 'uri'
       )
       expect(@instance.obtain_user_tokens('code', 'uri')['user_tokens']).to eq 'UserToken'
     end
@@ -55,7 +57,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
 
-  # def obtain_user_tokens_ro(username, password, audience, scope = 'openid')
   context '.obtain_user_tokens_ro' do
     it { expect(@instance).to respond_to(:obtain_user_tokens_ro) }
     it "is expected to make post request to '/oauth/token'" do

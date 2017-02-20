@@ -7,19 +7,33 @@ module Auth0
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
-      # Retrives an access token
-      # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
+      # Given the social provider's access_token and the connection, this endpoint will authenticate the user
+      # with the provider and return a JSON with the access_token and, optionally, an id_token
+      # @see https://auth0.com/docs/api/authentication#social-with-provider-s-access-token
       # @param access_token [string] Social provider's access_token
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
+      # @param scope [string] Use openid to get an id_token, or openid profile email to include user information
+      #   in the id_token. If null, only an access_token will be returned.
       # @return [json] Returns the access token
-      def obtain_access_token(access_token = nil, connection = 'facebook', scope = 'openid')
-        if access_token
-          request_params = { client_id: @client_id, access_token: access_token, connection: connection, scope: scope }
-          post('/oauth/access_token', request_params)['access_token']
-        else
-          request_params = { client_id: @client_id, client_secret: @client_secret, grant_type: 'client_credentials' }
-          post('/oauth/token', request_params)['access_token']
-        end
+      def obtain_access_token(access_token, connection = 'facebook', scope = 'openid')
+        raise Auth0::InvalidParameter, 'Must supply a valid code' if access_token.to_s.empty?
+        request_params = { client_id: @client_id, access_token: access_token, connection: connection, scope: scope }
+        post('/oauth/access_token', request_params)['access_token']
+      end
+
+      # This is the OAuth 2.0 grant that server processes utilize in order to access an API.
+      # Use this endpoint to directly request an access_token by using the Client Credentials
+      # @see https://auth0.com/docs/api/authentication#client-credentials
+      # @param audience [string] The unique identifier of the target API you want to access.
+      # @return [json] Returns the access token
+      def client_credentials(audience = nil)
+        request_params = {
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          grant_type:    'client_credentials',
+          audience:      audience
+        }
+        post('/oauth/token', request_params)['access_token']
       end
 
       # Gets the user tokens using the code obtained through passive authentication in the specified connection
@@ -29,13 +43,12 @@ module Auth0
       # @param redirect_uri [string] Url to redirect after authorization
       # @param code [string] The access code obtained through passive authentication
       # @return [json] Returns the access_token and id_token
-      def obtain_user_tokens(code, redirect_uri, connection = 'facebook', scope = 'openid')
+      def obtain_user_tokens(code, redirect_uri, scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
         request_params = {
           client_id:     @client_id,
           client_secret: @client_secret,
-          connection:    connection,
           grant_type:    'authorization_code',
           code:          code,
           scope:         scope,
@@ -277,7 +290,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
         raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
-        authorization_header obtain_access_token
+        authorization_header client_credentials
         request_params = {
           protocol:         options.fetch(:protocol, 'oauth2'),
           impersonator_id:  impersonator_id,
