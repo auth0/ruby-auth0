@@ -1,43 +1,43 @@
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
-  attr_reader :client, :impersonate_user, :impersonator_user, :global_client, :password
+  attr_reader :client, :user1, :user2, :global_client, :password
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    impersonate_username = Faker::Internet.user_name
-    impersonate_email = "#{entity_suffix}#{Faker::Internet.safe_email(impersonate_username)}"
+    user1name = Faker::Internet.user_name
+    impersonate_email = "#{entity_suffix}#{Faker::Internet.safe_email(user1name)}"
     @password = Faker::Internet.password
-    @impersonate_user = client.create_user(impersonate_username, 'email' => impersonate_email,
-                                                                 'password' => password,
-                                                                 'email_verified' => true,
-                                                                 'connection' =>
-                                                                  Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                                                 'app_metadata' => {})
+    @user1 = client.create_user(user1name, 'email' => impersonate_email,
+                                           'password' => password,
+                                           'email_verified' => true,
+                                           'connection' =>
+                                            Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+                                           'app_metadata' => {})
 
-    impersonator_username = Faker::Internet.user_name
-    impersonator_email = "#{entity_suffix}#{Faker::Internet.safe_email(impersonator_username)}"
-    @impersonator_user = client.create_user(impersonator_username, 'email' => impersonator_email,
-                                                                   'password' => password,
-                                                                   'email_verified' => true,
-                                                                   'connection' =>
-                                                                    Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                                                   'app_metadata' => {})
+    user2name = Faker::Internet.user_name
+    impersonator_email = "#{entity_suffix}#{Faker::Internet.safe_email(user2name)}"
+    @user2 = client.create_user(user2name, 'email' => impersonator_email,
+                                           'password' => password,
+                                           'email_verified' => true,
+                                           'connection' =>
+                                            Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+                                           'app_metadata' => {})
 
     @global_client = Auth0Client.new(v1_global_creds)
   end
 
   after(:all) do
-    client.delete_user(impersonate_user['user_id'])
-    client.delete_user(impersonator_user['user_id'])
+    client.delete_user(user1['user_id'])
+    client.delete_user(user2['user_id'])
   end
 
-  describe '.client_credentials' do
-    let(:acces_token) { global_client.client_credentials }
+  describe '.token_with_client_credentials' do
+    let(:acces_token) { global_client.token_with_client_credentials }
     it { expect(acces_token).to_not be_nil }
   end
 
   describe '.login' do
-    let(:login) { global_client.login(impersonate_user['email'], password) }
+    let(:login) { global_client.login(user1['email'], password) }
     it { expect(login).to(include('id_token', 'access_token', 'token_type')) }
   end
 
@@ -51,16 +51,16 @@ describe Auth0::Api::AuthenticationEndpoints do
 
   describe '.change_password' do
     let(:change_password) do
-      global_client.change_password(impersonate_user['user_id'], password)
+      global_client.change_password(user1['user_id'], password)
     end
     it { expect(change_password).to eq '"We\'ve just sent you an email to reset your password."' }
   end
 
   skip '.start_passwordless_email_flow' do
     let(:start_passwordless_email_flow) do
-      global_client.start_passwordless_email_flow(impersonate_user['email'])
+      global_client.start_passwordless_email_flow(user1['email'])
     end
-    it { expect(start_passwordless_email_flow['email']).to eq impersonate_user['email'] }
+    it { expect(start_passwordless_email_flow['email']).to eq user1['email'] }
     it { expect(start_passwordless_email_flow).to(include('_id', 'email')) }
   end
 
@@ -81,38 +81,25 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(wsfed_metadata).to(include('<EntityDescriptor')) }
   end
 
-  describe '.token_info' do
-    let(:id_token) { global_client.login(impersonate_user['email'], password)['id_token'] }
-    let(:token_info) { global_client.token_info(id_token) }
-    it { expect(token_info).to(include('email', 'clientID', 'global_client_id')) }
-  end
-
   describe '.delegation' do
-    let(:id_token) { global_client.login(impersonate_user['email'], password)['id_token'] }
+    let(:id_token) { global_client.login(user1['email'], password)['id_token'] }
     let(:target) { global_client.clients[0]['clientID'] }
     let(:delegation) { global_client.delegation(id_token, target) }
     it { expect(delegation).to(include('token_type', 'expires_in', 'id_token')) }
   end
 
-  describe '.impersonation' do
-    let(:impersonate_url) do
-      global_client.impersonate(impersonate_user['user_id'], ENV['CLIENT_ID'], impersonator_user['user_id'], {})
-    end
-    it { expect(impersonate_url).to_not be_nil }
-  end
-
   describe '.unlink_user' do
-    let(:access_token) { global_client.login(impersonate_user['email'], password)['access_token'] }
-    let(:unlink_user) { global_client.unlink_user(access_token, impersonator_user['user_id']) }
+    let(:access_token) { global_client.login(user1['email'], password)['access_token'] }
+    let(:unlink_user) { global_client.unlink_user(access_token, user2['user_id']) }
     it { expect(unlink_user).to eq 'OK' }
   end
 
   describe '.user_info' do
-    let(:access_token) { global_client.login(impersonate_user['email'], password)['access_token'] }
+    let(:access_token) { global_client.login(user1['email'], password)['access_token'] }
     let(:credentials) { { client_id: ENV['CLIENT_ID'], token: access_token, domain: ENV['DOMAIN'] } }
     let(:client) { Auth0Client.new(credentials) }
     let(:user_info) { client.user_info }
-    it { expect(user_info['email']).to eq impersonate_user['email'] }
+    it { expect(user_info['email']).to eq user1['email'] }
     it { expect(user_info).to(include('clientID', 'identities', 'nickname', 'picture')) }
   end
 end

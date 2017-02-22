@@ -7,58 +7,42 @@ describe Auth0::Api::AuthenticationEndpoints do
     @instance = dummy_instance
   end
 
-  context '.client_credentials' do
-    it { expect(@instance).to respond_to(:client_credentials) }
+  context '.token_with_client_credentials' do
+    it { expect(@instance).to respond_to(:token_with_client_credentials) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials',
-                              audience: nil
+                        audience: nil
       )
-        .and_return('access_token' => 'AccessToken')
+        .and_return('access_token': 'eyJ0eXAiOiJKV1', 'expires_in': 86_400, 'token_type': 'Bearer')
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials',
-                              audience: nil
+                        audience: nil
       )
-      expect(@instance.client_credentials).to eql 'AccessToken'
+      expect(@instance.token_with_client_credentials).to include(:access_token, :expires_in, :token_type)
     end
   end
 
-  context '.obtain_access_token social' do
-    it { expect(@instance).to respond_to(:obtain_access_token) }
-    it "is expected to make post request to '/oauth/access_token'" do
-      allow(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
-                               scope: 'openid'
-      )
-        .and_return('access_token' => 'AccessToken')
-      expect(@instance).to receive(:post).with(
-        '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
-                               scope: 'openid'
-      )
-      expect(@instance.obtain_access_token('access_token', 'facebook', 'openid')).to eql 'AccessToken'
-    end
-  end
-
-  context '.obtain_user_tokens' do
-    it { expect(@instance).to respond_to(:obtain_user_tokens) }
+  context '.user_tokens_from_code' do
+    it { expect(@instance).to respond_to(:user_tokens_from_code) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
-                        code: 'code', scope: 'openid', redirect_uri: 'uri'
+                        code: 'code', redirect_uri: 'uri'
       )
         .and_return('user_tokens' => 'UserToken')
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
-                        code: 'code', scope: 'openid', redirect_uri: 'uri'
+                        code: 'code', redirect_uri: 'uri'
       )
-      expect(@instance.obtain_user_tokens('code', 'uri')['user_tokens']).to eq 'UserToken'
+      expect(@instance.user_tokens_from_code('code', 'uri')['user_tokens']).to eq 'UserToken'
     end
-    it { expect { @instance.obtain_user_tokens('', '') }.to raise_error 'Must supply a valid code' }
-    it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
+    it { expect { @instance.user_tokens_from_code('', '') }.to raise_error 'Must supply a valid code' }
+    it { expect { @instance.user_tokens_from_code('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
 
-  context '.obtain_user_tokens_ro' do
-    it { expect(@instance).to respond_to(:obtain_user_tokens_ro) }
+  context '.login_with_default_directory' do
+    it { expect(@instance).to respond_to(:login_with_default_directory) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
         '/oauth/token', grant_type: 'password', username: 'username', password: 'pwd', audience: nil,
@@ -69,10 +53,42 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/token', grant_type: 'password', username: 'username', password: 'pwd', audience: nil,
                         client_id: @instance.client_id, client_secret: nil, scope: 'openid'
       )
-      expect(@instance.obtain_user_tokens_ro('username', 'pwd')['user_tokens']).to eq 'UserToken'
+      expect(@instance.login_with_default_directory('username', 'pwd')['user_tokens']).to eq 'UserToken'
     end
-    it { expect { @instance.obtain_user_tokens_ro('', '') }.to raise_error 'Must supply a valid username' }
-    it { expect { @instance.obtain_user_tokens_ro('usr', '') }.to raise_error 'Must supply a valid password' }
+    it { expect { @instance.login_with_default_directory('', '') }.to raise_error 'Must supply a valid username' }
+    it { expect { @instance.login_with_default_directory('usr', '') }.to raise_error 'Must supply a valid password' }
+  end
+
+  context '.login_with_default_directory_realm' do
+    it { expect(@instance).to respond_to(:login_with_default_directory_realm) }
+    it "is expected to make post request to '/oauth/token'" do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token', grant_type: 'http://auth0.com/oauth/grant-type/password-realm',
+                        username: 'username',
+                        password: 'pwd',
+                        audience: nil,
+                        client_id: @instance.client_id,
+                        client_secret: nil,
+                        scope: 'openid',
+                        realm: nil
+      )
+        .and_return('user_tokens' => 'UserToken')
+      expect(@instance).to receive(:post).with(
+        '/oauth/token', grant_type: 'http://auth0.com/oauth/grant-type/password-realm',
+                        username: 'username',
+                        password: 'pwd',
+                        audience: nil,
+                        client_id: @instance.client_id,
+                        client_secret: nil,
+                        scope: 'openid',
+                        realm: nil
+      )
+      expect(@instance.login_with_default_directory_realm('username', 'pwd')['user_tokens']).to eq 'UserToken'
+    end
+    it { expect { @instance.login_with_default_directory_realm('', '') }.to raise_error 'Must supply a valid username' }
+    it do
+      expect { @instance.login_with_default_directory_realm('usr', '') }.to raise_error 'Must supply a valid password'
+    end
   end
 
   context '.refresh_token' do
@@ -204,41 +220,33 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:audience) { 'http://api-url.com' }
     it { expect(@instance).to respond_to(:authorization_url) }
     it 'is expected to return an authorization url' do
-      expect(@instance.authorization_url(audience, redirect_uri).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, audience).to_s).to eq(
         "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&"\
         "response_type=code&redirect_uri=#{redirect_uri}"
       )
     end
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(audience, redirect_uri, additional_parameters).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, audience, additional_parameters).to_s).to eq(
         "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&"\
         "response_type=code&redirect_uri=#{redirect_uri}&aparam1=test1"
       )
     end
     let(:state) { { state: 'state1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(audience, redirect_uri, state).to_s).to eq(
+      expect(@instance.authorization_url(redirect_uri, audience, state).to_s).to eq(
         "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&"\
         "response_type=code&redirect_uri=#{redirect_uri}&state=state1"
       )
     end
     let(:connection) { { connection: 'connection-1' } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(audience, redirect_uri, connection).to_s).to eq(
-        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&response_type=code&"\
-        "connection=connection-1&redirect_uri=#{redirect_uri}"
+      expect(@instance.authorization_url(redirect_uri, audience, connection).to_s).to eq(
+        "https://#{@instance.domain}/authorize?audience=#{audience}&client_id=#{@instance.client_id}&"\
+        "response_type=code&connection=connection-1&redirect_uri=#{redirect_uri}"
       )
     end
     it { expect { @instance.authorization_url('', '') }.not_to raise_error 'Must supply a valid redirect_uri' }
-  end
-  context '.token_info' do
-    it { expect(@instance).to respond_to(:token_info) }
-    it 'is expected to make post to /tokeinfo' do
-      expect(@instance).to receive(:post).with('/tokeninfo', id_token: 'SomerandomToken')
-      @instance.token_info('SomerandomToken')
-    end
-    it { expect { @instance.token_info('') }.to raise_error 'Must supply a valid id_token' }
   end
 
   context '.refresh_delegation' do
@@ -295,33 +303,6 @@ describe Auth0::Api::AuthenticationEndpoints do
       )
     end
     it { expect { @instance.delegation('', nil, nil, nil) }.to raise_error 'Must supply a valid id_token' }
-  end
-
-  context '.impersonate' do
-    let(:user_id) { 'some_user_id' }
-    let(:impersonator_id) { 'some_other_user_id' }
-    let(:app_client_id) { 'app_client_id' }
-    it { expect(@instance).to respond_to(:impersonate) }
-    it do
-      expect { @instance.impersonate(user_id, app_client_id, impersonator_id, {}) }.to raise_error(
-        'Must supply client_secret'
-      )
-    end
-    it do
-      expect { @instance.impersonate('', app_client_id, impersonator_id, {}) }.to raise_error(
-        'Must supply a valid user_id'
-      )
-    end
-    it do
-      expect { @instance.impersonate(user_id, app_client_id, '', {}) }.to raise_error(
-        'Must supply a valid impersonator_id'
-      )
-    end
-    it do
-      expect { @instance.impersonate(user_id, '', impersonator_id, {}) }.to raise_error(
-        'Must supply a valid app_client_id'
-      )
-    end
   end
 
   context '.unlink_user' do

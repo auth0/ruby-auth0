@@ -7,43 +7,28 @@ module Auth0
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
-      # Given the social provider's access_token and the connection, this endpoint will authenticate the user
-      # with the provider and return a JSON with the access_token and, optionally, an id_token
-      # @see https://auth0.com/docs/api/authentication#social-with-provider-s-access-token
-      # @param access_token [string] Social provider's access_token
-      # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
-      # @param scope [string] Use openid to get an id_token, or openid profile email to include user information
-      #   in the id_token. If null, only an access_token will be returned.
-      # @return [json] Returns the access token
-      def obtain_access_token(access_token, connection = 'facebook', scope = 'openid')
-        raise Auth0::InvalidParameter, 'Must supply a valid code' if access_token.to_s.empty?
-        request_params = { client_id: @client_id, access_token: access_token, connection: connection, scope: scope }
-        post('/oauth/access_token', request_params)['access_token']
-      end
-
       # This is the OAuth 2.0 grant that server processes utilize in order to access an API.
       # Use this endpoint to directly request an access_token by using the Client Credentials
       # @see https://auth0.com/docs/api/authentication#client-credentials
       # @param audience [string] The unique identifier of the target API you want to access.
       # @return [json] Returns the access token
-      def client_credentials(audience = nil)
+      def token_with_client_credentials(audience = nil)
         request_params = {
           client_id:     @client_id,
           client_secret: @client_secret,
           grant_type:    'client_credentials',
           audience:      audience
         }
-        post('/oauth/token', request_params)['access_token']
+        post('/oauth/token', request_params)
       end
 
       # Gets the user tokens using the code obtained through passive authentication in the specified connection
       # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
-      # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
       # @param redirect_uri [string] Url to redirect after authorization
       # @param code [string] The access code obtained through passive authentication
       # @return [json] Returns the access_token and id_token
-      def obtain_user_tokens(code, redirect_uri, scope = 'openid')
+      def user_tokens_from_code(code, redirect_uri)
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
         request_params = {
@@ -51,7 +36,6 @@ module Auth0
           client_secret: @client_secret,
           grant_type:    'authorization_code',
           code:          code,
-          scope:         scope,
           redirect_uri:  redirect_uri
         }
         post('/oauth/token', request_params)
@@ -59,15 +43,12 @@ module Auth0
 
       # This is the OAuth 2.0 grant that highly trusted apps utilize in order to access an API
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
-      # @param grant_type [string] Denotes the flow you are using. For Resource Owner Password use password.
-      #   To add realm support use http://auth0.com/oauth/grant-type/password-realm.
       # @param username [string] Resource Owner's identifier.
       # @param password [string] Resource Owner's secret.
       # @param audience [string] API Identifier that the client is requesting access to.
       # @param scope [string] String value of the different scopes the client is asking for.
-      #   Multiple scopes are separated with whitespace.
       # @return [json] Returns the access_token and id_token
-      def obtain_user_tokens_ro(username, password, audience = nil, scope = 'openid')
+      def login_with_default_directory(username, password, audience = nil, scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
         request_params = {
@@ -78,6 +59,30 @@ module Auth0
           client_id:     @client_id,
           client_secret: @client_secret,
           scope:         scope
+        }
+        post('/oauth/token', request_params)
+      end
+
+      # This is the OAuth 2.0 grant that highly trusted apps utilize in order to access an API
+      # @see https://auth0.com/docs/api/authentication#resource-owner-password
+      # @param username [string] Resource Owner's identifier.
+      # @param password [string] Resource Owner's secret.
+      # @param audience [string] API Identifier that the client is requesting access to.
+      # @param realm [string] The realm the user belongs to. This maps to a connection in Auth0.
+      # @param scope [string] String value of the different scopes the client is asking for.
+      # @return [json] Returns the access_token and id_token
+      def login_with_default_directory_realm(username, password, audience = nil, realm = nil, scope = 'openid')
+        raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
+        request_params = {
+          grant_type:    'http://auth0.com/oauth/grant-type/password-realm',
+          username:      username,
+          password:      password,
+          audience:      audience,
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          scope:         scope,
+          realm:         realm
         }
         post('/oauth/token', request_params)
       end
@@ -222,17 +227,6 @@ module Auth0
         get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
       end
 
-      # @deprecated use {#patch_client}
-      # Validates a JSON Web Token (signature and expiration)
-      # @see https://auth0.com/docs/auth-api#!#post--tokeninfo
-      # @param id_token [string] Token's id.
-      # @return User information associated with the user id (sub property) of the token.
-      def token_info(id_token)
-        raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
-        request_params = { id_token: id_token }
-        post('/tokeninfo', request_params)
-      end
-
       # Refreshes a delegation token
       # @see https://auth0.com/docs/auth-api#!#post--delegation
       # @param refresh_token [string] Token to refresh
@@ -277,36 +271,6 @@ module Auth0
         post('/delegation', request_params)
       end
 
-      # Retrives an impersonation URL to login as another user
-      # @see https://auth0.com/docs/auth-api#!#post--users--user_id--impersonate
-      # @param user_id [string] Impersonate user id
-      # @param app_client_id [string] Application client id
-      # @param impersonator_id [string] Impersonator user id id.
-      # @param options [string] Additional Parameters
-      # @return [string] Impersonation URL
-      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      def impersonate(user_id, app_client_id, impersonator_id, options)
-        raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
-        raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
-        authorization_header client_credentials
-        request_params = {
-          protocol:         options.fetch(:protocol, 'oauth2'),
-          impersonator_id:  impersonator_id,
-          client_id:        app_client_id,
-          additionalParameters: {
-            response_type:  options.fetch(:response_type, 'code'),
-            state:          options.fetch(:state, ''),
-            scope:          options.fetch(:scope, 'openid'),
-            callback_url:   options.fetch(:callback_url, '')
-          }
-        }
-        result = post("/users/#{user_id}/impersonate", request_params)
-        authorization_header @token
-        result
-      end
-
       # Unlinks a User
       # @see https://auth0.com/docs/auth-api#!#post--unlink
       # @param access_token [string] Logged-in user access token
@@ -330,11 +294,11 @@ module Auth0
 
       # Returns an authorization URL, triggers a redirect.
       # @see https://auth0.com/docs/auth-api#!#get--authorize_social
-      # @param audience [string] The unique identifier of the target API you want to access.
       # @param redirect_uri [string] Url to redirect after authorization
+      # @param audience [string] The unique identifier of the target API you want to access.
       # @param options [hash] Can contain response_type, connection, state and additional_parameters.
       # @return [url] Authorization URL.
-      def authorization_url(audience, redirect_uri, options = {})
+      def authorization_url(redirect_uri, audience = nil, options = {})
         request_params = {
           audience: audience,
           client_id: @client_id,
