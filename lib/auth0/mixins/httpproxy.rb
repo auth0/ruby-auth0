@@ -52,7 +52,7 @@ module Auth0
         when RestClient::RequestTimeout
           raise Auth0::RequestTimeout
         else
-          raise e
+          return e.response
         end
       end
     end
