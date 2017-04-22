@@ -6,7 +6,7 @@ class DummyClass
     @client_id = 'NyW50o8Qt8I1VhMVlTlfVwWLGzBIPuxb'
   end
 
-  %i(get post put patch delete).each do |method|
+  [:get, :post, :put, :patch, :delete].each do |method|
     define_method(method) do |_path, _body = {}|
       true
     end

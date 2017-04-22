@@ -9,7 +9,7 @@ describe Auth0::Mixins::HTTPProxy do
     @exception = DummyClassForRestClient.new
   end
 
-  %i(get delete).each do |http_method|
+  [:get, :delete].each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP" do
@@ -113,7 +113,7 @@ describe Auth0::Mixins::HTTPProxy do
     end
   end
 
-  %i(post put patch).each do |http_method|
+  [:post, :put, :patch].each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP" do
