@@ -57,16 +57,17 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
         request_params = {
-          client_id:  @client_id,
-          username:   username,
-          password:   password,
-          scope:      options.fetch(:scope, 'openid'),
-          connection: connection_name,
-          grant_type: options.fetch(:grant_type, password),
-          id_token:   id_token,
-          device:     options.fetch(:device, nil)
+          client_id:     @client_id,
+          client_secret: @client_secret,
+          username:      username,
+          password:      password,
+          scope:         options.fetch(:scope, 'openid'),
+          connection:    connection_name,
+          grant_type:    options.fetch(:grant_type, password),
+          id_token:      id_token,
+          device:        options.fetch(:device, nil)
         }
-        post('/oauth/ro', request_params)
+        post('/oauth/token', request_params)
       end
 
       # Signup using username/password

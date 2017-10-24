@@ -3,7 +3,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   attr_reader :client, :impersonate_user, :impersonator_user, :global_client, :password
 
   before(:all) do
-    @client = Auth0Client.new(v2_creds)
+    @client = Auth0Client.new(Credentials.v2_creds)
     impersonate_username = Faker::Internet.user_name
     impersonate_email = "#{entity_suffix}#{Faker::Internet.safe_email(impersonate_username)}"
     @password = Faker::Internet.password
