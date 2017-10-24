@@ -1,5 +1,5 @@
 class DummyClass
-  attr_reader :domain, :client_id
+  attr_reader :domain, :client_id, :client_secret
 
   def initialize
     @domain = 'test.auth0.com'
