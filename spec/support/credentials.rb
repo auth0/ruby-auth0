@@ -1,4 +1,6 @@
 module Credentials
+  module_function
+
   def v1_creds
     { client_id: ENV['CLIENT_ID'],
       client_secret: ENV['CLIENT_SECRET'],
