@@ -40,8 +40,7 @@ describe Auth0::Api::V1::Connections do
                  options: {
                    tenant_domain: 'google.com',
                    domain_aliases: 'test.google.com,auth0.com'
-                 }
-              }
+                 } }
       expect(@instance).to receive(:post).with('/api/connections', params)
       expect do
         @instance.create_connection(
@@ -59,8 +58,7 @@ describe Auth0::Api::V1::Connections do
       params = { status: false,
                  options: {
                    tenant_domain: 'google.com'
-                 }
-              }
+                 } }
       expect(@instance).to receive(:put).with('/api/connections/TestName', params)
       expect { @instance.update_connection('TestName', 'google.com', false) }.not_to raise_error
     end

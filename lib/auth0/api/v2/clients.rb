@@ -1,39 +1,80 @@
 module Auth0
   module Api
     module V2
-      # https://auth0.com/docs/apiv2#!/clients
+      # Methods to use the client endpoints
       module Clients
-        # https://auth0.com/docs/apiv2#!/clients/get_clients
-        def clients(options = {})
-          path = '/api/v2/clients'
-          get(path, options)
-        end
-        alias_method :get_clients, :clients
+        attr_reader :clients_path
 
-        # https://auth0.com/docs/apiv2#!/clients/post_clients
+        # Retrieves a list of all client applications. Accepts a list of fields to include or exclude.
+        # @see https://auth0.com/docs/api/v2#!/clients/get_clients
+        # @param fields [string] A comma separated list of fields to include or exclude from the result.
+        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
+        #
+        # @return [json] Returns the clients applications.
+        def clients(fields: nil, include_fields: nil)
+          include_fields = true if !fields.nil? && include_fields.nil?
+          request_params = {
+            fields: fields,
+            include_fields: include_fields
+          }
+          get(clients_path, request_params)
+        end
+        alias get_clients clients
+
+        # Creates a new client application.
+        # @see https://auth0.com/docs/api/v2#!/clients/post_clients
+        # @param name [string] The name of the client. Must contain at least one character. Does not allow '<' or '>'.
+        # @param options [hash] The Hash options used to define the client's properties.
+        # @return [json] Returns the created client application.
         def create_client(name, options = {})
+          raise Auth0::MissingParameter, 'Must specify a valid client name' if name.to_s.empty?
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:name] = name
-          path = '/api/v2/clients'
-          post(path, request_params)
+          post(clients_path, request_params)
         end
 
-        # https://auth0.com/docs/apiv2#!/clients/get_clients_by_id
-        def client(client_id, options = {})
-          path = "/api/v2/clients/#{client_id}"
-          get(path, options)
+        # Retrieves a client by its id.
+        # @see https://auth0.com/docs/api/v2#!/Clients/get_clients_by_id
+        # @param client_id [string] The id of the client to retrieve.
+        # @param fields [string] A comma separated list of fields to include or exclude from the result.
+        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
+        # @return [json] Returns the requested client application.
+        def client(client_id, fields: nil, include_fields: nil)
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          include_fields = true if !fields.nil? && include_fields.nil?
+          request_params = {
+            fields: fields,
+            include_fields: include_fields
+          }
+          path = "#{clients_path}/#{client_id}"
+          get(path, request_params)
         end
 
-        # https://auth0.com/docs/apiv2#!/clients/delete_clients_by_id
+        # Deletes a client and all its related assets (like rules, connections, etc) given its id.
+        # @see https://auth0.com/docs/api/v2#!/Clients/delete_clients_by_id
+        # @param client_id [string] The id of the client to delete.
         def delete_client(client_id)
-          path = "/api/v2/clients/#{client_id}"
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          path = "#{clients_path}/#{client_id}"
           delete(path)
         end
 
-        # https://auth0.com/docs/apiv2#!/clients/patch_clients_by_id
+        # Updates a client.
+        # @see https://auth0.com/docs/api/v2#!/Clients/patch_clients_by_id
+        # @param client_id [string] The id of the client to update.
+        # @param options [hash] The Hash options used to define the client's properties.
         def patch_client(client_id, options)
-          path = "/api/v2/clients/#{client_id}"
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must specify a valid body' if options.to_s.empty?
+          path = "#{clients_path}/#{client_id}"
           patch(path, options)
+        end
+
+        private
+
+        # Clients API path
+        def clients_path
+          @clients_path ||= '/api/v2/clients'
         end
       end
     end

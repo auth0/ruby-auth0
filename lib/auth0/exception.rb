@@ -15,11 +15,15 @@ module Auth0
   class ServerError < Auth0::Exception; end
   # exception for incorrect request, you've sent wrong params
   class BadRequest < Auth0::Exception; end
+  # exception for timeouts
+  class RequestTimeout < Auth0::Exception; end
   # exception for unset user_id, this might cause removal of
-  # all users, or other unexpected bahaviour
+  # all users, or other unexpected behaviour
   class MissingUserId < Auth0::Exception; end
-  # exception for an unset connection_id
-  class MissingConnectionId < Auth0::Exception; end
+  # exception for unset client_id
+  class MissingClientId < Auth0::Exception; end
+  # exception for an unset parameter
+  class MissingParameter < Auth0::Exception; end
   # Api v2 access denied
   class AccessDenied < Auth0::Exception; end
   # Invalid parameter passed, e.g. empty where ID is required

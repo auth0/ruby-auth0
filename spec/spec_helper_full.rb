@@ -16,8 +16,8 @@ require 'faker'
 require 'auth0'
 require 'pry'
 
-Dir[('./lib/**/*.rb')].each { |f| require f }
-Dir[('./spec/support/**/*.rb')].each { |f| require f }
+Dir['./lib/**/*.rb'].each { |f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 def entity_suffix
   (ENV['TRAVIS_JOB_ID'] || 'local').delete('_')
@@ -33,7 +33,8 @@ RSpec.configure do |config|
   config.after(:suite) do
     puts "Cleaning up for #{entity_suffix}"
     v2_client = Auth0Client.new(
-      token: ENV['MASTER_JWT'], api_version: 2, domain: ENV['DOMAIN'])
+      token: ENV['MASTER_JWT'], api_version: 2, domain: ENV['DOMAIN']
+    )
     v2_client
       .clients
       .select { |client| client['name'] != 'DefaultApp' && !client['global'] && client['name'].include?(entity_suffix) }
@@ -44,4 +45,12 @@ RSpec.configure do |config|
       .each { |user| v2_client.delete_user(user['user_id']) }
     puts "Finished cleaning up for #{entity_suffix}"
   end
+end
+
+def wait(time, increment = 5, elapsed_time = 0, &block)
+  yield
+rescue RSpec::Expectations::ExpectationNotMetError => e
+  raise e if elapsed_time >= time
+  sleep increment
+  wait(time, increment, elapsed_time + increment, &block)
 end

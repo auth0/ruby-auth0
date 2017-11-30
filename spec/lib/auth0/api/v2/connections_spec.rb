@@ -15,7 +15,8 @@ describe Auth0::Api::V2::Connections do
         '/api/v2/connections',
         strategy: nil,
         fields: nil,
-        include_fields: true)
+        include_fields: true
+      )
       expect { @instance.connections }.not_to raise_error
     end
   end
@@ -27,16 +28,24 @@ describe Auth0::Api::V2::Connections do
     it 'is expected to call /api/v2/connections' do
       body = double
       expect(@instance).to receive(:post).with('/api/v2/connections', body)
-
       expect { @instance.create_connection(body) }.not_to raise_error
+    end
+
+    it 'is expected to raise an error when calling with empty body' do
+      expect(@instance).not_to receive(:post)
+      expect { @instance.create_connection(nil) }.to raise_error 'Must specify a body to create a connection'
     end
   end
 
   context '.connection' do
     it { expect(@instance).to respond_to(:connection) }
-    it 'is expected to call get request to /api/v2/connection/CONNECTION_ID' do
-      expect(@instance).to receive(:get).with('/api/v2/connections/CONNECTION_ID', fields: nil, include_fields: true)
-      expect { @instance.connection('CONNECTION_ID') }.not_to raise_error
+    it 'is expected to call get request to /api/v2/connection/connectionId' do
+      expect(@instance).to receive(:get).with('/api/v2/connections/connectionId', fields: nil, include_fields: true)
+      expect { @instance.connection('connectionId') }.not_to raise_error
+    end
+    it 'is expected raise an error when calling with empty id' do
+      expect(@instance).not_to receive(:get)
+      expect { @instance.connection(nil) }.to raise_error 'Must supply a valid connection id'
     end
   end
 
@@ -47,10 +56,27 @@ describe Auth0::Api::V2::Connections do
       @instance.delete_connection('connectionId')
     end
 
-    it 'is expected not to call delete to /api/v2/connections
-      if connection_id is blank' do
+    it 'is expected raise an error when calling with empty id' do
       expect(@instance).not_to receive(:delete)
-      expect { @instance.delete_connection('') }.to raise_exception(Auth0::MissingConnectionId)
+      expect { @instance.delete_connection(nil) }.to raise_error 'Must supply a valid connection id'
+    end
+  end
+
+  context '.delete_connection_user' do
+    it { expect(@instance).to respond_to(:delete_connection_user) }
+    it 'is expected to call delete to /api/v2/connections/connectionId/users' do
+      expect(@instance).to receive(:delete).with('/api/v2/connections/connectionId/users?email=email@test.com')
+      @instance.delete_connection_user('connectionId', 'email@test.com')
+    end
+
+    it 'is expected raise an error when calling with empty id' do
+      expect(@instance).not_to receive(:delete)
+      expect { @instance.delete_connection_user(nil, nil) }.to raise_error 'Must supply a valid connection id'
+    end
+
+    it 'is expected raise an error when calling with empty email' do
+      expect(@instance).not_to receive(:delete)
+      expect { @instance.delete_connection_user('Connection ID', nil) }.to raise_error 'Must supply a valid user email'
     end
   end
 
@@ -62,10 +88,9 @@ describe Auth0::Api::V2::Connections do
       @instance.update_connection('connectionId', body)
     end
 
-    it 'is expected not to call delete to /api/v2/connections
-      if connection_id is blank' do
+    it 'is expected raise an error when calling with empty id' do
       expect(@instance).not_to receive(:patch)
-      expect { @instance.delete_connection('') }.to raise_exception(Auth0::MissingConnectionId)
+      expect { @instance.delete_connection(nil) }.to raise_error 'Must supply a valid connection id'
     end
   end
 end

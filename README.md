@@ -4,6 +4,7 @@ Ruby api client for [Auth0](https://auth0.com) platform
 [![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
 [![Coverage Status](https://coveralls.io/repos/auth0/ruby-auth0/badge.svg?branch=master)](https://coveralls.io/r/auth0/ruby-auth0?branch=master)
 [![Dependency Status](https://gemnasium.com/auth0/ruby-auth0.svg)](https://gemnasium.com/auth0/ruby-auth0)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
 
 ## Installation
 
@@ -19,34 +20,46 @@ gem 'auth0'
 
 ## Basic usage
 
-Using [APIv1](https://auth0.com/docs/api)
+Using [APIv2](https://auth0.com/docs/api/v2)
 
 ```ruby
 require "auth0"
 
 auth0 = Auth0Client.new(
   :client_id => "YOUR CLIENT ID",
-  :client_secret => "YOUR CLIENT SECRET",
-  :domain => "<YOUR ACCOUNT>.auth0.com"
+  :token => "YOUR JWT HERE",
+  :domain => "<YOUR ACCOUNT>.auth0.com",
+  :api_version => 2
 )
 
 puts auth0.get_users
 ```
 
-Using [APIv2](https://auth0.com/docs/apiv2)
+### Timeout
+You can setup a custom timeout in the Auth0Client. By default it is set to 10 minutes.
 
 ```ruby
 require "auth0"
 
 auth0 = Auth0Client.new(
-  :api_version => 2,
+  :client_id => "YOUR CLIENT ID"
   :token => "YOUR JWT HERE",
-  :domain => "<YOUR ACCOUNT>.auth0.com"
+  :domain => "<YOUR ACCOUNT>.auth0.com",
+  :timeout => 15
 )
 
 puts auth0.get_users
 ```
 
+## API Documentation
+
+Build API docs locally
+
+``` bash
+bundle exec rake documentation
+```
+
+To view API docs, go to `doc` folder and open `index.html`
 
 ## What is Auth0?
 

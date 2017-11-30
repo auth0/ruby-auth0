@@ -1,11 +1,18 @@
+---
 language: ruby
-
 sudo: false
-
 cache: bundler
-
 rvm:
-  - 2.1.0
-  - 2.2.1
-
-script: ./build_travis.sh
+  - 2.1.9
+  - 2.2.5
+  - 2.3.1
+script: "./build_travis.sh"
+after_success: "./deploy_documentation.sh"
+deploy:
+  provider: rubygems
+  api_key: ${RUBYGEMS_API_KEY}
+  gemspec: auth0.gemspec
+  on:
+    tags: true
+    repo: auth0/ruby-auth0
+    branch: master
