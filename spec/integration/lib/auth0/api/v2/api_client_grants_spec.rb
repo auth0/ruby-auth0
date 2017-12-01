@@ -4,8 +4,8 @@ describe Auth0::Api::V2::ClientGrants do
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    @client_id = Faker::Lorem.word
-    @audience = Faker::Internet.url
+    @client_id = v2_creds[:client_id]
+    @audience = "https://#{client.clients[0]['tenant']}.auth0.com/api/v2/"
     @scope = [Faker::Lorem.word]
     @existing_grant = client.create_client_grant('client_id' => client_id, 'audience' => audience, 'scope' => scope)
   end
@@ -22,17 +22,6 @@ describe Auth0::Api::V2::ClientGrants do
 
     it { expect(client_grants.size).to be > 0 }
     it { expect(client_grants).to include(existing_grant) }
-  end
-
-  describe '.create_client_grant' do
-    let(:new_client) { Faker::Lorem.word }
-
-    it do
-      expect(
-        client.create_client_grant('client_id' => new_client, 'audience' => audience,
-                                   'scope' => scope)
-      ).to(include('client_id' => new_client, 'audience' => audience, 'scope' => scope))
-    end
   end
 
   describe '.patch_client_grant' do
