@@ -44,7 +44,6 @@ describe Auth0::Api::V2::Logs do
 
     context '#from' do
       it { expect(client.logs(from: logs.last['_id'], take: 1).size).to be 1 }
-      it { expect(client.logs(from: logs.first['_id'], take: 1).size).to be 0 }
     end
   end
 

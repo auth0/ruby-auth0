@@ -37,6 +37,7 @@ describe Auth0::Api::V2::ResourceServers do
       expect(resource_server).to include('name' => name, 'identifier' => identifier, 'signing_alg' => signing_alg,
                                          'signing_secret' => signing_secret,
                                          'token_lifetime' => token_lifetime)
+      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
     end
     it { expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error }
   end
