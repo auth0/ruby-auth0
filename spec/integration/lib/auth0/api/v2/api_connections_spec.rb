@@ -17,13 +17,26 @@ describe Auth0::Api::V2::Connections do
   describe '.connections' do
     let(:connections) { client.connections }
 
-    it { expect(connections.size).to be > 0 }
-    it { expect(connections.find { |con| con['name'] == name }).to_not be_empty }
+    it do
+      sleep 1
+      expect(connections.size).to be > 0
+    end
+    it do
+      sleep 1
+      expect(connections.find { |con| con['name'] == name }).to_not be_empty
+    end
 
     context '#filters' do
-      it { expect(client.connections(strategy: strategy).size).to be > 0 }
-      it { expect(client.connections(strategy: strategy, fields: [:name].join(',')).first).to include('name') }
       it do
+        sleep 1
+        expect(client.connections(strategy: strategy).size).to be > 0
+      end
+      it do
+        sleep 1
+        expect(client.connections(strategy: strategy, fields: [:name].join(',')).first).to include('name')
+      end
+      it do
+        sleep 1
         expect(client.connections(strategy: strategy, fields: [:name].join(','), include_fields: false).first).to_not(
           include('name')
         )
@@ -32,13 +45,20 @@ describe Auth0::Api::V2::Connections do
   end
 
   describe '.connection' do
-    let(:subject) { client.connection(connection['id']) }
+    let(:subject) do
+      sleep 1
+      client.connection(connection['id'])
+    end
 
     it { should include('name' => connection['name']) }
 
     context '#filters' do
-      it { expect(client.connection(connection['id'], fields: [:name, :id].join(','))).to include('id', 'name') }
       it do
+        sleep 1
+        expect(client.connection(connection['id'], fields: [:name, :id].join(','))).to include('id', 'name')
+      end
+      it do
+        sleep 1
         expect(client.connection(connection['id'], fields: [:name, :id].join(','), include_fields: false)).to_not(
           include('id', 'name')
         )
@@ -54,7 +74,10 @@ describe Auth0::Api::V2::Connections do
   end
 
   describe '.delete_connection' do
-    it { expect { client.delete_connection connection['id'] }.to_not raise_error }
+    it do
+      sleep 1
+      expect { client.delete_connection connection['id'] }.to_not raise_error
+    end
   end
 
   describe '.update_connection' do
@@ -67,6 +90,7 @@ describe Auth0::Api::V2::Connections do
     new_name = SecureRandom.uuid[0..25]
     let(:options) { { username: new_name } }
     it do
+      sleep 1
       expect(client.update_connection(connection_to_update['id'], 'options' => options)['options']).to include(
         'username' => new_name
       )
@@ -78,6 +102,7 @@ describe Auth0::Api::V2::Connections do
     let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
     let(:password) { Faker::Internet.password }
     let!(:user_to_delete) do
+      sleep 1
       client.create_user(username,  email: email,
                                     password: password,
                                     email_verified: false,
@@ -85,10 +110,14 @@ describe Auth0::Api::V2::Connections do
                                     app_metadata: {})
     end
     let(:connection) do
+      sleep 1
       client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }
     end
 
-    it { expect(client.delete_connection_user(connection['id'], email)).to be_empty }
+    it do
+      sleep 1
+      expect(client.delete_connection_user(connection['id'], email)).to be_empty
+    end
   end
 
   after(:all) do

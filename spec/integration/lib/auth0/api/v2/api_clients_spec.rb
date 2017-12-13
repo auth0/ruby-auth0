@@ -1,38 +1,58 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Clients do
   let(:client) { Auth0Client.new(v2_creds) }
-  let(:existing_client) { client.create_client("existing#{entity_suffix}") }
+  let(:existing_client) do
+    sleep 1
+    client.create_client("existing#{entity_suffix}")
+  end
   let(:client_name) { "ClientV2#{entity_suffix}" }
 
-  it { expect(client.clients).to_not be_empty }
+  it do
+    sleep 1
+    expect(client.clients).to_not be_empty
+  end
 
   describe '.clients' do
-    let(:clients) { client.clients }
+    let(:clients) do
+      sleep 1
+      client.clients
+    end
 
     it { expect(clients.size).to be > 0 }
 
     context '#filters' do
       it do
+        sleep 1
         expect(client.clients(fields: [:name, :callbacks].join(',')).first).to(include('name', 'callbacks'))
       end
       it do
+        sleep 1
         expect(client.clients(fields: [:callbacks].join(',')).first).to_not(include('name'))
       end
       it do
+        sleep 1
         expect(client.clients(fields: [:callbacks].join(','), include_fields: false).first).to_not(include('callbacks'))
       end
     end
   end
 
   describe '.client' do
-    it { expect(client.client(existing_client['client_id'])).to include('client_id' => existing_client['client_id']) }
-    it { expect { client.client '' }.to raise_error(Auth0::MissingClientId) }
+    it do
+      sleep 1
+      expect(client.client(existing_client['client_id'])).to include('client_id' => existing_client['client_id'])
+    end
+    it do
+      sleep 1
+      expect { client.client '' }.to raise_error(Auth0::MissingClientId)
+    end
 
     context '#filters' do
       let(:client_include) do
+        sleep 1
         client.client(existing_client['client_id'], fields: [:name, :client_secret, :jwt_configuration].join(','))
       end
       let(:client_not_include) do
+        sleep 1
         client.client(existing_client['client_id'], fields: :jwt_configuration, include_fields: false)
       end
 
@@ -49,6 +69,7 @@ describe Auth0::Api::V2::Clients do
 
   describe '.create_client' do
     it do
+      sleep 1
       expect(client.create_client(client_name, custom_login_page_on: false)).to(
         include('name' => client_name, 'custom_login_page_on' => false)
       )
@@ -58,6 +79,7 @@ describe Auth0::Api::V2::Clients do
 
   describe '.patch_client' do
     it do
+      sleep 1
       expect(
         client.patch_client(
           existing_client['client_id'],
@@ -66,11 +88,20 @@ describe Auth0::Api::V2::Clients do
         )
       ).to(include('custom_login_page_on' => false, 'sso' => true))
     end
-    it { expect { client.patch_client('', custom_login_page_on: false) }.to raise_error(Auth0::MissingClientId) }
+    it do
+      sleep 1
+      expect { client.patch_client('', custom_login_page_on: false) }.to raise_error(Auth0::MissingClientId)
+    end
   end
 
   describe '.delete_rule' do
-    it { expect { client.delete_client(existing_client['client_id']) }.to_not raise_error }
-    it { expect { client.delete_client '' }.to raise_error(Auth0::MissingClientId) }
+    it do
+      sleep 1
+      expect { client.delete_client(existing_client['client_id']) }.to_not raise_error
+    end
+    it do
+      sleep 1
+      expect { client.delete_client '' }.to raise_error(Auth0::MissingClientId)
+    end
   end
 end
