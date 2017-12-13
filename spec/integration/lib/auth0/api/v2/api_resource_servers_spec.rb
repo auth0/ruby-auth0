@@ -5,15 +5,18 @@ describe Auth0::Api::V2::ResourceServers do
   before(:all) do
     @client = Auth0Client.new(v2_creds)
     identifier = SecureRandom.uuid
+    sleep 1
     @resource_server = client.create_resource_server(identifier)
   end
 
   after(:all) do
+    sleep 1
     client.delete_resource_server(resource_server['id'])
   end
 
   describe '.resource_server' do
     it do
+      sleep 1
       expect(client.resource_server(resource_server['id'])).to(
         include('identifier' => resource_server['identifier'], 'id' => resource_server['id'],
                 'signing_alg' => resource_server['signing_alg'],
@@ -29,6 +32,7 @@ describe Auth0::Api::V2::ResourceServers do
     let(:signing_secret) { Faker::Lorem.characters(16) }
     let(:token_lifetime) { rand(1000..3000) }
     let!(:resource_server) do
+      sleep 1
       client.create_resource_server(identifier, 'name' => name, 'signing_alg' => signing_alg,
                                                 'signing_secret' => signing_secret,
                                                 'token_lifetime' => token_lifetime)
@@ -37,12 +41,19 @@ describe Auth0::Api::V2::ResourceServers do
       expect(resource_server).to include('name' => name, 'identifier' => identifier, 'signing_alg' => signing_alg,
                                          'signing_secret' => signing_secret,
                                          'token_lifetime' => token_lifetime)
+      sleep 1
       expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
     end
-    it { expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error }
+    it do
+      sleep 1
+      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
+    end
   end
 
   describe '.delete_resource_server' do
-    it { expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error }
+    it do
+      sleep 1
+      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
+    end
   end
 end

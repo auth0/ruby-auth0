@@ -8,6 +8,7 @@ describe Auth0::Api::V2::DeviceCredentials do
     username = Faker::Internet.user_name
     email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
     password = Faker::Internet.password
+    sleep 1
     @user = client.create_user(username,  'email' => email,
                                           'password' => password,
                                           'email_verified' => true,
@@ -20,6 +21,7 @@ describe Auth0::Api::V2::DeviceCredentials do
                     authorization: 'Basic' }
 
     @basic_client = Auth0Client.new(v2_creds.merge(basic_creds))
+    sleep 1
     @existing_device_credentials = basic_client.create_device_credential(
       "#{user['name']}_phone_1",
       'dmFsdWU=',
@@ -29,16 +31,24 @@ describe Auth0::Api::V2::DeviceCredentials do
   end
 
   after(:all) do
+    sleep 1
     client.delete_user(user['user_id'])
   end
 
   describe '.device_credentials' do
     let(:device_credentials) { basic_client.device_credentials(ENV['CLIENT_ID']) }
-    it { expect(device_credentials.size).to be > 0 }
-    it { expect(device_credentials.find { |cred| cred['id'] == existing_device_credentials['id'] }).to_not be_empty }
+    it do
+      sleep 1
+      expect(device_credentials.size).to be > 0
+    end
+    it do
+      sleep 1
+      expect(device_credentials.find { |cred| cred['id'] == existing_device_credentials['id'] }).to_not be_empty
+    end
     context '#filter_by_type' do
       let(:filtered_device_credentials) { basic_client.device_credentials(ENV['CLIENT_ID'], type: 'refresh_token') }
       it do
+        sleep 1
         expect(filtered_device_credentials.find do |cred|
                  cred['id'] == existing_device_credentials['id']
                end).to eq nil
@@ -56,12 +66,16 @@ describe Auth0::Api::V2::DeviceCredentials do
       )
     end
     it do
+      sleep 1
       expect(basic_client.device_credentials(ENV['CLIENT_ID'])
         .find { |cred| cred['id'] == new_credentials['id'] }).to_not be_empty
     end
   end
 
   describe '.delete_device_credential' do
-    it { expect { basic_client.delete_device_credential(existing_device_credentials['id']) }.to_not raise_error }
+    it do
+      sleep 1
+      expect { basic_client.delete_device_credential(existing_device_credentials['id']) }.to_not raise_error
+    end
   end
 end

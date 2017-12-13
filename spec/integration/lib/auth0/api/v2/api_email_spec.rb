@@ -3,6 +3,7 @@ describe Auth0::Api::V2::Emails do
   before(:all) do
     client = Auth0Client.new(v2_creds)
     begin
+      sleep 1
       client.delete_provider
     rescue
       puts 'no email provider to delete'
@@ -22,7 +23,10 @@ describe Auth0::Api::V2::Emails do
   end
 
   describe '.configure_provider' do
-    let!(:email_provider) { client.configure_provider(body) }
+    let!(:email_provider) do
+      sleep 1
+      client.configure_provider(body)
+    end
     it do
       expect(email_provider).to include(
         'name' => name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => settings
@@ -31,12 +35,18 @@ describe Auth0::Api::V2::Emails do
   end
 
   describe '.get_provider' do
-    let(:provider) { client.get_provider }
+    let(:provider) do
+      sleep 1
+      client.get_provider
+    end
 
-    it { expect(provider.size).to be > 0 }
+    it do
+      expect(provider.size).to be > 0
+    end
 
     context '#filters' do
       it do
+        sleep 1
         expect(
           client.get_provider(fields: [:name, :enabled, :credentials].join(','), include_fields: true)
         ).to(
@@ -44,6 +54,7 @@ describe Auth0::Api::V2::Emails do
         )
       end
       it do
+        sleep 1
         expect(
           client.get_provider(fields: [:enabled].join(','), include_fields: false).first
         ).to_not(include('enabled'))
@@ -61,6 +72,7 @@ describe Auth0::Api::V2::Emails do
         'settings' => update_settings }
     end
     it do
+      sleep 1
       expect(
         client.update_provider(update_body)
       ).to(
@@ -72,7 +84,13 @@ describe Auth0::Api::V2::Emails do
   end
 
   describe '.delete_provider' do
-    it { expect { client.delete_provider }.to_not raise_error }
-    it { expect { client.get_provider }.to raise_error(Auth0::NotFound) }
+    it do
+      sleep 1
+      expect { client.delete_provider }.to_not raise_error
+    end
+    it do
+      sleep 1
+      expect { client.get_provider }.to raise_error(Auth0::NotFound)
+    end
   end
 end

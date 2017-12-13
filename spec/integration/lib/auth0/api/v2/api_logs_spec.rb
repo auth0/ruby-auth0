@@ -8,6 +8,7 @@ describe Auth0::Api::V2::Logs do
     username = Faker::Internet.user_name
     email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
     password = Faker::Internet.password
+    sleep 1
     @user = client.create_user(username,  'email' => email,
                                           'password' => password,
                                           'email_verified' => false,
@@ -16,11 +17,15 @@ describe Auth0::Api::V2::Logs do
   end
 
   after(:all) do
+    sleep 1
     client.delete_user(user['user_id'])
   end
 
   describe '.logs' do
-    let(:logs) { client.logs }
+    let(:logs) do
+      sleep 1
+      client.logs
+    end
     it 'is expected to get a log about user creation' do
       wait 30 do
         expect(find_create_user_log_by_email(user['email'])).to_not be_empty
@@ -28,14 +33,19 @@ describe Auth0::Api::V2::Logs do
     end
 
     context '#filters' do
-      it { expect(client.logs(per_page: 1).size).to be 1 }
       it do
+        sleep 1
+        expect(client.logs(per_page: 1).size).to be 1
+      end
+      it do
+        sleep 1
         expect(
           client.logs(per_page: 1, fields: [:date, :description, :type].join(','), include_fields: true).first
         ).to(include('date', 'description', 'type'))
       end
       it { expect(client.logs(per_page: 1, fields: [:date].join(',')).first).to_not include('type', 'description') }
       it do
+        sleep 1
         expect(
           client.logs(per_page: 1, fields: [:date].join(','), include_fields: false).first
         ).to include('type', 'description')
@@ -43,13 +53,22 @@ describe Auth0::Api::V2::Logs do
     end
 
     context '#from' do
-      it { expect(client.logs(from: logs.last['_id'], take: 1).size).to be 1 }
+      it do
+        sleep 1
+        expect(client.logs(from: logs.last['_id'], take: 1).size).to be 1
+      end
     end
   end
 
   describe '.log' do
-    let(:first_log) { client.logs.first }
-    let(:log) { client.log(first_log['_id']) }
+    let(:first_log) do
+      sleep 1
+      client.logs.first
+    end
+    let(:log) do
+      sleep 1
+      client.log(first_log['_id'])
+    end
     it { expect(log).to_not be_empty }
     it { expect(log['_id']).to eq(first_log['_id']) }
     it { expect(log['date']).to eq(first_log['date']) }
@@ -58,6 +77,7 @@ describe Auth0::Api::V2::Logs do
   private
 
   def find_create_user_log_by_email(email)
+    sleep 1
     logs = client.logs
     logs.find do |log|
       log['description'] == 'Create a user' &&
