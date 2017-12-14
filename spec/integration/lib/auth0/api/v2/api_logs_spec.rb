@@ -43,7 +43,10 @@ describe Auth0::Api::V2::Logs do
           client.logs(per_page: 1, fields: [:date, :description, :type].join(','), include_fields: true).first
         ).to(include('date', 'description', 'type'))
       end
-      it { expect(client.logs(per_page: 1, fields: [:date].join(',')).first).to_not include('type', 'description') }
+      it do
+        sleep 1
+        expect(client.logs(per_page: 1, fields: [:date].join(',')).first).to_not include('type', 'description')
+      end
       it do
         sleep 1
         expect(
@@ -69,9 +72,18 @@ describe Auth0::Api::V2::Logs do
       sleep 1
       client.log(first_log['_id'])
     end
-    it { expect(log).to_not be_empty }
-    it { expect(log['_id']).to eq(first_log['_id']) }
-    it { expect(log['date']).to eq(first_log['date']) }
+    it do
+      sleep 1
+      expect(log).to_not be_empty
+    end
+    it do
+      sleep 1
+      expect(log['_id']).to eq(first_log['_id'])
+    end
+    it do
+      sleep 1
+      expect(log['date']).to eq(first_log['date'])
+    end
   end
 
   private

@@ -15,7 +15,10 @@ describe Auth0::Api::V2::Connections do
   end
 
   describe '.connections' do
-    let(:connections) { client.connections }
+    let(:connections) do
+      sleep 1
+      client.connections
+    end
 
     it do
       sleep 1
@@ -50,7 +53,10 @@ describe Auth0::Api::V2::Connections do
       client.connection(connection['id'])
     end
 
-    it { should include('name' => connection['name']) }
+    it do
+      sleep 1
+      should include('name' => connection['name'])
+    end
 
     context '#filters' do
       it do
@@ -69,8 +75,14 @@ describe Auth0::Api::V2::Connections do
   describe '.create_connection' do
     let(:subject) { connection }
 
-    it { should include('id', 'name') }
-    it { should include('name' => connection['name']) }
+    it do
+      sleep 1
+      should include('id', 'name')
+    end
+    it do
+      sleep 1
+      should include('name' => connection['name'])
+    end
   end
 
   describe '.delete_connection' do
@@ -82,6 +94,7 @@ describe Auth0::Api::V2::Connections do
 
   describe '.update_connection' do
     let!(:connection_to_update) do
+      sleep 1
       client.create_connection(name: "#{SecureRandom.uuid[0..25]}#{entity_suffix}",
                                strategy: strategy,
                                options: options,
@@ -124,6 +137,9 @@ describe Auth0::Api::V2::Connections do
     client
       .connections
       .select { |connection| connection['name'].include?(entity_suffix) }
-      .each { |connection| client.delete_connection(connection['id']) }
+      .each { |connection|
+        sleep 1
+        client.delete_connection(connection['id'])
+      }
   end
 end

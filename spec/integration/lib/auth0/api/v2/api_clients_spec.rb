@@ -18,7 +18,10 @@ describe Auth0::Api::V2::Clients do
       client.clients
     end
 
-    it { expect(clients.size).to be > 0 }
+    it do
+      sleep 1
+      expect(clients.size).to be > 0
+    end
 
     context '#filters' do
       it do
@@ -57,10 +60,12 @@ describe Auth0::Api::V2::Clients do
       end
 
       it do
+        sleep 1
         expect(client_include).to(include('name', 'client_secret', 'jwt_configuration'))
       end
 
       it do
+        sleep 1
         expect(client_not_include).to(include('name', 'client_secret'))
         expect(client_not_include).to_not(include('jwt_configuration'))
       end

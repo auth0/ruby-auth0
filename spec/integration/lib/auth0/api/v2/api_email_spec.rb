@@ -28,6 +28,7 @@ describe Auth0::Api::V2::Emails do
       client.configure_provider(body)
     end
     it do
+      sleep 1
       expect(email_provider).to include(
         'name' => name, 'enabled' => enabled, 'credentials' => credentials, 'settings' => settings
       )
@@ -41,6 +42,7 @@ describe Auth0::Api::V2::Emails do
     end
 
     it do
+      sleep 1
       expect(provider.size).to be > 0
     end
 

@@ -27,7 +27,10 @@ describe Auth0::Api::V2::Rules do
       client.rules
     end
 
-    it { expect(rules.size).to be > 0 }
+    it do
+      sleep 1
+      expect(rules.size).to be > 0
+    end
 
     context '#filters' do
       it do
@@ -70,10 +73,12 @@ describe Auth0::Api::V2::Rules do
       end
 
       it do
+        sleep 1
         expect(rule_include).to(include('stage', 'order', 'script'))
       end
 
       it do
+        sleep 1
         expect(rule_not_include).to(include('order', 'script'))
         expect(rule_not_include).to_not(include('stage'))
       end
@@ -90,7 +95,10 @@ describe Auth0::Api::V2::Rules do
       sleep 1
       client.create_rule(name, script, order, enabled, stage)
     end
-    it { expect(rule).to include('name' => name, 'stage' => stage, 'order' => order, 'script' => script) }
+    it do
+      sleep 1
+      expect(rule).to include('name' => name, 'stage' => stage, 'order' => order, 'script' => script)
+    end
   end
 
   describe '.delete_rule' do

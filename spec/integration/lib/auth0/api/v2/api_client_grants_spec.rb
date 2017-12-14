@@ -26,8 +26,14 @@ describe Auth0::Api::V2::ClientGrants do
       client.client_grants
     end
 
-    it { expect(client_grants.size).to be > 0 }
-    it { expect(client_grants).to include(existing_grant) }
+    it do
+      sleep 1
+      expect(client_grants.size).to be > 0
+    end
+    it do
+      sleep 1
+      expect(client_grants).to include(existing_grant)
+    end
   end
 
   describe '.patch_client_grant' do

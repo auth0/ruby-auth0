@@ -38,6 +38,7 @@ describe Auth0::Api::V2::ResourceServers do
                                                 'token_lifetime' => token_lifetime)
     end
     it do
+      sleep 1
       expect(resource_server).to include('name' => name, 'identifier' => identifier, 'signing_alg' => signing_alg,
                                          'signing_secret' => signing_secret,
                                          'token_lifetime' => token_lifetime)
