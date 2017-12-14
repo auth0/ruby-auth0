@@ -19,7 +19,10 @@ describe Auth0::Api::V2::Users do
       client.users
     end
 
-    it { expect(users.size).to be > 0 }
+    it do
+      sleep 1
+      expect(users.size).to be > 0
+    end
 
     context '#filters' do
       it do
@@ -51,7 +54,10 @@ describe Auth0::Api::V2::Users do
       client.user(user['user_id'])
     end
 
-    it { should include('email' => email, 'name' => username) }
+    it do
+      sleep 1
+      should include('email' => email, 'name' => username)
+    end
     it do
       sleep 1
       expect(
@@ -82,7 +88,10 @@ describe Auth0::Api::V2::Users do
   describe '.create_user' do
     let(:subject) { user }
 
-    it { should include('user_id', 'identities') }
+    it do
+      sleep 1
+      should include('user_id', 'identities')
+    end
     it do
       sleep 1
       expect(client.patch_user(user['user_id'], 'email_verified' => true)).to include('email_verified' => true)

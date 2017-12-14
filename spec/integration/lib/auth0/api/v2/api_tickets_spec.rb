@@ -25,7 +25,10 @@ describe Auth0::Api::V2::Tickets do
       sleep 1
       client.post_email_verification(user['user_id'], result_url: 'http://myapp.com/callback')
     end
-    it { expect(email_verification).to include('ticket') }
+    it do
+      sleep 1
+      expect(email_verification).to include('ticket')
+    end
   end
 
   describe '.post_password_change' do
@@ -34,6 +37,9 @@ describe Auth0::Api::V2::Tickets do
       client.post_password_change(new_password: 'secret', user_id: user['user_id'],
                                   result_url: 'http://myapp.com/callback')
     end
-    it { expect(password_change).to include('ticket') }
+    it do
+      sleep 1
+      expect(password_change).to include('ticket')
+    end
   end
 end

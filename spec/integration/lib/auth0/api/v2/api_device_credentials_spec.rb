@@ -36,7 +36,10 @@ describe Auth0::Api::V2::DeviceCredentials do
   end
 
   describe '.device_credentials' do
-    let(:device_credentials) { basic_client.device_credentials(ENV['CLIENT_ID']) }
+    let(:device_credentials) do
+      sleep 1
+      basic_client.device_credentials(ENV['CLIENT_ID'])
+    end
     it do
       sleep 1
       expect(device_credentials.size).to be > 0
@@ -58,6 +61,7 @@ describe Auth0::Api::V2::DeviceCredentials do
 
   describe '.create_device_credential' do
     let!(:new_credentials) do
+      sleep 1
       basic_client.create_device_credential(
         "#{user['name']}_phone_2",
         'dmFsdWU=',

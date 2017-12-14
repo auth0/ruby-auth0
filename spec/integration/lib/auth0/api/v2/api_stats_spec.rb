@@ -17,6 +17,9 @@ describe Auth0::Api::V2::Stats do
       sleep 1
       client.daily_stats(from, to)
     end
-    it { expect(daily_stats.size).to be > 0 }
+    it do
+      sleep 1
+      expect(daily_stats.size).to be > 0
+    end
   end
 end
