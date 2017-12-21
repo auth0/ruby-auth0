@@ -38,11 +38,17 @@ RSpec.configure do |config|
     v2_client
       .clients
       .select { |client| client['name'] != 'DefaultApp' && !client['global'] && client['name'].include?(entity_suffix) }
-      .each { |client| v2_client.delete_client(client['client_id']) }
+      .each { |client|
+        sleep 1
+        v2_client.delete_client(client['client_id'])
+      }
     v2_client
       .users
       .select { |user| user['email'].split('@').first.include? entity_suffix }
-      .each { |user| v2_client.delete_user(user['user_id']) }
+      .each { |user|
+        sleep 1
+        v2_client.delete_user(user['user_id'])
+      }
     puts "Finished cleaning up for #{entity_suffix}"
   end
 end

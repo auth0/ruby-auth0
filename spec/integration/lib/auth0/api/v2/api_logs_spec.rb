@@ -26,11 +26,6 @@ describe Auth0::Api::V2::Logs do
       sleep 1
       client.logs
     end
-    it 'is expected to get a log about user creation' do
-      wait 30 do
-        expect(find_create_user_log_by_email(user['email'])).to_not be_empty
-      end
-    end
 
     context '#filters' do
       it do
@@ -83,18 +78,6 @@ describe Auth0::Api::V2::Logs do
     it do
       sleep 1
       expect(log['date']).to eq(first_log['date'])
-    end
-  end
-
-  private
-
-  def find_create_user_log_by_email(email)
-    sleep 1
-    logs = client.logs
-    logs.find do |log|
-      log['description'] == 'Create a user' &&
-        log['type'] == 'sapi' &&
-        log['details']['request']['body']['email'] == email
     end
   end
 end
