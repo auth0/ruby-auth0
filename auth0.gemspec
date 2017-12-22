@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rack', '~> 1.6.4'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 1.4'
-  s.add_development_dependency 'yard', '~> 0.8'
+  s.add_development_dependency 'yard', '~> 0.9.12'
   s.add_development_dependency 'gem-release', '~> 0.7'
   s.license = 'MIT'
 end
