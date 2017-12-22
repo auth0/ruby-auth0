@@ -1,15 +1,19 @@
 require 'spec_helper'
 describe Auth0::Api::V2::ClientGrants do
-  attr_reader :client, :client_id, :audience, :existing_grant, :scope
+  attr_reader :client, :client_id, :audience, :existing_grant, :scope, :existing_client
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
     @client_id = v2_creds[:client_id]
     sleep 1
+    @existing_client = client.create_client("client#{entity_suffix}")
+    sleep 1
     @audience = "https://#{client.clients[0]['tenant']}.auth0.com/api/v2/"
     @scope = [Faker::Lorem.word]
     sleep 1
-    @existing_grant = client.create_client_grant('client_id' => client_id, 'audience' => audience, 'scope' => scope)
+    @existing_grant = client.create_client_grant('client_id' => existing_client['client_id'],
+                                                 'audience' => audience,
+                                                 'scope' => scope)
   end
 
   after(:all) do

@@ -4,13 +4,13 @@ describe Auth0::Api::V2::Rules do
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    suffix = Faker::Lorem.word
+    suffix = "#{entity_suffix}#{Faker::Lorem.word}"
     script = 'function (user, context, callback) { callback(null, user, context);}'
     stage = 'login_success'
     sleep 1
-    @enabled_rule = client.create_rule("Enabled Rule #{suffix}", script, rand(1..10), true, stage)
+    @enabled_rule = client.create_rule("Enabled Rule #{suffix}", script, nil, true, stage)
     sleep 1
-    @disabled_rule = client.create_rule("Disabled Rule #{suffix}", script, rand(11..20), false, stage)
+    @disabled_rule = client.create_rule("Disabled Rule #{suffix}", script, nil, false, stage)
   end
 
   after(:all) do
@@ -35,12 +35,12 @@ describe Auth0::Api::V2::Rules do
     context '#filters' do
       it do
         sleep 1
-        expect(client.rules(enabled: true).size).to be 1
+        expect(client.rules(enabled: true).size).to be >= 1
       end
 
       it do
         sleep 1
-        expect(client.rules(enabled: false).size).to be 1
+        expect(client.rules(enabled: false).size).to be >= 1
       end
 
       it do
@@ -86,18 +86,17 @@ describe Auth0::Api::V2::Rules do
   end
 
   describe '.create_rule' do
-    let(:name) { Faker::Lorem.word }
-    let(:order) { rand(21..30) }
+    let(:name) { "#{Faker::Lorem.word}#{entity_suffix}" }
     let(:stage) { 'login_success' }
     let(:script) { 'function(test)' }
     let(:enabled) { false }
     let!(:rule) do
       sleep 1
-      client.create_rule(name, script, order, enabled, stage)
+      client.create_rule(name, script, nil, enabled, stage)
     end
     it do
       sleep 1
-      expect(rule).to include('name' => name, 'stage' => stage, 'order' => order, 'script' => script)
+      expect(rule).to include('name' => name, 'stage' => stage, 'script' => script)
     end
   end
 
