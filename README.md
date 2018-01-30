@@ -42,7 +42,7 @@ You can setup a custom timeout in the Auth0Client. By default it is set to 10 mi
 require "auth0"
 
 auth0 = Auth0Client.new(
-  :client_id => "YOUR CLIENT ID"
+  :client_id => "YOUR CLIENT ID",
   :token => "YOUR JWT HERE",
   :domain => "<YOUR ACCOUNT>.auth0.com",
   :timeout => 15
