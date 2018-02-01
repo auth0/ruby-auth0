@@ -1,0 +1,6 @@
+bin
+doc
+.yardoc
+.idea
+*.iml
+coverage
