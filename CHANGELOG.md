@@ -1,5 +1,20 @@
 # Change Log
 
+## [v4.2.0](https://github.com/auth0/ruby-auth0/tree/v4.2.0) (2018-02-15)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.1.0...v4.2.0)
+
+**Closed issues:**
+
+- Vulnerable dependency: yard. [\#99]
+https://github.com/auth0/ruby-auth0/issues/99
+
+- Unsupported on latest ruby version. [\#83]
+https://github.com/auth0/ruby-auth0/issues/83
+
+- Outdated dependencies in ror-api example. [\#75]
+https://github.com/auth0/ruby-auth0/issues/75
+
+
 ## [v4.1.0](https://github.com/auth0/ruby-auth0/tree/v4.1.0) (2016-07-25)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.0.0...v4.1.0)
 
