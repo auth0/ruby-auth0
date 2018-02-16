@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-# Create file with credentials for rubygems.org
-touch credentials.txt
-echo $RUBYGEMS_EMAIL > credentials.txt
-echo $RUBYGEMS_PASSWORD >> credentials.txt
-# build the gem
+# Create directory for rubygems credentials
+mkdir /root/.gem
+# Get API key from rubygems.org
+curl -u "$RUBYGEMS_EMAIL":"$RUBYGEMS_PASSWORD" https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
+# Build Gem
 gem build auth0.gemspec
-# publish the gem on rubygems.org
-gem push auth0-*.gem < credentials.txt
-# Delete credentials file
-rm credentials.txt
+# Publish Gem
+gem push auth0-*.gem
