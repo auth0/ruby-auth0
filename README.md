@@ -36,7 +36,7 @@ puts auth0.get_users
 ```
 
 ### Timeout
-You can setup a custom timeout in the Auth0Client. By default it is set to 10 minutes.
+You can setup a custom timeout in the Auth0Client. By default it is set to 10 seconds.
 
 ```ruby
 require "auth0"
