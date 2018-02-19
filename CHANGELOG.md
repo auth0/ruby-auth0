@@ -1,5 +1,28 @@
 # Change Log
 
+## [v4.4.0](https://github.com/auth0/ruby-auth0/tree/v4.4.0) (2018-02-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.2.0...v4.4.0)
+
+Note: If you are using the `login` endpoint, you will need to enable the [Resource Owner Password Grant](https://auth0.com/docs/clients/client-grant-types).
+
+**Closed issues:**
+
+- Vulnerable dependency: yard. [\#99]
+https://github.com/auth0/ruby-auth0/issues/99
+
+- Unsupported on latest ruby version. [\#83]
+https://github.com/auth0/ruby-auth0/issues/83
+
+- Outdated dependencies in ror-api example. [\#75]
+https://github.com/auth0/ruby-auth0/issues/75
+
+- Authentication Login is using `/oauth/ro` [\#89]
+https://github.com/auth0/ruby-auth0/issues/89
+
+**Merged pull requests:**
+
+- Add support to /api/v2/users-by-email [\#105](https://github.com/auth0/ruby-auth0/pull/105) ([edgurgel](https://github.com/edgurgel))
+
 ## [v4.2.0](https://github.com/auth0/ruby-auth0/tree/v4.2.0) (2018-02-15)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.1.0...v4.2.0)
 
