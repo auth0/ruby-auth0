@@ -1,6 +1,3 @@
-$LOAD_PATH.unshift File.expand_path('..', __FILE__)
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-
 require 'coveralls'
 Coveralls.wear!
 
@@ -10,25 +7,11 @@ SimpleCov.start do
   add_filter '/spec/integration'
 end
 
-require 'rspec'
-require 'rack/test'
-require 'faker'
-require 'auth0'
 require 'pry'
-
-Dir['./lib/**/*.rb'].each { |f| require f }
-Dir['./spec/support/**/*.rb'].each { |f| require f }
-
-def entity_suffix
-  (ENV['TRAVIS_JOB_ID'] || 'local').delete('_')
-end
-
-puts "Entity suffix is #{entity_suffix}"
 
 RSpec.configure do |config|
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
-  config.include Rack::Test::Methods
   config.include Credentials
   config.after(:suite) do
     puts "Cleaning up for #{entity_suffix}"

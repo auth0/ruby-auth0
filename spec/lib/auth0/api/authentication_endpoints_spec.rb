@@ -57,10 +57,12 @@ describe Auth0::Api::AuthenticationEndpoints do
 
   context '.login' do
     it { expect(@instance).to respond_to(:login) }
-    it 'is expected to make post to /oauth/ro' do
+    it 'is expected to make post to /oauth/token' do
       expect(@instance).to receive(:post).with(
-        '/oauth/ro',
-        client_id: @instance.client_id, username: 'test@test.com',
+        '/oauth/token',
+        client_id: @instance.client_id,
+        username: 'test@test.com',
+        client_secret: @instance.client_secret,
         password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
         grant_type: 'password', id_token: nil, device: nil
       )
