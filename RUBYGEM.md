@@ -5,5 +5,5 @@ Then run the following [Docker](https://docs.docker.com/engine/installation/) co
 
 ```bash
 docker build -t auth0-publish-rubygem .
-docker run --rm -e RUBYGEMS_EMAIL=$RUBYGEMS_EMAIL -e RUBYGEMS_PASSWORD=$RUBYGEMS_PASSWORD -it auth0-publish-rubygem /bin/sh publish_rubygem.sh
+docker run --rm -e RUBYGEMS_EMAIL="$RUBYGEMS_EMAIL" -e RUBYGEMS_PASSWORD="$RUBYGEMS_PASSWORD" -it auth0-publish-rubygem /bin/sh publish_rubygem.sh
 ```
