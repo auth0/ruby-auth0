@@ -63,10 +63,10 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_id: @instance.client_id,
         username: 'test@test.com',
         client_secret: @instance.client_secret,
-        password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
+        password: 'test12345', scope: 'openid', connection: 'Username-Password-Authentication',
         grant_type: 'password', id_token: nil, device: nil
       )
-      @instance.login('test@test.com', 'password')
+      @instance.login('test@test.com', 'test12345')
     end
     it { expect { @instance.login('', '') }.to raise_error 'Must supply a valid username' }
     it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
