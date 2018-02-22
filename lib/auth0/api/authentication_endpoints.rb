@@ -63,7 +63,7 @@ module Auth0
           password:      password,
           scope:         options.fetch(:scope, 'openid'),
           connection:    connection_name,
-          grant_type:    options.fetch(:grant_type, password),
+          grant_type:    options.fetch(:grant_type, 'password'),
           id_token:      id_token,
           device:        options.fetch(:device, nil)
         }
