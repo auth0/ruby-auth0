@@ -57,17 +57,37 @@ describe Auth0::Api::AuthenticationEndpoints do
 
   context '.login' do
     it { expect(@instance).to respond_to(:login) }
+
     it 'is expected to make post to /oauth/token' do
       expect(@instance).to receive(:post).with(
         '/oauth/token',
         client_id: @instance.client_id,
         username: 'test@test.com',
         client_secret: @instance.client_secret,
-        password: 'password', scope: 'openid', connection: 'Username-Password-Authentication',
+        password: 'test123', scope: 'openid', connection: 'Username-Password-Authentication',
         grant_type: 'password', id_token: nil, device: nil
       )
-      @instance.login('test@test.com', 'password')
+      @instance.login('test@test.com', 'test123')
     end
+
+    it 'is expected to make post to /oauth/token with options' do
+      options = {
+        audience: 'test.auth0.com',
+        realm: 'Username-Password-Authentication'
+      }
+      expect(@instance).to receive(:post).with(
+        '/oauth/token',
+        client_id: @instance.client_id,
+        username: 'test@test.com',
+        client_secret: @instance.client_secret,
+        password: 'test123', scope: 'openid', connection: 'Username-Password-Authentication',
+        grant_type: 'password', id_token: nil, device: nil,
+        audience: 'test.auth0.com',
+        realm: 'Username-Password-Authentication'
+      )
+      @instance.login('test@test.com', 'test123', nil, 'Username-Password-Authentication', options)
+    end
+
     it { expect { @instance.login('', '') }.to raise_error 'Must supply a valid username' }
     it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
   end
