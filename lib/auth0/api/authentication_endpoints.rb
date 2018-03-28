@@ -45,12 +45,14 @@ module Auth0
       end
 
       # Logins using username/password
-      # @see https://auth0.com/docs/auth-api#!#post--oauth-ro
+      # @see https://auth0.com/docs/api/authentication#resource-owner-password
       # @param username [string] Username
       # @param password [string] User's password
-      # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
-      # @param id_token [string] Token's id
-      # @param connection_name [string] Connection name. Works for database connections, passwordless connections,
+      # @param scope [string] Defaults to openid. Can be 'openid name email',
+      # 'openid offline_access'
+      # @param id_token [string] Deprecated, Token's id
+      # @param connection_name [string] Deprecated, Connection name. Works for
+      # database connections, passwordless connections.
       # Active Directory/LDAP, Windows Azure AD and ADF
       # @return [json] Returns the access token and id token
       def login(username, password, id_token = nil, connection_name = UP_AUTH, options = {})
@@ -61,12 +63,15 @@ module Auth0
           client_secret: @client_secret,
           username:      username,
           password:      password,
-          scope:         options.fetch(:scope, 'openid'),
           connection:    connection_name,
-          grant_type:    options.fetch(:grant_type, password),
           id_token:      id_token,
-          device:        options.fetch(:device, nil)
+          device:        options.fetch(:device, nil),
+          grant_type:    options.fetch(:grant_type, 'password'),
+          scope:         options.fetch(:scope, 'openid')
         }
+        request_params[:realm] = options[:realm] if options[:realm]
+        request_params[:audience] = options[:audience] if options[:audience]
+
         post('/oauth/token', request_params)
       end
 
