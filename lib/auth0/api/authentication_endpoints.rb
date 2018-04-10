@@ -70,6 +70,26 @@ module Auth0
         post('/oauth/token', request_params)
       end
 
+      # Login using username/password with the /oauth/ro endpoint
+      # @see https://auth0.com/docs/auth-api#!#post--oauth-ro
+      # @param username [string] Username
+      # @param password [string] User's password
+      # Active Directory/LDAP, Windows Azure AD and ADF
+      # @return [json] Returns the access token and id token
+      def login_with_legacy_endpoint(username, password)
+        raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
+        request_params = {
+          client_id:  @client_id,
+          username:   username,
+          password:   password,
+          connection: UP_AUTH,
+          grant_type: 'password',
+          scope:      'openid'
+        }
+        post('/oauth/ro', request_params)
+      end
+
       # Signup using username/password
       # @see https://auth0.com/docs/auth-api#!#post--dbconnections-signup
       # @param email [string] User email

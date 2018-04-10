@@ -72,6 +72,24 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
   end
 
+  context '.login_with_legacy_endpoint' do
+    it { expect(@instance).to respond_to(:login_with_legacy_endpoint) }
+    it 'is expected to make post to /oauth/ro' do
+      expect(@instance).to receive(:post).with(
+        '/oauth/ro',
+        client_id: @instance.client_id,
+        username: 'test@test.com',
+        password: 'test12345',
+        connection: 'Username-Password-Authentication',
+        grant_type: 'password',
+        scope: 'openid'
+      )
+      @instance.login_with_legacy_endpoint('test@test.com', 'test12345')
+    end
+    it { expect { @instance.login('', '') }.to raise_error 'Must supply a valid username' }
+    it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
+  end
+
   context '.signup' do
     it { expect(@instance).to respond_to(:signup) }
     it 'is expected to make post to /dbconnections/signup' do
