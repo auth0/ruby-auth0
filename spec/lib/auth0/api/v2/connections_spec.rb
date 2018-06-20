@@ -15,9 +15,53 @@ describe Auth0::Api::V2::Connections do
         '/api/v2/connections',
         strategy: nil,
         fields: nil,
-        include_fields: true
+        include_fields: nil,
+        page: nil,
+        per_page: nil
       )
       expect { @instance.connections }.not_to raise_error
+    end
+
+    it 'is expected to send get request to /api/v2/connections?fields=name' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/connections',
+        include_fields: true,
+        fields: 'name',
+        strategy: nil,
+        page: nil,
+        per_page: nil
+      )
+      expect {
+        @instance.connections(fields: 'name', include_fields: true)
+      }.not_to raise_error
+    end
+
+    it 'is expected to convert fields param from Array to string' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/connections',
+        include_fields: true,
+        fields: 'name,strategy',
+        strategy: nil,
+        page: nil,
+        per_page: nil
+      )
+      expect {
+        @instance.connections(fields: ['name','strategy'], include_fields: true)
+      }.not_to raise_error
+    end
+
+    it 'is expected to add pagination' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/connections',
+        page: 1,
+        per_page: 10,
+        strategy: nil,
+        fields: nil,
+        include_fields: nil
+      )
+      expect {
+        @instance.connections(page: 1, per_page: 10)
+      }.not_to raise_error
     end
   end
 

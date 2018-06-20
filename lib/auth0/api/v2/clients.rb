@@ -6,16 +6,19 @@ module Auth0
         attr_reader :clients_path
 
         # Retrieves a list of all client applications. Accepts a list of fields to include or exclude.
-        # @see https://auth0.com/docs/api/v2#!/clients/get_clients
-        # @param fields [string] A comma separated list of fields to include or exclude from the result.
+        # @see https://auth0.com/docs/api/management/v2#!/Clients/get_clients
+        # @param fields [string|Array] A comma separated list or an array of fields.
         # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
-        #
+        # @param page [int] Page number to get, 0-based.
+        # @param per_page [int] Results per page if also passing a page number.
         # @return [json] Returns the clients applications.
-        def clients(fields: nil, include_fields: nil)
+        def clients(fields: nil, include_fields: nil, page: nil, per_page: nil)
           include_fields = true if !fields.nil? && include_fields.nil?
           request_params = {
-            fields: fields,
-            include_fields: include_fields
+            fields: fields.is_a?(Array) ? fields.join(',') : fields,
+            include_fields: include_fields,
+            page: !page.nil? ? page.to_i : nil,
+            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
           }
           get(clients_path, request_params)
         end
