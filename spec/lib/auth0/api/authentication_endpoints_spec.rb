@@ -311,9 +311,24 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.logout_url' do
     let(:return_to) { 'http://returnto.com' }
     it { expect(@instance).to respond_to(:logout_url) }
+
     it 'is expected to return a logout url' do
       expect(@instance.logout_url(return_to).to_s).to eq(
-        "https://#{@instance.domain}/logout?returnTo=#{return_to}"
+        "https://#{@instance.domain}/v2/logout?returnTo=#{return_to}"
+      )
+    end
+
+    it 'is expected to return a logout url with a client ID' do
+      expect(@instance.logout_url(return_to, true).to_s).to eq(
+        "https://#{@instance.domain}/v2/logout" +
+          "?returnTo=#{return_to}&client_id=#{@instance.client_id}"
+      )
+    end
+
+    it 'is expected to return a logout url with federated parameter' do
+      expect(@instance.logout_url(return_to, false, true).to_s).to eq(
+        "https://#{@instance.domain}/v2/logout" +
+          "?returnTo=#{return_to}&federated"
       )
     end
   end
