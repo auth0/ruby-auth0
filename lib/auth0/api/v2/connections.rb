@@ -7,18 +7,27 @@ module Auth0
 
         # Retrieves every connection matching the specified strategy. All connections are retrieved if no strategy is
         # being specified. Accepts a list of fields to include or exclude in the resulting list of connection objects.
-        # @see https://auth0.com/docs/api/v2#!/Connections/get_connections
-        # @param strategy [string] Provide a type of strategy to only retrieve connections with that strategy (e.g. 'ad',
-        # 'facebook', 'twitter').
+        # @see https://auth0.com/docs/api/management/v2#!/Connections/get_connections
+        # @param strategy [string] Strategy to filter connection results.
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
         # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
-        #
+        # @param page [int] Page number to get, 0-based.
+        # @param per_page [int] Results per page if also passing a page number.
         # @return [json] Returns the existing connections matching the strategy.
-        def connections(strategy: nil, fields: nil, include_fields: true)
+        def connections(
+          strategy: nil,
+          fields: nil,
+          include_fields: nil,
+          page: nil,
+          per_page: nil
+        )
+          include_fields = true if !fields.nil? && include_fields.nil?
           request_params = {
             strategy: strategy,
-            fields: fields,
-            include_fields: include_fields
+            fields: fields.is_a?(Array) ? fields.join(',') : fields,
+            include_fields: include_fields,
+            page: !page.nil? ? page.to_i : nil,
+            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
           }
           get(connections_path, request_params)
         end

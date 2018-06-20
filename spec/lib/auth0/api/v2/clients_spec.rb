@@ -5,18 +5,62 @@ describe Auth0::Api::V2::Clients do
     dummy_instance.extend(Auth0::Api::V2::Clients)
     @instance = dummy_instance
   end
+  
   context '.clients' do
     it { expect(@instance).to respond_to(:clients) }
     it { expect(@instance).to respond_to(:get_clients) }
+
     it 'is expected to send get request to /api/v2/clients/' do
-      expect(@instance).to receive(:get).with('/api/v2/clients', fields: nil, include_fields: nil)
+      expect(@instance).to receive(:get).with(
+        '/api/v2/clients',
+        fields: nil,
+        include_fields: nil,
+        page: nil,
+        per_page: nil
+      )
       expect { @instance.clients }.not_to raise_error
     end
+
     it 'is expected to send get request to /api/v2/clients?fields=name' do
-      expect(@instance).to receive(:get).with('/api/v2/clients', include_fields: true, fields: [:name])
-      expect { @instance.clients(fields: [:name], include_fields: true) }.not_to raise_error
+      expect(@instance).to receive(:get).with(
+        '/api/v2/clients',
+        include_fields: true,
+        fields: 'name',
+        page: nil,
+        per_page: nil
+      )
+      expect {
+        @instance.clients(fields: 'name', include_fields: true)
+      }.not_to raise_error
+    end
+
+    it 'is expected to convert fields param from Array to string' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/clients',
+        include_fields: true,
+        fields: 'name,app_type',
+        page: nil,
+        per_page: nil
+      )
+      expect {
+        @instance.clients(fields: ['name','app_type'], include_fields: true)
+      }.not_to raise_error
+    end
+
+    it 'is expected to add pagination' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/clients',
+        page: 1,
+        per_page: 10,
+        fields: nil,
+        include_fields: nil
+      )
+      expect {
+        @instance.clients(page: 1, per_page: 10)
+      }.not_to raise_error
     end
   end
+
   context '.client' do
     it { expect(@instance).to respond_to(:client) }
     it 'is expected to send get request to /api/v2/clients/1' do
@@ -38,6 +82,7 @@ describe Auth0::Api::V2::Clients do
     end
     it { expect { @instance.create_client('') }.to raise_error 'Must specify a valid client name' }
   end
+
   context '.delete_client' do
     it { expect(@instance).to respond_to(:delete_client) }
     it 'is expected to send delete to /api/v2/clients/1' do
