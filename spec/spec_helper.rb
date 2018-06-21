@@ -17,7 +17,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 Dir['./spec/support/*.rb'].each { |f| require f }
 
 def entity_suffix
-  (ENV['TRAVIS_JOB_ID'] || 'local').delete('_')
+  (ENV['TRAVIS_JOB_ID'] || ENV['TEST_ENTITY_SUFFIX'] || 'rubytest').delete('_')
 end
 
 puts "Entity suffix is #{entity_suffix}"
