@@ -26,10 +26,9 @@ RSpec.configure do |config|
         v2_client.delete_client(client['client_id'])
       }
     v2_client
-      .users
-      .select { |user| !user['email'].nil? && user['email'].split('@').first.include?(entity_suffix) }
+      .users(q: "email:#{entity_suffix}*", fields: 'user_id', page: 0, per_page: 50)
       .each { |user|
-        sleep 1
+        sleep 0.6
         v2_client.delete_user(user['user_id'])
       }
     puts "Finished cleaning up for #{entity_suffix}"
