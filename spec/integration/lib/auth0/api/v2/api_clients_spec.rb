@@ -26,15 +26,31 @@ describe Auth0::Api::V2::Clients do
     context '#filters' do
       it do
         sleep 1
-        expect(client.clients(fields: [:name, :callbacks].join(',')).first).to(include('name', 'callbacks'))
+        expect(client.clients(
+          fields: [:name, :callbacks].join(',')
+        ).first).to(include('name', 'callbacks'))
       end
       it do
         sleep 1
-        expect(client.clients(fields: [:callbacks].join(',')).first).to_not(include('name'))
+        expect(client.clients(
+          fields: [:callbacks].join(',')).first
+        ).to_not(include('name'))
       end
       it do
         sleep 1
-        expect(client.clients(fields: [:callbacks].join(','), include_fields: false).first).to_not(include('callbacks'))
+        expect(client.clients(
+          fields: [:callbacks].join(','),
+          include_fields: false
+        ).first).to_not(include('callbacks'))
+      end
+      it do
+        sleep 1
+        results = client.clients(
+          fields: :name,
+          page: 0,
+          per_page: 1
+        )
+        expect(results.first).to equal(results.last)
       end
     end
   end

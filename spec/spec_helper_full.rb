@@ -27,7 +27,7 @@ RSpec.configure do |config|
       }
     v2_client
       .users
-      .select { |user| user['email'].split('@').first.include? entity_suffix }
+      .select { |user| !user['email'].nil? && user['email'].split('@').first.include?(entity_suffix) }
       .each { |user|
         sleep 1
         v2_client.delete_user(user['user_id'])

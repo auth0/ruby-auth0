@@ -5,12 +5,12 @@ describe Auth0::Api::V2::Clients do
     dummy_instance.extend(Auth0::Api::V2::Clients)
     @instance = dummy_instance
   end
-  
+
   context '.clients' do
     it { expect(@instance).to respond_to(:clients) }
     it { expect(@instance).to respond_to(:get_clients) }
 
-    it 'is expected to send get request to /api/v2/clients/' do
+    it 'is expected to send get request to the Clients endpoint' do
       expect(@instance).to receive(:get).with(
         '/api/v2/clients',
         fields: nil,
@@ -21,7 +21,7 @@ describe Auth0::Api::V2::Clients do
       expect { @instance.clients }.not_to raise_error
     end
 
-    it 'is expected to send get request to /api/v2/clients?fields=name' do
+    it 'is expected to send get request to the Clients endpoint with a name parameter' do
       expect(@instance).to receive(:get).with(
         '/api/v2/clients',
         include_fields: true,
@@ -34,7 +34,7 @@ describe Auth0::Api::V2::Clients do
       }.not_to raise_error
     end
 
-    it 'is expected to convert fields param from Array to string' do
+    it 'is expected to send get request to Clients endpoint using an array of fields' do
       expect(@instance).to receive(:get).with(
         '/api/v2/clients',
         include_fields: true,
@@ -47,7 +47,7 @@ describe Auth0::Api::V2::Clients do
       }.not_to raise_error
     end
 
-    it 'is expected to add pagination' do
+    it 'is expected to send get request to Clients endpoint with pagination' do
       expect(@instance).to receive(:get).with(
         '/api/v2/clients',
         page: 1,
