@@ -51,32 +51,32 @@ end
 require 'auth0'
 
 class AllUsersController < ApplicationController
-  before_action :set_api
+	before_action :set_api
 
-  # Get all users from Auth0 with "auth0" in their email.
-  def index
-    @params = {
-      q: "email:*auth0*",
-      fields: 'email,user_id,name',
-      include_fields: true,
-      page: 0,
-      per_page: 50
-    }
-    @users = @auth0.users @params
-  end
-
-  private
-
-    # before_action: Setup the Auth0 API connection.
-    def set_api
-      @auth0 = Auth0Client.new(
-        client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
-        token: ENV['AUTH0_RUBY_API_TOKEN'],
-        domain: ENV['AUTH0_RUBY_DOMAIN'],
-        api_version: 2,
-        timeout: 15 # optional, defaults to 10s
-      )
-    end
+	# Get all users from Auth0 with "auth0" in their email.
+	def index
+	@params = {
+	  q: "email:*auth0*",
+	  fields: 'email,user_id,name',
+	  include_fields: true,
+	  page: 0,
+	  per_page: 50
+	}
+	@users = @auth0.users @params
+	end
+	
+	private
+	
+	# before_action: Setup the Auth0 API connection.
+	def set_api
+	  @auth0 ||= Auth0Client.new(
+	    client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+	    token: ENV['AUTH0_RUBY_API_TOKEN'],
+	    domain: ENV['AUTH0_RUBY_DOMAIN'],
+	    api_version: 2,
+	    timeout: 15 # optional, defaults to 10s
+	  )
+	end
 end
 ```
 
@@ -99,12 +99,12 @@ This should show the parameters passed to the `users` method and a list of users
 
 In addition to the Management API, this SDK also provides access to [Authentication API](https://auth0.com/docs/api/authentication) endpoints with the `Auth0::API::AuthenticationEndpoints` module. For basic login capability, we suggest using our OmniAuth stategy [detailed here](https://auth0.com/docs/quickstart/webapp/rails/01-login). Other authentication tasks currently supported are:
 
-* Register a new user with a database connection using the `signup` method
-* Redirect a user to the universal login page for authentication using the `authorization_url` method
-* Log a user in to a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method
-* Exchange an authorization code for an access token on callback using the `obtain_user_tokens` method (see the note on state validation below)
-* Send a change password email to a database connection user using the `change_password` method
-* Log a user out of Auth0 with the `logout_url` method
+* Register a new user with a database connection using the `signup` method.
+* Redirect a user to the universal login page for authentication using the `authorization_url` method.
+* Log a user in to a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method.
+* Exchange an authorization code for an access token on callback using the `obtain_user_tokens` method (see the note on state validation below).
+* Send a change password email to a database connection user using the `change_password` method.
+* Log a user out of Auth0 with the `logout_url` method.
 
 **Important note on state validation**: If you choose to implement a login flow callback youself, it is important to generate and store a `state` value, pass that value to Auth0 in the `authorization_url` method, and validate it in your callback URL before calling `obtain_user_tokens`. For more information on state validation, [please see our documentation](https://auth0.com/docs/protocols/oauth2/oauth-state). 
 
@@ -123,12 +123,12 @@ Please note that this module implements endpoints that might be deprecated for n
 
 Auth0 helps you to:
 
-* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, amont others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** among others, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
 * Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
 * Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
-* Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when and where users are logging in.
-* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
+* Support for generating signed [JSON Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
+* Analytics of how, when, and where users are logging in.
+* Pull data from other sources and add it to the user profile with [JavaScript rules](https://docs.auth0.com/rules).
 
 ## Create a free Auth0 Account
 
@@ -137,7 +137,7 @@ Auth0 helps you to:
 
 ## Issue Reporting
 
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
+If you find a bug or have a feature request, please report them in this repository's Issues tab. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
 
 ## Author
 
