@@ -51,36 +51,32 @@ end
 require 'auth0'
 
 class AllUsersController < ApplicationController
-	before_action :set_api
-
-	# Get all users from Auth0 with "auth0" in their email.
-	def index
-	@params = {
-	  q: "email:*auth0*",
-	  fields: 'email,user_id,name',
-	  include_fields: true,
-	  page: 0,
-	  per_page: 50
-	}
-	@users = @auth0.users @params
-	end
+  # Get all users from Auth0 with "auth0" in their email.
+  def index
+    @params = {
+      q: "email:*auth0*",
+      fields: 'email,user_id,name',
+      include_fields: true,
+      page: 0,
+      per_page: 50
+    }
+    @users = auth0_client.users @params
+  end
 	
-	private
+  private
 	
-	# before_action: Setup the Auth0 API connection.
-	def set_api
-	  @auth0 ||= Auth0Client.new(
-	    client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
-	    token: ENV['AUTH0_RUBY_API_TOKEN'],
-	    domain: ENV['AUTH0_RUBY_DOMAIN'],
-	    api_version: 2,
-	    timeout: 15 # optional, defaults to 10s
-	  )
-	end
+  # Setup the Auth0 API connection.
+  def auth0_client
+    @auth0_client ||= Auth0Client.new(
+      client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+      token: ENV['AUTH0_RUBY_API_TOKEN'],
+      domain: ENV['AUTH0_RUBY_DOMAIN'],
+      api_version: 2,
+      timeout: 15 # optional, defaults to 10
+    )
+  end
 end
 ```
-
-Note the `set_api` filter that sets the API client on a variable we can use within this class. If API access is required across multiple controllers, this would be best used in a helper function.
 
 In this example, we're using environment variables to store the values needed to connect to Auth0 and authorize. The `token` used above is an API token for the Management API with the scopes required to perform a specific action (in this case `read:users`). These tokens can be [generated manually](https://auth0.com/docs/api/management/v2/tokens#get-a-token-manually) using a test Application or with the [Application](https://manage.auth0.com/#/applications) being used for your project.
 
@@ -137,7 +133,7 @@ Auth0 helps you to:
 
 ## Issue Reporting
 
-If you find a bug or have a feature request, please report them in this repository's Issues tab. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
+If you find a bug or have a feature request, please report them in this repository's [Issues tab](https://github.com/auth0/ruby-auth0/issues). Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
 
 ## Author
 
