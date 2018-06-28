@@ -5,18 +5,21 @@ module Auth0
       module Users
         attr_reader :users_path
 
-        # Retrieves a list of existing users.
-        # @see https://auth0.com/docs/api/v2#!/Users/get_users
-        # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
-        # @param page [integer]  The page number. Zero based.
-        # @param include_totals [boolean] True if a query summary must be included in the result.
-        # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
-        # @param connection [string] Connection filter.
-        # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
-        # @param q [string] Query in Lucene query string syntax. Only fields in app_metadata, user_metadata or the
-        # normalized user profile are searchable.
-        #
+        # Retrieves a list of Auth0 users.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_users
+        # @param options - The Hash options used to refine the User results.
+        #   :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        #   :page [integer] The page number. Zero based.
+        #   :include_totals [boolean] True if a query summary must be included in the result.
+        #   :sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
+        #   :connection [string] Connection to filter results by.
+        #   :fields [string] A comma separated list of result fields.
+        #   :include_fields [boolean] True to include :fields, false to exclude.
+        #   :q [string] Query in Lucene query string syntax.
+        #   :search_engine [string] User search engine version.
+        #     - Will default to v2 if no value is passed.
+        #     - Default will change to v3 on 11/13/2018
+        #     - See https://auth0.com/docs/users/search/v3#migrate-from-search-engine-v2-to-v3
         # @return [json] Returns the list of existing users.
         def users(options = {})
           request_params = {
@@ -27,9 +30,9 @@ module Auth0
             connection:     options.fetch(:connection, nil),
             fields:         options.fetch(:fields, nil),
             include_fields: options.fetch(:include_fields, nil),
-            q:              options.fetch(:q, nil)
+            q:              options.fetch(:q, nil),
+            search_engine:  options.fetch(:search_engine, nil)
           }
-          request_params[:search_engine] = :v2 if request_params[:q]
           get(users_path, request_params)
         end
         alias get_users users

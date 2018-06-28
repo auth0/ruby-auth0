@@ -45,6 +45,30 @@ describe Auth0::Api::V2::Users do
           client.users(per_page: 1, fields: [:email].join(','), include_fields: false).first
         ).to include('user_id', 'picture')
       end
+
+      it 'is expected to find a user with a v2 search engine query' do
+        sleep 1
+        expect(
+          client.users(
+            per_page: 1,
+            fields: 'user_id',
+            q: "updated_at:>=2016-01-01",
+            search_engine: 'v2'
+          ).first
+        ).to include('user_id')
+      end
+
+      it 'is expected to find a user with a v3 search engine query' do
+        sleep 1
+        expect(
+          client.users(
+            per_page: 1,
+            fields: 'user_id',
+            q: "updated_at:[2016-01-01 TO *]",
+            search_engine: 'v3'
+          ).first
+        ).to include('user_id')
+      end
     end
   end
 
@@ -150,19 +174,6 @@ describe Auth0::Api::V2::Users do
     end
 
     let(:body_link) { { 'provider' => 'auth0', 'user_id' => link_user['user_id'] } }
-    skip 'Link user account examples are skipped to avoid errors on users deletion' do
-      it do
-        expect(
-          client.link_user_account(primary_user['user_id'], body_link).first
-        ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
-      end
-
-      it do
-        expect(
-          client.unlink_users_account(primary_user['user_id'], 'auth0', link_user['user_id']).first
-        ).to include('provider' => 'auth0', 'user_id' => primary_user['identities'].first['user_id'])
-      end
-    end
   end
 
 end

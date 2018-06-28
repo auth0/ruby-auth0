@@ -9,6 +9,7 @@ describe Auth0::Api::V2::Users do
   context '.users' do
     it { expect(@instance).to respond_to(:users) }
     it { expect(@instance).to respond_to(:get_users) }
+
     it 'is expected to call /api/v2/users' do
       expect(@instance).to receive(:get).with(
         '/api/v2/users',
@@ -19,9 +20,26 @@ describe Auth0::Api::V2::Users do
         connection: nil,
         fields: nil,
         include_fields: nil,
-        q: nil
+        q: nil,
+        search_engine: nil
       )
       expect { @instance.users }.not_to raise_error
+    end
+
+    it 'is expected to call /api/v2/users with a search engine' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users',
+        per_page: nil,
+        page: nil,
+        include_totals: nil,
+        sort: nil,
+        connection: nil,
+        fields: nil,
+        include_fields: nil,
+        q: nil,
+        search_engine: 'v3'
+      )
+      expect { @instance.users(search_engine: 'v3') }.not_to raise_error
     end
   end
 
