@@ -16,47 +16,46 @@ describe Auth0::Api::V2::Rules do
   after(:all) do
     rules = client.rules
     rules.each do |rule|
-      sleep 1
       client.delete_rule(rule['id'])
     end
   end
 
   describe '.rules' do
     let(:rules) do
-      sleep 1
       client.rules
     end
 
     it do
-      sleep 1
       expect(rules.size).to be > 0
     end
 
     context '#filters' do
       it do
-        sleep 1
         expect(client.rules(enabled: true).size).to be >= 1
       end
 
       it do
-        sleep 1
         expect(client.rules(enabled: false).size).to be >= 1
       end
 
       it do
-        sleep 1
         expect(client.rules(enabled: true, fields: [:script, :order].join(',')).first).to(include('script', 'order'))
       end
+
       it do
-        sleep 1
         expect(client.rules(enabled: true, fields: [:script].join(',')).first).to_not(include('order', 'name'))
+      end
+
+      it do
+        rule_1 = client.rules(fields: :name, page: 0, per_page: 2)
+        rule_2 = client.rules(fields: :name, page: 1, per_page: 1)
+        expect(rule_1.last).to eq(rule_2.first)
       end
     end
   end
 
   describe '.rule' do
     it do
-      sleep 1
       expect(client.rule(enabled_rule['id'])).to(
         include('stage' => enabled_rule['stage'], 'order' => enabled_rule['order'], 'script' => enabled_rule['script'])
       )
@@ -64,21 +63,17 @@ describe Auth0::Api::V2::Rules do
 
     context '#filters' do
       let(:rule_include) do
-        sleep 1
         client.rule(enabled_rule['id'], fields: [:stage, :order, :script].join(','))
       end
       let(:rule_not_include) do
-        sleep 1
         client.rule(enabled_rule['id'], fields: :stage, include_fields: false)
       end
 
       it do
-        sleep 1
         expect(rule_include).to(include('stage', 'order', 'script'))
       end
 
       it do
-        sleep 1
         expect(rule_not_include).to(include('order', 'script'))
         expect(rule_not_include).to_not(include('stage'))
       end
@@ -91,29 +86,24 @@ describe Auth0::Api::V2::Rules do
     let(:script) { 'function(test)' }
     let(:enabled) { false }
     let!(:rule) do
-      sleep 1
       client.create_rule(name, script, nil, enabled, stage)
     end
     it do
-      sleep 1
       expect(rule).to include('name' => name, 'stage' => stage, 'script' => script)
     end
   end
 
   describe '.delete_rule' do
     it do
-      sleep 1
       expect { client.delete_rule(enabled_rule['id']) }.to_not raise_error
     end
     it do
-      sleep 1
       expect { client.delete_rule '' }.to raise_error(Auth0::InvalidParameter)
     end
   end
 
   describe '.update_rule' do
     it do
-      sleep 1
       expect(client.update_rule(disabled_rule['id'], enabled: true)).to(include('enabled' => true))
     end
   end

@@ -9,11 +9,33 @@ describe Auth0::Api::V2::Rules do
 
   context '.rules' do
     it { expect(@instance).to respond_to(:rules) }
+
     it 'is expected to call get /api/v2/rules' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/rules', enabled: nil, fields: nil, include_fields: nil, stage: nil
+        '/api/v2/rules',
+        enabled: nil,
+        fields: nil,
+        include_fields: nil,
+        stage: nil,
+        page: nil,
+        per_page: nil
       )
       expect { @instance.rules }.not_to raise_error
+    end
+
+    it 'is expected to call get /api/v2/rules with pagination' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/rules',
+        enabled: nil,
+        fields: nil,
+        include_fields: nil,
+        stage: nil,
+        page: 1,
+        per_page: 2
+      )
+      expect {
+        @instance.rules(page: 1, per_page: 2)
+      }.not_to raise_error
     end
   end
 
