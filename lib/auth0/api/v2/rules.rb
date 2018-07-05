@@ -14,14 +14,18 @@ module Auth0
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
         # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         # @param stage [string] Retrieves rules that match the execution stage (defaults to login_success).
+        # @param page [int] Page number to get, 0-based.
+        # @param per_page [int] Results per page if also passing a page number.
         #
         # @return [json] Returns the existing rules.
-        def rules(enabled: nil, fields: nil, include_fields: nil, stage: nil)
+        def rules(enabled: nil, fields: nil, include_fields: nil, stage: nil, page: nil, per_page: nil)
           request_params = {
             enabled:          enabled,
             fields:           fields,
             include_fields:   include_fields,
-            stage:            stage
+            stage:            stage,
+            page:             !page.nil? ? page.to_i : nil,
+            per_page:         !page.nil? && !per_page.nil? ? per_page.to_i : nil
           }
           get(rules_path, request_params)
         end
