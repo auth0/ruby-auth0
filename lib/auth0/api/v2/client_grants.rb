@@ -7,10 +7,15 @@ module Auth0
 
         # Retrieves a list of all client grants.
         # @see https://auth0.com/docs/api/management/v2#!/client_grants/get_client_grants
-        #
+        # @param page [int] Page number to get, 0-based.
+        # @param per_page [int] Results per page if also passing a page number.
         # @return [json] Returns the client grants.
-        def client_grants
-          get(client_grants_path)
+        def client_grants (page: nil, per_page: nil)
+          request_params = {
+            page: !page.nil? ? page.to_i : nil,
+            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
+          }
+          get(client_grants_path, request_params)
         end
         alias get_all_client_grants client_grants
 
