@@ -52,7 +52,7 @@ describe Auth0::Api::V2::Users do
           client.users(
             per_page: 1,
             fields: 'user_id',
-            q: "updated_at:>=2016-01-01",
+            q: "updated_at:{2016-01-01 TO *}",
             search_engine: 'v2'
           ).first
         ).to include('user_id')
