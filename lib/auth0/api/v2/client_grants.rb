@@ -12,8 +12,8 @@ module Auth0
         # @return [json] Returns the client grants.
         def client_grants (page: nil, per_page: nil)
           request_params = {
-            page: !page.nil? ? page.to_i : nil,
-            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
+            page: page,
+            per_page: per_page
           }
           get(client_grants_path, request_params)
         end
