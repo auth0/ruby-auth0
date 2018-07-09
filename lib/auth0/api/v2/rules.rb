@@ -24,8 +24,8 @@ module Auth0
             fields:           fields,
             include_fields:   include_fields,
             stage:            stage,
-            page:             !page.nil? ? page.to_i : nil,
-            per_page:         !page.nil? && !per_page.nil? ? per_page.to_i : nil
+            page:             page,
+            per_page:         per_page
           }
           get(rules_path, request_params)
         end

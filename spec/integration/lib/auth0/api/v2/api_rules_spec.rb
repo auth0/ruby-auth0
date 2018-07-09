@@ -31,23 +31,29 @@ describe Auth0::Api::V2::Rules do
 
     context '#filters' do
       it do
+        sleep 0.5
         expect(client.rules(enabled: true).size).to be >= 1
       end
 
       it do
+        sleep 0.5
         expect(client.rules(enabled: false).size).to be >= 1
       end
 
       it do
+        sleep 0.5
         expect(client.rules(enabled: true, fields: [:script, :order].join(',')).first).to(include('script', 'order'))
       end
 
       it do
+        sleep 0.5
         expect(client.rules(enabled: true, fields: [:script].join(',')).first).to_not(include('order', 'name'))
       end
 
       it do
+        sleep 0.5
         rule_1 = client.rules(fields: :name, page: 0, per_page: 2)
+        sleep 0.5
         rule_2 = client.rules(fields: :name, page: 1, per_page: 1)
         expect(rule_1.last).to eq(rule_2.first)
       end
