@@ -328,7 +328,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to return a logout url with federated parameter' do
       expect(@instance.logout_url(return_to, false, true).to_s).to eq(
         "https://#{@instance.domain}/v2/logout" +
-          "?returnTo=#{return_to}&federated"
+          "?returnTo=#{return_to}&federated=1"
       )
     end
   end
