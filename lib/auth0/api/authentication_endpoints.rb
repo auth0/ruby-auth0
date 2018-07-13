@@ -1,14 +1,14 @@
 # rubocop:disable Metrics/ModuleLength
 module Auth0
   module Api
-    # {https://auth0.com/docs/auth-api}
-    # Methods to use the authentication endpoints
+    # {https://auth0.com/docs/api/authentication}
+    # Methods to use the Authentication API
     module AuthenticationEndpoints
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
-      # Retrives an access token
-      # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
+      # Retrieve an access token.
+      # @see https://auth0.com/docs/api/authentication#client-credentials
       # @param access_token [string] Social provider's access_token
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
       # @return [json] Returns the access token
@@ -22,12 +22,12 @@ module Auth0
         end
       end
 
-      # Gets the user tokens using the code obtained through passive authentication in the specified connection
-      # @see https://auth0.com/docs/auth-api#!#post--oauth-access_token
+      # Get access and ID tokens using an Authorization Code.
+      # @see https://auth0.com/docs/api/authentication#authorization-code
+      # @param code [string] The access code obtained through passive authentication
+      # @param redirect_uri [string] Url to redirect after authorization
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
       # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
-      # @param redirect_uri [string] Url to redirect after authorization
-      # @param redirect_uri [string] The access code obtained through passive authentication
       # @return [json] Returns the access_token and id_token
       def obtain_user_tokens(code, redirect_uri, connection = 'facebook', scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
@@ -44,15 +44,15 @@ module Auth0
         post('/oauth/token', request_params)
       end
 
-      # Logins using username/password
-      # @see https://auth0.com/docs/auth-api#!#post--oauth-ro
-      # @param username [string] Username
-      # @param password [string] User's password
-      # @param scope [string] Defaults to openid. Can be 'openid name email', 'openid offline_access'
+      # Get access and ID tokens using Resource Owner Password.
+      # @see https://auth0.com/docs/api/authentication#resource-owner-password
+      # @param username [string] Username or email
+      # @param password [string] Password
       # @param id_token [string] Token's id
-      # @param connection_name [string] Connection name. Works for database connections, passwordless connections,
-      # Active Directory/LDAP, Windows Azure AD and ADF
-      # @return [json] Returns the access token and id token
+      # @param connection_name [string] Connection name; use a database or
+      #    passwordless connection, Active Directory/LDAP, Windows Azure or ADF
+      # @param options [hash] Additional options - :scope, :grant_type, :device
+      # @return [json] Returns the access_token and id_token
       def login(username, password, id_token = nil, connection_name = UP_AUTH, options = {})
         raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
@@ -70,73 +70,76 @@ module Auth0
         post('/oauth/token', request_params)
       end
 
-      # Signup using username/password
-      # @see https://auth0.com/docs/auth-api#!#post--dbconnections-signup
-      # @param email [string] User email
-      # @param password [string] User's password
-      # @param connection_name [string] Connection name. Works for database connections.
+      # Sign up with a database connection using a username and password.
+      # @see https://auth0.com/docs/api/authentication#signup
+      # @param email [string] New user's email
+      # @param password [string] New user's password
+      # @param connection_name [string] Database connection name
       # @return [json] Returns the created user
       def signup(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
         request_params = {
-          client_id:  @client_id,
           email:      email,
+          password:   password,
           connection: connection_name,
-          password:   password
+          client_id:  @client_id
         }
         post('/dbconnections/signup', request_params)
       end
 
-      # Asks to change a password for a given user.
-      # Send an email to the user.
-      # @see https://auth0.com/docs/auth-api#!#post--dbconnections-change_password
-      # @param email [string] User email
-      # @param password [string] User's new password
-      # @param connection_name [string] Connection name. Works for database connections.
+      # Change a user's password or trigger a password reset email.
+      # @see https://auth0.com/docs/api/authentication#change-password
+      # @see https://auth0.com/docs/connections/database/password-change
+      # @param email [string] User's current email
+      # @param password [string] User's new password; empty to trigger a
+      #   password reset email
+      # @param connection_name [string] Database connection name
       def change_password(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
-          client_id:  @client_id,
           email:      email,
+          password:   password,
           connection: connection_name,
-          password:   password
+          client_id:  @client_id
         }
         post('/dbconnections/change_password', request_params)
       end
 
-      # Start passwordless workflow sending an email
-      # @see https://auth0.com/docs/auth-api#!#post--with_email
-      # @param email [string] User email
-      # @param send [string] Defaults to 'link'. Can be 'code'. You can then authenticate with this user opening the link
-      # @param auth_params [hash] Append/override parameters to the link (like scope, redirect_uri, protocol, etc.)
+      # Start Passwordless email login flow.
+      # @see https://auth0.com/docs/api/authentication#get-code-or-link
+      # @see https://auth0.com/docs/connections/passwordless#passwordless-on-regular-web-apps
+      # @param email [string] Email to send a link or code
+      # @param send [string] Pass 'link' to send a magic link, 'code' to send a code
+      # @param auth_params [hash] Append or override the magic link parameters
       def start_passwordless_email_flow(email, send = 'link', auth_params = {})
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         request_params = {
-          client_id:   @client_id,
-          connection:  'email',
           email:       email,
           send:        send,
-          authParams:  auth_params
+          authParams:  auth_params,
+          connection:  'email',
+          client_id:   @client_id
         }
         post('/passwordless/start', request_params)
       end
 
-      # Start passwordless workflow sending a SMS message
-      # @see https://auth0.com/docs/auth-api#!#post--with_sms
+      # Start Passwordless SMS login flow.
+      # @see https://auth0.com/docs/api/authentication#get-code-or-link
+      # @see https://auth0.com/docs/connections/passwordless#passwordless-on-regular-web-apps
       # @param phone_number [string] User's phone number.
       def start_passwordless_sms_flow(phone_number)
         raise Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
         request_params = {
-          client_id:    @client_id,
+          phone_number: phone_number,
           connection:   'sms',
-          phone_number: phone_number
+          client_id:    @client_id
         }
         post('/passwordless/start', request_params)
       end
 
-      # Logins using phone number/verification code.
-      # @see https://auth0.com/docs/auth-api#!#post--ro_with_sms
+      # Login using phone number + verification code.
+      # @see https://auth0.com/docs/api/authentication#resource-owner
       # @param phone_number [string] User's phone number.
       # @param code [string] Verification code.
       # @return [json] Returns the access token and id token
@@ -154,23 +157,23 @@ module Auth0
         post('/oauth/ro', request_params)
       end
 
-      # Retrives the SAML 2.0 metadata
-      # @see https://auth0.com/docs/auth-api#!#get--samlp--client_id-
+      # Retrive SAML 2.0 metadata XMLfor an Application.
+      # @see https://auth0.com/docs/api/authentication#get-metadata
       # @return [xml] SAML 2.0 metadata
       def saml_metadata
         get("/samlp/metadata/#{@client_id}")
       end
 
-      # Retrives the WS-Federation metadata
-      # @see https://auth0.com/docs/auth-api#!#get--wsfed--client_id-
-      # @return [xml] Federation Metadata
+      # Retrieve WS-Federation metadata XML for a tenant.
+      # @see https://auth0.com/docs/api/authentication#get-metadata36
+      # @return [xml] WS-Federation metadata
       def wsfed_metadata
         get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
       end
 
-      # Validates a JSON Web Token (signature and expiration)
-      # @see https://auth0.com/docs/auth-api#!#post--tokeninfo
-      # @param id_token [string] Token's id.
+      # Validate a JSON Web Token (signature and expiration).
+      # @see https://auth0.com/docs/api/authentication#get-token-info
+      # @param id_token [string] ID Token to use
       # @return User information associated with the user id (sub property) of the token.
       def token_info(id_token)
         raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
@@ -178,8 +181,8 @@ module Auth0
         post('/tokeninfo', request_params)
       end
 
-      # Refreshes a delegation token
-      # @see https://auth0.com/docs/auth-api#!#post--delegation
+      # Refresh a delegation token.
+      # @see https://auth0.com/docs/api/authentication#delegation
       # @param refresh_token [string] Token to refresh
       # @param target [string] Target to sign the new token.
       # @param scope [string] Defaults to openid. Can be 'openid name email'.
@@ -200,8 +203,8 @@ module Auth0
         post('/delegation', request_params)
       end
 
-      # Retrives a delegation token
-      # @see https://auth0.com/docs/auth-api#!#post--delegation
+      # Retrieve a delegation token.
+      # @see https://auth0.com/docs/api/authentication#delegation
       # @param id_token [string] Token's id.
       # @param target [string] Target to sign the new token.
       # @param scope [string] Defaults to openid. Can be 'openid name email'.
@@ -222,8 +225,8 @@ module Auth0
         post('/delegation', request_params)
       end
 
-      # Retrives an impersonation URL to login as another user
-      # @see https://auth0.com/docs/auth-api#!#post--users--user_id--impersonate
+      # Retrieve an impersonation URL to login as another user.
+      # @see https://auth0.com/docs/api/authentication#impersonation
       # @param user_id [string] Impersonate user id
       # @param app_client_id [string] Application client id
       # @param impersonator_id [string] Impersonator user id id.
@@ -251,9 +254,10 @@ module Auth0
         authorization_header @token
         result
       end
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
-      # Unlinks a User
-      # @see https://auth0.com/docs/auth-api#!#post--unlink
+      # Unlink a user's account from the identity provider.
+      # @see https://auth0.com/docs/api/authentication#unlink
       # @param access_token [string] Logged-in user access token
       # @param user_id [string] User Id
       def unlink_user(access_token, user_id)
@@ -266,16 +270,16 @@ module Auth0
         post('/unlink', request_params)
       end
 
-      # Returns the user information based on the Auth0 access token.
-      # @see https://auth0.com/docs/auth-api#!#get--userinfo
+      # Return the user information based on the Auth0 access token.
+      # @see https://auth0.com/docs/api/authentication#get-user-info
       # @return [json] User information based on the Auth0 access token
       def user_info
         get('/userinfo')
       end
 
-      # Returns an authorization URL, triggers a redirect.
-      # @see https://auth0.com/docs/auth-api#!#get--authorize_social
-      # @param redirect_uri [string] Url to redirect after authorization
+      # Return an authorization URL.
+      # @see https://auth0.com/docs/api/authentication#authorization-code-grant
+      # @param redirect_uri [string] URL to redirect after authorization
       # @param options [hash] Can contain response_type, connection, state and additional_parameters.
       # @return [url] Authorization URL.
       def authorization_url(redirect_uri, options = {})
@@ -304,11 +308,12 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/logout', query: to_query(request_params))
       end
 
-      # Returns a samlp URL. The SAML Request AssertionConsumerServiceURL will be used to POST back the assertion
-      # and it has to match with the application callback URL.
-      # @see https://auth0.com/docs/auth-api#get--samlp--client_id-
-      # @param connection [string] to login with a specific provider.
-      # @return [url] samlp URL.
+      # Return a SAMLP URL.
+      # The SAML Request AssertionConsumerServiceURL will be used to POST back
+      # the assertion and it must match with the application callback URL.
+      # @see https://auth0.com/docs/api/authentication#accept-request
+      # @param connection [string] Connection to use; empty to show all
+      # @return [url] SAMLP URL
       def samlp_url(connection = UP_AUTH)
         request_params = {
           connection: connection
@@ -316,10 +321,10 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: "/samlp/#{@client_id}", query: to_query(request_params))
       end
 
-      # Returns a wsfed URL.
-      # @see https://auth0.com/docs/auth-api#get--wsfed--client_id-
-      # @param connection [string] to login with a specific provider.
-      # @return [url] wsfed URL.
+      # Return a WS-Federation URL.
+      # @see https://auth0.com/docs/api/authentication#accept-request35
+      # @param connection [string] Connection to use; empty to show all
+      # @return [url] WS-Federation URL
       def wsfed_url(connection = UP_AUTH)
         request_params = {
           whr: connection
@@ -329,9 +334,11 @@ module Auth0
 
       private
 
+      # Build a URL query string from a hash.
       def to_query(hash)
         hash.map { |k, v| "#{k}=#{URI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
       end
     end
   end
 end
+# rubocop:enable Metrics/ModuleLength
