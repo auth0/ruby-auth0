@@ -296,18 +296,21 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#logout
       # @see https://auth0.com/docs/logout
       # @param return_to [string] URL to redirect after logout.
-      # @param client [bool] Include the client_id in the logout URL.
+      # @param include_client [bool] Include the client_id in the logout URL.
       # @param federated [boolean] Perform a federated logout.
       # @return [url] Logout URI
-      def logout_url(return_to, client = false, federated = false)
+      def logout_url(return_to, include_client = false, federated = false)
         request_params = {
           returnTo: return_to,
-          client_id: client ? @client_id : nil
+          client_id: include_client ? @client_id : nil,
+          federated: federated ? '1' : nil
         }
-        query = to_query(request_params)
-+       query += '&federated' if federated
 
-        URI::HTTPS.build(host: @domain, path: '/v2/logout', query: query)
+        URI::HTTPS.build(
+          host: @domain,
+          path: '/v2/logout',
+          query: to_query(request_params)
+        )
       end
 
       # Returns a samlp URL. The SAML Request AssertionConsumerServiceURL will be used to POST back the assertion
