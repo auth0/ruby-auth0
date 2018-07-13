@@ -299,7 +299,7 @@ module Auth0
       # @param include_client [bool] Include the client_id in the logout URL.
       # @param federated [boolean] Perform a federated logout.
       # @return [url] Logout URI
-      def logout_url(return_to, include_client = false, federated = false)
+      def logout_url(return_to, include_client: false, federated: false)
         request_params = {
           returnTo: return_to,
           client_id: include_client ? @client_id : nil,
