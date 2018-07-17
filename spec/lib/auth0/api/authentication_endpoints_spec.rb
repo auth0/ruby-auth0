@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
   before :all do
@@ -13,7 +14,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
       )
-        .and_return('access_token' => 'AccessToken')
+                                        .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
       )
@@ -28,7 +29,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
                                scope: 'openid'
       )
-        .and_return('access_token' => 'AccessToken')
+                                        .and_return('access_token' => 'AccessToken')
       expect(@instance).to receive(:post).with(
         '/oauth/access_token', client_id: @instance.client_id, access_token: 'access_token', connection: 'facebook',
                                scope: 'openid'
@@ -44,7 +45,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
                         connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
       )
-        .and_return('user_tokens' => 'UserToken')
+                                        .and_return('user_tokens' => 'UserToken')
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
                         connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
@@ -72,55 +73,93 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.login('username', '') }.to raise_error 'Must supply a valid password' }
   end
 
+  # Auth0::API::AuthenticationEndpoints.signup
   context '.signup' do
     it { expect(@instance).to respond_to(:signup) }
-    it 'is expected to make post to /dbconnections/signup' do
+
+    it 'is expected to make a post request to /dbconnections/signup' do
       expect(@instance).to receive(:post).with(
         '/dbconnections/signup',
-        client_id: @instance.client_id, email: 'test@test.com',
-        password: 'password', connection: 'User'
+        client_id: @instance.client_id,
+        email: 'test@test.com',
+        password: 'password',
+        connection: 'User'
       )
       @instance.signup('test@test.com', 'password', 'User')
     end
-    it { expect { @instance.signup('', '') }.to raise_error 'Must supply a valid email' }
-    it { expect { @instance.signup('email', '') }.to raise_error 'Must supply a valid password' }
+
+    it 'is expected to raise an error with an empty email' do
+      expect do
+        @instance.signup('', '')
+      end.to raise_error 'Must supply a valid email'
+    end
+
+    it 'is expected to raise an error with an empty password' do
+      expect do
+        @instance.signup('email', '')
+      end.to raise_error 'Must supply a valid password'
+    end
   end
 
+  # Auth0::API::AuthenticationEndpoints.change_password
   context '.change_password' do
     it { expect(@instance).to respond_to(:change_password) }
+
     it 'is expected to make post to /dbconnections/change_password' do
       expect(@instance).to receive(:post).with(
         '/dbconnections/change_password',
-        client_id: @instance.client_id, email: 'test@test.com',
-        password: 'password', connection: 'User'
+        client_id: @instance.client_id,
+        email: 'test@test.com',
+        password: 'password',
+        connection: 'User'
       )
       @instance.change_password('test@test.com', 'password', 'User')
     end
-    it { expect { @instance.change_password('', '', '') }.to raise_error 'Must supply a valid email' }
+
+    it 'is expected to raise an error with an empty email' do
+      expect do
+        @instance.change_password('', '', '')
+      end.to raise_error 'Must supply a valid email'
+    end
   end
 
+  # Auth0::API::AuthenticationEndpoints.start_passwordless_email_flow
   context '.start_passwordless_email_flow' do
     it { expect(@instance).to respond_to(:start_passwordless_email_flow) }
+
     it 'is expected to make post to /passwordless/start' do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
         client_id: @instance.client_id,
         connection:  'email',
         email: 'test@test.com',
-        send: 'link',
+        send: 'code',
         authParams: {
           scope: 'scope',
           protocol: 'protocol'
         }
       )
-      @instance.start_passwordless_email_flow('test@test.com', 'link', scope: 'scope', protocol: 'protocol')
+      @instance.start_passwordless_email_flow(
+        'test@test.com',
+        'code',
+        scope: 'scope',
+        protocol: 'protocol'
+      )
     end
-    it { expect { @instance.start_passwordless_email_flow('', '', '') }.to raise_error 'Must supply a valid email' }
+
+    it 'is expected to raise an error with an empty email' do
+      expect do
+        @instance.start_passwordless_email_flow('', '', '')
+      end.to raise_error 'Must supply a valid email'
+    end
   end
 
+  # Auth0::API::AuthenticationEndpoints.start_passwordless_sms_flow
   context '.start_passwordless_sms_flow' do
     let(:phone_number) { Faker::PhoneNumber.cell_phone }
+
     it { expect(@instance).to respond_to(:start_passwordless_sms_flow) }
+
     it 'is expected to make post to /passwordless/start' do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
@@ -130,7 +169,12 @@ describe Auth0::Api::AuthenticationEndpoints do
       )
       @instance.start_passwordless_sms_flow(phone_number)
     end
-    it { expect { @instance.start_passwordless_sms_flow('') }.to raise_error 'Must supply a valid phone number' }
+
+    it 'is expected to raise an error with an empty phone number' do
+      expect do
+        @instance.start_passwordless_sms_flow('')
+      end.to raise_error 'Must supply a valid phone number'
+    end
   end
 
   context '.phone_login' do
@@ -150,54 +194,30 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.phone_login('phone', '') }.to raise_error 'Must supply a valid code' }
   end
 
+  # Auth0::API::AuthenticationEndpoints.saml_metadata
   context '.saml_metadata' do
     it { expect(@instance).to respond_to(:saml_metadata) }
-    it 'is expected to make post to /samlp/metadata/client-id' do
-      expect(@instance).to receive(:get).with("/samlp/metadata/#{@instance.client_id}")
+
+    it 'is expected to make post to SAMLP metadata endpoint' do
+      expect(@instance).to receive(:get).with(
+        "/samlp/metadata/#{@instance.client_id}"
+      )
       @instance.saml_metadata
     end
   end
 
+  # Auth0::API::AuthenticationEndpoints.wsfed_metadata
   context '.wsfed_metadata' do
     it { expect(@instance).to respond_to(:wsfed_metadata) }
-    it 'is expected to make post to /wsfed/FederationMetadata/2007-06/FederationMetadata.xml' do
-      expect(@instance).to receive(:get).with('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
+
+    it 'is expected to make post to WS-Fed metadata endpoint' do
+      expect(@instance).to receive(:get).with(
+        '/wsfed/FederationMetadata/2007-06/FederationMetadata.xml'
+      )
       @instance.wsfed_metadata
     end
   end
 
-  context '.authorization_url' do
-    let(:redirect_uri) { 'http://redirect.com' }
-    it { expect(@instance).to respond_to(:authorization_url) }
-    it 'is expected to return an authorization url' do
-      expect(@instance.authorization_url(redirect_uri).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_uri=#{redirect_uri}"
-      )
-    end
-    let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
-    it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, additional_parameters).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_uri=#{redirect_uri}&aparam1=test1"
-      )
-    end
-    let(:state) { { state: 'state1' } }
-    it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, state).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "redirect_uri=#{redirect_uri}&state=state1"
-      )
-    end
-    let(:connection) { { connection: 'connection-1' } }
-    it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, connection).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        "connection=connection-1&redirect_uri=#{redirect_uri}"
-      )
-    end
-    it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
-  end
   context '.token_info' do
     it { expect(@instance).to respond_to(:token_info) }
     it 'is expected to make post to /tokeinfo' do
@@ -308,52 +328,97 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
+  context '.authorization_url' do
+    let(:redirect_uri) { 'http://redirect.com' }
+    it { expect(@instance).to respond_to(:authorization_url) }
+    it 'is expected to return an authorization url' do
+      expect(@instance.authorization_url(redirect_uri).to_s).to eq(
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        'redirect_uri=http%3A%2F%2Fredirect.com'
+      )
+    end
+    let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_uri, additional_parameters).to_s).to eq(
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        'redirect_uri=http%3A%2F%2Fredirect.com&aparam1=test1'
+      )
+    end
+    let(:state) { { state: 'state1' } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_uri, state).to_s).to eq(
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        'redirect_uri=http%3A%2F%2Fredirect.com&state=state1'
+      )
+    end
+    let(:connection) { { connection: 'connection-1' } }
+    it 'is expected to return an authorization url with additionalParameters' do
+      expect(@instance.authorization_url(redirect_uri, connection).to_s).to eq(
+        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
+        'connection=connection-1&redirect_uri=http%3A%2F%2Fredirect.com'
+      )
+    end
+    it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
+  end
+
+  # Auth0::API::AuthenticationEndpoints.logout_url
   context '.logout_url' do
     let(:return_to) { 'http://returnto.com' }
+
     it { expect(@instance).to respond_to(:logout_url) }
 
     it 'is expected to return a logout url' do
       expect(@instance.logout_url(return_to).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout?returnTo=#{return_to}"
+        "https://#{@instance.domain}/v2/logout?" \
+          'returnTo=http%3A%2F%2Freturnto.com'
       )
     end
 
     it 'is expected to return a logout url with a client ID' do
       expect(@instance.logout_url(return_to, include_client: true).to_s).to eq(
         "https://#{@instance.domain}/v2/logout" +
-          "?returnTo=#{return_to}&client_id=#{@instance.client_id}"
+          "?returnTo=http%3A%2F%2Freturnto.com&client_id=#{@instance.client_id}"
       )
     end
 
     it 'is expected to return a logout url with federated parameter' do
       expect(@instance.logout_url(return_to, federated: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout" +
-          "?returnTo=#{return_to}&federated=1"
+        "https://#{@instance.domain}/v2/logout?" \
+          'returnTo=http%3A%2F%2Freturnto.com&federated=1'
       )
     end
   end
 
+  # Auth0::API::AuthenticationEndpoints.samlp_url
   context '.samlp_url' do
     it { expect(@instance).to respond_to(:samlp_url) }
+
     it 'is expected to get the samlp url' do
       expect(@instance.samlp_url.to_s).to eq(
-        "https://#{@instance.domain}/samlp/#{@instance.client_id}?connection=Username-Password-Authentication"
+        "https://#{@instance.domain}/samlp/#{@instance.client_id}" \
+          '?connection=Username-Password-Authentication'
       )
     end
+
     it 'is expected to get the samlp url with fb connection' do
       expect(@instance.samlp_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/samlp/#{@instance.client_id}?connection=facebook"
+        "https://#{@instance.domain}/samlp/#{@instance.client_id}" \
+          '?connection=facebook'
       )
     end
   end
 
+  # Auth0::API::AuthenticationEndpoints.wsfed_url
   context '.wsfed_url' do
     it { expect(@instance).to respond_to(:wsfed_url) }
+
     it 'is expected to get the wsfed url' do
       expect(@instance.wsfed_url.to_s).to eq(
-        "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=Username-Password-Authentication"
+        "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
+          '?whr=Username-Password-Authentication'
       )
     end
+
     it 'is expected to get the wsfed url with fb connection' do
       expect(@instance.wsfed_url('facebook').to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=facebook"
@@ -361,3 +426,4 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
