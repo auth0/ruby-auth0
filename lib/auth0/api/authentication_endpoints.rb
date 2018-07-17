@@ -345,7 +345,7 @@ module Auth0
 
       # Build a URL query string from a hash.
       def to_query(hash)
-        hash.map { |k, v| "#{k}=#{URI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
+        hash.map { |k, v| "#{k}=#{CGI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
       end
     end
   end
