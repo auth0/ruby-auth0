@@ -138,25 +138,6 @@ module Auth0
         post('/passwordless/start', request_params)
       end
 
-      # Login using phone number + verification code.
-      # @see https://auth0.com/docs/api/authentication#resource-owner
-      # @param phone_number [string] User's phone number.
-      # @param code [string] Verification code.
-      # @return [json] Returns the access token and id token
-      def phone_login(phone_number, code, scope = 'openid')
-        raise Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
-        request_params = {
-          client_id:  @client_id,
-          username:   phone_number,
-          password:   code,
-          scope:      scope,
-          connection: 'sms',
-          grant_type: 'password'
-        }
-        post('/oauth/ro', request_params)
-      end
-
       # Retrive SAML 2.0 metadata XMLfor an Application.
       # @see https://auth0.com/docs/api/authentication#get-metadata
       # @return [xml] SAML 2.0 metadata
@@ -169,105 +150,6 @@ module Auth0
       # @return [xml] WS-Federation metadata
       def wsfed_metadata
         get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
-      end
-
-      # Validate a JSON Web Token (signature and expiration).
-      # @see https://auth0.com/docs/api/authentication#get-token-info
-      # @param id_token [string] ID Token to use
-      # @return User information associated with the user id (sub property) of the token.
-      def token_info(id_token)
-        raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
-        request_params = { id_token: id_token }
-        post('/tokeninfo', request_params)
-      end
-
-      # Refresh a delegation token.
-      # @see https://auth0.com/docs/api/authentication#delegation
-      # @param refresh_token [string] Token to refresh
-      # @param target [string] Target to sign the new token.
-      # @param scope [string] Defaults to openid. Can be 'openid name email'.
-      # @param api_type [string] Defaults to app. Can be aws, azure_sb, azure_blob, firebase, layer, salesforce_api,
-      #  salesforce_sandbox_api, sap_api or wams
-      # @param extra_parameters [hash] Extra parameters.
-      # @return [json] Returns the refreshed delegation token
-      def refresh_delegation(refresh_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
-        raise Auth0::InvalidParameter, 'Must supply a valid token to refresh' if refresh_token.to_s.empty?
-        request_params = {
-          client_id:      @client_id,
-          grant_type:     JWT_BEARER,
-          refresh_token:  refresh_token,
-          target:         target,
-          api_type:       api_type,
-          scope:          scope
-        }.merge(extra_parameters)
-        post('/delegation', request_params)
-      end
-
-      # Retrieve a delegation token.
-      # @see https://auth0.com/docs/api/authentication#delegation
-      # @param id_token [string] Token's id.
-      # @param target [string] Target to sign the new token.
-      # @param scope [string] Defaults to openid. Can be 'openid name email'.
-      # @param api_type [string] Defaults to app. Can be aws, azure_sb, azure_blob, firebase, layer, salesforce_api,
-      #  salesforce_sandbox_api, sap_api or wams
-      # @param extra_parameters [hash] Extra parameters.
-      # @return [json] Returns the refreshed delegation token
-      def delegation(id_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
-        raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
-        request_params = {
-          client_id:  @client_id,
-          grant_type: JWT_BEARER,
-          id_token:   id_token,
-          target:     target,
-          api_type:   api_type,
-          scope:      scope
-        }.merge(extra_parameters)
-        post('/delegation', request_params)
-      end
-
-      # Retrieve an impersonation URL to login as another user.
-      # @see https://auth0.com/docs/api/authentication#impersonation
-      # @param user_id [string] Impersonate user id
-      # @param app_client_id [string] Application client id
-      # @param impersonator_id [string] Impersonator user id id.
-      # @param options [string] Additional Parameters
-      # @return [string] Impersonation URL
-      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      def impersonate(user_id, app_client_id, impersonator_id, options)
-        raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
-        raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
-        authorization_header obtain_access_token
-        request_params = {
-          protocol:         options.fetch(:protocol, 'oauth2'),
-          impersonator_id:  impersonator_id,
-          client_id:        app_client_id,
-          additionalParameters: {
-            response_type:  options.fetch(:response_type, 'code'),
-            state:          options.fetch(:state, ''),
-            scope:          options.fetch(:scope, 'openid'),
-            callback_url:   options.fetch(:callback_url, '')
-          }
-        }
-        result = post("/users/#{user_id}/impersonate", request_params)
-        authorization_header @token
-        result
-      end
-      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
-
-      # Unlink a user's account from the identity provider.
-      # @see https://auth0.com/docs/api/authentication#unlink
-      # @param access_token [string] Logged-in user access token
-      # @param user_id [string] User Id
-      def unlink_user(access_token, user_id)
-        raise Auth0::InvalidParameter, 'Must supply a valid access_token' if access_token.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
-        request_params = {
-          access_token:  access_token,
-          user_id: user_id
-        }
-        post('/unlink', request_params)
       end
 
       # Return the user information based on the Auth0 access token.
@@ -339,6 +221,130 @@ module Auth0
           whr: connection
         }
         URI::HTTPS.build(host: @domain, path: "/wsfed/#{@client_id}", query: to_query(request_params))
+      end
+
+      # Login using phone number + verification code.
+      # @deprecated 4.5.0 - Legacy authentication pipeline; use a Password Grant instead
+      # @see https://auth0.com/docs/api/authentication#resource-owner
+      # @param phone_number [string] User's phone number.
+      # @param code [string] Verification code.
+      # @return [json] Returns the access token and id token
+      def phone_login(phone_number, code, scope = 'openid')
+        raise Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
+        request_params = {
+          client_id:  @client_id,
+          username:   phone_number,
+          password:   code,
+          scope:      scope,
+          connection: 'sms',
+          grant_type: 'password'
+        }
+        post('/oauth/ro', request_params)
+      end
+
+      # Validate a JSON Web Token (signature and expiration).
+      # @deprecated 4.5.0 - legacy endpoint, use /userinfo instead.
+      # @see https://auth0.com/docs/api/authentication#get-token-info
+      # @param id_token [string] ID Token to use
+      # @return User information associated with the user id (sub property) of the token.
+      def token_info(id_token)
+        raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
+        request_params = { id_token: id_token }
+        post('/tokeninfo', request_params)
+      end
+
+      # Refresh a delegation token.
+      # @deprecated 4.5.0 - feature is disabled, no replacement currently.
+      # @see https://auth0.com/docs/api/authentication#delegation
+      # @param refresh_token [string] Token to refresh
+      # @param target [string] Target to sign the new token.
+      # @param scope [string] Defaults to openid. Can be 'openid name email'.
+      # @param api_type [string] Defaults to app. Can be aws, azure_sb, azure_blob, firebase, layer, salesforce_api,
+      #  salesforce_sandbox_api, sap_api or wams
+      # @param extra_parameters [hash] Extra parameters.
+      # @return [json] Returns the refreshed delegation token
+      def refresh_delegation(refresh_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
+        raise Auth0::InvalidParameter, 'Must supply a valid token to refresh' if refresh_token.to_s.empty?
+        request_params = {
+          client_id:      @client_id,
+          grant_type:     JWT_BEARER,
+          refresh_token:  refresh_token,
+          target:         target,
+          api_type:       api_type,
+          scope:          scope
+        }.merge(extra_parameters)
+        post('/delegation', request_params)
+      end
+
+      # Retrieve a delegation token.
+      # @deprecated 4.5.0 - feature is disabled, no replacement currently.
+      # @see https://auth0.com/docs/api/authentication#delegation
+      # @param id_token [string] Token's id.
+      # @param target [string] Target to sign the new token.
+      # @param scope [string] Defaults to openid. Can be 'openid name email'.
+      # @param api_type [string] Defaults to app. Can be aws, azure_sb, azure_blob, firebase, layer, salesforce_api,
+      #  salesforce_sandbox_api, sap_api or wams
+      # @param extra_parameters [hash] Extra parameters.
+      # @return [json] Returns the refreshed delegation token
+      def delegation(id_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
+        raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
+        request_params = {
+          client_id:  @client_id,
+          grant_type: JWT_BEARER,
+          id_token:   id_token,
+          target:     target,
+          api_type:   api_type,
+          scope:      scope
+        }.merge(extra_parameters)
+        post('/delegation', request_params)
+      end
+
+      # Retrieve an impersonation URL to login as another user.
+      # @deprecated 4.5.0 - feature is disabled.
+      # @see https://auth0.com/docs/api/authentication#impersonation
+      # @param user_id [string] Impersonate user id
+      # @param app_client_id [string] Application client id
+      # @param impersonator_id [string] Impersonator user id id.
+      # @param options [string] Additional Parameters
+      # @return [string] Impersonation URL
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def impersonate(user_id, app_client_id, impersonator_id, options)
+        raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
+        raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
+        authorization_header obtain_access_token
+        request_params = {
+          protocol:         options.fetch(:protocol, 'oauth2'),
+          impersonator_id:  impersonator_id,
+          client_id:        app_client_id,
+          additionalParameters: {
+            response_type:  options.fetch(:response_type, 'code'),
+            state:          options.fetch(:state, ''),
+            scope:          options.fetch(:scope, 'openid'),
+            callback_url:   options.fetch(:callback_url, '')
+          }
+        }
+        result = post("/users/#{user_id}/impersonate", request_params)
+        authorization_header @token
+        result
+      end
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+
+      # Unlink a user's account from the identity provider.
+      # @deprecated 4.5.0 - endpoint is disabled, use the Management API instead.
+      # @see https://auth0.com/docs/api/authentication#unlink
+      # @param access_token [string] Logged-in user access token
+      # @param user_id [string] User Id
+      def unlink_user(access_token, user_id)
+        raise Auth0::InvalidParameter, 'Must supply a valid access_token' if access_token.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
+        request_params = {
+          access_token:  access_token,
+          user_id: user_id
+        }
+        post('/unlink', request_params)
       end
 
       private
