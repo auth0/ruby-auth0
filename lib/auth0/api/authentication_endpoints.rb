@@ -138,7 +138,7 @@ module Auth0
         post('/passwordless/start', request_params)
       end
 
-      # Retrive SAML 2.0 metadata XMLfor an Application.
+      # Retrive SAML 2.0 metadata XML for an Application.
       # @see https://auth0.com/docs/api/authentication#get-metadata
       # @return [xml] SAML 2.0 metadata
       def saml_metadata
@@ -224,7 +224,8 @@ module Auth0
       end
 
       # Login using phone number + verification code.
-      # @deprecated 4.5.0 - Legacy authentication pipeline; use a Password Grant instead
+      # @deprecated 4.5.0 - Legacy authentication pipeline; use a Password Grant
+      #   instead - https://auth0.com/docs/api-auth/tutorials/password-grant
       # @see https://auth0.com/docs/api/authentication#resource-owner
       # @param phone_number [string] User's phone number.
       # @param code [string] Verification code.
@@ -244,7 +245,7 @@ module Auth0
       end
 
       # Validate a JSON Web Token (signature and expiration).
-      # @deprecated 4.5.0 - legacy endpoint, use /userinfo instead.
+      # @deprecated 4.5.0 - Legacy endpoint, use /userinfo instead.
       # @see https://auth0.com/docs/api/authentication#get-token-info
       # @param id_token [string] ID Token to use
       # @return User information associated with the user id (sub property) of the token.
@@ -255,7 +256,8 @@ module Auth0
       end
 
       # Refresh a delegation token.
-      # @deprecated 4.5.0 - feature is disabled, no replacement currently.
+      # @deprecated 4.5.0 - Feature is disabled, no replacement currently; see
+      #   https://auth0.com/docs/api-auth/tutorials/adoption/delegation
       # @see https://auth0.com/docs/api/authentication#delegation
       # @param refresh_token [string] Token to refresh
       # @param target [string] Target to sign the new token.
@@ -278,7 +280,8 @@ module Auth0
       end
 
       # Retrieve a delegation token.
-      # @deprecated 4.5.0 - feature is disabled, no replacement currently.
+      # @deprecated 4.5.0 - Feature is disabled, no replacement currently; see
+      #   https://auth0.com/docs/api-auth/tutorials/adoption/delegation
       # @see https://auth0.com/docs/api/authentication#delegation
       # @param id_token [string] Token's id.
       # @param target [string] Target to sign the new token.
@@ -301,7 +304,7 @@ module Auth0
       end
 
       # Retrieve an impersonation URL to login as another user.
-      # @deprecated 4.5.0 - feature is disabled.
+      # @deprecated 4.5.0 - Feature is disabled.
       # @see https://auth0.com/docs/api/authentication#impersonation
       # @param user_id [string] Impersonate user id
       # @param app_client_id [string] Application client id
@@ -333,7 +336,8 @@ module Auth0
       # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
       # Unlink a user's account from the identity provider.
-      # @deprecated 4.5.0 - endpoint is disabled, use the Management API instead.
+      # @deprecated 4.5.0 - Endpoint is disabled in favor of the Management API;
+      #   see https://auth0.com/docs/migrations/guides/account-linking
       # @see https://auth0.com/docs/api/authentication#unlink
       # @param access_token [string] Logged-in user access token
       # @param user_id [string] User Id
