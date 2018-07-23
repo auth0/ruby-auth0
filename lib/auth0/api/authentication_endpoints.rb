@@ -215,12 +215,22 @@ module Auth0
       # Return a WS-Federation URL.
       # @see https://auth0.com/docs/api/authentication#accept-request35
       # @param connection [string] Connection to use; empty to show all
+      # @param options [hash] Extra options; supports wtrealm, wctx, wreply
       # @return [url] WS-Federation URL
-      def wsfed_url(connection = UP_AUTH)
+      def wsfed_url(connection = UP_AUTH, options = {})
         request_params = {
-          whr: connection
+          whr: connection,
+          wtrealm: options[:wtrealm],
+          wctx: options[:wctx],
+          wreply: options[:wreply]
         }
-        URI::HTTPS.build(host: @domain, path: "/wsfed/#{@client_id}", query: to_query(request_params))
+
+        url_client_id = @client_id if !request_params[:wtrealm]
+        URI::HTTPS.build(
+          host: @domain,
+          path: "/wsfed/#{url_client_id}",
+          query: to_query(request_params)
+        )
       end
 
       # Login using phone number + verification code.
