@@ -1,6 +1,8 @@
 # rubocop:disable Metrics/BlockLength
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
+  UP_AUTH = 'Username-Password-Authentication'.freeze
+
   before :all do
     dummy_instance = DummyClass.new
     dummy_instance.extend(Auth0::Api::AuthenticationEndpoints)
@@ -415,13 +417,33 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to get the wsfed url' do
       expect(@instance.wsfed_url.to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
-          '?whr=Username-Password-Authentication'
+          "?whr=#{UP_AUTH}"
       )
     end
 
     it 'is expected to get the wsfed url with fb connection' do
       expect(@instance.wsfed_url('facebook').to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=facebook"
+      )
+    end
+
+    it 'is expected to get the wsfed url with wctx' do
+      expect(@instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s).to eq(
+        "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
+          "?whr=#{UP_AUTH}&wctx=wctx_test"
+      )
+    end
+
+    it 'is expected to get the wsfed url with wtrealm and wreply' do
+      expect(@instance.wsfed_url(
+        UP_AUTH,
+        {
+          wtrealm: 'wtrealm_test',
+          wreply: 'wreply_test'
+        }
+      ).to_s).to eq(
+        "https://#{@instance.domain}/wsfed/?whr=#{UP_AUTH}" \
+          '&wtrealm=wtrealm_test&wreply=wreply_test'
       )
     end
   end
