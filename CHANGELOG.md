@@ -1,42 +1,78 @@
 # Change Log
 
-## [v4.4.0](https://github.com/auth0/ruby-auth0/tree/v4.4.0) (2018-02-19)
-[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.2.0...v4.4.0)
-
-Note: If you are using the `login` endpoint, you will need to enable the [Resource Owner Password Grant](https://auth0.com/docs/clients/client-grant-types).
+## [v4.5.0](https://github.com/auth0/ruby-auth0/tree/v4.5.0) (2018-07-26)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.4.0...v4.5.0)
 
 **Closed issues:**
 
-- Vulnerable dependency: yard. [\#99]
-https://github.com/auth0/ruby-auth0/issues/99
-
-- Unsupported on latest ruby version. [\#83]
-https://github.com/auth0/ruby-auth0/issues/83
-
-- Outdated dependencies in ror-api example. [\#75]
-https://github.com/auth0/ruby-auth0/issues/75
-
-- Authentication Login is using `/oauth/ro` [\#89]
-https://github.com/auth0/ruby-auth0/issues/89
+- New version with updated rest-client dependency [\#93](https://github.com/auth0/ruby-auth0/issues/93)
+- Bug?: `result` from auth0/mixins/httpproxy.rb returns 'nil' [\#88](https://github.com/auth0/ruby-auth0/issues/88)
+- import\_users fails with EOFError [\#56](https://github.com/auth0/ruby-auth0/issues/56)
+- Using inside of a Rails API [\#55](https://github.com/auth0/ruby-auth0/issues/55)
+- Add documentation? [\#102](https://github.com/auth0/ruby-auth0/issues/102)
+- logout\_url does not include client\_id parameter [\#81](https://github.com/auth0/ruby-auth0/issues/81)
 
 **Merged pull requests:**
 
+- Correctly default grant\_type to 'password' in login method [\#107](https://github.com/auth0/ruby-auth0/pull/107) ([psparrow](https://github.com/psparrow))
+- Add additional parameters for WS-Fed URL [\#123](https://github.com/auth0/ruby-auth0/pull/123) ([joshcanhelp](https://github.com/joshcanhelp))
+- Deprecate Authentication API endpoints [\#121](https://github.com/auth0/ruby-auth0/pull/121) ([joshcanhelp](https://github.com/joshcanhelp))
+- Clean up auth endpoint tests [\#120](https://github.com/auth0/ruby-auth0/pull/120) ([joshcanhelp](https://github.com/joshcanhelp))
+- Fix docblocks for Authentication API endpoints [\#119](https://github.com/auth0/ruby-auth0/pull/119) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add Client ID to logout\_url [\#118](https://github.com/auth0/ruby-auth0/pull/118) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add pagination and tests for Rules endpoint [\#117](https://github.com/auth0/ruby-auth0/pull/117) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add pagination and tests for Client Grants [\#116](https://github.com/auth0/ruby-auth0/pull/116) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add search\_engine parameter to Users endpoint + tests [\#115](https://github.com/auth0/ruby-auth0/pull/115) ([joshcanhelp](https://github.com/joshcanhelp))
+- Improve README [\#114](https://github.com/auth0/ruby-auth0/pull/114) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add pagination and tests to Clients and Connections endpoints [\#113](https://github.com/auth0/ruby-auth0/pull/113) ([joshcanhelp](https://github.com/joshcanhelp))
+- Use Secure RubyGems Source [\#112](https://github.com/auth0/ruby-auth0/pull/112) ([markprovan](https://github.com/markprovan))
+
+## [v4.4.0](https://github.com/auth0/ruby-auth0/tree/v4.4.0) (2018-02-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.3.0...v4.4.0)
+
+**Closed issues:**
+
+- Authentication Login is using `/oauth/ro`.  [\#89](https://github.com/auth0/ruby-auth0/issues/89)
+
+## [v4.3.0](https://github.com/auth0/ruby-auth0/tree/v4.3.0) (2018-02-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.2.0...v4.3.0)
+
+**Merged pull requests:**
+
+- Fix script publish gem [\#106](https://github.com/auth0/ruby-auth0/pull/106) ([alexisluque](https://github.com/alexisluque))
 - Add support to /api/v2/users-by-email [\#105](https://github.com/auth0/ruby-auth0/pull/105) ([edgurgel](https://github.com/edgurgel))
+- Update /login to use /oauth/token [\#94](https://github.com/auth0/ruby-auth0/pull/94) ([Zensaburou](https://github.com/Zensaburou))
+- Fix error in the readme regarding timeouts [\#90](https://github.com/auth0/ruby-auth0/pull/90) ([ksamc](https://github.com/ksamc))
 
 ## [v4.2.0](https://github.com/auth0/ruby-auth0/tree/v4.2.0) (2018-02-15)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.1.0...v4.2.0)
 
 **Closed issues:**
 
-- Vulnerable dependency: yard. [\#99]
-https://github.com/auth0/ruby-auth0/issues/99
+- Vulnerable dependency: yard [\#99](https://github.com/auth0/ruby-auth0/issues/99)
+- post\_password\_change results in payload validation error [\#84](https://github.com/auth0/ruby-auth0/issues/84)
+- Unsupported on latest ruby version \(2.4.0\) [\#83](https://github.com/auth0/ruby-auth0/issues/83)
+- Adding a resource server breaks authentication. [\#76](https://github.com/auth0/ruby-auth0/issues/76)
+- outdated dependencies in ror-api example [\#75](https://github.com/auth0/ruby-auth0/issues/75)
 
-- Unsupported on latest ruby version. [\#83]
-https://github.com/auth0/ruby-auth0/issues/83
+**Merged pull requests:**
 
-- Outdated dependencies in ror-api example. [\#75]
-https://github.com/auth0/ruby-auth0/issues/75
-
+- Add scripts and Dockerfile to publish SDK on rubygems [\#104](https://github.com/auth0/ruby-auth0/pull/104) ([alexisluque](https://github.com/alexisluque))
+- Fix typo [\#103](https://github.com/auth0/ruby-auth0/pull/103) ([coisnepe](https://github.com/coisnepe))
+- Fix tests [\#101](https://github.com/auth0/ruby-auth0/pull/101) ([alexisluque](https://github.com/alexisluque))
+- Update outdated dependency [\#100](https://github.com/auth0/ruby-auth0/pull/100) ([alexisluque](https://github.com/alexisluque))
+- Fix build [\#98](https://github.com/auth0/ruby-auth0/pull/98) ([alexisluque](https://github.com/alexisluque))
+- Add delay to integration test [\#97](https://github.com/auth0/ruby-auth0/pull/97) ([alexisluque](https://github.com/alexisluque))
+- Fix build [\#96](https://github.com/auth0/ruby-auth0/pull/96) ([alexisluque](https://github.com/alexisluque))
+- Removed reference to API v1 [\#91](https://github.com/auth0/ruby-auth0/pull/91) ([aaguiarz](https://github.com/aaguiarz))
+- Update rest-client version to v2 [\#87](https://github.com/auth0/ruby-auth0/pull/87) ([hzalaz](https://github.com/hzalaz))
+- Introduce and raise exception for timeout [\#85](https://github.com/auth0/ruby-auth0/pull/85) ([anderslemke](https://github.com/anderslemke))
+- corrected missing comma in example code of readme.md [\#79](https://github.com/auth0/ruby-auth0/pull/79) ([drewnichols](https://github.com/drewnichols))
+- Resolve v1 API example error [\#78](https://github.com/auth0/ruby-auth0/pull/78) ([jesseproudman](https://github.com/jesseproudman))
+- updated dependencies in ror api example. Fix \#75 [\#77](https://github.com/auth0/ruby-auth0/pull/77) ([Amialc](https://github.com/Amialc))
+- Add a badge to documentation [\#74](https://github.com/auth0/ruby-auth0/pull/74) ([amingilani](https://github.com/amingilani))
+- Typo [\#73](https://github.com/auth0/ruby-auth0/pull/73) ([amingilani](https://github.com/amingilani))
+- Add how to generate documentation to the README.md + patch\_user [\#72](https://github.com/auth0/ruby-auth0/pull/72) ([ignaciojonas](https://github.com/ignaciojonas))
 
 ## [v4.1.0](https://github.com/auth0/ruby-auth0/tree/v4.1.0) (2016-07-25)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.0.0...v4.1.0)
