@@ -1,6 +1,6 @@
 # Change Log
 
-## [v4.5.0](https://github.com/auth0/ruby-auth0/tree/v4.5.0) (2018-07-26)
+## [v4.5.0](https://github.com/auth0/ruby-auth0/tree/v4.5.0) (2018-07-27)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.4.0...v4.5.0)
 
 **Closed issues:**
