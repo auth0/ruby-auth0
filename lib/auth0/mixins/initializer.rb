@@ -1,3 +1,5 @@
+require 'json'
+
 module Auth0
   module Mixins
     # Help class where Auth0::Client initialization described
