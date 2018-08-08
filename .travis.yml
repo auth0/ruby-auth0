@@ -6,6 +6,7 @@ rvm:
   - 2.1.9
   - 2.2.5
   - 2.3.1
+  - 2.5.1
 script: "./build_travis.sh"
 after_success: "./deploy_documentation.sh"
 deploy:
