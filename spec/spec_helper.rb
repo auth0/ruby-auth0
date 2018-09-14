@@ -1,6 +1,8 @@
 require 'dotenv'
-
 Dotenv.load
+
+require 'webmock/rspec'
+WebMock.allow_net_connect!
 
 mode = ENV['MODE'] || 'unit'
 
@@ -22,4 +24,4 @@ end
 
 puts "Entity suffix is #{entity_suffix}"
 
-require_relative "spec_helper_#{mode}"
+require_relative "spec_helper_#{mode}.rb"

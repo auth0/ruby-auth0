@@ -10,15 +10,45 @@ describe Auth0::Api::AuthenticationEndpoints do
     @instance = dummy_instance
   end
 
+  context '.api_token' do
+    it { expect(@instance).to respond_to(:api_token) }
+    it "is expected to POST to '/oauth/token'" do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'client_credentials',
+        client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
+        audience: @instance.audience,
+      ).and_return('access_token' => 'AccessToken')
+
+      expect(@instance.api_token.token).to eql 'AccessToken'
+    end
+
+    it "is expected to POST to '/oauth/token' with a custom audience" do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'client_credentials',
+        client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
+        audience: '__test_audience__',
+      ).and_return('access_token' => 'AccessToken')
+
+      expect(
+        @instance.api_token(audience: '__test_audience__').token
+      ).to eql 'AccessToken'
+    end
+  end
+
   context '.obtain_access_token' do
     it { expect(@instance).to respond_to(:obtain_access_token) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
       )
-                                        .and_return('access_token' => 'AccessToken')
+                            .and_return('access_token' => 'AccessToken')
+
       expect(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'client_credentials'
+        '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
       )
       expect(@instance.obtain_access_token).to eql 'AccessToken'
     end
@@ -44,12 +74,12 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect(@instance).to respond_to(:obtain_user_tokens) }
     it "is expected to make post request to '/oauth/token'" do
       allow(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
+        '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'authorization_code',
                         connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
       )
                                         .and_return('user_tokens' => 'UserToken')
       expect(@instance).to receive(:post).with(
-        '/oauth/token', client_id: @instance.client_id, client_secret: nil, grant_type: 'authorization_code',
+        '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'authorization_code',
                         connection: 'facebook', code: 'code', scope: 'openid', redirect_uri: 'uri'
       )
       expect(@instance.obtain_user_tokens('code', 'uri')['user_tokens']).to eq 'UserToken'
@@ -290,11 +320,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     let(:impersonator_id) { 'some_other_user_id' }
     let(:app_client_id) { 'app_client_id' }
     it { expect(@instance).to respond_to(:impersonate) }
-    it do
-      expect { @instance.impersonate(user_id, app_client_id, impersonator_id, {}) }.to raise_error(
-        'Must supply client_secret'
-      )
-    end
     it do
       expect { @instance.impersonate('', app_client_id, impersonator_id, {}) }.to raise_error(
         'Must supply a valid user_id'

@@ -9,3 +9,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'yard', require: false
 end
+
+group :test do
+  gem 'webmock', require: false
+end

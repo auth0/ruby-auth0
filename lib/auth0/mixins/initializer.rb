@@ -16,6 +16,7 @@ module Auth0
         @timeout = options[:timeout] || 10
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
+        @client_secret = options[:client_secret]
         initialize_api(options)
       end
 
@@ -38,7 +39,7 @@ module Auth0
       private
 
       def initialize_api(options)
-        api_v2?(options) ? initialize_v2(options) : initialize_v1(options)
+        api_v2?(options) ? initialize_v2(options) : initialize_v1
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
         if options.fetch(:authorization, nil) == 'Basic'
           authorization_header_basic(options)
@@ -49,7 +50,7 @@ module Auth0
 
       def base_url(options)
         @domain = options[:domain] || options[:namespace]
-        raise InvalidApiNamespace, 'Api namespace must supply an API domain' if @domain.to_s.empty?
+        raise InvalidApiNamespace, 'API namespace must supply an API domain' if @domain.to_s.empty?
         "https://#{@domain}"
       end
 
@@ -70,13 +71,12 @@ module Auth0
 
       def initialize_v2(options)
         extend Auth0::Api::V2
-        @client_secret = options[:client_secret]
         @token = options[:access_token] || options[:token]
+        @token = api_token.token unless @token || !options[:client_secret]
       end
 
-      def initialize_v1(options)
+      def initialize_v1
         extend Auth0::Api::V1
-        @client_secret = options[:client_secret]
         raise InvalidCredentials, 'Invalid API v1 client_id and client_secret' if @client_id.nil? || @client_secret.nil?
         @token = obtain_access_token
       end
