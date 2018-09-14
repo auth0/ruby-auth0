@@ -7,7 +7,28 @@ module Auth0
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
+      # Request an API access token using a Client Credentials grant
+      # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
+      # @param audience [string] API audience to use
+      # @return [json] Returns the API token
+      # def api_token(audience = "https://#{@domain}/api/v2/")
+      def api_token(
+        client_id: @client_id,
+        client_secret: @client_secret,
+        audience: "https://#{@domain}/api/v2/"
+      )
+        request_params = {
+          grant_type: 'client_credentials',
+          client_id: client_id,
+          client_secret: client_secret,
+          audience: audience
+        }
+        response = post('/oauth/token', request_params)
+        ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
+      end
+
       # Retrieve an access token.
+      # TODO: Deprecate, use the api_token method in this module instead.
       # @see https://auth0.com/docs/api/authentication#client-credentials
       # @param access_token [string] Social provider's access_token
       # @param connection [string] Currently, this endpoint only works for Facebook, Google, Twitter and Weibo
@@ -232,6 +253,10 @@ module Auth0
           query: to_query(request_params)
         )
       end
+
+      #
+      # DEPRECATED
+      #
 
       # Login using phone number + verification code.
       # @deprecated 4.5.0 - Legacy authentication pipeline; use a Password Grant
