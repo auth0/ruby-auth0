@@ -10,6 +10,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     @instance = dummy_instance
   end
 
+  subject { @instance }
+
   context '.api_token' do
     it { expect(@instance).to respond_to(:api_token) }
     it "is expected to POST to '/oauth/token'" do
@@ -348,10 +350,18 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   context '.user_info' do
-    it { expect(@instance).to respond_to(:user_info) }
+    it { is_expected.to respond_to(:user_info) }
     it 'is expected to make post to /userinfo' do
-      expect(@instance).to receive(:get).with('/userinfo')
-      @instance.user_info
+      is_expected.to receive(:get).with('/userinfo')
+      subject.user_info
+    end
+  end
+
+  context '.userinfo' do
+    it { is_expected.to respond_to(:user_info) }
+    it 'is expected to make a GET request to /userinfo' do
+      is_expected.to receive(:get).with('/userinfo', {}, {'Authorization' => 'Bearer access-token'})
+      subject.userinfo 'access-token'
     end
   end
 
