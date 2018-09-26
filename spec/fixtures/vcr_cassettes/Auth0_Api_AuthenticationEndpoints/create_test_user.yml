@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/dbconnections/signup
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-username-1}@auth0.com","password":"Ng8oDgOiLn387a90","connection":"Username-Password-Authentication","client_id":"B4oPHl007Va1GBdZXiSHaECUqVWkd9Xk"}'
+      string: '{"email":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","connection":"Username-Password-Authentication","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"}'
     headers:
       Accept:
       - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - Ruby/2.5.1
       Content-Type:
       - application/json
       Auth0-Client:
       - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      - Bearer API_TOKEN
       Content-Length:
-      - '167'
+      - '179'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,21 +29,21 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 21:58:59 GMT
+      - Wed, 10 Oct 2018 23:19:58 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '98'
+      - '97'
       Connection:
       - keep-alive
       X-Auth0-Requestid:
-      - d7b9e5b781775101652a
+      - a287e55974ca9d0e956c
       X-Ratelimit-Limit:
       - '50'
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1538776741'
+      - '1539213600'
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       Strict-Transport-Security:
@@ -52,7 +52,7 @@ http_interactions:
       - noindex, nofollow, nosnippet, noarchive
     body:
       encoding: UTF-8
-      string: '{"_id":"5bb7dea35e09334d7789a19d","email_verified":false,"email":"rubytest-username-1}@auth0.com"}'
-    http_version:
-  recorded_at: Fri, 05 Oct 2018 21:58:59 GMT
+      string: '{"_id":"5bbe891e90253a02377c1c0b","email_verified":false,"email":"rubytest-username-1@auth0.com"}'
+    http_version: 
+  recorded_at: Wed, 10 Oct 2018 23:19:58 GMT
 recorded_with: VCR 4.0.0

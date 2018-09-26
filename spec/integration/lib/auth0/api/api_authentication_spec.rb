@@ -1,16 +1,17 @@
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
-  attr_reader :client, :test_user_email, :test_user
+  attr_reader :client, :test_user_email, :test_user_pwd, :test_user
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
 
-    @test_user_email = "#{entity_suffix}-username-1}@auth0.com"
+    @test_user_email = "#{entity_suffix}-username-1@auth0.com"
+    @test_user_pwd = '23kejn2jk3en2jke2jk3be2jk3ber'
 
     VCR.use_cassette('Auth0_Api_AuthenticationEndpoints/create_test_user') do
       @test_user ||= @client.signup(
         test_user_email,
-        Faker::Internet.password
+        test_user_pwd
       )
     end
   end
@@ -48,6 +49,21 @@ describe Auth0::Api::AuthenticationEndpoints do
   describe '.wsfed_metadata', vcr: true do
     it 'should retrieve WSFED metadata' do
       expect(@client.wsfed_metadata).to(include('<EntityDescriptor'))
+    end
+  end
+
+  describe '.userinfo', vcr: true do
+    it 'should fail as not authorized' do
+      expect do
+        @client.userinfo('invalid_token')
+      end.to raise_error Auth0::Unauthorized
+    end
+
+    it 'should return the userinfo' do
+      tokens = @client.login(test_user_email, test_user_pwd, nil, nil)
+      expect(@client.userinfo(tokens['access_token'])).to(
+        include( 'email' => test_user_email )
+      )
     end
   end
 end

@@ -6,9 +6,12 @@ WebMock.allow_net_connect!
 
 require 'vcr'
 VCR.configure do |config|
+  # config.allow_http_connections_when_no_cassette = true
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.configure_rspec_metadata!
   config.hook_into :webmock
+  config.filter_sensitive_data('CLIENT_SECRET') { ENV['CLIENT_SECRET'] }
+  config.filter_sensitive_data('API_TOKEN') { ENV['MASTER_JWT'] }
 end
 
 mode = ENV['MODE'] || 'unit'

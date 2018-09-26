@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/oauth/token
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","scope":"openid","grant_type":"password"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '258'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 10 Oct 2018 23:20:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1239'
+      Connection:
+      - keep-alive
+      X-Auth0-Requestid:
+      - f9b9289a6ea6335d05ab
+      X-Ratelimit-Limit:
+      - '100'
+      X-Ratelimit-Remaining:
+      - '98'
+      X-Ratelimit-Reset:
+      - '1539215300'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ACCESS_TOKEN","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xMFQyMzoxOTo1OS45OTFaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYmU4OTFlOTAyNTNhMDIzNzdjMWMwYiIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5MjEzNTk5LCJleHAiOjE1MzkyNDk1OTl9.FzU-3QvviQkUyYxVWl2O2y6dOyN82gtu2sKnV1kbhUUAhbOgsHF-OAHdrcD5072b8t0rDBE5Iato2jk51w-b3dlu90TLqHFQOY0m0HrCCvASRTWQHyhI7AGuoC-f3EIzbb8DdQiYh8GjE7oKLoKbDICeEK12JOAfiRt8e7piCdbwcFUQYyFaxV667EzWRSRO4EOQTD10JZSQ6oEphXt4D7GvMElg8-yQ8yCsGu-JKYUFgM89yR37QKv8jpBdEZA76GmSRZ8oOIBoVGBGYV_7ywqaknIjxl7Ol0f5WHE33Ll9VQCaR3IU3KCi8ezhW06CKgVLqmzNSJm5ZV9qMfGcxA","scope":"openid
+        profile email address phone","expires_in":86400,"token_type":"Bearer"}'
+    http_version: 
+  recorded_at: Wed, 10 Oct 2018 23:20:00 GMT
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/userinfo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer ACCESS_TOKEN
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 10 Oct 2018 23:20:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '350'
+      Connection:
+      - keep-alive
+      X-Auth0-Requestid:
+      - c00c09543bbc331d3444
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'false'
+      X-Ratelimit-Limit:
+      - '20'
+      X-Ratelimit-Remaining:
+      - '19'
+      X-Ratelimit-Reset:
+      - '1539213607'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: '{"sub":"auth0|5bbe891e90253a02377c1c0b","nickname":"rubytest-username-1","name":"rubytest-username-1@auth0.com","picture":"https://s.gravatar.com/avatar/6946aed960fa14ccb86657ed5c4e7f01?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2018-10-10T23:19:59.991Z","email":"rubytest-username-1@auth0.com","email_verified":false}'
+    http_version: 
+  recorded_at: Wed, 10 Oct 2018 23:20:00 GMT
+recorded_with: VCR 4.0.0

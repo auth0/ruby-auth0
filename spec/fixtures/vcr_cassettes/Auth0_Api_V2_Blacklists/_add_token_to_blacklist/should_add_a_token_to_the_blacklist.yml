@@ -5,20 +5,20 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/blacklists/tokens
     body:
       encoding: UTF-8
-      string: '{"jti":"faketoken","aud":"B4oPHl007Va1GBdZXiSHaECUqVWkd9Xk"}'
+      string: '{"jti":"faketoken","aud":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"}'
     headers:
       Accept:
       - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - Ruby/2.5.1
       Content-Type:
       - application/json
       Auth0-Client:
       - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      - Bearer API_TOKEN
       Content-Length:
       - '60'
       Host:
@@ -29,7 +29,7 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:22:47 GMT
+      - Thu, 11 Oct 2018 01:30:24 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
@@ -39,7 +39,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '9'
       X-Ratelimit-Reset:
-      - '1538770969'
+      - '1539221425'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -52,5 +52,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:22:47 GMT
+  recorded_at: Thu, 11 Oct 2018 01:30:24 GMT
 recorded_with: VCR 4.0.0

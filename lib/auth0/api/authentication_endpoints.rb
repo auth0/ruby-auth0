@@ -176,6 +176,14 @@ module Auth0
       # Return the user information based on the Auth0 access token.
       # @see https://auth0.com/docs/api/authentication#get-user-info
       # @return [json] User information based on the Auth0 access token
+      def userinfo(access_token)
+        get('/userinfo', {}, {'Authorization' => "Bearer #{access_token}"})
+      end
+
+      # Return the user information based on the Auth0 access token.
+      # TODO: Deprecate, use the userinfo method in this module instead.
+      # @see https://auth0.com/docs/api/authentication#get-user-info
+      # @return [json] User information based on the Auth0 access token
       def user_info
         get('/userinfo')
       end
