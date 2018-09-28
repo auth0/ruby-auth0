@@ -72,7 +72,7 @@ module Auth0
       def initialize_v2(options)
         extend Auth0::Api::V2
         @token = options[:access_token] || options[:token]
-        @token = api_token.token unless @token || !options[:client_secret]
+        @token = api_token.token if @token.nil? && @client_id && @client_secret
       end
 
       def initialize_v1
