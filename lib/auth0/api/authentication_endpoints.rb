@@ -27,6 +27,29 @@ module Auth0
         ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
       end
 
+      # Get access and ID tokens using an Authorization Code.
+      # @see https://auth0.com/docs/api/authentication#authorization-code
+      # @param code [string] The authentication code obtained from /authorize
+      # @param redirect_uri [string] Url to redirect after authorization
+      # @return [json] Returns the access_token and id_token
+      def exchange_auth_code_for_tokens(
+        code,
+        redirect_uri,
+        client_id: @client_id,
+        client_secret: @client_secret
+      )
+        raise Auth0::InvalidParameter, 'Must provide an authorization code' if code.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must provide a redirect URI' if redirect_uri.to_s.empty?
+        request_params = {
+          grant_type:    'authorization_code',
+          client_id:     client_id,
+          client_secret: client_secret,
+          code:          code,
+          redirect_uri:  redirect_uri
+        }
+        AccessToken.from_response post('/oauth/token', request_params)
+      end
+
       # Retrieve an access token.
       # TODO: Deprecate, use the api_token method in this module instead.
       # @see https://auth0.com/docs/api/authentication#client-credentials
@@ -44,6 +67,7 @@ module Auth0
       end
 
       # Get access and ID tokens using an Authorization Code.
+      # TODO: Deprecate, use the auth_code_exchange method in this module instead.
       # @see https://auth0.com/docs/api/authentication#authorization-code
       # @param code [string] The access code obtained through passive authentication
       # @param redirect_uri [string] Url to redirect after authorization
