@@ -1,3 +1,4 @@
 ---
-BUNDLE_JOBS: '4'
-BUNDLE_BIN: bin
+BUNDLE_JOBS: "3"
+BUNDLE_BIN: "bin"
+BUNDLE_RETRY: "3"

@@ -1,45 +1,53 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Tickets do
-  attr_reader :client, :user
+  attr_reader :client, :test_user
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    username = Faker::Internet.user_name
-    email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
-    password = Faker::Internet.password
-    sleep 1
-    @user = client.create_user(username,  'email' => email,
-                                          'password' => password,
-                                          'email_verified' => false,
-                                          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                          'app_metadata' => {})
+    test_user_name = "#{entity_suffix}-username"
+
+    VCR.use_cassette('Auth0_Api_V2_Tickets/create_test_user') do
+      @test_user = client.create_user(
+        test_user_name,
+        'email' => "#{entity_suffix}-#{test_user_name}@auth0.com",
+        'password' => Faker::Internet.password,
+        'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH
+      )
+    end
   end
 
   after(:all) do
-    sleep 1
-    client.delete_user(user['user_id'])
-  end
-
-  describe '.post_email_verification' do
-    let(:email_verification) do
-      sleep 1
-      client.post_email_verification(user['user_id'], result_url: 'http://myapp.com/callback')
-    end
-    it do
-      sleep 1
-      expect(email_verification).to include('ticket')
+    VCR.use_cassette('Auth0_Api_V2_Tickets/delete_test_user') do
+      client.delete_user(test_user['user_id'])
     end
   end
 
-  describe '.post_password_change' do
-    let(:password_change) do
-      sleep 1
-      client.post_password_change(new_password: 'secret', user_id: user['user_id'],
-                                  result_url: 'http://myapp.com/callback')
+  describe '.post_email_verification', vcr: true do
+    it 'should create an email verification ticket' do
+      expect(
+        client.post_email_verification(
+          test_user['user_id'],
+          result_url: 'https://auth0.com/callback'
+        )
+      ).to include('ticket')
     end
-    it do
-      sleep 1
-      expect(password_change).to include('ticket')
+
+    it 'should raise an error if the user id is empty' do
+      expect do
+        client.post_email_verification( '' )
+      end.to raise_error Auth0::InvalidParameter
+    end
+  end
+
+  describe '.post_password_change', vcr: true do
+    it 'should create a password change ticket' do
+      expect(
+        client.post_password_change(
+          new_password: 'secret',
+          user_id: test_user['user_id'],
+          result_url: 'https://auth0.com/callback'
+        )
+      ).to include('ticket')
     end
   end
 end

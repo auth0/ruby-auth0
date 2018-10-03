@@ -12,4 +12,5 @@ end
 
 group :test do
   gem 'webmock', require: false
+  gem 'vcr', require: false
 end

@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 04 Oct 2018 15:41:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '5'
+      X-Ratelimit-Reset:
+      - '1538667669'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+2TXXOaQBSG/wvXZmb5qF93iIqKWoyiYMZhlmXBTZAFdsFgJv+9S9IktdNOO9NOr3oFc87Lu4f3PHv3JJFQ6kuIpr4FFuZIJe4mxHBhZZrUkmjGCU2Z1H+SThFsHhBxUmGpz4sSt6QC87JIfZwWNEl8hjknacxeu88tKYOMnWkR2jQhqBbHxJSGwjYoSo79iBYI+1lBOUbNMW+mjBeQ47j2K1ywl7ry/FEVLrDkRyBsUngSk0gbzLhB0/TV5aYog5qLkhAQ5of0BEnqo/e+1I9gwl5mh8lJzHr3U4NDS8IpDBIc+ighOOWN+vDc+iYz91GzipLCAGjnKvHcP8/s72bjMFw0rzf211Xc6EIgfoUg+OL72yH90umHaUmqcV51lfochfluSWRbhpHehvfhZOyZR23KxABqrk+dpGsuQtOVKxQU+/2DMg2Vy9wZw12nJyQDjdqTBIDOFsrmINy7ZD2BI8PJt7uHsOc+CInBHE1W510eOcTKY/h5YJCRTj0I+OrWAKqQmIuluwYGj05tbZZtVztrdukoxvLoTIiprwIh2YYz8CkGlVwPgBPmZGgN5nrkPC5zeaCgSXMn0HCWo3hi2N2M5vt6GHnyEVjOeNquLvamFzXhZ2B0W3bMyZguwY7s5nownkbL+/XFs8YM1EKSX4KhymZ1ufEMxVWneq5UyFM7iY3C3gY0IF1u7QGCUemMlwuo5Wzmre6j0No7oLdPOutcukbR7sENaI/iagM6eIp21yhiseHkjSLBVUSSdyIZohlulvUq+ugfrtkStzdO8A1tGFM+GPu+/JtAXX/2n55/T8/hC1zkMgH+BQAA
+    http_version: 
+  recorded_at: Thu, 04 Oct 2018 15:41:06 GMT
+recorded_with: VCR 3.0.3

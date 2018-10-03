@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/emails/provider
+    body:
+      encoding: UTF-8
+      string: '{"name":"mandrill","enabled":true,"credentials":{"api_key":"api_key"},"settings":{"first_setting":"first_setting_set","second_setting":"second_setting_set"}}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Content-Length:
+      - '157'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 04 Oct 2018 18:56:02 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '8'
+      X-Ratelimit-Reset:
+      - '1538679364'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA1XLSwqAMAwE0LvMuifoZSTaKMEapY0LKb27HxTsKjPDS4HS
+        wvBYSEOSGOHASn3kAG9pZ4chcWA1oZjhC2iTbubjevlSdchsJjo9YJSUrXuX
+        izX9vrj9sGr4oXZ4VK0nUgTawp0AAAA=
+    http_version: 
+  recorded_at: Thu, 04 Oct 2018 18:56:02 GMT
+recorded_with: VCR 3.0.3

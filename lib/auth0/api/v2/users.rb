@@ -101,7 +101,7 @@ module Auth0
         # @return [json] Returns the updated user.
         def patch_user(user_id, body)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
           path = "#{users_path}/#{user_id}"
           patch(path, body)
         end

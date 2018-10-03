@@ -1,53 +1,59 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Tenants do
-  attr_reader :client, :body
+  attr_reader :client
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    @body = {
-      'error_page' => {
-        'html' => '',
-        'show_log_link' => false,
-        'url' => 'https://mycompany.org/error'
-      },
-      'friendly_name' => 'My Company',
-      'picture_url' => 'https://mycompany.org/logo.png',
-      'support_email' => 'support@mycompany.org',
-      'support_url' => 'https://mycompany.org/support'
-    }
-
-    sleep 1
-    client.update_tenant_settings(body)
   end
 
-  describe '.get_tenant_settings' do
-    it do
-      sleep 1
-      expect(client.get_tenant_settings).to include(body)
-    end
+  let(:default_tenant_name) { 'Auth0' }
 
+  describe '.get_tenant_settings', vcr: true do
+    it 'should get the tenant settings' do
+      expect(
+        client.get_tenant_settings
+      ).to include(
+        'friendly_name' => default_tenant_name,
+        'support_email' => 'support@auth0.org'
+      )
+    end
+  end
+
+  describe '.get_tenant_settings with specific fields', vcr: true do
     let(:tenant_setting_fields) do
-      sleep 1
-      client.get_tenant_settings(fields: 'picture_url')
+      client.get_tenant_settings(fields: 'support_email')
     end
-    it do
-      sleep 1
-      expect(tenant_setting_fields).to_not include('friendly_name' => 'My Company')
+
+    it 'should include the field requested' do
+      expect(
+        tenant_setting_fields
+      ).to include('support_email')
     end
-    it do
-      sleep 1
-      expect(tenant_setting_fields).to include('picture_url' => 'https://mycompany.org/logo.png')
+
+    it 'should exclude a field not requested' do
+      expect(
+        tenant_setting_fields
+      ).to_not include('friendly_name')
     end
   end
 
-  describe '.update_tenant_settings' do
-    let(:tenant_name) { Faker::Company.name }
-    let(:body_tenant) do
-      { 'friendly_name' => tenant_name }
+  describe '.update_tenant_settings', vcr: true do
+    let(:changed_tenant_name) { "#{default_tenant_name}-CHANGED" }
+
+    it 'should update the tenant settings with a new tenant name' do
+      expect(
+        client.update_tenant_settings(
+          { friendly_name: changed_tenant_name }
+        )['friendly_name']
+      ).to include(changed_tenant_name)
     end
-    it do
-      sleep 1
-      expect(client.update_tenant_settings(body_tenant)['friendly_name']).to include(tenant_name)
+
+    it 'should revert the tenant name' do
+      expect(
+        client.update_tenant_settings(
+          { friendly_name: default_tenant_name }
+        )['friendly_name']
+      ).to include(default_tenant_name)
     end
   end
 end

@@ -1,0 +1,90 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/wsfed/FederationMetadata/2007-06/FederationMetadata.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 21:59:00 GMT
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Auth0-Requestid:
+      - 5e4a4db7d8e139300664
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        3WE+v/+5RPr81qn7N0Xyx92IEgAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 21:59:00 GMT
+recorded_with: VCR 4.0.0

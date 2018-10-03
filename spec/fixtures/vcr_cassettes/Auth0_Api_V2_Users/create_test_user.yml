@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users
+    body:
+      encoding: UTF-8
+      string: '{"email":"rubytest-rubytest-username@auth0.com","password":"VeR6ItEuZ29m","connection":"Username-Password-Authentication","name":"rubytest-username"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Content-Length:
+      - '149'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 20:06:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1538769988'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA41Ry2rDMBD8F0Fy8kOS34bQ5tJzoe2lpQRZWjuisWwkOaWk
+        +fdKzoOcQkGHkTQ7M7t7QNAzuUM10lPzY8HY8AomA1qxHh7ZZLc44kOPAuQf
+        btkXkvualTZ70LKVIFDdsp2BAE2jYBbEhllXRzEpQ4JDnL1SXOO8pnlU5fjd
+        lY+S20l78a21o6nj2ESdZntmmfbm8QnGNE84hpakGZSECJoXOeGFA6Sq0rJs
+        H8wqLfFSr8ZuKVaz1iJZL+iTO1yo6NqNu58kjUN6ikbVuRi+oY108dFM/M2a
+        puBpSjPAVZKkoijKqmoE97OQ/OvOPKQAZaWVYFD9cUB8UAq4lYNy/LczLXxm
+        xnwPWoRr5+b5nM2U2yB3Iox62DsffYnrbc3LwCXbnRdw/AwQ1/CPFRz/AIkm
+        rdkNAgAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 20:06:26 GMT
+recorded_with: VCR 4.0.0
