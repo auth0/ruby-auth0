@@ -1,61 +1,53 @@
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
-  attr_reader :client,
-              :impersonate_user,
-              :global_client,
-              :password
+  attr_reader :client, :test_user_email, :test_user
 
   before(:all) do
-    @client = Auth0Client.new(Credentials.v2_creds)
-    @global_client = Auth0Client.new(v1_global_creds)
+    @client = Auth0Client.new(v2_creds)
 
-    impersonate_username = Faker::Internet.user_name
-    impersonate_email = "#{entity_suffix}" \
-      "#{Faker::Internet.safe_email(impersonate_username)}"
-    @password = Faker::Internet.password
-    @impersonate_user = client.create_user(
-      impersonate_username,
-      'email' => impersonate_email,
-      'password' => password,
-      'email_verified' => true,
-      'connection' =>
-      Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-      'app_metadata' => {}
-    )
-  end
+    @test_user_email = "#{entity_suffix}-username-1}@auth0.com"
 
-  describe '.obtain_access_token' do
-    let(:acces_token) { @global_client.obtain_access_token }
-    it { expect(acces_token).to_not be_nil }
-  end
-
-  describe '.signup' do
-    let(:signup_username) { Faker::Internet.user_name }
-    let(:signup_email) {
-      "#{entity_suffix}#{Faker::Internet.safe_email(signup_username)}"
-    }
-    let(:signup) { @global_client.signup(signup_email, @password) }
-    it { expect(signup).to(include('_id', 'email')) }
-    it { expect(signup['email']).to eq signup_email }
-  end
-
-  describe '.change_password' do
-    let(:change_password) do
-      @global_client.change_password(@impersonate_user['user_id'], '')
-    end
-    it do
-      expect(@global_client.change_password(@impersonate_user['user_id'], ''))
-        .to(include('We\'ve just sent you an email to reset your password.'))
+    VCR.use_cassette('Auth0_Api_AuthenticationEndpoints/create_test_user') do
+      @test_user ||= @client.signup(
+        test_user_email,
+        Faker::Internet.password
+      )
     end
   end
 
-  describe '.saml_metadata' do
-    let(:saml_metadata) { @global_client.saml_metadata }
-    it { expect(saml_metadata).to(include('<EntityDescriptor')) }
+  after(:all) do
+    VCR.use_cassette('Auth0_Api_AuthenticationEndpoints/delete_test_user') do
+      @client.delete_user('auth0|' + test_user['_id'])
+    end
   end
 
-  describe '.wsfed_metadata' do
-    let(:wsfed_metadata) { @global_client.wsfed_metadata }
-    it { expect(wsfed_metadata).to(include('<EntityDescriptor')) }
+  describe '.signup', vcr: true do
+    it 'should signup a new user' do
+      expect(test_user).to(include('_id', 'email'))
+    end
+
+    it 'should return the correct email address' do
+      expect(test_user['email']).to eq test_user_email
+    end
+  end
+
+  describe '.change_password', vcr: true do
+    it 'should trigger a password reset' do
+      expect(
+        @client.change_password(test_user_email, '')
+      ).to(include("We've just sent you an email to reset your password."))
+    end
+  end
+
+  describe '.saml_metadata', vcr: true do
+    it 'should retrieve SAML metadata' do
+      expect(@client.saml_metadata).to(include('<EntityDescriptor'))
+    end
+  end
+
+  describe '.wsfed_metadata', vcr: true do
+    it 'should retrieve WSFED metadata' do
+      expect(@client.wsfed_metadata).to(include('<EntityDescriptor'))
+    end
   end
 end

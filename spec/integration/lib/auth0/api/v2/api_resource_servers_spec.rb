@@ -1,60 +1,92 @@
 require 'spec_helper'
 describe Auth0::Api::V2::ResourceServers do
-  attr_reader :client, :resource_server
+  attr_reader :client, :test_server
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    identifier = SecureRandom.uuid
-    sleep 1
-    @resource_server = client.create_resource_server(identifier)
-  end
 
-  after(:all) do
-    sleep 1
-    client.delete_resource_server(resource_server['id'])
-  end
-
-  describe '.resource_server' do
-    it do
-      sleep 1
-      expect(client.resource_server(resource_server['id'])).to(
-        include('identifier' => resource_server['identifier'], 'id' => resource_server['id'],
-                'signing_alg' => resource_server['signing_alg'],
-                'token_lifetime' => resource_server['token_lifetime'])
+    VCR.use_cassette('Auth0_Api_V2_ResourceServers/create_test_server') do
+      @test_server = client.create_resource_server(
+        'https://localhost.test/api/v1/',
+        'name' => "TestServer-#{entity_suffix}",
+        'signing_alg' => 'RS256',
+        'signing_secret' => 'jPd1d0TWbg7pN9iPcXdtYtEIIGAk5zhmCi',
+        'token_lifetime' => 123456
       )
     end
   end
 
-  describe '.create_resource_server' do
-    let(:name) { Faker::Lorem.word }
-    let(:identifier) { SecureRandom.uuid }
-    let(:signing_alg) { 'HS256' }
-    let(:signing_secret) { Faker::Lorem.characters(16) }
-    let(:token_lifetime) { rand(1000..3000) }
-    let!(:resource_server) do
-      sleep 1
-      client.create_resource_server(identifier, 'name' => name, 'signing_alg' => signing_alg,
-                                                'signing_secret' => signing_secret,
-                                                'token_lifetime' => token_lifetime)
-    end
-    it do
-      sleep 1
-      expect(resource_server).to include('name' => name, 'identifier' => identifier, 'signing_alg' => signing_alg,
-                                         'signing_secret' => signing_secret,
-                                         'token_lifetime' => token_lifetime)
-      sleep 1
-      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
-    end
-    it do
-      sleep 1
-      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
+  after(:all) do
+    VCR.use_cassette('Auth0_Api_V2_ResourceServers/delete_test_server') do
+      client.delete_resource_server(test_server['id'])
     end
   end
 
-  describe '.delete_resource_server' do
-    it do
-      sleep 1
-      expect { client.delete_resource_server(resource_server['id']) }.to_not raise_error
+  describe '.create_resource_server', vcr: true do
+    it 'should raise an error if the identifier is empty' do
+      expect do
+        client.create_resource_server('')
+      end.to raise_error Auth0::InvalidParameter
+    end
+
+    it 'should raise an error if the name includes an invalid char' do
+      expect do
+        client.create_resource_server(
+          'https://localhost.test/api/v2/',
+          name: '<ServerName'
+        )
+      end.to raise_error Auth0::InvalidParameter
+    end
+
+    it 'should raise an error if the name includes an invalid char' do
+      expect do
+        client.create_resource_server(
+          'https://localhost.test/api/v2/',
+          name: 'ServerName>'
+        )
+      end.to raise_error Auth0::InvalidParameter
+    end
+
+    it 'should create the test server' do
+      expect(test_server).to(
+        include(
+          'name' => test_server['name'],
+          'identifier' => test_server['identifier'],
+          'signing_alg' => test_server['signing_alg'],
+          'signing_secret' => test_server['signing_secret'],
+          'token_lifetime' => test_server['token_lifetime']
+        )
+      )
+    end
+  end
+
+  describe '.resource_server', vcr: true do
+    it 'should raise an error if the id is empty' do
+      expect do
+        client.resource_server('')
+      end.to raise_error Auth0::InvalidParameter
+    end
+
+    it 'should get the test server' do
+      expect(
+        client.resource_server(test_server['id'])
+      ).to(
+        include('identifier' => test_server['identifier'])
+      )
+    end
+  end
+
+  describe '.delete_resource_server', vcr: true do
+    it 'should raise an error if the id is empty' do
+      expect do
+        client.delete_resource_server('')
+      end.to raise_error Auth0::InvalidParameter
+    end
+
+    it 'should delete the test server without an error' do
+      expect do
+        client.delete_resource_server(test_server['id'])
+      end.to_not raise_error
     end
   end
 end

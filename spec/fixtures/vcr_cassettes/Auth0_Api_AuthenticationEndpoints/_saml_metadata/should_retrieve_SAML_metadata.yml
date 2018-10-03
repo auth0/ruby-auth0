@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/samlp/metadata/B4oPHl007Va1GBdZXiSHaECUqVWkd9Xk
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 21:59:00 GMT
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Auth0-Requestid:
+      - 5cd424042afbb657d575
+      Content-Disposition:
+      - attachment; filename="auth0-sdk-tests_auth0_com-metadata.xml"
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        DQAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 21:59:00 GMT
+recorded_with: VCR 4.0.0

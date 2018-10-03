@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/9mhyX7O1EokZmaEwtSSmDsBEj352cSlX?fields=jwt_configuration&include_fields=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 20:40:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '7'
+      X-Ratelimit-Reset:
+      - '1538772057'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        4N5gHHkkVD8X8edfRrM9OMALAAA=
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 20:40:55 GMT
+recorded_with: VCR 4.0.0

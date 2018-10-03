@@ -1,65 +1,75 @@
 require 'spec_helper'
 describe Auth0::Api::V2::ClientGrants do
-  attr_reader :client, :client_id, :audience, :existing_grant, :scope, :existing_client
+  attr_reader :client, :test_client_grant, :test_client
 
   before(:all) do
     @client = Auth0Client.new(v2_creds)
-    @client_id = v2_creds[:client_id]
-    @existing_client = client.create_client("client-grant-test-#{entity_suffix}")
-    @audience = "https://#{client.clients[0]['tenant']}.auth0.com/api/v2/"
-    @scope = [Faker::Lorem.word]
-    @existing_grant = client.create_client_grant(
-      'client_id' => existing_client['client_id'],
-      'audience' => audience,
-      'scope' => scope
-    )
+
+    VCR.use_cassette('Auth0_Api_V2_ClientGrants/create_test_client') do
+      @test_client = client.create_client(
+        "ClientGrantTestClient-#{entity_suffix}"
+      )
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_ClientGrants/create_test_client_grant') do
+      @test_client_grant = client.create_client_grant(
+        'client_id' => test_client['client_id'],
+        'audience' => "https://#{test_client['tenant']}.auth0.com/api/v2/",
+        'scope' => ['test:scope']
+      )
+    end
+
   end
 
   after(:all) do
-    grants = client.client_grants
-    grants.each do |grant|
-      client.delete_client_grant(grant['id'])
+    VCR.use_cassette('Auth0_Api_V2_ClientGrants/delete_test_client') do
+      client.delete_client(test_client['client_id'])
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_ClientGrants/delete_test_client_grant') do
+      client.delete_client_grant(test_client_grant['id'])
     end
   end
 
-  describe '.client_grants' do
+  describe '.client_grants', vcr: true do
     let(:client_grants) do
       client.client_grants
     end
 
-    it 'is expected to have a result' do
+    it 'should return at least 1 result' do
       expect(client_grants.size).to be > 0
     end
 
-    it 'is expected to match the created grant' do
-      expect(client_grants).to include(existing_grant)
+    it 'should return the test client grant' do
+      expect(client_grants).to include(test_client_grant)
     end
 
-    it 'is expected to return the first page of one result' do
+    it 'should return the first page of one result' do
       results = client.client_grants(
         page: 0,
         per_page: 1
       )
       expect(results.first).to equal(results.last)
-      expect(results.first).to eq(existing_grant)
+      expect(results.first).to eq(test_client_grant)
     end
   end
 
-  describe '.patch_client_grant' do
-    let(:new_scope) { [Faker::Lorem.word] }
-    it do
+  describe '.patch_client_grant', vcr: true do
+    it 'should update the test client grant' do
       expect(
         client.patch_client_grant(
-          existing_grant['id'],
-          'scope' => new_scope
+          test_client_grant['id'],
+          'scope' => ['new:scope']
         )
-      ).to(include('scope' => new_scope))
+      ).to(include('scope' => ['new:scope']))
     end
   end
 
-  describe '.delete_client_grant' do
-    it do
-      expect { client.delete_client_grant(existing_grant['id']) }.to_not raise_error
+  describe '.delete_client_grant', vcr: true do
+    it 'should delete the test client grant' do
+      expect do
+        client.delete_client_grant(test_client_grant['id'])
+      end.to_not raise_error
     end
   end
 end

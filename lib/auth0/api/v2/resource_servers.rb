@@ -32,7 +32,7 @@ module Auth0
         # @return [json] Returns the resource server.
         def create_resource_server(identifier, options = {})
           raise Auth0::InvalidParameter, 'Must supply a valid resource server id' if identifier.to_s.empty?
-          if ['<', '>'].include?(options.fetch(:name, ''))
+          if options.fetch(:name, '').index(/[<>]/)
             raise Auth0::InvalidParameter, 'Name must contain at least one character. Does not allow "<" or ">"'
           end
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]

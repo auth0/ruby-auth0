@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 04 Oct 2018 17:11:23 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1538673084'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA42QT0/DMAzFv0uk7bR2Tfq/0gS7cEYCLkxT5SXuFtGmVZINpLHvjtsB4oAQUg6O/HvP9tucGXagW1axOInjLEmT5IBGoXW9ucU36IYWQ4OeLa5gfUKrG42KVQ20DhfMQIck/1YReXRoa00Ig6M/RO8pFKAkF00qC8FjuRO5RFVKQgct/dFOBt4PrlouXbi3cAIPNpR9t7yWy7wRcZnxGOK0EDlkqqBNs1QmPG9gVxY3bpUU0dyuhv1crSavWbyeiTt6UplwWmQ0pP/V0lF1wHAwe1rDaPnyyyFaofHaa3Ss2pyZ7I1B6TX1KvZER46S4B6ce+2tCtY0Y+QlTMjPHP5KwPYnmmO/0hrHuodeamg/M75syWpQ4FHV4IkTES+CSAS8fORJxdMqycIsyp9JKi3+i4NhqDv0QK7AqvPlsv0AxAdj3QsCAAA=
+    http_version: 
+  recorded_at: Thu, 04 Oct 2018 17:11:23 GMT
+recorded_with: VCR 3.0.3

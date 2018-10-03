@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: patch
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5bb7c4425e09334d77899bdc
+    body:
+      encoding: UTF-8
+      string: '{"email_verified":true}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Content-Length:
+      - '23'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 20:06:28 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '6'
+      X-Ratelimit-Reset:
+      - '1538769991'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA31Ry27CMBD8F0v0RBLHediJhFouPVdqe6GqkGNvwCo4kR9U
+        FeXfa4eCOCH5MLZnZ2Z3jwj2XO1Qi4zvfhxYl1yBt2A038MT926LUzHs0RzF
+        h1v2hRS+JqX1AYzqFUjUOuNhjvwouQO55i6UEZyzJMcJrt4IbnHdEpYSSleh
+        elTCeRO1t86Nts0ym24MP3DHTfTOzjAjdSEw9HlZActzSWpa54IGkDdNyVj/
+        aBclww9mMW4e5GLSmhXLGXkOR0idXpsJ97OkDcj4dNSbECP2s1YhPZqIv1XX
+        UVGWpALcFEUpKWVN00kRR6HE151xKAnaKafAovbjiMSgNQinBh347/+05IVb
+        +z0YmSyDW+QLPlFug9yJMJrhEHzMJW60ta+DUDystOc7C6fPORIG7q2gTpsa
+        r9DpD4j2v9EMAgAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 20:06:28 GMT
+recorded_with: VCR 4.0.0

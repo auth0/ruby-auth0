@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: patch
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/rules/rul_VEsZIAicOPoU52nz?fields=stage&include_fields=false
+    body:
+      encoding: UTF-8
+      string: '{"enabled":true}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Content-Length:
+      - '16'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 17:28:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '7'
+      X-Ratelimit-Reset:
+      - '1538760540'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA1WNMQvCMBCF/0q4qYW4CF3qVGmHgqAgOriUNj1LIL1IcgG1
+        9L97urk8HryP9y1gRyghJNddm3hrK2uOJ38ptvQGDUj94FAADgk1RBPsgwW/
+        JzJsPaksRQxaGU+MT5Yy5GqRzCg5p9Xfmu9WuaR+xp9weDFGVhtVt+dqf2hq
+        GX0YMUBZiIr76cs5P1nqYjIGY4T1A/r3+UOvAAAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 17:28:58 GMT
+recorded_with: VCR 3.0.3

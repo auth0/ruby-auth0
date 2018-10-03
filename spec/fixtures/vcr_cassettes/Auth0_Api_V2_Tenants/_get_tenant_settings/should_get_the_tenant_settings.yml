@@ -1,0 +1,95 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/tenants/settings?include_fields=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 20:12:41 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1538770363'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        v3OaVo0GDwAA
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 20:12:41 GMT
+recorded_with: VCR 4.0.0

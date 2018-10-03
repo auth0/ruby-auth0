@@ -1,145 +1,159 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Connections do
-  attr_reader :client, :connection, :strategy, :name, :enabled_clients, :options
+  attr_reader :client,
+              :test_user_name, :test_user_email,
+              :test_con_name, :test_con_strategy, :test_conn
 
   before(:all) do
-    @client = Auth0Client.new(v2_creds)
-    @name = "#{SecureRandom.uuid[0..25]}#{entity_suffix}"
-    @strategy = 'google-oauth2'
-    @options = {}
-    @enabled_clients = []
-    @connection = client.create_connection(name: name,
-                                           strategy: strategy,
-                                           options: options,
-                                           enabled_clients: enabled_clients)
-  end
+    @client ||= Auth0Client.new(v2_creds)
+    @test_user_name = "#{entity_suffix}-username"
+    @test_user_email = "#{entity_suffix}-#{test_user_name}@auth0.com"
+    @test_con_name = "TestConnection-#{entity_suffix}"
+    @test_con_strategy = 'auth0'
 
-  describe '.connections' do
-    let(:connections) do
-      sleep 1
-      client.connections
+    VCR.use_cassette(
+      'Auth0_Api_V2_Connections/create_test_connection'
+    ) do
+      @test_conn ||= client.create_connection(
+        name: test_con_name,
+        strategy: test_con_strategy
+      )
     end
 
-    it do
-      sleep 1
-      expect(connections.size).to be > 0
-    end
-    it do
-      sleep 1
-      expect(connections.find { |con| con['name'] == name }).to_not be_empty
-    end
-
-    context '#filters' do
-      it do
-        sleep 1
-        expect(client.connections(strategy: strategy).size).to be > 0
-      end
-      it do
-        sleep 1
-        expect(client.connections(strategy: strategy, fields: [:name].join(',')).first).to include('name')
-      end
-      it do
-        sleep 1
-        expect(client.connections(strategy: strategy, fields: [:name].join(','), include_fields: false).first).to_not(
-          include('name')
-        )
-      end
+    VCR.use_cassette(
+      'Auth0_Api_V2_Connections/create_test_user'
+    ) do
+      @test_user ||= client.create_user(
+        test_user_name,
+        email: test_user_email,
+        password: Faker::Internet.password,
+        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
+      )
     end
   end
 
-  describe '.connection' do
+  describe '.create_connection', vcr: true do
+    let(:subject) { test_conn }
+
+    it 'should return specific fields upon creation' do
+      should include('id', 'name', 'options', 'strategy')
+    end
+
+    it 'should return the data sent' do
+      should include(
+               'name' => test_conn['name'],
+               'strategy' => test_con_strategy,
+               )
+    end
+  end
+
+  describe '.connection', vcr: true do
     let(:subject) do
-      sleep 1
-      client.connection(connection['id'])
+      client.connection(test_conn['id'])
     end
 
-    it do
-      sleep 1
-      should include('name' => connection['name'])
+    it 'should find the correct connection' do
+      should include('name' => test_conn['name'])
     end
 
     context '#filters' do
-      it do
-        sleep 1
-        expect(client.connection(connection['id'], fields: [:name, :id].join(','))).to include('id', 'name')
+      it 'should include the fields indicated' do
+        expect(
+          client.connection(
+            test_conn['id'],
+            fields: [:name, :id].join(',')
+          )
+        ).to include('id', 'name')
       end
-      it do
-        sleep 1
-        expect(client.connection(connection['id'], fields: [:name, :id].join(','), include_fields: false)).to_not(
+
+      it 'should exclude the fields indicated' do
+        expect(
+          client.connection(
+            test_conn['id'],
+            fields: [:name, :id].join(','),
+            include_fields: false
+          )
+        ).to_not(
           include('id', 'name')
         )
       end
     end
   end
 
-  describe '.create_connection' do
-    let(:subject) { connection }
-
-    it do
-      sleep 1
-      should include('id', 'name')
+  describe '.connections', vcr: true do
+    let(:connections) do
+      client.connections
     end
-    it do
-      sleep 1
-      should include('name' => connection['name'])
+
+    it 'should not be empty' do
+      expect(connections.size).to be > 0
+    end
+
+    it 'should include the previously created connection' do
+      expect(
+        connections.find do |con|
+          con['name'] == test_con_name
+        end
+      ).to_not be_empty
+    end
+
+    context '#filters' do
+      it 'should include previously-created connection when filtered' do
+        expect(
+          client.connections(strategy: test_con_strategy).size
+        ).to be > 0
+      end
+
+      it 'should should include the fields indicated from filtered results' do
+        expect(
+          client.connections(
+            strategy: test_con_strategy,
+            fields: [:name].join(',')
+          ).first
+        ).to include('name')
+      end
+
+      it 'should should exclude the fields indicated from filtered results' do
+        expect(
+          client.connections(
+            strategy: test_con_strategy,
+            fields: [:name].join(','),
+            include_fields: false
+          ).first).to_not include('name')
+      end
     end
   end
 
-  describe '.delete_connection' do
-    it do
-      sleep 1
-      expect { client.delete_connection connection['id'] }.to_not raise_error
-    end
-  end
-
-  describe '.update_connection' do
-    let!(:connection_to_update) do
-      sleep 1
-      client.create_connection(name: "#{SecureRandom.uuid[0..25]}#{entity_suffix}",
-                               strategy: strategy,
-                               options: options,
-                               enabled_clients: enabled_clients)
-    end
-    new_name = SecureRandom.uuid[0..25]
-    let(:options) { { username: new_name } }
-    it do
-      sleep 1
-      expect(client.update_connection(connection_to_update['id'], 'options' => options)['options']).to include(
-        'username' => new_name
-      )
-    end
-  end
-
-  describe '.delete_connection_user' do
-    let(:username) { Faker::Internet.user_name }
-    let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
-    let(:password) { Faker::Internet.password }
-    let!(:user_to_delete) do
-      sleep 1
-      client.create_user(username,  email: email,
-                                    password: password,
-                                    email_verified: false,
-                                    connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                    app_metadata: {})
-    end
+  describe '.delete_connection_user', vcr: true do
     let(:connection) do
-      sleep 1
-      client.connections.find { |connection| connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH }
+      client.connections.find do |connection|
+        connection['name'] == Auth0::Api::AuthenticationEndpoints::UP_AUTH
+      end
     end
 
-    it do
-      sleep 1
-      expect(client.delete_connection_user(connection['id'], email)).to be_empty
+    it 'should delete the user created' do
+      expect(
+        client.delete_connection_user(connection['id'], test_user_email)
+      ).to be_empty
     end
   end
 
-  after(:all) do
-    client
-      .connections
-      .select { |connection| connection['name'].include?(entity_suffix) }
-      .each { |connection|
-        sleep 1
-        client.delete_connection(connection['id'])
-      }
+  describe '.update_connection', vcr: true do
+    it 'should update the connection' do
+      new_options = test_conn['options']
+      new_options['passwordPolicy'] = 'excellent'
+      expect(
+        client.update_connection(
+          test_conn['id'],
+          options: new_options
+        )['options']['passwordPolicy']
+      ).to eq 'excellent'
+    end
+  end
+
+  describe '.delete_connection', vcr: true do
+    it 'should delete the connection' do
+      expect { client.delete_connection test_conn['id'] }.to_not raise_error
+    end
   end
 end

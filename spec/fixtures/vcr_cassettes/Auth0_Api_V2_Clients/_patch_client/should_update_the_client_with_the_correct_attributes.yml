@@ -1,0 +1,94 @@
+---
+http_interactions:
+- request:
+    method: patch
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/9mhyX7O1EokZmaEwtSSmDsBEj352cSlX?fields=jwt_configuration&include_fields=false
+    body:
+      encoding: UTF-8
+      string: '{"custom_login_page_on":false,"sso":true}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.3.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      Content-Length:
+      - '41'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Oct 2018 20:40:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '6'
+      X-Ratelimit-Reset:
+      - '1538772058'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        1csKGppvMI48OsGPln8B25Ei2BQMAAA=
+    http_version: 
+  recorded_at: Fri, 05 Oct 2018 20:40:55 GMT
+recorded_with: VCR 4.0.0
