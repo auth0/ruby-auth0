@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/oauth/token
+    body:
+      encoding: UTF-8
+      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '258'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 10 Oct 2018 23:52:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1239'
+      Connection:
+      - keep-alive
+      X-Auth0-Requestid:
+      - efd2f94555d3656c33f0
+      X-Ratelimit-Limit:
+      - '100'
+      X-Ratelimit-Remaining:
+      - '82'
+      X-Ratelimit-Reset:
+      - '1539230709'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ACCESS_TOKEN","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xMFQyMzo1MjoyOC42NzBaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYmU5MGJiOTAyNTNhMDIzNzdjMWQ0ZiIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5MjE1NTQ4LCJleHAiOjE1MzkyNTE1NDh9.RUJNL6wiUPZ1EshJSRyvxre9imxBEUdA6ZVOmtILFczYYzBS2IAeOyfgDY8U0cW-UqZbmhItQm11yD1Gy18bNVvTrBaJwOBnaiGbsIv8sHbbAL4WS3S-ZwPCeXWygHQLXbXVql7MlyTn7g_BXUdbBManvjYchpTnU_PynjZnvtB_m7LDQYtCH7nJ0vJR6bq3ed_xxmPazFYgw5NHRZsiubKtgRqA7VVRYCoww5CLCWuwki5aXtwwWJAV9F5kmUbYgq62iwPIR4F5tdtZ4e7oQB88UxUbdnwM39m5y5yImOQ4vkBDPzrQX4JYHBu0Wwds-8mQacWHbgzsjO31UqRHyg","scope":"openid
+        profile email address phone","expires_in":86400,"token_type":"Bearer"}'
+    http_version: 
+  recorded_at: Wed, 10 Oct 2018 23:52:28 GMT
+recorded_with: VCR 4.0.0

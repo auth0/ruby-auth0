@@ -27,4 +27,13 @@ module Credentials
       domain: ENV['DOMAIN']
     }
   end
+
+  def v2_creds_with_secret
+    {
+      client_id: ENV['CLIENT_ID'],
+      client_secret: ENV['CLIENT_SECRET'],
+      token: ENV['MASTER_JWT'],
+      domain: ENV['DOMAIN']
+    }
+  end
 end

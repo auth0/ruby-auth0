@@ -90,6 +90,46 @@ module Auth0
       end
 
       # Get access and ID tokens using Resource Owner Password.
+      # Requires that your tenant has a Default Audience or Default Directory.
+      # @see https://auth0.com/docs/api/authentication#resource-owner-password
+      # @param login_name [string] Email or username for the connection
+      # @param password [string] Password
+      # @param client_id [string] Client ID from Application settings
+      # @param client_secret [string] Client Secret from Application settings
+      # @param realm [string] Specific realm to authenticate against
+      # @param audience [string] API audience
+      # @param scope [string] Scope(s) requested
+      #   - Include an audience (above) for API access scopes
+      #   - Use the default "openid" for userinfo calls
+      # @return [json] Returns the access_token and id_token
+      def login_ro(
+        login_name,
+        password,
+        client_id: @client_id,
+        client_secret: @client_secret,
+        realm: nil,
+        audience: nil,
+        scope: 'openid'
+      )
+        raise Auth0::InvalidParameter,
+              'Must supply a valid login_name' if login_name.empty?
+        raise Auth0::InvalidParameter,
+              'Must supply a valid password' if password.empty?
+        request_params = {
+          username:      login_name,
+          password:      password,
+          client_id:     client_id,
+          client_secret: client_secret,
+          realm:         realm,
+          scope:         scope,
+          audience:      audience,
+          grant_type:    realm ? 'http://auth0.com/oauth/grant-type/password-realm' : 'password'
+        }
+        post('/oauth/token', request_params)
+      end
+
+      # Get access and ID tokens using Resource Owner Password.
+      # TODO: Deprecate, use the login_ro method in this module instead.
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
       # @param username [string] Username or email
       # @param password [string] Password
