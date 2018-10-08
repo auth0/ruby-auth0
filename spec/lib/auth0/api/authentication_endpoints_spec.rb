@@ -90,6 +90,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
 
+
   context '.auth_code_exchange' do
     it { is_expected.to respond_to(:exchange_auth_code_for_tokens) }
 
@@ -130,6 +131,62 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect do
         @instance.exchange_auth_code_for_tokens('code', '')
       end.to raise_error 'Must provide a redirect URI'
+    end
+  end
+
+  context '.login_ro' do
+    it 'should respond to the login_ro method' do
+      expect(@instance).to respond_to(:login_ro)
+    end
+
+    it 'should make post to /oauth/token with default params' do
+      expect(@instance).to receive(:post).with(
+        '/oauth/token',
+        username: 'test@test.com',
+        password: 'test12345',
+        client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
+        realm: nil,
+        audience: nil,
+        scope: 'openid',
+        grant_type: 'password'
+      )
+      @instance.login_ro('test@test.com', 'test12345')
+    end
+
+    it 'should make post to /oauth/token with custom params' do
+      expect(@instance).to receive(:post).with(
+        '/oauth/token',
+        username: 'test@test.com',
+        password: 'test12345',
+        client_id: '__custom_client_id__',
+        client_secret: '__custom_client_secret_',
+        realm: '__custom_realm__',
+        audience: '__custom_audience__',
+        scope: 'openid email',
+        grant_type: 'http://auth0.com/oauth/grant-type/password-realm'
+      )
+      @instance.login_ro(
+        'test@test.com',
+        'test12345',
+        client_id: '__custom_client_id__',
+        client_secret: '__custom_client_secret_',
+        realm: '__custom_realm__',
+        audience: '__custom_audience__',
+        scope: 'openid email'
+      )
+    end
+
+    it 'should raise an error with a blank username' do
+      expect do
+        @instance.login_ro('', 'password')
+      end.to raise_error 'Must supply a valid login_name'
+    end
+
+    it 'should raise an error with a blank password' do
+      expect do
+        @instance.login_ro('username', '')
+      end.to raise_error 'Must supply a valid password'
     end
   end
 
