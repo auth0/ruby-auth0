@@ -1,7 +1,10 @@
+# Auth0 - Ruby
+
 [![Build Status](https://travis-ci.org/auth0/ruby-auth0.svg?branch=master)](https://travis-ci.org/auth0/ruby-auth0)
 [![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
 [![Coverage Status](https://coveralls.io/repos/auth0/ruby-auth0/badge.svg?branch=master)](https://coveralls.io/r/auth0/ruby-auth0?branch=master)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
+[![MIT licensed](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://github.com/auth0/ruby-auth0/blob/master/LICENSE)
 
 Ruby API client for the [Auth0](https://auth0.com) platform.
 
