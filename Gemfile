@@ -6,6 +6,7 @@ gemspec
 group :development do
   gem 'terminal-notifier-guard', require: false unless ENV['TRAVIS']
   gem 'coveralls', require: false
+  gem 'redcarpet', require: false
   gem 'rubocop', require: false
   gem 'yard', require: false
 end
