@@ -30,7 +30,7 @@ You can build the API documentation with the following:
 bundle exec rake documentation
 ```
 
-To view the generated documentation, open `doc/Auth0/Api.html`
+To view the generated documentation, open `doc/Auth0/Api.html` .
 
 ## Management API v2
 
@@ -100,12 +100,12 @@ In addition to the Management API, this SDK also provides access to [Authenticat
 
 * Register a new user with a database connection using the `signup` method.
 * Redirect a user to the universal login page for authentication using the `authorization_url` method.
-* Log a user in to a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method.
+* Log a user into a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method.
 * Exchange an authorization code for an access token on callback using the `obtain_user_tokens` method (see the note on state validation below).
 * Send a change password email to a database connection user using the `change_password` method.
 * Log a user out of Auth0 with the `logout_url` method.
 
-**Important note on state validation**: If you choose to implement a login flow callback youself, it is important to generate and store a `state` value, pass that value to Auth0 in the `authorization_url` method, and validate it in your callback URL before calling `obtain_user_tokens`. For more information on state validation, [please see our documentation](https://auth0.com/docs/protocols/oauth2/oauth-state). 
+**Important note on state validation**: If you choose to implement a login flow callback yourself, it is important to generate and store a `state` value, pass that value to Auth0 in the `authorization_url` method, and validate it in your callback URL before calling `obtain_user_tokens`. For more information on state validation, [please see our documentation](https://auth0.com/docs/protocols/oauth2/oauth-state). 
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
