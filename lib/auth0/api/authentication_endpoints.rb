@@ -102,7 +102,7 @@ module Auth0
       #   - Include an audience (above) for API access scopes
       #   - Use the default "openid" for userinfo calls
       # @return [json] Returns the access_token and id_token
-      def login_ro(
+      def login_with_resource_owner(
         login_name,
         password,
         client_id: @client_id,
@@ -129,7 +129,7 @@ module Auth0
       end
 
       # Get access and ID tokens using Resource Owner Password.
-      # TODO: Deprecate, use the login_ro method in this module instead.
+      # TODO: Deprecate, use the login_with_resource_owner method in this module instead.
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
       # @param username [string] Username or email
       # @param password [string] Password
