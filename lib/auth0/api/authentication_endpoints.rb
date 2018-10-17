@@ -125,7 +125,8 @@ module Auth0
           audience:      audience,
           grant_type:    realm ? 'http://auth0.com/oauth/grant-type/password-realm' : 'password'
         }
-        post('/oauth/token', request_params)
+        response = post('/oauth/token', request_params)
+        AccessToken.from_response post('/oauth/token', request_params)
       end
 
       # Get access and ID tokens using Resource Owner Password.
