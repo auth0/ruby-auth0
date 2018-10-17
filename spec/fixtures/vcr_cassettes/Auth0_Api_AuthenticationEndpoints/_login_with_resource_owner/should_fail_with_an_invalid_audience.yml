@@ -29,7 +29,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:52:29 GMT
+      - Wed, 17 Oct 2018 17:17:59 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -37,13 +37,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Auth0-Requestid:
-      - f9b90852e88c5d268b1e
+      - 4e25e371ed76da7184c9
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '82'
+      - '92'
       X-Ratelimit-Reset:
-      - '1539230709'
+      - '1539803212'
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
     body:
@@ -51,5 +51,5 @@ http_interactions:
       string: '{"error":"invalid_request","error_description":"invalid audience specified
         for password grant exchange"}'
     http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:52:29 GMT
+  recorded_at: Wed, 17 Oct 2018 17:17:59 GMT
 recorded_with: VCR 4.0.0

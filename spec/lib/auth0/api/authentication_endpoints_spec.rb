@@ -134,9 +134,9 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
-  context '.login_ro' do
-    it 'should respond to the login_ro method' do
-      expect(@instance).to respond_to(:login_ro)
+  context '.login_with_resource_owner' do
+    it 'should respond to the login_with_resource_owner method' do
+      expect(@instance).to respond_to(:login_with_resource_owner)
     end
 
     it 'should make post to /oauth/token with default params' do
@@ -151,7 +151,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         scope: 'openid',
         grant_type: 'password'
       )
-      @instance.login_ro('test@test.com', 'test12345')
+      @instance.login_with_resource_owner('test@test.com', 'test12345')
     end
 
     it 'should make post to /oauth/token with custom params' do
@@ -166,7 +166,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         scope: 'openid email',
         grant_type: 'http://auth0.com/oauth/grant-type/password-realm'
       )
-      @instance.login_ro(
+      @instance.login_with_resource_owner(
         'test@test.com',
         'test12345',
         client_id: '__custom_client_id__',
@@ -179,13 +179,13 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'should raise an error with a blank username' do
       expect do
-        @instance.login_ro('', 'password')
+        @instance.login_with_resource_owner('', 'password')
       end.to raise_error 'Must supply a valid login_name'
     end
 
     it 'should raise an error with a blank password' do
       expect do
-        @instance.login_ro('username', '')
+        @instance.login_with_resource_owner('username', '')
       end.to raise_error 'Must supply a valid password'
     end
   end

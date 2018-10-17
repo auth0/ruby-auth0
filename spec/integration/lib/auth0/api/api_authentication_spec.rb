@@ -67,10 +67,10 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
   end
 
-  describe '.login_ro', vcr: true do
+  describe '.login_with_resource_owner', vcr: true do
     it 'should fail with an incorrect email' do
       expect do
-        @client.login_ro(
+        @client.login_with_resource_owner(
           test_user['email'] + '_invalid',
           test_user_pwd
         )
@@ -79,7 +79,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'should fail with an incorrect password' do
       expect do
-        @client.login_ro(
+        @client.login_with_resource_owner(
           test_user['email'],
           test_user_pwd + '_invalid'
         )
@@ -88,7 +88,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'should login successfully with a default scope' do
       expect(
-        @client.login_ro(
+        @client.login_with_resource_owner(
           test_user['email'],
           test_user_pwd
         )
@@ -97,7 +97,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'should fail with an invalid audience' do
       expect do
-        @client.login_ro(
+        @client.login_with_resource_owner(
           test_user['email'],
           test_user_pwd,
           scope: 'test:scope',
@@ -108,7 +108,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'should login successfully with a custom audience' do
       expect(
-        @client.login_ro(
+        @client.login_with_resource_owner(
           test_user['email'],
           test_user_pwd,
           scope: 'test:scope',

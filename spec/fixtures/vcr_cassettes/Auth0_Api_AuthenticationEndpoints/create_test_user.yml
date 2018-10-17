@@ -29,7 +29,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:19:58 GMT
+      - Wed, 17 Oct 2018 17:17:52 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -37,13 +37,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Auth0-Requestid:
-      - a287e55974ca9d0e956c
+      - ea00e2cdf117312eaa66
       X-Ratelimit-Limit:
       - '50'
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1539213600'
+      - '1539796674'
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       Strict-Transport-Security:
@@ -52,7 +52,7 @@ http_interactions:
       - noindex, nofollow, nosnippet, noarchive
     body:
       encoding: UTF-8
-      string: '{"_id":"5bbe891e90253a02377c1c0b","email_verified":false,"email":"rubytest-username-1@auth0.com"}'
+      string: '{"_id":"5bc76ec0df86ab7cfd106635","email_verified":false,"email":"rubytest-username-1@auth0.com"}'
     http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:19:58 GMT
+  recorded_at: Wed, 17 Oct 2018 17:17:52 GMT
 recorded_with: VCR 4.0.0
