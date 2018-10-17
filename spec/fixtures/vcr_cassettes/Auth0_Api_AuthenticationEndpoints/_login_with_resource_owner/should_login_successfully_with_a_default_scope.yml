@@ -29,7 +29,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:17:58 GMT
+      - Wed, 17 Oct 2018 17:39:06 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -37,13 +37,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Auth0-Requestid:
-      - 16ce7a7503425c1b25ff
+      - 031373fa2e586ea674d3
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '92'
+      - '90'
       X-Ratelimit-Reset:
-      - '1539803212'
+      - '1539805804'
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       Pragma:
@@ -54,8 +54,66 @@ http_interactions:
       - noindex, nofollow, nosnippet, noarchive
     body:
       encoding: UTF-8
-      string: '{"access_token":"5rI6VhVDY9ac2RS52_OMyu8s_gYMHUkl","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xN1QxNzoxNzo1OC43MjFaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYzc2ZWMwZGY4NmFiN2NmZDEwNjYzNSIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5Nzk2Njc4LCJleHAiOjE1Mzk4MzI2Nzh9.UtDDj00eAvMcOGt68QiUM7Cg1RT5jD20penb34vE6WSQSw_I3TYwsQPe40Ufc80yFv0cSK6tPmPwVwsI1fDwQ89J_8J5-mmzmH95o8eJYB9EJMDyiNCn2ylHBTFNEYJ4u5pZ33ArfDwDchhDPJ_XByzcpnitqp3Vda01cVKev8ftWXeBsZTnYbqZ6PyhriX3KX6ZQwt7YIA6DPy3WNaBaOdJPvGz--AovuctSdjh-K6fYUabjeCDl0EP_1cinj1MgNlnmTk-7FGsJRE4gv9NpMoQw80o20m6Qjh9BRbi9Vp0Rv-Rfciy0PRLcp6cpiJaZqg-oAvT5sszqKx_hNZSqw","scope":"openid
+      string: '{"access_token":"dCndEvcBHl5aZwRIFzsMS5PMexVm8B7b","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xN1QxNzozOTowNi4wMDNaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYzc3M2I5MzA1MzNmNDdkNDc2NGI5YyIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5Nzk3OTQ2LCJleHAiOjE1Mzk4MzM5NDZ9.n3yNRcpsGS4BtfE842udTbjURdyaZe9PNizLOFt5uYgVlxXds4aWkkBWlLbw128I6vznzAtqVHt3xLPG-PWR10Ce2yZp3WvdL8_K-yNcRjZYZCidD0tQ1f1F86BqiUzmiyap9Xmz19CjdHTIDrm9UUIuaHRF_IaJW1XizYMYjQwc40w-ZYzZGSpUTGAdTc4o3G5PJVEg3wWzz0ESxcBnYCFDs-bK8A1DOWzcOgK_W0xVx50JK7QoASsSz3YEgDFlSgM2FFHyDEkaZOeSpvnrrFBYT1HoJ7PdMRn4E44MElDW2impGCe-AJIYPXVnvWOSsg-23CVp9bqy0Am0j9Zeaw","scope":"openid
         profile email address phone","expires_in":86400,"token_type":"Bearer"}'
     http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:17:58 GMT
+  recorded_at: Wed, 17 Oct 2018 17:39:06 GMT
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/oauth/token
+    body:
+      encoding: UTF-8
+      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '258'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Oct 2018 17:39:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1239'
+      Connection:
+      - keep-alive
+      X-Auth0-Requestid:
+      - 5cec4399e09d986f0e8f
+      X-Ratelimit-Limit:
+      - '100'
+      X-Ratelimit-Remaining:
+      - '90'
+      X-Ratelimit-Reset:
+      - '1539805804'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ZJsovrcsn2NtbpdY6Qgvy79zQjrkE59d","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xN1QxNzozOTowNi40ODdaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYzc3M2I5MzA1MzNmNDdkNDc2NGI5YyIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5Nzk3OTQ2LCJleHAiOjE1Mzk4MzM5NDZ9.L9rz15foepN6PBq8tcs2ccV7Ct1vdPK2Pa09R0tQU2S8DsgV3KSuWrV3K3pKvztjKfXICSRdSwt240SVnVPHsyxTcrsfEV4dI3lJE-6TtimhctCBfhQEMMgfxMX0CE3N8wp_0gJjvUkPMi3TiWkBFxZlNJyfTft3IMhlbl0JyeZWssurjCBFNxgbVPGxOlLe3gmsLAb4zr44GUEyqkMixtJmAwWer3D9WckCXwKJzJc6rfWZVi_ZJ4PJSySL7uWvob-wPh6dUuV4LMKAEa0mMlhcSosyxf_e6lYvJkW0Trmj3G7R_c7F9yYROYrDsHdPea2wFAgPImyoGqs_adAWtw","scope":"openid
+        profile email address phone","expires_in":86400,"token_type":"Bearer"}'
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 17:39:06 GMT
 recorded_with: VCR 4.0.0

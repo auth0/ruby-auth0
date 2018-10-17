@@ -29,7 +29,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:17:59 GMT
+      - Wed, 17 Oct 2018 17:39:07 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -37,13 +37,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Auth0-Requestid:
-      - 0cde8081bba46c97e825
+      - 808b8c17f0dfd9e6e23a
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '91'
+      - '90'
       X-Ratelimit-Reset:
-      - '1539804076'
+      - '1539805804'
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       Pragma:
@@ -54,7 +54,64 @@ http_interactions:
       - noindex, nofollow, nosnippet, noarchive
     body:
       encoding: UTF-8
-      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWJjNzZlYzBkZjg2YWI3Y2ZkMTA2NjM1IiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTUzOTc5NjY3OSwiZXhwIjoxNTM5ODgzMDc5LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.OaJ2aaCNplsQVUce1P9B0LeQQM_Zgf2ZG3y8eP0Q8n-nD7b0WnZM9O8A1gPra0MCZZUViD2A7DWlznjyM84hON65yoMJCkajnwPGqtmAiBm746JWgZIfcgA8Ha3AjcpYcrip1fYOf5jDlJDID3j1TtQRkwXsVASzEL69OKTo736VZgBRvfrZ8OtW8JE0BcjopEkRh-cApbRHJWfPjN5lJhLDjAwC2hbOsqUW8sy-ic46WQQz-FTOQ1sTMZulTOwkkR2wM8U6d9-_Y09dZvafvcJFv730VwqzKFC34kIvOh8xLNwox0yILerMUk2zPNh8xtt_hw5IX74ijJNpoPb5yw","expires_in":86400,"token_type":"Bearer"}'
+      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWJjNzczYjkzMDUzM2Y0N2Q0NzY0YjljIiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTUzOTc5Nzk0NywiZXhwIjoxNTM5ODg0MzQ3LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.XtI-34k_YzEGhBK225OkoDRLY5YtKA9G8bNnQpexXHYv0lT9zHayCC8CKhyjMijVWv0pHLlnGOoJodz0ZkjjBvgSaIR44OwrQxyaGbPySBq8kxZSKneM6CyHR22OwXfPWMJwG1AdcORJAiEDzZs4-KA4Odoo-DBY9UrZbzWySqs0xs7M32CkC62m66lqKTAlkTbF5woRntL56seIe0CawQIKKyB1EdJXaNCTh6vGGAnibwY7zGJ2UVJSmb4mJhKawyakkti-Oc3EfUb_fEoWOuRnwAwjB7gOla1nsAsVQ9F2nfPArBAti2distZJCR9086vtU0SjlvXE6BCwsOBFGQ","expires_in":86400,"token_type":"Bearer"}'
     http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:17:59 GMT
+  recorded_at: Wed, 17 Oct 2018 17:39:07 GMT
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/oauth/token
+    body:
+      encoding: UTF-8
+      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/custom/api/v1/","grant_type":"password"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby/2.5.1
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '310'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Oct 2018 17:39:07 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '843'
+      Connection:
+      - keep-alive
+      X-Auth0-Requestid:
+      - 3639dd9ae800ba6e2c68
+      X-Ratelimit-Limit:
+      - '100'
+      X-Ratelimit-Remaining:
+      - '90'
+      X-Ratelimit-Reset:
+      - '1539805804'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWJjNzczYjkzMDUzM2Y0N2Q0NzY0YjljIiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTUzOTc5Nzk0NywiZXhwIjoxNTM5ODg0MzQ3LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.XtI-34k_YzEGhBK225OkoDRLY5YtKA9G8bNnQpexXHYv0lT9zHayCC8CKhyjMijVWv0pHLlnGOoJodz0ZkjjBvgSaIR44OwrQxyaGbPySBq8kxZSKneM6CyHR22OwXfPWMJwG1AdcORJAiEDzZs4-KA4Odoo-DBY9UrZbzWySqs0xs7M32CkC62m66lqKTAlkTbF5woRntL56seIe0CawQIKKyB1EdJXaNCTh6vGGAnibwY7zGJ2UVJSmb4mJhKawyakkti-Oc3EfUb_fEoWOuRnwAwjB7gOla1nsAsVQ9F2nfPArBAti2distZJCR9086vtU0SjlvXE6BCwsOBFGQ","expires_in":86400,"token_type":"Bearer"}'
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 17:39:07 GMT
 recorded_with: VCR 4.0.0

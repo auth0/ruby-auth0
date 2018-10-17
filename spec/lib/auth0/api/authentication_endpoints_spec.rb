@@ -140,7 +140,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'should make post to /oauth/token with default params' do
-      expect(@instance).to receive(:post).with(
+      allow(@instance).to receive(:post).with(
         '/oauth/token',
         username: 'test@test.com',
         password: 'test12345',
@@ -150,12 +150,16 @@ describe Auth0::Api::AuthenticationEndpoints do
         audience: nil,
         scope: 'openid',
         grant_type: 'password'
-      )
-      @instance.login_with_resource_owner('test@test.com', 'test12345')
+      ).and_return('access_token' => 'AccessToken')
+
+      expect(
+        @instance.login_with_resource_owner('test@test.com', 'test12345').token
+      ).to eq 'AccessToken'
     end
 
     it 'should make post to /oauth/token with custom params' do
-      expect(@instance).to receive(:post).with(
+
+      allow(@instance).to receive(:post).with(
         '/oauth/token',
         username: 'test@test.com',
         password: 'test12345',
@@ -165,16 +169,19 @@ describe Auth0::Api::AuthenticationEndpoints do
         audience: '__custom_audience__',
         scope: 'openid email',
         grant_type: 'http://auth0.com/oauth/grant-type/password-realm'
-      )
-      @instance.login_with_resource_owner(
-        'test@test.com',
-        'test12345',
-        client_id: '__custom_client_id__',
-        client_secret: '__custom_client_secret_',
-        realm: '__custom_realm__',
-        audience: '__custom_audience__',
-        scope: 'openid email'
-      )
+      ).and_return('access_token' => 'AccessToken')
+
+      expect(
+        @instance.login_with_resource_owner(
+          'test@test.com',
+          'test12345',
+          client_id: '__custom_client_id__',
+          client_secret: '__custom_client_secret_',
+          realm: '__custom_realm__',
+          audience: '__custom_audience__',
+          scope: 'openid email'
+        ).token
+      ).to eq 'AccessToken'
     end
 
     it 'should raise an error with a blank username' do

@@ -91,8 +91,8 @@ describe Auth0::Api::AuthenticationEndpoints do
         @client.login_with_resource_owner(
           test_user['email'],
           test_user_pwd
-        )
-      ).to include( 'access_token', 'id_token', 'expires_in', 'scope' )
+        ).token
+      ).to_not be_empty
     end
 
     it 'should fail with an invalid audience' do
@@ -113,8 +113,8 @@ describe Auth0::Api::AuthenticationEndpoints do
           test_user_pwd,
           scope: 'test:scope',
           audience: 'https://brucke.club/custom/api/v1/'
-        )
-      ).to include( 'access_token', 'expires_in' )
+        ).token
+      ).to_not be_empty
     end
   end
 end
