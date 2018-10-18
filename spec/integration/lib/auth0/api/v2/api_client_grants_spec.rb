@@ -18,7 +18,6 @@ describe Auth0::Api::V2::ClientGrants do
         'scope' => ['test:scope']
       )
     end
-
   end
 
   after(:all) do

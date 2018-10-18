@@ -18,7 +18,7 @@ describe Auth0::Api::V2::Emails do
 
   let(:name) { 'mandrill' }
   let(:enabled) { true }
-  let(:credentials) { {api_key: 'api_key'} }
+  let(:credentials) { { api_key: 'api_key' } }
 
   let(:settings) do
     {
@@ -61,10 +61,10 @@ describe Auth0::Api::V2::Emails do
       it 'should get the existing email provider with specific fields' do
         begin
           expect(
-              client.get_provider(
-                fields: [:name, :enabled, :credentials].join(','),
-                include_fields: true
-              )
+            client.get_provider(
+              fields: %i[name enabled credentials].join(','),
+              include_fields: true
+            )
           ).to include('name', 'enabled', 'credentials')
         rescue Auth0::NotFound
           'No email provider configured'
@@ -74,10 +74,10 @@ describe Auth0::Api::V2::Emails do
       it 'should get the existing email provider without specific fields' do
         begin
           expect(
-              client.get_provider(
-                fields: [:enabled].join(','),
-                include_fields: false
-              ).first
+            client.get_provider(
+              fields: [:enabled].join(','),
+              include_fields: false
+            ).first
           ).to_not include('enabled')
         rescue Auth0::NotFound
           'No email provider configured'

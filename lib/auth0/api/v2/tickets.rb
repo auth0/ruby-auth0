@@ -15,6 +15,7 @@ module Auth0
           if user_id.to_s.empty?
             raise Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
           end
+
           path = "#{tickets_path}/email-verification"
           request_params = {
             user_id: user_id,

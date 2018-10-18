@@ -32,7 +32,6 @@ describe Auth0::Client do
   let(:audience) { "https://#{domain}/api/v2/" }
 
   describe 'V2 client with token' do
-
     before :each do
       expect_any_instance_of(Auth0::Api::AuthenticationEndpoints)
         .not_to receive(:obtain_access_token)
@@ -99,13 +98,11 @@ describe Auth0::Client do
   end
 
   describe 'V2 client without token' do
-
     before do
       stub_api_token
     end
 
     context 'should try to get an API token' do
-
       let(:subject) do
         Auth0::Client.new(
           domain: domain,
@@ -119,7 +116,6 @@ describe Auth0::Client do
     end
 
     context 'should fail if' do
-
       it 'does not have a client_secret' do
         expect do
           Auth0::Client.new(
@@ -136,12 +132,10 @@ describe Auth0::Client do
     stub_request(:post, "https://#{domain}/oauth/token")
       .with(
         body: hash_including(
-          {
-            grant_type: 'client_credentials',
-            client_id: client_id,
-            client_secret: client_secret,
-            audience: audience
-          }
+          grant_type: 'client_credentials',
+          client_id: client_id,
+          client_secret: client_secret,
+          audience: audience
         )
       )
       .to_return(

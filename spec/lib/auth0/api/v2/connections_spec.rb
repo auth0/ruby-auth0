@@ -31,9 +31,9 @@ describe Auth0::Api::V2::Connections do
         page: nil,
         per_page: nil
       )
-      expect {
+      expect do
         @instance.connections(fields: 'name', include_fields: true)
-      }.not_to raise_error
+      end.not_to raise_error
     end
 
     it 'is expected to convert fields param from Array to string' do
@@ -45,9 +45,9 @@ describe Auth0::Api::V2::Connections do
         page: nil,
         per_page: nil
       )
-      expect {
-        @instance.connections(fields: ['name','strategy'], include_fields: true)
-      }.not_to raise_error
+      expect do
+        @instance.connections(fields: %w[name strategy], include_fields: true)
+      end.not_to raise_error
     end
 
     it 'is expected to add pagination' do
@@ -59,9 +59,9 @@ describe Auth0::Api::V2::Connections do
         fields: nil,
         include_fields: nil
       )
-      expect {
+      expect do
         @instance.connections(page: 1, per_page: 10)
-      }.not_to raise_error
+      end.not_to raise_error
     end
   end
 

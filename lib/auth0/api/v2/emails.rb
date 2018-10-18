@@ -24,6 +24,7 @@ module Auth0
         # @param body [hash] The Hash options used to specify the email provider's properties.
         def configure_provider(body)
           raise Auth0::InvalidParameter, 'Must supply a valid body to create an email provider' if body.to_s.empty?
+
           post(email_path, body)
         end
 
@@ -42,6 +43,7 @@ module Auth0
         # @return [json] Returns the updated email provider.
         def update_provider(body)
           raise Auth0::InvalidParameter, 'Must supply a valid body to update an email provider' if body.to_s.empty?
+
           patch(email_path, body)
         end
 

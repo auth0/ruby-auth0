@@ -20,7 +20,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: @instance.audience,
+        audience: @instance.audience
       ).and_return('access_token' => 'AccessToken')
 
       expect(@instance.api_token.token).to eql 'AccessToken'
@@ -32,7 +32,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: '__test_audience__',
+        audience: '__test_audience__'
       ).and_return('access_token' => 'AccessToken')
 
       expect(
@@ -47,7 +47,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
       )
-                            .and_return('access_token' => 'AccessToken')
+                                        .and_return('access_token' => 'AccessToken')
 
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
@@ -89,7 +89,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.obtain_user_tokens('', '') }.to raise_error 'Must supply a valid code' }
     it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
-
 
   context '.auth_code_exchange' do
     it { is_expected.to respond_to(:exchange_auth_code_for_tokens) }
@@ -158,7 +157,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'should make post to /oauth/token with custom params' do
-
       allow(@instance).to receive(:post).with(
         '/oauth/token',
         username: 'test@test.com',
@@ -467,7 +465,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.userinfo' do
     it { is_expected.to respond_to(:user_info) }
     it 'is expected to make a GET request to /userinfo' do
-      is_expected.to receive(:get).with('/userinfo', {}, {'Authorization' => 'Bearer access-token'})
+      is_expected.to receive(:get).with('/userinfo', {}, 'Authorization' => 'Bearer access-token')
       subject.userinfo 'access-token'
     end
   end
@@ -520,7 +518,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'is expected to return a logout url with a client ID' do
       expect(@instance.logout_url(return_to, include_client: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout" +
+        "https://#{@instance.domain}/v2/logout" \
           "?returnTo=http%3A%2F%2Freturnto.com&client_id=#{@instance.client_id}"
       )
     end
@@ -570,7 +568,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'is expected to get the wsfed url with wctx' do
-      expect(@instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s).to eq(
+      expect(@instance.wsfed_url(UP_AUTH, wctx: 'wctx_test').to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
           "?whr=#{UP_AUTH}&wctx=wctx_test"
       )
@@ -579,10 +577,8 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'is expected to get the wsfed url with wtrealm and wreply' do
       expect(@instance.wsfed_url(
         UP_AUTH,
-        {
-          wtrealm: 'wtrealm_test',
-          wreply: 'wreply_test'
-        }
+        wtrealm: 'wtrealm_test',
+        wreply: 'wreply_test'
       ).to_s).to eq(
         "https://#{@instance.domain}/wsfed/?whr=#{UP_AUTH}" \
           '&wtrealm=wtrealm_test&wreply=wreply_test'

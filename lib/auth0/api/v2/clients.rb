@@ -31,6 +31,7 @@ module Auth0
         # @return [json] Returns the created client application.
         def create_client(name, options = {})
           raise Auth0::MissingParameter, 'Must specify a valid client name' if name.to_s.empty?
+
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:name] = name
           post(clients_path, request_params)
@@ -44,6 +45,7 @@ module Auth0
         # @return [json] Returns the requested client application.
         def client(client_id, fields: nil, include_fields: nil)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+
           include_fields = true if !fields.nil? && include_fields.nil?
           request_params = {
             fields: fields,
@@ -58,6 +60,7 @@ module Auth0
         # @param client_id [string] The id of the client to delete.
         def delete_client(client_id)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+
           path = "#{clients_path}/#{client_id}"
           delete(path)
         end
@@ -69,6 +72,7 @@ module Auth0
         def patch_client(client_id, options)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           raise Auth0::MissingParameter, 'Must specify a valid body' if options.to_s.empty?
+
           path = "#{clients_path}/#{client_id}"
           patch(path, options)
         end

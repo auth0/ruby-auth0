@@ -41,6 +41,7 @@ module Auth0
         # @return [json] Returns the rule.
         def rule(rule_id, fields: nil, include_fields: nil)
           raise Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
+
           path = "#{rules_path}/#{rule_id}"
           request_params = {
             fields:   fields,
@@ -65,6 +66,7 @@ module Auth0
         def create_rule(name, script, order = nil, enabled = true, stage = 'login_success')
           raise Auth0::InvalidParameter, 'Must supply a valid name' if name.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid script' if script.to_s.empty?
+
           request_params = {
             name: name,
             enabled: enabled,
@@ -93,6 +95,7 @@ module Auth0
         # @param rule_id [string] The id of the rule to delete.
         def delete_rule(rule_id)
           raise Auth0::InvalidParameter, 'Must supply a valid rule id' if rule_id.to_s.empty?
+
           path = "#{rules_path}/#{rule_id}"
           delete(path)
         end

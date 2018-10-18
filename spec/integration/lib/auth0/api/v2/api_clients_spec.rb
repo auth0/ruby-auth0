@@ -33,7 +33,7 @@ describe Auth0::Api::V2::Clients do
       )
     end
   end
-  
+
   describe '.clients', vcr: true do
     let(:clients) do
       client.clients
@@ -46,14 +46,14 @@ describe Auth0::Api::V2::Clients do
     context '#filters' do
       it 'should include the specified fields' do
         expect(client.clients(
-          fields: [:name, :callbacks].join(',')
+          fields: %i[name callbacks].join(',')
         ).first).to(include('name', 'callbacks'))
       end
 
       it 'should exclude fields not specified' do
         expect(client.clients(
-          fields: [:callbacks].join(',')).first
-        ).to_not(include('name'))
+          fields: [:callbacks].join(',')
+        ).first).to_not(include('name'))
       end
 
       it 'should exclude the specified fields' do
@@ -75,7 +75,6 @@ describe Auth0::Api::V2::Clients do
   end
 
   describe '.client', vcr: true do
-
     it 'should raise an error with a missing client_id' do
       expect do
         client.client('')
@@ -96,7 +95,7 @@ describe Auth0::Api::V2::Clients do
       let(:client_include) do
         client.client(
           test_client['client_id'],
-          fields: [:name, :client_secret, :jwt_configuration].join(',')
+          fields: %i[name client_secret jwt_configuration].join(',')
         )
       end
 

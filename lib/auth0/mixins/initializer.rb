@@ -41,6 +41,7 @@ module Auth0
       def initialize_api(options)
         api_v2?(options) ? initialize_v2(options) : initialize_v1
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
+
         if options.fetch(:authorization, nil) == 'Basic'
           authorization_header_basic(options)
         else
@@ -51,6 +52,7 @@ module Auth0
       def base_url(options)
         @domain = options[:domain] || options[:namespace]
         raise InvalidApiNamespace, 'API namespace must supply an API domain' if @domain.to_s.empty?
+
         "https://#{@domain}"
       end
 
@@ -78,6 +80,7 @@ module Auth0
       def initialize_v1
         extend Auth0::Api::V1
         raise InvalidCredentials, 'Invalid API v1 client_id and client_secret' if @client_id.nil? || @client_secret.nil?
+
         @token = obtain_access_token
       end
 

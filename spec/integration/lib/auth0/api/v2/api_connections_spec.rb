@@ -41,9 +41,9 @@ describe Auth0::Api::V2::Connections do
 
     it 'should return the data sent' do
       should include(
-               'name' => test_conn['name'],
-               'strategy' => test_con_strategy,
-               )
+        'name' => test_conn['name'],
+        'strategy' => test_con_strategy
+      )
     end
   end
 
@@ -61,7 +61,7 @@ describe Auth0::Api::V2::Connections do
         expect(
           client.connection(
             test_conn['id'],
-            fields: [:name, :id].join(',')
+            fields: %i[name id].join(',')
           )
         ).to include('id', 'name')
       end
@@ -70,7 +70,7 @@ describe Auth0::Api::V2::Connections do
         expect(
           client.connection(
             test_conn['id'],
-            fields: [:name, :id].join(','),
+            fields: %i[name id].join(','),
             include_fields: false
           )
         ).to_not(
@@ -119,7 +119,8 @@ describe Auth0::Api::V2::Connections do
             strategy: test_con_strategy,
             fields: [:name].join(','),
             include_fields: false
-          ).first).to_not include('name')
+          ).first
+        ).to_not include('name')
       end
     end
   end

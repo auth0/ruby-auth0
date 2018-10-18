@@ -62,7 +62,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     it 'should return the userinfo' do
       tokens = @client.login(test_user_email, test_user_pwd, nil, nil)
       expect(@client.userinfo(tokens['access_token'])).to(
-        include( 'email' => test_user_email )
+        include('email' => test_user_email)
       )
     end
   end

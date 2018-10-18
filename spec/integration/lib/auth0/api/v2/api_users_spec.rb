@@ -45,7 +45,7 @@ describe Auth0::Api::V2::Users do
         expect(
           client.users(
             per_page: 1,
-            fields: [:picture, :email, :user_id].join(','),
+            fields: %i[picture email user_id].join(','),
             include_fields: true
           ).first
         ).to(include('email', 'user_id', 'picture'))
@@ -75,7 +75,7 @@ describe Auth0::Api::V2::Users do
           client.users(
             per_page: 1,
             fields: 'user_id',
-            q: "updated_at:{2016-01-01 TO *}",
+            q: 'updated_at:{2016-01-01 TO *}',
             search_engine: 'v2'
           ).first
         ).to include('user_id')
@@ -86,7 +86,7 @@ describe Auth0::Api::V2::Users do
           client.users(
             per_page: 1,
             fields: 'user_id',
-            q: "updated_at:[2016-01-01 TO *]",
+            q: 'updated_at:[2016-01-01 TO *]',
             search_engine: 'v3'
           ).first
         ).to include('user_id')
@@ -109,7 +109,7 @@ describe Auth0::Api::V2::Users do
         expect(
           client.user(
             test_user['user_id'],
-            fields: [:picture, :email, :user_id].join(','),
+            fields: %i[picture email user_id].join(','),
             include_fields: true
           )
         ).to include('email', 'user_id', 'picture')
@@ -119,7 +119,7 @@ describe Auth0::Api::V2::Users do
         expect(
           client.user(
             test_user['user_id'],
-            fields: [:picture, :email, :user_id].join(','),
+            fields: %i[picture email user_id].join(','),
             include_fields: false
           )
         ).not_to include('picture', 'email', 'user_id')
@@ -129,7 +129,8 @@ describe Auth0::Api::V2::Users do
         expect(
           client.user(
             test_user['user_id'],
-            fields: [:email].join(','))
+            fields: [:email].join(',')
+          )
         ).to_not include('user_id', 'picture')
       end
     end

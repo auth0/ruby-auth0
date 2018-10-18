@@ -12,6 +12,7 @@ module Auth0
         # @return [json] Returns the job status and properties.
         def get_job(job_id)
           raise Auth0::InvalidParameter, 'Must specify a job id' if job_id.to_s.empty?
+
           path = "#{jobs_path}/#{job_id}"
           get(path)
         end
@@ -26,6 +27,7 @@ module Auth0
         def import_users(users_file, connection_id)
           raise Auth0::InvalidParameter, 'Must specify a valid file' if users_file.to_s.empty?
           raise Auth0::InvalidParameter, 'Must specify a connection_id' if connection_id.to_s.empty?
+
           request_params = {
             users: users_file,
             connection_id: connection_id
@@ -41,6 +43,7 @@ module Auth0
         # @return [json] Returns the job status and properties.
         def send_verification_email(user_id)
           raise Auth0::InvalidParameter, 'Must specify a user id' if user_id.to_s.empty?
+
           request_params = {
             user_id: user_id
           }

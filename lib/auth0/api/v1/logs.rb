@@ -5,9 +5,10 @@ module Auth0
       module Logs
         # https://auth0.com/docs/api/v1#!#logs
         def logs(options = {})
-          acceptable_params = %i(take from search_criteria page per_page sort fields exclude_fields)
+          acceptable_params = %i[take from search_criteria page per_page sort fields exclude_fields]
           options.reject! do |key, value|
             next unless key.nil? || value.nil? || !acceptable_params.include?(key.to_sym)
+
             warn "#{key} is not in acceptable params list: #{acceptable_params}"
             true
           end

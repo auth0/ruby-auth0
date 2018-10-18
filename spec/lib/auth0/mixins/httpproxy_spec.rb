@@ -9,7 +9,7 @@ describe Auth0::Mixins::HTTPProxy do
     @exception = DummyClassForRestClient.new
   end
 
-  %i(get delete).each do |http_method|
+  %i[get delete].each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP" do
@@ -18,7 +18,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-          .and_return(StubResponse.new({}, true, 200))
+                                                        .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
       end
 
@@ -28,7 +28,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_return(StubResponse.new('Some random text here', true, 200))
+                                                       .and_return(StubResponse.new('Some random text here', true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
         expect(@instance.send(http_method, '/test')).to eql('Some random text here')
       end
@@ -40,7 +40,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-          .and_return(StubResponse.new({}, false, 401))
+                                                        .and_return(StubResponse.new({}, false, 401))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unauthorized)
       end
 
@@ -51,7 +51,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-          .and_return(StubResponse.new({}, false, 404))
+                                                        .and_return(StubResponse.new({}, false, 404))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound)
       end
 
@@ -62,7 +62,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-          .and_return(StubResponse.new({}, false, 418))
+                                                        .and_return(StubResponse.new({}, false, 418))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unsupported)
       end
 
@@ -74,7 +74,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::BadRequest)
       end
 
@@ -86,7 +86,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::AccessDenied)
       end
       it "should raise Auth0::ServerError on send http #{http_method} method
@@ -97,7 +97,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
@@ -107,13 +107,13 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-          .and_return(StubResponse.new({}, true, 200))
+                                                        .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/te st') }.not_to raise_error
       end
     end
   end
 
-  %i(post put patch).each do |http_method|
+  %i[post put patch].each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP" do
@@ -122,7 +122,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: nil,
                                                               payload: '{}')
-          .and_return(StubResponse.new({}, true, 200))
+                                                        .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
       end
 
@@ -132,7 +132,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_return(StubResponse.new('Some random text here', true, 200))
+                                                       .and_return(StubResponse.new('Some random text here', true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
         expect(@instance.send(http_method, '/test')).to eql('Some random text here')
       end
@@ -145,7 +145,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unauthorized)
       end
 
@@ -157,7 +157,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound)
       end
 
@@ -169,7 +169,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unsupported)
       end
 
@@ -181,7 +181,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::BadRequest)
       end
 
@@ -192,7 +192,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                              timeout: nil,
                                                              headers: nil,
                                                              payload: '{}')
-          .and_raise(@exception)
+                                                       .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
@@ -202,7 +202,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: nil,
                                                               payload: '{}')
-          .and_return(StubResponse.new({}, true, 200))
+                                                        .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/te st') }.not_to raise_error
       end
 
@@ -217,7 +217,7 @@ describe Auth0::Mixins::HTTPProxy do
                                                               timeout: nil,
                                                               headers: nil,
                                                               payload: '{}')
-          .and_return(StubResponse.new(res, true, 404))
+                                                        .and_return(StubResponse.new(res, true, 404))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound, res)
       end
     end

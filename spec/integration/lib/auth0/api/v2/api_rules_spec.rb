@@ -89,7 +89,7 @@ describe Auth0::Api::V2::Rules do
       it 'should include the specified fields' do
         expect(
           client.rules(
-            fields: [:script, :order].join(',')
+            fields: %i[script order].join(',')
           ).first
         ).to(include('script', 'order'))
       end
@@ -124,7 +124,7 @@ describe Auth0::Api::V2::Rules do
       let(:rule_include) do
         client.rule(
           enabled_rule['id'],
-          fields: [:stage, :order, :script].join(',')
+          fields: %i[stage order script].join(',')
         )
       end
 

@@ -34,7 +34,7 @@ describe Auth0::Api::V2::Tickets do
 
     it 'should raise an error if the user id is empty' do
       expect do
-        client.post_email_verification( '' )
+        client.post_email_verification('')
       end.to raise_error Auth0::InvalidParameter
     end
   end

@@ -26,6 +26,7 @@ module Auth0
         # @return [json] Returns the updated tenant settings.
         def update_tenant_settings(body)
           raise Auth0::InvalidParameter, 'Must supply a valid body to update tenant settings' if body.to_s.empty?
+
           patch(tenant_path, body)
         end
 

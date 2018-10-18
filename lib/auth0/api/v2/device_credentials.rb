@@ -24,9 +24,10 @@ module Auth0
             type: options.fetch(:type, nil)
           }
           raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
-          if !request_params[:type].nil? && !%w(public_key refresh_token).include?(request_params[:type])
+          if !request_params[:type].nil? && !%w[public_key refresh_token].include?(request_params[:type])
             raise Auth0::InvalidParameter, 'Type must be one of \'public_key\', \'refresh_token\''
           end
+
           get(device_credentials_path, request_params)
         end
         alias list_device_credentials device_credentials
@@ -44,6 +45,7 @@ module Auth0
           raise Auth0::InvalidParameter, 'Must supply a valid value' if value.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid device_id' if device_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
+
           request_params = {
             device_name:  device_name,
             type:         'public_key',
@@ -60,6 +62,7 @@ module Auth0
         # @param id [string] The id of the credential to delete.
         def delete_device_credential(id)
           raise Auth0::InvalidParameter, 'Must supply a valid id' if id.to_s.empty?
+
           path = "#{device_credentials_path}/#{id}"
           delete(path)
         end

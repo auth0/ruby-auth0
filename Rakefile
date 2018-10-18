@@ -44,7 +44,7 @@ begin
   desc 'Run All Suites'
   RSpec::Core::RakeTask.new(:all)
 
-  task default: [:rubocop, :spec]
+  task default: %i[rubocop spec]
 rescue LoadError
   puts 'Load Error - No RSpec'
 end

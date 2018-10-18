@@ -39,6 +39,7 @@ module Auth0
           if request_params[:per_page].to_i > 100
             raise Auth0::InvalidParameter, 'The total amount of entries per page should be less than 100'
           end
+
           get(logs_path, request_params)
         end
         alias get_logs logs
@@ -50,6 +51,7 @@ module Auth0
         # @return [json] Returns the log with the given id if exists.
         def log(log_id)
           raise Auth0::MissingParameter, 'Must supply a valid log_id' if log_id.to_s.empty?
+
           path = "#{logs_path}/#{log_id}"
           get(path)
         end

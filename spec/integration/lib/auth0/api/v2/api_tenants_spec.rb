@@ -43,7 +43,7 @@ describe Auth0::Api::V2::Tenants do
     it 'should update the tenant settings with a new tenant name' do
       expect(
         client.update_tenant_settings(
-          { friendly_name: changed_tenant_name }
+          friendly_name: changed_tenant_name
         )['friendly_name']
       ).to include(changed_tenant_name)
     end
@@ -51,7 +51,7 @@ describe Auth0::Api::V2::Tenants do
     it 'should revert the tenant name' do
       expect(
         client.update_tenant_settings(
-          { friendly_name: default_tenant_name }
+          friendly_name: default_tenant_name
         )['friendly_name']
       ).to include(default_tenant_name)
     end

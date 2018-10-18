@@ -15,6 +15,7 @@ module Auth0
         # @return [json] Returns the list of existing users.
         def users_by_email(email, options = {})
           raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
+
           request_params = {
             fields:         options.fetch(:fields, nil),
             include_fields: options.fetch(:include_fields, nil)

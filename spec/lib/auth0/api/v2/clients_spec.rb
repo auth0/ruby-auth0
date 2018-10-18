@@ -29,9 +29,9 @@ describe Auth0::Api::V2::Clients do
         page: nil,
         per_page: nil
       )
-      expect {
+      expect do
         @instance.clients(fields: 'name', include_fields: true)
-      }.not_to raise_error
+      end.not_to raise_error
     end
 
     it 'is expected to send get request to Clients endpoint using an array of fields' do
@@ -42,9 +42,9 @@ describe Auth0::Api::V2::Clients do
         page: nil,
         per_page: nil
       )
-      expect {
-        @instance.clients(fields: ['name','app_type'], include_fields: true)
-      }.not_to raise_error
+      expect do
+        @instance.clients(fields: %w[name app_type], include_fields: true)
+      end.not_to raise_error
     end
 
     it 'is expected to send get request to Clients endpoint with pagination' do
@@ -55,9 +55,9 @@ describe Auth0::Api::V2::Clients do
         fields: nil,
         include_fields: nil
       )
-      expect {
+      expect do
         @instance.clients(page: 1, per_page: 10)
-      }.not_to raise_error
+      end.not_to raise_error
     end
   end
 

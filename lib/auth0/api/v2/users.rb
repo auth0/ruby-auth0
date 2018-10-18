@@ -66,6 +66,7 @@ module Auth0
         # @return [json] Returns the user with the given user_id if it exists.
         def user(user_id, fields: nil, include_fields: true)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
           path = "#{users_path}/#{user_id}"
           request_params = {
             fields:         fields,
@@ -79,6 +80,7 @@ module Auth0
         # @param user_id [string] The user_id of the user to delete.
         def delete_user(user_id)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
           path = "#{users_path}/#{user_id}"
           delete(path)
         end
@@ -102,6 +104,7 @@ module Auth0
         def patch_user(user_id, body)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+
           path = "#{users_path}/#{user_id}"
           patch(path, body)
         end
@@ -114,6 +117,7 @@ module Auth0
         def delete_user_provider(user_id, provider_name)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid provider name' if provider_name.to_s.empty?
+
           path = "#{users_path}/#{user_id}/multifactor/#{provider_name}"
           delete(path)
         end
@@ -134,6 +138,7 @@ module Auth0
         def link_user_account(user_id, body)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
+
           path = "#{users_path}/#{user_id}/identities"
           post(path, body)
         end
@@ -149,6 +154,7 @@ module Auth0
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
+
           path = "#{users_path}/#{user_id}/identities/#{provider}/#{secondary_user_id}"
           delete(path)
         end
@@ -165,6 +171,7 @@ module Auth0
         # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         def user_logs(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
           path = "#{users_path}/#{user_id}/logs"
           request_params = {
             user_id:        user_id,
@@ -176,10 +183,12 @@ module Auth0
           if request_params[:per_page].to_i > 100
             raise Auth0::InvalidParameter, 'The total amount of entries per page should be less than 100'
           end
+
           sort_pattern = /^(([a-zA-Z0-9_\.]+))\:(1|-1)$/
           if !request_params[:sort].nil? && !sort_pattern.match(request_params[:sort])
             raise Auth0::InvalidParameter, 'Sort does not match pattern ^(([a-zA-Z0-9_\\.]+))\\:(1|-1)$'
           end
+
           get(path, request_params)
         end
         alias get_user_log_events user_logs

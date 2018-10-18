@@ -6,20 +6,20 @@ module Auth0
       attr_accessor :headers, :base_uri, :timeout
 
       # proxying requests from instance methods to HTTP class methods
-      %i(get post post_file put patch delete).each do |method|
+      %i[get post post_file put patch delete].each do |method|
         define_method(method) do |path, body = {}, extra_headers = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
           result = if method == :get
                      # Mutate the headers property to add parameters.
-                     add_headers({params: body})
+                     add_headers(params: body)
                      # Merge custom headers into existing ones for this req.
                      # This prevents future calls from using them.
                      get_headers = headers.merge extra_headers
                      # Make the call with extra_headers, if provided.
                      call(:get, url(safe_path), timeout, get_headers)
                    elsif method == :delete
-                     call(:delete, url(safe_path), timeout, add_headers({params: body}))
+                     call(:delete, url(safe_path), timeout, add_headers(params: body))
                    elsif method == :post_file
                      call(:post, url(safe_path), timeout, headers, body)
                    else
@@ -43,6 +43,7 @@ module Auth0
 
       def add_headers(h = {})
         raise ArgumentError, 'Headers must be an object which responds to #to_hash' unless h.respond_to?(:to_hash)
+
         @headers ||= {}
         @headers.merge!(h.to_hash)
       end
@@ -60,7 +61,7 @@ module Auth0
         when RestClient::RequestTimeout
           raise Auth0::RequestTimeout
         else
-          return e.response
+          e.response
         end
       end
     end

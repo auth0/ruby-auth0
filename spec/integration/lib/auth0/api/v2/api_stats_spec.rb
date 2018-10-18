@@ -7,8 +7,6 @@ describe Auth0::Api::V2::Stats do
       expect(Integer(client.active_users)).to be >= 0
     end
   end
-
-  # rubocop:disable Date
   describe '.daily_stats', vcr: true do
     it 'should have at least one stats entry for the timeframe' do
       expect(

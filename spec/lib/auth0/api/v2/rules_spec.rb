@@ -33,9 +33,9 @@ describe Auth0::Api::V2::Rules do
         page: 1,
         per_page: 2
       )
-      expect {
+      expect do
         @instance.rules(page: 1, per_page: 2)
-      }.not_to raise_error
+      end.not_to raise_error
     end
   end
 

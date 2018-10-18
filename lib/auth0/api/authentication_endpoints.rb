@@ -40,6 +40,7 @@ module Auth0
       )
         raise Auth0::InvalidParameter, 'Must provide an authorization code' if code.to_s.empty?
         raise Auth0::InvalidParameter, 'Must provide a redirect URI' if redirect_uri.to_s.empty?
+
         request_params = {
           grant_type:    'authorization_code',
           client_id:     client_id,
@@ -77,6 +78,7 @@ module Auth0
       def obtain_user_tokens(code, redirect_uri, connection = 'facebook', scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
+
         request_params = {
           client_id:     @client_id,
           client_secret: @client_secret,
@@ -111,10 +113,14 @@ module Auth0
         audience: nil,
         scope: 'openid'
       )
-        raise Auth0::InvalidParameter,
-              'Must supply a valid login_name' if login_name.empty?
-        raise Auth0::InvalidParameter,
-              'Must supply a valid password' if password.empty?
+        if login_name.empty?
+          raise Auth0::InvalidParameter,
+                'Must supply a valid login_name'
+        end
+        if password.empty?
+          raise Auth0::InvalidParameter,
+                'Must supply a valid password'
+        end
         request_params = {
           username:      login_name,
           password:      password,
@@ -142,6 +148,7 @@ module Auth0
       def login(username, password, id_token = nil, connection_name = UP_AUTH, options = {})
         raise Auth0::InvalidParameter, 'Must supply a valid username' if username.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
+
         request_params = {
           client_id:     @client_id,
           client_secret: @client_secret,
@@ -165,6 +172,7 @@ module Auth0
       def signup(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid password' if password.to_s.empty?
+
         request_params = {
           email:      email,
           password:   password,
@@ -183,6 +191,7 @@ module Auth0
       # @param connection_name [string] Database connection name
       def change_password(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
+
         request_params = {
           email:      email,
           password:   password,
@@ -200,6 +209,7 @@ module Auth0
       # @param auth_params [hash] Append or override the magic link parameters
       def start_passwordless_email_flow(email, send = 'link', auth_params = {})
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
+
         request_params = {
           email:       email,
           send:        send,
@@ -216,6 +226,7 @@ module Auth0
       # @param phone_number [string] User's phone number.
       def start_passwordless_sms_flow(phone_number)
         raise Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
+
         request_params = {
           phone_number: phone_number,
           connection:   'sms',
@@ -242,7 +253,7 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#get-user-info
       # @return [json] User information based on the Auth0 access token
       def userinfo(access_token)
-        get('/userinfo', {}, {'Authorization' => "Bearer #{access_token}"})
+        get('/userinfo', {}, 'Authorization' => "Bearer #{access_token}")
       end
 
       # Return the user information based on the Auth0 access token.
@@ -260,6 +271,7 @@ module Auth0
       # @return [url] Authorization URL.
       def authorization_url(redirect_uri, options = {})
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
+
         request_params = {
           client_id: @client_id,
           response_type: options.fetch(:response_type, 'code'),
@@ -319,7 +331,7 @@ module Auth0
           wreply: options[:wreply]
         }
 
-        url_client_id = @client_id if !request_params[:wtrealm]
+        url_client_id = @client_id unless request_params[:wtrealm]
         URI::HTTPS.build(
           host: @domain,
           path: "/wsfed/#{url_client_id}",
@@ -341,6 +353,7 @@ module Auth0
       def phone_login(phone_number, code, scope = 'openid')
         raise Auth0::InvalidParameter, 'Must supply a valid phone number' if phone_number.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid code' if code.to_s.empty?
+
         request_params = {
           client_id:  @client_id,
           username:   phone_number,
@@ -359,6 +372,7 @@ module Auth0
       # @return User information associated with the user id (sub property) of the token.
       def token_info(id_token)
         raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
+
         request_params = { id_token: id_token }
         post('/tokeninfo', request_params)
       end
@@ -376,6 +390,7 @@ module Auth0
       # @return [json] Returns the refreshed delegation token
       def refresh_delegation(refresh_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
         raise Auth0::InvalidParameter, 'Must supply a valid token to refresh' if refresh_token.to_s.empty?
+
         request_params = {
           client_id:      @client_id,
           grant_type:     JWT_BEARER,
@@ -400,6 +415,7 @@ module Auth0
       # @return [json] Returns the refreshed delegation token
       def delegation(id_token, target, scope = 'openid', api_type = 'app', extra_parameters = {})
         raise Auth0::InvalidParameter, 'Must supply a valid id_token' if id_token.to_s.empty?
+
         request_params = {
           client_id:  @client_id,
           grant_type: JWT_BEARER,
@@ -425,6 +441,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply a valid app_client_id' if app_client_id.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid impersonator_id' if impersonator_id.to_s.empty?
         raise Auth0::MissingParameter, 'Must supply client_secret' if @client_secret.nil?
+
         authorization_header obtain_access_token
         request_params = {
           protocol:         options.fetch(:protocol, 'oauth2'),
@@ -452,6 +469,7 @@ module Auth0
       def unlink_user(access_token, user_id)
         raise Auth0::InvalidParameter, 'Must supply a valid access_token' if access_token.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid user_id' if user_id.to_s.empty?
+
         request_params = {
           access_token:  access_token,
           user_id: user_id

@@ -10,7 +10,7 @@ module Auth0
         # @param page [int] Page number to get, 0-based.
         # @param per_page [int] Results per page if also passing a page number.
         # @return [json] Returns the client grants.
-        def client_grants (page: nil, per_page: nil)
+        def client_grants(page: nil, per_page: nil)
           request_params = {
             page: page,
             per_page: per_page
@@ -34,6 +34,7 @@ module Auth0
         # @param client_id [string] The id of the client grant to delete.
         def delete_client_grant(client_grant_id)
           raise Auth0::InvalidParameter, 'Must specify a client grant id' if client_grant_id.to_s.empty?
+
           path = "#{client_grants_path}/#{client_grant_id}"
           delete(path)
         end
@@ -45,6 +46,7 @@ module Auth0
         def patch_client_grant(client_grant_id, options)
           raise Auth0::InvalidParameter, 'Must specify a client grant id' if client_grant_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must specify a valid body' if options.to_s.empty?
+
           path = "#{client_grants_path}/#{client_grant_id}"
           patch(path, options)
         end

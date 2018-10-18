@@ -12,8 +12,10 @@ def validate_token(env)
   auth0_client_secret = ENV['AUTH0_CLIENT_SECRET']
   authorization = env['HTTP_AUTHORIZATION']
   raise InvalidTokenError if authorization.nil?
+
   decoded_token = JWT.decode(authorization.split(' ').last, JWT.base64url_decode(auth0_client_secret))
   raise InvalidTokenError if auth0_client_id != decoded_token[0]['aud']
+
   'You get this only if authenticated'
 rescue JWT::DecodeError
   raise InvalidTokenError

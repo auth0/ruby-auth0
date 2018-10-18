@@ -19,7 +19,6 @@ describe Auth0::Api::V2::DeviceCredentials do
       )
     end
 
-
     basic_creds = {
       connection_id: Auth0::Api::AuthenticationEndpoints::UP_AUTH,
       user: email,
@@ -37,7 +36,6 @@ describe Auth0::Api::V2::DeviceCredentials do
         v2_creds[:client_id]
       )
     end
-
   end
 
   after(:all) do
@@ -103,7 +101,8 @@ describe Auth0::Api::V2::DeviceCredentials do
       expect(
         device_credentials.find do |cred|
           cred['id'] == test_credential['id']
-        end).to_not be_empty
+        end
+      ).to_not be_empty
     end
 
     context '#filter_by_type' do

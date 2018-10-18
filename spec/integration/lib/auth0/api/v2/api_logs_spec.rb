@@ -15,7 +15,6 @@ describe Auth0::Api::V2::Logs do
         'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH
       )
     end
-
   end
 
   after(:all) do
@@ -38,7 +37,7 @@ describe Auth0::Api::V2::Logs do
         expect(
           client.logs(
             per_page: 1,
-            fields: [:date, :description, :type].join(','),
+            fields: %i[date description type].join(','),
             include_fields: true
           ).first
         ).to(include('date', 'description', 'type'))

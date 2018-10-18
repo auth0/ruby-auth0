@@ -11,7 +11,7 @@ describe Auth0::Api::V2::ResourceServers do
         'name' => "TestServer-#{entity_suffix}",
         'signing_alg' => 'RS256',
         'signing_secret' => 'jPd1d0TWbg7pN9iPcXdtYtEIIGAk5zhmCi',
-        'token_lifetime' => 123456
+        'token_lifetime' => 123_456
       )
     end
   end
