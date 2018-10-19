@@ -8,9 +8,10 @@ module Auth0
         # Retrieves a list of existing users by their email.
         # @see https://auth0.com/docs/api/v2#!/Users/get_users
         # @see https://auth0.com/docs/api/management/v2#!/Users_By_Email/get_users_by_email
-        # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         # @param email [string] E-mail to be searched
+        # @param options [hash]
+        #   * :fields [string] A comma separated list of fields to include or exclude from the result.
+        #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #
         # @return [json] Returns the list of existing users.
         def users_by_email(email, options = {})

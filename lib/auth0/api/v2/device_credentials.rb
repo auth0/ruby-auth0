@@ -7,11 +7,12 @@ module Auth0
 
         # Retrieves log entries that match the specified search criteria.
         # @see https://auth0.com/docs/api/v2#!/device_credentials/get_device_credentials
-        # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
-        # @param user_id [string] The user_id of the devices to retrieve.
         # @param client_id [string] The client_id of the devices to retrieve.
-        # @param type [string] The type of credentials. Possible values: 'public_key' or 'refresh_token'.
+        # @param options [hash]
+        #   * :fields [string] A comma separated list of fields to include or exclude from the result.
+        #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
+        #   * :user_id [string] The user_id of the devices to retrieve.
+        #   * :type [string] The type of credentials. Possible values: 'public_key' or 'refresh_token'.
         #
         # @return [json] Returns the list of existing devices for the specified client_id.
         # rubocop:disable Metrics/AbcSize

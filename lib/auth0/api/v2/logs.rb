@@ -8,16 +8,16 @@ module Auth0
 
         # Retrieves log entries that match the specified search criteria.
         # @see https://auth0.com/docs/api/v2#!/Logs/get_logs
-        # @param q [string] Query in Lucene query string syntax.
-        # @param page [integer] The page number. Zero based.
-        # @param per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
-        # @param sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
-        # @param fields [string] A comma separated list of fields to include or exclude from the result.
-        # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
-        # @param include_totals [string] True if a query summary must be included in the result, false otherwise.
-        # @param from [string] Log Event Id to start retrieving logs. You can limit the amount of logs using the take
-        # parameter.
-        # @param take [integer] The total amount of entries to retrieve when using the from parameter.
+        # @param options [hash]
+        #   * :q [string] Query in Lucene query string syntax.
+        #   * :page [integer] The page number. Zero based.
+        #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        #   * :sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
+        #   * :fields [string] A comma separated list of fields to include or exclude from the result.
+        #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
+        #   * :include_totals [string] True if a query summary must be included in the result, false otherwise.
+        #   * :from [string] Log Event Id to start retrieving logs. You can limit the amount of logs using the take parameter.
+        #   * :take [integer] The total amount of entries to retrieve when using the from parameter.
         # Default: 50. Max value: 100.
         #
         # @return [json] Returns the list of existing log entries.
@@ -45,7 +45,7 @@ module Auth0
 
         # Retrieves log entries that match the specified search criteria.
         # @see https://auth0.com/docs/api/v2#!/Logs/get_logs_by_id
-        # @param id [string] The log_id of the log to retrieve.
+        # @param log_id [string] The log_id of the log to retrieve.
         #
         # @return [json] Returns the log with the given id if exists.
         def log(log_id)
