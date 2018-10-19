@@ -21,13 +21,12 @@ module Auth0
         # Creates a new resource server according to the JSON object received in body.
         # @see https://auth0.com/docs/api/management/v2#!/Resource_Servers/post_resource_servers
         # @param identifier [string] The identifier of the resource server.
-        # @param name [string] The name of the resource server. Must contain at least one character.
-        # Does not allow '<' or '>'.
-        # @param signing_alg [string] The algorithm used to sign tokens.
-        # @param signing_secret [string] The secret used to sign tokens when using symmetric algorithms.
-        # @param token_lifetime [integer] The amount of time (in seconds) that the token will be valid
-        # after being issued.
-        # @param scopes [array] The scope of the resource server.
+        # @param options [hash]
+        #   * :name [string] The name of the resource server. Must contain at least one character. Does not allow '<' or '>'.
+        #   * :signing_alg [string] The algorithm used to sign tokens.
+        #   * :signing_secret [string] The secret used to sign tokens when using symmetric algorithms.
+        #   * :token_lifetime [integer] The amount of time (in seconds) that the token will be valid after being issued.
+        #   * :scopes [array] The scope of the resource server.
         #
         # @return [json] Returns the resource server.
         def create_resource_server(identifier, options = {})

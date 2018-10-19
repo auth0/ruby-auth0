@@ -11,7 +11,6 @@ module Auth0
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
       # @param audience [string] API audience to use
       # @return [json] Returns the API token
-      # def api_token(audience = "https://#{@domain}/api/v2/")
       def api_token(
         client_id: @client_id,
         client_secret: @client_secret,
