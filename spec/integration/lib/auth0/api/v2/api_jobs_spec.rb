@@ -44,6 +44,29 @@ describe Auth0::Api::V2::Jobs do
       end
     end
 
+    describe '.export_users and .get_job' do
+      let(:connection_id) do
+        client.connections
+              .find do |connection|
+          connection['name'].include?(Auth0::Api::AuthenticationEndpoints::UP_AUTH)
+        end['id']
+      end
+      let(:exported_users) { client.export_users }
+      it do
+        expect(exported_users).to include(
+          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+          'status' => 'pending',
+          'type' => 'users_export'
+        )
+      end
+      let(:export_job_id) { exported_users['id'] }
+      it do
+        expect(client.get_job(export_job_id)).to include(
+          'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH, 'type' => 'users_export', 'id' => export_job_id
+        )
+      end
+    end
+
     describe '.send_verification_email and .get_job' do
       let(:user) do
         client.create_user(username,  'email' => email,
