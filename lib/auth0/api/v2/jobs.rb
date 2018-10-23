@@ -48,7 +48,7 @@ module Auth0
             connection_id: options.fetch(:connection_id, nil),
             format: options.fetch(:format, nil),
             limit: options.fetch(:limit, nil),
-            fields: fields_for_export(options.fetch(:connection_id, nil))
+            fields: fields_for_export(options.fetch(:fields, nil))
           }
           path = "#{jobs_path}/users-exports"
           post(path, request_params)
