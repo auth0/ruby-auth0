@@ -1,3 +1,17 @@
+require 'pry'
+require 'rack/test'
+require 'faker'
+require 'auth0'
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/spec/integration'
+end
+
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['TRAVIS']
+
 require 'dotenv'
 Dotenv.load
 
@@ -6,6 +20,7 @@ WebMock.allow_net_connect!
 
 require 'vcr'
 VCR.configure do |config|
+  # Uncomment the line below to record new cassettes
   # config.allow_http_connections_when_no_cassette = true
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.configure_rspec_metadata!
@@ -14,25 +29,30 @@ VCR.configure do |config|
   config.filter_sensitive_data('API_TOKEN') { ENV['MASTER_JWT'] }
 end
 
-mode = ENV['MODE'] || 'unit'
-
 $LOAD_PATH.unshift File.expand_path('..', __FILE__)
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-
-require 'rspec'
-require 'rack/test'
-require 'faker'
-require 'auth0'
 
 Dir['./lib/**/*.rb'].each { |f| require f }
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 Dir['./spec/support/*.rb'].each { |f| require f }
+
+require 'rspec'
+RSpec.configure do |config|
+  config.filter_run focus: true
+  config.run_all_when_everything_filtered = true
+  config.include Credentials
+end
+
+def wait(time, increment = 5, elapsed_time = 0, &block)
+  yield
+rescue RSpec::Expectations::ExpectationNotMetError => e
+  raise e if elapsed_time >= time
+  sleep increment
+  wait(time, increment, elapsed_time + increment, &block)
+end
 
 def entity_suffix
   'rubytest'
 end
 
 puts "Entity suffix is #{entity_suffix}"
-puts "Running in mode #{mode}"
-
-require_relative "spec_helper_#{mode}.rb"

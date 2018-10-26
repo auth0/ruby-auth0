@@ -44,7 +44,10 @@ begin
   desc 'Run All Suites'
   RSpec::Core::RakeTask.new(:all)
 
-  task default: [:rubocop, :spec]
+  desc 'Run unit and integration tests'
+  task test: [:spec, :integration]
+
+  task default: [:rubocop, :test]
 rescue LoadError
   puts 'Load Error - No RSpec'
 end
