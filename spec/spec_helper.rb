@@ -20,7 +20,8 @@ WebMock.allow_net_connect!
 
 require 'vcr'
 VCR.configure do |config|
-  # Uncomment the line below to record new cassettes
+  # Uncomment the line below to record new VCR cassettes.
+  # When this is commented out, VCR will reject all outbound HTTP calls.
   # config.allow_http_connections_when_no_cassette = true
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.configure_rspec_metadata!
