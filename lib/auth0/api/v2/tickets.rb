@@ -22,7 +22,7 @@ module Auth0
           request_params = {
             user_id: user_id,
             result_url: result_url,
-            ttl_sec: ttl_sec
+            ttl_sec: ttl_sec.is_a?(Integer) ? ttl_sec : nil
           }
           post(path, request_params)
         end
