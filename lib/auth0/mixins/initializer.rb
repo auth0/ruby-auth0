@@ -12,7 +12,7 @@ module Auth0
       def initialize(config)
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
         @base_uri = base_url(options)
-        @headers = client_headers(config)
+        @headers = client_headers
         @timeout = options[:timeout] || 10
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
@@ -36,6 +36,26 @@ module Auth0
         add_headers('Authorization' => "Basic #{Base64.strict_encode64("#{connection_id}\\#{user}:#{password}")}")
       end
 
+      def telemetry
+        telemetry_hash = {
+          name: 'ruby-auth0',
+          version: Auth0::VERSION,
+          env: {
+            ruby: RUBY_VERSION
+          }
+        }
+
+        if Gem.loaded_specs['rails'].respond_to? :version
+          telemetry_hash[:env][:rails] = Gem.loaded_specs['rails'].version.to_s
+        end
+
+        telemetry_hash
+      end
+
+      def telemetry_encoded
+        Base64.urlsafe_encode64(JSON.dump(telemetry))
+      end
+
       private
 
       def initialize_api(options)
@@ -54,19 +74,11 @@ module Auth0
         "https://#{@domain}"
       end
 
-      def client_headers(config)
-        client_info = JSON.dump(name: 'ruby-auth0', version: Auth0::VERSION)
-
-        headers = {
-          'Content-Type' => 'application/json'
+      def client_headers
+        {
+          'Content-Type' => 'application/json',
+          'Auth0-Client' => telemetry_encoded
         }
-
-        unless config[:opt_out_sdk_info]
-          headers['User-Agent'] = "Ruby/#{RUBY_VERSION}"
-          headers['Auth0-Client'] = Base64.urlsafe_encode64(client_info)
-        end
-
-        headers
       end
 
       def initialize_v2(options)
