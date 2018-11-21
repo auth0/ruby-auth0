@@ -4,6 +4,7 @@ module Auth0
   module Mixins
     # Help class where Auth0::Client initialization described
     module Initializer
+
       # Default initialization mechanism, moved here to keep Auth0::Client clear
       # accepts hash as parameter
       # you can get all required fields from here: https://auth0.com/docs/auth-api
@@ -36,26 +37,6 @@ module Auth0
         add_headers('Authorization' => "Basic #{Base64.strict_encode64("#{connection_id}\\#{user}:#{password}")}")
       end
 
-      def telemetry
-        telemetry_hash = {
-          name: 'ruby-auth0',
-          version: Auth0::VERSION,
-          env: {
-            ruby: RUBY_VERSION
-          }
-        }
-
-        if Gem.loaded_specs['rails'].respond_to? :version
-          telemetry_hash[:env][:rails] = Gem.loaded_specs['rails'].version.to_s
-        end
-
-        telemetry_hash
-      end
-
-      def telemetry_encoded
-        Base64.urlsafe_encode64(JSON.dump(telemetry))
-      end
-
       private
 
       def initialize_api(options)
@@ -72,13 +53,6 @@ module Auth0
         @domain = options[:domain] || options[:namespace]
         raise InvalidApiNamespace, 'API namespace must supply an API domain' if @domain.to_s.empty?
         "https://#{@domain}"
-      end
-
-      def client_headers
-        {
-          'Content-Type' => 'application/json',
-          'Auth0-Client' => telemetry_encoded
-        }
       end
 
       def initialize_v2(options)

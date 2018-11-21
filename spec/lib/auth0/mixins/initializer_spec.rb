@@ -4,6 +4,7 @@ class MockClass
   attr_reader :token
   include Auth0::Mixins::Initializer
   include Auth0::Mixins::HTTPProxy
+  include Auth0::Mixins::Headers
 end
 
 describe Auth0::Mixins::Initializer do
