@@ -62,9 +62,7 @@ describe Auth0::Client do
   context 'client headers' do
     let(:client) { Auth0::Client.new(v2_credentials.merge(access_token: 'abc123', domain: 'myhost.auth0.com')) }
     let(:headers) { client.headers }
-    let(:telemetry) do
-      JSON.parse(Base64::urlsafe_decode64(headers['Auth0-Client']))
-    end
+    let(:telemetry) { JSON.parse(Base64::urlsafe_decode64(headers['Auth0-Client'])) }
 
     it 'has the correct headers present' do
       expect(headers.keys.sort).to eql(['Auth0-Client', 'Authorization', 'Content-Type'])

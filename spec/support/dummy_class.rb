@@ -1,4 +1,6 @@
 class DummyClass
+  include Auth0::Mixins::Headers
+
   attr_reader :domain, :client_id, :client_secret, :audience
 
   def initialize
