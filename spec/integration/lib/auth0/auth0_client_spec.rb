@@ -62,13 +62,12 @@ describe Auth0::Client do
   context 'client headers' do
     let(:client) { Auth0::Client.new(v2_credentials.merge(access_token: 'abc123', domain: 'myhost.auth0.com')) }
     let(:headers) { client.headers }
-
-    let(:base64_token) do
-      Base64.urlsafe_encode64('{"name":"ruby-auth0","version":"' + Auth0::VERSION + '"}')
+    let(:telemetry) do
+      JSON.parse(Base64::urlsafe_decode64(headers['Auth0-Client']))
     end
 
     it 'has the correct headers present' do
-      expect(headers.keys.sort).to eql(['Auth0-Client', 'Authorization', 'Content-Type', 'User-Agent'])
+      expect(headers.keys.sort).to eql(['Auth0-Client', 'Authorization', 'Content-Type'])
     end
 
     it 'uses the correct access token' do
@@ -79,12 +78,16 @@ describe Auth0::Client do
       expect(headers['Content-Type']).to eql 'application/json'
     end
 
-    it 'sets the ruby version' do
-      expect(headers['User-Agent']).to eql "Ruby/#{RUBY_VERSION}"
+    it 'should include the correct name in telemetry data' do
+      expect(telemetry['name']).to eq('ruby-auth0')
     end
 
-    it 'sets the client version' do
-      expect(headers['Auth0-Client']).to eql base64_token
+    it 'should include the correct version in telemetry data' do
+      expect(telemetry['version']).to eq(Auth0::VERSION)
+    end
+
+    it 'should include the correct env in telemetry data' do
+      expect(telemetry['env']['ruby']).to eq(RUBY_VERSION)
     end
   end
 end
