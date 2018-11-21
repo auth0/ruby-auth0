@@ -124,7 +124,6 @@ module Auth0
           audience:      audience,
           grant_type:    realm ? 'http://auth0.com/oauth/grant-type/password-realm' : 'password'
         }
-        response = post('/oauth/token', request_params)
         AccessToken.from_response post('/oauth/token', request_params)
       end
 
