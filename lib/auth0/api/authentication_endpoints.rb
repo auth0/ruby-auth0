@@ -67,10 +67,10 @@ module Auth0
       )
         raise Auth0::InvalidParameter, 'Must provide a refresh token' if refresh_token.to_s.empty?
         request_params = {
-          grant_type:    'refresh_token',
-          client_id:     client_id,
+          grant_type: 'refresh_token',
+          client_id: client_id,
           client_secret: client_secret,
-          refresh_token:  refresh_token
+          refresh_token: refresh_token
         }
         AccessToken.from_response post('/oauth/token', request_params)
       end
