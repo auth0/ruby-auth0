@@ -91,17 +91,17 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
 
-  context '.auth_code_exchange' do
+  context '.exchange_auth_code_for_tokens' do
     it { is_expected.to respond_to(:exchange_auth_code_for_tokens) }
 
-    it 'is expected to make post request to /oauth/token' do
+    it 'is expected to make post request to /oauth/token with default params' do
       allow(@instance).to receive(:post).with(
         '/oauth/token',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
         grant_type: 'authorization_code',
         code: '__test_auth_code__',
-        redirect_uri: '__test_redirect_uri__'
+        redirect_uri: nil
       ).and_return('access_token' => 'AccessToken')
 
       is_expected.to receive(:post).with(
@@ -110,27 +110,110 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_secret: @instance.client_secret,
         grant_type: 'authorization_code',
         code: '__test_auth_code__',
+        redirect_uri: nil
+      )
+
+      expect(
+        @instance.exchange_auth_code_for_tokens(
+          '__test_auth_code__'
+        )['access_token']
+      ).to eq 'AccessToken'
+    end
+
+    it 'is expected to make post request to /oauth/token with custom params' do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'authorization_code',
+        client_id: '_test_custom_client_id__',
+        client_secret: '_test_custom_client_secret__',
+        code: '__test_auth_code__',
+        redirect_uri: '__test_redirect_uri__'
+      ).and_return('access_token' => 'AccessToken')
+
+      is_expected.to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'authorization_code',
+        client_id: '_test_custom_client_id__',
+        client_secret: '_test_custom_client_secret__',
+        code: '__test_auth_code__',
         redirect_uri: '__test_redirect_uri__'
       )
 
       expect(
         @instance.exchange_auth_code_for_tokens(
           '__test_auth_code__',
-          '__test_redirect_uri__'
+          redirect_uri: '__test_redirect_uri__',
+          client_id: '_test_custom_client_id__',
+          client_secret: '_test_custom_client_secret__'
         )['access_token']
       ).to eq 'AccessToken'
     end
 
     it 'is expected to raise an error when the code is empty' do
       expect do
-        @instance.exchange_auth_code_for_tokens('', '')
+        @instance.exchange_auth_code_for_tokens(nil)
       end.to raise_error 'Must provide an authorization code'
     end
+  end
 
-    it 'is expected to raise an error when the URI is empty' do
+  context '.exchange_refresh_token' do
+    it { is_expected.to respond_to(:exchange_refresh_token) }
+
+    it 'is expected to make post request to /oauth/token with default params' do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'refresh_token',
+        client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
+        refresh_token: '__test_refresh_token__'
+      ).and_return('access_token' => 'AccessToken')
+
+      is_expected.to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'refresh_token',
+        client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
+        refresh_token: '__test_refresh_token__'
+      )
+
+      expect(
+        @instance.exchange_refresh_token(
+          '__test_refresh_token__'
+        )['access_token']
+      ).to eq 'AccessToken'
+    end
+
+
+    it 'is expected to make post request to /oauth/token with custom params' do
+      allow(@instance).to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'refresh_token',
+        client_id: '_test_custom_client_id__',
+        client_secret: '_test_custom_client_secret__',
+        refresh_token: '__test_refresh_token__'
+      ).and_return('access_token' => 'AccessToken')
+
+      is_expected.to receive(:post).with(
+        '/oauth/token',
+        grant_type: 'refresh_token',
+        client_id: '_test_custom_client_id__',
+        client_secret: '_test_custom_client_secret__',
+        refresh_token: '__test_refresh_token__'
+      )
+
+      expect(
+        @instance.exchange_refresh_token(
+          '__test_refresh_token__',
+          client_id: '_test_custom_client_id__',
+          client_secret: '_test_custom_client_secret__'
+        )['access_token']
+      ).to eq 'AccessToken'
+    end
+
+    it 'is expected to raise an error when the refresh_token is empty' do
       expect do
-        @instance.exchange_auth_code_for_tokens('code', '')
-      end.to raise_error 'Must provide a redirect URI'
+        @instance.exchange_refresh_token(nil)
+      end.to raise_error 'Must provide a refresh token'
     end
   end
 
