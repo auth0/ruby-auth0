@@ -29,22 +29,48 @@ module Auth0
       # Get access and ID tokens using an Authorization Code.
       # @see https://auth0.com/docs/api/authentication#authorization-code
       # @param code [string] The authentication code obtained from /authorize
-      # @param redirect_uri [string] Url to redirect after authorization
-      # @return [json] Returns the access_token and id_token
+      # @param redirect_uri [string] URL to redirect to after authorization.
+      #   Required only if it was set at the GET /authorize endpoint
+      # @param client_id [string] Client ID for the Application
+      # @param client_secret [string] Client Secret for the Application.
+      # @return [AccessToken] Returns the access_token and id_token
       def exchange_auth_code_for_tokens(
         code,
-        redirect_uri,
+        redirect_uri: nil,
         client_id: @client_id,
         client_secret: @client_secret
       )
         raise Auth0::InvalidParameter, 'Must provide an authorization code' if code.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must provide a redirect URI' if redirect_uri.to_s.empty?
         request_params = {
           grant_type:    'authorization_code',
           client_id:     client_id,
           client_secret: client_secret,
           code:          code,
           redirect_uri:  redirect_uri
+        }
+        AccessToken.from_response post('/oauth/token', request_params)
+      end
+
+      # Get access and ID tokens using a refresh token.
+      # @see https://auth0.com/docs/api/authentication#refresh-token
+      # @param refresh_token [string] Refresh token to use. Request this with
+      #   the offline_access scope when logging in.
+      # @param client_id [string] Client ID for the Application
+      # @param client_secret [string] Client Secret for the Application.
+      #   Required when the Application's Token Endpoint Authentication Method
+      #   is Post or Basic.
+      # @return [AccessToken] Returns tokens allowed in the refresh_token
+      def exchange_refresh_token(
+        refresh_token,
+        client_id: @client_id,
+        client_secret: @client_secret
+      )
+        raise Auth0::InvalidParameter, 'Must provide a refresh token' if refresh_token.to_s.empty?
+        request_params = {
+          grant_type:    'refresh_token',
+          client_id:     client_id,
+          client_secret: client_secret,
+          refresh_token:  refresh_token
         }
         AccessToken.from_response post('/oauth/token', request_params)
       end
@@ -66,7 +92,7 @@ module Auth0
       end
 
       # Get access and ID tokens using an Authorization Code.
-      # TODO: Deprecate, use the auth_code_exchange method in this module instead.
+      # TODO: Deprecate, use the exchange_auth_code_for_tokens method in this module instead.
       # @see https://auth0.com/docs/api/authentication#authorization-code
       # @param code [string] The access code obtained through passive authentication
       # @param redirect_uri [string] Url to redirect after authorization
