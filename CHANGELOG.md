@@ -1,5 +1,41 @@
 # Change Log
 
+## [v4.6.0](https://github.com/auth0/ruby-auth0/tree/v4.6.0) (2018-12-17)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.5.0...v4.6.0)
+
+**Closed issues**
+- New Release with Client Token work [\#148](https://github.com/auth0/ruby-auth0/issues/148)
+- Unable to initialize Auth0Api [\#147](https://github.com/auth0/ruby-auth0/issues/147)
+- Issues building the documentation [\#135](https://github.com/auth0/ruby-auth0/issues/135)
+- signin with referral token [\#127](https://github.com/auth0/ruby-auth0/issues/127)
+- Some challenges when upgrading to Ruby 2.5.1 [\#122](https://github.com/auth0/ruby-auth0/issues/122)
+- Cannot refresh access token with refresh token. [\#111](https://github.com/auth0/ruby-auth0/issues/111)
+- Incorrect request_params for username-password login [\#109](https://github.com/auth0/ruby-auth0/issues/109)
+- Obtain APIv2 Token [\#86](https://github.com/auth0/ruby-auth0/issues/86)
+
+**Added**
+- Add refresh token method and unit tests [\#150](https://github.com/auth0/ruby-auth0/pull/150) ([joshcanhelp](https://github.com/joshcanhelp))
+- Improve telemetry; more modular Auth API [\#149](https://github.com/auth0/ruby-auth0/pull/149) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add ttl_sec argument to post_email_verification request. [\#145](https://github.com/auth0/ruby-auth0/pull/145) ([digitaldawn](https://github.com/digitaldawn))
+- Add issue and PR templates, CoC [\#141](https://github.com/auth0/ruby-auth0/pull/141) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add new login_ro method to replace login [\#133](https://github.com/auth0/ruby-auth0/pull/133) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add VCR to and improve all integration tests [\#132](https://github.com/auth0/ruby-auth0/pull/132) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add new method to perform an auth code exchange [\#131](https://github.com/auth0/ruby-auth0/pull/131) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add new userinfo method for auth endpoints [\#130](https://github.com/auth0/ruby-auth0/pull/130) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add Client Credentials grant [\#129](https://github.com/auth0/ruby-auth0/pull/129) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Changed**
+- Improve the test suite [\#143](https://github.com/auth0/ruby-auth0/pull/143) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Deprecated**
+- Formal deprecation of 4 auth endpoint methods; rubocop [\#151](https://github.com/auth0/ruby-auth0/pull/151) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Fixed**
+- Documentation improvements [\#139](https://github.com/auth0/ruby-auth0/pull/139) ([szemek](https://github.com/szemek))
+- Fix typos in README.md [\#137](https://github.com/auth0/ruby-auth0/pull/137) ([swetax](https://github.com/swetax))
+- Explicitly require JSON dependency [\#126](https://github.com/auth0/ruby-auth0/pull/126) ([jgaskins](https://github.com/jgaskins))
+
+
 ## [v4.5.0](https://github.com/auth0/ruby-auth0/tree/v4.5.0) (2018-07-27)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.4.0...v4.5.0)
 
