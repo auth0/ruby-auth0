@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Jobs do
-  # skip "Jobs examples are skipped to avoid Job's creation" do
+  skip "Jobs examples are skipped to avoid Job's creation" do
     let(:client) { Auth0Client.new(v2_creds) }
     let(:username) { Faker::Internet.user_name }
     let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
@@ -90,5 +90,5 @@ describe Auth0::Api::V2::Jobs do
       delete_user_id = new_client.get_users(q: 'email:@example.com').first['user_id']
       new_client.delete_user(delete_user_id)
     end
-  # end
+  end
 end
