@@ -26,8 +26,22 @@ describe Auth0::Api::V2::Jobs do
   end
   context '.export_users' do
     it { expect(@instance).to respond_to(:export_users) }
-    it 'expect client to send post to /api/v2/jobs/users-exports' do
-      expect { @instance.export_users }.not_to raise_error
+    it { expect { @instance.export_users }.not_to raise_error }
+    it 'sends post to /api/v2/jobs/users-exports with correct params' do
+      expect(@instance).to receive(:post).with(
+        '/api/v2/jobs/users-exports', {
+          fields: [{ name: 'author' }],
+          connection_id: 'test-connection',
+          format: 'csv',
+          limit: 10
+        }
+      )
+      @instance.export_users(
+        fields: ['author'],
+        connection_id: 'test-connection',
+        format: 'csv',
+        limit: 10
+      )
     end
   end
   context '.send_verification_email' do

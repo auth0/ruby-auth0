@@ -75,6 +75,10 @@ module Auth0
           @jobs_path ||= '/api/v2/jobs'
         end
 
+        # Map array of field names for export to array of objects
+        # @param fields [array] Field names to be included in the export
+        
+        # @return [array] Returns the fields mapped as array of objects for the export_users endpoint
         def fields_for_export(fields)
           return nil if fields.nil? || fields.empty?
           fields.map { |field| { name: field } }
