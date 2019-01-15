@@ -7,6 +7,19 @@ describe Auth0::Api::V2::ResourceServers do
     @instance = dummy_instance
   end
 
+  context '.resource_servers' do
+    it { expect(@instance).to respond_to(:resource_servers) }
+    it { expect(@instance).to respond_to(:get_resource_servers) }
+    it 'is expected to call get /api/v2/resource-servers' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/resource-servers',
+        page: nil,
+        per_page: nil,
+      )
+      expect { @instance.resource_servers }.not_to raise_error
+    end
+  end
+
   context '.resource_server' do
     it { expect(@instance).to respond_to(:resource_server) }
     it 'is expected to call get /api/v2/resource-servers/test' do

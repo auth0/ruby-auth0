@@ -5,6 +5,20 @@ module Auth0
       module ResourceServers
         attr_reader :resource_servers_path
 
+        # Retrieves a list of all resource servers.
+        # @see https://auth0.com/docs/api/management/v2#!/Resource_servers/get_resource_servers
+        # @param page [int] Page number to get, 0-based.
+        # @param per_page [int] Results per page if also passing a page number.
+        # @return [json] Returns the resource servers.
+        def resource_servers(page: nil, per_page: nil)
+          request_params = {
+            page: !page.nil? ? page.to_i : nil,
+            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
+          }
+          get(resource_servers_path, request_params)
+        end
+        alias get_resource_servers resource_servers
+
         # Retrieves a resource server by its ID.
         # @see https://auth0.com/docs/api/management/v2#!/Resource_Servers/get_resource_servers_by_id
         # @param resource_server_id [string] The id of the resource server to retrieve.
