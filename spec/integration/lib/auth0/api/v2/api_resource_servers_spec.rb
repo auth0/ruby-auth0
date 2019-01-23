@@ -41,7 +41,6 @@ describe Auth0::Api::V2::ResourceServers do
         per_page: 1
       )
       expect(results.first).to equal(results.last)
-      expect(results.first).to eq(test_server)
     end
   end
 
