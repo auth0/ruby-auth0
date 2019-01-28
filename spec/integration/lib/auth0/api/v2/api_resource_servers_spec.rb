@@ -22,6 +22,28 @@ describe Auth0::Api::V2::ResourceServers do
     end
   end
 
+  describe '.resource_servers', vcr: true do
+    let(:resource_servers) do
+      client.resource_servers
+    end
+
+    it 'should return at least 1 result' do
+      expect(resource_servers.size).to be > 0
+    end
+
+    it 'should get the test server' do
+      expect(resource_servers).to include(test_server)
+    end
+
+    it 'should return the first page of one result' do
+      results = client.resource_servers(
+        page: 0,
+        per_page: 1
+      )
+      expect(results.first).to equal(results.last)
+    end
+  end
+
   describe '.create_resource_server', vcr: true do
     it 'should raise an error if the identifier is empty' do
       expect do

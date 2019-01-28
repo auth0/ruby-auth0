@@ -34,6 +34,26 @@ module Auth0
           post_file(path, request_params)
         end
 
+        # Export all users to a file using a long running job.
+        # @see https://auth0.com/docs/api/v2#!/Jobs/post_users_exports
+        # @param options [hash] The options used to configure the output file.
+        #   * :connection_id [string] The connection id of the connection from which users will be exported.
+        #   * :format [string] The format of the file. Valid values are: "json" and "csv".
+        #   * :limit [integer] Limit the number of users to export.
+        #   * :fields [array] A list of fields to be included in the CSV. If omitted, a set of predefined fields will be exported.
+        #
+        # @return [json] Returns the job status and properties.
+        def export_users(options = {})
+          request_params = {
+            connection_id: options.fetch(:connection_id, nil),
+            format: options.fetch(:format, nil),
+            limit: options.fetch(:limit, nil),
+            fields: fields_for_export(options.fetch(:fields, nil))
+          }
+          path = "#{jobs_path}/users-exports"
+          post(path, request_params)
+        end
+
         # Send an email to the specified user that asks them to click a link to verify their email address.
         # @see https://auth0.com/docs/api/v2#!/Jobs/post_verification_email
         # @param user_id [string] The user_id of the user to whom the email will be sent.
@@ -53,6 +73,15 @@ module Auth0
         # Jobs API path
         def jobs_path
           @jobs_path ||= '/api/v2/jobs'
+        end
+
+        # Map array of field names for export to array of objects
+        # @param fields [array] Field names to be included in the export
+        
+        # @return [array] Returns the fields mapped as array of objects for the export_users endpoint
+        def fields_for_export(fields)
+          return nil if fields.nil? || fields.empty?
+          fields.map { |field| { name: field } }
         end
       end
     end
