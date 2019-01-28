@@ -62,6 +62,17 @@ module Auth0
           delete(path)
         end
 
+        # Updates a resource server.
+        # @see https://auth0.com/docs/api/management/v2#!/Resource_Servers/patch_resource_servers_by_id
+        # @param id [string] The id or audience of the resource server to update.
+        # @param options [hash] The Hash options used to define the resource servers's properties.
+        def patch_resource_server(id, options)
+          raise Auth0::InvalidParameter, 'Must specify a resource server id' if id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must specify a valid body' if options.to_s.empty?
+          path = "#{resource_servers_path}/#{id}"
+          patch(path, options)
+        end
+        
         private
 
         # Resource Servers API path

@@ -73,4 +73,14 @@ describe Auth0::Api::V2::ResourceServers do
       expect { @instance.delete_resource_server(nil) }.to raise_error 'Must supply a valid resource server id'
     end
   end
+
+  context '.patch_resource_server' do
+    it { expect(@instance).to respond_to(:patch_resource_server) }
+    it 'is expected to send patch to /api/v2/resource_servers/1' do
+      expect(@instance).to receive(:patch).with('/api/v2/resource-servers/1', fields: 'fields')
+      expect { @instance.patch_resource_server('1', fields: 'fields') }.not_to raise_error
+    end
+    it { expect { @instance.patch_resource_server('', nil) }.to raise_error 'Must specify a resource server id' }
+    it { expect { @instance.patch_resource_server('some', nil) }.to raise_error 'Must specify a valid body' }
+  end
 end
