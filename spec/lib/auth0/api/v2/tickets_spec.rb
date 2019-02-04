@@ -31,10 +31,16 @@ describe Auth0::Api::V2::Tickets do
   context '.post_password_change' do
     it { expect(@instance).to respond_to(:post_password_change) }
     it 'expect client to send post to /api/v2/tickets/password-change with body' do
-      expect(@instance).to receive(:post).with('/api/v2/tickets/password-change', user_id: nil, result_url: nil,
-                                                                                  new_password: nil,
-                                                                                  connection_id: nil, email: nil)
-      expect { @instance.post_password_change }.not_to raise_error
+      expect(@instance).to receive(:post).with('/api/v2/tickets/password-change',
+                                               result_url: nil,
+                                               user_id: nil,
+                                               connection_id: nil,
+                                               email: nil,
+                                               ttl_sec: nil,
+                                               mark_email_as_verified: nil,
+                                               includeEmailInRedirect: nil,
+                                               new_password: nil)
+      expect {@instance.post_password_change}.not_to raise_error
     end
   end
 end
