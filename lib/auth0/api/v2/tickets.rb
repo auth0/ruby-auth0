@@ -53,15 +53,17 @@ module Auth0
             mark_email_as_verified: nil,
             includeEmailInRedirect: nil,
             new_password: nil)
+
+          booleans = [true, false]
           path = "#{tickets_path}/password-change"
           request_params = {
             result_url: result_url,
             user_id: user_id,
             connection_id: connection_id,
             email: email,
-            ttl_sec: ttl_sec,
-            mark_email_as_verified: mark_email_as_verified,
-            includeEmailInRedirect: includeEmailInRedirect,
+            ttl_sec: ttl_sec.is_a?(Integer) ? ttl_sec : nil,
+            mark_email_as_verified: booleans.include?(mark_email_as_verified) ? mark_email_as_verified : nil,
+            includeEmailInRedirect: booleans.include?(includeEmailInRedirect) ? includeEmailInRedirect : nil,
             new_password: new_password
           }
           post(path, request_params)
