@@ -80,7 +80,7 @@ describe Auth0::Api::V2::ResourceServers do
       expect(@instance).to receive(:patch).with('/api/v2/resource-servers/1', fields: 'fields')
       expect { @instance.patch_resource_server('1', fields: 'fields') }.not_to raise_error
     end
-    it { expect { @instance.patch_resource_server('', nil) }.to raise_error 'Must specify a resource server id' }
-    it { expect { @instance.patch_resource_server('some', nil) }.to raise_error 'Must specify a valid body' }
+    it { expect { @instance.patch_resource_server('', nil) }.to raise_error Auth0::InvalidParameter }
+    it { expect { @instance.patch_resource_server('some', nil) }.to raise_error Auth0::InvalidParameter }
   end
 end

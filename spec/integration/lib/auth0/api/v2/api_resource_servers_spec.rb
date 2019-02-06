@@ -98,22 +98,10 @@ describe Auth0::Api::V2::ResourceServers do
     end
   end
 
-    describe '.patch_client', vcr: true do
-    it 'should raise an error with a missing client_id' do
-      expect do
-        client.patch_resource_server('', token_lifetime: 654321)
-      end.to raise_error Auth0::InvalidParameter
-    end
-
-    it 'should raise an error with an empty body' do
-      expect do
-        client.patch_resource_server('__test_resource_server_id__', {})
-      end.to raise_error Auth0::InvalidParameter
-    end
-
+  describe '.patch_resource_server', vcr: true do
     it 'should update the resource server with the correct attributes' do
       expect(
-        client.patch_client(
+        client.patch_resource_server(
           test_server['id'],
           token_lifetime: 654321,
         )
