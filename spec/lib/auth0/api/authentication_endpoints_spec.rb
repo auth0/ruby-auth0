@@ -1,5 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 require 'spec_helper'
+require 'cgi'
+
 describe Auth0::Api::AuthenticationEndpoints do
   UP_AUTH = 'Username-Password-Authentication'.freeze
 
@@ -11,6 +13,12 @@ describe Auth0::Api::AuthenticationEndpoints do
   end
 
   subject { @instance }
+
+  let(:telemetry_param) do
+    telemetry_class = Class.new.extend( Auth0::Mixins::Headers )
+    expected_telemetry = telemetry_class.telemetry_encoded
+    'auth0Client=' + CGI.escape(expected_telemetry)
+  end
 
   context '.api_token' do
     it { expect(@instance).to respond_to(:api_token) }
@@ -557,106 +565,131 @@ describe Auth0::Api::AuthenticationEndpoints do
 
   context '.authorization_url' do
     let(:redirect_uri) { 'http://redirect.com' }
-    it { expect(@instance).to respond_to(:authorization_url) }
-    it 'is expected to return an authorization url' do
-      expect(@instance.authorization_url(redirect_uri).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        'redirect_uri=http%3A%2F%2Fredirect.com'
-      )
+    let(:base_url) do
+      "https://#{@instance.domain}/authorize?" +
+        "redirect_uri=http%3A%2F%2Fredirect.com" +
+        "&client_id=#{@instance.client_id}" +
+        "&response_type=code"
     end
+
+    it 'is expected to respond to an authorization_url method' do
+      is_expected.to respond_to(:authorization_url)
+    end
+
+    it 'is expected to return an authorization url' do
+      expect(
+        @instance.authorization_url(redirect_uri).to_s
+      ).to eq("#{base_url}&#{telemetry_param}")
+    end
+
     let(:additional_parameters) { { additional_parameters: { aparam1: 'test1' } } }
     it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, additional_parameters).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        'redirect_uri=http%3A%2F%2Fredirect.com&aparam1=test1'
-      )
+      expect(
+        @instance.authorization_url(redirect_uri, additional_parameters).to_s
+      ).to eq( "#{base_url}&aparam1=test1&#{telemetry_param}")
     end
+
     let(:state) { { state: 'state1' } }
-    it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, state).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        'redirect_uri=http%3A%2F%2Fredirect.com&state=state1'
-      )
+    it 'is expected to return an authorization url with state' do
+      expect(
+        @instance.authorization_url(redirect_uri, state).to_s
+      ).to eq( "#{base_url}&state=state1&#{telemetry_param}")
     end
+
     let(:connection) { { connection: 'connection-1' } }
-    it 'is expected to return an authorization url with additionalParameters' do
-      expect(@instance.authorization_url(redirect_uri, connection).to_s).to eq(
-        "https://#{@instance.domain}/authorize?client_id=#{@instance.client_id}&response_type=code&"\
-        'connection=connection-1&redirect_uri=http%3A%2F%2Fredirect.com'
-      )
+    it 'is expected to return an authorization url with a connection' do
+      expect(
+        @instance.authorization_url(redirect_uri, connection).to_s
+      ).to eq( "#{base_url}&connection=connection-1&#{telemetry_param}")
     end
-    it { expect { @instance.authorization_url('', '') }.to raise_error 'Must supply a valid redirect_uri' }
+
+    it 'should raise an error with blank parameters' do
+      expect do
+        @instance.authorization_url('', '')
+      end.to raise_error 'Must supply a valid redirect_uri'
+    end
   end
 
   # Auth0::API::AuthenticationEndpoints.logout_url
   context '.logout_url' do
-    let(:return_to) { 'http://returnto.com' }
+    let(:return_to) { 'http://redirect.com' }
+    let(:base_url) do
+      "https://#{@instance.domain}/v2/logout?" +
+        "returnTo=http%3A%2F%2Fredirect.com"
+    end
 
-    it { expect(@instance).to respond_to(:logout_url) }
+    it 'is expected to respond to a logout_url method' do
+      expect(@instance).to respond_to(:logout_url)
+    end
 
     it 'is expected to return a logout url' do
-      expect(@instance.logout_url(return_to).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout?" \
-          'returnTo=http%3A%2F%2Freturnto.com'
-      )
+      expect(
+        @instance.logout_url(return_to).to_s
+      ).to eq("#{base_url}&#{telemetry_param}")
     end
 
     it 'is expected to return a logout url with a client ID' do
-      expect(@instance.logout_url(return_to, include_client: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout" +
-          "?returnTo=http%3A%2F%2Freturnto.com&client_id=#{@instance.client_id}"
-      )
+      expect(
+        @instance.logout_url(return_to, include_client: true).to_s
+      ).to eq("#{base_url}&client_id=#{@instance.client_id}&#{telemetry_param}")
     end
 
     it 'is expected to return a logout url with federated parameter' do
-      expect(@instance.logout_url(return_to, federated: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout?" \
-          'returnTo=http%3A%2F%2Freturnto.com&federated=1'
-      )
+      expect(
+        @instance.logout_url(return_to, federated: true).to_s
+      ).to eq("#{base_url}&federated=1&#{telemetry_param}")
     end
   end
 
   # Auth0::API::AuthenticationEndpoints.samlp_url
   context '.samlp_url' do
-    it { expect(@instance).to respond_to(:samlp_url) }
+    let(:base_url) do
+      "https://#{@instance.domain}/samlp/#{@instance.client_id}"
+    end
+
+    it 'is expected to respond to a samlp_url method' do
+      expect(@instance).to respond_to(:samlp_url)
+    end
 
     it 'is expected to get the samlp url' do
-      expect(@instance.samlp_url.to_s).to eq(
-        "https://#{@instance.domain}/samlp/#{@instance.client_id}" \
-          '?connection=Username-Password-Authentication'
-      )
+      expect(
+        @instance.samlp_url.to_s
+      ).to eq("#{base_url}?connection=#{UP_AUTH}&#{telemetry_param}")
     end
 
     it 'is expected to get the samlp url with fb connection' do
-      expect(@instance.samlp_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/samlp/#{@instance.client_id}" \
-          '?connection=facebook'
-      )
+      expect(
+        @instance.samlp_url('facebook').to_s
+      ).to eq("#{base_url}?connection=facebook&#{telemetry_param}")
     end
   end
 
   # Auth0::API::AuthenticationEndpoints.wsfed_url
   context '.wsfed_url' do
-    it { expect(@instance).to respond_to(:wsfed_url) }
-
-    it 'is expected to get the wsfed url' do
-      expect(@instance.wsfed_url.to_s).to eq(
-        "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
-          "?whr=#{UP_AUTH}"
-      )
+    let(:base_url) do
+      "https://#{@instance.domain}/wsfed/#{@instance.client_id}"
     end
 
-    it 'is expected to get the wsfed url with fb connection' do
-      expect(@instance.wsfed_url('facebook').to_s).to eq(
-        "https://#{@instance.domain}/wsfed/#{@instance.client_id}?whr=facebook"
-      )
+    it 'is expected to respond to a wsfed_url method' do
+      expect(@instance).to respond_to(:wsfed_url)
+    end
+
+    it 'is expected to get the wsfed url' do
+      expect(
+        @instance.wsfed_url.to_s
+      ).to eq("#{base_url}?whr=#{UP_AUTH}&#{telemetry_param}")
+    end
+
+    it 'is expected to get the wsfed url with a custom connection' do
+      expect(
+        @instance.wsfed_url('facebook').to_s
+      ).to eq("#{base_url}?whr=facebook&#{telemetry_param}")
     end
 
     it 'is expected to get the wsfed url with wctx' do
-      expect(@instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s).to eq(
-        "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
-          "?whr=#{UP_AUTH}&wctx=wctx_test"
-      )
+      expect(
+        @instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s
+      ).to eq("#{base_url}?whr=#{UP_AUTH}&wctx=wctx_test&#{telemetry_param}")
     end
 
     it 'is expected to get the wsfed url with wtrealm and wreply' do
@@ -667,8 +700,8 @@ describe Auth0::Api::AuthenticationEndpoints do
           wreply: 'wreply_test'
         }
       ).to_s).to eq(
-        "https://#{@instance.domain}/wsfed/?whr=#{UP_AUTH}" \
-          '&wtrealm=wtrealm_test&wreply=wreply_test'
+        "https://#{@instance.domain}/wsfed/?whr=#{UP_AUTH}" +
+          "&wtrealm=wtrealm_test&wreply=wreply_test&#{telemetry_param}"
       )
     end
   end
