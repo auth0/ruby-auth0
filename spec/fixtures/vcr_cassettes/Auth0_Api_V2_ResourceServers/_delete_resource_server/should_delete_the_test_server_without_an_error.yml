@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers/5c464b0acb6332081b45f804
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers/5c76f6a9724ec0372d108a42
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Mon, 21 Jan 2019 22:43:23 GMT
+      - Wed, 27 Feb 2019 20:44:27 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
@@ -35,9 +35,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '7'
       X-Ratelimit-Reset:
-      - '1548110607'
+      - '1551300269'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -50,5 +50,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 21 Jan 2019 22:43:23 GMT
+  recorded_at: Wed, 27 Feb 2019 20:44:29 GMT
 recorded_with: VCR 4.0.0
