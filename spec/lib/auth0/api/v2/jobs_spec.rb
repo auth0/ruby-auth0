@@ -29,12 +29,11 @@ describe Auth0::Api::V2::Jobs do
     it { expect { @instance.export_users }.not_to raise_error }
     it 'sends post to /api/v2/jobs/users-exports with correct params' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/jobs/users-exports', {
-          fields: [{ name: 'author' }],
-          connection_id: 'test-connection',
-          format: 'csv',
-          limit: 10
-        }
+        '/api/v2/jobs/users-exports',
+        fields: [{ name: 'author' }],
+        connection_id: 'test-connection',
+        format: 'csv',
+        limit: 10
       )
       @instance.export_users(
         fields: ['author'],
@@ -44,12 +43,37 @@ describe Auth0::Api::V2::Jobs do
       )
     end
   end
+
   context '.send_verification_email' do
-    it { expect(@instance).to respond_to(:send_verification_email) }
-    it 'expect client to send post to /api/v2/jobs/verification-email' do
-      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', user_id: 'user_id')
-      expect { @instance.send_verification_email('user_id') }.not_to raise_error
+    it 'should respond to a send_verification_email method' do
+      expect(@instance).to respond_to(:send_verification_email)
     end
-    it { expect { @instance.send_verification_email('') }.to raise_error('Must specify a user id') }
+
+    it 'should post to the jobs email verification endpoint' do
+      expect(@instance).to receive(:post).with(
+        '/api/v2/jobs/verification-email',
+        user_id: 'test_user_id'
+      )
+      expect do
+        @instance.send_verification_email('test_user_id')
+      end.not_to raise_error
+    end
+
+    it 'should post to the jobs email verification endpoint with a client_id' do
+      expect(@instance).to receive(:post).with(
+        '/api/v2/jobs/verification-email',
+        user_id: 'test_user_id',
+        client_id: 'test_client_id'
+      )
+      expect do
+        @instance.send_verification_email('test_user_id', 'test_client_id')
+      end.not_to raise_error
+    end
+
+    it 'should raise an error if the user_id is empty' do
+      expect do
+        @instance.send_verification_email('')
+      end.to raise_error('Must specify a user id')
+    end
   end
 end

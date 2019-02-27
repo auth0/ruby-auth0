@@ -1,0 +1,116 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/users-imports
+    body:
+      encoding: ASCII-8BIT
+      string: "------RubyFormBoundaryoUaJwiumU1KEMPgF\r\nContent-Disposition: form-data;
+        name=\"users\"; filename=\"api-jobs-spec-import-users.json\"\r\nContent-Type:
+        application/json\r\n\r\n[{\"email\":\"rubytestonie_adams@example.net\",\"email_verified\":false,\"app_metadata\":{\"roles\":[\"admin\"]},\"user_metadata\":{\"theme\":\"light\"}}]\r\n------RubyFormBoundaryoUaJwiumU1KEMPgF\r\nContent-Disposition:
+        form-data; name=\"connection_id\"\r\n\r\ncon_Xx4Kruoab04wvlYX\r\n------RubyFormBoundaryoUaJwiumU1KEMPgF--\r\n"
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - multipart/form-data; boundary=----RubyFormBoundaryoUaJwiumU1KEMPgF
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '462'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Wed, 27 Feb 2019 16:14:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1551284059'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA1XNMQvCMBAF4P+S2UoTitVugltBHRRqlxCbQyP2UpKLrYj/3aOb47338e4j6D2AqESKEKJ2/eADiYWIZChFzgdA6/DGUecRoSPnUTvLDd+6mYo6JG+ueTG+npfmj7E58yqaHrKjiXH0wWbbRHdAcp2ZCfsAhsBqQ+xVLjdZrjJVnuSqkkUl10tZqpbd/PPhr/oAvsZ+khJap/ZyJ74/CKFe28UAAAA=
+    http_version: 
+  recorded_at: Wed, 27 Feb 2019 16:14:18 GMT
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/job_OeoKnmx11eZi2N1D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 27 Feb 2019 16:14:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1551284059'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA1XNMQvCMBAF4P+S2UoTitVugltBHRRqlxCbQyP2UpKLrYj/3aOb47338e4j6D2AqESKEKJ2/eADiYWIZChFzgdA6/DGUecRoSPnUTvLDd+6mYo6JG+ueTG+npfmj7E58yqaHrKjiXH0wWbbRHdAcp2ZCfsAhsBqQ+xVLjdZrjJVnuSqkkUl10tZqpbd/PPhr/oAvsZ+khJap/ZyJ74/CKFe28UAAAA=
+    http_version: 
+  recorded_at: Wed, 27 Feb 2019 16:14:18 GMT
+recorded_with: VCR 4.0.0

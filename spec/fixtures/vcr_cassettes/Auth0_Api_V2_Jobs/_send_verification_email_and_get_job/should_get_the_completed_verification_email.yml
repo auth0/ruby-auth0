@@ -1,0 +1,175 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users
+    body:
+      encoding: UTF-8
+      string: '{"email":"rubytesthermann_dane@example.org","password":"5qMq3o8uZaQ","connection":"Username-Password-Authentication","name":"dane.hermann"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '139'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Wed, 27 Feb 2019 16:13:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '5'
+      X-Ratelimit-Reset:
+      - '1551284000'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA41R30vDMBD+XwLb05qm7ZpuhaF78VlQXxQpt+S6Bdu0JOlU5v53r3WCDyJCHi6X78fluxPDFkzDSuaG3XtAHw7oWrC20mDxGt+g7RvknduzBbPQIiHHF36BUXcSqI7oTG1Qs7KGxuOCDb2GgLqCQJRUJOtIpFFa3CeyTLIykbwQ4pHog0dXGeIxGMJBfOSqkLsiUSqHlQIp1xkUhVRA0N6oMLhxhEMIvS/j2PO9gyMEcFx1bfxVxrWQya7WNYLENMOlzhPMAWtSzYWQ6ZXfLFdi7jb9fq43k9Ys287SGzpKWz4NMgrS/UvSU6WB93aKwaiXSxS/hUYIo9EGEwx6Vj6dmOqsRRVMZ4nyQP8d2dEteP/aOR1tyW7EK5ggPyP5KwzXHcnHfQc32vq7ThloLjs4Py+YcviPLZw/ARL3w0AHAgAA
+    http_version: 
+  recorded_at: Wed, 27 Feb 2019 16:13:16 GMT
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/verification-email
+    body:
+      encoding: UTF-8
+      string: '{"user_id":"auth0|5c76b71cc5a8ca6693a776ca"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '44'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Wed, 27 Feb 2019 16:13:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '6'
+      X-Ratelimit-Reset:
+      - '1551284000'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWKqksSFWyUipLLcpMy0xOLMnMz4tPzU3MzFHSUSouSSwpLQbKFqTmpWTmpQOFkotSE0tSU+ITS4DCRgaGlroGRrpG5iGGZlaGxlaG5nqGBiZRQHWZKUD5rPykeO9sk4jkNJPyZMcSxzBfX1elWgCfpdR6dAAAAA==
+    http_version: 
+  recorded_at: Wed, 27 Feb 2019 16:13:17 GMT
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/job_Kk4Xcf4wcAtAVMME
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 27 Feb 2019 16:13:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '5'
+      X-Ratelimit-Reset:
+      - '1551284000'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWKqksSFWyUipLLcpMy0xOLMnMz4tPzU3MzFHSUSouSSwpLQbKJufnFuSklqSmAAWTi1ITgaz4xBKghJGBoaWugZGukXmIoZmVobGVobmeoYFJFFBdZgpQPis/Kd472yQiOc2kPNmxxDHM19dVqRYAWI5p13YAAAA=
+    http_version: 
+  recorded_at: Wed, 27 Feb 2019 16:13:17 GMT
+recorded_with: VCR 4.0.0
