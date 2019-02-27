@@ -40,7 +40,7 @@ describe Auth0::Api::V2::Emails do
     it 'should configure a new email provider' do
       begin
         expect(
-          client.configure_provider(body).deep_symbolize_keys
+          JSON.parse(JSON[client.configure_provider(body)], symbolize_names: true)
         ).to include(body)
       rescue Auth0::Unsupported
         puts 'Email provider is already configured'
@@ -100,7 +100,7 @@ describe Auth0::Api::V2::Emails do
 
     it 'should update the existing email provider' do
       expect(
-        client.update_provider(update_body).deep_symbolize_keys
+        JSON.parse(JSON[client.update_provider(update_body)], symbolize_names: true)
       ).to include(update_body)
     end
   end
