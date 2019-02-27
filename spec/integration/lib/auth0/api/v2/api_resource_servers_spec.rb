@@ -127,5 +127,4 @@ describe Auth0::Api::V2::ResourceServers do
     end
   end
 
-  
 end
