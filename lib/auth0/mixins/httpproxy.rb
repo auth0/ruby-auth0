@@ -21,6 +21,7 @@ module Auth0
                    elsif method == :delete
                      call(:delete, url(safe_path), timeout, add_headers({params: body}))
                    elsif method == :post_file
+                     body.merge!(multipart: true)
                      call(:post, url(safe_path), timeout, headers, body)
                    else
                      call(method, url(safe_path), timeout, headers, body.to_json)
@@ -54,7 +55,13 @@ module Auth0
       end
 
       def call(method, url, timeout, headers, body = nil)
-        RestClient::Request.execute(method: method, url: url, timeout: timeout, headers: headers, payload: body)
+        RestClient::Request.execute(
+          method: method,
+          url: url,
+          timeout: timeout,
+          headers: headers,
+          payload: body
+        )
       rescue RestClient::Exception => e
         case e
         when RestClient::RequestTimeout
