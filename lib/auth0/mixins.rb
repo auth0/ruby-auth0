@@ -1,5 +1,5 @@
 require 'base64'
-require 'rest-client'
+require 'http'
 require 'uri'
 require 'auth0/mixins/httpproxy'
 require 'auth0/mixins/initializer'

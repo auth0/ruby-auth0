@@ -54,10 +54,10 @@ module Auth0
       end
 
       def call(method, url, timeout, headers, body = nil)
-        RestClient::Request.execute(method: method, url: url, timeout: timeout, headers: headers, payload: body)
-      rescue RestClient::Exception => e
+        HTTP::Request.execute(method: method, url: url, timeout: timeout, headers: headers, payload: body)
+      rescue HTTP::Error => e
         case e
-        when RestClient::RequestTimeout
+        when HTTP::TimeoutError
           raise Auth0::RequestTimeout
         else
           return e.response
