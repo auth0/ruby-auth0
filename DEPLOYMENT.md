@@ -3,12 +3,13 @@
 bundle install
 
 # Run all tests
-MODE=full bundle exec rake all
+bundle exec rake test
 
 # Create a release branch
 git checkout master
 git pull
 git checkout -b release-X.X.X
+git push --set-upstream origin release-X.X.X
 
 # Update the version number
 bundle exec gem bump --version x.y.z
