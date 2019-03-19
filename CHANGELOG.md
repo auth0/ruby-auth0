@@ -1,5 +1,18 @@
 # Change Log
 
+## [v4.7.0](https://github.com/auth0/ruby-auth0/tree/v4.7.0) (2019-03-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.6.0...v4.7.0)
+
+**Closed issues**
+- No method to update/patch resource servers [\#156](https://github.com/auth0/ruby-auth0/issues/156)
+- No method to get all resource servers [\#154](https://github.com/auth0/ruby-auth0/issues/154)
+
+**Added**
+- Add Client ID to send_verification_email [\#162](https://github.com/auth0/ruby-auth0/pull/162) ([joshcanhelp](https://github.com/joshcanhelp))
+- More password change params [\#159](https://github.com/auth0/ruby-auth0/pull/159) ([nhusher](https://github.com/nhusher))
+- Add patch resource server [\#157](https://github.com/auth0/ruby-auth0/pull/157) ([philomory](https://github.com/philomory))
+- Get all resource servers [\#155](https://github.com/auth0/ruby-auth0/pull/155) ([philomory](https://github.com/philomory))
+
 ## [v4.6.0](https://github.com/auth0/ruby-auth0/tree/v4.6.0) (2018-12-17)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.5.0...v4.6.0)
 
