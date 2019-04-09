@@ -1,5 +1,6 @@
 # Auth0 - Ruby
 
+[![CircleCI](https://img.shields.io/circleci/project/github/auth0/ruby-auth0/master.svg)](https://circleci.com/gh/auth0/ruby-auth0)
 [![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
 [![Coverage Status](https://coveralls.io/repos/auth0/ruby-auth0/badge.svg?branch=master)](https://coveralls.io/r/auth0/ruby-auth0?branch=master)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
