@@ -1,0 +1,50 @@
+version: 2.1
+jobs:
+  run-tests:
+    docker:
+      - image: circleci/ruby:2.4.6-jessie
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+            - gems-v2-
+      - run: bundle check || bundle install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - Gemfile
+            - Gemfile.lock
+      - save_cache:
+          key: gems-v2--{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Must define DOMAIN, CLIENT_ID, CLIENT_SECRET and MASTER_JWT env
+      - run: bundle exec rake test
+  snyk:
+    docker:
+      - image: snyk/snyk-cli:rubygems
+    steps:
+      - attach_workspace:
+          at: .
+      - run: snyk test
+      - run:
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+            snyk monitor --org=auth0-sdks
+            fi
+          when: always
+
+workflows:
+  tests:
+    jobs:
+      - run-tests
+  snyk:
+    jobs:
+      - run-tests
+      - snyk:
+          # Must define SNYK_TOKEN env
+          context: snyk-env 
+          requires: 
+            - run-tests
