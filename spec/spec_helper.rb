@@ -4,13 +4,12 @@ require 'faker'
 require 'auth0'
 
 require 'simplecov'
-SimpleCov.start do
-  add_filter '/spec/'
-  add_filter '/spec/integration'
-end
+SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CIRCLECI']
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
 require 'dotenv'
 Dotenv.load
