@@ -14,7 +14,7 @@ cd doc
 git init
 
 # inside this git repo we'll pretend to be a new user
-git config user.name "Travis CI"
+git config user.name "Circle CI"
 git config user.email "build-documentation@auth0.com"
 
 # The first and only commit to this new Git repo contains all the

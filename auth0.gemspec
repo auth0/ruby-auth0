@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'fuubar', '~> 2.0'
-  s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['TRAVIS']
+  s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'pry', '~> 0.10'
   s.add_development_dependency 'pry-nav', '~> 0.2.4'

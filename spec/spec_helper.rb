@@ -10,7 +10,7 @@ SimpleCov.start do
 end
 
 require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['TRAVIS']
+SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CIRCLECI']
 
 require 'dotenv'
 Dotenv.load
