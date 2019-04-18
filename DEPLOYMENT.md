@@ -12,17 +12,24 @@ git checkout -b release-X.X.X
 git push --set-upstream origin release-X.X.X
 
 # Update the version number
+# This will create a commit with the new version
 bundle exec gem bump --version x.y.z
+
+# Make sure the Gemfile.lock is up-to-date
+bundle update
+git commit -am "Update gems"
 
 # Generate the changelog
 github_changelog_generator -t $GITHUB_READ_TOKEN
+# ... or similar.
 # Review the changelog
 # Remove "unreleased" section
 # Make sure the tags are ordered
 
 # Commit, push, and create a PR for this release
-git commit -am "Release vX.X.X"
-git push --set-upstream origin release-X.X.X
+git commit -am "Update CHANGELOG.md"
+git push
+
 # Add related milestone
 # Create PR on GitHub and assign for review
 # Merge/rebase and delete branch once approved
