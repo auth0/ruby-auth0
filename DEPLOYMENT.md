@@ -13,7 +13,7 @@ git push --set-upstream origin release-X.X.X
 
 # Update the version number
 # This will create a commit with the new version
-bundle exec gem bump --version x.y.z
+bundle exec gem bump --version X.X.X
 
 # Make sure the Gemfile.lock is up-to-date
 bundle update
@@ -38,6 +38,7 @@ git push
 git checkout master
 git pull
 bundle exec gem tag
+git push origin vX.X.X
 # Create a new release from this tag on GitHub using markdown from the changelog
 
 # Make sure you are an author for this gem here https://rubygems.org/gems/auth0/
