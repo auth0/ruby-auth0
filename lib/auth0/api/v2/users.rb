@@ -53,6 +53,7 @@ module Auth0
 
         # Delete all users - USE WITH CAUTION
         # @see https://auth0.com/docs/api/v2#!/Users/delete_users
+        # TODO: Deprecate, no longer provided
         def delete_users
           delete(users_path)
         end
@@ -96,7 +97,7 @@ module Auth0
         # If your are updating email or phone_number you need to specify the connection and the client_id properties.
         # @see https://auth0.com/docs/api/v2#!/Users/patch_users_by_id
         # @param user_id [string] The user_id of the user to update.
-        # @param body [hash] The optional parametes to update.
+        # @param body [hash] The optional parameters to update.
         #
         # @return [json] Returns the updated user.
         def patch_user(user_id, body)
@@ -168,7 +169,6 @@ module Auth0
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}/logs"
           request_params = {
-            user_id:        user_id,
             per_page:       options.fetch(:per_page, nil),
             page:           options.fetch(:page, nil),
             include_totals: options.fetch(:include_totals, nil),
