@@ -34,6 +34,12 @@ module Auth0
           when 401       then raise Auth0::Unauthorized, result.body
           when 403       then raise Auth0::AccessDenied, result.body
           when 404       then raise Auth0::NotFound, result.body
+          when 429       then raise Auth0::RateLimitEncountered.new(
+                                result.body,
+                                result.headers['X-RateLimit-Limit'],
+                                result.headers['X-RateLimit-Remaining'],
+                                result.headers['X-RateLimit-Reset']
+                              )
           when 500       then raise Auth0::ServerError, result.body
           else                raise Auth0::Unsupported, result.body
           end

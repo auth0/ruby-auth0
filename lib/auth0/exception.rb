@@ -33,4 +33,12 @@ module Auth0
   class InvalidCredentials < Auth0::Exception; end
   # Invalid Auth0 API namespace
   class InvalidApiNamespace < Auth0::Exception; end
+  # Auth0 API rate-limiting encountered
+  class RateLimitEncountered < Auth0::Exception
+    attr_reader :limit, :remaining, :reset
+    def initialize(message,limit,remaining,reset)
+      super(message)
+      @limit, @remaining, @reset = limit, remaining, reset
+    end
+  end
 end
