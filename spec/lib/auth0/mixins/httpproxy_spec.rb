@@ -89,6 +89,27 @@ describe Auth0::Mixins::HTTPProxy do
           .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::AccessDenied)
       end
+
+      it "should raise Auth0::RateLimitEncountered on send http #{http_method} method
+        to path defined through HTTP when 429 recieved" do
+        headers = {
+          'X-RateLimit-Limit'     => 10,
+          'X-RateLimit-Remaining' => 0,
+          'X-RateLimit-Reset'     => 1560564149
+        }
+        @exception.response = StubResponse.new({}, false, 429, headers)
+        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                             url: '/test',
+                                                             timeout: nil,
+                                                             headers: { params: {} },
+                                                             payload: nil)
+          .and_raise(@exception)
+        expect { @instance.send(http_method, '/test') }.to raise_error { |error|
+          expect(error).to be_a(Auth0::RateLimitEncountered)
+          expect(error).to have_attributes(limit: 10, remaining: 0, reset: 1560564149)
+        }
+      end      
+
       it "should raise Auth0::ServerError on send http #{http_method} method
         to path defined through HTTP when 500 received" do
         @exception.response = StubResponse.new({}, false, 500)
@@ -147,6 +168,26 @@ describe Auth0::Mixins::HTTPProxy do
                                                              payload: '{}')
           .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unauthorized)
+      end
+      
+      it "should raise Auth0::RateLimitEncountered on send http #{http_method} method
+        to path defined through HTTP when 429 status received" do
+        headers = {
+          'X-RateLimit-Limit'     => 10,
+          'X-RateLimit-Remaining' => 0,
+          'X-RateLimit-Reset'     => 1560564149
+        }
+        @exception.response = StubResponse.new({}, false, 429,headers)
+        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                             url: '/test',
+                                                             timeout: nil,
+                                                             headers: nil,
+                                                             payload: '{}')
+          .and_raise(@exception)
+        expect { @instance.send(http_method, '/test') }.to raise_error { |error|
+          expect(error).to be_a(Auth0::RateLimitEncountered)
+          expect(error).to have_attributes(limit: 10, remaining: 0, reset: 1560564149)
+        }
       end
 
       it "should raise Auth0::NotFound on send http #{http_method} method
