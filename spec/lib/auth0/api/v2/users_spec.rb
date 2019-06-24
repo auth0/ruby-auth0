@@ -243,7 +243,6 @@ describe Auth0::Api::V2::Users do
     it 'is expected to get /api/v2/USER_ID/logs' do
       expect(@instance).to receive(:get).with(
         '/api/v2/users/USER_ID/logs',
-        user_id: 'USER_ID',
         per_page: nil,
         page: nil,
         include_totals: nil,
@@ -318,11 +317,14 @@ describe Auth0::Api::V2::Users do
       expect { @instance.remove_roles('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
     end
 
+    it 'is expected to raise an exception when the roles are empty' do
+      expect { @instance.remove_roles('USER_ID', [1, 2]) }.to raise_exception(Auth0::InvalidParameter)
+    end
+
     it 'is expected to remove roles' do
       expect(@instance).to receive(:delete).with(
         '/api/v2/users/USER_ID/roles',
-        'USER_ID',
-        %w[test-role-01 test-role-02]
+        roles: %w[test-role-01 test-role-02]
       )
       expect do
         @instance.remove_roles('USER_ID', %w[test-role-01 test-role-02])
@@ -344,14 +346,13 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to raise an exception when the roles are empty' do
-      expect { @instance.add_roles('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.add_roles('USER_ID', [3, 4]) }.to raise_exception(Auth0::InvalidParameter)
     end
 
     it 'is expected to add roles' do
       expect(@instance).to receive(:post).with(
         '/api/v2/users/USER_ID/roles',
-        'USER_ID',
-        %w[test-role-03 test-role-04]
+        roles: %w[test-role-03 test-role-04]
       )
       expect do
         @instance.add_roles('USER_ID', %w[test-role-03 test-role-04])
@@ -369,10 +370,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to get enrollments' do
-      expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/enrollments',
-        'USER_ID'
-      )
+      expect(@instance).to receive(:get).with('/api/v2/users/USER_ID/enrollments')
       expect do
         @instance.get_enrollments('USER_ID')
       end.not_to raise_error
@@ -389,10 +387,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to get permissions' do
-      expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/permissions',
-        'USER_ID'
-      )
+      expect(@instance).to receive(:get).with('/api/v2/users/USER_ID/permissions')
       expect do
         @instance.get_permissions('USER_ID')
       end.not_to raise_error
@@ -412,7 +407,7 @@ describe Auth0::Api::V2::Users do
       expect { @instance.remove_permissions('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
     end
 
-    it 'is expected to raise an exception when the permissions are not Permission structs' do
+    it 'is expected to raise an exception when the array does not consist of Permissions' do
       expect do
         @instance.remove_permissions('USER_ID', %w[permission-01 permission02])
       end.to raise_exception(Auth0::InvalidParameter)
@@ -421,24 +416,23 @@ describe Auth0::Api::V2::Users do
     it 'is expected to remove permissions' do
       expect(@instance).to receive(:delete).with(
         '/api/v2/users/USER_ID/permissions',
-        'USER_ID',
         [
-          Permission.new('permission-name-1', 'server-id-1'),
-          Permission.new('permission-name-2', 'server-id-2')
+          {
+            permission_name: 'permission-name-1',
+            resource_server_identifier: 'server-id-1'
+          },
+          {
+            permission_name: 'permission-name-2',
+            resource_server_identifier: 'server-id-2'
+          }
         ]
       )
       expect do
         @instance.remove_permissions(
           'USER_ID',
           [
-            {
-              permission_name: 'permission-name-1',
-              resource_server_identifier: 'server-id-1'
-            },
-            {
-              permission_name: 'permission-name-2',
-              resource_server_identifier: 'server-id-2'
-            }
+            Permission.new('permission-name-1', 'server-id-1'),
+            Permission.new('permission-name-2', 'server-id-2')
           ]
         )
       end.not_to raise_error
@@ -464,27 +458,26 @@ describe Auth0::Api::V2::Users do
       end.to raise_exception(Auth0::InvalidParameter)
     end
 
-    it 'is expected to remove permissions' do
+    it 'is expected to add permissions' do
       expect(@instance).to receive(:post).with(
         '/api/v2/users/USER_ID/permissions',
-        'USER_ID',
         [
-          Permission.new('permission-name-1', 'server-id-1'),
-          Permission.new('permission-name-2', 'server-id-2')
+          {
+            permission_name: 'permission-name-1',
+            resource_server_identifier: 'server-id-1'
+          },
+          {
+            permission_name: 'permission-name-2',
+            resource_server_identifier: 'server-id-2'
+          }
         ]
       )
       expect do
         @instance.add_permissions(
           'USER_ID',
           [
-            {
-              permission_name: 'permission-name-1',
-              resource_server_identifier: 'server-id-1'
-            },
-            {
-              permission_name: 'permission-name-2',
-              resource_server_identifier: 'server-id-2'
-            }
+            Permission.new('permission-name-1', 'server-id-1'),
+            Permission.new('permission-name-2', 'server-id-2')
           ]
         )
       end.not_to raise_error
@@ -501,10 +494,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to get generate a recovery code' do
-      expect(@instance).to receive(:post).with(
-        '/api/v2/users/USER_ID/recovery-code-generation',
-        'USER_ID'
-      )
+      expect(@instance).to receive(:post).with('/api/v2/users/USER_ID/recovery-code-generation')
       expect do
         @instance.generate_recovery_code('USER_ID')
       end.not_to raise_error
@@ -522,8 +512,7 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to invalidate remembered browsers' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/users/USER_ID/multifactor/actions/invalidate-remember-browser',
-        'USER_ID'
+        '/api/v2/users/USER_ID/multifactor/actions/invalidate-remember-browser'
       )
       expect do
         @instance.invalidate_browsers('USER_ID')

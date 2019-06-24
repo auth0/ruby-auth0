@@ -185,11 +185,136 @@ module Auth0
         end
         alias get_user_log_events user_logs
 
+        # Get all roles assigned to a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_user_roles
+        #
+        # @param user_id [string] The user_id of the roles to retrieve.
+        # @param options [hash]
+        #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        #   * :page [integer]  The page number. Zero based.
+        #   * :include_totals [boolean] True if a query summary must be included in the result.
+        #   * :sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
+        #
+        # @return [json] Returns roles for the given user_id.
+        def get_roles(user_id, options = {})
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          path = "#{users_path}/#{user_id}/roles"
+          request_params = {
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+          get(path, request_params)
+        end
+
+        # Remove one or more roles from a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_user_roles
+        #
+        # @param user_id [string] The user_id of the roles to remove.
+        # @param roles [array] An array of role names to remove.
+        def remove_roles(user_id, roles)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          validate_roles_array roles
+          path = "#{users_path}/#{user_id}/roles"
+          delete(path, { roles: roles })
+        end
+
+        # Add one or more roles to a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_user_roles
+        #
+        # @param user_id [string] The user_id of the roles to add.
+        # @param roles [array] An array of role names to add.
+        def add_roles(user_id, roles)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          validate_roles_array roles
+          path = "#{users_path}/#{user_id}/roles"
+          post(path, { roles: roles })
+        end
+
+        # Get all Guardian enrollments for a specific user
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_enrollments
+        #
+        # @param user_id [string] The user_id of the enrollments to get.
+        #
+        # @return [json] Returns Guardian enrollments for the given user_id.
+        def get_enrollments(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          get "#{users_path}/#{user_id}/enrollments"
+        end
+
+        # Get all permissions for a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_permissions
+        #
+        # @param user_id [string] The user_id of the permissions to get.
+        #
+        # @return [json] Returns permissions for the given user_id.
+        def get_permissions(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          get "#{users_path}/#{user_id}/permissions"
+        end
+
+        # Remove one or more permissions from a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_permissions
+        #
+        # @param user_id [string] The user_id of the permissions to remove.
+        # @param permissions [array] An array of Permissions to remove.
+        def remove_permissions(user_id, permissions)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          permissions = validate_permissions_array permissions
+          delete("#{users_path}/#{user_id}/permissions", permissions)
+        end
+
+        # Add one or more permissions from a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_permissions
+        #
+        # @param user_id [string] The user_id of the permissions to add.
+        # @param permissions [array] An array of Permissions to add.
+        def add_permissions(user_id, permissions)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          permissions = validate_permissions_array permissions
+          post("#{users_path}/#{user_id}/permissions", permissions)
+        end
+
+        # Removes the current Guardian recovery code and generates and returns a new one.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_recovery_code_regeneration
+        #
+        # @param user_id [string] The user_id of the recovery codes to regenerate.
+        def generate_recovery_code(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          post "#{users_path}/#{user_id}/recovery-code-generation"
+        end
+
+        # Invalidates all remembered browsers for all authentication factors for a specific user.
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_invalidate_remember_browser
+        #
+        # @param user_id [string] The user_id of the browsers to invalidate.
+        def invalidate_browsers(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          post "#{users_path}/#{user_id}/multifactor/actions/invalidate-remember-browser"
+        end
+
         private
 
         # Users API path
         def users_path
           @users_path ||= '/api/v2/users'
+        end
+
+        # Check a roles array
+        def validate_roles_array(roles)
+          raise Auth0::InvalidParameter, 'Must supply an array of role names' unless roles.kind_of?(Array)
+          raise Auth0::InvalidParameter, 'Must supply an array of role names' if roles.empty?
+          raise Auth0::InvalidParameter, 'All role names must be strings' unless roles.all? {|role| role.is_a? String}
+        end
+
+        # Check a permissions array
+        def validate_permissions_array(permissions)
+          raise Auth0::InvalidParameter, 'Must supply an array of Permissions' unless permissions.kind_of?(Array)
+          raise Auth0::InvalidParameter, 'Must supply an array of Permissions' if permissions.empty?
+          raise Auth0::InvalidParameter, 'All array elements must be Permissions' unless permissions.all? do |permission|
+            permission.kind_of? Permission
+          end
+          permissions.map { |permission| permission.to_h }
         end
       end
     end
