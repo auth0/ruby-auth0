@@ -257,7 +257,7 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Users/delete_permissions
         #
         # @param user_id [string] The user_id of the permissions to remove.
-        # @param permissions [array] An array of Permissions to remove.
+        # @param permissions [array] An array of Permission structs to remove.
         def remove_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
@@ -268,14 +268,14 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Users/post_permissions
         #
         # @param user_id [string] The user_id of the permissions to add.
-        # @param permissions [array] An array of Permissions to add.
+        # @param permissions [array] An array of Permission structs to add.
         def add_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
           post("#{users_path}/#{user_id}/permissions", permissions)
         end
 
-        # Removes the current Guardian recovery code and generates and returns a new one.
+        # Remove the current Guardian recovery code and generates and returns a new one.
         # @see https://auth0.com/docs/api/management/v2#!/Users/post_recovery_code_regeneration
         #
         # @param user_id [string] The user_id of the recovery codes to regenerate.
@@ -284,7 +284,7 @@ module Auth0
           post "#{users_path}/#{user_id}/recovery-code-generation"
         end
 
-        # Invalidates all remembered browsers for all authentication factors for a specific user.
+        # Invalidate all remembered browsers for all authentication factors for a specific user.
         # @see https://auth0.com/docs/api/management/v2#!/Users/post_invalidate_remember_browser
         #
         # @param user_id [string] The user_id of the browsers to invalidate.
