@@ -218,7 +218,7 @@ module Auth0
         # @param roles [array] An array of role names to remove.
         def remove_roles(user_id, roles)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          validate_roles_array roles
+          validate_strings_array roles
           path = "#{users_path}/#{user_id}/roles"
           delete(path, { roles: roles })
         end
@@ -230,7 +230,7 @@ module Auth0
         # @param roles [array] An array of role names to add.
         def add_roles(user_id, roles)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          validate_roles_array roles
+          validate_strings_array roles
           path = "#{users_path}/#{user_id}/roles"
           post(path, { roles: roles })
         end

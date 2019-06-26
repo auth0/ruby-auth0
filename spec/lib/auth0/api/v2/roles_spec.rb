@@ -229,7 +229,7 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to get roles with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/rolesROLE_ID/permissions',
+        '/api/v2/roles/ROLE_ID/permissions',
         per_page: 15,
         page: 5,
         include_totals: true
@@ -274,7 +274,7 @@ describe Auth0::Api::V2::Roles do
     end
 
     it 'is expected to add permissions to a role' do
-      expect(@instance).to receive(:get).with(
+      expect(@instance).to receive(:post).with(
         '/api/v2/roles/ROLE_ID/permissions',
         permissions: [
           {

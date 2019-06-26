@@ -314,7 +314,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to raise an exception when the roles are empty' do
-      expect { @instance.remove_roles('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.remove_roles('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the roles are empty' do
@@ -404,7 +404,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to raise an exception when the permissions are empty' do
-      expect { @instance.remove_permissions('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.remove_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the array does not consist of Permissions' do
@@ -449,7 +449,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to raise an exception when the permissions are empty' do
-      expect { @instance.add_permissions('USER_ID', []) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.add_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the permissions are not Permission structs' do
