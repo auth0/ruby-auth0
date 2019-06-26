@@ -1,8 +1,12 @@
+require 'auth0/mixins/validation'
+
 module Auth0
   module Api
     module V2
       # Methods to use the users endpoints
       module Users
+        include Auth0::Mixins::Validation
+
         attr_reader :users_path
 
         # Retrieves a list of Auth0 users.
@@ -300,22 +304,6 @@ module Auth0
           @users_path ||= '/api/v2/users'
         end
 
-        # Check a roles array
-        def validate_roles_array(roles)
-          raise Auth0::InvalidParameter, 'Must supply an array of role names' unless roles.kind_of?(Array)
-          raise Auth0::InvalidParameter, 'Must supply an array of role names' if roles.empty?
-          raise Auth0::InvalidParameter, 'All role names must be strings' unless roles.all? {|role| role.is_a? String}
-        end
-
-        # Check a permissions array
-        def validate_permissions_array(permissions)
-          raise Auth0::InvalidParameter, 'Must supply an array of Permissions' unless permissions.kind_of?(Array)
-          raise Auth0::InvalidParameter, 'Must supply an array of Permissions' if permissions.empty?
-          raise Auth0::InvalidParameter, 'All array elements must be Permissions' unless permissions.all? do |permission|
-            permission.kind_of? Permission
-          end
-          permissions.map { |permission| permission.to_h }
-        end
       end
     end
   end
