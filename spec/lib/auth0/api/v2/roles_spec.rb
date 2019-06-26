@@ -39,7 +39,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.get_role' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:get_role)
     end
 
@@ -61,7 +61,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.create_role' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:create_role)
     end
 
@@ -88,7 +88,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.update_role' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:update_role)
     end
 
@@ -116,7 +116,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.delete_role' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:delete_role)
     end
 
@@ -134,7 +134,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.get_users' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:get_users)
     end
 
@@ -169,7 +169,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.add_users' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:add_users)
     end
 
@@ -206,7 +206,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.get_permissions' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:get_permissions)
     end
 
@@ -241,7 +241,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.add_permissions' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:add_permissions)
     end
 
@@ -300,7 +300,7 @@ describe Auth0::Api::V2::Roles do
   end
 
   context '.remove_permissions' do
-    it 'is expected to exist'  do
+    it 'is expected to exist' do
       expect(@instance).to respond_to(:remove_permissions)
     end
 
