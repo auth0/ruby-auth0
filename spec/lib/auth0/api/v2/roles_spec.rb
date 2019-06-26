@@ -15,7 +15,7 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:roles)
     end
 
-    it 'is expected to get roles with default parameters' do
+    it 'is expected to get Roles with default parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles',
         per_page: nil,
@@ -25,7 +25,7 @@ describe Auth0::Api::V2::Roles do
       expect { @instance.get_roles }.not_to raise_error
     end
 
-    it 'is expected to get roles with custom parameters' do
+    it 'is expected to get Roles with custom parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles',
         per_page: 10,
@@ -47,14 +47,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:role)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:get)
       expect do
         @instance.get_role('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to get a role by ID' do
+    it 'is expected to get a Role by ID' do
       expect(@instance).to receive(:get).with('/api/v2/roles/ROLE_ID')
       expect { @instance.get_role('ROLE_ID') }.not_to raise_error
     end
@@ -65,14 +65,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:create_role)
     end
 
-    it 'is expected to raise an exception if an empty role name is passed' do
+    it 'is expected to raise an exception if an empty Role name is passed' do
       expect(@instance).not_to receive(:post)
       expect do
         @instance.create_role('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to post a new role' do
+    it 'is expected to post a new Role' do
       expect(@instance).to receive(:post).with(
         '/api/v2/roles',
         name: 'ROLE_NAME',
@@ -92,14 +92,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:update_role)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:patch)
       expect do
         @instance.update_role('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to post an updated role' do
+    it 'is expected to post an updated Role' do
       expect(@instance).to receive(:patch).with(
         '/api/v2/roles/ROLE_ID',
         name: 'ROLE_NAME',
@@ -120,14 +120,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:delete_role)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:delete)
       expect do
         @instance.delete_role('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to delete a role' do
+    it 'is expected to delete a Role' do
       expect(@instance).to receive(:delete).with('/api/v2/roles/ROLE_ID')
       expect { @instance.delete_role('ROLE_ID') }.not_to raise_error
     end
@@ -138,14 +138,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:get_users)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:get)
       expect do
         @instance.get_users('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to get users for a role with default parameters' do
+    it 'is expected to get Users for a Role with default parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles/ROLE_ID/users',
         per_page: nil,
@@ -155,7 +155,7 @@ describe Auth0::Api::V2::Roles do
       expect { @instance.get_users('ROLE_ID') }.not_to raise_error
     end
 
-    it 'is expected to get users for a role with custom parameters' do
+    it 'is expected to get Users for a Role with custom parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles/ROLE_ID/users',
         per_page: 30,
@@ -173,28 +173,28 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:add_users)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:post)
       expect do
         @instance.add_users('', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to raise an exception if an array is not passed for users' do
+    it 'is expected to raise an exception if an array is not passed for Users' do
       expect(@instance).not_to receive(:post)
       expect do
         @instance.add_users('ROLE_ID', 'USERS')
       end.to raise_exception Auth0::InvalidParameter
     end
 
-    it 'is expected to raise an exception if no user IDs are passed' do
+    it 'is expected to raise an exception if no User IDs are passed' do
       expect(@instance).not_to receive(:post)
       expect do
         @instance.add_users('ROLE_ID', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to add users to a role' do
+    it 'is expected to add Users to a Role' do
       expect(@instance).to receive(:post).with(
         '/api/v2/roles/ROLE_ID/users',
         users: %w[test|user-01 test|user-02]
@@ -210,14 +210,14 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:get_permissions)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:get)
       expect do
         @instance.get_permissions('')
       end.to raise_exception Auth0::MissingParameter
     end
 
-    it 'is expected to get roles with default parameters' do
+    it 'is expected to get Roles with default parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles/ROLE_ID/permissions',
         per_page: nil,
@@ -227,7 +227,7 @@ describe Auth0::Api::V2::Roles do
       expect { @instance.get_permissions('ROLE_ID') }.not_to raise_error
     end
 
-    it 'is expected to get roles with custom parameters' do
+    it 'is expected to get Roles with custom parameters' do
       expect(@instance).to receive(:get).with(
         '/api/v2/roles/ROLE_ID/permissions',
         per_page: 15,
@@ -245,7 +245,7 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:add_permissions)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:post)
       expect do
         @instance.add_permissions('', [])
@@ -273,7 +273,7 @@ describe Auth0::Api::V2::Roles do
       end.to raise_exception Auth0::InvalidParameter
     end
 
-    it 'is expected to add permissions to a role' do
+    it 'is expected to add permissions to a Role' do
       expect(@instance).to receive(:post).with(
         '/api/v2/roles/ROLE_ID/permissions',
         permissions: [
@@ -304,7 +304,7 @@ describe Auth0::Api::V2::Roles do
       expect(@instance).to respond_to(:remove_permissions)
     end
 
-    it 'is expected to raise an exception if an empty role ID is passed' do
+    it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:delete)
       expect do
         @instance.remove_permissions('', [])
@@ -332,7 +332,7 @@ describe Auth0::Api::V2::Roles do
       end.to raise_exception Auth0::InvalidParameter
     end
 
-    it 'is expected to remove permissions from a role' do
+    it 'is expected to remove permissions from a Role' do
       expect(@instance).to receive(:delete).with(
         '/api/v2/roles/ROLE_ID/permissions',
         permissions: [
