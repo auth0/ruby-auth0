@@ -416,7 +416,7 @@ describe Auth0::Api::V2::Users do
     it 'is expected to remove permissions' do
       expect(@instance).to receive(:delete).with(
         '/api/v2/users/USER_ID/permissions',
-        [
+        permissions: [
           {
             permission_name: 'permission-name-1',
             resource_server_identifier: 'server-id-1'
@@ -461,7 +461,7 @@ describe Auth0::Api::V2::Users do
     it 'is expected to add permissions' do
       expect(@instance).to receive(:post).with(
         '/api/v2/users/USER_ID/permissions',
-        [
+        permissions: [
           {
             permission_name: 'permission-name-1',
             resource_server_identifier: 'server-id-1'

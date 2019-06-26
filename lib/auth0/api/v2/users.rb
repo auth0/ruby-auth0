@@ -265,7 +265,7 @@ module Auth0
         def remove_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
-          delete("#{users_path}/#{user_id}/permissions", permissions)
+          delete "#{users_path}/#{user_id}/permissions", permissions: permissions
         end
 
         # Add one or more permissions from a specific user.
@@ -276,7 +276,7 @@ module Auth0
         def add_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
-          post("#{users_path}/#{user_id}/permissions", permissions)
+          post "#{users_path}/#{user_id}/permissions", permissions: permissions
         end
 
         # Remove the current Guardian recovery code and generates and returns a new one.
