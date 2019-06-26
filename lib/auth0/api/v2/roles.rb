@@ -3,7 +3,7 @@ require 'auth0/mixins/validation'
 module Auth0
   module Api
     module V2
-      # Methods to use the users endpoints
+      # Methods to use the Roles endpoints
       module Roles
         include Auth0::Mixins::Validation
 
@@ -11,12 +11,12 @@ module Auth0
         # Required scope: "read:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/get_roles
         #
-        # @param options [hash] A hash of options for getting roles
-        #   - per_page: Number or roles to return.
-        #   - page: Page number to return, zero-based
+        # @param options [hash] A hash of options for getting Roles
+        #   - per_page: Number of Roles to return.
+        #   - page: Page number to return, zero-based.
         #   - include_totals: True to include query summary in the result, false or nil otherwise.
         #
-        # @return [json] All roles matching the query.
+        # @return [json] All Roles matching the query.
         def get_roles(options = {})
           request_params = {
             per_page: options.fetch(:per_page, nil),
@@ -45,8 +45,8 @@ module Auth0
         # Required scope: "create:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/post_roles
         #
-        # @param role_name [string] Role name for the new role.
-        # @param data [hash] Additional role data.
+        # @param role_name [string] Role name for the new Role.
+        # @param data [hash] Additional Role data.
         def create_role(role_name, data = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_name' if role_name.to_s.empty?
 
@@ -77,16 +77,16 @@ module Auth0
           delete "#{roles_path}/#{role_id}"
         end
 
-        # Get users assigned to a specific role.
+        # Get Users assigned to a specific Role.
         # Required scopes:
         #   - "read:roles"
         #   - "read:users"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/get_role_user
         #
-        # @param role_id [string] Role ID to which the users belong to.
-        # @param options [hash] A hash of options for getting roles
-        #   - per_page: Number or roles to return.
-        #   - page: Page number to return, zero-based
+        # @param role_id [string] Role ID to which the Users belong to.
+        # @param options [hash] A hash of options for getting Roles
+        #   - per_page: Number of Roles to return.
+        #   - page: Page number to return, zero-based.
         #   - include_totals: True to include query summary in the result, false or nil otherwise.
         def get_users(role_id, options = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
@@ -99,12 +99,12 @@ module Auth0
           get "#{roles_path}/#{role_id}/users", request_params
         end
 
-        # Add one or more users to a role.
+        # Add one or more Users to a Role.
         # Required scopes: "update:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/post_role_users
         #
-        # @param role_id [string] Role ID to add users.
-        # @param users [array] Array of string user IDs to add to the role.
+        # @param role_id [string] Role ID to add Users.
+        # @param users [array] Array of string User IDs to add to the Role.
         def add_users(role_id, users = [])
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
@@ -112,7 +112,7 @@ module Auth0
           post "#{roles_path}/#{role_id}/users", users: users
         end
 
-        # Get the permissions associated to a role.
+        # Get the permissions associated to a Role.
         # Required scope: "read:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/get_role_permission
         #
@@ -134,7 +134,7 @@ module Auth0
           get "#{roles_path}/#{role_id}/permissions", request_params
         end
 
-        # Associate permissions with a role.
+        # Associate permissions with a Role.
         # Required scope: "update:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/post_role_permission_assignment
         #
@@ -147,7 +147,7 @@ module Auth0
           post "#{roles_path}/#{role_id}/permissions", permissions: permissions
         end
 
-        # Remove permissions from a role.
+        # Remove permissions from a Role.
         # Required scope: "update:roles"
         # @see https://auth0.com/docs/api/management/v2#!/Roles/delete_role_permission_assignment
         #
