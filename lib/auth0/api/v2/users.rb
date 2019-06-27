@@ -221,19 +221,19 @@ module Auth0
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           validate_strings_array roles
           path = "#{users_path}/#{user_id}/roles"
-          delete(path, { roles: roles })
+          delete_with_body path, roles: roles
         end
 
         # Add one or more roles to a specific user.
         # @see https://auth0.com/docs/api/management/v2#!/Users/post_user_roles
         #
         # @param user_id [string] The user_id of the roles to add.
-        # @param roles [array] An array of role names to add.
+        # @param roles [array] An array of role ids to add.
         def add_user_roles(user_id, roles)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           validate_strings_array roles
           path = "#{users_path}/#{user_id}/roles"
-          post(path, { roles: roles })
+          post(path, roles: roles)
         end
 
         # Get all Guardian enrollments for a specific user
@@ -266,7 +266,7 @@ module Auth0
         def remove_user_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
-          delete "#{users_path}/#{user_id}/permissions", permissions: permissions
+          delete_with_body "#{users_path}/#{user_id}/permissions", permissions: permissions
         end
 
         # Add one or more permissions from a specific user.

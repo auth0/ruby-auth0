@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980?include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976?include_fields=true
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 20:25:42 GMT
+      - Thu, 27 Jun 2019 21:00:04 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 4e9aca79659d1eee
+      - 4ff9be1b2d5c8c9f
       Ot-Tracer-Traceid:
-      - 32da4da04560c2b7
+      - 6ec7bad70f01809e
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '4'
+      - '6'
       X-Ratelimit-Reset:
-      - '1561667146'
+      - '1561669207'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -59,7 +59,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA41RW2vDIBj9L0L71CRqczGBsPVlz4NtLxujWP3SylIT1HSMrv99ml4oZYyBD0c9l8/jHsGWqxZVyAyrLwfWRRcwWDCab+GeD26DY9Ft0QyFg2v2meSvRqflDoxqFEhUNby1MENDL7kDueTO6ygmZYTziBbPFFc0q+YspgV59fLgtFReh8a870ySjOYpLVZp2RAsKWYFlAx7aq+EG0yYY+Ncb6sksfHa8B133IQ5kyNMaD4XGBqSZsAIkTQvciIKD0hZpow1d7ZOGZ6aul9PZT16TeaLCX3wS0gdXx7u90dL65EZ4l6vQxdKfNz28VsxSoJ2yimwqHrbI9FpDcKpTnvhy4kWPXJrPzsjo4UPDXzBR8p1MX9VYrqdzzHn+kKsfeqE4u3pJw7vMyQM/OMvDj/Cz7TuFgIAAA==
+        H4sIAAAAAAAAA41RW2vDIBj9L0L7lIvaaGKgbH3Z82Dby8YoTr+0stYENR2j63+fSS+UMcbAh6Oey+dxj2ArzQbVyPVvnwF8SC+g9+Cs3MKt7MMaZ6rdogQNB9fsMylejU7LHTjTGNCobuTGQ4L6TssAeilD1FFMRIp5SstHimsmasYzgdlzlA9OSxN1aMz7YpowCoXCUmLFMAiuZqUoeaR2RoXeDXOsQ+h8nec+Wzm5k0G6Yc78CHPKZwpDQwoGFSGa8pITVUZAhCiqqrnx86LCUzfvVlM9H70ms8WE3sWltM0uD4/7o6WPyPVZZ1dDF0a9/+zjt2KMBhtMMOBR/bJHqrUWVDCtjcKnEy29l95/tE6nixg68JUcKdfF/FWJa3cxx53rG2L9Q6uM3Jx+4vCaIOXgH39x+AbHruaaFgIAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 20:25:42 GMT
+  recorded_at: Thu, 27 Jun 2019 21:00:04 GMT
 recorded_with: VCR 4.0.0

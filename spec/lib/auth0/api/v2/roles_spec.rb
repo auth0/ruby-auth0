@@ -305,7 +305,7 @@ describe Auth0::Api::V2::Roles do
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
-      expect(@instance).not_to receive(:delete)
+      expect(@instance).not_to receive(:delete_with_body)
       expect do
         @instance.remove_role_permissions('', [])
       end.to raise_exception Auth0::MissingParameter
@@ -319,7 +319,7 @@ describe Auth0::Api::V2::Roles do
     end
 
     it 'is expected to raise an exception if an empty permissions array is passed' do
-      expect(@instance).not_to receive(:delete)
+      expect(@instance).not_to receive(:delete_with_body)
       expect do
         @instance.remove_role_permissions('ROLE_ID', [])
       end.to raise_exception Auth0::MissingParameter
@@ -333,7 +333,7 @@ describe Auth0::Api::V2::Roles do
     end
 
     it 'is expected to remove permissions from a Role' do
-      expect(@instance).to receive(:delete).with(
+      expect(@instance).to receive(:delete_with_body).with(
         '/api/v2/roles/ROLE_ID/permissions',
         permissions: [
           {

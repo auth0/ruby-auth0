@@ -10,7 +10,7 @@ class DummyClass
     @audience = "https://#{@domain}/api/v2/"
   end
 
-  %i(get post put patch delete).each do |method|
+  %i(get post put patch delete delete_with_body).each do |method|
     define_method(method) do |_path, _body = {}|
       true
     end

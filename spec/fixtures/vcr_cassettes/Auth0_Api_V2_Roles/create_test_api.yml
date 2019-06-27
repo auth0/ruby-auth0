@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers
     body:
       encoding: UTF-8
-      string: '{"name":"rubytest-test-api","scopes":[{"value":"test:scope"}],"identifier":"rubytest-test-api"}'
+      string: '{"name":"rubytest-test-api-for-roles","scopes":[{"value":"test:scope"}],"identifier":"rubytest-test-api-for-roles"}'
     headers:
       Accept:
       - "*/*"
@@ -20,7 +20,7 @@ http_interactions:
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '95'
+      - '115'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,7 +29,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Thu, 27 Jun 2019 18:42:05 GMT
+      - Thu, 27 Jun 2019 21:01:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,17 +37,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 62f395190a4c4f80
+      - 48db9faf494e74d1
       Ot-Tracer-Traceid:
-      - 1b8d01624db3520e
+      - 064bf4a8289eabdf
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '9'
+      - '8'
       X-Ratelimit-Reset:
-      - '1561660926'
+      - '1561669313'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -61,7 +61,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA3WPwWrDMAyG30XnDtzSZG0eYzuWIRRbCqKeHSy3pZS++5xcBoVedPj16+PTAzTAAF3Ydi5IYE/78ej6Qx+cSCewgUS/3BrlMt4rW/1YB83aVho4VRXl8qZAMeYbZpGoiZG8ZzMYhKLxBuysM/qcrEFQcsErlwajMTKKFqs4U6l39FFb4/+u5jMnjCpcdVE79HvnXuMVeOMRhs/dsjWdkqYJKU7N9et71/XNz3yeuZFPD7hSvCx/LvbDmsPz5/kHeMJIyB8BAAA=
+        H4sIAAAAAAAAA4WPwWrDMBBE/2XPMdjCdlp9RnsMZVnLK7NkKxlJSQgh/17Zl0AuvexhdmZ48wCZwcIwd4PhyRv2/adpR6Jj33XdBAcI9MvVkS7TvXAuzX5olcbH1KSonKtJZg5FvHD610qq8YbRe5XASM5xzmA9aeYD5LOs6GLItQ5rCq+cai1Nyugl5YIrpXJHp1Idr1yJZw6o4rnIhvsx9m37Lu+FN57AHs32zbIECQuSLpX669sMY+XLLq4V1J4ecCW9bNu3HXbX4fnz/AM0gFjLMwEAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 18:42:05 GMT
+  recorded_at: Thu, 27 Jun 2019 21:01:51 GMT
 recorded_with: VCR 4.0.0
