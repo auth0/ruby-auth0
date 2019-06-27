@@ -88,7 +88,7 @@ module Auth0
         #   - per_page: Number of Roles to return.
         #   - page: Page number to return, zero-based.
         #   - include_totals: True to include query summary in the result, false or nil otherwise.
-        def get_users(role_id, options = {})
+        def get_role_users(role_id, options = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           request_params = {
@@ -105,7 +105,7 @@ module Auth0
         #
         # @param role_id [string] Role ID to add Users.
         # @param users [array] Array of string User IDs to add to the Role.
-        def add_users(role_id, users = [])
+        def add_role_users(role_id, users = [])
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           validate_strings_array(users)
@@ -123,7 +123,7 @@ module Auth0
         #   - include_totals: True to include query summary in the result, false or nil otherwise.
         #
         # @return [json] All permissions matching the query.
-        def get_permissions(role_id, options = {})
+        def get_role_permissions(role_id, options = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           request_params = {
@@ -140,7 +140,7 @@ module Auth0
         #
         # @param role_id [string] Role ID to add permissions.
         # @param permissions [array] Array of Permission structs to add.
-        def add_permissions(role_id, permissions)
+        def add_role_permissions(role_id, permissions)
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           permissions = validate_permissions_array(permissions)
@@ -153,7 +153,7 @@ module Auth0
         #
         # @param role_id [string] Role ID to remove permissions.
         # @param permissions [array] Array of Permission structs to remove.
-        def remove_permissions(role_id, permissions)
+        def remove_role_permissions(role_id, permissions)
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           permissions = validate_permissions_array(permissions)

@@ -270,11 +270,11 @@ describe Auth0::Api::V2::Users do
 
   context '.get_roles' do
     it 'is expected to respond to a get_roles method' do
-      expect(@instance).to respond_to(:get_roles)
+      expect(@instance).to respond_to(:get_user_roles)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.get_roles(nil) }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.get_user_roles(nil) }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to get roles with default parameters' do
@@ -284,7 +284,7 @@ describe Auth0::Api::V2::Users do
         page: nil,
         include_totals: nil
       )
-      expect { @instance.get_roles('USER_ID') }.not_to raise_error
+      expect { @instance.get_user_roles('USER_ID') }.not_to raise_error
     end
 
     it 'is expected to get roles with custom parameters' do
@@ -295,7 +295,7 @@ describe Auth0::Api::V2::Users do
         include_totals: true
       )
       expect do
-        @instance.get_roles('USER_ID', per_page: 20, page: 2, include_totals: true)
+        @instance.get_user_roles('USER_ID', per_page: 20, page: 2, include_totals: true)
       end.not_to raise_error
     end
   end
@@ -334,19 +334,19 @@ describe Auth0::Api::V2::Users do
 
   context '.add_roles' do
     it 'is expected to respond to a add_roles method' do
-      expect(@instance).to respond_to(:add_roles)
+      expect(@instance).to respond_to(:add_user_roles)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.add_roles(nil, 'ROLES') }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.add_user_roles(nil, 'ROLES') }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.add_roles('USER_ID', 'ROLES') }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.add_user_roles('USER_ID', 'ROLES') }.to raise_exception(Auth0::InvalidParameter)
     end
 
     it 'is expected to raise an exception when the roles are empty' do
-      expect { @instance.add_roles('USER_ID', [3, 4]) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.add_user_roles('USER_ID', [3, 4]) }.to raise_exception(Auth0::InvalidParameter)
     end
 
     it 'is expected to add roles' do
@@ -355,7 +355,7 @@ describe Auth0::Api::V2::Users do
         roles: %w[test-role-03 test-role-04]
       )
       expect do
-        @instance.add_roles('USER_ID', %w[test-role-03 test-role-04])
+        @instance.add_user_roles('USER_ID', %w[test-role-03 test-role-04])
       end.not_to raise_error
     end
   end
@@ -379,37 +379,37 @@ describe Auth0::Api::V2::Users do
 
   context '.get_permissions' do
     it 'is expected to respond to a get_permissions method' do
-      expect(@instance).to respond_to(:get_permissions)
+      expect(@instance).to respond_to(:get_user_permissions)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.get_permissions(nil) }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.get_user_permissions(nil) }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to get permissions' do
       expect(@instance).to receive(:get).with('/api/v2/users/USER_ID/permissions')
       expect do
-        @instance.get_permissions('USER_ID')
+        @instance.get_user_permissions('USER_ID')
       end.not_to raise_error
     end
   end
 
   context '.remove_permissions' do
     it 'is expected to respond to a remove_permissions method' do
-      expect(@instance).to respond_to(:remove_permissions)
+      expect(@instance).to respond_to(:remove_user_permissions)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.remove_permissions(nil, 'PERMISSIONS') }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.remove_user_permissions(nil, 'PERMISSIONS') }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to raise an exception when the permissions are empty' do
-      expect { @instance.remove_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
+      expect { @instance.remove_user_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the array does not consist of Permissions' do
       expect do
-        @instance.remove_permissions('USER_ID', %w[permission-01 permission02])
+        @instance.remove_user_permissions('USER_ID', %w[permission-01 permission02])
       end.to raise_exception(Auth0::InvalidParameter)
     end
 
@@ -428,7 +428,7 @@ describe Auth0::Api::V2::Users do
         ]
       )
       expect do
-        @instance.remove_permissions(
+        @instance.remove_user_permissions(
           'USER_ID',
           [
             Permission.new('permission-name-1', 'server-id-1'),
@@ -441,20 +441,20 @@ describe Auth0::Api::V2::Users do
 
   context '.add_permissions' do
     it 'is expected to respond to a add_permissions method' do
-      expect(@instance).to respond_to(:add_permissions)
+      expect(@instance).to respond_to(:add_user_permissions)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.add_permissions(nil, 'PERMISSIONS') }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.add_user_permissions(nil, 'PERMISSIONS') }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to raise an exception when the permissions are empty' do
-      expect { @instance.add_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
+      expect { @instance.add_user_permissions('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the permissions are not Permission structs' do
       expect do
-        @instance.add_permissions('USER_ID', %w[permission-01 permission02])
+        @instance.add_user_permissions('USER_ID', %w[permission-01 permission02])
       end.to raise_exception(Auth0::InvalidParameter)
     end
 
@@ -473,7 +473,7 @@ describe Auth0::Api::V2::Users do
         ]
       )
       expect do
-        @instance.add_permissions(
+        @instance.add_user_permissions(
           'USER_ID',
           [
             Permission.new('permission-name-1', 'server-id-1'),
