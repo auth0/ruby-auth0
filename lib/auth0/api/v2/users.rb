@@ -150,13 +150,14 @@ module Auth0
         # @param secondary_user_id [string] The unique identifier for the user for the identity.
         #
         # @return [json] Returns the array of the unlinked account identities.
-        def unlink_users_account(user_id, provider, secondary_user_id)
+        def unlink_user_account(user_id, provider, secondary_user_id)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::MissingUserId, 'Must supply a valid secondary user_id' if secondary_user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid provider' if provider.to_s.empty?
           path = "#{users_path}/#{user_id}/identities/#{provider}/#{secondary_user_id}"
           delete(path)
         end
+        alias unlink_users_account unlink_user_account
 
         # Retrieve every log event for a specific user id
         # @see https://auth0.com/docs/api/management/v2#!/Users/get_logs_by_user

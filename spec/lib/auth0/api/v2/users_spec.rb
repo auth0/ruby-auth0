@@ -202,8 +202,11 @@ describe Auth0::Api::V2::Users do
     end
   end
 
-  context '.unlink_users_account' do
-    it 'is expected to respond to a unlink_users_account method' do
+  context '.unlink_user_account' do
+    it 'is expected to respond to a unlink_user_account method' do
+      expect(@instance).to respond_to(:unlink_user_account)
+    end
+    it 'is expected to respond to a unlink_users_account alias' do
       expect(@instance).to respond_to(:unlink_users_account)
     end
 

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5bb7c4425e09334d77899bdc?fields=picture,email,user_id&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980?fields=picture,email,user_id&include_fields=true
     body:
       encoding: US-ASCII
       string: ''
@@ -12,13 +12,13 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      - Bearer API_TOKEN
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,19 +27,25 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:06:27 GMT
+      - Thu, 27 Jun 2019 20:25:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Ot-Tracer-Spanid:
+      - 0e7566c719ce07b2
+      Ot-Tracer-Traceid:
+      - 4ad484911eddc231
+      Ot-Tracer-Sampled:
+      - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '8'
+      - '5'
       X-Ratelimit-Reset:
-      - '1538769989'
+      - '1561667146'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -53,11 +59,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAz2OywqDMBBF/yWgqzYxD00iSNtNf6PEJFWhWsmjUNr+e6OC
-        MIszcOfO+QA7quEBauBi+w7Wh+MO0Vs3qdGeVQx9AfVzBAcwDzpEZ9NBH8Ls
-        a4Q87Jx6qaDcEkEbIlJRXdg7ZqUVGBtS8QprngBLyYS4n3zDRJG7Zu5y06xd
-        Gb1k5JpGmwnuP9O+VfpELsJ56pLG4nYbTNJYg9+ybblmjJS2kJQyw7mQsjUa
-        /P5TVpM14gAAAA==
+        H4sIAAAAAAAAAz2O2QrCMBBF/yXQPmm2pklaKOqLvyExSRewtWQRRP130xYK83DmcucwH2BHNTxADVy8v4P14bhD9NZNarRnFUOPoX6O4ACW8DaYdLCm39KQknJGxZ1VLcGGYilsJXGqzoMO0dlU7UOYfY2Qh51TLxWUW2xoQ0R5obFtCSutJMRQLjjRIgGpKiZle/INkzh3zdzlplldWXHJ6DWNNhPc30v7pvSJXITz1IHfH1K/VeLiAAAA
     http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:06:27 GMT
+  recorded_at: Thu, 27 Jun 2019 20:25:43 GMT
 recorded_with: VCR 4.0.0

@@ -12,13 +12,13 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      - Bearer API_TOKEN
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,19 +27,25 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Oct 2018 17:11:24 GMT
+      - Thu, 27 Jun 2019 20:25:41 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Ot-Tracer-Spanid:
+      - 6cd73fbe5d9c5e2e
+      Ot-Tracer-Traceid:
+      - 5552a4110517d168
+      Ot-Tracer-Sampled:
+      - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '9'
+      - '7'
       X-Ratelimit-Reset:
-      - '1538673086'
+      - '1561667144'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -55,5 +61,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA4uuVkrNTczMUbJSMjYxNjYzMTUxyUjNS0ktKs7Pc0itSMwtyEnVy0stUaqNBQDKCTEMLAAAAA==
     http_version: 
-  recorded_at: Thu, 04 Oct 2018 17:11:24 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 27 Jun 2019 20:25:41 GMT
+recorded_with: VCR 4.0.0
