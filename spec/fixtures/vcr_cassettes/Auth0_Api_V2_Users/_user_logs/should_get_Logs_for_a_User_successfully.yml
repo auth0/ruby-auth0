@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users?fields=user_id&per_page=1&q=updated_at:%5B2016-01-01%20TO%20*%5D&search_engine=v3
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980/logs?per_page=2
     body:
       encoding: US-ASCII
       string: ''
@@ -27,25 +27,29 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 20:25:42 GMT
+      - Thu, 27 Jun 2019 20:25:44 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980/logs?per_page=2&page=0>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980/logs?per_page=2&page=0>;
+        rel="last"
       Ot-Tracer-Spanid:
-      - 48de66b84e0df112
+      - 614ef2e015a77360
       Ot-Tracer-Traceid:
-      - 59723e050e705575
+      - '0351196b13454658'
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '1'
       X-Ratelimit-Reset:
-      - '1561667145'
+      - '1561667150'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -59,7 +63,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA4uuViotTi2Kz0xRslJKLC3JMKgxTUo2Nzc0TjU2MDU2TjMxTzExNzNJtLRUqo0FAOWV+kAuAAAA
+        H4sIAAAAAAAAA6VTbW/TMBD+K1E+oqa1Heetn6jQkABBK9ZpHQhFTuK2Zm6c2Q5rNPLfOacZKyAhXhJFse+eu3vuOfvjg18xy/25TxDOAhQHJFkTNCfRPEynJI4/+BPfdo1DGAPriptSi8YKVYMJDKWqa16O+yvDdc0OPFgxY+6VroJFa/e8tqJkA+Qcn4sKQmCfb470jW4VKxC9/yJvNg4mBYSdIHht7Ovl5njTLK8vjiF5eff5etPJdyl+gd9fJbdPcFcbAharV97FsZFKc+0tmkY+lReNS0iSKYIXg6EFyjnbQTQ4lkBWe86FvJl3ths6t0xI488f/EJVnfv/JUnLazaUYSAKCkx1G1hurJOVHyA3eHRbdM4WfF+0o6TPh6BpqQ4Ab0Z5IeKZe/5hDqNUv9Tx+4l/13I9NHjgdq9cldXycg1Be2Ucf6l2op7+QEhpcFAaTnzNjWp16ZLPpJq5vGZWCQ3knP5/pFXfj4MZ4EOhr1GFIxJTkhQ022JUEZQmPEvR4wx/buj3Chqr4dzvusf0Z6Z8PO9wMVjBDAcXNHyikiHkLgqKSUIQicIUrkhEswhn8EUYxxijKEyyJIxpCh6akhTwFHL8dwJh3qpCSKC2ZdJwx+o0zVzUWwXj6vtP3wAacI060AMAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 20:25:42 GMT
+  recorded_at: Thu, 27 Jun 2019 20:25:44 GMT
 recorded_with: VCR 4.0.0

@@ -1,17 +1,29 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Users do
-  let(:client) { Auth0Client.new(v2_creds) }
-  let(:test_user_name) { "#{entity_suffix}-username" }
-  let(:test_user_email) { "#{entity_suffix}-#{test_user_name}@auth0.com" }
-  let(:test_user) do
-    VCR.use_cassette(
-      'Auth0_Api_V2_Users/create_test_user'
-    ) do
-      client.create_user(
-        test_user_name,
-        'email' => test_user_email,
-        'password' => Faker::Internet.password,
-        'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH
+
+  attr_reader :client, :test_user_name, :test_user_email, :test_user, :test_user_secondary
+
+  before(:all) do
+    @client ||= Auth0::Client.new(v2_creds)
+
+    @test_user_name = "#{entity_suffix}-username"
+    @test_user_email = "#{entity_suffix}-#{@test_user_name}@auth0.com"
+
+    VCR.use_cassette('Auth0_Api_V2_Users/create_test_user') do
+      @test_user ||= client.create_user(
+        @test_user_name,
+        email: @test_user_email,
+        password: Faker::Internet.password,
+        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
+      )
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_Users/create_secondary_test_user') do
+      @test_user_secondary ||= client.create_user(
+        "#{test_user_name}-secondary",
+        email: "#{entity_suffix}-#{@test_user_name}-secondary@auth0.com",
+        password: Faker::Internet.password,
+        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
       )
     end
   end
@@ -138,45 +150,60 @@ describe Auth0::Api::V2::Users do
   describe '.patch_user', vcr: true do
     let(:patch_user_body) do
       {
+        'email_verified' => true,
         'user_metadata' => {
           'addresses' => { 'home_address' => '742 Evergreen Terrace' }
         }
       }
     end
 
-    it 'should raise an error when the user_id is missing' do
-      expect { client.patch_user('', {}) }.to raise_error Auth0::MissingUserId
-    end
-
-    it 'should raise an error when the body is missing' do
-      expect do
-        client.patch_user(test_user['user_id'], {})
-      end.to raise_error Auth0::InvalidParameter
-    end
-
-    it 'should patch email_verified and return the updated data' do
-      expect(
-        client.patch_user(
-          test_user['user_id'],
-          'email_verified' => true
-        )
-      ).to include('email_verified' => true)
-    end
-
-    it 'should patch user_metadata and return the updated user' do
+    it 'should patch the User successfully' do
       expect(
         client.patch_user(test_user['user_id'], patch_user_body)
       ).to include(patch_user_body)
     end
   end
 
-  describe '.delete_user', vcr: true do
-    it 'should raise an error when the user_id is missing' do
-      expect { client.delete_user '' }.to raise_error Auth0::MissingUserId
+  describe '.delete_user_provider', vcr: true do
+    it 'should attempt to delete the MFA provider for the User' do
+      expect { client.delete_user_provider test_user['user_id'], 'google-authenticator' }.to_not raise_error
+    end
+  end
+
+  describe '.link_user_account', vcr: true do
+    let(:secondary_account_body) do
+      {
+        provider: 'auth0',
+        user_id: test_user_secondary['user_id']
+      }
     end
 
-    it 'should delete the user successfully' do
+    it 'should link two Users successfully' do
+      expect { client.link_user_account test_user['user_id'], secondary_account_body }.to_not raise_error
+    end
+  end
+
+  describe '.unlink_user_account', vcr: true do
+    it 'should unlink two Users successfully' do
+      expect do
+        client.unlink_user_account test_user['user_id'], 'auth0', test_user_secondary['user_id']
+      end.to_not raise_error
+    end
+  end
+
+  describe '.user_logs', vcr: true do
+    it 'should get Logs for a User successfully' do
+      expect { client.user_logs( test_user['user_id'], per_page: 2 ) }.to_not raise_error
+    end
+  end
+
+  describe '.delete_user', vcr: true do
+    it 'should delete the User successfully' do
       expect { client.delete_user test_user['user_id'] }.to_not raise_error
+    end
+
+    it 'should delete the secondary User successfully' do
+      expect { client.delete_user test_user_secondary['user_id'] }.to_not raise_error
     end
   end
 end

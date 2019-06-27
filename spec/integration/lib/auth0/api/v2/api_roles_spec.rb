@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Auth0::Api::V2::Roles do
-  attr_reader :client, :test_role_name, :test_user, :test_api, :test_role, :test_permission
+  attr_reader :client, :test_user, :test_role_name, :test_permission, :test_api, :test_role
 
   before(:all) do
     @client ||= Auth0::Client.new(v2_creds)

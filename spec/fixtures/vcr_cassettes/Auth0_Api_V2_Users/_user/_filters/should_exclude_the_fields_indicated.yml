@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5bb7c4425e09334d77899bdc?fields=picture,email,user_id&include_fields=false
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980?fields=picture,email,user_id&include_fields=false
     body:
       encoding: US-ASCII
       string: ''
@@ -12,13 +12,13 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGc.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiQjRvUEhsMDA3VmExR0JkWlhpU0hhRUNVcVZXa2Q5WGtAY2xpZW50cyIsIm.PxfZjVd4wTb_bFbSTENdTmbj13CDQaPK352w3UNL3i3DnWcVJa6qSiA0hCr_tSU_uC34mHkK52O8tFVeZjxCYSeM9yOZUcKVya5N0I7G90X
+      - Bearer API_TOKEN
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,19 +27,25 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:06:27 GMT
+      - Thu, 27 Jun 2019 20:25:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Ot-Tracer-Spanid:
+      - 06ea36a221e0d0b4
+      Ot-Tracer-Traceid:
+      - 2790d5497fc949a7
+      Ot-Tracer-Sampled:
+      - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '7'
+      - '5'
       X-Ratelimit-Reset:
-      - '1538769990'
+      - '1561667147'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -53,11 +59,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA42Py27CMBBF/2XWMTIhD+Jd/6BSYUNVRRN7EKMGG9kOVRXl
-        3xkQa8T26tzXDB7PBAbiNPxnSllNieJDK4DOyGN/pchHJgfmiGOiAqaLw0yu
-        xyy+Uq+3aq2VrnelNroxZbPqGn0Qu2f7+yKdHfnMmSmB+Z7BBu/JZg5e+P0T
-        U5+Y0l+ITn1M+XTnLT4QWSFIz7IK6mFobVWVNelus6lc2267bnBWoEsMV+mJ
-        QqEE6Htt+gqWcXzeWX4KsJHeOLTcAGqQKmEsAQAA
+        H4sIAAAAAAAAA42PTW7CMBCF7zLruHJcQhLveoNKbTdUVTTYEzFqYiPbAVWIu3dArBALtk/f+ztBwJnAQlq2f4VyUUumdNUqoBl5Gg6UeGTyYEecMlWw7D0W8gMW8Rld90qvlWk/jbamsa/di2nrjdgDu9/79Ec17CkULkwZ7PcJXAyBXOEYxPh1w9Q75nyMyau3pewuvMMrInMEGVjmQePrxqxXpt2u+rHW3uiupb7TAu1TPEhPEgol4CJx/oiOcbr9Ov9U4BI98ez8D9S01/g1AQAA
     http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:06:27 GMT
+  recorded_at: Thu, 27 Jun 2019 20:25:43 GMT
 recorded_with: VCR 4.0.0

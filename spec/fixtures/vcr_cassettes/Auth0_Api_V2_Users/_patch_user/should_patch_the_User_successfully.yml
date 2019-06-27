@@ -1,11 +1,12 @@
 ---
 http_interactions:
 - request:
-    method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980
+    method: patch
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980?fields=email&include_fields=true
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"email_verified":true,"user_metadata":{"addresses":{"home_address":"742
+        Evergreen Terrace"}}}'
     headers:
       Accept:
       - "*/*"
@@ -19,42 +20,49 @@ http_interactions:
       - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
       - Bearer API_TOKEN
+      Content-Length:
+      - '94'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
     status:
-      code: 204
-      message: No Content
+      code: 200
+      message: OK
     headers:
       Date:
       - Thu, 27 Jun 2019 20:25:44 GMT
       Content-Type:
       - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 0e8c77112cfa7654
+      - 4a8e4de04ea11393
       Ot-Tracer-Traceid:
-      - 7409e6fe18974baf
+      - 778c01e831d4d91b
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '0'
+      - '3'
       X-Ratelimit-Reset:
-      - '1561667150'
+      - '1561667148'
       Vary:
       - origin,accept-encoding
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
       Strict-Transport-Security:
       - max-age=15724800
       X-Robots-Tag:
       - noindex, nofollow, nosnippet, noarchive
     body:
-      encoding: UTF-8
-      string: ''
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA31Ry2rDMBD8lSBoTrEjKYpfENoc2nOh6aWlGEVaJ6Lxg5WcUlz/e+W8CKUEdFitZmdWMx2BUpodyQi2628H1gWXorWAlSzhQbZuS0NVl2RChsY1+gzyTwemfA9oCgOaZA5bmJC20dKBzqXzY5yyNKBRwOMVpxmfZ0KElIo3Pz0Q5caPkYPcz1yzOY8Ej9ciLRjVnCYxpAn10MYo1+Kwxta5xmbTqQ03KPfSSRzWnB7LKY9mikLBxBwSxjSP4oip2BcsTUWSFPd2IRI6xkWzGevFgetutrzjT/4oXYWXf/v7kdL6CtuwqTaDFUZ9/rXjP1+MhsoZZ8CS7L0jqq4qUM7UlR98PcGCZ2ntV406WHrRAa/kAXJtzC1LsN57HTzbN8jal1oZ6bMt5M5C/zEhCuFGFrMk5DG7ZFGCkz46SbKOSK0RrB1+0JFtXUJ+6nieWPDRo099gwDVaAWIUgHp+/4XaznSg1wCAAA=
     http_version: 
   recorded_at: Thu, 27 Jun 2019 20:25:44 GMT
 recorded_with: VCR 4.0.0

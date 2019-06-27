@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526427b49f10d2087e980/identities
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"provider":"auth0","user_id":"auth0|5d1526424f304d0d76a1e5a2"}'
     headers:
       Accept:
       - "*/*"
@@ -19,42 +19,49 @@ http_interactions:
       - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
       - Bearer API_TOKEN
+      Content-Length:
+      - '63'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
     status:
-      code: 204
-      message: No Content
+      code: 201
+      message: Created
     headers:
       Date:
       - Thu, 27 Jun 2019 20:25:44 GMT
       Content-Type:
       - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 0e8c77112cfa7654
+      - 2af1b5395d2fc6dd
       Ot-Tracer-Traceid:
-      - 7409e6fe18974baf
+      - 481d32907f550ccd
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '0'
+      - '2'
       X-Ratelimit-Reset:
-      - '1561667150'
+      - '1561667149'
       Vary:
       - origin,accept-encoding
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
       Strict-Transport-Security:
       - max-age=15724800
       X-Robots-Tag:
       - noindex, nofollow, nosnippet, noarchive
     body:
-      encoding: UTF-8
-      string: ''
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA62PwWrCQBCG32XOiWxiYjQnhT5AQXoqRcbdWTqQ7MruJkWk794xqO3Bg0hvy+w3//zf+wkOwVvu6AUTQnsC6pE7aCEM+2OimPLbY4gUHPa0xiF9qpn2PWRwHvylr5B8TUm7kQJbJgNtCgN9Z6C9c6QTeyd7bxc8f8UYv3ww+UbCySXWOCEZnBN3LPtQm6IuF1XZ7KuVLZQp1bKh1VIJJBIjGwpCTe1kxHHrNaO4WOyiXH5CNY8kdQ2G40PSv/gd/UuLf/Cv7FxVRplmgQXVWD7m//EDUzr5puwBAAA=
     http_version: 
   recorded_at: Thu, 27 Jun 2019 20:25:44 GMT
 recorded_with: VCR 4.0.0
