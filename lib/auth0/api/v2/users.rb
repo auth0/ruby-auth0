@@ -200,7 +200,7 @@ module Auth0
         #   * :sort [string] The field to use for sorting. 1 == ascending and -1 == descending.
         #
         # @return [json] Returns roles for the given user_id.
-        def get_roles(user_id, options = {})
+        def get_user_roles(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           path = "#{users_path}/#{user_id}/roles"
           request_params = {
@@ -228,7 +228,7 @@ module Auth0
         #
         # @param user_id [string] The user_id of the roles to add.
         # @param roles [array] An array of role names to add.
-        def add_roles(user_id, roles)
+        def add_user_roles(user_id, roles)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           validate_strings_array roles
           path = "#{users_path}/#{user_id}/roles"
@@ -252,7 +252,7 @@ module Auth0
         # @param user_id [string] The user_id of the permissions to get.
         #
         # @return [json] Returns permissions for the given user_id.
-        def get_permissions(user_id)
+        def get_user_permissions(user_id)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           get "#{users_path}/#{user_id}/permissions"
         end
@@ -262,7 +262,7 @@ module Auth0
         #
         # @param user_id [string] The user_id of the permissions to remove.
         # @param permissions [array] An array of Permission structs to remove.
-        def remove_permissions(user_id, permissions)
+        def remove_user_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
           delete "#{users_path}/#{user_id}/permissions", permissions: permissions
@@ -273,7 +273,7 @@ module Auth0
         #
         # @param user_id [string] The user_id of the permissions to add.
         # @param permissions [array] An array of Permission structs to add.
-        def add_permissions(user_id, permissions)
+        def add_user_permissions(user_id, permissions)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           permissions = validate_permissions_array permissions
           post "#{users_path}/#{user_id}/permissions", permissions: permissions

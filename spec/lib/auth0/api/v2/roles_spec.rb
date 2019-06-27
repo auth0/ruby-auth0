@@ -135,13 +135,13 @@ describe Auth0::Api::V2::Roles do
 
   context '.get_users' do
     it 'is expected to exist' do
-      expect(@instance).to respond_to(:get_users)
+      expect(@instance).to respond_to(:get_role_users)
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:get)
       expect do
-        @instance.get_users('')
+        @instance.get_role_users('')
       end.to raise_exception Auth0::MissingParameter
     end
 
@@ -152,7 +152,7 @@ describe Auth0::Api::V2::Roles do
         page: nil,
         include_totals: nil
       )
-      expect { @instance.get_users('ROLE_ID') }.not_to raise_error
+      expect { @instance.get_role_users('ROLE_ID') }.not_to raise_error
     end
 
     it 'is expected to get Users for a Role with custom parameters' do
@@ -163,34 +163,34 @@ describe Auth0::Api::V2::Roles do
         include_totals: true
       )
       expect do
-        @instance.get_users('ROLE_ID', per_page: 30, page: 4, include_totals: true)
+        @instance.get_role_users('ROLE_ID', per_page: 30, page: 4, include_totals: true)
       end.not_to raise_error
     end
   end
 
   context '.add_users' do
     it 'is expected to exist' do
-      expect(@instance).to respond_to(:add_users)
+      expect(@instance).to respond_to(:add_role_users)
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_users('', [])
+        @instance.add_role_users('', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
     it 'is expected to raise an exception if an array is not passed for Users' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_users('ROLE_ID', 'USERS')
+        @instance.add_role_users('ROLE_ID', 'USERS')
       end.to raise_exception Auth0::InvalidParameter
     end
 
     it 'is expected to raise an exception if no User IDs are passed' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_users('ROLE_ID', [])
+        @instance.add_role_users('ROLE_ID', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
@@ -200,20 +200,20 @@ describe Auth0::Api::V2::Roles do
         users: %w[test|user-01 test|user-02]
       )
       expect do
-        @instance.add_users('ROLE_ID', %w[test|user-01 test|user-02])
+        @instance.add_role_users('ROLE_ID', %w[test|user-01 test|user-02])
       end.not_to raise_error
     end
   end
 
   context '.get_permissions' do
     it 'is expected to exist' do
-      expect(@instance).to respond_to(:get_permissions)
+      expect(@instance).to respond_to(:get_role_permissions)
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:get)
       expect do
-        @instance.get_permissions('')
+        @instance.get_role_permissions('')
       end.to raise_exception Auth0::MissingParameter
     end
 
@@ -224,7 +224,7 @@ describe Auth0::Api::V2::Roles do
         page: nil,
         include_totals: nil
       )
-      expect { @instance.get_permissions('ROLE_ID') }.not_to raise_error
+      expect { @instance.get_role_permissions('ROLE_ID') }.not_to raise_error
     end
 
     it 'is expected to get Roles with custom parameters' do
@@ -235,41 +235,41 @@ describe Auth0::Api::V2::Roles do
         include_totals: true
       )
       expect do
-        @instance.get_permissions('ROLE_ID', per_page: 15, page: 5, include_totals: true)
+        @instance.get_role_permissions('ROLE_ID', per_page: 15, page: 5, include_totals: true)
       end.not_to raise_error
     end
   end
 
   context '.add_permissions' do
     it 'is expected to exist' do
-      expect(@instance).to respond_to(:add_permissions)
+      expect(@instance).to respond_to(:add_role_permissions)
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_permissions('', [])
+        @instance.add_role_permissions('', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
     it 'is expected to raise an exception if an array is not passed for permissions' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_permissions('ROLE_ID', 'PERMISSIONS')
+        @instance.add_role_permissions('ROLE_ID', 'PERMISSIONS')
       end.to raise_exception Auth0::InvalidParameter
     end
 
     it 'is expected to raise an exception if an empty permissions array is passed' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_permissions('ROLE_ID', [])
+        @instance.add_role_permissions('ROLE_ID', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
     it 'is expected to raise an exception if the permissions array does not contain Permission structs' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.add_permissions('ROLE_ID', [1, 2, 3])
+        @instance.add_role_permissions('ROLE_ID', [1, 2, 3])
       end.to raise_exception Auth0::InvalidParameter
     end
 
@@ -288,7 +288,7 @@ describe Auth0::Api::V2::Roles do
         ]
       )
       expect do
-        @instance.add_permissions(
+        @instance.add_role_permissions(
           'ROLE_ID',
           [
             Permission.new('permission-name-1', 'server-id-1'),
@@ -301,34 +301,34 @@ describe Auth0::Api::V2::Roles do
 
   context '.remove_permissions' do
     it 'is expected to exist' do
-      expect(@instance).to respond_to(:remove_permissions)
+      expect(@instance).to respond_to(:remove_role_permissions)
     end
 
     it 'is expected to raise an exception if an empty Role ID is passed' do
       expect(@instance).not_to receive(:delete)
       expect do
-        @instance.remove_permissions('', [])
+        @instance.remove_role_permissions('', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
     it 'is expected to raise an exception if an array is not passed for permissions' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.remove_permissions('ROLE_ID', 'PERMISSIONS')
+        @instance.remove_role_permissions('ROLE_ID', 'PERMISSIONS')
       end.to raise_exception Auth0::InvalidParameter
     end
 
     it 'is expected to raise an exception if an empty permissions array is passed' do
       expect(@instance).not_to receive(:delete)
       expect do
-        @instance.remove_permissions('ROLE_ID', [])
+        @instance.remove_role_permissions('ROLE_ID', [])
       end.to raise_exception Auth0::MissingParameter
     end
 
     it 'is expected to raise an exception if the permissions array does not contain Permission structs' do
       expect(@instance).not_to receive(:post)
       expect do
-        @instance.remove_permissions('ROLE_ID', [1, 2, 3])
+        @instance.remove_role_permissions('ROLE_ID', [1, 2, 3])
       end.to raise_exception Auth0::InvalidParameter
     end
 
@@ -347,7 +347,7 @@ describe Auth0::Api::V2::Roles do
         ]
       )
       expect do
-        @instance.remove_permissions(
+        @instance.remove_role_permissions(
           'ROLE_ID',
           [
             Permission.new('permission-name-3', 'server-id-3'),
