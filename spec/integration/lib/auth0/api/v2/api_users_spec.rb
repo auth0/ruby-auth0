@@ -1,13 +1,18 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Users do
 
-  attr_reader :client, :test_user_name, :test_user_email, :test_user, :test_user_secondary
+  attr_reader :client, :test_user_name, :test_user_email, :test_user, :test_user_secondary, :test_role
 
   before(:all) do
     @client ||= Auth0::Client.new(v2_creds)
 
     @test_user_name = "#{entity_suffix}-username"
     @test_user_email = "#{entity_suffix}-#{@test_user_name}@auth0.com"
+
+    @test_api_name = "#{entity_suffix}-test-api-for-users"
+    @test_api_scope = 'test:scope'
+
+    @test_permission = Permission.new("#{entity_suffix}-test-permission-for-users", @test_api_name)
 
     VCR.use_cassette('Auth0_Api_V2_Users/create_test_user') do
       @test_user ||= client.create_user(
@@ -25,6 +30,31 @@ describe Auth0::Api::V2::Users do
         password: Faker::Internet.password,
         connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
       )
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_Users/create_test_api') do
+      @test_api ||= client.create_resource_server(
+        @test_api_name,
+        name: @test_api_name,
+        scopes: [{ value: @test_api_scope }]
+      )
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_Users/create_test_role') do
+      @test_role ||= client.create_role(
+        "#{entity_suffix}-test-role-for-users",
+        description: 'Test role description'
+      )
+    end
+  end
+
+  after(:all) do
+    VCR.use_cassette('Auth0_Api_V2_Users/delete_test_api') do
+      client.delete_resource_server @test_api['id']
+    end
+
+    VCR.use_cassette('Auth0_Api_V2_Users/delete_test_role') do
+      client.delete_role @test_role['id']
     end
   end
 
@@ -194,6 +224,26 @@ describe Auth0::Api::V2::Users do
   describe '.user_logs', vcr: true do
     it 'should get Logs for a User successfully' do
       expect { client.user_logs( test_user['user_id'], per_page: 2 ) }.to_not raise_error
+    end
+  end
+
+  describe '.add_user_roles', vcr: true do
+    it 'should add a Role to a User successfully' do
+      expect { client.add_user_roles test_user['user_id'], [ test_role['id'] ] }.to_not raise_error
+    end
+  end
+
+  describe '.get_user_roles', vcr: true do
+    it 'should get Roles for a User successfully' do
+      expect( client.get_user_roles(test_user['user_id']).first ).to include(
+        'id' => test_role['id']
+      )
+    end
+  end
+
+  describe '.remove_roles', vcr: true do
+    it 'should remove a Role from a User successfully' do
+      expect { client.remove_roles test_user['user_id'], [ test_role['id'] ] }.to_not raise_error
     end
   end
 

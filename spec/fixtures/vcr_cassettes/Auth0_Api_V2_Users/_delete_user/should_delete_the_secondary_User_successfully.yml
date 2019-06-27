@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1526424f304d0d76a1e5a2
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4d9050fe0eadc7e0ef
     body:
       encoding: US-ASCII
       string: ''
@@ -27,23 +27,23 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Thu, 27 Jun 2019 20:25:45 GMT
+      - Thu, 27 Jun 2019 21:00:11 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 1b7d604e74c46495
+      - 2f69cca45a129553
       Ot-Tracer-Traceid:
-      - 635434325a81dc98
+      - 79b8300c6961e103
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '0'
+      - '8'
       X-Ratelimit-Reset:
-      - '1561667151'
+      - '1561669213'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -56,5 +56,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 20:25:45 GMT
+  recorded_at: Thu, 27 Jun 2019 21:00:11 GMT
 recorded_with: VCR 4.0.0

@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers/5d152e4e6c312606a357d352
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Date:
+      - Thu, 27 Jun 2019 21:00:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Ot-Tracer-Spanid:
+      - 0a5a858b2b3c23d6
+      Ot-Tracer-Traceid:
+      - 0144f9ed30919fa3
+      Ot-Tracer-Sampled:
+      - 'true'
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1561669213'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 27 Jun 2019 21:00:12 GMT
+recorded_with: VCR 4.0.0

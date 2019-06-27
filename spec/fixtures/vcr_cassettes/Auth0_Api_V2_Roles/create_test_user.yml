@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/users
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-rubytest-username@auth0.com","password":"1gKkSoE6G","connection":"Username-Password-Authentication","name":"rubytest-username"}'
+      string: '{"email":"rubytest-rubytest-username-for-roles@auth0.com","password":"Am9f5tHj","connection":"Username-Password-Authentication","name":"rubytest-username-for-roles"}'
     headers:
       Accept:
       - "*/*"
@@ -20,7 +20,7 @@ http_interactions:
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '146'
+      - '165'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,7 +29,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Thu, 27 Jun 2019 18:42:04 GMT
+      - Thu, 27 Jun 2019 21:01:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,9 +37,9 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 11ec73cf259dfff1
+      - 53ca8692404851c5
       Ot-Tracer-Traceid:
-      - 3c8698ef55ccb0b0
+      - 24e8532b7615d3d0
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
@@ -47,7 +47,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '9'
       X-Ratelimit-Reset:
-      - '1561660925'
+      - '1561669312'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -61,7 +61,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA41RW2vDIBj9L0L7lIumSWoCZevLngfbXjZGsfqllbUmqOkYXf/7PtMLpYwx8OGo5/J53BPYCr0hNbH98suD8/EF9A6sEVu4F71f00S2WxKRcHDNPpPwanBa7MDqRoMidSM2DiLSd0p4UAvhUZdRVsW0jLPpM+N1ntU0Tya8eEV5cFpo1JEh77tQrKCqkZQBU5LCsiqLnMslUjstfW/DHGvvO1enqUtWVuyEFzbMmR5hmpUTFDYsL4AzprJyWjI5RcCqKue8uXOznNOxnXWrsZoNXqPJfJQ94JLKJJeH4/5o6RDZPunMKnSh5cdtH78VoxUYr70GR+q3PZGtMSC9bg0KX060+FE499laFc8xNPClGCjXxfxViW13mGPP9YVY99RKLTannzi8R0Ra+MdfHH4A4yWEoRYCAAA=
+        H4sIAAAAAAAAA41RTWsCMRD9LwE9ubvJ6n6CtF56LrS9tBQZk4mGrsmSZC3F+t+bXauIBSnk8Ia8j+HNnuAWVENqYrvVl0fnozPoHFoNW4yksZE1Dbp76PyGxtxsyYT0X5e6v/RAGtyXO7RKKhSkltA4nJCuFeBRLMEHh5SyKqJ5lBbPKaspqzMW55S+BnnvuVRBR4bk70ywLMWVBCgrWVFRzaSYUloEaqu472y/0cb71tVJ4uK1hR14sP3GyREmRcmzirG8EshmlWApcORpWeRyCmXOVnduPivp2M7b9VjMB6/RdDFKH8LjQsfnCsJ8tHQB2S5u9bpvRfGP62ZuV6QEaq+8CkP9tifcaI3cK6ODxctJ8AjOfRorokWI7/kcBsplRbfKsWYXcuypyD7WPRmuoPm9yeF9QrjFf1zl8APZQkUVNAIAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 18:42:04 GMT
+  recorded_at: Thu, 27 Jun 2019 21:01:51 GMT
 recorded_with: VCR 4.0.0

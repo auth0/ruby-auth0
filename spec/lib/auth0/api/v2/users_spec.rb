@@ -325,7 +325,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to remove roles' do
-      expect(@instance).to receive(:delete).with(
+      expect(@instance).to receive(:delete_with_body).with(
         '/api/v2/users/USER_ID/roles',
         roles: %w[test-role-01 test-role-02]
       )
@@ -417,7 +417,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to remove permissions' do
-      expect(@instance).to receive(:delete).with(
+      expect(@instance).to receive(:delete_with_body).with(
         '/api/v2/users/USER_ID/permissions',
         permissions: [
           {

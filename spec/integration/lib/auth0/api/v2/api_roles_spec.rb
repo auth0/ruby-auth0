@@ -6,13 +6,13 @@ describe Auth0::Api::V2::Roles do
   before(:all) do
     @client ||= Auth0::Client.new(v2_creds)
 
-    @test_user_name = "#{entity_suffix}-username"
+    @test_user_name = "#{entity_suffix}-username-for-roles"
     @test_user_email = "#{entity_suffix}-#{@test_user_name}@auth0.com"
 
-    @test_api_name = "#{entity_suffix}-test-api"
+    @test_api_name = "#{entity_suffix}-test-api-for-roles"
     @test_api_scope = 'test:scope'
 
-    @test_role_name = "#{entity_suffix}-test-api"
+    @test_role_name = "#{entity_suffix}-test-role"
 
     @test_permission = Permission.new("#{entity_suffix}-test-permission", @test_api_name)
 
