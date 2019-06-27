@@ -157,7 +157,7 @@ module Auth0
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           permissions = validate_permissions_array(permissions)
-          delete "#{roles_path}/#{role_id}/permissions", permissions: permissions
+          delete_with_body "#{roles_path}/#{role_id}/permissions", permissions: permissions
         end
 
         private

@@ -6,7 +6,7 @@ module Auth0
       attr_accessor :headers, :base_uri, :timeout
 
       # proxying requests from instance methods to HTTP class methods
-      %i(get post post_file put patch delete).each do |method|
+      %i(get post post_file put patch delete delete_with_body).each do |method|
         define_method(method) do |path, body = {}, extra_headers = {}|
           safe_path = URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
@@ -20,6 +20,8 @@ module Auth0
                      call(:get, url(safe_path), timeout, get_headers)
                    elsif method == :delete
                      call(:delete, url(safe_path), timeout, add_headers({params: body}))
+                   elsif method == :delete_with_body
+                     call(:delete, url(safe_path), timeout, headers, body)
                    elsif method == :post_file
                      body.merge!(multipart: true)
                      call(:post, url(safe_path), timeout, headers, body)
