@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_T1ubVpdsAQ01jlcy/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 27 Jun 2019 18:42:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Ot-Tracer-Spanid:
+      - 4a99be8864e31de9
+      Ot-Tracer-Traceid:
+      - 4e9abbea4b959a8c
+      Ot-Tracer-Sampled:
+      - 'true'
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '6'
+      X-Ratelimit-Reset:
+      - '1561660930'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA02O2QrCMBBF/yVQn7RJuqaFor74EyKSJukCtoYsgqj/7rTFIszDGbhz5p5fyFtlrr1EJeLedeSdSpoS2QhCFZWCqLrI0oSJGm2RGnh/g6Dx9dMp63YrTJKRD+owO0JxHyCue+G8UXDQOadtibENW8Mf3HEzRfCCOMpi+NPQJFWMUhlleUZFDkCLImGs2dsqYWRjKt1uZDW7gvgYRCcYIcdw/Qn7orRAxod6bKHG1Ou/9K8r+ly+GwbUFP8AAAA=
+    http_version: 
+  recorded_at: Thu, 27 Jun 2019 18:42:07 GMT
+recorded_with: VCR 4.0.0

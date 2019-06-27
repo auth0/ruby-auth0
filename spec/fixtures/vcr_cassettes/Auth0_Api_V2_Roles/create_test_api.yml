@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers
+    body:
+      encoding: UTF-8
+      string: '{"name":"rubytest-test-api","scopes":[{"value":"test:scope"}],"identifier":"rubytest-test-api"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      Content-Type:
+      - application/json
+      Auth0-Client:
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      Authorization:
+      - Bearer API_TOKEN
+      Content-Length:
+      - '95'
+      Host:
+      - auth0-sdk-tests.auth0.com
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 27 Jun 2019 18:42:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Ot-Tracer-Spanid:
+      - 62f395190a4c4f80
+      Ot-Tracer-Traceid:
+      - 1b8d01624db3520e
+      Ot-Tracer-Sampled:
+      - 'true'
+      X-Ratelimit-Limit:
+      - '10'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1561660926'
+      Vary:
+      - origin,accept-encoding
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA3WPwWrDMAyG30XnDtzSZG0eYzuWIRRbCqKeHSy3pZS++5xcBoVedPj16+PTAzTAAF3Ydi5IYE/78ej6Qx+cSCewgUS/3BrlMt4rW/1YB83aVho4VRXl8qZAMeYbZpGoiZG8ZzMYhKLxBuysM/qcrEFQcsErlwajMTKKFqs4U6l39FFb4/+u5jMnjCpcdVE79HvnXuMVeOMRhs/dsjWdkqYJKU7N9et71/XNz3yeuZFPD7hSvCx/LvbDmsPz5/kHeMJIyB8BAAA=
+    http_version: 
+  recorded_at: Thu, 27 Jun 2019 18:42:05 GMT
+recorded_with: VCR 4.0.0
