@@ -300,25 +300,25 @@ describe Auth0::Api::V2::Users do
     end
   end
 
-  context '.remove_roles' do
-    it 'is expected to respond to a remove_roles method' do
-      expect(@instance).to respond_to(:remove_roles)
+  context '.remove_user_roles' do
+    it 'is expected to respond to a remove_user_roles method' do
+      expect(@instance).to respond_to(:remove_user_roles)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.remove_roles(nil, 'ROLES') }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.remove_user_roles(nil, 'ROLES') }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to raise an exception when the roles are not an array' do
-      expect { @instance.remove_roles('USER_ID', 'ROLES') }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.remove_user_roles('USER_ID', 'ROLES') }.to raise_exception(Auth0::InvalidParameter)
     end
 
     it 'is expected to raise an exception when the roles are empty' do
-      expect { @instance.remove_roles('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
+      expect { @instance.remove_user_roles('USER_ID', []) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to raise an exception when the roles are empty' do
-      expect { @instance.remove_roles('USER_ID', [1, 2]) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.remove_user_roles('USER_ID', [1, 2]) }.to raise_exception(Auth0::InvalidParameter)
     end
 
     it 'is expected to remove roles' do
@@ -327,7 +327,7 @@ describe Auth0::Api::V2::Users do
         roles: %w[test-role-01 test-role-02]
       )
       expect do
-        @instance.remove_roles('USER_ID', %w[test-role-01 test-role-02])
+        @instance.remove_user_roles('USER_ID', %w[test-role-01 test-role-02])
       end.not_to raise_error
     end
   end
