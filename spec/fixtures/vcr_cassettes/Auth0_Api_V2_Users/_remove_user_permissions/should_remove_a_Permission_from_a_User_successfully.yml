@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976/roles
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/permissions
     body:
       encoding: UTF-8
-      string: roles[]=rol_l0JF9dA0vW14gMPB
+      string: permissions[][permission_name]=rubytest-test-permission-for-users&permissions[][resource_server_identifier]=rubytest-test-api-for-users
     headers:
       Accept:
       - "*/*"
@@ -20,7 +20,7 @@ http_interactions:
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '28'
+      - '135'
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,23 +29,23 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:00:09 GMT
+      - Fri, 28 Jun 2019 19:22:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 243ce41747f9c7e7
+      - 2a7f95ee15c5b0ae
       Ot-Tracer-Traceid:
-      - 4f73a3ba19c180ae
+      - 48efa1311af734ea
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '7'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669212'
+      - '1561749739'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -58,5 +58,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:00:09 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:18 GMT
 recorded_with: VCR 4.0.0

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976?fields=picture,email,user_id&include_fields=false
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799?fields=picture,email,user_id&include_fields=false
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:00:04 GMT
+      - Fri, 28 Jun 2019 19:22:07 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 40b97c213ef4d9d6
+      - 5a8a247b1603c5af
       Ot-Tracer-Traceid:
-      - 45b4af6e15497106
+      - '092a123c73a321fb'
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669207'
+      - '1561749728'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -59,7 +59,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA42Pz0oDMRDG32XOG0lXs0ty8w0E9WIpyziZ4uA2KUm2UkrfvdPSk3jw+vH7/p0g4Y4hQFk+j41rM0vlctM64B3KPB24yFY4QtjiXLmDZR+xcZywqa+3K2/sYPrxrbfB+eCGB2/dh9qT0Pfv9L9qJHJq0oQrhPUJKKfE1CQnNb7fMfOCtf7kEs3z0r6uPOEN0TmKTKLzwMWV6/mJLKIlZ9kP9Dj6cVBoX/JBe4pSqAH2WltfMwnO91/nTQdU+B/PzhfK52wTNQEAAA==
+        H4sIAAAAAAAAA42PTWrDMBCF7zJrq0gGO5Z2vUEh7aYlmLE0pkMdKUhySgi5eyYhq9BFt4/v/Z0h4p7AQV6nU6VS1Voo37UGaI+8jEfKPDMFcDMuhRpYDwErhRGr+FptrNK9aod3Y11rXLd5sb3+FHtk//Oc/lcNB4qVK1MB93UGn2IkXzlFMX48MPWGpfymHNTrWr9vvMc7InMEGVnmQRdM3w+hG+ZpMq0m1N7YjbUCHXI6Sk8WCiVA32rLNnnG5fHrsmvAZ/rHs8sVI3//7zUBAAA=
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:00:04 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:07 GMT
 recorded_with: VCR 4.0.0

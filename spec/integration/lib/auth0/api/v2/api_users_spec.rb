@@ -1,7 +1,8 @@
 require 'spec_helper'
 describe Auth0::Api::V2::Users do
 
-  attr_reader :client, :test_user_name, :test_user_email, :test_user, :test_user_secondary, :test_role
+  attr_reader :client, :test_user_name, :test_user_email, :test_user, :test_user_secondary,
+              :test_role, :test_api_name, :test_permission_name, :test_permission
 
   before(:all) do
     @client ||= Auth0::Client.new(v2_creds)
@@ -12,6 +13,7 @@ describe Auth0::Api::V2::Users do
     @test_api_name = "#{entity_suffix}-test-api-for-users"
     @test_api_scope = 'test:scope'
 
+    @test_permission_name = "#{entity_suffix}-test-permission-for-users"
     @test_permission = Permission.new("#{entity_suffix}-test-permission-for-users", @test_api_name)
 
     VCR.use_cassette('Auth0_Api_V2_Users/create_test_user') do
@@ -241,9 +243,48 @@ describe Auth0::Api::V2::Users do
     end
   end
 
-  describe '.remove_roles', vcr: true do
+  describe '.remove_user_roles', vcr: true do
     it 'should remove a Role from a User successfully' do
-      expect { client.remove_roles test_user['user_id'], [ test_role['id'] ] }.to_not raise_error
+      expect { client.remove_user_roles test_user['user_id'], [ test_role['id'] ] }.to_not raise_error
+    end
+  end
+
+  describe '.get_enrollments', vcr: true do
+    it 'should get Enrollments for a User successfully' do
+      expect { client.get_enrollments test_user['user_id'] }.to_not raise_error
+    end
+  end
+
+  describe '.add_user_permissions', vcr: true do
+    it 'should add a Permissions for a User successfully' do
+      expect { client.add_user_permissions test_user['user_id'], [ test_permission ] }.to_not raise_error
+    end
+  end
+
+  describe '.get_user_permissions', vcr: true do
+    let(:test_get_user_permissions) do
+      client.get_user_permissions test_user['user_id']
+    end
+
+    it 'should get exactly 1 Permission for a User successfully' do
+      expect( test_get_user_permissions.count ).to eq 1
+    end
+
+    it 'should get the correct Permission for a User successfully' do
+      expect( test_get_user_permissions.first['permission_name'] ).to eq test_permission_name
+      expect( test_get_user_permissions.first['resource_server_name'] ).to eq test_api_name
+    end
+  end
+
+  describe '.remove_user_permissions', vcr: true do
+    it 'should remove a Permission from a User successfully' do
+      expect { client.remove_user_permissions test_user['user_id'], [ test_permission ] }.to_not raise_error
+    end
+  end
+
+  describe '.invalidate_browsers', vcr: true do
+    it 'should invalidate MFA browsers for the User successfully' do
+      expect { client.invalidate_browsers test_user['user_id'] }.to_not raise_error
     end
   end
 

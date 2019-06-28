@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:00:02 GMT
+      - Fri, 28 Jun 2019 19:22:03 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 555ecb4a758b34c0
+      - 1e05262d5ee683b8
       Ot-Tracer-Traceid:
-      - 7208e7492660e2ea
+      - 6008be97594ffbbc
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '6'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669205'
+      - '1561749724'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -61,5 +61,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA42QTUsDMRCG/0ugnrofyX4HivTiWVAvlrJMJ7NtsJtdkrQeav+72a2CBxEhhwnzzvPOvJsLox70sT2T1Z0mxWQHR0dLZqAnJtmBjCLrBsOW7OTItjpIGJz8If0ooAaFXHQF1oJnuBMVkmowSEeN/mRngPejk0ni4r2FM3iwMQ59ciuTqhNZU/IMsqIWFZSqLvK8LDDnVQe7pr53q7xO7+xq3N+p1cxaZOuFeAgPlYnnRSZg+N+QLlQHikezD2sYjW+/HKIVGa+9Jsfk5sJwMIbQ69CT7CUcOY1Ej+Dc+2BVtA4ekx5hlvzM4a8E7HAOPvY7rcnWPQ2o4fiV8XUbUKMCT6oFH3Qi5XWUiog3zzyXvJB5GZdp9RpG0dK/dDCObU8eAhWYvFyv208wzCg74gEAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:00:02 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:03 GMT
 recorded_with: VCR 4.0.0

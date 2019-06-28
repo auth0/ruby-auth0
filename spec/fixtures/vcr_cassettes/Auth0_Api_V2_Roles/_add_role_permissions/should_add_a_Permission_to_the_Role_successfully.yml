@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_k9l2exKSesXLFyXm/permissions
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_rSi7DH8MezaQ229K/permissions
     body:
       encoding: UTF-8
       string: '{"permissions":[{"permission_name":"rubytest-test-permission","resource_server_identifier":"rubytest-test-api-for-roles"}]}'
@@ -29,7 +29,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:01:54 GMT
+      - Fri, 28 Jun 2019 19:10:36 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,17 +37,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 1ff78c301fdf8ba9
+      - 00b2c56e5846715b
       Ot-Tracer-Traceid:
-      - 63da97536aa9285a
+      - 3e8125b1094f3ea3
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669317'
+      - '1561749038'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -63,5 +63,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA6uuBQBDv6ajAgAAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:01:54 GMT
+  recorded_at: Fri, 28 Jun 2019 19:10:37 GMT
 recorded_with: VCR 4.0.0

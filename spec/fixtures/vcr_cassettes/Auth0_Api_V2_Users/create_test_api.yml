@@ -29,7 +29,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Thu, 27 Jun 2019 20:59:58 GMT
+      - Fri, 28 Jun 2019 19:21:58 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,17 +37,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 7e96a88a1019d3ae
+      - 170178dd6862775d
       Ot-Tracer-Traceid:
-      - 2e73ab9765aba6b2
+      - 4ed0639d51fe659e
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '9'
+      - '8'
       X-Ratelimit-Reset:
-      - '1561669199'
+      - '1561749720'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -61,7 +61,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA4WPwWrDMBBE/2XPMThyrBR/RnssZVnLK7NElYxWTggh/x7Zl0Avvexh9s0w8wCZYIB+OvaGT2xddzS2tdT156nrDRwg0i9XIq/jvbCWZj+0SONTblblrBWSiWMRL5z/RSmEdMPkfZDISM6xKgyegvIB9CILuhS1xmF14ZVzjaUxMHrJWnChXO7oglTi7SvpwhGDeC6y1f2wp7b9K++BNx5hOJvtqzJHiTNSmGvrzy/T29pPXVq4Jn8/4Eph3bZvO4Zdh+fP8wW0RWbcMwEAAA==
+        H4sIAAAAAAAAA4WPwY7CMAxE/8VnKrVlG0I/A46rlZWmTmURkipOQQjx75v2gsSFiw/jN6OZJ/AIPXRjo5Qele4ad9S10s2hafd6DzsI5kqFSMvwyCS52o6ZuXIxVYtQkgLxSCGzY0pfUeN9vGN0znMgNNaSCPTOeKEdyIVntDFIicPiwhulEmsGT+g4ScbZpPxA67kQb1+OFwro2VHmta5WP3X9KW+BdxqgP7TrV3gKHCY0fiqtT+e2U6Wf2DhTSf59ws34Zd2+7ug3HV5/r38xxKMfMwEAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 20:59:58 GMT
+  recorded_at: Fri, 28 Jun 2019 19:21:58 GMT
 recorded_with: VCR 4.0.0
