@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976/logs?per_page=2
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:00:07 GMT
+      - Fri, 28 Jun 2019 19:22:11 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,21 +35,21 @@ http_interactions:
       Connection:
       - keep-alive
       Link:
-      - <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976/logs?per_page=2&page=0>;
-        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976/logs?per_page=2&page=0>;
+      - <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2&page=0>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2&page=0>;
         rel="last"
       Ot-Tracer-Spanid:
-      - 396f1a6b3192ecdc
+      - 639fae9675940ca0
       Ot-Tracer-Traceid:
-      - 29487763309ea991
+      - 2205766b0b922353
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669210'
+      - '1561749733'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -63,7 +63,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA6VTbW/TMBD+K1U+oqa1ncSu+4kKDQkQtGKd1g2hyEm81iyNM9thjUb+O+c02wpIiJf4Q+y75+6ee87+9BAUwslgHhCEeYhoSNiaoHnC5wmdcISug3Hg2tojrIV9IW1uVO2UrsAEhlxXlcyH84WVphJ7Ga6EtffaFOGicTtZOZWLHnKKT1UBIXBON4f4nWm0yFB8/7W82nhYqSDsCMFr694uN4erenl5dojI67svl5u2/DDDr/DHC3b7DPe1IWCxejM6O9SlNtKMFnVdPpdXtU9I2ATBwmBogHIqthANjiWQNSPvQqPp6OTUd+6EKm0wfwgyXbT+/5cknaxEX0aAKCi0xW3opHVeVrmH3OAxTdZ6W/i0aQZJX/ZBk1zvAV4P8kLEC//9wxwGqX6pE3Tj4K6Rpm9wL91O+yqr5fkagnbaev6l3qpq8gMhbcARx9E4MNLqxuQ++bTUU5/XTgtlgJzX/4+06rphMD28L/QtKXBCZJwjIVCeIMlpHjHO6OMMf27o9wpaZ+Deb9vH9CemdLjv8DBEJqwEFzR8pAIvwj8URAkjKOEJ5QgTzChFFMWYohlnEZ4hGjNEOMUUM86jGfbp/zuBsu91pkqgdiNKKz2r4zRTVd1oGFfXff4ONSIDg9ADAAA=
+        H4sIAAAAAAAAA6VTbW/TMBD+K1E+oqa1nRfH/USFhgQIWrFO60AochK3NUvjzHZYo5H/zjnNWAEJ8RJ/iH333N1zz9kfH/ySW+HPfYIwC1ASkHSN2ZzgeUynLCYf/Ilvu8YhjIF9KUyhZWOlqsEEhkLVtSjG85URuuYHEay4MfdKl8GitXtRW1nwAXKOz2QJIXDONsfojW4Vz1F0/6W62ThYJSHsBMFrY18vN8ebZnl9cQzJy7vP15uuepfiF/j9Fb19grvaELBYvfIujk2ltNDeommqp/KycQkJnSJYGAwtUM74DqLBsQSy2nMu5M28s9PQueWyMv78wc9V2bn/X5K0ouZDGQ6ioMCUt4EVxjpZxQFyg0e3eedswfdNO0r6fAiaFuoA8GaUFyKeue8f5jBK9Usdv5/4d63QQ4MHYffKVVktL9cQtFfG8a/UTtbTHwgpDY4oCie+Fka1unDJZ5WaubxmVkoN5Jz+f6RV34+DGeBDoa9xiZMkLeN0m+eYIMFRgRll7HGGPzf0ewWN1XDvd91j+jNTNt53eBg850aACxo+UWEIuYeCEpJiRnBMWRyylIY0IhRFhERxSBCNUkaTEJMI4ZgklFGX/r8TSPNW5bICalteGeFYnaaZyXqrYFx9/+kbX3HxUtADAAA=
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:00:07 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:11 GMT
 recorded_with: VCR 4.0.0

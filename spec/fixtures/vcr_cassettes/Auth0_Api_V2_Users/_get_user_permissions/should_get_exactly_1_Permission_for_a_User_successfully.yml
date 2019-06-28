@@ -1,8 +1,8 @@
 ---
 http_interactions:
 - request:
-    method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_rSi7DH8MezaQ229K
+    method: get
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/permissions
     body:
       encoding: US-ASCII
       string: ''
@@ -23,19 +23,21 @@ http_interactions:
       - auth0-sdk-tests.auth0.com
   response:
     status:
-      code: 204
-      message: No Content
+      code: 200
+      message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:10:42 GMT
+      - Fri, 28 Jun 2019 19:22:16 GMT
       Content-Type:
       - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 11652af63de32e09
+      - 3b84fd7104def73e
       Ot-Tracer-Traceid:
-      - 4310301d4e1c7c32
+      - 1e8717612d51cfb7
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
@@ -43,18 +45,21 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '9'
       X-Ratelimit-Reset:
-      - '1561749043'
+      - '1561749737'
       Vary:
       - origin,accept-encoding
       Cache-Control:
       - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Encoding:
+      - gzip
       Strict-Transport-Security:
       - max-age=15724800
       X-Robots-Tag:
       - noindex, nofollow, nosnippet, noarchive
     body:
-      encoding: UTF-8
-      string: ''
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA4WOQQrCQAxF75K1c4Fu1YVbcVdKqe0vZNGZIZkRSundjXagKIKbkLzkhV8vFCETq3Lwre8mUEWS73OCJvcu+96NQVxWiNKBBmgvHJNxUwwINGTp0drBA/L7WRf548u3xAN84pEhf9VNVKrqpfRmb1HKWBLsIM3xBU6X6/l4o7VZmydrE2jgAAEAAA==
     http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:10:42 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:16 GMT
 recorded_with: VCR 4.0.0

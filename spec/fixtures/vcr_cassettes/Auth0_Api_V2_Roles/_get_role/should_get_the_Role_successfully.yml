@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_k9l2exKSesXLFyXm
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_rSi7DH8MezaQ229K
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:01:53 GMT
+      - Fri, 28 Jun 2019 19:10:29 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,9 +35,9 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 156da56206fc205c
+      - 29d59d014f04514c
       Ot-Tracer-Traceid:
-      - 037a30bb6a53fb78
+      - 23d7e3cf35ba0ed8
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
@@ -45,7 +45,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '9'
       X-Ratelimit-Reset:
-      - '1561669314'
+      - '1561749030'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -59,7 +59,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA6tWykxRslIqys+Jz7bMMUqt8A5OLY7wcauMyFXSUcpLzE0FyZYmVZakFpfoggmg2lSgXEpqcXJRZkFJZn4eUEkIUEYBJKOALF4LAN/SPYNfAAAA
+        H4sIAAAAAAAAA6tWykxRslIqys+JLwrONHfxsPBNrUoMNDKy9FbSUcpLzE0FyZYmVZakFpfoggmg2lSgXEpqcXJRZkFJZn4eUEkIUEYBJKOALF4LAIwSdAlfAAAA
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:01:53 GMT
+  recorded_at: Fri, 28 Jun 2019 19:10:29 GMT
 recorded_with: VCR 4.0.0

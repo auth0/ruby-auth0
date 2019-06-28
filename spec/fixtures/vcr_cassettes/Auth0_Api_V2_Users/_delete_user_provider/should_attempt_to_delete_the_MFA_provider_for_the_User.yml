@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d152e4c0aa0c50e96c37976/multifactor/google-authenticator
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/multifactor/google-authenticator
     body:
       encoding: US-ASCII
       string: ''
@@ -27,23 +27,23 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:00:05 GMT
+      - Fri, 28 Jun 2019 19:22:09 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 31a2f53e3721d991
+      - 11525ce27704b12e
       Ot-Tracer-Traceid:
-      - '09fb1fa00f626bf8'
+      - 2d7753dd4bc5442d
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '5'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669209'
+      - '1561749730'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -56,5 +56,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:00:05 GMT
+  recorded_at: Fri, 28 Jun 2019 19:22:09 GMT
 recorded_with: VCR 4.0.0

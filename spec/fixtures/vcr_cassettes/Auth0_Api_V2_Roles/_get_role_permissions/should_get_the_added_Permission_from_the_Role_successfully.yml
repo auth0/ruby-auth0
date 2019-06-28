@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_k9l2exKSesXLFyXm/permissions
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_rSi7DH8MezaQ229K/permissions
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:01:54 GMT
+      - Fri, 28 Jun 2019 19:10:39 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 42d3e694494f69f5
+      - 5073dec72ed81075
       Ot-Tracer-Traceid:
-      - 6147c69e087df2f5
+      - 74571f82431ad586
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '3'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669319'
+      - '1561749041'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -61,5 +61,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA4WMSwqAMBBD7zJrewGvIiJaIwxoWzKtIOLd/WzcCG4CyeOl2SWBi5ppDF3oF0gtLMOWYdk98XKpZIR5asp3q+UaCIuFHp2BK/h90Sd1U6RjnGEfko4IWScFf9SjPQGSemtTsQAAAA==
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:01:54 GMT
+  recorded_at: Fri, 28 Jun 2019 19:10:39 GMT
 recorded_with: VCR 4.0.0

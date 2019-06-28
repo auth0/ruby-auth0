@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_k9l2exKSesXLFyXm/permissions
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_rSi7DH8MezaQ229K/permissions
     body:
       encoding: UTF-8
       string: permissions[][permission_name]=rubytest-test-permission&permissions[][resource_server_identifier]=rubytest-test-api-for-roles
@@ -29,23 +29,23 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Thu, 27 Jun 2019 21:01:54 GMT
+      - Fri, 28 Jun 2019 19:10:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
       Ot-Tracer-Spanid:
-      - 0d5842764c345046
+      - 715f5e8a2e96400a
       Ot-Tracer-Traceid:
-      - 66f8e6911e09aa85
+      - 70818b535cddc217
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '3'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561669319'
+      - '1561749042'
       Vary:
       - origin,accept-encoding
       Cache-Control:
@@ -58,5 +58,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 21:01:54 GMT
+  recorded_at: Fri, 28 Jun 2019 19:10:40 GMT
 recorded_with: VCR 4.0.0
