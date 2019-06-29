@@ -13,6 +13,14 @@ describe Auth0::Api::V2::Jobs do
     end
     it { expect { @instance.get_job('') }.to raise_error('Must specify a job id') }
   end
+  context '.get_job_error_details' do
+    it { expect(@instance).to respond_to(:get_job_errors) }
+    it 'expect client to send get to /api/v2/jobs/3/errors' do
+      expect(@instance).to receive(:get).with('/api/v2/jobs/3/errors')
+      expect { @instance.get_job_errors(3) }.not_to raise_error
+    end
+    it { expect { @instance.get_job_errors('') }.to raise_error('Must specify a job id') }
+  end
   context '.import_users' do
     it { expect(@instance).to respond_to(:import_users) }
     it 'expect client to send post to /api/v2/jobs/users-imports' do
