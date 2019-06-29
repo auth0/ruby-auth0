@@ -15,6 +15,18 @@ module Auth0
           get(path)
         end
 
+        # Retrieve error details based on the id of the job. Useful to check its status.
+        # @see https://auth0.com/docs/api/management/v2#!/Jobs/get_errors
+        # @param job_id [string] The ID of the job.
+        #
+        # @return [json] Returns the job error details.
+        def get_job_errors(job_id)
+          raise Auth0::InvalidParameter, 'Must specify a job id' if job_id.to_s.empty?
+
+          path = "#{jobs_path}/#{job_id}/errors"
+          get(path)
+        end
+
         # Imports users to a connection from a file using a long running job.
         # Documentation for the file format: https://docs.auth0.com/bulk-import
         # @see https://auth0.com/docs/api/v2#!/Jobs/post_users_imports
