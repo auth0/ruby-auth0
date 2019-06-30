@@ -17,9 +17,33 @@ describe Auth0::Api::V2::Jobs do
     it { expect(@instance).to respond_to(:import_users) }
     it 'expect client to send post to /api/v2/jobs/users-imports' do
       expect(@instance).to receive(:post_file).with(
-        '/api/v2/jobs/users-imports', users: 'file', connection_id: 'connnection_id'
+        '/api/v2/jobs/users-imports',
+        users: 'file',
+        connection_id: 'connnection_id',
+        upsert: false,
+        external_id: nil,
+        send_completion_email: true
       )
       expect { @instance.import_users('file', 'connnection_id') }.not_to raise_error
+    end
+    it 'expect client to send post to /api/v2/jobs/users-imports with options' do
+      expect(@instance).to receive(:post_file).with(
+        '/api/v2/jobs/users-imports',
+        users: 'file',
+        connection_id: 'connnection_id',
+        upsert: true,
+        external_id: 'external_1',
+        send_completion_email: false
+      )
+      expect do
+        @instance.import_users(
+          'file',
+          'connnection_id',
+          upsert: true,
+          external_id: 'external_1',
+          send_completion_email: false
+        )
+      end.not_to raise_error
     end
     it { expect { @instance.import_users('', 'connnection_id') }.to raise_error('Must specify a valid file') }
     it { expect { @instance.import_users('users', '') }.to raise_error('Must specify a connection_id') }
