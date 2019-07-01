@@ -44,19 +44,18 @@ describe Auth0::Client do
     api_version: 2, token: 'token'
   }, Auth0::InvalidApiNamespace
 
-  let(:token) { ENV['MASTER_JWT'] }
-  let(:v2_credentials) { { domain: ENV['DOMAIN'] } }
+  let(:v2_credentials) { { domain: 'test.auth0.com' } }
 
   shared_examples 'valid credentials' do
     it { expect { Auth0Client.new(credentials) }.to_not raise_error }
   end
 
   it_should_behave_like 'valid credentials' do
-    let(:credentials) { v2_credentials.merge(token: token) }
+    let(:credentials) { v2_credentials.merge(token: 'TEST_API_TOKEN') }
   end
 
   it_should_behave_like 'valid credentials' do
-    let(:credentials) { v2_credentials.merge(access_token: ENV['MASTER_JWT']) }
+    let(:credentials) { v2_credentials.merge(access_token: 'TEST_API_TOKEN') }
   end
 
   context 'client headers' do

@@ -21,19 +21,10 @@ module Credentials
 
   def v2_creds
     {
-      client_id: ENV['CLIENT_ID'],
-      client_secret: ENV['CLIENT_SECRET'],
-      token: ENV['MASTER_JWT'],
-      domain: ENV['DOMAIN']
-    }
-  end
-
-  def v2_creds_with_secret
-    {
-      client_id: ENV['CLIENT_ID'],
-      client_secret: ENV['CLIENT_SECRET'],
-      token: ENV['MASTER_JWT'],
-      domain: ENV['DOMAIN']
+      domain: ENV.fetch( 'DOMAIN', 'DOMAIN' ),
+      client_id: ENV.fetch( 'CLIENT_ID', 'CLIENT_ID' ),
+      client_secret: ENV.fetch( 'CLIENT_SECRET', 'TEST_CLIENT_SECRET' ),
+      token: ENV.fetch( 'MASTER_JWT', 'TEST_MASTER_JWT' )
     }
   end
 end
