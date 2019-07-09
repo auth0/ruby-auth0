@@ -30,18 +30,13 @@ module Auth0
                    end
           case result.code
           when 200...226 then safe_parse_json(result.body)
-          when 400       then raise Auth0::BadRequest, result.to_s
-          when 401       then raise Auth0::Unauthorized, result.body
-          when 403       then raise Auth0::AccessDenied, result.body
-          when 404       then raise Auth0::NotFound, result.body
-          when 429       then raise Auth0::RateLimitEncountered.new(
-                                result.body,
-                                result.headers['X-RateLimit-Limit'],
-                                result.headers['X-RateLimit-Remaining'],
-                                result.headers['X-RateLimit-Reset']
-                              )
-          when 500       then raise Auth0::ServerError, result.body
-          else                raise Auth0::Unsupported, result.body
+          when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
+          when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
+          when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
+          when 404       then raise Auth0::NotFound.new(result.body, code: result.code, headers: result.headers)
+          when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.code, headers: result.headers)
+          when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
+          else                raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
           end
         end
       end
