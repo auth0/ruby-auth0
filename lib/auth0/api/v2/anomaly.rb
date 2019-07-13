@@ -3,7 +3,7 @@ module Auth0
     module V2
       # Methods to use the anomaly endpoints
       module Anomaly
-        # Use this route to determine if a given ip is currently blocked
+        # Use this route to determine if a given IP is currently blocked
         # by the failed login to multiple user accounts trigger.
         # @see https://auth0.com/docs/api/management/v2#!/Anomaly/get_ips_by_id
         # @param ip [string] The IP to check.
