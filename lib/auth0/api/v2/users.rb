@@ -56,8 +56,7 @@ module Auth0
         end
 
         # Delete all users - USE WITH CAUTION
-        # @see https://auth0.com/docs/api/v2#!/Users/delete_users
-        # TODO: Deprecate, no longer provided
+        # @deprecated - 4.8.0, endpoint has been removed
         def delete_users
           delete(users_path)
         end
