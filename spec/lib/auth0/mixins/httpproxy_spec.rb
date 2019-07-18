@@ -106,7 +106,15 @@ describe Auth0::Mixins::HTTPProxy do
           .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error { |error|
           expect(error).to be_a(Auth0::RateLimitEncountered)
-          expect(error).to have_attributes(reset: Time.at(1560564149))
+          expect(error).to have_attributes(
+            error_data: {
+              headers: headers,
+              code: 429
+            },
+            headers: headers,
+            http_code: 429,
+            reset: Time.at(1560564149)
+          )
         }
       end      
 
@@ -186,7 +194,15 @@ describe Auth0::Mixins::HTTPProxy do
           .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error { |error|
           expect(error).to be_a(Auth0::RateLimitEncountered)
-          expect(error).to have_attributes(reset: Time.at(1560564149))
+          expect(error).to have_attributes(
+            error_data: {
+              headers: headers,
+              code: 429
+            },
+            headers: headers,
+            http_code: 429,
+            reset: Time.at(1560564149)
+          )
         }
       end
 
