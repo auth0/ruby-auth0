@@ -40,7 +40,7 @@ describe Auth0::Api::V2::Guardian do
     end
   end
 
-  context '.delete_user' do
+  context '.delete_guardian_enrollment' do
     it 'is expected to respond to a delete_guardian_enrollment method' do
       expect(@instance).to respond_to(:delete_guardian_enrollment)
     end
