@@ -14,7 +14,7 @@ describe Auth0::Api::V2::Roles do
     @test_role_name = "#{entity_suffix}-test-role"
 
     @test_permission_name = "#{entity_suffix}-test-permission"
-    @test_permission = Permission.new(@test_permission_name, @test_api_name)
+    @test_permission = ::Auth0::Permission.new(@test_permission_name , @test_api_name)
 
     VCR.use_cassette('Auth0_Api_V2_Roles/create_test_user') do
       @test_user ||= client.create_user(

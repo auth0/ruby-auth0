@@ -451,8 +451,8 @@ describe Auth0::Api::V2::Users do
         @instance.remove_user_permissions(
           'USER_ID',
           [
-            Permission.new('permission-name-1', 'server-id-1'),
-            Permission.new('permission-name-2', 'server-id-2')
+            Auth0::Permission.new('permission-name-1', 'server-id-1'),
+            Auth0::Permission.new('permission-name-2', 'server-id-2')
           ]
         )
       end.not_to raise_error
@@ -496,8 +496,8 @@ describe Auth0::Api::V2::Users do
         @instance.add_user_permissions(
           'USER_ID',
           [
-            Permission.new('permission-name-1', 'server-id-1'),
-            Permission.new('permission-name-2', 'server-id-2')
+            Auth0::Permission.new('permission-name-1', 'server-id-1'),
+            Auth0::Permission.new('permission-name-2', 'server-id-2')
           ]
         )
       end.not_to raise_error
