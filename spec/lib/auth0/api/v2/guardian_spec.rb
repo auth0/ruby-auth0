@@ -57,4 +57,98 @@ describe Auth0::Api::V2::Guardian do
       )
     end
   end
+
+  context '.guardian_sms_templates' do
+    it 'is expected to respond to a guardian_sms_templates method' do
+      expect(@instance).to respond_to(:guardian_sms_templates)
+    end
+
+    it 'is expected to call get request to /api/v2/guardian/factors/sms/templates' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/guardian/factors/sms/templates'
+      )
+      expect { @instance.guardian_sms_templates }.not_to raise_error
+    end
+  end
+
+  context '.guardian_update_enrollment_verification_templates' do
+    it 'is expected to respond to a guardian_update_enrollment_verification_templates method' do
+      expect(@instance).to respond_to(:guardian_update_enrollment_verification_templates)
+    end
+
+    it 'is expected to patch /api/v2/guardian/factors/sms/templates' do
+      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/sms/templates', 'BODY')
+      @instance.guardian_update_enrollment_verification_templates('BODY')
+    end
+  end
+
+  context '.guardian_sns_provider_config' do
+    it 'is expected to respond to a guardian_sns_provider_config method' do
+      expect(@instance).to respond_to(:guardian_sns_provider_config)
+    end
+
+    it 'is expected to call get request to /api/v2/guardian/factors/push-notification/providers/sns' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/guardian/factors/push-notification/providers/sns'
+      )
+      expect { @instance.guardian_sns_provider_config }.not_to raise_error
+    end
+  end
+
+  context '.guardian_update_sns_provider_config' do
+    it 'is expected to respond to a guardian_update_sns_provider_config method' do
+      expect(@instance).to respond_to(:guardian_update_sns_provider_config)
+    end
+
+    it 'is expected to patch /api/v2/guardian/factors/push-notification/providers/sns' do
+      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/push-notification/providers/sns', 'BODY')
+      @instance.guardian_update_sns_provider_config('BODY')
+    end
+  end
+
+  context '.guardian_twillo_provider_config' do
+    it 'is expected to respond to a guardian_twillo_provider_config method' do
+      expect(@instance).to respond_to(:guardian_twillo_provider_config)
+    end
+
+    it 'is expected to call get request to /api/v2/guardian/factors/sms/providers/twilio' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/guardian/factors/sms/providers/twilio'
+      )
+      expect { @instance.guardian_twillo_provider_config }.not_to raise_error
+    end
+  end
+
+  context '.guardian_update_twillo_provider_config' do
+    it 'is expected to respond to a guardian_update_twillo_provider_config method' do
+      expect(@instance).to respond_to(:guardian_update_twillo_provider_config)
+    end
+
+    it 'is expected to patch /api/v2/guardian/factors/sms/providers/twilio' do
+      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/sms/providers/twilio', 'BODY')
+      @instance.guardian_update_twillo_provider_config('BODY')
+    end
+  end
+
+  context '.guardian_create_enrollment_ticket' do
+    it 'is expected to respond to a guardian_create_enrollment_ticket method' do
+      expect(@instance).to respond_to(:guardian_create_enrollment_ticket)
+    end
+
+    it 'is expected to post /api/v2/guardian/enrollments/ticket' do
+      expect(@instance).to receive(:post).with('/api/v2/guardian/enrollments/ticket', 'BODY')
+      @instance.guardian_create_enrollment_ticket('BODY')
+    end
+  end
+
+  context '.guardian_update_factor' do
+    it 'is expected to respond to a guardian_update_factor method' do
+      expect(@instance).to respond_to(:guardian_update_factor)
+    end
+
+    it 'is expected to patch /api/v2/guardian/factors/NAME' do
+      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/NAME', 'BODY')
+      @instance.guardian_update_factor('NAME', 'BODY')
+    end
+  end
 end
