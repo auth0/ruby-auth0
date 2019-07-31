@@ -50,7 +50,11 @@ module Auth0
   # Invalid Auth0 API namespace
   class InvalidApiNamespace < Auth0::Exception; end
   # Auth0 API rate-limiting encountered
-  class RateLimitEncountered < Auth0::HTTPError
+  # TODO: When making API-breaking changes, make this a subclass
+  # of Auth0::HTTPError directly rather than Auth0::Unsupported.
+  # It's currently under Unsupported to avoid breaking compatibility
+  # with prior gem versions that treated 429 errors as unknown errors.
+  class RateLimitEncountered < Auth0::Unsupported
     def reset
       Time.at(headers['X-RateLimit-Reset']).utc
     end
