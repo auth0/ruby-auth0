@@ -1,5 +1,32 @@
 # Change Log
 
+## [v4.8.0](https://github.com/auth0/ruby-auth0/tree/v4.8.0) (2019-08-01)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.7.0...v4.8.0)
+
+**Closed issues**
+- Not enough information in exception when Rate Limiting is encountered [\#158](https://github.com/auth0/ruby-auth0/issues/158)
+
+**Added**
+- Add Management API Anomaly endpoints [\#179](https://github.com/auth0/ruby-auth0/pull/179) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
+- Add parameters for users imports [\#177](https://github.com/auth0/ruby-auth0/pull/177) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
+- Add failed job error details endpoint [\#176](https://github.com/auth0/ruby-auth0/pull/176) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
+- Add Management API Roles endpoints [\#172](https://github.com/auth0/ruby-auth0/pull/172) ([joshcanhelp](https://github.com/joshcanhelp))
+- Expose rate limiting information [\#170](https://github.com/auth0/ruby-auth0/pull/170) ([philomory](https://github.com/philomory))
+- Add missing User Management API endpoints [\#169](https://github.com/auth0/ruby-auth0/pull/169) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add Gemfile.lock file [\#165](https://github.com/auth0/ruby-auth0/pull/165) ([lbalmaceda](https://github.com/lbalmaceda))
+
+**Changed**
+- Add Roles and Users endpoints integration tests [\#174](https://github.com/auth0/ruby-auth0/pull/174) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Deprecated**
+- Deprecate Auth0::Api::V2::Users.delete_users [\#181](https://github.com/auth0/ruby-auth0/pull/181) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Removed**
+- Gemspec: Drop EOL'd property rubyforge_project [\#180](https://github.com/auth0/ruby-auth0/pull/180) ([olleolleolle](https://github.com/olleolleolle))
+
+**Security**
+- Fix Yard dependency vulnerability [\#184](https://github.com/auth0/ruby-auth0/pull/184) ([joshcanhelp](https://github.com/joshcanhelp))
+
 ## [v4.7.0](https://github.com/auth0/ruby-auth0/tree/v4.7.0) (2019-03-19)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.6.0...v4.7.0)
 
