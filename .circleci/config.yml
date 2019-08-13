@@ -15,6 +15,7 @@ jobs:
           paths:
             - Gemfile
             - Gemfile.lock
+            - .snyk
       - save_cache:
           key: gems-v2--{{ checksum "Gemfile.lock" }}
           paths:

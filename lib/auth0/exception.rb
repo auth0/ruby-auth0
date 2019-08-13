@@ -2,19 +2,35 @@ module Auth0
   # Default exception in namespace of Auth0
   # if you want to catch all exceptions, then you should use this one.
   # Network exceptions are not included
-  class Exception < StandardError; end
+  class Exception < StandardError
+    attr_reader :error_data
+    def initialize(message,error_data={})
+      super(message)
+      @error_data = error_data
+    end
+  end
+  # Parent for all exceptions that arise out of HTTP error responses.
+  class HTTPError < Auth0::Exception
+    def headers
+      error_data[:headers]
+    end
+
+    def http_code
+      error_data[:code]
+    end
+  end
   # exception for unauthorized requests, if you see it,
   # probably Bearer Token is not set correctly
-  class Unauthorized < Auth0::Exception; end
+  class Unauthorized < Auth0::HTTPError; end
   # exception for not found resource, you query for an
   # unexistent resource, or wrong path
-  class NotFound < Auth0::Exception; end
+  class NotFound < Auth0::HTTPError; end
   # exception for unknown error
-  class Unsupported < Auth0::Exception; end
+  class Unsupported < Auth0::HTTPError; end
   # exception for server error
-  class ServerError < Auth0::Exception; end
+  class ServerError < Auth0::HTTPError; end
   # exception for incorrect request, you've sent wrong params
-  class BadRequest < Auth0::Exception; end
+  class BadRequest < Auth0::HTTPError; end
   # exception for timeouts
   class RequestTimeout < Auth0::Exception; end
   # exception for unset user_id, this might cause removal of
@@ -25,7 +41,7 @@ module Auth0
   # exception for an unset parameter
   class MissingParameter < Auth0::Exception; end
   # Api v2 access denied
-  class AccessDenied < Auth0::Exception; end
+  class AccessDenied < Auth0::HTTPError; end
   # Invalid parameter passed, e.g. empty where ID is required
   class InvalidParameter < Auth0::Exception; end
   # Invalid Auth0 credentials either client_id/secret for API v1
@@ -33,4 +49,14 @@ module Auth0
   class InvalidCredentials < Auth0::Exception; end
   # Invalid Auth0 API namespace
   class InvalidApiNamespace < Auth0::Exception; end
+  # Auth0 API rate-limiting encountered
+  # TODO: When making API-breaking changes, make this a subclass
+  # of Auth0::HTTPError directly rather than Auth0::Unsupported.
+  # It's currently under Unsupported to avoid breaking compatibility
+  # with prior gem versions that treated 429 errors as unknown errors.
+  class RateLimitEncountered < Auth0::Unsupported
+    def reset
+      Time.at(headers['X-RateLimit-Reset']).utc
+    end
+  end
 end
