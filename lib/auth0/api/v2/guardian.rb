@@ -11,8 +11,7 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Guardian/get_factors
         # @return [json] Returns the list of all Guardian factors.
         def guardian_factors
-          path = "#{guardian_path}/factors"
-          get(path)
+          get(guardian_factors_path)
         end
         alias get_guardian_factors guardian_factors
 
@@ -53,10 +52,10 @@ module Auth0
         #
         # @return [json] Returns updated SMS enrollment and verification templates.
         def guardian_update_enrollment_verification_templates(body)
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
 
           path = "#{guardian_factors_path}/sms/templates"
-          patch(path, body)
+          put(path, body)
         end
 
         # Retrieves provider configuration for AWS SNS.
@@ -74,10 +73,10 @@ module Auth0
         #
         # @return [json] Returns updated provider configuration for AWS SNS.
         def guardian_update_sns_provider_config(body)
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
 
           path = "#{guardian_factors_path}/push-notification/providers/sns"
-          patch(path, body)
+          put(path, body)
         end
 
         # Retrieves provider configuration for Twilio.
@@ -95,10 +94,10 @@ module Auth0
         #
         # @return [json] Returns updated provider configuration for Twilio.
         def guardian_update_twillo_provider_config(body)
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
 
           path = "#{guardian_factors_path}/sms/providers/twilio"
-          patch(path, body)
+          put(path, body)
         end
 
         # Creates a Guardian enrollment ticket.
@@ -106,7 +105,7 @@ module Auth0
         # @param body [hash] User details to create enrollment ticket for.
         # @return [json] Returns details of created enrollment ticket.
         def guardian_create_enrollment_ticket(body)
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
 
           path = "#{guardian_enrollments_path}/ticket"
           post(path, body)
@@ -119,10 +118,10 @@ module Auth0
         # @return [json] Returns details of updated Guardian factor.
         def guardian_update_factor(name, body)
           raise Auth0::MissingParameter, 'Must supply a valid name' if name.to_s.empty?
-          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty? || body.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid body' if body.to_s.empty?
 
           path = "#{guardian_factors_path}/#{name}"
-          patch(path, body)
+          put(path, body)
         end
 
         private
