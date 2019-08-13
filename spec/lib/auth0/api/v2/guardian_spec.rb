@@ -77,7 +77,7 @@ describe Auth0::Api::V2::Guardian do
     end
 
     it 'is expected to patch /api/v2/guardian/factors/sms/templates' do
-      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/sms/templates', 'BODY')
+      expect(@instance).to receive(:put).with('/api/v2/guardian/factors/sms/templates', 'BODY')
       @instance.guardian_update_enrollment_verification_templates('BODY')
     end
   end
@@ -101,7 +101,7 @@ describe Auth0::Api::V2::Guardian do
     end
 
     it 'is expected to patch /api/v2/guardian/factors/push-notification/providers/sns' do
-      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/push-notification/providers/sns', 'BODY')
+      expect(@instance).to receive(:put).with('/api/v2/guardian/factors/push-notification/providers/sns', 'BODY')
       @instance.guardian_update_sns_provider_config('BODY')
     end
   end
@@ -125,7 +125,7 @@ describe Auth0::Api::V2::Guardian do
     end
 
     it 'is expected to patch /api/v2/guardian/factors/sms/providers/twilio' do
-      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/sms/providers/twilio', 'BODY')
+      expect(@instance).to receive(:put).with('/api/v2/guardian/factors/sms/providers/twilio', 'BODY')
       @instance.guardian_update_twillo_provider_config('BODY')
     end
   end
@@ -147,7 +147,7 @@ describe Auth0::Api::V2::Guardian do
     end
 
     it 'is expected to patch /api/v2/guardian/factors/NAME' do
-      expect(@instance).to receive(:patch).with('/api/v2/guardian/factors/NAME', 'BODY')
+      expect(@instance).to receive(:put).with('/api/v2/guardian/factors/NAME', 'BODY')
       @instance.guardian_update_factor('NAME', 'BODY')
     end
   end
