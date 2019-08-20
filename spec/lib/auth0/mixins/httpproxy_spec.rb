@@ -67,7 +67,7 @@ describe Auth0::Mixins::HTTPProxy do
       end
 
       it "should raise Auth0::RequestTimeout on send http #{http_method} method
-        to path defined through HTTP when 408 status received" do
+        to path defined through HTTP when RestClient::RequestTimeout received" do
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
                                                              url: '/test',
                                                              timeout: nil,
@@ -242,7 +242,7 @@ describe Auth0::Mixins::HTTPProxy do
       end
 
       it "should raise Auth0::RequestTimeout on send http #{http_method} method
-        to path defined through HTTP when 408 status received" do
+        to path defined through HTTP when RestClient::RequestTimeout received" do
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
                                                              url: '/test',
                                                              timeout: nil,
