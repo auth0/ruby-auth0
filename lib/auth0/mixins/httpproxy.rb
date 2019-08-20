@@ -68,7 +68,7 @@ module Auth0
       rescue RestClient::Exception => e
         case e
         when RestClient::RequestTimeout
-          raise Auth0::RequestTimeout
+          raise Auth0::RequestTimeout.new(e.message)
         else
           return e.response
         end

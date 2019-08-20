@@ -66,8 +66,19 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unsupported)
       end
 
+      it "should raise Auth0::RequestTimeout on send http #{http_method} method
+        to path defined through HTTP when 408 status received" do
+        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                             url: '/test',
+                                                             timeout: nil,
+                                                             headers: { params: {} },
+                                                             payload: nil)
+          .and_raise(RestClient::Exceptions::OpenTimeout.new)
+        expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::RequestTimeout)
+      end
+
       it "should raise Auth0::BadRequest on send http #{http_method} method
-        to path defined through HTTP when 400 or other unknown status received" do
+        to path defined through HTTP when 400 status received" do
         @exception.response = StubResponse.new({}, false, 400)
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
                                                              url: '/test',
@@ -230,8 +241,19 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unsupported)
       end
 
+      it "should raise Auth0::RequestTimeout on send http #{http_method} method
+        to path defined through HTTP when 408 status received" do
+        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                             url: '/test',
+                                                             timeout: nil,
+                                                             headers: nil,
+                                                             payload: '{}')
+          .and_raise(RestClient::Exceptions::OpenTimeout.new)
+        expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::RequestTimeout)
+      end
+
       it "should raise Auth0::BadRequest on send http #{http_method} method
-        to path defined through HTTP when 400 or other unknown status received" do
+        to path defined through HTTP when 400 status received" do
         @exception.response = StubResponse.new({}, false, 400)
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
                                                              url: '/test',
