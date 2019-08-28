@@ -72,7 +72,16 @@ class AllUsersController < ApplicationController
   def auth0_client
     @auth0_client ||= Auth0Client.new(
       client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
-      token: ENV['AUTH0_RUBY_API_TOKEN'],
+      client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
+      # If you pass in a client_secret value, the SDK will automatically try to get a 
+      # Management API token for this application. Make sure your Application can make a 
+      # Client Credentials grant (Application settings in Auth0 > Advanced > Grant Types
+      # tab) and that the Application is authorized for the Management API:
+      # https://auth0.com/docs/api-auth/config/using-the-auth0-dashboard
+      #
+      # Otherwise, you can pass in a Management API token directly for testing or temporary
+      # access using the key below. 
+      # token: ENV['AUTH0_RUBY_API_TOKEN'],
       domain: ENV['AUTH0_RUBY_DOMAIN'],
       api_version: 2,
       timeout: 15 # optional, defaults to 10
