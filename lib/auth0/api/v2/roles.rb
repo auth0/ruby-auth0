@@ -1,5 +1,3 @@
-require 'auth0/mixins/validation'
-
 module Auth0
   module Api
     module V2
