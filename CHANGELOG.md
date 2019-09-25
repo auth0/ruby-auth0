@@ -1,5 +1,24 @@
 # Change Log
 
+## [v4.9.0](https://github.com/auth0/ruby-auth0/tree/v4.9.0) (2019-09-25)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.8.0...v4.9.0)
+
+
+**Closed issues:**
+
+- Dot in role name makes description disappear [\#194](https://github.com/auth0/ruby-auth0/issues/194)
+- Missing require Permission [\#192](https://github.com/auth0/ruby-auth0/issues/192)
+- Token required even when not necessary [\#190](https://github.com/auth0/ruby-auth0/issues/190)
+
+**Fixed:**
+
+- Fix request timeout [\#188](https://github.com/auth0/ruby-auth0/pull/188) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
+- Fix missing Permissions mixin [\#196](https://github.com/auth0/ruby-auth0/pull/196) ([joshcanhelp](https://github.com/joshcanhelp))
+
+**Added:**
+
+- Add Management API Guardian enrollments endpoint [\#182](https://github.com/auth0/ruby-auth0/pull/182) ([tomgi](https://github.com/tomgi))
+
 ## [v4.8.0](https://github.com/auth0/ruby-auth0/tree/v4.8.0) (2019-08-01)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.7.0...v4.8.0)
 
