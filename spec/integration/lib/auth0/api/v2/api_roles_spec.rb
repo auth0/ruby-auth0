@@ -10,11 +10,11 @@ describe Auth0::Api::V2::Roles do
     @test_user_email = "#{entity_suffix}-#{@test_user_name}@auth0.com"
 
     @test_api_name = "#{entity_suffix}-test-api-for-roles"
-    @test_api_scope = 'test:scope'
 
     @test_role_name = "#{entity_suffix}-test-role"
 
-    @test_permission = Permission.new("#{entity_suffix}-test-permission", @test_api_name)
+    @test_permission_name = "#{entity_suffix}-test-permission"
+    @test_permission = Permission.new(@test_permission_name, @test_api_name)
 
     VCR.use_cassette('Auth0_Api_V2_Roles/create_test_user') do
       @test_user ||= client.create_user(
@@ -29,7 +29,7 @@ describe Auth0::Api::V2::Roles do
       @test_api ||= client.create_resource_server(
         @test_api_name,
         name: @test_api_name,
-        scopes: [{ value: @test_api_scope }]
+        scopes: [{ value: @test_permission_name }]
       )
     end
 

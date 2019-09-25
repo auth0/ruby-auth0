@@ -16,7 +16,7 @@ http_interactions:
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjguMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
@@ -29,29 +29,31 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:10:27 GMT
+      - Wed, 25 Sep 2019 16:28:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - nginx
       Ot-Tracer-Spanid:
-      - 7d7b46586ea44d7a
+      - 4965d1a63d1cd7b6
       Ot-Tracer-Traceid:
-      - 50bb4f735f294947
+      - 7b1239cb6df00d3e
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '7'
+      - '9'
       X-Ratelimit-Reset:
-      - '1561749029'
+      - '1569428933'
       Vary:
       - origin,accept-encoding
       Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - no-cache
       Content-Encoding:
       - gzip
       Strict-Transport-Security:
@@ -61,7 +63,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA6tWykxRslIqys+JLwrONHfxsPBNrUoMNDKy9FbSUcpLzE0FyZYmVZakFpfoggmg2lSgXEpqcXJRZkFJZn4eUEkIUEYBJKOALF4LAIwSdAlfAAAA
+        H4sIAAAAAAAAA6tWykxRslIqys+J9001dy73qogsKo0KSis0L1TSUcpLzE0FyZYmVZakFpfoggmg2lSgXEpqcXJRZkFJZn4eUEkIUEYBJKOALF4LADvySGBfAAAA
     http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:10:27 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Wed, 25 Sep 2019 16:28:51 GMT
+recorded_with: VCR 5.0.0

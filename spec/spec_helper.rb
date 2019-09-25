@@ -32,7 +32,8 @@ end
 $LOAD_PATH.unshift File.expand_path('..', __FILE__)
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-Dir['./lib/**/*.rb'].each { |f| require f }
+Dir['./lib/*.rb'].each { |f| require f }
+Dir['./lib/api/**/*.rb'].each { |f| require f }
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 Dir['./spec/support/*.rb'].each { |f| require f }
 

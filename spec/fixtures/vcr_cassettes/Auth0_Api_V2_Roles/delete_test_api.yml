@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers/5d166622561c3606b3c2982a
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers/5d8b95c2f460ef0753fe0329
     body:
       encoding: US-ASCII
       string: ''
@@ -16,7 +16,7 @@ http_interactions:
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjguMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
       Authorization:
       - Bearer API_TOKEN
       Host:
@@ -27,27 +27,29 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:10:42 GMT
+      - Wed, 25 Sep 2019 16:28:55 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
+      Server:
+      - nginx
       Ot-Tracer-Spanid:
-      - 6f62334427a74031
+      - 352f549921eeb010
       Ot-Tracer-Traceid:
-      - 42c809b470ac018d
+      - 2bb526c61a4a0513
       Ot-Tracer-Sampled:
       - 'true'
       X-Ratelimit-Limit:
       - '10'
       X-Ratelimit-Remaining:
-      - '7'
+      - '2'
       X-Ratelimit-Reset:
-      - '1561749044'
+      - '1569428940'
       Vary:
       - origin,accept-encoding
       Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - no-cache
       Strict-Transport-Security:
       - max-age=15724800
       X-Robots-Tag:
@@ -56,5 +58,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:10:42 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Wed, 25 Sep 2019 16:28:55 GMT
+recorded_with: VCR 5.0.0
