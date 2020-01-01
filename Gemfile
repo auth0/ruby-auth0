@@ -7,6 +7,7 @@ group :development do
   gem 'terminal-notifier-guard', require: false unless ENV['CIRCLECI']
   gem 'coveralls', require: false
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'yard', require: false
 end
 
