@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-nav', '~> 0.2.4'
   s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
   s.add_development_dependency 'rack-test', '~> 0.6'
-  s.add_development_dependency 'rack', '~> 1.6.4'
+  s.add_development_dependency 'rack', '~> 2.1.2'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 1.4'
   s.add_development_dependency 'yard', '~> 0.9.12'
