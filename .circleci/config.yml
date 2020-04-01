@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   run-tests:
     docker:
-      - image: circleci/ruby:2.4.6-jessie
+      - image: circleci/ruby:2.5.7-buster
     steps:
       - checkout
       - restore_cache:
