@@ -21,6 +21,19 @@ describe Auth0::Api::V2::ClientGrants do
       expect { @instance.client_grants }.not_to raise_error
     end
 
+    it 'is expected to send get /api/v2/client-grants/ with client_id and audience' do
+      audience = "https://samples.auth0.com/api/v2/"
+
+      expect(@instance).to receive(:get).with(
+        '/api/v2/client-grants',
+        client_id: '1',
+        audience: audience,
+        page: nil,
+        per_page: nil
+      )
+      expect { @instance.client_grants(client_id: '1', audience: audience) }.not_to raise_error
+    end
+
     it 'is expected to send get /api/v2/client-grants/ with pagination' do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants',
