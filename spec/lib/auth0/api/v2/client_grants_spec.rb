@@ -13,6 +13,7 @@ describe Auth0::Api::V2::ClientGrants do
     it 'is expected to get /api/v2/client-grants/' do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants',
+        client_id: nil,
         page: nil,
         per_page: nil
       )
@@ -22,6 +23,7 @@ describe Auth0::Api::V2::ClientGrants do
     it 'is expected to send get /api/v2/client-grants/ with pagination' do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants',
+        client_id: nil,
         page: 1,
         per_page: 2
       )
