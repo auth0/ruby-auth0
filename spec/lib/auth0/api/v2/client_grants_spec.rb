@@ -14,6 +14,7 @@ describe Auth0::Api::V2::ClientGrants do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants',
         client_id: nil,
+        audience: nil,
         page: nil,
         per_page: nil
       )
@@ -24,6 +25,7 @@ describe Auth0::Api::V2::ClientGrants do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants',
         client_id: nil,
+        audience: nil,
         page: 1,
         per_page: 2
       )
