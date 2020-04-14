@@ -21,7 +21,7 @@ module Auth0
                    elsif method == :delete
                      call(:delete, url(safe_path), timeout, add_headers({params: body}))
                    elsif method == :delete_with_body
-                     call(:delete, url(safe_path), timeout, headers, body)
+                     call(:delete, url(safe_path), timeout, headers, body.to_json)
                    elsif method == :post_file
                      body.merge!(multipart: true)
                      call(:post, url(safe_path), timeout, headers, body)
