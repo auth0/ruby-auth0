@@ -20,7 +20,8 @@ describe Auth0::Api::V2::Roles do
         '/api/v2/roles',
         per_page: nil,
         page: nil,
-        include_totals: nil
+        include_totals: nil,
+        name_filter: nil
       )
       expect { @instance.get_roles }.not_to raise_error
     end
@@ -30,10 +31,11 @@ describe Auth0::Api::V2::Roles do
         '/api/v2/roles',
         per_page: 10,
         page: 3,
-        include_totals: true
+        include_totals: true,
+        name_filter: 'test'
       )
       expect do
-        @instance.get_roles(per_page: 10, page: 3, include_totals: true)
+        @instance.get_roles(per_page: 10, page: 3, include_totals: true, name_filter: 'test')
       end.not_to raise_error
     end
   end
