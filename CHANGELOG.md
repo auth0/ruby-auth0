@@ -1,5 +1,21 @@
 # Change Log
 
+## [v4.10.0](https://github.com/auth0/ruby-auth0/tree/v4.10.0) (2020-04-23)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.9.0...v4.10.0)
+
+**Added**
+
+- Added support for name\_filter parameter \[SDK-1607\] [\#214](https://github.com/auth0/ruby-auth0/pull/214) ([Widcket](https://github.com/Widcket))
+- Pass client\_id, audience at Auth0::Api::V2::ClientGrants\#client\_grants [\#209](https://github.com/auth0/ruby-auth0/pull/209) ([hkdnet](https://github.com/hkdnet))
+- Add rubocop-rails [\#200](https://github.com/auth0/ruby-auth0/pull/200) ([tknzk](https://github.com/tknzk))
+
+**Security**
+
+- Update rack requirement from ~\> 1.6.4 to ~\> 2.1.2 [\#206](https://github.com/auth0/ruby-auth0/pull/206) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update rake requirement from ~\> 10.4 to ~\> 13.0 [\#207](https://github.com/auth0/ruby-auth0/pull/207) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependencies and CI script [\#210](https://github.com/auth0/ruby-auth0/pull/210) ([lbalmaceda](https://github.com/lbalmaceda))
+
 ## [v4.9.0](https://github.com/auth0/ruby-auth0/tree/v4.9.0) (2019-09-25)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.8.0...v4.9.0)
 
