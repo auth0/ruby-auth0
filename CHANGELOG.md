@@ -1,5 +1,29 @@
 # Change Log
 
+## [v4.10.0](https://github.com/auth0/ruby-auth0/tree/v4.10.0) (2020-04-23)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.9.0...v4.10.0)
+
+**Implemented enhancements:**
+
+- Gem prevents from replacing {app,user}\_metadata [\#191](https://github.com/auth0/ruby-auth0/issues/191)
+
+**Closed issues:**
+
+- Every 24 hours the management API starts returning unauthorized responses. [\#208](https://github.com/auth0/ruby-auth0/issues/208)
+- Update to include Prompts / should not be closed [\#204](https://github.com/auth0/ruby-auth0/issues/204)
+- Should not be closed [\#203](https://github.com/auth0/ruby-auth0/issues/203)
+- Unable to set audience [\#189](https://github.com/auth0/ruby-auth0/issues/189)
+
+**Merged pull requests:**
+
+- Update rack requirement from ~\> 1.6.4 to ~\> 2.1.2 [\#206](https://github.com/auth0/ruby-auth0/pull/206) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Added support for name\_filter parameter \[SDK-1607\] [\#214](https://github.com/auth0/ruby-auth0/pull/214) ([Widcket](https://github.com/Widcket))
+- Update dependencies and CI script [\#210](https://github.com/auth0/ruby-auth0/pull/210) ([lbalmaceda](https://github.com/lbalmaceda))
+- Pass client\_id, audience at Auth0::Api::V2::ClientGrants\#client\_grants [\#209](https://github.com/auth0/ruby-auth0/pull/209) ([hkdnet](https://github.com/hkdnet))
+- Update rake requirement from ~\> 10.4 to ~\> 13.0 [\#207](https://github.com/auth0/ruby-auth0/pull/207) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add rubocop-rails [\#200](https://github.com/auth0/ruby-auth0/pull/200) ([tknzk](https://github.com/tknzk))
+
 ## [v4.9.0](https://github.com/auth0/ruby-auth0/tree/v4.9.0) (2019-09-25)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.8.0...v4.9.0)
 
