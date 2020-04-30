@@ -118,6 +118,31 @@ In addition to the Management API, this SDK also provides access to [Authenticat
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
+## Development
+In order to set up the local environment you'd have to have Ruby installed and a few global gems used to run and record the unit tests. A working Ruby version can be taken from the [CI script](/.circleci/config.yml). At the moment of this writting we're using Ruby `2.5.7`.
+
+> It is expected that every Pull Request introducing a fix, change or feature contains enough test coverage to assert the new behavior. 
+
+### Running the tests
+Install the following gems globally. These are used to run the snapshot tests and recreate them when there are changes in the output.
+
+```bash
+gem install vcr
+gem install webmock
+```
+
+Then, install the gems required for this project.
+
+```bash
+bundle install
+```
+
+Finally, run the tests.
+
+```bash
+bundle exec rake test
+```
+
 
 ## More Information
 
