@@ -1,4 +1,10 @@
+Tested with Ruby `v2.5.7`
+
 ```bash
+# Install global gems for running tests
+gem install vcr
+gem install webmock
+
 # Install gems for exec commands
 bundle install
 

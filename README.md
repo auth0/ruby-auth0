@@ -118,6 +118,39 @@ In addition to the Management API, this SDK also provides access to [Authenticat
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
+## Development
+In order to set up the local environment you'd have to have Ruby installed and a few global gems used to run and record the unit tests. A working Ruby version can be taken from the [CI script](/.circleci/config.yml). At the moment of this writting we're using Ruby `2.5.7`.
+
+> It is expected that every Pull Request introducing a fix, change or feature contains enough test coverage to assert the new behavior. 
+
+### Running the tests
+Install the following gems globally. These are used to run the snapshot tests and recreate them when there are changes in the output.
+
+```bash
+gem install vcr
+gem install webmock
+```
+
+Then, install the gems required for this project.
+
+```bash
+bundle install
+```
+
+Finally, run the tests.
+
+```bash
+bundle exec rake test
+```
+
+### Releasing the gem
+
+Make sure you have access in https://rubygems.org/gems/auth0/ and that your Ruby Gems tokens are set in `~/.gem/credentials`. In order to generate a changelog entry, define an environment variable `GITHUB_READ_TOKEN` with a Github API token that has READ access to `repo:public_repo`. [Generate a token here](https://github.com/settings/tokens/new?description=GitHub%20Changelog%20Generator%20token).
+
+Create a new Github Milestone with the version name prefixed with 'v'. i.e. `v4.10.2`. Assign every Issue and Pull Request to be included on this release to that Milestone, and tag them with the `CH:xxxxxx` labels, depending on the type of change fixed or introduced there.
+
+Finally, follow the steps detailed in the [DEPLOYMENT.md](./DEPLOYMENT.md) file.
+
 
 ## More Information
 
