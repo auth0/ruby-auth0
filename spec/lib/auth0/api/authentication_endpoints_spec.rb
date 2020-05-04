@@ -355,6 +355,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
         client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
         connection:  'email',
         email: 'test@test.com',
         send: 'code',
@@ -388,6 +389,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect(@instance).to receive(:post).with(
         '/passwordless/start',
         client_id: @instance.client_id,
+        client_secret: @instance.client_secret,
         connection: 'sms',
         phone_number: phone_number
       )
