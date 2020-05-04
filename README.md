@@ -142,7 +142,7 @@ bundle exec rake test
 
 You can run only the unit tests and ignore the integration tests by running the following:
 
-```
+```bash
 bundle exec rake spec
 ```
 
@@ -150,7 +150,7 @@ bundle exec rake spec
 
 You can run only the unit tests and ignore the integration tests by running the following:
 
-```
+```bash
 bundle exec rake integration
 ```
 
