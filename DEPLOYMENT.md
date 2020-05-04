@@ -2,7 +2,7 @@
 
 ## Credentials set up
 
-Make sure you have access in https://rubygems.org/gems/auth0/ and that your Ruby Gems tokens are set in `~/.gem/credentials`. 
+Make sure you have access in https://rubygems.org/gems/auth0/ and that your Ruby Gems tokens are set in `~/.gem/credentials`.
 
 In order to generate the required changelog entry, define an environment variable `GITHUB_READ_TOKEN` with a Github API token that has READ access to `repo:public_repo`. You can generate a Github API Token [here](https://github.com/settings/tokens/new?description=GitHub%20Changelog%20Generator%20token).
 
@@ -11,10 +11,6 @@ Create a new Github Milestone with the version name prefixed with `v`. i.e. `v4.
 Finally, follow the next steps:
 
 ```bash
-# Install global gems for running tests
-gem install vcr
-gem install webmock
-
 # Install gems for exec commands
 bundle install
 
