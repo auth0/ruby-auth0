@@ -170,7 +170,8 @@ module Auth0
           send: send,
           authParams: auth_params,
           connection: 'email',
-          client_id: @client_id
+          client_id: @client_id,
+          client_secret: @client_secret
         }
         post('/passwordless/start', request_params)
       end
@@ -185,7 +186,8 @@ module Auth0
         request_params = {
           phone_number: phone_number,
           connection: 'sms',
-          client_id: @client_id
+          client_id: @client_id,
+          client_secret: @client_secret
         }
         post('/passwordless/start', request_params)
       end

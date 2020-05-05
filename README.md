@@ -12,7 +12,7 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 
 This gem can be installed directly:
 
-``` bash
+```bash
 $ gem install auth0
 ```
 
@@ -26,7 +26,7 @@ bundle add auth0
 
 You can build the API documentation with the following:
 
-``` bash
+```bash
 bundle exec rake documentation
 ```
 
@@ -65,22 +65,22 @@ class AllUsersController < ApplicationController
     }
     @users = auth0_client.users @params
   end
-	
+
   private
-	
+
   # Setup the Auth0 API connection.
   def auth0_client
     @auth0_client ||= Auth0Client.new(
       client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
       client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
-      # If you pass in a client_secret value, the SDK will automatically try to get a 
-      # Management API token for this application. Make sure your Application can make a 
+      # If you pass in a client_secret value, the SDK will automatically try to get a
+      # Management API token for this application. Make sure your Application can make a
       # Client Credentials grant (Application settings in Auth0 > Advanced > Grant Types
       # tab) and that the Application is authorized for the Management API:
       # https://auth0.com/docs/api-auth/config/using-the-auth0-dashboard
       #
       # Otherwise, you can pass in a Management API token directly for testing or temporary
-      # access using the key below. 
+      # access using the key below.
       # token: ENV['AUTH0_RUBY_API_TOKEN'],
       domain: ENV['AUTH0_RUBY_DOMAIN'],
       api_version: 2,
@@ -107,36 +107,71 @@ This should show the parameters passed to the `users` method and a list of users
 
 In addition to the Management API, this SDK also provides access to [Authentication API](https://auth0.com/docs/api/authentication) endpoints with the `Auth0::API::AuthenticationEndpoints` module. For basic login capability, we suggest using our OmniAuth stategy [detailed here](https://auth0.com/docs/quickstart/webapp/rails/01-login). Other authentication tasks currently supported are:
 
-* Register a new user with a database connection using the `signup` method.
-* Redirect a user to the universal login page for authentication using the `authorization_url` method.
-* Log a user into a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method.
-* Exchange an authorization code for an access token on callback using the `obtain_user_tokens` method (see the note on state validation below).
-* Send a change password email to a database connection user using the `change_password` method.
-* Log a user out of Auth0 with the `logout_url` method.
+- Register a new user with a database connection using the `signup` method.
+- Redirect a user to the universal login page for authentication using the `authorization_url` method.
+- Log a user into a highly trusted app with the [Resource Owner Password grant](https://auth0.com/docs/api-auth/tutorials/password-grant) using the `login` method.
+- Exchange an authorization code for an access token on callback using the `obtain_user_tokens` method (see the note on state validation below).
+- Send a change password email to a database connection user using the `change_password` method.
+- Log a user out of Auth0 with the `logout_url` method.
 
-**Important note on state validation**: If you choose to implement a login flow callback yourself, it is important to generate and store a `state` value, pass that value to Auth0 in the `authorization_url` method, and validate it in your callback URL before calling `obtain_user_tokens`. For more information on state validation, [please see our documentation](https://auth0.com/docs/protocols/oauth2/oauth-state). 
+**Important note on state validation**: If you choose to implement a login flow callback yourself, it is important to generate and store a `state` value, pass that value to Auth0 in the `authorization_url` method, and validate it in your callback URL before calling `obtain_user_tokens`. For more information on state validation, [please see our documentation](https://auth0.com/docs/protocols/oauth2/oauth-state).
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
+## Development
+
+In order to set up the local environment you'd have to have Ruby installed and a few global gems used to run and record the unit tests. A working Ruby version can be taken from the [CI script](/.circleci/config.yml). At the moment of this writting we're using Ruby `2.5.7`.
+
+> It is expected that every Pull Request introducing a fix, change or feature contains enough test coverage to assert the new behavior.
+
+### Running the tests
+
+Install the gems required for this project.
+
+```bash
+bundle install
+```
+
+Finally, run the tests.
+
+```bash
+bundle exec rake test
+```
+
+#### Running only unit tests
+
+You can run only the unit tests and ignore the integration tests by running the following:
+
+```bash
+bundle exec rake spec
+```
+
+#### Running only integration tests
+
+You can run only the unit tests and ignore the integration tests by running the following:
+
+```bash
+bundle exec rake integration
+```
 
 ## More Information
 
-* [Login using OmniAuth](https://auth0.com/docs/quickstart/webapp/rails/01-login)
-* [API authentication in Ruby](https://auth0.com/docs/quickstart/backend/ruby)
-* [API authentication in Rails](https://auth0.com/docs/quickstart/backend/rails)
-* [Managing authentication with Auth0 (blog)](https://auth0.com/blog/rails-5-with-auth0/)
-* [Ruby on Rails workflow with Docker (blog)](https://auth0.com/blog/ruby-on-rails-killer-workflow-with-docker-part-1/)
+- [Login using OmniAuth](https://auth0.com/docs/quickstart/webapp/rails/01-login)
+- [API authentication in Ruby](https://auth0.com/docs/quickstart/backend/ruby)
+- [API authentication in Rails](https://auth0.com/docs/quickstart/backend/rails)
+- [Managing authentication with Auth0 (blog)](https://auth0.com/blog/rails-5-with-auth0/)
+- [Ruby on Rails workflow with Docker (blog)](https://auth0.com/blog/ruby-on-rails-killer-workflow-with-docker-part-1/)
 
 ## What is Auth0?
 
 Auth0 helps you to:
 
-* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** among others, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
-* Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
-* Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
-* Support for generating signed [JSON Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when, and where users are logging in.
-* Pull data from other sources and add it to the user profile with [JavaScript rules](https://docs.auth0.com/rules).
+- Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** among others, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+- Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
+- Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
+- Support for generating signed [JSON Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
+- Analytics of how, when, and where users are logging in.
+- Pull data from other sources and add it to the user profile with [JavaScript rules](https://docs.auth0.com/rules).
 
 ## Create a free Auth0 Account
 

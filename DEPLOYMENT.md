@@ -1,3 +1,15 @@
+# Releasing the gem
+
+## Credentials set up
+
+Make sure you have access in https://rubygems.org/gems/auth0/ and that your Ruby Gems tokens are set in `~/.gem/credentials`.
+
+In order to generate the required changelog entry, define an environment variable `GITHUB_READ_TOKEN` with a Github API token that has READ access to `repo:public_repo`. You can generate a Github API Token [here](https://github.com/settings/tokens/new?description=GitHub%20Changelog%20Generator%20token).
+
+Create a new Github Milestone with the version name prefixed with `v`. i.e. `v4.10.2`. Assign every Issue and Pull Request to be included on this release to that Milestone, and tag them with the `CH:xxxxxx` labels, depending on the type of change fixed or introduced there.
+
+Finally, follow the next steps:
+
 ```bash
 # Install gems for exec commands
 bundle install
@@ -45,3 +57,5 @@ git push origin vX.X.X
 # Rubygems token can be updated in ~/.gem/credentials
 bundle exec gem release
 ```
+
+The steps above were tested with Ruby `v2.5.7`.

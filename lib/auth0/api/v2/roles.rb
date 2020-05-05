@@ -13,13 +13,15 @@ module Auth0
         #   - per_page: Number of Roles to return.
         #   - page: Page number to return, zero-based.
         #   - include_totals: True to include query summary in the result, false or nil otherwise.
+        #   - name_filter: Optional filter on name (case-insensitive).
         #
         # @return [json] All Roles matching the query.
         def get_roles(options = {})
           request_params = {
             per_page: options.fetch(:per_page, nil),
             page: options.fetch(:page, nil),
-            include_totals: options.fetch(:include_totals, nil)
+            include_totals: options.fetch(:include_totals, nil),
+            name_filter: options.fetch(:name_filter, nil)
           }
           get roles_path, request_params
         end

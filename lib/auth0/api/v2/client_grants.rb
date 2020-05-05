@@ -7,11 +7,15 @@ module Auth0
 
         # Retrieves a list of all client grants.
         # @see https://auth0.com/docs/api/management/v2#!/client_grants/get_client_grants
+        # @param client_id [string] The client_id of the client grant to retrieve.
+        # @param audience [string] The audience of the client grant to retrieve.
         # @param page [int] Page number to get, 0-based.
         # @param per_page [int] Results per page if also passing a page number.
         # @return [json] Returns the client grants.
-        def client_grants (page: nil, per_page: nil)
+        def client_grants (client_id: nil, audience: nil, page: nil, per_page: nil)
           request_params = {
+            client_id: client_id,
+            audience: audience,
             page: page,
             per_page: per_page
           }

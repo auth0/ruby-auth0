@@ -27,6 +27,9 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.filter_sensitive_data('CLIENT_SECRET') { ENV['CLIENT_SECRET'] }
   config.filter_sensitive_data('API_TOKEN') { ENV['MASTER_JWT'] }
+
+  ENV['DOMAIN'] = 'auth0-sdk-tests.auth0.com'
+  ENV['CLIENT_ID'] = '2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI'
 end
 
 $LOAD_PATH.unshift File.expand_path('..', __FILE__)
