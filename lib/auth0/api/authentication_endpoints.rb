@@ -1,5 +1,60 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/ModuleLength
+
+require 'jwt'
+
 module Auth0
+  # TODO: Move to another file
+  class IdTokenValidator
+    def initialize(context)
+      @context = context
+    end
+
+    def validate(id_token)
+      begin
+        result = JWT.decode id_token, nil, false, {}
+      rescue JWT::DecodeError
+        raise Auth0::InvalidIdToken, 'ID token could not be decoded.'
+      end
+
+      decoded_id_token = { payload: result.first, header: result.last, string: id_token }
+      validate_signature decoded_id_token
+      validate_claims decoded_id_token
+    end
+
+    private
+
+    attr_accessor :context
+
+    def validate_signature(decoded_id_token)
+      algorithm = @context[:algorithm]
+      alg = algorithm.class.to_s.split('::').last # TODO: Move to an alg helper/mixin/whatever
+      options = { algorithms: [alg], verify_expiration: false, verify_not_before: false }
+      secret = nil
+
+      case algorithm
+      when Auth0::Algorithm::RS256
+        options[:jwks] = JSON.parse(JSON[algorithm.jwks], symbolize_names: true)[:keys]
+      when Auth0::Algorithm::HS256
+        secret = algorithm.secret
+      end
+
+      begin
+        JWT.decode decoded_id_token[:string], secret, true, options
+      rescue JWT::VerificationError
+        raise Auth0::InvalidIdToken, 'Invalid token signature.'
+      rescue JWT::DecodeError
+        kid = decoded_id_token[:header]['kid'] if decoded_id_token[:header].key? 'kid'
+        raise Auth0::InvalidIdToken, "Could not find the key with kid #{kid}" # TODO: Use the correct error messages
+      rescue JWT::IncorrectAlgorithm
+        raise Auth0::InvalidIdToken, 'Expected a different algorithm' # TODO: Use the correct error messages
+      end
+    end
+
+    def validate_claims(decoded_id_token); end
+  end
+
   module Api
     # {https://auth0.com/docs/api/authentication}
     # Methods to use the Authentication API
@@ -500,6 +555,47 @@ module Auth0
           user_id: user_id
         }
         post('/unlink', request_params)
+      end
+
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def validate_id_token(id_token, leeway: 60, algorithm: nil, nonce: nil, max_age: nil, issuer: nil, audience: nil)
+        raise Auth0::InvalidParameter, 'ID token is required but missing.' if id_token.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
+        raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
+        raise Auth0::InvalidParameter, 'Must supply a valid audience' unless audience.nil? || !audience.to_s.empty?
+
+        unless max_age.nil? || (max_age.is_a?(Integer) && max_age >= 0)
+          raise Auth0::InvalidParameter, 'Must supply a valid max_age'
+        end
+
+        unless algorithm.nil? || algorithm.is_a?(Auth0::Algorithm::RS256) || algorithm.is_a?(Auth0::Algorithm::HS256)
+          raise Auth0::InvalidParameter, 'algorithm must be RS256 or HS256' # TODO: Use the correct error messages
+        end
+
+        context = {
+          issuer: issuer || "https://#{@domain}/",
+          audience: audience || @client_id,
+          algorithm: algorithm || Auth0::Algorithm::RS256.jwks_path,
+          leeway: leeway
+        }
+
+        context[:nonce] = nonce unless nonce.nil?
+        context[:max_age] = max_age unless max_age.nil?
+
+        # now, everything's ready and we can actually begin.
+        # 1. Call the method verification on the algorithm.
+        #    a. Add the jwk gem. [X]
+        #    b. Parse the token and fail if needed [~]
+        #    c. Implement the secret fetcher in the algorithm [X]
+        #    d..Implement the verification method [~]
+        # 2. The signature was verified! or an exception was throen! [~]
+        # 3. Write tests
+        # 4. Verify the claims
+        # 5. Write tests
+
+        validator = IdTokenValidator.new context
+        validator.validate id_token
       end
 
       private

@@ -59,4 +59,6 @@ module Auth0
       Time.at(headers['X-RateLimit-Reset']).utc
     end
   end
+
+  class InvalidIdToken < Auth0::Exception; end
 end
