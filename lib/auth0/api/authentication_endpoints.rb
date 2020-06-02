@@ -533,17 +533,6 @@ module Auth0
         context[:nonce] = nonce unless nonce.nil?
         context[:max_age] = max_age unless max_age.nil?
 
-        # now, everything's ready and we can actually begin.
-        # 1. Call the method verification on the algorithm.
-        #    a. Add the jwk gem. [X]
-        #    b. Parse the token and fail if needed [~]
-        #    c. Implement the secret fetcher in the algorithm [X]
-        #    d..Implement the verification method [~]
-        # 2. The signature was verified! or an exception was throen! [~]
-        # 3. Write tests
-        # 4. Verify the claims
-        # 5. Write tests
-
         validator = Auth0::Mixins::Validation::IdTokenValidator.new context
         validator.validate id_token
       end
