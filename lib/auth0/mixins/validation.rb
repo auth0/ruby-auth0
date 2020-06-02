@@ -77,10 +77,15 @@ module Auth0
       end
 
       module Algorithm
+        # Represents the HS256 algorithm, which rely on shared secrets.
+        # @see https://auth0.com/docs/tokens/concepts/signing-algorithms
         class HS256
           class << self
             private :new
 
+            # Create a new instance passing the shared secret.
+            # @param secret [string] The HMAC shared secret.
+            # @return [object] A new instance.
             def secret(secret)
               new secret
             end
@@ -95,6 +100,8 @@ module Auth0
           end
         end
 
+        # Represents the RS256 algorithm, which rely on public key certificates.
+        # @see https://auth0.com/docs/tokens/concepts/signing-algorithms
         class RS256
           include Auth0::Mixins::HTTPProxy
 
@@ -103,7 +110,12 @@ module Auth0
           class << self
             private :new
 
-            def jwks_url(url, lifetime: 10 * 60) # 10 minutes
+            # Create a new instance passing the shared secret.
+            # @param secret [string] The url where the JWK set is located.
+            # @param lifetime [integer] The lifetime of the JWK set in-memory cache in seconds.
+            #   Must be a non-negative value. Defaults to 600 seconds (10 minutes).
+            # @return [object] A new instance.
+            def jwks_url(url, lifetime: 10 * 60)
               new url, lifetime
             end
           end
@@ -116,6 +128,8 @@ module Auth0
             @jwks_url = jwks_url
           end
 
+          # Fetches the JWK set from the in-memory cache, or from the url as a fallback.
+          # @return [hash] A JWK set.
           def jwks
             previous_value = @@cache.last(:jwks)[:value] unless @@cache.last(:jwks).nil?
 

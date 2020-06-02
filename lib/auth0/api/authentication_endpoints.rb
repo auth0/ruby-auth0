@@ -507,9 +507,23 @@ module Auth0
         post('/unlink', request_params)
       end
 
+      # Validate an ID token (signature and expiration).
+      # @see https://auth0.com/docs/tokens/guides/validate-id-tokens
+      # @param id_token [string] The JWT to validate.
+      # @param algorithm [object] The expected signing algorithm.
+      #   Defaults to Auth0::Algorithm::RS256.jwks_url("https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json").
+      # @param leeway [integer] The clock skew to accept when verifying date related claims in seconds.
+      #   Must be a non-negative value. Defaults to 60 seconds.
+      # @param nonce [string] The nonce value sent during authentication.
+      # @param max_age [integer] The max_age value sent during authentication.
+      #   Must be a non-negative value.
+      # @param issuer [string] The expected issuer claim value.
+      #   Defaults to "https://YOUR_AUTH0_DOMAIN/".
+      # @param audience [string] The expected audience claim value.
+      #   Defaults to your Auth0 Client ID.
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
-      def validate_id_token(id_token, leeway: 60, algorithm: nil, nonce: nil, max_age: nil, issuer: nil, audience: nil)
-        raise Auth0::InvalidParameter, 'ID token is required but missing.' if id_token.to_s.empty?
+      def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil)
+        raise Auth0::InvalidParameter, 'ID token is required but missing' if id_token.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
         raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
@@ -520,7 +534,7 @@ module Auth0
         end
 
         unless algorithm.nil? || algorithm.is_a?(Auth0::Algorithm::RS256) || algorithm.is_a?(Auth0::Algorithm::HS256)
-          raise Auth0::InvalidParameter, 'algorithm must be RS256 or HS256' # TODO: Use the correct error messages
+          raise Auth0::InvalidParameter, "Signature algorithm of \"#{algorithm}\" is not supported"
         end
 
         context = {
