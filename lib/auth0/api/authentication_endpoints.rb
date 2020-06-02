@@ -507,7 +507,7 @@ module Auth0
         post('/unlink', request_params)
       end
 
-      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
       def validate_id_token(id_token, leeway: 60, algorithm: nil, nonce: nil, max_age: nil, issuer: nil, audience: nil)
         raise Auth0::InvalidParameter, 'ID token is required but missing.' if id_token.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
@@ -536,6 +536,7 @@ module Auth0
         validator = Auth0::Mixins::Validation::IdTokenValidator.new context
         validator.validate id_token
       end
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
 
       private
 
