@@ -1,42 +1,46 @@
 require 'zache'
 
+class Zache
+  def last(key)
+    @hash[key]
+  end
+end
+
 module Auth0
   module Algorithm
     class RS256
-      class << self
-        protected :new
+      include Auth0::Mixins::HTTPProxy
 
-        def jwks_path(path = '/.well-known/jwks.json')
-          new path
+      @@cache = Zache.new.freeze
+
+      class << self
+        private :new
+
+        def jwks_url(url)
+          new url
         end
       end
 
-      def initialize(jwks_path)
-        raise Auth0::InvalidParameter, 'Must supply a valid jwks_path' if jwks_path.to_s.empty?
+      def initialize(jwks_url)
+        raise Auth0::InvalidParameter, 'Must supply a valid jwks_url' if jwks_url.to_s.empty?
 
-        @jwks_path = jwks_path
+        @jwks_url = jwks_url
       end
 
       def jwks
         lifetime = 10 * 60 # 10 minutes
-        previous_value = @@cache.hash[:jwks][:value]
+        previous_value = @@cache.last(:jwks)[:value] unless @@cache.last(:jwks).nil?
 
         @@cache.get(:jwks, lifetime: lifetime) do
-          result = get(jwks_path)
+          result = get(@jwks_url)
           result.is_a?(Hash) && result.key?('keys') ? result : previous_value
         end
       end
-
-      private
-
-      @@cache = Zache.new
-
-      attr_accessor :jwks_path
     end
 
     class HS256
       class << self
-        protected :new
+        private :new
 
         def secret(secret)
           new secret

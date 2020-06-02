@@ -35,7 +35,7 @@ module Auth0
 
       case algorithm
       when Auth0::Algorithm::RS256
-        options[:jwks] = JSON.parse(JSON[algorithm.jwks], symbolize_names: true)[:keys]
+        options[:jwks] = JSON.parse(JSON[algorithm.jwks], symbolize_names: true)
       when Auth0::Algorithm::HS256
         secret = algorithm.secret
       end
@@ -576,7 +576,7 @@ module Auth0
         context = {
           issuer: issuer || "https://#{@domain}/",
           audience: audience || @client_id,
-          algorithm: algorithm || Auth0::Algorithm::RS256.jwks_path,
+          algorithm: algorithm || Auth0::Algorithm::RS256.jwks_url("https://#{@domain}/.well-known/jwks.json"),
           leeway: leeway
         }
 
