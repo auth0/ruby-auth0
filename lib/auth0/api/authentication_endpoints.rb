@@ -5,56 +5,6 @@
 require 'jwt'
 
 module Auth0
-  # TODO: Move to another file
-  class IdTokenValidator
-    def initialize(context)
-      @context = context
-    end
-
-    def validate(id_token)
-      begin
-        result = JWT.decode id_token, nil, false, {}
-      rescue JWT::DecodeError
-        raise Auth0::InvalidIdToken, 'ID token could not be decoded.'
-      end
-
-      decoded_id_token = { payload: result.first, header: result.last, string: id_token }
-      validate_signature decoded_id_token
-      validate_claims decoded_id_token
-    end
-
-    private
-
-    attr_accessor :context
-
-    def validate_signature(decoded_id_token)
-      algorithm = @context[:algorithm]
-      alg = algorithm.class.to_s.split('::').last # TODO: Move to an alg helper/mixin/whatever
-      options = { algorithms: [alg], verify_expiration: false, verify_not_before: false }
-      secret = nil
-
-      case algorithm
-      when Auth0::Algorithm::RS256
-        options[:jwks] = JSON.parse(JSON[algorithm.jwks], symbolize_names: true)
-      when Auth0::Algorithm::HS256
-        secret = algorithm.secret
-      end
-
-      begin
-        JWT.decode decoded_id_token[:string], secret, true, options
-      rescue JWT::VerificationError
-        raise Auth0::InvalidIdToken, 'Invalid token signature.'
-      rescue JWT::DecodeError
-        kid = decoded_id_token[:header]['kid'] if decoded_id_token[:header].key? 'kid'
-        raise Auth0::InvalidIdToken, "Could not find the key with kid #{kid}" # TODO: Use the correct error messages
-      rescue JWT::IncorrectAlgorithm
-        raise Auth0::InvalidIdToken, 'Expected a different algorithm' # TODO: Use the correct error messages
-      end
-    end
-
-    def validate_claims(decoded_id_token); end
-  end
-
   module Api
     # {https://auth0.com/docs/api/authentication}
     # Methods to use the Authentication API
@@ -594,7 +544,7 @@ module Auth0
         # 4. Verify the claims
         # 5. Write tests
 
-        validator = IdTokenValidator.new context
+        validator = Auth0::Mixins::Validation::IdTokenValidator.new context
         validator.validate id_token
       end
 
