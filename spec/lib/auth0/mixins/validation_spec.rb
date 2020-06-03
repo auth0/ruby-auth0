@@ -195,7 +195,7 @@ describe Auth0::Algorithm::RS256 do
       instance.jwks
 
       WebMock.after_request do
-        expect(a_request(:get, JWKS_URL)).to have_been_made.at_most_once
+        expect(a_request(:get, JWKS_URL)).to have_been_made.once
       end
     end
   end
