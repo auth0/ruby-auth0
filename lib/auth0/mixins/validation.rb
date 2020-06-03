@@ -2,7 +2,7 @@ require 'zache'
 
 class Zache
   def last(key)
-    @hash[key]
+    @hash[key][:value] if @hash.key?(key)
   end
 end
 
@@ -47,10 +47,16 @@ module Auth0
 
         private
 
+        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         def validate_signature(decoded_id_token)
           algorithm = @context[:algorithm]
-          algorithm_name = algorithm.class.to_s.split('::').last
-          options = { algorithms: [algorithm_name], verify_expiration: false, verify_not_before: false }
+
+          unless algorithm.is_a?(Auth0::Mixins::Validation::JWTAlgorithm)
+            raise Auth0::InvalidIdToken, "Signature algorithm of \"#{algorithm}\" is not supported"
+          end
+
+          # The expiration verification will be performed in the validate_claims method
+          options = { algorithms: [algorithm.name], verify_expiration: false, verify_not_before: false }
           secret = nil
 
           case algorithm
@@ -66,20 +72,27 @@ module Auth0
             raise Auth0::InvalidIdToken, 'Invalid ID token signature'
           rescue JWT::IncorrectAlgorithm
             alg = decoded_id_token[:header]['alg']
-            raise Auth0::InvalidIdToken, "Signature algorithm of \"#{alg}\" is not supported. Expected the ID token to be signed with \"#{algorithm_name}\""
+            raise Auth0::InvalidIdToken, "Signature algorithm of \"#{alg}\" is not supported. Expected the ID token to be signed with \"#{algorithm.name}\""
           rescue JWT::DecodeError
             kid = decoded_id_token[:header]['kid']
             raise Auth0::InvalidIdToken, "Could not find a public key for Key ID (kid) \"#{kid}\""
           end
         end
+        # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
-        def validate_claims(decoded_id_token); end
+        def validate_claims(decoded_id_token); end # TODO: Implement (in the next PR)
+      end
+
+      class JWTAlgorithm
+        def name
+          self.class.to_s.split('::').last
+        end
       end
 
       module Algorithm
         # Represents the HS256 algorithm, which rely on shared secrets.
         # @see https://auth0.com/docs/tokens/concepts/signing-algorithms
-        class HS256
+        class HS256 < JWTAlgorithm
           class << self
             private :new
 
@@ -102,7 +115,7 @@ module Auth0
 
         # Represents the RS256 algorithm, which rely on public key certificates.
         # @see https://auth0.com/docs/tokens/concepts/signing-algorithms
-        class RS256
+        class RS256 < JWTAlgorithm
           include Auth0::Mixins::HTTPProxy
 
           @@cache = Zache.new.freeze
@@ -110,8 +123,8 @@ module Auth0
           class << self
             private :new
 
-            # Create a new instance passing the shared secret.
-            # @param secret [string] The url where the JWK set is located.
+            # Create a new instance passing the JWK set url.
+            # @param url [string] The url where the JWK set is located.
             # @param lifetime [integer] The lifetime of the JWK set in-memory cache in seconds.
             #   Must be a non-negative value. Defaults to 600 seconds (10 minutes).
             # @return [object] A new instance.
@@ -131,7 +144,7 @@ module Auth0
           # Fetches the JWK set from the in-memory cache, or from the url as a fallback.
           # @return [hash] A JWK set.
           def jwks
-            previous_value = @@cache.last(:jwks)[:value] unless @@cache.last(:jwks).nil?
+            previous_value = @@cache.last(:jwks) unless @@cache.last(:jwks).nil?
 
             @@cache.get(:jwks, lifetime: @lifetime, dirty: true) do
               result = get(@jwks_url)

@@ -687,7 +687,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect { @instance.validate_id_token('') }.to raise_exception
     end
 
-    it 'is expected to raise an error with a non integer leeway' do
+    it 'is expected to raise an error with a non-integer leeway' do
       expect { @instance.validate_id_token('id token', leeway: '1') }.to raise_exception
     end
 
@@ -707,31 +707,12 @@ describe Auth0::Api::AuthenticationEndpoints do
       expect { @instance.validate_id_token('id token', audience: '') }.to raise_exception
     end
 
-    it 'is expected to raise an error with a non integer max_age' do
+    it 'is expected to raise an error with a non-integer max_age' do
       expect { @instance.validate_id_token('id token', max_age: '1') }.to raise_exception
     end
 
     it 'is expected to raise an error with a negative max_age' do
       expect { @instance.validate_id_token('id token', max_age: -1) }.to raise_exception
-    end
-
-    it 'is expected to raise an error with an unsupported algorithm' do
-      expect { @instance.validate_id_token('id token', algorithm: 'ES256') }.to raise_exception
-    end
-
-    it 'is expected to not raise an error with a supported algorithm' do
-      expect do
-        token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.Hn38QVtN_mWN0c-jOa-Fqq69kXpbBp0THsvE-CQ47Ps'
-        algorithm = Auth0::Algorithm::HS256.secret('secret')
-        @instance.validate_id_token(token, algorithm: algorithm)
-      end.to_not raise_exception
-
-      expect do
-        stub_jwks
-        token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3Qta2V5LTEifQ.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.jE00ARUiAwrKEoAMwbioKYj4bUZjmg31V7McDtIPsJJ16rYcvI-e5mtSSMgCmAom6t-WA7dsSWCJUlBCW2nAMvyCZ-hj8HG9Z0RmQEiwig9Fk22avoX94zdx65TwAeDfn2uMRaX_ps3TJcn4nymUtMp8Lps_vMw15eJerKThlSO4KuLTrvDDdRaCRamAd7jxuzhiwOt0mB0TVD55b5itA02pGuyapbjQXvvLYEx8OgpyIaAkB9Ry25abgjev0bSw2kjFZckG3lv9QgvZM85m9l3Rbrc6msNPGfMDFWGyT3Tu2ObqnSEA-57hZeuCbFrOya3vUwgSlc66rfvZj2xpzg'
-        algorithm = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
-        @instance.validate_id_token(token, algorithm: algorithm)
-      end.to_not raise_exception
     end
   end
 end

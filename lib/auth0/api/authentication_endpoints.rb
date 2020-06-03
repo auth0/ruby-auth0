@@ -532,18 +532,14 @@ module Auth0
           raise Auth0::InvalidParameter, 'Must supply a valid max_age'
         end
 
-        unless algorithm.nil? || algorithm.is_a?(Auth0::Algorithm::RS256) || algorithm.is_a?(Auth0::Algorithm::HS256)
-          raise Auth0::InvalidParameter, "Signature algorithm of \"#{algorithm}\" is not supported"
-        end
-
         context = {
           issuer: issuer || "https://#{@domain}/",
           audience: audience || @client_id,
           algorithm: algorithm || Auth0::Algorithm::RS256.jwks_url("https://#{@domain}/.well-known/jwks.json"),
-          leeway: leeway
+          leeway: leeway,
+          nonce: nonce
         }
 
-        context[:nonce] = nonce unless nonce.nil?
         context[:max_age] = max_age unless max_age.nil?
 
         validator = Auth0::Mixins::Validation::IdTokenValidator.new context
