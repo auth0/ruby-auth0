@@ -285,6 +285,14 @@ describe Auth0::Algorithm::RS256 do
       expect(a_request(:get, JWKS_URL)).to have_been_made.once
     end
 
+    it 'is expected to return the last cached value if the jwks could not be fetched' do
+      Auth0::Algorithm::RS256.jwks_url(JWKS_URL).jwks
+      stub_request(:get, JWKS_URL).to_return(body: 'invalid')
+      instance = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
+
+      expect(instance.jwks).to have_key('keys') and contain_exactly(a_hash_including(kid: 'test-key-1'))
+    end
+
     it 'is expected to raise an error if the jwks could not be fetched and the cache is empty' do
       stub_request(:get, JWKS_URL).to_return(body: 'invalid')
       instance = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
