@@ -509,20 +509,19 @@ module Auth0
       # Validate an ID token (signature and expiration).
       # @see https://auth0.com/docs/tokens/guides/validate-id-tokens
       # @param id_token [string] The JWT to validate.
-      # @param algorithm [object] The expected signing algorithm.
-      #   Defaults to Auth0::Algorithm::RS256.jwks_url("https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json").
+      # @param algorithm [JWKAlgorithm] The expected signing algorithm.
+      #   Defaults to +Auth0::Algorithm::RS256.jwks_url("https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json", lifetime: 10 * 60)+.
       # @param leeway [integer] The clock skew to accept when verifying date related claims in seconds.
-      #   Must be a non-negative value. Defaults to 60 seconds.
+      #   Must be a non-negative value. Defaults to *60 seconds*.
       # @param nonce [string] The nonce value sent during authentication.
       # @param max_age [integer] The max_age value sent during authentication.
       #   Must be a non-negative value.
       # @param issuer [string] The expected issuer claim value.
-      #   Defaults to "https://YOUR_AUTH0_DOMAIN/".
+      #   Defaults to +https://YOUR_AUTH0_DOMAIN/+.
       # @param audience [string] The expected audience claim value.
-      #   Defaults to your Auth0 Client ID.
+      #   Defaults to your *Auth0 Client ID*.
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
       def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil)
-        raise Auth0::InvalidParameter, 'ID token is required but missing' if id_token.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
         raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
         raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
@@ -536,14 +535,13 @@ module Auth0
           issuer: issuer || "https://#{@domain}/",
           audience: audience || @client_id,
           algorithm: algorithm || Auth0::Algorithm::RS256.jwks_url("https://#{@domain}/.well-known/jwks.json"),
-          leeway: leeway,
-          nonce: nonce
+          leeway: leeway
         }
 
+        context[:nonce] = nonce unless nonce.nil?
         context[:max_age] = max_age unless max_age.nil?
 
-        validator = Auth0::Mixins::Validation::IdTokenValidator.new context
-        validator.validate id_token
+        Auth0::Mixins::Validation::IdTokenValidator.new(context).validate(id_token)
       end
       # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
 

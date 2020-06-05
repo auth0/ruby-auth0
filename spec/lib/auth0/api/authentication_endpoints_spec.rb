@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
@@ -20,7 +22,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: @instance.audience,
+        audience: @instance.audience
       ).and_return('access_token' => 'AccessToken')
 
       expect(@instance.api_token.token).to eql 'AccessToken'
@@ -32,7 +34,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: '__test_audience__',
+        audience: '__test_audience__'
       ).and_return('access_token' => 'AccessToken')
 
       expect(
@@ -47,7 +49,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
       )
-                            .and_return('access_token' => 'AccessToken')
+                                        .and_return('access_token' => 'AccessToken')
 
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
@@ -89,7 +91,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.obtain_user_tokens('', '') }.to raise_error 'Must supply a valid code' }
     it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
-
 
   context '.exchange_auth_code_for_tokens' do
     it { is_expected.to respond_to(:exchange_auth_code_for_tokens) }
@@ -183,7 +184,6 @@ describe Auth0::Api::AuthenticationEndpoints do
       ).to eq 'AccessToken'
     end
 
-
     it 'is expected to make post request to /oauth/token with custom params' do
       allow(@instance).to receive(:post).with(
         '/oauth/token',
@@ -241,7 +241,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'should make post to /oauth/token with custom params' do
-
       allow(@instance).to receive(:post).with(
         '/oauth/token',
         username: 'test@test.com',
@@ -356,7 +355,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/passwordless/start',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        connection:  'email',
+        connection: 'email',
         email: 'test@test.com',
         send: 'code',
         authParams: {
@@ -552,7 +551,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.userinfo' do
     it { is_expected.to respond_to(:user_info) }
     it 'is expected to make a GET request to /userinfo' do
-      is_expected.to receive(:get).with('/userinfo', {}, {'Authorization' => 'Bearer access-token'})
+      is_expected.to receive(:get).with('/userinfo', {}, { 'Authorization' => 'Bearer access-token' })
       subject.userinfo 'access-token'
     end
   end
@@ -605,7 +604,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'is expected to return a logout url with a client ID' do
       expect(@instance.logout_url(return_to, include_client: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout" +
+        "https://#{@instance.domain}/v2/logout" \
           "?returnTo=http%3A%2F%2Freturnto.com&client_id=#{@instance.client_id}"
       )
     end
@@ -655,7 +654,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'is expected to get the wsfed url with wctx' do
-      expect(@instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s).to eq(
+      expect(@instance.wsfed_url(UP_AUTH, { wctx: 'wctx_test' }).to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
           "?whr=#{UP_AUTH}&wctx=wctx_test"
       )
@@ -679,40 +678,55 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.validate_id_token' do
     it { expect(@instance).to respond_to(:validate_id_token) }
 
-    it 'is expected to raise an error with a nil id_token' do
-      expect { @instance.validate_id_token(nil) }.to raise_exception
-    end
-
-    it 'is expected to raise an error with an empty id_token' do
-      expect { @instance.validate_id_token('') }.to raise_exception
-    end
-
     it 'is expected to raise an error with a non-integer leeway' do
-      expect { @instance.validate_id_token('id token', leeway: '1') }.to raise_exception
+      expect { @instance.validate_id_token('id token', leeway: '1') }.to raise_exception('Must supply a valid leeway')
     end
 
     it 'is expected to raise an error with a negative leeway' do
-      expect { @instance.validate_id_token('id token', leeway: -1) }.to raise_exception
+      expect { @instance.validate_id_token('id token', leeway: -1) }.to raise_exception('Must supply a valid leeway')
     end
 
     it 'is expected to raise an error with an empty nonce' do
-      expect { @instance.validate_id_token('id token', nonce: '') }.to raise_exception
+      expect { @instance.validate_id_token('id token', nonce: '') }.to raise_exception('Must supply a valid nonce')
     end
 
     it 'is expected to raise an error with an empty issuer' do
-      expect { @instance.validate_id_token('id token', issuer: '') }.to raise_exception
+      expect { @instance.validate_id_token('id token', issuer: '') }.to raise_exception('Must supply a valid issuer')
     end
 
     it 'is expected to raise an error with an empty audience' do
-      expect { @instance.validate_id_token('id token', audience: '') }.to raise_exception
+      expect { @instance.validate_id_token('id token', audience: '') }.to raise_exception('Must supply a valid audience')
     end
 
     it 'is expected to raise an error with a non-integer max_age' do
-      expect { @instance.validate_id_token('id token', max_age: '1') }.to raise_exception
+      expect { @instance.validate_id_token('id token', max_age: '1') }.to raise_exception('Must supply a valid max_age')
     end
 
     it 'is expected to raise an error with a negative max_age' do
-      expect { @instance.validate_id_token('id token', max_age: -1) }.to raise_exception
+      expect { @instance.validate_id_token('id token', max_age: -1) }.to raise_exception('Must supply a valid max_age')
+    end
+
+    it 'is expected not to raise an error with a valid token signed with HS256' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.Hn38QVtN_mWN0c-jOa-Fqq69kXpbBp0THsvE-CQ47Ps'
+
+      expect { @instance.validate_id_token(token, algorithm: Auth0::Algorithm::HS256.secret('secret')) }.to_not raise_exception
+    end
+
+    it 'is expected not to raise an error with a valid token signed with RS256' do
+      stub_jwks
+      token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3Qta2V5LTEifQ.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.jE00ARUiAwrKEoAMwbioKYj4bUZjmg31V7McDtIPsJJ16rYcvI-e5mtSSMgCmAom6t-WA7dsSWCJUlBCW2nAMvyCZ-hj8HG9Z0RmQEiwig9Fk22avoX94zdx65TwAeDfn2uMRaX_ps3TJcn4nymUtMp8Lps_vMw15eJerKThlSO4KuLTrvDDdRaCRamAd7jxuzhiwOt0mB0TVD55b5itA02pGuyapbjQXvvLYEx8OgpyIaAkB9Ry25abgjev0bSw2kjFZckG3lv9QgvZM85m9l3Rbrc6msNPGfMDFWGyT3Tu2ObqnSEA-57hZeuCbFrOya3vUwgSlc66rfvZj2xpzg'
+
+      expect { @instance.validate_id_token(token, algorithm: Auth0::Algorithm::RS256.jwks_url(JWKS_URL)) }.to_not raise_exception
+      expect do
+        @instance.validate_id_token(token,
+                                    algorithm: Auth0::Algorithm::RS256.jwks_url(JWKS_URL),
+                                    leeway: 10,
+                                    nonce: 'nonce',
+                                    issuer: 'issuer',
+                                    audience: 'audience',
+                                    max_age: 10)
+      end .to_not raise_exception
+      expect(a_request(:get, JWKS_URL)).to have_been_made.once
     end
   end
 end
