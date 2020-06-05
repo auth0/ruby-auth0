@@ -190,7 +190,7 @@ module Auth0
 
               raise Auth0::InvalidIdToken, 'Could not fetch the JWK set' unless new_value || previous_value
 
-              !new_value.nil? ? new_value : previous_value
+              new_value || previous_value
             end
           end
 
