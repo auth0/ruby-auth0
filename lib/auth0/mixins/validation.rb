@@ -149,7 +149,7 @@ module Auth0
                                          " found \"#{claims['aud']}\""
           elsif claims['aud'].is_a?(Array) && !claims['aud'].include?(expected)
             raise Auth0::InvalidIdToken, "Audience (aud) claim mismatch in the ID token; expected \"#{expected}\""\
-                                         " but was not one of \"#{claims['aud']}\""
+                                         " but was not one of \"#{claims['aud'].join ', '}\""
           end
         end
 

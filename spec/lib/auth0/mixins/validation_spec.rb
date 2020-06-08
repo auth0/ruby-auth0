@@ -204,9 +204,9 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
     end
 
     it 'is expected to raise an error with an invalid array aud' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.5wamOri6WdxTew3mm2PCKMiPjdCf7jwPUqaxjwkeJQU'
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsiZXh0ZXJuYWwtdGVzdC05OTgiLCJleHRlcm5hbC10ZXN0LTk5OSJdLCJleHAiOjE1ODc3NjUzNjEsImlhdCI6MTU4NzU5MjU2MSwibm9uY2UiOiJhMWIyYzNkNGU1IiwiYXpwIjoidG9rZW5zLXRlc3QtMTIzIiwiYXV0aF90aW1lIjoxNTg3Njc4OTYxfQ.Q1GRVL5g3RLQqG5sEV_cc8WW_oiZzFIAfzRfBdxMW2s'
 
-      expect { @instance.validate(token) }.to raise_exception("Audience (aud) claim mismatch in the ID token; expected \"#{CONTEXT[:audience]}\" but was not one of \"[\"external-test-999\"]\"")
+      expect { @instance.validate(token) }.to raise_exception("Audience (aud) claim mismatch in the ID token; expected \"#{CONTEXT[:audience]}\" but was not one of \"external-test-998, external-test-999\"")
     end
 
     it 'is expected to raise an error with a missing exp' do
