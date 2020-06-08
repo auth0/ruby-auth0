@@ -28,6 +28,7 @@ module Auth0
         permissions.map { |permission| permission.to_h }
       end
 
+      # rubocop:disable Metrics/ClassLength
       class IdTokenValidator
         def initialize(context)
           @context = context
@@ -85,15 +86,140 @@ module Auth0
             raise Auth0::InvalidIdToken, 'Invalid ID token signature'
           rescue JWT::IncorrectAlgorithm
             alg = header['alg']
-            raise Auth0::InvalidIdToken, "Signature algorithm of \"#{alg}\" is not supported. Expected the ID token to be signed with \"#{algorithm.name}\""
+            raise Auth0::InvalidIdToken, "Signature algorithm of \"#{alg}\" is not supported. Expected the ID token"\
+                                         " to be signed with \"#{algorithm.name}\""
           rescue JWT::DecodeError
             raise Auth0::InvalidIdToken, "Could not find a public key for Key ID (kid) \"#{kid}\""
           end
         end
-        # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
-        def validate_claims(decoded_id_token); end # TODO: Implement (in the next PR)
+        # rubocop:disable Metrics/PerceivedComplexity
+        def validate_claims(claims)
+          leeway = @context[:leeway]
+          nonce = @context[:nonce]
+          issuer = @context[:issuer]
+          audience = @context[:audience]
+          max_age = @context[:max_age]
+
+          raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
+          raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid audience' unless audience.nil? || !audience.to_s.empty?
+
+          unless max_age.nil? || (max_age.is_a?(Integer) && max_age >= 0)
+            raise Auth0::InvalidParameter, 'Must supply a valid max_age'
+          end
+
+          validate_iss(claims, issuer)
+          validate_sub(claims)
+          validate_aud(claims, audience)
+          validate_exp(claims, leeway)
+          validate_iat(claims, leeway)
+          validate_nonce(claims, nonce) if nonce
+          validate_azp(claims, audience) if claims['aud'].is_a?(Array) && claims['aud'].count > 1
+          validate_auth_time(claims, max_age, leeway) if max_age
+        end
+        # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+        def validate_iss(claims, expected)
+          unless claims.key?('iss') && claims['iss'].is_a?(String)
+            raise Auth0::InvalidIdToken, 'Issuer (iss) claim must be a string present in the ID token'
+          end
+
+          unless expected == claims['iss']
+            raise Auth0::InvalidIdToken, "Issuer (iss) claim mismatch in the ID token; expected \"#{expected}\","\
+                                         " found \"#{claims['iss']}\""
+          end
+        end
+
+        def validate_sub(claims)
+          unless claims.key?('sub') && claims['sub'].is_a?(String)
+            raise Auth0::InvalidIdToken, 'Subject (sub) claim must be a string present in the ID token'
+          end
+        end
+
+        def validate_aud(claims, expected)
+          unless claims.key?('aud') && (claims['aud'].is_a?(String) || claims['aud'].is_a?(Array))
+            raise Auth0::InvalidIdToken, 'Audience (aud) claim must be a string or array of strings present'\
+                                         ' in the ID token'
+          end
+
+          if claims['aud'].is_a?(String) && expected != claims['aud']
+            raise Auth0::InvalidIdToken, "Audience (aud) claim mismatch in the ID token; expected \"#{expected}\","\
+                                         " found \"#{claims['aud']}\""
+          elsif claims['aud'].is_a?(Array) && !claims['aud'].include?(expected)
+            raise Auth0::InvalidIdToken, "Audience (aud) claim mismatch in the ID token; expected \"#{expected}\""\
+                                         " but was not one of \"#{claims['aud'].join ', '}\""
+          end
+        end
+
+        def validate_exp(claims, leeway)
+          unless claims.key?('exp') && claims['exp'].is_a?(Integer)
+            raise Auth0::InvalidIdToken, 'Expiration Time (exp) claim must be a number present in the ID token'
+          end
+
+          now = @context[:clock] || Time.now.to_i
+          exp_time = claims['exp'] + leeway
+
+          unless now < exp_time
+            raise Auth0::InvalidIdToken, 'Expiration Time (exp) claim mismatch in the ID token; current time'\
+                                         " \"#{now}\" is after expiration time \"#{exp_time}\""
+          end
+        end
+
+        def validate_iat(claims, leeway)
+          unless claims.key?('iat') && claims['iat'].is_a?(Integer)
+            raise Auth0::InvalidIdToken, 'Issued At (iat) claim must be a number present in the ID token'
+          end
+
+          now = @context[:clock] || Time.now.to_i
+          iat_time = claims['iat'] - leeway
+
+          unless now > iat_time
+            raise Auth0::InvalidIdToken, "Issued At (iat) claim mismatch in the ID token; current time \"#{now}\""\
+                                         " is before issued at time \"#{iat_time}\""
+          end
+        end
+
+        def validate_nonce(claims, expected)
+          unless claims.key?('nonce') && claims['nonce'].is_a?(String)
+            raise Auth0::InvalidIdToken, 'Nonce (nonce) claim must be a string present in the ID token'
+          end
+
+          unless expected == claims['nonce']
+            raise Auth0::InvalidIdToken, "Nonce (nonce) claim mismatch in the ID token; expected \"#{expected}\","\
+                                         " found \"#{claims['nonce']}\""
+          end
+        end
+
+        def validate_azp(claims, expected)
+          unless claims.key?('azp') && claims['azp'].is_a?(String)
+            raise Auth0::InvalidIdToken, 'Authorized Party (azp) claim must be a string present in the ID token'
+          end
+
+          unless expected == claims['azp']
+            raise Auth0::InvalidIdToken, 'Authorized Party (azp) claim mismatch in the ID token; expected'\
+                                         " \"#{expected}\", found \"#{claims['azp']}\""
+          end
+        end
+
+        def validate_auth_time(claims, max_age, leeway)
+          unless claims.key?('auth_time') && claims['auth_time'].is_a?(Integer)
+            raise Auth0::InvalidIdToken, 'Authentication Time (auth_time) claim must be a number present in the ID'\
+                                         ' token when Max Age (max_age) is specified'
+          end
+
+          now = @context[:clock] || Time.now.to_i
+          auth_valid_until = claims['auth_time'] + max_age + leeway
+
+          unless now < auth_valid_until
+            raise Auth0::InvalidIdToken, 'Authentication Time (auth_time) claim in the ID token indicates that too'\
+                                         ' much time has passed since the last end-user authentication. Current time'\
+                                         " \"#{now}\" is after last auth at \"#{auth_valid_until}\""
+          end
+        end
       end
+      # rubocop:enable Metrics/ClassLength
 
       class JWTAlgorithm
         private_class_method :new

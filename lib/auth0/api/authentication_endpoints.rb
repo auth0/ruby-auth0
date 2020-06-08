@@ -522,15 +522,6 @@ module Auth0
       #   Defaults to your *Auth0 Client ID*.
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
       def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil)
-        raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
-        raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
-        raise Auth0::InvalidParameter, 'Must supply a valid audience' unless audience.nil? || !audience.to_s.empty?
-
-        unless max_age.nil? || (max_age.is_a?(Integer) && max_age >= 0)
-          raise Auth0::InvalidParameter, 'Must supply a valid max_age'
-        end
-
         context = {
           issuer: issuer || "https://#{@domain}/",
           audience: audience || @client_id,
