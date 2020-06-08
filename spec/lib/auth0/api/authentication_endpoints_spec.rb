@@ -677,57 +677,6 @@ describe Auth0::Api::AuthenticationEndpoints do
   # Auth0::API::AuthenticationEndpoints.validate_id_token
   context '.validate_id_token' do
     it { expect(@instance).to respond_to(:validate_id_token) }
-
-    it 'is expected to raise an error with a non-integer leeway' do
-      expect { @instance.validate_id_token('id token', leeway: '1') }.to raise_exception('Must supply a valid leeway')
-    end
-
-    it 'is expected to raise an error with a negative leeway' do
-      expect { @instance.validate_id_token('id token', leeway: -1) }.to raise_exception('Must supply a valid leeway')
-    end
-
-    it 'is expected to raise an error with an empty nonce' do
-      expect { @instance.validate_id_token('id token', nonce: '') }.to raise_exception('Must supply a valid nonce')
-    end
-
-    it 'is expected to raise an error with an empty issuer' do
-      expect { @instance.validate_id_token('id token', issuer: '') }.to raise_exception('Must supply a valid issuer')
-    end
-
-    it 'is expected to raise an error with an empty audience' do
-      expect { @instance.validate_id_token('id token', audience: '') }.to raise_exception('Must supply a valid audience')
-    end
-
-    it 'is expected to raise an error with a non-integer max_age' do
-      expect { @instance.validate_id_token('id token', max_age: '1') }.to raise_exception('Must supply a valid max_age')
-    end
-
-    it 'is expected to raise an error with a negative max_age' do
-      expect { @instance.validate_id_token('id token', max_age: -1) }.to raise_exception('Must supply a valid max_age')
-    end
-
-    it 'is expected not to raise an error with a valid token signed with HS256' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.Hn38QVtN_mWN0c-jOa-Fqq69kXpbBp0THsvE-CQ47Ps'
-
-      expect { @instance.validate_id_token(token, algorithm: Auth0::Algorithm::HS256.secret('secret')) }.to_not raise_exception
-    end
-
-    it 'is expected not to raise an error with a valid token signed with RS256' do
-      stub_jwks
-      token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3Qta2V5LTEifQ.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.jE00ARUiAwrKEoAMwbioKYj4bUZjmg31V7McDtIPsJJ16rYcvI-e5mtSSMgCmAom6t-WA7dsSWCJUlBCW2nAMvyCZ-hj8HG9Z0RmQEiwig9Fk22avoX94zdx65TwAeDfn2uMRaX_ps3TJcn4nymUtMp8Lps_vMw15eJerKThlSO4KuLTrvDDdRaCRamAd7jxuzhiwOt0mB0TVD55b5itA02pGuyapbjQXvvLYEx8OgpyIaAkB9Ry25abgjev0bSw2kjFZckG3lv9QgvZM85m9l3Rbrc6msNPGfMDFWGyT3Tu2ObqnSEA-57hZeuCbFrOya3vUwgSlc66rfvZj2xpzg'
-
-      expect { @instance.validate_id_token(token, algorithm: Auth0::Algorithm::RS256.jwks_url(JWKS_URL)) }.to_not raise_exception
-      expect do
-        @instance.validate_id_token(token,
-                                    algorithm: Auth0::Algorithm::RS256.jwks_url(JWKS_URL),
-                                    leeway: 10,
-                                    nonce: 'nonce',
-                                    issuer: 'issuer',
-                                    audience: 'audience',
-                                    max_age: 10)
-      end .to_not raise_exception
-      expect(a_request(:get, JWKS_URL)).to have_been_made.once
-    end
   end
 end
 # rubocop:enable Metrics/BlockLength

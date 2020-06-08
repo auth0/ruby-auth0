@@ -8,8 +8,9 @@ JWKS_RESPONSE_2 = { 'keys': [RSA_PUB_KEY_JWK_2] }.freeze
 JWKS_URL = 'https://tokens-test.auth0.com/.well-known/jwks.json'.freeze
 HMAC_SHARED_SECRET = 'secret'.freeze
 
-MOCKED_CLOCK = 1587592561 # Apr 22 2020 21:56:01 UTC
-DEFAULT_LEEWAY = 60
+LEEWAY = 60
+CLOCK = 1587592561 # Apr 22 2020 21:56:01 UTC
+CONTEXT = { algorithm: Auth0::Algorithm::HS256.secret(HMAC_SHARED_SECRET), leeway: LEEWAY, audience: 'tokens-test-123', issuer: 'https://tokens-test.auth0.com/', clock: CLOCK }.freeze
 
 describe Auth0::Mixins::Validation::IdTokenValidator do
   subject { @instance }
@@ -65,7 +66,7 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
   context 'HS256 signature verification' do
     before :each do
       algorithm = Auth0::Algorithm::HS256.secret(HMAC_SHARED_SECRET)
-      @instance = Auth0::Mixins::Validation::IdTokenValidator.new({ algorithm: algorithm })
+      @instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ algorithm: algorithm }))
     end
 
     it 'is expected not to raise an error with a valid signature' do
@@ -85,7 +86,7 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
     before :each do
       stub_jwks
       algorithm = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
-      @instance = Auth0::Mixins::Validation::IdTokenValidator.new({ algorithm: algorithm })
+      @instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ algorithm: algorithm }))
     end
 
     after :each do
@@ -118,6 +119,171 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       @instance.validate(token)
 
       expect(a_request(:get, JWKS_URL)).to have_been_made.twice
+    end
+  end
+
+  context 'context validation' do
+    token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.Hn38QVtN_mWN0c-jOa-Fqq69kXpbBp0THsvE-CQ47Ps'
+
+    it 'is expected to raise an error with a non-integer leeway' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ leeway: '1' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid leeway')
+    end
+
+    it 'is expected to raise an error with a negative leeway' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ leeway: -1 }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid leeway')
+    end
+
+    it 'is expected to raise an error with an empty nonce' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ nonce: '' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid nonce')
+    end
+
+    it 'is expected to raise an error with an empty issuer' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ issuer: '' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid issuer')
+    end
+
+    it 'is expected to raise an error with an empty audience' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ audience: '' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid audience')
+    end
+
+    it 'is expected to raise an error with a non-integer max_age' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ max_age: '1' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid max_age')
+    end
+
+    it 'is expected to raise an error with a negative max_age' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ max_age: -1 }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid max_age')
+    end
+  end
+
+  context 'claims validation' do
+    before :all do
+      @instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT)
+    end
+
+    it 'is expected to raise an error with a missing iss' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.QL2B2tqJhlW9rc8HQ3PQKkjDufBeSvtRBtJmRPdQ5K8'
+
+      expect { @instance.validate(token) }.to raise_exception('Issuer (iss) claim must be a string present in the ID token')
+    end
+
+    it 'is expected to raise an error with a invalid iss' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb21ldGhpbmctZWxzZSIsInN1YiI6ImF1dGgwfDEyMzQ1Njc4OSIsImF1ZCI6WyJ0b2tlbnMtdGVzdC0xMjMiLCJleHRlcm5hbC10ZXN0LTk5OSJdLCJleHAiOjE1ODc3NjUzNjEsImlhdCI6MTU4NzU5MjU2MSwibm9uY2UiOiJhMWIyYzNkNGU1IiwiYXpwIjoidG9rZW5zLXRlc3QtMTIzIiwiYXV0aF90aW1lIjoxNTg3Njc4OTYxfQ.AhMMouDlGMdxTYrY9Cn-p8svJ8ssKmsHeT6JNRVTh10'
+
+      expect { @instance.validate(token) }.to raise_exception("Issuer (iss) claim mismatch in the ID token; expected \"#{CONTEXT[:issuer]}\", found \"something-else\"")
+    end
+
+    it 'is expected to raise an error with a missing sub' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0._4sUXtAZYpGrO3QaYArXnk2JivCqixa7hgHhH3w4SlY'
+
+      expect { @instance.validate(token) }.to raise_exception('Subject (sub) claim must be a string present in the ID token')
+    end
+
+    it 'is expected to raise an error with a missing aud' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJleHAiOjE1ODc3NjUzNjEsImlhdCI6MTU4NzU5MjU2MSwibm9uY2UiOiJhMWIyYzNkNGU1IiwiYXpwIjoidG9rZW5zLXRlc3QtMTIzIiwiYXV0aF90aW1lIjoxNTg3Njc4OTYxfQ.TlwnBmGUKe0SElSYKxPqsG1mujkK2t1CwDJGGiWRdXA'
+
+      expect { @instance.validate(token) }.to raise_exception('Audience (aud) claim must be a string or array of strings present in the ID token')
+    end
+
+    it 'is expected to raise an error with an invalid string aud' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOiJleHRlcm5hbC10ZXN0LTk5OSIsImV4cCI6MTU4Nzc2NTM2MSwiaWF0IjoxNTg3NTkyNTYxLCJub25jZSI6ImExYjJjM2Q0ZTUiLCJhenAiOiJ0b2tlbnMtdGVzdC0xMjMiLCJhdXRoX3RpbWUiOjE1ODc2Nzg5NjF9.-Tf5CIi2bZ51UdgqxFWQNXpJJmK5GgsetcVoVrQwHIA'
+
+      expect { @instance.validate(token) }.to raise_exception("Audience (aud) claim mismatch in the ID token; expected \"#{CONTEXT[:audience]}\", found \"external-test-999\"")
+    end
+
+    it 'is expected to raise an error with an invalid array aud' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.5wamOri6WdxTew3mm2PCKMiPjdCf7jwPUqaxjwkeJQU'
+
+      expect { @instance.validate(token) }.to raise_exception("Audience (aud) claim mismatch in the ID token; expected \"#{CONTEXT[:audience]}\" but was not one of \"[\"external-test-999\"]\"")
+    end
+
+    it 'is expected to raise an error with a missing exp' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiaWF0IjoxNTg3NTkyNTYxLCJub25jZSI6ImExYjJjM2Q0ZTUiLCJhenAiOiJ0b2tlbnMtdGVzdC0xMjMiLCJhdXRoX3RpbWUiOjE1ODc2Nzg5NjF9.aoLiQX3sHsf1bEbc0axbjJ9qV6hhomtEzJq-FT8OGF0'
+
+      expect { @instance.validate(token) }.to raise_exception('Expiration Time (exp) claim must be a number present in the ID token')
+    end
+
+    it 'is expected to raise an error with a invalid exp' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NTkyNTYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.A8Pc0vlCG5Ufez7VIoRqXTYpJehalTEgGX9cR2xJLkU'
+      clock = CLOCK + LEEWAY + 1
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ clock: clock }))
+
+      expect { instance.validate(token) }.to raise_exception("Expiration Time (exp) claim mismatch in the ID token; current time \"#{clock}\" is after expiration time \"1587592621\"")
+    end
+
+    it 'is expected to raise an error with a missing iat' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJub25jZSI6ImExYjJjM2Q0ZTUiLCJhenAiOiJ0b2tlbnMtdGVzdC0xMjMiLCJhdXRoX3RpbWUiOjE1ODc2Nzg5NjF9.Jea6UVJsAK7Hnb494f_WIQCIbaLTnnCvMenSY1Y2toc'
+
+      expect { @instance.validate(token) }.to raise_exception('Issued At (iat) claim must be a number present in the ID token')
+    end
+
+    it 'is expected to raise an error with a invalid iat' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc3NjUzNjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.1AeRLTaExbKnmsfNduUl3HArsau4RcNrnmYOJnkPWi0'
+      clock = CLOCK - LEEWAY - 1
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ clock: clock }))
+
+      expect { instance.validate(token) }.to raise_exception("Issued At (iat) claim mismatch in the ID token; current time \"#{clock}\" is before issued at time \"1587765301\"")
+    end
+
+    it 'is expected not to raise an error with a missing but not required nonce' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.-o5grnyODbBdRgzcrn7Sf9Hb6eOC0x_U2i3YjVgHN0U'
+
+      expect { @instance.validate(token) }.not_to raise_exception
+    end
+
+    it 'is expected to raise an error with a missing but required nonce' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.-o5grnyODbBdRgzcrn7Sf9Hb6eOC0x_U2i3YjVgHN0U'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ nonce: 'a1b2c3d4e5' }))
+
+      expect { instance.validate(token) }.to raise_exception('Nonce (nonce) claim must be a string present in the ID token')
+    end
+
+    it 'is expected to raise an error with an invalid nonce' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiMDAwOTk5IiwiYXpwIjoidG9rZW5zLXRlc3QtMTIzIiwiYXV0aF90aW1lIjoxNTg3Njc4OTYxfQ.XqQPdFN4m5kmTUQQi_mAJu0LQOeUTS9lF2J_xWc_j-0'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ nonce: 'a1b2c3d4e5' }))
+
+      expect { instance.validate(token) }.to raise_exception('Nonce (nonce) claim mismatch in the ID token; expected "a1b2c3d4e5", found "000999"')
+    end
+
+    it 'is expected to raise an error with a missing azp' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.LrgYkIbWrxMq6jvvkL1lxWL237ii1IBhtN2o_tDxFns'
+
+      expect { @instance.validate(token) }.to raise_exception('Authorized Party (azp) claim must be a string present in the ID token')
+    end
+
+    it 'is expected to raise an error with an invalid azp' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6ImV4dGVybmFsLXRlc3QtOTk5IiwiYXV0aF90aW1lIjoxNTg3Njc4OTYxfQ.3DX-LY3B4UngDML-9nv11Sv89ECJpRpOLeWnkF1vAFY'
+
+      expect { @instance.validate(token) }.to raise_exception("Authorized Party (azp) claim mismatch in the ID token; expected \"tokens-test-123\", found \"external-test-999\"")
+    end
+
+    it 'is expected to raise an error with a missing auth_time' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyJ9.JqUotnjHbGW0FcHz1s1YsRkce9Sbpsv2AEBDMpcUhp8'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ max_age: 120 }))
+
+      expect { instance.validate(token) }.to raise_exception('Authentication Time (auth_time) claim must be a number present in the ID token when Max Age (max_age) is specified')
+    end
+
+    it 'is expected to raise an error with a invalid auth_time' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzU5MjU2MX0.B7eWHJPHjhOh0ALjIQi0ro6zVsqGIeHd0gpRZsv6Hg8'
+      max_age = 120
+      auth_time = CLOCK + LEEWAY + max_age
+      clock = auth_time + 1
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ max_age: max_age, clock: clock }))
+
+      expect { instance.validate(token) }.to raise_exception("Authentication Time (auth_time) claim in the ID token indicates that too much time has passed since the last end-user authentication. Current time \"#{clock}\" is after last auth at \"#{auth_time}\"")
     end
   end
 end
