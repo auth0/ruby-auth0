@@ -158,7 +158,7 @@ module Auth0
             raise Auth0::InvalidIdToken, 'Expiration Time (exp) claim must be a number present in the ID token'
           end
 
-          now = @context[:clock] || Time.now
+          now = @context[:clock] || Time.now.to_i
           exp_time = claims['exp'] + leeway
 
           unless now < exp_time
@@ -172,7 +172,7 @@ module Auth0
             raise Auth0::InvalidIdToken, 'Issued At (iat) claim must be a number present in the ID token'
           end
 
-          now = @context[:clock] || Time.now
+          now = @context[:clock] || Time.now.to_i
           iat_time = claims['iat'] - leeway
 
           unless now > iat_time
@@ -209,7 +209,7 @@ module Auth0
                                          ' token when Max Age (max_age) is specified'
           end
 
-          now = @context[:clock] || Time.now
+          now = @context[:clock] || Time.now.to_i
           auth_valid_until = claims['auth_time'] + max_age + leeway
 
           unless now < auth_valid_until
