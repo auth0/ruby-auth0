@@ -149,7 +149,7 @@ You can check the signing algorithm value under **Advanced Settings > OAuth > Js
 # HS256
 
 begin
-  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::HS256.secret('secret')
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::HS256.secret('YOUR_SECRET')
 rescue Auth0::InvalidIdToken => e
   # Handle error
 end
@@ -157,7 +157,7 @@ end
 # RS256 with a custom JWKS URL
 
 begin
-  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::RS256.jwks_url('url')
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::RS256.jwks_url('YOUR_URL')
 rescue Auth0::InvalidIdToken => e
   # Handle error
 end
