@@ -126,7 +126,7 @@ Before accessing its contents, you must first validate the ID token to ensure it
 
 ```ruby
 begin
-  @auth0_client.validate_id_token 'id_token'
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN'
 rescue Auth0::InvalidIdToken => e
   # In this case the ID Token contents should not be trusted
 end
@@ -143,13 +143,13 @@ The method takes the following optional keyword parameters:
 | `issuer`      | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`  |
 | `audience`    | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.  | `nil`  |
 
-You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. We recommend that you make use of asymmetric signing algorithms like `RS256` as their keys are easier to rotate in case they need to be revoked.
+You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. [We recommend](https://auth0.com/docs/tokens/concepts/signing-algorithms#our-recommendation) that you make use of asymmetric signing algorithms like `RS256` instead of symmetric ones like `HS256`.
 
 ```ruby
 # HS256
 
 begin
-  @auth0_client.validate_id_token 'id_token', algorithm: Auth0::Algorithm::HS256.secret('secret')
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::HS256.secret('secret')
 rescue Auth0::InvalidIdToken => e
   # Handle error
 end
@@ -157,7 +157,7 @@ end
 # RS256 with a custom JWKS URL
 
 begin
-  @auth0_client.validate_id_token 'id_token', algorithm: Auth0::Algorithm::RS256.jwks_url('url')
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::RS256.jwks_url('url')
 rescue Auth0::InvalidIdToken => e
   # Handle error
 end
