@@ -143,7 +143,7 @@ The method takes the following optional keyword parameters:
 | `issuer`      | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`  |
 | `audience`    | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.  | `nil`  |
 
-You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. It is recommended that you make use of asymmetric signing algorithms like `RS256` as their keys are easier to rotate in case they need to be revoked.
+You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. We recommend that you make use of asymmetric signing algorithms like `RS256` as their keys are easier to rotate in case they need to be revoked.
 
 ```ruby
 # HS256
