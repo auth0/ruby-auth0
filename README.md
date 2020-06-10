@@ -136,7 +136,7 @@ The method takes the following optional keyword parameters:
 
 | Parameter     | Type           | Description   | Default value             |
 | ------------- | -------------- | ------------- | ------------------------- |
-| `algorithm`   | `JWTAlgorithm` | The [signing algorithm](https://auth0.com/docs/tokens/concepts/signing-algorithms) used by your Auth0 application.  | `Auth0::Algorithm::RS256` |
+| `algorithm`   | `JWTAlgorithm` | The [signing algorithm](https://auth0.com/docs/tokens/concepts/signing-algorithms) used by your Auth0 application.  | `Auth0::Algorithm::RS256` (using the [JWKS URL](https://auth0.com/docs/tokens/concepts/jwks) of your **Auth0 Domain**) |
 | `leeway`      | Integer        | Number of seconds to account for clock skew when validating the `exp`, `iat` and `azp` claims.  | `60`  |
 | `nonce`       | String         | The `nonce` value you sent in the call to `/authorize`, if any.  | `nil`  |
 | `max_age`     | Integer        | The `max_age` value you sent in the call to `/authorize`, if any.  | `nil`  |
