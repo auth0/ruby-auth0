@@ -120,7 +120,7 @@ Please note that this module implements endpoints that might be deprecated for n
 
 ## ID Token Validation
 
-As the result of the authentication and among the credentials received, an `id_token` might be present. This artifact contains information associated to the user that has just logged in, provided the scope used contained `openid`. You can read more about ID tokens [here](https://auth0.com/docs/tokens/concepts/id-tokens).
+An ID token may be present in the credentials received after authentication. This token contains information associated with the user that has just logged in, provided the scope used contained `openid`. You can [read more about ID tokens here](https://auth0.com/docs/tokens/concepts/id-tokens).
 
 Before accessing its contents, you must first validate the ID token to ensure it has not been tampered with and that it is meant for your application to consume. Use the `validate_id_token` method to do so:
 
