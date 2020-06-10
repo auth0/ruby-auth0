@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 require 'spec_helper'
 describe Auth0::Api::AuthenticationEndpoints do
@@ -20,7 +22,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: @instance.audience,
+        audience: @instance.audience
       ).and_return('access_token' => 'AccessToken')
 
       expect(@instance.api_token.token).to eql 'AccessToken'
@@ -32,7 +34,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         grant_type: 'client_credentials',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        audience: '__test_audience__',
+        audience: '__test_audience__'
       ).and_return('access_token' => 'AccessToken')
 
       expect(
@@ -47,7 +49,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       allow(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
       )
-                            .and_return('access_token' => 'AccessToken')
+                                        .and_return('access_token' => 'AccessToken')
 
       expect(@instance).to receive(:post).with(
         '/oauth/token', client_id: @instance.client_id, client_secret: @instance.client_secret, grant_type: 'client_credentials'
@@ -89,7 +91,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     it { expect { @instance.obtain_user_tokens('', '') }.to raise_error 'Must supply a valid code' }
     it { expect { @instance.obtain_user_tokens('code', '') }.to raise_error 'Must supply a valid redirect_uri' }
   end
-
 
   context '.exchange_auth_code_for_tokens' do
     it { is_expected.to respond_to(:exchange_auth_code_for_tokens) }
@@ -183,7 +184,6 @@ describe Auth0::Api::AuthenticationEndpoints do
       ).to eq 'AccessToken'
     end
 
-
     it 'is expected to make post request to /oauth/token with custom params' do
       allow(@instance).to receive(:post).with(
         '/oauth/token',
@@ -241,7 +241,6 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'should make post to /oauth/token with custom params' do
-
       allow(@instance).to receive(:post).with(
         '/oauth/token',
         username: 'test@test.com',
@@ -356,7 +355,7 @@ describe Auth0::Api::AuthenticationEndpoints do
         '/passwordless/start',
         client_id: @instance.client_id,
         client_secret: @instance.client_secret,
-        connection:  'email',
+        connection: 'email',
         email: 'test@test.com',
         send: 'code',
         authParams: {
@@ -552,7 +551,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context '.userinfo' do
     it { is_expected.to respond_to(:user_info) }
     it 'is expected to make a GET request to /userinfo' do
-      is_expected.to receive(:get).with('/userinfo', {}, {'Authorization' => 'Bearer access-token'})
+      is_expected.to receive(:get).with('/userinfo', {}, { 'Authorization' => 'Bearer access-token' })
       subject.userinfo 'access-token'
     end
   end
@@ -605,7 +604,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     it 'is expected to return a logout url with a client ID' do
       expect(@instance.logout_url(return_to, include_client: true).to_s).to eq(
-        "https://#{@instance.domain}/v2/logout" +
+        "https://#{@instance.domain}/v2/logout" \
           "?returnTo=http%3A%2F%2Freturnto.com&client_id=#{@instance.client_id}"
       )
     end
@@ -655,7 +654,7 @@ describe Auth0::Api::AuthenticationEndpoints do
     end
 
     it 'is expected to get the wsfed url with wctx' do
-      expect(@instance.wsfed_url(UP_AUTH, {wctx: 'wctx_test'}).to_s).to eq(
+      expect(@instance.wsfed_url(UP_AUTH, { wctx: 'wctx_test' }).to_s).to eq(
         "https://#{@instance.domain}/wsfed/#{@instance.client_id}" \
           "?whr=#{UP_AUTH}&wctx=wctx_test"
       )
@@ -672,6 +671,32 @@ describe Auth0::Api::AuthenticationEndpoints do
         "https://#{@instance.domain}/wsfed/?whr=#{UP_AUTH}" \
           '&wtrealm=wtrealm_test&wreply=wreply_test'
       )
+    end
+  end
+
+  # Auth0::API::AuthenticationEndpoints.validate_id_token
+  context '.validate_id_token' do
+    it { expect(@instance).to respond_to(:validate_id_token) }
+
+    it 'is expected not to raise an error with default values' do
+      stub_request(:get, 'https://test.auth0.com/.well-known/jwks.json').to_return(body: JWKS_RESPONSE_1.to_json)
+      token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3Qta2V5LTEifQ.eyJpc3MiOiJodHRwczovL3Rlc3QuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDEyMzQ1Njc4OSIsImF1ZCI6WyJfX3Rlc3RfYXVkaWVuY2VfXyIsIl9fdGVzdF9jbGllbnRfaWRfXyJdLCJleHAiOjI1MzgzMDExNDYsImlhdCI6MTU4NzU5MjU2MSwiYXpwIjoiX190ZXN0X2NsaWVudF9pZF9fIn0.X35Hfa1C9RtuJIj7Eky2iO4elY9XqCDRy8ieFAft63vGds9vhP38x8QHbJifmLs6vDEOySKfJMWhklp3oaXm6Tk6gyUQEaliW_pXUgZt8C3Xo125R8BMCDQeVJg8Abevbg6FpHpYztWpQuI609tmpoTczx7pXMmAneg6e4LNYvvtzaFD_0M0cxtjkm4OcevCJszNBru3tdXwRynkGbMYeXgoa_FumAshRvIvh-4dtkyNWsepo5IVTvixxF3FVoFaXOOycmFXh9gxOppG4lvE78AFB9AQ9LNS-DNhcXszbPs9KHMrg2bqhSL8Razqd3m2a1MXkdLMBD5DY499MVnb5w'
+
+      expect { @instance.validate_id_token(token) }.to_not raise_exception
+    end
+
+    it 'is expected not to raise an error with custom values' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJpc3N1ZXIiLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsiYXVkaWVuY2UiLCJhbm90aGVyX2F1ZGllbmNlIl0sImV4cCI6MjUzODMwMTE0NiwiaWF0IjoxNTg3NTkyNTYxLCJub25jZSI6Im5vbmNlIiwiYXpwIjoiYXVkaWVuY2UiLCJhdXRoX3RpbWUiOjE1ODc2Nzg5NjF9.u39qTvuUmbzj5jsXjATXxjxJt0u064G1IAumoi18gm0'
+
+      expect do
+        @instance.validate_id_token(token,
+                                    algorithm: Auth0::Algorithm::HS256.secret('secret'),
+                                    leeway: 100,
+                                    nonce: 'nonce',
+                                    max_age: 2538301146,
+                                    issuer: 'issuer',
+                                    audience: 'audience')
+      end.to_not raise_exception
     end
   end
 end
