@@ -1,5 +1,18 @@
 # Change Log
 
+## [v4.12.0](https://github.com/auth0/ruby-auth0/tree/v4.12.0) (2020-06-10)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.11.0...v4.12.0)
+
+**Added**
+
+- Improve OIDC compliance [SDK-987] [\#225](https://github.com/auth0/ruby-auth0/pull/225) ([Widcket](https://github.com/Widcket))
+
+**Security**
+
+- Bump activesupport from 6.0.3 to 6.0.3.1 [\#221](https://github.com/auth0/ruby-auth0/pull/221) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actionpack from 6.0.3 to 6.0.3.1 [\#220](https://github.com/auth0/ruby-auth0/pull/220) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.11.0](https://github.com/auth0/ruby-auth0/tree/v4.11.0) (2020-05-06)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.10.0...v4.11.0)
