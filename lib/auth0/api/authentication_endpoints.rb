@@ -1,4 +1,8 @@
+# frozen_string_literal: true
 # rubocop:disable Metrics/ModuleLength
+
+require 'jwt'
+
 module Auth0
   module Api
     # {https://auth0.com/docs/api/authentication}
@@ -501,6 +505,36 @@ module Auth0
         }
         post('/unlink', request_params)
       end
+
+      # Validate an ID token (signature and expiration).
+      # @see https://auth0.com/docs/tokens/guides/validate-id-tokens
+      # @param id_token [string] The JWT to validate.
+      # @param algorithm [JWKAlgorithm] The expected signing algorithm.
+      #   Defaults to +Auth0::Algorithm::RS256.jwks_url("https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json", lifetime: 10 * 60)+.
+      # @param leeway [integer] The clock skew to accept when verifying date related claims in seconds.
+      #   Must be a non-negative value. Defaults to *60 seconds*.
+      # @param nonce [string] The nonce value sent during authentication.
+      # @param max_age [integer] The max_age value sent during authentication.
+      #   Must be a non-negative value.
+      # @param issuer [string] The expected issuer claim value.
+      #   Defaults to +https://YOUR_AUTH0_DOMAIN/+.
+      # @param audience [string] The expected audience claim value.
+      #   Defaults to your *Auth0 Client ID*.
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
+      def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil)
+        context = {
+          issuer: issuer || "https://#{@domain}/",
+          audience: audience || @client_id,
+          algorithm: algorithm || Auth0::Algorithm::RS256.jwks_url("https://#{@domain}/.well-known/jwks.json"),
+          leeway: leeway
+        }
+
+        context[:nonce] = nonce unless nonce.nil?
+        context[:max_age] = max_age unless max_age.nil?
+
+        Auth0::Mixins::Validation::IdTokenValidator.new(context).validate(id_token)
+      end
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
 
       private
 

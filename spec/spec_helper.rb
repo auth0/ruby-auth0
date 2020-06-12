@@ -1,6 +1,7 @@
 require 'pry'
 require 'rack/test'
 require 'faker'
+require 'json'
 require 'auth0'
 
 require 'simplecov'

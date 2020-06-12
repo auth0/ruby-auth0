@@ -118,6 +118,51 @@ In addition to the Management API, this SDK also provides access to [Authenticat
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
+## ID Token Validation
+
+An ID token may be present in the credentials received after authentication. This token contains information associated with the user that has just logged in, provided the scope used contained `openid`. You can [read more about ID tokens here](https://auth0.com/docs/tokens/concepts/id-tokens).
+
+Before accessing its contents, you must first validate the ID token to ensure it has not been tampered with and that it is meant for your application to consume. Use the `validate_id_token` method to do so:
+
+```ruby
+begin
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN'
+rescue Auth0::InvalidIdToken => e
+  # In this case the ID Token contents should not be trusted
+end
+```
+
+The method takes the following optional keyword parameters:
+
+| Parameter     | Type           | Description   | Default value             |
+| ------------- | -------------- | ------------- | ------------------------- |
+| `algorithm`   | `JWTAlgorithm` | The [signing algorithm](https://auth0.com/docs/tokens/concepts/signing-algorithms) used by your Auth0 application.  | `Auth0::Algorithm::RS256` (using the [JWKS URL](https://auth0.com/docs/tokens/concepts/jwks) of your **Auth0 Domain**) |
+| `leeway`      | Integer        | Number of seconds to account for clock skew when validating the `exp`, `iat` and `azp` claims.  | `60`  |
+| `nonce`       | String         | The `nonce` value you sent in the call to `/authorize`, if any.  | `nil`  |
+| `max_age`     | Integer        | The `max_age` value you sent in the call to `/authorize`, if any.  | `nil`  |
+| `issuer`      | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`  |
+| `audience`    | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.  | `nil`  |
+
+You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. [We recommend](https://auth0.com/docs/tokens/concepts/signing-algorithms#our-recommendation) that you make use of asymmetric signing algorithms like `RS256` instead of symmetric ones like `HS256`.
+
+```ruby
+# HS256
+
+begin
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::HS256.secret('YOUR_SECRET')
+rescue Auth0::InvalidIdToken => e
+  # Handle error
+end
+
+# RS256 with a custom JWKS URL
+
+begin
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', algorithm: Auth0::Algorithm::RS256.jwks_url('YOUR_URL')
+rescue Auth0::InvalidIdToken => e
+  # Handle error
+end
+```
+
 ## Development
 
 In order to set up the local environment you'd have to have Ruby installed and a few global gems used to run and record the unit tests. A working Ruby version can be taken from the [CI script](/.circleci/config.yml). At the moment of this writting we're using Ruby `2.5.7`.
