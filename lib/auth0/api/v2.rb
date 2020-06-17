@@ -6,6 +6,7 @@ require 'auth0/api/v2/connections'
 require 'auth0/api/v2/device_credentials'
 require 'auth0/api/v2/emails'
 require 'auth0/api/v2/jobs'
+require 'auth0/api/v2/prompts'
 require 'auth0/api/v2/rules'
 require 'auth0/api/v2/roles'
 require 'auth0/api/v2/stats'
@@ -30,6 +31,7 @@ module Auth0
       include Auth0::Api::V2::DeviceCredentials
       include Auth0::Api::V2::Emails
       include Auth0::Api::V2::Jobs
+      include Auth0::Api::V2::Prompts
       include Auth0::Api::V2::Rules
       include Auth0::Api::V2::Roles
       include Auth0::Api::V2::Stats
