@@ -23,11 +23,11 @@ describe Auth0::Api::V2::Prompts do
   end
 
   context '.update_prompts' do
-    it 'is expected to respond to a prompts method' do
+    it 'is expected to respond to an update_prompts method' do
       expect(@instance).to respond_to(:update_prompts)
     end
 
-    it 'is expected to respond to a get_prompts method' do
+    it 'is expected to respond to a patch_prompts method' do
       expect(@instance).to respond_to(:patch_prompts)
     end
 
@@ -39,11 +39,11 @@ describe Auth0::Api::V2::Prompts do
   end
 
   context '.custom_text' do
-    it 'is expected to respond to a prompts method' do
+    it 'is expected to respond to a custom_text method' do
       expect(@instance).to respond_to(:custom_text)
     end
 
-    it 'is expected to respond to a get_prompts method' do
+    it 'is expected to respond to a get_custom_text method' do
       expect(@instance).to respond_to(:get_custom_text)
     end
 
@@ -54,34 +54,34 @@ describe Auth0::Api::V2::Prompts do
     end
 
     it 'is expected to raise an exception when the prompt is empty' do
-      expect { @instance.custom_text(nil, nil) }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.custom_text(nil, 'language') }.to raise_exception(Auth0::InvalidParameter)
     end
 
-    it 'is expected to raise an exception when the prompt is empty' do
+    it 'is expected to raise an exception when the language is empty' do
       expect { @instance.custom_text('prompt_name', nil) }.to raise_exception(Auth0::InvalidParameter)
     end
   end
 
   context '.update_custom_text' do
-    it 'is expected to respond to a prompts method' do
+    it 'is expected to respond to an update_custom_text method' do
       expect(@instance).to respond_to(:update_custom_text)
     end
 
-    it 'is expected to respond to a get_prompts method' do
+    it 'is expected to respond to a put_custom_text method' do
       expect(@instance).to respond_to(:put_custom_text)
     end
 
-    it 'is expected to get /api/v2/prompts/PROMPT_NAME/language/LANGUAGE' do
+    it 'is expected to call put /api/v2/prompts/PROMPT_NAME/language/LANGUAGE' do
       expect(@instance).to receive(:put).with('/api/v2/prompts/PROMPT_NAME/custom-text/LANGUAGE', 'BODY')
 
       expect { @instance.update_custom_text('PROMPT_NAME', 'LANGUAGE', 'BODY') }.not_to raise_error
     end
 
     it 'is expected to raise an exception when the prompt is empty' do
-      expect { @instance.update_custom_text(nil, nil, 'BODY') }.to raise_exception(Auth0::InvalidParameter)
+      expect { @instance.update_custom_text(nil,'language', 'BODY') }.to raise_exception(Auth0::InvalidParameter)
     end
 
-    it 'is expected to raise an exception when the prompt is empty' do
+    it 'is expected to raise an exception when the language is empty' do
       expect { @instance.update_custom_text('prompt_name', nil, 'BODY') }.to raise_exception(Auth0::InvalidParameter)
     end
   end

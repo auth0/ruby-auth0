@@ -17,7 +17,7 @@ module Auth0
         # @param options [hash]
         #   * :universal_login_experience [string] Should be any of: new, classic.
         #
-        # @return [json] Returns the prompts setting.
+        # @return [json] Returns the prompts settings.
         def patch_prompts(options = {})
           request_params = {
             universal_login_experience: options.fetch(:universal_login_experience, nil)
