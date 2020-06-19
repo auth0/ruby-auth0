@@ -1,5 +1,17 @@
 # Change Log
 
+## [v4.13.0](https://github.com/auth0/ruby-auth0/tree/v4.13.0) (2020-06-18)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.12.0...v4.13.0)
+
+**Added**
+
+- Add prompts endpoints [\#205](https://github.com/auth0/ruby-auth0/pull/205) ([unhappychoice](https://github.com/unhappychoice))
+
+**Fixed**
+
+- Fix missing to_json [\#212](https://github.com/auth0/ruby-auth0/pull/212) ([qortex](https://github.com/qortex))
+
 ## [v4.12.0](https://github.com/auth0/ruby-auth0/tree/v4.12.0) (2020-06-10)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.11.0...v4.12.0)
