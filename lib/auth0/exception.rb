@@ -56,7 +56,7 @@ module Auth0
   # with prior gem versions that treated 429 errors as unknown errors.
   class RateLimitEncountered < Auth0::Unsupported
     def reset
-      Time.at(headers['X-RateLimit-Reset']).utc
+      headers.key?('X-RateLimit-Reset') ? Time.at(headers['X-RateLimit-Reset']).utc : nil
     end
   end
 
