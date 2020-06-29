@@ -171,14 +171,6 @@ module Auth0
           unless claims.key?('iat') && claims['iat'].is_a?(Integer)
             raise Auth0::InvalidIdToken, 'Issued At (iat) claim must be a number present in the ID token'
           end
-
-          now = @context[:clock] || Time.now.to_i
-          iat_time = claims['iat'] - leeway
-
-          unless now > iat_time
-            raise Auth0::InvalidIdToken, "Issued At (iat) claim mismatch in the ID token; current time \"#{now}\""\
-                                         " is before issued at time \"#{iat_time}\""
-          end
         end
 
         def validate_nonce(claims, expected)

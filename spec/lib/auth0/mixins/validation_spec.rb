@@ -229,14 +229,6 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       expect { @instance.validate(token) }.to raise_exception('Issued At (iat) claim must be a number present in the ID token')
     end
 
-    it 'is expected to raise an error with a invalid iat' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc3NjUzNjEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.1AeRLTaExbKnmsfNduUl3HArsau4RcNrnmYOJnkPWi0'
-      clock = CLOCK - LEEWAY - 1
-      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ clock: clock }))
-
-      expect { instance.validate(token) }.to raise_exception("Issued At (iat) claim mismatch in the ID token; current time \"#{clock}\" is before issued at time \"1587765301\"")
-    end
-
     it 'is expected not to raise an error with a missing but not required nonce' do
       token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNTg3NzY1MzYxLCJpYXQiOjE1ODc1OTI1NjEsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTU4NzY3ODk2MX0.-o5grnyODbBdRgzcrn7Sf9Hb6eOC0x_U2i3YjVgHN0U'
 
