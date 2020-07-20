@@ -1,5 +1,21 @@
 # Change Log
 
+## [v4.14.0](https://github.com/auth0/ruby-auth0/tree/v4.14.0) (2020-07-20)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.13.0...v4.14.0)
+
+**Deprecated**
+
+- Deprecate mgmt v1 calls [\#230](https://github.com/auth0/ruby-auth0/pull/230) ([davidpatrick](https://github.com/davidpatrick))
+
+**Removed**
+
+- Remove iat claim value check [\#229](https://github.com/auth0/ruby-auth0/pull/229) ([lbalmaceda](https://github.com/lbalmaceda))
+
+**Fixed**
+
+- Handle missing reset header [\#228](https://github.com/auth0/ruby-auth0/pull/228) ([Widcket](https://github.com/Widcket))
+
 ## [v4.13.0](https://github.com/auth0/ruby-auth0/tree/v4.13.0) (2020-06-18)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.12.0...v4.13.0)
