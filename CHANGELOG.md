@@ -1,5 +1,11 @@
 # Change Log
 
+## [v4.15.0](https://github.com/auth0/ruby-auth0/tree/v4.15.0) (2020-09-04)
+
+**Added**
+
+- Add log streaming endpoints [\#233](https://github.com/auth0/ruby-auth0/pull/233) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v4.14.0](https://github.com/auth0/ruby-auth0/tree/v4.14.0) (2020-07-20)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.13.0...v4.14.0)
