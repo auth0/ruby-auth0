@@ -16,6 +16,7 @@ require 'auth0/api/v2/user_blocks'
 require 'auth0/api/v2/tenants'
 require 'auth0/api/v2/tickets'
 require 'auth0/api/v2/logs'
+require 'auth0/api/v2/log_streams'
 require 'auth0/api/v2/resource_servers'
 require 'auth0/api/v2/guardian'
 
@@ -41,6 +42,7 @@ module Auth0
       include Auth0::Api::V2::Tenants
       include Auth0::Api::V2::Tickets
       include Auth0::Api::V2::Logs
+      include Auth0::Api::V2::LogStreams
       include Auth0::Api::V2::ResourceServers
       include Auth0::Api::V2::Guardian
     end
