@@ -1,5 +1,17 @@
 # Change Log
 
+## [v4.16.0](https://github.com/auth0/ruby-auth0/tree/v4.16.0) (2020-10-02)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.15.0...v4.16.0)
+
+**Added**
+
+- New Email Verification Fields [\#237](https://github.com/auth0/ruby-auth0/pull/237) ([davidpatrick](https://github.com/davidpatrick))
+
+**Security**
+
+- Bump actionview from 6.0.3.2 to 6.0.3.3 [\#236](https://github.com/auth0/ruby-auth0/pull/236) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.15.0](https://github.com/auth0/ruby-auth0/tree/v4.15.0) (2020-09-04)
 
 **Added**
