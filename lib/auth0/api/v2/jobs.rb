@@ -78,13 +78,23 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Jobs/post_verification_email
         # @param user_id [string] The user_id of the user to whom the email will be sent.
         # @param client_id [string] Client ID to send an Application-specific email.
+        # @param identity [hash] Used to verify secondary, federated, and passwordless-email identities.
+        #   * :user_id [string] user_id of the identity.
+        #   * :provider [string] provider of the identity.
         #
         # @return [json] Returns the job status and properties.
-        def send_verification_email(user_id, client_id = nil)
+        def send_verification_email(user_id, client_id = nil, identity: nil)
           raise Auth0::InvalidParameter, 'Must specify a user id' if user_id.to_s.empty?
 
           request_params = { user_id: user_id }
           request_params[:client_id] = client_id unless client_id.nil?
+
+          if identity
+            unless identity.is_a? Hash
+              raise Auth0::InvalidParameter, 'Identity must be a hash send an email verification'
+            end
+            request_params[:identity] = identity
+          end
 
           path = "#{jobs_path}/verification-email"
           post(path, request_params)
