@@ -21,6 +21,23 @@ describe Auth0::Api::V2::Tickets do
                                                                                      result_url: nil, ttl_sec: nil)
       expect { @instance.post_email_verification('user_id', ttl_sec: "noninteger") }.not_to raise_error
     end
+    it 'expect client to accept hash identity' do
+      expect(@instance).to receive(:post).with('/api/v2/tickets/email-verification', user_id: 'user_id',
+                                                                                     result_url: nil, 
+                                                                                     ttl_sec: nil,
+                                                                                     identity: {
+                                                                                      provider: "auth0",
+                                                                                      user_id: "user_id"
+                                                                                     })
+      expect {
+        @instance.post_email_verification('user_id', identity: { provider: "auth0", user_id: "user_id"}) 
+      }.not_to raise_error
+    end
+    it 'expect client to return nil when calling with a non-hash identity' do
+      expect { @instance.post_email_verification('user_id', identity: "nonhash") }.to raise_error(
+        'Identity must be a hash to post an email verification'
+      )
+    end
     it 'expect client to rasie error when calling with empty body' do
       expect { @instance.post_email_verification(nil) }.to raise_error(
         'Must supply a valid user id to post an email verification'
