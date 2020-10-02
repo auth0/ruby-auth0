@@ -102,6 +102,23 @@ describe Auth0::Api::V2::Jobs do
       end.not_to raise_error
     end
 
+    it 'expect client to accept hash identity' do
+      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', user_id: 'user_id',
+                                                                                  identity: {
+                                                                                    provider: "auth0",
+                                                                                    user_id: "user_id"
+                                                                                  })
+      expect {
+        @instance.send_verification_email('user_id', identity: { provider: "auth0", user_id: "user_id"}) 
+      }.not_to raise_error
+    end
+
+    it 'expect client to return nil when calling with a non-hash identity' do
+      expect { @instance.send_verification_email('user_id', identity: "nonhash") }.to raise_error(
+        'Identity must be a hash send an email verification'
+      )
+    end
+
     it 'should raise an error if the user_id is empty' do
       expect do
         @instance.send_verification_email('')

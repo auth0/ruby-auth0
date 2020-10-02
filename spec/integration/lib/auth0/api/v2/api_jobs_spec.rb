@@ -100,6 +100,18 @@ describe Auth0::Api::V2::Jobs do
         client.send_verification_email(user['user_id'], Random.new(32).to_s)
       end.to raise_error Auth0::BadRequest
     end
+
+    it 'should raise an error if the user id is empty' do
+      expect do
+        client.send_verification_email( '' )
+      end.to raise_error Auth0::InvalidParameter, 'Must specify a user id'
+    end
+
+    it 'should raise an error if the identity supplied is not a Hash' do
+      expect do
+        client.send_verification_email( 'user_id', identity: 'not a hash')
+      end.to raise_error Auth0::InvalidParameter, 'Identity must be a hash send an email verification'
+    end
   end
 
   after(:all) do

@@ -12,9 +12,12 @@ module Auth0
         # @param ttl_sec [integer] The ticket's lifetime in seconds starting from the moment of creation.
         # After expiration, the ticket cannot be used to verify the user's email. If not specified or if
         # you send 0, the Auth0 default lifetime of five days will be applied
+        # @param identity [hash] Used to verify secondary, federated, and passwordless-email identities.
+        #   * :user_id [string] user_id of the identity.
+        #   * :provider [string] provider of the identity.
         #
         # @return [json] Returns the created ticket url.
-        def post_email_verification(user_id, result_url: nil, ttl_sec: nil)
+        def post_email_verification(user_id, result_url: nil, ttl_sec: nil, identity: nil)
           if user_id.to_s.empty?
             raise Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
           end
@@ -24,6 +27,14 @@ module Auth0
             result_url: result_url,
             ttl_sec: ttl_sec.is_a?(Integer) ? ttl_sec : nil
           }
+
+          if identity
+            unless identity.is_a? Hash
+              raise Auth0::InvalidParameter, 'Identity must be a hash to post an email verification'
+            end
+            request_params[:identity] = identity
+          end
+
           post(path, request_params)
         end
 

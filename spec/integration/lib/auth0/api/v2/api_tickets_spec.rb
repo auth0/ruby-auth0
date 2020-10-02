@@ -35,7 +35,13 @@ describe Auth0::Api::V2::Tickets do
     it 'should raise an error if the user id is empty' do
       expect do
         client.post_email_verification( '' )
-      end.to raise_error Auth0::InvalidParameter
+      end.to raise_error Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
+    end
+
+    it 'should raise an error if the identity supplied is not a Hash' do
+      expect do
+        client.post_email_verification( '', identity: 'not a hash')
+      end.to raise_error Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
     end
   end
 
