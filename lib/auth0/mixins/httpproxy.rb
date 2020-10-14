@@ -1,3 +1,5 @@
+require "addressable/uri"
+
 module Auth0
   module Mixins
     # here's the proxy for Rest calls based on rest-client, we're building all request on that gem
@@ -8,7 +10,7 @@ module Auth0
       # proxying requests from instance methods to HTTP class methods
       %i(get post post_file put patch delete delete_with_body).each do |method|
         define_method(method) do |path, body = {}, extra_headers = {}|
-          safe_path = URI.escape(path)
+          safe_path = Addressable::URI.escape(path)
           body = body.delete_if { |_, v| v.nil? }
           result = if method == :get
                      # Mutate the headers property to add parameters.

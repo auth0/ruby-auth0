@@ -141,7 +141,7 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
-      it 'should escape path with URI.escape' do
+      it 'should escape path with Addressable::URI.escape' do
         expect(RestClient::Request).to receive(:execute).with(method: http_method,
                                                               url: '/te%20st',
                                                               timeout: nil,
@@ -275,7 +275,7 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
-      it 'should escape path with URI.escape' do
+      it 'should escape path with Addressable::URI.escape' do
         expect(RestClient::Request).to receive(:execute).with(method: http_method,
                                                               url: '/te%20st',
                                                               timeout: nil,
