@@ -390,9 +390,26 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to get permissions' do
-      expect(@instance).to receive(:get).with('/api/v2/users/USER_ID/permissions')
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/permissions',
+        per_page: nil,
+        page: nil,
+        include_totals: nil,
+      )
       expect do
         @instance.get_user_permissions('USER_ID')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get permissions with custom parameters' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/permissions',
+        per_page: 10,
+        page: 3,
+        include_totals: true
+      )
+      expect do
+        @instance.get_user_permissions('USER_ID', per_page: 10, page: 3, include_totals: true)
       end.not_to raise_error
     end
   end

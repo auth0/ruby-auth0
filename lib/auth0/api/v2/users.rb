@@ -248,11 +248,22 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2#!/Users/get_permissions
         #
         # @param user_id [string] The user_id of the permissions to get.
+        # @param options [hash] A hash of options for getting permissions
+        #   * :per_page [integer] The amount of permissions per page. (optional)
+        #   * :page [integer]  The page number. Zero based. (optional)
+        #   * :include_totals [boolean] True if a query summary must be included in the result. (optional)
         #
         # @return [json] Returns permissions for the given user_id.
-        def get_user_permissions(user_id)
+        def get_user_permissions(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          get "#{users_path}/#{user_id}/permissions"
+
+          request_params = {
+            per_page: options.fetch(:per_page, nil),
+            page: options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+
+          get "#{users_path}/#{user_id}/permissions", request_params
         end
 
         # Remove one or more permissions from a specific user.
