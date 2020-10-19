@@ -1,5 +1,19 @@
 # Change Log
 
+
+## [v4.17.0](https://github.com/auth0/ruby-auth0/tree/v4.17.0) (2020-10-19)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.16.0...v4.17.0)
+
+**Added**
+
+- Add pagination to user permissions  [\#241](https://github.com/auth0/ruby-auth0/pull/241) ([davidpatrick](https://github.com/davidpatrick))
+
+**Deprecated**
+
+- Addressable URI Escape  [\#240](https://github.com/auth0/ruby-auth0/pull/240) ([davidpatrick](https://github.com/apps/davidpatrick))
+
+
 ## [v4.16.0](https://github.com/auth0/ruby-auth0/tree/v4.16.0) (2020-10-02)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.15.0...v4.16.0)
