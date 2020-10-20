@@ -293,8 +293,8 @@ describe Auth0::Api::V2::Roles do
         @instance.add_role_permissions(
           'ROLE_ID',
           [
-            Permission.new('permission-name-1', 'server-id-1'),
-            Permission.new('permission-name-2', 'server-id-2')
+            Auth0::Permission.new('permission-name-1', 'server-id-1'),
+            Auth0::Permission.new('permission-name-2', 'server-id-2')
           ]
         )
       end.not_to raise_error
@@ -352,8 +352,8 @@ describe Auth0::Api::V2::Roles do
         @instance.remove_role_permissions(
           'ROLE_ID',
           [
-            Permission.new('permission-name-3', 'server-id-3'),
-            Permission.new('permission-name-4', 'server-id-4')
+            Auth0::Permission.new('permission-name-3', 'server-id-3'),
+            Auth0::Permission.new('permission-name-4', 'server-id-4')
           ]
         )
       end.not_to raise_error

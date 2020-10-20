@@ -14,7 +14,7 @@ describe Auth0::Api::V2::Users do
     @test_api_scope = 'test:scope'
 
     @test_permission_name = "#{entity_suffix}-test-permission-for-users"
-    @test_permission = Permission.new("#{entity_suffix}-test-permission-for-users", @test_api_name)
+    @test_permission = ::Auth0::Permission.new("#{entity_suffix}-test-permission-for-users", @test_api_name)
 
     VCR.use_cassette('Auth0_Api_V2_Users/create_test_user') do
       @test_user ||= client.create_user(

@@ -23,7 +23,7 @@ module Auth0
         raise Auth0::InvalidParameter, 'Must supply an array of Permissions' unless permissions.kind_of?(Array)
         raise Auth0::MissingParameter, 'Must supply an array of Permissions' if permissions.empty?
         raise Auth0::InvalidParameter, 'All array elements must be Permissions' unless permissions.all? do |permission|
-          permission.kind_of? Permission
+          permission.kind_of? ::Auth0::Permission
         end
         permissions.map { |permission| permission.to_h }
       end
