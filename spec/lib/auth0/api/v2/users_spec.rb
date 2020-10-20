@@ -97,7 +97,7 @@ describe Auth0::Api::V2::Users do
       end.not_to raise_error
     end
 
-    it 'is expected to raise error if connection is not specified', focus: true do
+    it 'is expected to raise error if connection is not specified' do
       expect(@instance).not_to receive(:delete)
       expect { 
         @instance.create_user(
