@@ -43,13 +43,13 @@ module Auth0
         # The attribute connection is always mandatory but depending on the type of connection you are using there
         # could be others too. For instance, Auth0 DB Connections require email and password.
         # @see https://auth0.com/docs/api/v2#!/Users/post_users
-        # @param name [string] The user name.
-        # @param options [hash]
-        #   * :connection [string] The connection the user belongs to.
+        # @param connection [string]  The connection the user belongs to.
+        # @param options [hash] See https://auth0.com/docs/api/management/v2#!/Users/post_users for available options
         # @return [json] Returns the created user.
-        def create_user(name, options = {})
+        def create_user(connection, options = {})
+          raise Auth0::MissingConnection, 'Must supply a valid connection' if connection.to_s.empty?
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
-          request_params[:name] = name
+          request_params[:connection] = connection
           post(users_path, request_params)
         end
 
