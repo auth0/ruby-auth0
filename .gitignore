@@ -10,5 +10,4 @@ coverage
 *.swp
 *.swo
 spec/auth0.yml
-.yardoc
 .env

@@ -25,13 +25,7 @@ bundle add auth0
 
 ## API Documentation
 
-You can build the API documentation with the following:
-
-```bash
-bundle exec rake documentation
-```
-
-To view the generated documentation, open `doc/Auth0/Api.html` .
+https://www.rubydoc.info/gems/auth0
 
 ## Management API v2
 
