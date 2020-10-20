@@ -86,17 +86,27 @@ describe Auth0::Api::V2::Users do
         '/api/v2/users',
         email: 'test@test.com',
         password: 'password',
-        connection: 'conn',
-        name: 'name'
+        connection: 'conn'
       )
       expect do
         @instance.create_user(
-          'name',
+          'conn',
           email: 'test@test.com',
-          password: 'password',
-          connection: 'conn'
+          password: 'password'
         )
       end.not_to raise_error
+    end
+
+    it 'is expected to raise error if connection is not specified', focus: true do
+      expect(@instance).not_to receive(:delete)
+      expect { 
+        @instance.create_user(
+          email: 'test@test.com',
+          password: 'password'
+        )
+       }.to raise_exception(
+        Auth0::MissingParameter
+      )
     end
   end
 

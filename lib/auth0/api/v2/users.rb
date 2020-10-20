@@ -47,7 +47,9 @@ module Auth0
         # @param options [hash] See https://auth0.com/docs/api/management/v2#!/Users/post_users for available options
         # @return [json] Returns the created user.
         def create_user(connection, options = {})
-          raise Auth0::MissingConnection, 'Must supply a valid connection' if connection.to_s.empty?
+          if !connection.is_a?(String) || connection.is_empty?
+            raise Auth0::MissingParameter, 'Must supply a valid connection'
+          end
           request_params = Hash[options.map { |(k, v)| [k.to_sym, v] }]
           request_params[:connection] = connection
           post(users_path, request_params)
