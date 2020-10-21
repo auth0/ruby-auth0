@@ -40,7 +40,7 @@ module Auth0
       private
 
       def initialize_api(options)
-        api_v2?(options) ? initialize_v2(options) : initialize_v1
+        initialize_v2(options)
         raise InvalidCredentials, 'Must supply a valid API token' if @token.nil?
         if options.fetch(:authorization, nil) == 'Basic'
           authorization_header_basic(options)
@@ -59,12 +59,6 @@ module Auth0
         extend Auth0::Api::V2
         @token = options[:access_token] || options[:token]
         @token = api_token.token if @token.nil? && @client_id && @client_secret
-      end
-
-      def initialize_v1
-        extend Auth0::Api::V1
-        raise InvalidCredentials, 'Invalid API v1 client_id and client_secret' if @client_id.nil? || @client_secret.nil?
-        @token = obtain_access_token
       end
 
       def api_v2?(options)

@@ -44,17 +44,12 @@ module Auth0
   class AccessDenied < Auth0::HTTPError; end
   # Invalid parameter passed, e.g. empty where ID is required
   class InvalidParameter < Auth0::Exception; end
-  # Invalid Auth0 credentials either client_id/secret for API v1
-  # or JWT for API v2/
+  # Invalid JWT
   class InvalidCredentials < Auth0::Exception; end
   # Invalid Auth0 API namespace
   class InvalidApiNamespace < Auth0::Exception; end
   # Auth0 API rate-limiting encountered
-  # TODO: When making API-breaking changes, make this a subclass
-  # of Auth0::HTTPError directly rather than Auth0::Unsupported.
-  # It's currently under Unsupported to avoid breaking compatibility
-  # with prior gem versions that treated 429 errors as unknown errors.
-  class RateLimitEncountered < Auth0::Unsupported
+  class RateLimitEncountered < Auth0::HTTPError
     def reset
       Time.at(headers['X-RateLimit-Reset']).utc
     end
