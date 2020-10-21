@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    auth0 (4.16.0)
+    auth0 (4.17.0)
+      addressable (~> 2.7.0)
       jwt (~> 2.2.0)
       rest-client (~> 2.0.0)
       zache (~> 0.12.0)
