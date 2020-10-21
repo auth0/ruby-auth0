@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rest-client', '~> 2.0.0'
   s.add_runtime_dependency 'jwt', '~> 2.2.0'
   s.add_runtime_dependency 'zache', '~> 0.12.0'
+  s.add_runtime_dependency 'addressable', '~> 2.7.0'
 
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'fuubar', '~> 2.0'

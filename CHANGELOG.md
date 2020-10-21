@@ -1,5 +1,13 @@
 # Change Log
 
+## [v4.17.1](https://github.com/auth0/ruby-auth0/tree/v4.17.1) (2020-10-21)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.17.0...v4.17.1)
+
+**Fixed**
+
+- Addressable dependency  [\#247](https://github.com/auth0/ruby-auth0/pull/247) ([davidpatrick](https://github.com/davidpatrick))
+
 
 ## [v4.17.0](https://github.com/auth0/ruby-auth0/tree/v4.17.0) (2020-10-19)
 
