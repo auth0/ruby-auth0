@@ -1,5 +1,38 @@
 # Change Log
 
+## [v5.0.0](https://github.com/auth0/ruby-auth0/tree/v5.0.0) (2020-10-22)
+
+This release addresses some long standing issues with the library that could only be addressed in a major.  We have also removed Api/v1 endpoints and other deprecated methods.
+
+### Migration from v4 to v5
+
+#### Top Level Structs
+The following top level structs were colliding with other libraries, this was addressed in [\#183](183) and have been namespaced with `::Auth0::`
+- `ApiToken` changed to `::Auth0::ApiToken`
+- `Permission` changed to `::Auth0::Permission`
+- `AccessToken` changed to `::AccessToken::AccessToken`
+
+#### Api2 Users create_user method
+This method was requiring you send in a `name`, which was optional, but didn't require `connection_name` which isn't optional. This was fixed in [\#244](244).
+
+`Auth0::Api::V2::Users.create_user(name, options = {})` has changed to `Auth0::Api::V2::Users.create_user(connection_name, options = {})`
+
+#### APIv1 End of Life
+APIv1 endpoints were deprecated in 4.x and now have been removed in v5.  They reached end-of-life in the Public Cloud on 13 July 2020. Migration from v1 to v2 has been documented here https://auth0.com/docs/product-lifecycle/deprecations-and-migrations/migrate-to-management-api-v2
+
+#### Catching 429 Errors
+In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order for backwards compatibility. This class is now inheriting `Auth0::HTTPError`.  If you are catching 429 errors with `Auth0::Unsupported` then you will need to migrate to catching with `Auth0::HTTPError`.
+
+### Changes
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.17.1...v5.0.0)
+
+**Fixed** 
+- Don't define structs as top-level constants (breaking changes) [\#183](https://github.com/auth0/ruby-auth0/pull/183) ([makimoto](https://github.com/makimoto))
+- Fix create_user implementation (breaking changes) [\#244](https://github.com/auth0/ruby-auth0/pull/244) ([davidpatrick](https://github.com/davidpatrick))
+
+**Removed**
+- Removed Deprecations (breaking changes) [\#245](https://github.com/auth0/ruby-auth0/pull/245) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v4.17.1](https://github.com/auth0/ruby-auth0/tree/v4.17.1) (2020-10-21)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.17.0...v4.17.1)
