@@ -31,7 +31,14 @@ module Auth0
                      call(method, url(safe_path), timeout, headers, body.to_json)
                    end
           case result.code
-          when 200...226 then safe_parse_json(result.body)
+          when 200...226 then
+            body = begin
+                     stringio = StringIO.new(result.body.to_s)
+                     Zlib::GzipReader.new(stringio).read
+                   rescue Zlib::GzipFile::Error
+                     result.body
+                   end
+            safe_parse_json(body)
           when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
           when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
           when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
