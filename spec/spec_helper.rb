@@ -4,6 +4,11 @@ require 'faker'
 require 'json'
 require 'auth0'
 
+if RUBY_VERSION >= '2.7.2'
+  # NOTE: https://bugs.ruby-lang.org/issues/17000
+  Warning[:deprecated] = true
+end
+
 require 'simplecov'
 SimpleCov.start
 
