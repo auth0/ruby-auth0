@@ -1,8 +1,21 @@
 version: 2.1
+
+executors:
+  ruby-image:
+    parameters:
+      ruby_version:
+        type: string
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_version >>-buster
+
 jobs:
   run-tests:
-    docker:
-      - image: circleci/ruby:2.5.7-buster
+    parameters:
+      ruby_version:
+        type: string
+    executor:
+      name: ruby-image
+      ruby_version: << parameters.ruby_version >>
     steps:
       - checkout
       - restore_cache:
@@ -20,4 +33,7 @@ jobs:
 workflows:
   tests:
     jobs:
-      - run-tests
+      - run-tests:
+          matrix:
+            parameters:
+              ruby_version: ["2.5.8", "2.6.6", "2.7.2"]
