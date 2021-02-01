@@ -6,7 +6,7 @@ describe Auth0::Api::V2::UserBlocks do
     before(:all) do
       @client = Auth0Client.new(v2_creds)
       username = Faker::Internet.user_name
-      @email = "#{entity_suffix}#{Faker::Internet.safe_email(username)}"
+      @email = "#{entity_suffix}#{Faker::Internet.safe_email(name: username)}"
       password = Faker::Internet.password
       @user = client.create_user(username,  'email' => email,
                                             'password' => password,

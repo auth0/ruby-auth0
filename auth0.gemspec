@@ -21,17 +21,18 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'zache', '~> 0.12.0'
   s.add_runtime_dependency 'addressable', '~> 2.7.0'
 
+  s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'fuubar', '~> 2.0'
   s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'pry', '~> 0.10'
   s.add_development_dependency 'pry-nav', '~> 0.2.4'
-  s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
+  s.add_development_dependency 'rspec', '~> 3.5'
   s.add_development_dependency 'rack-test', '~> 0.6'
   s.add_development_dependency 'rack', '~> 2.1.2'
   s.add_development_dependency 'simplecov', '~> 0.9'
-  s.add_development_dependency 'faker', '~> 1.4'
+  s.add_development_dependency 'faker', '~> 2.0'
   s.add_development_dependency 'gem-release', '~> 0.7'
   s.license = 'MIT'
 end

@@ -11,3 +11,4 @@ coverage
 *.swo
 spec/auth0.yml
 .env
+/Gemfile.lock
