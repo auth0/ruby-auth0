@@ -296,7 +296,7 @@ module Auth0
         # @param user_id [string] The user_id of the recovery codes to regenerate.
         def generate_recovery_code(user_id)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
-          post "#{users_path}/#{user_id}/recovery-code-generation"
+          post "#{users_path}/#{user_id}/recovery-code-regeneration"
         end
 
         # Invalidate all remembered browsers for all authentication factors for a specific user.

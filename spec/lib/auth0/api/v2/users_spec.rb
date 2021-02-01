@@ -524,7 +524,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to get generate a recovery code' do
-      expect(@instance).to receive(:post).with('/api/v2/users/USER_ID/recovery-code-generation')
+      expect(@instance).to receive(:post).with('/api/v2/users/USER_ID/recovery-code-regeneration')
       expect do
         @instance.generate_recovery_code('USER_ID')
       end.not_to raise_error
