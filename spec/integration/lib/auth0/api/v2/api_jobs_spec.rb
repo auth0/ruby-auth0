@@ -4,7 +4,7 @@ describe Auth0::Api::V2::Jobs do
 
   let(:client) { Auth0Client.new(v2_creds) }
   let(:username) { Faker::Internet.user_name }
-  let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(username)}" }
+  let(:email) { "#{entity_suffix}#{Faker::Internet.safe_email(name: username)}" }
   let(:connection_id) do
     VCR.use_cassette('Auth0_Api_V2_Jobs/search_for_connection_id') do
       client.connections.find do |connection|

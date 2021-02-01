@@ -1,8 +1,30 @@
 version: 2.1
+
+matrix_ruby_versions: &matrix_ruby_versions
+  matrix:
+    parameters:
+      ruby_version: ["2.5", "2.6", "2.7", "3.0"]
+# Default version of ruby to use for lint and publishing
+default_ruby_version: &default_ruby_version "2.7"
+
+executors:
+  ruby-image:
+    parameters:
+      ruby_version:
+        type: string
+        default: *default_ruby_version
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_version >>
+
 jobs:
   run-tests:
-    docker:
-      - image: circleci/ruby:2.5.7-buster
+    parameters:
+      ruby_version:
+        type: string
+        default: *default_ruby_version
+    executor:
+      name: ruby-image
+      ruby_version: << parameters.ruby_version >>
     steps:
       - checkout
       - restore_cache:
@@ -20,4 +42,5 @@ jobs:
 workflows:
   tests:
     jobs:
-      - run-tests
+      - run-tests:
+          <<: *matrix_ruby_versions
