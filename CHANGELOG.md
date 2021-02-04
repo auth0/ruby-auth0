@@ -1,5 +1,21 @@
 # Change Log
 
+## [v5.0.1](https://github.com/auth0/ruby-auth0/tree/v5.0.1) (2021-02-02)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.0.0..v5.0.1)
+
+**Added**
+
+- Add test support for Ruby 2.6 and 2.7 and 3.0 [\#256](https://github.com/auth0/ruby-auth0/pull/256) ([fursich](https://github.com/fursich))
+
+**Fixed**
+
+- Fixes recovery-code-regeneration URL [\#257](https://github.com/auth0/ruby-auth0/pull/257) ([epintos](https://github.com/apps/epintos))
+
+**Security**
+
+- Bumps nokogiri from 1.10.10 to 1.11.1 [\#258](https://github.com/auth0/ruby-auth0/pull/258) ([dependabot](https://github.com/apps/dependabot))
+
 ## [v5.0.0](https://github.com/auth0/ruby-auth0/tree/v5.0.0) (2020-10-22)
 
 This release addresses some long standing issues with the library that could only be addressed in a major.  We have also removed Api/v1 endpoints and other deprecated methods.
