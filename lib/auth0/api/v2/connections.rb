@@ -9,6 +9,7 @@ module Auth0
         # being specified. Accepts a list of fields to include or exclude in the resulting list of connection objects.
         # @see https://auth0.com/docs/api/management/v2#!/Connections/get_connections
         # @param strategy [string] Strategy to filter connection results.
+        # @param name [string] Name to filter connection results.
         # @param fields [string] A comma separated list of fields to include or exclude from the result.
         # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         # @param page [int] Page number to get, 0-based.
@@ -16,6 +17,7 @@ module Auth0
         # @return [json] Returns the existing connections matching the strategy.
         def connections(
           strategy: nil,
+          name: nil,
           fields: nil,
           include_fields: nil,
           page: nil,
@@ -24,6 +26,7 @@ module Auth0
           include_fields = true if !fields.nil? && include_fields.nil?
           request_params = {
             strategy: strategy,
+            name: name,
             fields: fields.is_a?(Array) ? fields.join(',') : fields,
             include_fields: include_fields,
             page: !page.nil? ? page.to_i : nil,
