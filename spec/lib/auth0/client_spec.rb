@@ -29,7 +29,7 @@ describe Auth0::Client do
   let(:client_id) { '__test_client_id__' }
   let(:client_secret) { '__test_client_secret__' }
   let(:access_token) { '__test_access_token__' }
-  let(:audience) { "https://#{domain}/api/v2/" }
+  let(:organization) { '__test_organization__'}
 
   describe 'V2 client with token' do
 
@@ -84,13 +84,12 @@ describe Auth0::Client do
       it_should_behave_like 'Authentication API client'
     end
 
-    context 'with token, audience, and client_secret' do
+    context 'with token and client_secret' do
       let(:subject) do
         Auth0::Client.new(
           token: access_token,
           domain: domain,
           client_secret: client_secret,
-          audience: audience
         )
       end
       it_should_behave_like 'v2 API client'
@@ -99,19 +98,53 @@ describe Auth0::Client do
   end
 
   describe 'V2 client without token' do
-
-    before do
-      stub_api_token
-    end
-
     context 'should try to get an API token' do
+      before do
+        stub_api_token
+      end
 
       let(:subject) do
         Auth0::Client.new(
           domain: domain,
           client_id: client_id,
           client_secret: client_secret,
-          audience: audience
+        )
+      end
+      it_should_behave_like 'v2 API client'
+      it_should_behave_like 'Authentication API client'
+    end
+
+    context 'when try to get an API tokenwith api_identifier' do
+      let(:api_identifier) { 'https://samples.api_identifier/api/v2/' }
+
+      before do
+        stub_api_token_with_api_identifier 
+      end
+
+      let(:subject) do
+        Auth0::Client.new(
+          domain: domain,
+          client_id: client_id,
+          client_secret: client_secret,
+          api_identifier: api_identifier
+        )
+      end
+
+      it_should_behave_like 'v2 API client'
+      it_should_behave_like 'Authentication API client'  
+    end
+
+    context 'when try to get an API tokenwith organization' do
+      before do
+        stub_api_token_with_organization
+      end
+
+      let(:subject) do
+        Auth0::Client.new(
+          domain: domain,
+          client_id: client_id,
+          client_secret: client_secret,
+          organization: organization
         )
       end
       it_should_behave_like 'v2 API client'
@@ -125,7 +158,6 @@ describe Auth0::Client do
           Auth0::Client.new(
             domain: domain,
             client_id: client_id,
-            audience: audience
           )
         end.to raise_error('Must supply a valid API token')
       end
@@ -140,7 +172,45 @@ describe Auth0::Client do
             grant_type: 'client_credentials',
             client_id: client_id,
             client_secret: client_secret,
-            audience: audience
+            audience: "https://#{domain}/api/v2/"
+          }
+        )
+      )
+      .to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        body: '{"access_token":"__test_access_token__"}',
+        status: 200
+      )
+  end
+
+  def stub_api_token_with_api_identifier
+    stub_request(:post, "https://#{domain}/oauth/token")
+      .with(
+        body: hash_including(
+          {
+            grant_type: 'client_credentials',
+            client_id: client_id,
+            client_secret: client_secret,
+            audience: api_identifier
+          }
+        )
+      )
+      .to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        body: '{"access_token":"__test_access_token__"}',
+        status: 200
+      )
+  end
+
+  def stub_api_token_with_organization
+    stub_request(:post, "https://#{domain}/oauth/token")
+      .with(
+        body: hash_including(
+          {
+            grant_type: 'client_credentials',
+            client_id: client_id,
+            client_secret: client_secret,
+            organization: organization
           }
         )
       )
