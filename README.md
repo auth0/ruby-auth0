@@ -113,6 +113,61 @@ In addition to the Management API, this SDK also provides access to [Authenticat
 
 Please note that this module implements endpoints that might be deprecated for newer tenants. If you have any questions about how and when the endpoints should be used, consult the [documentation](https://auth0.com/docs/api/authentication) or ask in our [Community forums](https://community.auth0.com/tags/wordpress).
 
+### Organizations (Closed Beta)
+
+Organizations is a set of features that provide better support for developers who build and maintain SaaS and Business-to-Business (B2B) applications.
+
+Using Organizations, you can:
+
+- Represent teams, business customers, partner companies, or any logical grouping of users that should have different ways of accessing your applications, as organizations.
+- Manage their membership in a variety of ways, including user invitation.
+- Configure branded, federated login flows for each organization.
+- Implement role-based access control, such that users can have different roles when authenticating in the context of different organizations.
+- Build administration capabilities into your products, using Organizations APIs, so that those businesses can manage their own organizations.
+
+Note that Organizations is currently only available to customers on our Enterprise and Startup subscription plans.
+
+#### Logging in with an Organization
+
+Configure the Authentication API client and pass your Organization ID to the authorize url:
+
+```ruby
+require 'auth0'
+
+@auth0_client ||= Auth0Client.new(
+  client_id: '{YOUR_APPLICATION_CLIENT_ID}',
+  client_secret: '{YOUR_APPLICATION_CLIENT_SECRET}',
+  domain: '{YOUR_TENANT}.auth0.com'
+)
+
+universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}", {
+  organization: "{YOUR_ORGANIZATION_ID}",
+})
+
+# redirect_to universal_login_url
+```
+
+#### Accepting user invitations
+
+Auth0 Organizations allow users to be invited using emailed links, which will direct a user back to your application. The URL the user will arrive at is based on your configured `Application Login URI`, which you can change from your Application's settings inside the Auth0 dashboard.  When they arrive at this URL, a `invitation` and `organization` query parameters will be provided
+
+```ruby
+require 'auth0'
+
+@auth0_client ||= Auth0Client.new(
+  client_id: '{YOUR_APPLICATION_CLIENT_ID}',
+  client_secret: '{YOUR_APPLICATION_CLIENT_ID}',
+  domain: '{YOUR_TENANT}.auth0.com'
+)
+
+universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}", {
+  organization: "{ORGANIZATION_QUERY_PARAM}",
+  invitation: "{INVITATION_QUERY_PARAM}"
+})
+
+# redirect_to universal_login_url
+```
+
 ## ID Token Validation
 
 An ID token may be present in the credentials received after authentication. This token contains information associated with the user that has just logged in, provided the scope used contained `openid`. You can [read more about ID tokens here](https://auth0.com/docs/tokens/concepts/id-tokens).

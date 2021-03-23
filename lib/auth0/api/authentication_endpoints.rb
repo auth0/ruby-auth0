@@ -14,18 +14,24 @@ module Auth0
       # Request an API access token using a Client Credentials grant
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
       # @param audience [string] API audience to use
+      # @param organization [string] Organization ID
       # @return [json] Returns the API token
       def api_token(
         client_id: @client_id,
         client_secret: @client_secret,
-        audience: "https://#{@domain}/api/v2/"
+        audience: "https://#{@domain}/api/v2/",
+        organization: ''
       )
+
         request_params = {
           grant_type: 'client_credentials',
           client_id: client_id,
           client_secret: client_secret,
           audience: audience
         }
+
+        request_params[:organization] = organization if !organization.empty?
+
         response = post('/oauth/token', request_params)
         ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
       end
@@ -220,7 +226,7 @@ module Auth0
       # Return an authorization URL.
       # @see https://auth0.com/docs/api/authentication#authorization-code-grant
       # @param redirect_uri [string] URL to redirect after authorization
-      # @param options [hash] Can contain response_type, connection, state and additional_parameters.
+      # @param options [hash] Can contain response_type, connection, state, organization, invitation, and additional_parameters.
       # @return [url] Authorization URL.
       def authorization_url(redirect_uri, options = {})
         raise Auth0::InvalidParameter, 'Must supply a valid redirect_uri' if redirect_uri.to_s.empty?
@@ -231,7 +237,9 @@ module Auth0
           connection: options.fetch(:connection, nil),
           redirect_uri: redirect_uri,
           state: options.fetch(:state, nil),
-          scope: options.fetch(:scope, nil)
+          scope: options.fetch(:scope, nil),
+          organization: options.fetch(:organization, nil),
+          invitation: options.fetch(:invitation, nil)
         }.merge(options.fetch(:additional_parameters, {}))
 
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
