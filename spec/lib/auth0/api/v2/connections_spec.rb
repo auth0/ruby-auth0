@@ -14,6 +14,7 @@ describe Auth0::Api::V2::Connections do
       expect(@instance).to receive(:get).with(
         '/api/v2/connections',
         strategy: nil,
+        name: nil,
         fields: nil,
         include_fields: nil,
         page: nil,
@@ -28,6 +29,7 @@ describe Auth0::Api::V2::Connections do
         include_fields: true,
         fields: 'name',
         strategy: nil,
+        name: nil,
         page: nil,
         per_page: nil
       )
@@ -42,6 +44,7 @@ describe Auth0::Api::V2::Connections do
         include_fields: true,
         fields: 'name,strategy',
         strategy: nil,
+        name: nil,
         page: nil,
         per_page: nil
       )
@@ -56,6 +59,7 @@ describe Auth0::Api::V2::Connections do
         page: 1,
         per_page: 10,
         strategy: nil,
+        name: nil,
         fields: nil,
         include_fields: nil
       )
