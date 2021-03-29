@@ -143,6 +143,12 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       expect { instance.validate(token) }.to raise_exception('Must supply a valid nonce')
     end
 
+    it 'is expected to raise an error with an empty organization' do
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: '' }))
+
+      expect { instance.validate(token) }.to raise_exception('Must supply a valid organization')
+    end
+
     it 'is expected to raise an error with an empty issuer' do
       instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ issuer: '' }))
 
@@ -276,6 +282,32 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ max_age: max_age, clock: clock }))
 
       expect { instance.validate(token) }.to raise_exception("Authentication Time (auth_time) claim in the ID token indicates that too much time has passed since the last end-user authentication. Current time \"#{clock}\" is after last auth at \"#{auth_time}\"")
+    end
+
+    it 'is expected not to raise an error when org_id exsist in the token, but not required' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
+      expect { @instance.validate(token) }.not_to raise_exception
+    end
+
+    it 'is expected to raise an error with a missing but required organization' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE4MTg1LCJpYXQiOjE2MTY0NDUzODUsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTc4NX0.UMo5pmgceXO9lIKzbk7X0ZhE5DOe0IP2LfMKdUj03zQ'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'a1b2c3d4e5' }))
+
+      expect { instance.validate(token) }.to raise_exception('Organization Id (org_id) claim must be a string present in the ID token')
+    end
+
+    it 'is expected to raise an error with an invalid organization' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'a1b2c3d4e5' }))
+
+      expect { instance.validate(token) }.to raise_exception('Organization Id (org_id) claim value mismatch in the ID token; expected "a1b2c3d4e5", found "testOrg"')
+    end
+
+    it 'is expected to NOT raise an error with a valid organization' do
+      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
+      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'testOrg' }))
+
+      expect { instance.validate(token) }.not_to raise_exception
     end
   end
 end

@@ -100,11 +100,13 @@ module Auth0
           issuer = @context[:issuer]
           audience = @context[:audience]
           max_age = @context[:max_age]
+          org = @context[:organization]
 
           raise Auth0::InvalidParameter, 'Must supply a valid leeway' unless leeway.is_a?(Integer) && leeway >= 0
           raise Auth0::InvalidParameter, 'Must supply a valid nonce' unless nonce.nil? || !nonce.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid issuer' unless issuer.nil? || !issuer.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid audience' unless audience.nil? || !audience.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid organization' unless org.nil? || !org.to_s.empty?
 
           unless max_age.nil? || (max_age.is_a?(Integer) && max_age >= 0)
             raise Auth0::InvalidParameter, 'Must supply a valid max_age'
@@ -118,6 +120,7 @@ module Auth0
           validate_nonce(claims, nonce) if nonce
           validate_azp(claims, audience) if claims['aud'].is_a?(Array) && claims['aud'].count > 1
           validate_auth_time(claims, max_age, leeway) if max_age
+          validate_org(claims, org) if org
         end
         # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
@@ -181,6 +184,17 @@ module Auth0
           unless expected == claims['nonce']
             raise Auth0::InvalidIdToken, "Nonce (nonce) claim mismatch in the ID token; expected \"#{expected}\","\
                                          " found \"#{claims['nonce']}\""
+          end
+        end
+
+        def validate_org(claims, expected)
+          unless claims.key?('org_id') && claims['org_id'].is_a?(String)
+            raise Auth0::InvalidIdToken, 'Organization Id (org_id) claim must be a string present in the ID token'
+          end
+
+          unless expected == claims['org_id']
+            raise Auth0::InvalidIdToken, "Organization Id (org_id) claim value mismatch in the ID token; expected \"#{expected}\","\
+                                         " found \"#{claims['org_id']}\""
           end
         end
 
