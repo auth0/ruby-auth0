@@ -308,6 +308,18 @@ module Auth0
           post "#{users_path}/#{user_id}/multifactor/actions/invalidate-remember-browser"
         end
 
+
+        # Get a list of organizations for a user.
+        #
+        # @param user_id [string] The user_id of the permissions to get.
+        #
+        # @return [json] Returns organizations for the given user_id.
+        def get_user_organizations(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          get "#{users_path}/#{user_id}/organizations"
+        end
+
         private
 
         # Users API path

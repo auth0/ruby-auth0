@@ -119,6 +119,17 @@ describe Auth0::Api::V2::Jobs do
       )
     end
 
+    it 'expect client to accept organization_id' do
+      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email',
+        user_id: 'user_id',
+        organization_id: 'org_id'
+      )
+
+      expect {
+        @instance.send_verification_email('user_id', organization_id: 'org_id')
+      }.not_to raise_error
+    end
+
     it 'should raise an error if the user_id is empty' do
       expect do
         @instance.send_verification_email('')

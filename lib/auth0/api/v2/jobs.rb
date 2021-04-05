@@ -81,13 +81,15 @@ module Auth0
         # @param identity [hash] Used to verify secondary, federated, and passwordless-email identities.
         #   * :user_id [string] user_id of the identity.
         #   * :provider [string] provider of the identity.
+        # @param organization_id [string] organization id
         #
         # @return [json] Returns the job status and properties.
-        def send_verification_email(user_id, client_id = nil, identity: nil)
+        def send_verification_email(user_id, client_id = nil, identity: nil, organization_id: nil)
           raise Auth0::InvalidParameter, 'Must specify a user id' if user_id.to_s.empty?
 
           request_params = { user_id: user_id }
           request_params[:client_id] = client_id unless client_id.nil?
+          request_params[:organization_id] = organization_id unless organization_id.nil?
 
           if identity
             unless identity.is_a? Hash

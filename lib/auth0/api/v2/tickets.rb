@@ -15,9 +15,11 @@ module Auth0
         # @param identity [hash] Used to verify secondary, federated, and passwordless-email identities.
         #   * :user_id [string] user_id of the identity.
         #   * :provider [string] provider of the identity.
+        # @param client_id [string] client id
+        # @param organization_id [string] organization id
         #
         # @return [json] Returns the created ticket url.
-        def post_email_verification(user_id, result_url: nil, ttl_sec: nil, identity: nil)
+        def post_email_verification(user_id, result_url: nil, ttl_sec: nil, identity: nil, client_id: nil, organization_id: nil)
           if user_id.to_s.empty?
             raise Auth0::InvalidParameter, 'Must supply a valid user id to post an email verification'
           end
@@ -27,6 +29,8 @@ module Auth0
             result_url: result_url,
             ttl_sec: ttl_sec.is_a?(Integer) ? ttl_sec : nil
           }
+          request_params[:client_id] = client_id unless client_id.nil?
+          request_params[:organization_id] = organization_id unless organization_id.nil?
 
           if identity
             unless identity.is_a? Hash
@@ -53,6 +57,8 @@ module Auth0
         # @param includeEmailInRedirect [boolean] Whether or not we include the email as part of the returnUrl
         # in the reset_email
         # @param new_password [string] The password to be set for the user once the ticket is used.
+        # @param client_id [string] client id
+        # @param organization_id [string] organization id
         #
         # @return [json] Returns the created ticket url.
         def post_password_change(
@@ -63,7 +69,10 @@ module Auth0
             ttl_sec: nil,
             mark_email_as_verified: nil,
             includeEmailInRedirect: nil,
-            new_password: nil)
+            new_password: nil,
+            client_id: nil,
+            organization_id: nil
+          )
 
           booleans = [true, false]
           path = "#{tickets_path}/password-change"
@@ -77,6 +86,9 @@ module Auth0
             includeEmailInRedirect: booleans.include?(includeEmailInRedirect) ? includeEmailInRedirect : nil,
             new_password: new_password
           }
+          request_params[:client_id] = client_id unless client_id.nil?
+          request_params[:organization_id] = organization_id unless organization_id.nil?
+
           post(path, request_params)
         end
 
