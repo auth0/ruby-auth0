@@ -49,7 +49,7 @@ module Auth0
         #
         # @return [json] Returns the organization with the given organization_name if it exists.
         def organization_by_name(organization_name)
-          raise Auth0::MissingOrganizationId, 'Must supply a valid organization_name' if organization_name.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid organization_name' if organization_name.to_s.empty?
           path = "#{organizations_path}/name/#{organization_name}"
           get(path)
         end

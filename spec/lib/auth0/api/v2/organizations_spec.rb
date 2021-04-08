@@ -108,7 +108,7 @@ describe Auth0::Api::V2::Organizations do
     end
 
     it 'is expected to raise an exception when the organization ID is empty' do
-      expect { @instance.organization_by_name(nil) }.to raise_exception(Auth0::MissingOrganizationId)
+      expect { @instance.organization_by_name(nil) }.to raise_exception(Auth0::InvalidParameter)
     end
   end
 
