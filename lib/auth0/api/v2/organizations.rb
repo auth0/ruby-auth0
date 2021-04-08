@@ -55,7 +55,7 @@ module Auth0
         end
 
 
-        # Deletes a single user given its id
+        # Deletes a single organization given its id
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/delete_organizations_by_id
         # @param organization_id [string] The Organization ID
         def delete_organization(organization_id)
