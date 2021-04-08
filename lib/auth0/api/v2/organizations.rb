@@ -47,7 +47,7 @@ module Auth0
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_name_by_name
         # @param organization_id [string] The Organization ID
         #
-        # @return [json] Returns the organization with the given organization_id if it exists.
+        # @return [json] Returns the organization with the given organization_name if it exists.
         def organization_by_name(organization_name)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_name' if organization_name.to_s.empty?
           path = "#{organizations_path}/name/#{organization_name}"
