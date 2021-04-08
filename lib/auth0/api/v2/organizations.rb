@@ -45,7 +45,7 @@ module Auth0
 
         # Get an organization by name. A token with read:organizations scope is required.
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_name_by_name
-        # @param organization_id [string] The Organization ID
+        # @param organization_name [string] The Organization name
         #
         # @return [json] Returns the organization with the given organization_name if it exists.
         def organization_by_name(organization_name)
