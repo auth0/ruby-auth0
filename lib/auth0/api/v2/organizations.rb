@@ -124,7 +124,7 @@ module Auth0
         end
         alias update_organizations_enabled_connection patch_organizations_enabled_connection
 
-        # Add an eanbled connection for an Organization
+        # Add an enabled connection for an Organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/post_enabled_connections
         # @param organization_id [string] The Organization ID
         # @param assign_membership_on_login [boolean] flag to allow assign membership on login
