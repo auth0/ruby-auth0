@@ -59,5 +59,60 @@ describe Auth0::Api::V2::Tickets do
                                                new_password: nil)
       expect {@instance.post_password_change}.not_to raise_error
     end
+    
+    it 'expect client to accept organization_id' do
+      expect(@instance).to receive(:post).with('/api/v2/tickets/password-change',
+        result_url: nil,
+        user_id: nil,
+        connection_id: nil,
+        email: nil,
+        ttl_sec: nil,
+        mark_email_as_verified: nil,
+        includeEmailInRedirect: nil,
+        new_password: nil,
+        client_id: '123',
+        organization_id: '999'
+      )
+      expect {
+        @instance.post_password_change(
+          result_url: nil,
+          user_id: nil,
+          connection_id: nil,
+          email: nil,
+          ttl_sec: nil,
+          mark_email_as_verified: nil,
+          includeEmailInRedirect: nil,
+          new_password: nil,
+          client_id: '123',
+          organization_id: '999')
+      }.not_to raise_error
+    end
+
+    it 'expect client to accept client_id' do
+      expect(@instance).to receive(:post).with('/api/v2/tickets/password-change',
+        result_url: nil,
+        user_id: nil,
+        connection_id: nil,
+        email: nil,
+        ttl_sec: nil,
+        mark_email_as_verified: nil,
+        includeEmailInRedirect: nil,
+        new_password: nil,
+        client_id: '123'
+      )
+      expect {
+        @instance.post_password_change(
+          result_url: nil,
+          user_id: nil,
+          connection_id: nil,
+          email: nil,
+          ttl_sec: nil,
+          mark_email_as_verified: nil,
+          includeEmailInRedirect: nil,
+          new_password: nil,
+          client_id: '123'
+        )
+      }.not_to raise_error
+    end
   end
 end

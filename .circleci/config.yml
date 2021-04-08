@@ -28,12 +28,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - gems-v2-{{ checksum "Gemfile.lock" }}
-            - gems-v2-
-      - run: bundle check || bundle install
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
       - save_cache:
-          key: gems-v2--{{ checksum "Gemfile.lock" }}
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       # Must define DOMAIN, CLIENT_ID, CLIENT_SECRET and MASTER_JWT env

@@ -19,6 +19,7 @@ require 'auth0/api/v2/logs'
 require 'auth0/api/v2/log_streams'
 require 'auth0/api/v2/resource_servers'
 require 'auth0/api/v2/guardian'
+require 'auth0/api/v2/organizations'
 
 module Auth0
   module Api
@@ -45,6 +46,7 @@ module Auth0
       include Auth0::Api::V2::LogStreams
       include Auth0::Api::V2::ResourceServers
       include Auth0::Api::V2::Guardian
+      include Auth0::Api::V2::Organizations
     end
   end
 end

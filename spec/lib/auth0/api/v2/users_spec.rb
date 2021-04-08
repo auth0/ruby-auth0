@@ -549,4 +549,23 @@ describe Auth0::Api::V2::Users do
       end.not_to raise_error
     end
   end
+
+  context '.get_user_organizations' do
+    it 'is expected to respond to a get_user_organizations method' do
+      expect(@instance).to respond_to(:get_user_organizations)
+    end
+
+    it 'is expected to raise an exception when the user ID is empty' do
+      expect { @instance.get_user_organizations(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to get users organizations' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/organizations'
+      )
+      expect do
+        @instance.get_user_organizations('USER_ID')
+      end.not_to raise_error
+    end
+  end
 end
