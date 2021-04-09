@@ -192,7 +192,7 @@ The method takes the following optional keyword parameters:
 | `max_age`     | Integer        | The `max_age` value you sent in the call to `/authorize`, if any.  | `nil`  |
 | `issuer`      | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`  |
 | `audience`    | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.  | `nil`  |
-| `org_id  `    | String         | By default the `org_id` claim will be compared to your **Organization ID**. Use this parameter to override that.  | `nil`  |
+| `organization`| String         | By default the `org_id` claim will be compared to your **Organization ID**. Use this parameter to override that.  | `nil`  |
 
 You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. [We recommend](https://auth0.com/docs/tokens/concepts/signing-algorithms#our-recommendation) that you make use of asymmetric signing algorithms like `RS256` instead of symmetric ones like `HS256`.
 
