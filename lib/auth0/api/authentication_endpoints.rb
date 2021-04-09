@@ -19,18 +19,17 @@ module Auth0
       def api_token(
         client_id: @client_id,
         client_secret: @client_secret,
-        audience: "https://#{@domain}/api/v2/",
-        organization: ''
+        organization: @organization,
+        audience: nil
       )
 
         request_params = {
           grant_type: 'client_credentials',
           client_id: client_id,
           client_secret: client_secret,
-          audience: audience
+          audience: audience,
+          organization: organization
         }
-
-        request_params[:organization] = organization if !organization.empty?
 
         response = post('/oauth/token', request_params)
         ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
@@ -238,7 +237,7 @@ module Auth0
           redirect_uri: redirect_uri,
           state: options.fetch(:state, nil),
           scope: options.fetch(:scope, nil),
-          organization: options.fetch(:organization, nil),
+          organization: options.fetch(:organization, @organization),
           invitation: options.fetch(:invitation, nil)
         }.merge(options.fetch(:additional_parameters, {}))
 
@@ -304,7 +303,7 @@ module Auth0
       # @see https://auth0.com/docs/tokens/guides/validate-id-tokens
       # @param id_token [string] The JWT to validate.
       # @param algorithm [JWKAlgorithm] The expected signing algorithm.
-      #   Defaults to +Auth0::Algorithm::RS256.jwks_url("https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json", lifetime: 10 * 60)+.
+
       # @param leeway [integer] The clock skew to accept when verifying date related claims in seconds.
       #   Must be a non-negative value. Defaults to *60 seconds*.
       # @param nonce [string] The nonce value sent during authentication.
@@ -314,8 +313,10 @@ module Auth0
       #   Defaults to +https://YOUR_AUTH0_DOMAIN/+.
       # @param audience [string] The expected audience claim value.
       #   Defaults to your *Auth0 Client ID*.
+      # @param organization [string] Organization ID
+      #   Defaults to your *Auth0 Organization ID*.
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/ParameterLists
-      def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil)
+      def validate_id_token(id_token, algorithm: nil, leeway: 60, nonce: nil, max_age: nil, issuer: nil, audience: nil, organization: @organization)
         context = {
           issuer: issuer || "https://#{@domain}/",
           audience: audience || @client_id,
@@ -325,6 +326,7 @@ module Auth0
 
         context[:nonce] = nonce unless nonce.nil?
         context[:max_age] = max_age unless max_age.nil?
+        context[:organization] = organization unless !organization
 
         Auth0::Mixins::Validation::IdTokenValidator.new(context).validate(id_token)
       end

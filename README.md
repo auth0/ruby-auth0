@@ -137,12 +137,11 @@ require 'auth0'
 @auth0_client ||= Auth0Client.new(
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_SECRET}',
-  domain: '{YOUR_TENANT}.auth0.com'
+  domain: '{YOUR_TENANT}.auth0.com',
+  organization: "{YOUR_ORGANIZATION_ID}"
 )
 
-universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}", {
-  organization: "{YOUR_ORGANIZATION_ID}",
-})
+universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}")
 
 # redirect_to universal_login_url
 ```
@@ -157,11 +156,12 @@ require 'auth0'
 @auth0_client ||= Auth0Client.new(
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_ID}',
-  domain: '{YOUR_TENANT}.auth0.com'
+  domain: '{YOUR_TENANT}.auth0.com',
+  organization: "{YOUR_ORGANIZATION_ID}"
 )
 
 universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}", {
-  organization: "{ORGANIZATION_QUERY_PARAM}",
+  organization: "{ORGANIZATION_QUERY_PARAM}", # You can override organization if needed
   invitation: "{INVITATION_QUERY_PARAM}"
 })
 
