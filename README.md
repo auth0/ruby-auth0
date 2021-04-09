@@ -192,6 +192,7 @@ The method takes the following optional keyword parameters:
 | `max_age`     | Integer        | The `max_age` value you sent in the call to `/authorize`, if any.  | `nil`  |
 | `issuer`      | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`  |
 | `audience`    | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.  | `nil`  |
+| `org_id  `    | String         | By default the `org_id` claim will be compared to your **Organization ID**. Use this parameter to override that.  | `nil`  |
 
 You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. [We recommend](https://auth0.com/docs/tokens/concepts/signing-algorithms#our-recommendation) that you make use of asymmetric signing algorithms like `RS256` instead of symmetric ones like `HS256`.
 
@@ -212,6 +213,18 @@ rescue Auth0::InvalidIdToken => e
   # Handle error
 end
 ```
+
+### Organization ID Token Validation
+
+If no organization parameter was given to the authorization endpoint, but an org_id claim is present in the ID Token, then the claim should be validated by the application to ensure that the value received is expected or known.
+
+Normally, validating the issuer would be enough to ensure that the token was issued by Auth0, and this check is performed by the SDK. In the case of organizations, additional checks should be made so that the organization within an Auth0 tenant is expected.
+
+In particular, the org_id claim should be checked to ensure it is a value that is already known to the application. This could be validated against a known list of organization IDs, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the ID Token.
+
+If the claim cannot be validated, then the application should deem the token invalid.
+
+For more information, please read [Work with Tokens and Organizations](https://auth0.com/docs/organizations/using-tokens) on Auth0 Docs.
 
 ## Development
 
