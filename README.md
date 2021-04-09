@@ -216,13 +216,24 @@ end
 
 ### Organization ID Token Validation
 
-If no organization parameter was given to the authorization endpoint, but an org_id claim is present in the ID Token, then the claim should be validated by the application to ensure that the value received is expected or known.
+If an org_id claim is present in the Access Token, then the claim should be validated by the API to ensure that the value received is expected or known.
 
-Normally, validating the issuer would be enough to ensure that the token was issued by Auth0, and this check is performed by the SDK. In the case of organizations, additional checks should be made so that the organization within an Auth0 tenant is expected.
+In particular:
 
-In particular, the org_id claim should be checked to ensure it is a value that is already known to the application. This could be validated against a known list of organization IDs, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the ID Token.
+* The issuer (iss) claim should be checked to ensure the token was issued by Auth0
+
+* the org_id claim should be checked to ensure it is a value that is already known to the application. This could be validated against a known list of organization IDs, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the Access Token.
+
+Normally, validating the issuer would be enough to ensure that the token was issued by Auth0. In the case of organizations, additional checks should be made so that the organization within an Auth0 tenant is expected.
 
 If the claim cannot be validated, then the application should deem the token invalid.
+
+```ruby
+begin
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', organization: '{Expected org_id}'
+rescue Auth0::InvalidIdToken => e
+  # In this case the ID Token contents should not be trusted
+end
 
 For more information, please read [Work with Tokens and Organizations](https://auth0.com/docs/organizations/using-tokens) on Auth0 Docs.
 
