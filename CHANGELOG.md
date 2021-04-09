@@ -1,5 +1,18 @@
 # Change Log
 
+## [v5.1.0](https://github.com/auth0/ruby-auth0/tree/v5.1.0) (2021-04-09)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.0.1..v5.1.0)
+
+**Added**
+
+- Org idtoken validation guidance  [\#267](https://github.com/auth0/ruby-auth0/pull/267) ([davidpatrick](https://github.com/davidpatrick))
+- Adds Branding endpoints [\#266](https://github.com/auth0/ruby-auth0/pull/266) ([davidpatrick](https://github.com/davidpatrick))
+- Organizations feature [\#264](https://github.com/auth0/ruby-auth0/pull/264) ([davidpatrick](https://github.com/davidpatrick))
+- Add Organizations support to Authentication API Client [\#263](https://github.com/auth0/ruby-auth0/pull/263) ([davidpatrick](https://github.com/davidpatrick))
+- Add api_identifier as an accepted configurable [\#261](https://github.com/auth0/ruby-auth0/pull/261) ([QWYNBG](https://github.com/QWYNBG))
+- add name param to connections api [\#260](https://github.com/auth0/ruby-auth0/pull/260) ([QWYNBG](https://github.com/QWYNBG))
+
 ## [v5.0.1](https://github.com/auth0/ruby-auth0/tree/v5.0.1) (2021-02-02)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.0.0..v5.0.1)
