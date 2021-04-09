@@ -1,5 +1,6 @@
 require 'auth0/api/v2/anomaly'
 require 'auth0/api/v2/blacklists'
+require 'auth0/api/v2/branding'
 require 'auth0/api/v2/clients'
 require 'auth0/api/v2/client_grants'
 require 'auth0/api/v2/connections'
@@ -7,6 +8,7 @@ require 'auth0/api/v2/device_credentials'
 require 'auth0/api/v2/emails'
 require 'auth0/api/v2/jobs'
 require 'auth0/api/v2/prompts'
+require 'auth0/api/v2/organizations'
 require 'auth0/api/v2/rules'
 require 'auth0/api/v2/roles'
 require 'auth0/api/v2/stats'
@@ -19,7 +21,6 @@ require 'auth0/api/v2/logs'
 require 'auth0/api/v2/log_streams'
 require 'auth0/api/v2/resource_servers'
 require 'auth0/api/v2/guardian'
-require 'auth0/api/v2/organizations'
 
 module Auth0
   module Api
@@ -27,26 +28,27 @@ module Auth0
     module V2
       include Auth0::Api::V2::Anomaly
       include Auth0::Api::V2::Blacklists
+      include Auth0::Api::V2::Branding
       include Auth0::Api::V2::Clients
       include Auth0::Api::V2::ClientGrants
       include Auth0::Api::V2::Connections
       include Auth0::Api::V2::DeviceCredentials
       include Auth0::Api::V2::Emails
+      include Auth0::Api::V2::Guardian
       include Auth0::Api::V2::Jobs
+      include Auth0::Api::V2::Logs
+      include Auth0::Api::V2::LogStreams
       include Auth0::Api::V2::Prompts
+      include Auth0::Api::V2::Organizations
       include Auth0::Api::V2::Rules
       include Auth0::Api::V2::Roles
       include Auth0::Api::V2::Stats
       include Auth0::Api::V2::Users
       include Auth0::Api::V2::UsersByEmail
       include Auth0::Api::V2::UserBlocks
+      include Auth0::Api::V2::ResourceServers
       include Auth0::Api::V2::Tenants
       include Auth0::Api::V2::Tickets
-      include Auth0::Api::V2::Logs
-      include Auth0::Api::V2::LogStreams
-      include Auth0::Api::V2::ResourceServers
-      include Auth0::Api::V2::Guardian
-      include Auth0::Api::V2::Organizations
     end
   end
 end
