@@ -127,15 +127,18 @@ module Auth0
         # Add an enabled connection for an Organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/post_enabled_connections
         # @param organization_id [string] The Organization ID
+        # @param connection_id [string] The Organization ID
         # @param assign_membership_on_login [boolean] flag to allow assign membership on login
         #
         # @return [json] Returns the connection for the given organization
-        def create_organizations_enabled_connection(organization_id, assign_membership_on_login: false)
+        def create_organizations_enabled_connection(organization_id, connection_id, assign_membership_on_login: false)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
           path = "#{organizations_enabled_connections_path(organization_id)}"
           
           body = {}
           body[:assign_membership_on_login] = assign_membership_on_login
+          body[:connection_id] = connection_id
 
           post(path, body)
         end
