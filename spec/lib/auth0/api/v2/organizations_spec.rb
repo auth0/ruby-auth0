@@ -247,14 +247,19 @@ describe Auth0::Api::V2::Organizations do
       expect(@instance).to receive(:post).with(
         '/api/v2/organizations/org_id/enabled_connections',
         {
+          connection_id: 'connection_id',
           assign_membership_on_login: true
         }
       )
-      @instance.create_organizations_enabled_connection('org_id', assign_membership_on_login: true)
+      @instance.create_organizations_enabled_connection('org_id', 'connection_id', assign_membership_on_login: true)
     end
 
     it 'is expected to raise an exception when the organization id is empty' do
-      expect { @instance.create_organizations_enabled_connection(nil) }.to raise_exception(Auth0::MissingOrganizationId)
+      expect { @instance.create_organizations_enabled_connection(nil, nil) }.to raise_exception(Auth0::MissingOrganizationId)
+    end
+
+    it 'is expected to raise an exception when the connection id is empty' do
+      expect { @instance.create_organizations_enabled_connection('123', nil) }.to raise_error 'Must supply a valid connection id'
     end
   end
 
