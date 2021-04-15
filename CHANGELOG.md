@@ -1,5 +1,14 @@
 # Change Log
 
+## [v5.1.01(https://github.com/auth0/ruby-auth0/tree/v5.1.1) (2021-04-14)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.0..v5.1.1)
+
+**Fixed**
+
+- Fixes create_organizations_enabled_connection [\#269](https://github.com/auth0/ruby-auth0/pull/269) ([davidpatrick](https://github.com/apps/davidpatrick))
+
+
 ## [v5.1.0](https://github.com/auth0/ruby-auth0/tree/v5.1.0) (2021-04-09)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.0.1..v5.1.0)
