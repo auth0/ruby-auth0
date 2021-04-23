@@ -104,9 +104,9 @@ describe Auth0::Mixins::HTTPProxy do
       it "should raise Auth0::RateLimitEncountered on send http #{http_method} method
         to path defined through HTTP when 429 recieved" do
         headers = {
-          'X-RateLimit-Limit'     => 10,
-          'X-RateLimit-Remaining' => 0,
-          'X-RateLimit-Reset'     => 1560564149
+          :x_ratelimit_limit     => 10,
+          :x_ratelimit_remaining => 0,
+          :x_ratelimit_reset     => 1560564149
         }
         @exception.response = StubResponse.new({}, false, 429, headers)
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
@@ -127,7 +127,7 @@ describe Auth0::Mixins::HTTPProxy do
             reset: Time.at(1560564149)
           )
         }
-      end      
+      end
 
       it "should raise Auth0::ServerError on send http #{http_method} method
         to path defined through HTTP when 500 received" do
@@ -188,13 +188,13 @@ describe Auth0::Mixins::HTTPProxy do
           .and_raise(@exception)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unauthorized)
       end
-      
+
       it "should raise Auth0::RateLimitEncountered on send http #{http_method} method
         to path defined through HTTP when 429 status received" do
         headers = {
-          'X-RateLimit-Limit'     => 10,
-          'X-RateLimit-Remaining' => 0,
-          'X-RateLimit-Reset'     => 1560564149
+          :x_ratelimit_limit     => 10,
+          :x_ratelimit_remaining => 0,
+          :x_ratelimit_reset     => 1560564149
         }
         @exception.response = StubResponse.new({}, false, 429,headers)
         allow(RestClient::Request).to receive(:execute).with(method: http_method,
