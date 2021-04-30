@@ -53,7 +53,7 @@ module Auth0
   # Auth0 API rate-limiting encountered
   class RateLimitEncountered < Auth0::HTTPError
     def reset
-      Time.at(headers['X-RateLimit-Reset']).utc
+      Time.at(Integer(headers[:x_ratelimit_reset])).utc
     end
   end
 
