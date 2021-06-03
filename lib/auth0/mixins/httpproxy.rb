@@ -26,7 +26,10 @@ module Auth0
                      call(:delete, url(safe_path), timeout, headers, body.to_json)
                    elsif method == :post_file
                      body.merge!(multipart: true)
-                     call(:post, url(safe_path), timeout, headers, body)
+                     # Ignore the default Content-Type headers and let the HTTP client define them
+                     post_file_headers = headers.slice(*headers.keys - ['Content-Type'])
+                     # Actual call with the altered headers
+                     call(:post, url(safe_path), timeout, post_file_headers, body)
                    else
                      call(method, url(safe_path), timeout, headers, body.to_json)
                    end
