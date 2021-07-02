@@ -22,9 +22,9 @@ describe Auth0::Api::V2::DeviceCredentials do
       )
       expect { @instance.device_credentials(client_id) }.not_to raise_error
     end
-    it 'is expect to raise an error when type is not one of \'public_key\', \'refresh_token\'' do
+    it 'is expect to raise an error when type is not one of \'public_key\', \'refresh_token\', \'rotating_refresh_token\'' do
       expect { @instance.device_credentials(client_id, type: 'invalid_type') }.to raise_error(
-        'Type must be one of \'public_key\', \'refresh_token\''
+        'Type must be one of \'public_key\', \'refresh_token\', \'rotating_refresh_token\''
       )
     end
   end
