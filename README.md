@@ -234,6 +234,7 @@ begin
 rescue Auth0::InvalidIdToken => e
   # In this case the ID Token contents should not be trusted
 end
+```
 
 For more information, please read [Work with Tokens and Organizations](https://auth0.com/docs/organizations/using-tokens) on Auth0 Docs.
 
