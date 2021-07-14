@@ -81,8 +81,11 @@ module Auth0
         def delete_connection_user(connection_id, user_email)
           raise Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid user email' if user_email.to_s.empty?
-          path = "#{connections_path}/#{connection_id}/users?email=#{user_email}"
-          delete(path)
+          path = "#{connections_path}/#{connection_id}/users"
+          request_params = {
+            email: user_email
+          }
+          delete(path, request_params)
         end
 
         # Updates a connection. Updates the fields specified in the body parameter.
