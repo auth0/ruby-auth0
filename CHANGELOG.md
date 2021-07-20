@@ -1,5 +1,21 @@
 # Change Log
 
+## [v5.2.0](https://github.com/auth0/ruby-auth0/tree/v5.2.0) (2021-07-20)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.2..v5.2.0)
+
+**Fixed**
+
+- Ensure email param is properly encoded in delete_connection_user [\#280](https://github.com/auth0/ruby-auth0/pull/280) ([widcket](https://github.com/widcket))
+
+**Added**
+
+- Adds Rotating Refresh Token type to Device Credentials [\#275](https://github.com/auth0/ruby-auth0/pull/275) ([epintos](https://github.com/epintos))
+
+**Changed**
+
+- Do not lock dependencies to minor version [\#279](https://github.com/auth0/ruby-auth0/pull/279) ([athix](https://github.com/athix))
+
 ## [v5.1.2](https://github.com/auth0/ruby-auth0/tree/v5.1.2) (2021-07-15)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.1..v5.1.2)
