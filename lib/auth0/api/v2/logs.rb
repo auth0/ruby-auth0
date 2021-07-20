@@ -16,8 +16,8 @@ module Auth0
         #   * :fields [string] A comma separated list of fields to include or exclude from the result.
         #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #   * :include_totals [string] True if a query summary must be included in the result, false otherwise.
-        #   * :from [string] Log Event Id to start retrieving logs. You can limit the amount of logs using the take parameter.
-        #   * :take [integer] The total amount of entries to retrieve when using the from parameter.
+        #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
+        #   * :take [integer] or checkpoint pagination, the number of entries to retrieve. Default 50.
         # Default: 50. Max value: 100.
         #
         # @return [json] Returns the list of existing log entries.
