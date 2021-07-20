@@ -113,7 +113,7 @@ describe Auth0::Api::V2::Connections do
   context '.delete_connection_user' do
     it { expect(@instance).to respond_to(:delete_connection_user) }
     it 'is expected to call delete to /api/v2/connections/connectionId/users' do
-      expect(@instance).to receive(:delete).with('/api/v2/connections/connectionId/users?email=email@test.com')
+      expect(@instance).to receive(:delete).with('/api/v2/connections/connectionId/users', email: 'email@test.com')
       @instance.delete_connection_user('connectionId', 'email@test.com')
     end
 

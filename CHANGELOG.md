@@ -1,5 +1,13 @@
 # Change Log
 
+## [v5.1.2](https://github.com/auth0/ruby-auth0/tree/v5.1.2) (2021-07-15)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.1..v5.1.2)
+
+**Security**
+
+- Bump addressable version per CVE-2021-32740 [\#276](https://github.com/auth0/ruby-auth0/pull/276) ([lostapathy](https://github.com/lostapathy))
+
 ## [v5.1.1](https://github.com/auth0/ruby-auth0/tree/v5.1.1) (2021-04-14)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.0..v5.1.1)

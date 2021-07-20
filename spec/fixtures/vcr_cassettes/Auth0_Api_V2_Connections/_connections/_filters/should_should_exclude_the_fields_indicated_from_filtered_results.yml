@@ -12,48 +12,68 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
       Authorization:
       - Bearer API_TOKEN
-      Host:
-      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Thu, 04 Oct 2018 15:41:06 GMT
+      - Tue, 20 Jul 2021 02:14:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '3'
-      X-Ratelimit-Reset:
-      - '1538667671'
-      Vary:
-      - origin,accept-encoding
+      Cf-Ray:
+      - 6718ada988f531f7-LAX
       Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - no-cache
       Content-Encoding:
       - gzip
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=false&page=0&per_page=50>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=false&page=0&per_page=50>;
+        rel="last"
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - max-age=31536000
+      Vary:
+      - origin,accept-encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6718ada988f531f7
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 43a569100a7a6d38
+      Ot-Tracer-Traceid:
+      - 1968a4b72d72e843
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1626747292'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA72SX4+iMBTFvwvPTlL+7KjzBiigKIujKDgxpNCinUEqbcHBid99qruzuw/7tsk+NTn3d25Pcs/Lh0KQ8qTktErjd8NnDYUZMM5tmcRKT6EnQWjFlacP5VjA2wNzQVqsPAnW4J7CsGhYleKK0bJMORaCVHv+Y3rtKRlrBE4LynKcnhgVOL+t+zJzwaDA+y5tMeN3Xbv+VmUo2IgDkCkITxE9QlKlMmb1taSAJb9HgOVRfvmiRByzCh7xQwg5P1OGHky5AFeC5PBu2fUUXMGsxCjNSyIHd5tunxcDrTsXqN4ERA1VWJiP8BV5TuIejAmXAfTanETlwJ0jN1bbPGPb7Zs2QdplFjlw0x9KxDJo6JUA9NdQdS20jcnSg2M7qtebNzSM3yRi88hQ9dlAFBHx6z38btlkbNIEArF4toEuEXcexEtgi+L4aExP68XGn176mh0cIo+45iKTyBpNwbc9aNXOAhGqyci3ZmYRvQe1amm5Z0gkH03rfO/Z4eBE6203KhL1APzImTy2l3A1LCRSncD4uem7nkMDsCGbmZk5kyJ4XV4S3+Ggk0h9yUY6n3bNKrG1WJ+Ytdbmid4vwxwNV+BWj8tzaOWwaCInmEOj5tNk8VogfxuB4bbsL2tld+39UTAfzN2xTuIVwnDun4x/L9jp56VDWpL8Vpk9pUj538VbYS7sX8ADa7JOSOnvfdtdd58RXtJxdQMAAA==
-    http_version: 
-  recorded_at: Thu, 04 Oct 2018 15:41:06 GMT
-recorded_with: VCR 3.0.3
+        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
+  recorded_at: Tue, 20 Jul 2021 02:14:51 GMT
+recorded_with: VCR 6.0.0
