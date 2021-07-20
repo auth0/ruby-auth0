@@ -12,7 +12,7 @@ module Auth0
         #   * :fields [string] A comma separated list of fields to include or exclude from the result.
         #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #   * :user_id [string] The user_id of the devices to retrieve.
-        #   * :type [string] The type of credentials. Possible values: 'public_key' or 'refresh_token'.
+        #   * :type [string] Type of credentials to retrieve. Must be 'public_key', 'refresh_token' or 'rotating_refresh_token'
         #
         # @return [json] Returns the list of existing devices for the specified client_id.
         # rubocop:disable Metrics/AbcSize
@@ -25,8 +25,8 @@ module Auth0
             type: options.fetch(:type, nil)
           }
           raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
-          if !request_params[:type].nil? && !%w(public_key refresh_token).include?(request_params[:type])
-            raise Auth0::InvalidParameter, 'Type must be one of \'public_key\', \'refresh_token\''
+          if !request_params[:type].nil? && !%w(public_key refresh_token rotating_refresh_token).include?(request_params[:type])
+            raise Auth0::InvalidParameter, 'Type must be one of \'public_key\', \'refresh_token\', \'rotating_refresh_token\''
           end
           get(device_credentials_path, request_params)
         end
