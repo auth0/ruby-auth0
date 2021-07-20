@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_LW7vB80FsVmRF4fN?fields=name,id&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_n8MJ02x2Zs0JBUWN?fields=name,id&include_fields=true
     body:
       encoding: US-ASCII
       string: ''
@@ -12,50 +12,64 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
       Authorization:
       - Bearer API_TOKEN
-      Host:
-      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:17:17 GMT
+      - Tue, 20 Jul 2021 02:14:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '8'
-      X-Ratelimit-Reset:
-      - '1538770639'
-      Vary:
-      - origin,accept-encoding
+      Cf-Ray:
+      - 6718ad9ea9c23173-LAX
       Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - no-cache
       Content-Encoding:
       - gzip
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - max-age=31536000
+      Vary:
+      - origin,accept-encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6718ad9ea9c23173
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 1bb309994137c31b
+      Ot-Tracer-Traceid:
+      - 0747a0f428a15eca
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1626747290'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA6tWykxRslJKzs+L9wk3L3OyMHArDssNcjNJ81PSUcpLzE0F
-        yoakFpc45+flpSaXZObn6RaVJlWWAIWACjKL41PycxMz8+KT4fJKVmmJOcWp
-        tQCC/XfpWwAAAA==
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:17:17 GMT
-recorded_with: VCR 4.0.0
+        H4sIAAAAAAAAA6tWykxRslJKzs+Lz7Pw9TIwqjCKKjbwcgoN91PSUcpLzE0FyoakFpc45+flpSaXZObn6RaVJlWWAIWACjKL41PycxMz8+KT4fJKVmmJOcWptQAJ916aWwAAAA==
+  recorded_at: Tue, 20 Jul 2021 02:14:49 GMT
+recorded_with: VCR 6.0.0
