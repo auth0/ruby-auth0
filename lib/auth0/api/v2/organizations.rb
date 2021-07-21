@@ -224,7 +224,7 @@ module Auth0
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         #
         # @return [json] Returns the members for the given organization
-        def get_organizations_members(organization_id, params = {})
+        def get_organizations_members(organization_id, options = {})
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           request_params = {
             per_page:       options.fetch(:per_page, nil),
