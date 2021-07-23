@@ -16,7 +16,7 @@ module Auth0
         #   * :fields [string] A comma separated list of fields to include or exclude from the result.
         #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #   * :include_totals [string] True if a query summary must be included in the result, false otherwise.
-        #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
         #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         # Default: 50. Max value: 100.
         #
