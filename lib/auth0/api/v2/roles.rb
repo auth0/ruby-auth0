@@ -88,7 +88,7 @@ module Auth0
         #   - per_page: Number of Roles to return.
         #   - page: Page number to return, zero-based.
         #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
-        #   * :take [integer] or checkpoint pagination, the number of entries to retrieve. Default 50.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         def get_role_users(role_id, options = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
