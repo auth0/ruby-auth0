@@ -87,7 +87,7 @@ module Auth0
         # @param options [hash] A hash of options for getting Roles
         #   - per_page: Number of Roles to return.
         #   - page: Page number to return, zero-based.
-        #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
         #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         def get_role_users(role_id, options = {})
