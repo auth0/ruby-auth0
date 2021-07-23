@@ -87,13 +87,17 @@ module Auth0
         # @param options [hash] A hash of options for getting Roles
         #   - per_page: Number of Roles to return.
         #   - page: Page number to return, zero-based.
-        #   - include_totals: True to include query summary in the result, false or nil otherwise.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
+        #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         def get_role_users(role_id, options = {})
           raise Auth0::MissingParameter, 'Must supply a valid role_id' if role_id.to_s.empty?
 
           request_params = {
-            per_page: options.fetch(:per_page, nil),
-            page: options.fetch(:page, nil),
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            from:           options.fetch(:from, nil),
+            take:           options.fetch(:take, nil),
             include_totals: options.fetch(:include_totals, nil)
           }
           get "#{roles_path}/#{role_id}/users", request_params

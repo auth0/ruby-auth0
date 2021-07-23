@@ -12,12 +12,16 @@ module Auth0
         # @param options [hash] The Hash options used to define the paging of rersults
         #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
         #   * :page [integer] The page number. Zero based.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         # @return [json] All Organizations
         def organizations(options = {})
           request_params = {
             per_page:       options.fetch(:per_page, nil),
             page:           options.fetch(:page, nil),
+            from:           options.fetch(:from, nil),
+            take:           options.fetch(:take, nil),
             include_totals: options.fetch(:include_totals, nil)
           }
           get(organizations_path, request_params)
@@ -212,13 +216,25 @@ module Auth0
         # Get Members in a Organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_members
         # @param organization_id [string] The Organization ID
-        # @param user_id [string] The User ID
+        # @param options [hash] The Hash options used to define the paging of rersults
+        #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        #   * :page [integer] The page number. Zero based.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
+        #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         #
         # @return [json] Returns the members for the given organization
-        def get_organizations_members(organization_id)
+        def get_organizations_members(organization_id, options = {})
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
+          request_params = {
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            from:           options.fetch(:from, nil),
+            take:           options.fetch(:take, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
           path = "#{organizations_members_path(organization_id)}"
-          get(path)
+          get(path, request_params)
         end
 
         # Add members in an organization

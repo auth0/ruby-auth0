@@ -152,6 +152,8 @@ describe Auth0::Api::V2::Roles do
         '/api/v2/roles/ROLE_ID/users',
         per_page: nil,
         page: nil,
+        from: nil,
+        take: nil,
         include_totals: nil
       )
       expect { @instance.get_role_users('ROLE_ID') }.not_to raise_error
@@ -162,10 +164,12 @@ describe Auth0::Api::V2::Roles do
         '/api/v2/roles/ROLE_ID/users',
         per_page: 30,
         page: 4,
+        from: 'org_id',
+        take: 50,
         include_totals: true
       )
       expect do
-        @instance.get_role_users('ROLE_ID', per_page: 30, page: 4, include_totals: true)
+        @instance.get_role_users('ROLE_ID', per_page: 30, page: 4, from: 'org_id', take: 50, include_totals: true)
       end.not_to raise_error
     end
   end

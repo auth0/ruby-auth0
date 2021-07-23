@@ -20,6 +20,8 @@ describe Auth0::Api::V2::Organizations do
         '/api/v2/organizations',
         per_page: nil,
         page: nil,
+        from: nil,
+        take: nil,
         include_totals: nil
       )
       expect { @instance.organizations }.not_to raise_error
@@ -30,12 +32,16 @@ describe Auth0::Api::V2::Organizations do
         '/api/v2/organizations',
         per_page: 10,
         page: 1,
+        from: 'org_id',
+        take: 50,
         include_totals: true
       )
       expect do
         @instance.organizations(
           per_page: 10,
           page: 1,
+          from: 'org_id',
+          take: 50,
           include_totals: true
         )
       end.not_to raise_error
@@ -438,19 +444,38 @@ describe Auth0::Api::V2::Organizations do
       expect { @instance.get_organizations_members(nil) }.to raise_exception(Auth0::MissingOrganizationId)
     end
 
-    it 'is expected to get invitations for an org' do
-      expect(@instance).to receive(:get).with(
-        '/api/v2/organizations/org_id/members'
-      )
-      expect { @instance.get_organizations_members('org_id') }.not_to raise_error
-    end
-
     it 'is expected to get members for an org' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/organizations/org_id/members'
+        '/api/v2/organizations/org_id/members',
+        per_page: nil,
+        page: nil,
+        from: nil,
+        take: nil,
+        include_totals: nil
       )
       expect do
         @instance.get_organizations_members('org_id')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get /api/v2/organizations with custom parameters' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/organizations/org_id/members',
+        per_page: 10,
+        page: 1,
+        from: 'org_id',
+        take: 50,
+        include_totals: true
+      )
+      expect do
+        @instance.get_organizations_members(
+          'org_id',
+          per_page: 10,
+          page: 1,
+          from: 'org_id',
+          take: 50,
+          include_totals: true
+        )
       end.not_to raise_error
     end
   end
