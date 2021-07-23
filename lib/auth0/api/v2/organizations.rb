@@ -13,7 +13,7 @@ module Auth0
         #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
         #   * :page [integer] The page number. Zero based.
         #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
-        #   * :take [integer] or checkpoint pagination, the number of entries to retrieve. Default 50.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         # @return [json] All Organizations
         def organizations(options = {})
