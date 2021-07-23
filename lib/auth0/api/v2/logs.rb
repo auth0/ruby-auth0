@@ -17,7 +17,7 @@ module Auth0
         #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #   * :include_totals [string] True if a query summary must be included in the result, false otherwise.
         #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
-        #   * :take [integer] or checkpoint pagination, the number of entries to retrieve. Default 50.
+        #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         # Default: 50. Max value: 100.
         #
         # @return [json] Returns the list of existing log entries.
