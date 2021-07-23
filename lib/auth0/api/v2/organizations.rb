@@ -219,7 +219,7 @@ module Auth0
         # @param options [hash] The Hash options used to define the paging of rersults
         #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
         #   * :page [integer] The page number. Zero based.
-        #   * :from [string] For checkpoint pagination, the Id from which to start selection from.
+        #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
         #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
         #
