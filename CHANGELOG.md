@@ -1,5 +1,13 @@
 # Change Log
 
+## [v5.3.0](https://github.com/auth0/ruby-auth0/tree/v5.3.0) (2021-07-23)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.2.0..v5.3.0)
+
+**Added**
+
+- Checkpoint Pagination [\#284](https://github.com/auth0/ruby-auth0/pull/284) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v5.2.0](https://github.com/auth0/ruby-auth0/tree/v5.2.0) (2021-07-20)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.1.2..v5.2.0)
