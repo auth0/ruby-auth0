@@ -9,8 +9,15 @@ module Auth0
 
       # proxying requests from instance methods to HTTP class methods
       %i(get post post_file put patch delete delete_with_body).each do |method|
-        define_method(method) do |path, body = {}, extra_headers = {}|
-          safe_path = Addressable::URI.escape(path)
+        define_method(method) do |uri, body = {}, extra_headers = {}|
+
+          if base_uri
+            # if a base_uri is set then the uri can be encoded as a path
+            safe_path = Addressable::URI.new(path: uri).normalized_path
+          else
+            safe_path = Addressable::URI.escape(uri)
+          end
+
           body = body.delete_if { |_, v| v.nil? }
           result = if method == :get
                      # Mutate the headers property to add parameters.
