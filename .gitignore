@@ -12,3 +12,8 @@ coverage
 spec/auth0.yml
 .env
 /Gemfile.lock
+/.yardoc/checksums
+/.yardoc/complete
+/.yardoc/object_types
+/.yardoc/objects/root.dat
+/.yardoc/proxy_types
