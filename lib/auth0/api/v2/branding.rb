@@ -35,7 +35,6 @@ module Auth0
 
         # Delete template for New Universal Login Experience
         # @see https://auth0.com/docs/api/management/v2/#!/Branding/delete_universal_login
-        # @param rule_id [string] The id of the rule to delete.
         def delete_branding_templates_for_universal_login
           delete(templates_path)
         end
