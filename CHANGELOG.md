@@ -1,5 +1,17 @@
 # Change Log
 
+## [v5.4.0](https://github.com/auth0/ruby-auth0/tree/v5.4.0) (2021-07-23)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.3.0..v5.4.0)
+
+**Fixed**
+
+- Fixing yard issues with documentation [\#288](https://github.com/auth0/ruby-auth0/pull/288) ([davidpatrick](https://github.com/davidpatrick))
+
+**Changed**
+
+- Change strategy when normalizing path [\#287](https://github.com/auth0/ruby-auth0/pull/287) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v5.3.0](https://github.com/auth0/ruby-auth0/tree/v5.3.0) (2021-07-23)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.2.0..v5.3.0)
