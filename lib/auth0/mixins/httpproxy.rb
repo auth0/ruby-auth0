@@ -1,56 +1,52 @@
 require "addressable/uri"
+require "retryable"
+require_relative "../exception.rb"
 
 module Auth0
   module Mixins
     # here's the proxy for Rest calls based on rest-client, we're building all request on that gem
     # for now, if you want to feel free to use your own http client
     module HTTPProxy
-      attr_accessor :headers, :base_uri, :timeout
+      attr_accessor :headers, :base_uri, :timeout, :retry_count
+      DEAFULT_RETRIES = 3
+      MAX_ALLOWED_RETRIES = 10
+      MAX_REQUEST_RETRY_JITTER = 250
+      MAX_REQUEST_RETRY_DELAY = 1000
+      MIN_REQUEST_RETRY_DELAY = 100
 
       # proxying requests from instance methods to HTTP class methods
       %i(get post post_file put patch delete delete_with_body).each do |method|
         define_method(method) do |uri, body = {}, extra_headers = {}|
-
-          if base_uri
-            # if a base_uri is set then the uri can be encoded as a path
-            safe_path = Addressable::URI.new(path: uri).normalized_path
-          else
-            safe_path = Addressable::URI.escape(uri)
-          end
-
           body = body.delete_if { |_, v| v.nil? }
-          result = if method == :get
-                     # Mutate the headers property to add parameters.
-                     add_headers({params: body})
-                     # Merge custom headers into existing ones for this req.
-                     # This prevents future calls from using them.
-                     get_headers = headers.merge extra_headers
-                     # Make the call with extra_headers, if provided.
-                     call(:get, url(safe_path), timeout, get_headers)
-                   elsif method == :delete
-                     call(:delete, url(safe_path), timeout, add_headers({params: body}))
-                   elsif method == :delete_with_body
-                     call(:delete, url(safe_path), timeout, headers, body.to_json)
-                   elsif method == :post_file
-                     body.merge!(multipart: true)
-                     # Ignore the default Content-Type headers and let the HTTP client define them
-                     post_file_headers = headers.slice(*headers.keys - ['Content-Type'])
-                     # Actual call with the altered headers
-                     call(:post, url(safe_path), timeout, post_file_headers, body)
-                   else
-                     call(method, url(safe_path), timeout, headers, body.to_json)
-                   end
-          case result.code
-          when 200...226 then safe_parse_json(result.body)
-          when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
-          when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
-          when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
-          when 404       then raise Auth0::NotFound.new(result.body, code: result.code, headers: result.headers)
-          when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.code, headers: result.headers)
-          when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
-          else                raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
+
+          Retryable.retryable(retry_options) do
+            request(method, uri, body, extra_headers)
           end
         end
+      end
+
+      def retry_options
+        sleep_timer = lambda do |attempt|
+          wait = 1000 * 2**attempt # Exponential delay with each subsequent request attempt.
+          wait += rand(wait..wait+MAX_REQUEST_RETRY_JITTER) # Add jitter to the delay window.
+          wait = [MAX_REQUEST_RETRY_DELAY, wait].min # Cap delay at MAX_REQUEST_RETRY_DELAY.
+          wait = [MIN_REQUEST_RETRY_DELAY, wait].max # Ensure delay is no less than MIN_REQUEST_RETRY_DELAY.
+          wait / 1000.to_f.round(2) # convert ms to seconds
+        end
+
+        tries = 1 + [Integer(retry_count || DEAFULT_RETRIES), MAX_ALLOWED_RETRIES].min # Cap retries at MAX_ALLOWED_RETRIES
+
+        {
+          tries: tries,
+          sleep: sleep_timer,
+          on: Auth0::RateLimitEncountered
+        }
+      end
+
+      def encode_uri(uri)
+        # if a base_uri is set then the uri can be encoded as a path
+        path = base_uri ? Addressable::URI.new(path: uri).normalized_path : Addressable::URI.escape(uri)
+        url(path)
       end
 
       def url(path)
@@ -67,6 +63,41 @@ module Auth0
         JSON.parse(body.to_s)
       rescue JSON::ParserError
         body
+      end
+
+      def request(method, uri, body, extra_headers)
+        result = if method == :get
+          # Mutate the headers property to add parameters.
+          add_headers({params: body})
+          # Merge custom headers into existing ones for this req.
+          # This prevents future calls from using them.
+          get_headers = headers.merge extra_headers
+          # Make the call with extra_headers, if provided.
+          call(:get, encode_uri(uri), timeout, get_headers)
+        elsif method == :delete
+          call(:delete, encode_uri(uri), timeout, add_headers({params: body}))
+        elsif method == :delete_with_body
+          call(:delete, encode_uri(uri), timeout, headers, body.to_json)
+        elsif method == :post_file
+          body.merge!(multipart: true)
+          # Ignore the default Content-Type headers and let the HTTP client define them
+          post_file_headers = headers.slice(*headers.keys - ['Content-Type'])
+          # Actual call with the altered headers
+          call(:post, encode_uri(uri), timeout, post_file_headers, body)
+        else
+          call(method, encode_uri(uri), timeout, headers, body.to_json)
+        end
+
+        case result.code
+        when 200...226 then safe_parse_json(result.body)
+        when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
+        when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
+        when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
+        when 404       then raise Auth0::NotFound.new(result.body, code: result.code, headers: result.headers)
+        when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.code, headers: result.headers)
+        when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
+        else           raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
+        end
       end
 
       def call(method, url, timeout, headers, body = nil)
