@@ -26,5 +26,12 @@ describe Auth0::Mixins::Initializer do
 
       expect(instance.instance_variable_get('@token')).to eq('123')
     end
+
+    it 'sets retry_count when passed' do
+      params[:token] = '123'
+      params[:retry_count] = 10
+
+      expect(instance.instance_variable_get('@retry_count')).to eq(10)
+    end
   end
 end

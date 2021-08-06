@@ -15,6 +15,7 @@ module Auth0
         @base_uri = base_url(options)
         @headers = client_headers
         @timeout = options[:timeout] || 10
+        @retry_count = options[:retry_count]
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
         @client_secret = options[:client_secret]

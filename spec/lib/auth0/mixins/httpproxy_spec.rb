@@ -6,6 +6,7 @@ describe Auth0::Mixins::HTTPProxy do
     dummy_instance = DummyClassForProxy.new
     dummy_instance.extend(Auth0::Mixins::HTTPProxy)
     dummy_instance.base_uri = "https://auth0.com"
+    dummy_instance.retry_count = 0
 
     @instance = dummy_instance
     @exception = DummyClassForRestClient.new
@@ -151,6 +152,100 @@ describe Auth0::Mixins::HTTPProxy do
                                                               payload: nil)
           .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/te st#test') }.not_to raise_error
+      end
+
+      context "when status 429 is recieved on send http #{http_method} method" do
+        it "should retry 3 times when retry_count is not set" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: { params: {} },
+                                                              payload: nil)
+            .and_raise(@exception)
+          expect(RestClient::Request).to receive(:execute).exactly(4).times
+
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should retry 2 times when retry_count is set to 2" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 2
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: { params: {} },
+                                                              payload: nil)
+            .and_raise(@exception)
+          expect(RestClient::Request).to receive(:execute).exactly(3).times
+
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should not retry when retry_count is set to 0" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 0
+
+          @exception.response = StubResponse.new({}, false, 429)
+
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: { params: {} },
+                                                              payload: nil)
+            .and_raise(@exception)
+          
+          expect(RestClient::Request).to receive(:execute).exactly(1).times
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should have have random retry times grow with jitter backoff" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 2
+          time_entries = []
+          @time_start
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                               url: 'https://auth0.com/test',
+                                                               timeout: nil,
+                                                               headers: { params: {} },
+                                                               payload: nil) do
+
+            time_entries.push(Time.now.to_f - @time_start.to_f)
+            @time_start = Time.now.to_f # restart the clock
+            raise @exception
+          end
+
+          @time_start = Time.now.to_f #start the clock
+          retry_instance.send(http_method, '/test') rescue nil
+          time_entries_first_set = time_entries.shift(time_entries.length)
+
+          retry_instance.send(http_method, '/test') rescue nil
+          time_entries.each_with_index do |entry, index|
+            if index > 0 #skip the first request
+              expect(entry != time_entries_first_set[index])
+            end
+          end
+        end
       end
     end
   end
@@ -300,6 +395,100 @@ describe Auth0::Mixins::HTTPProxy do
                                                               payload: '{}')
           .and_return(StubResponse.new(res, true, 404))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound, res)
+      end
+
+      context "when status 429 is recieved on send http #{http_method} method" do
+        it "should retry 3 times when retry_count is not set" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: nil,
+                                                              payload: '{}')
+            .and_raise(@exception)
+          expect(RestClient::Request).to receive(:execute).exactly(4).times
+
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should retry 2 times when retry_count is set to 2" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 2
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: nil,
+                                                              payload: '{}')
+            .and_raise(@exception)
+          expect(RestClient::Request).to receive(:execute).exactly(3).times
+
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should not retry when retry_count is set to 0" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 0
+
+          @exception.response = StubResponse.new({}, false, 429)
+
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                              url: 'https://auth0.com/test',
+                                                              timeout: nil,
+                                                              headers: nil,
+                                                              payload: '{}')
+            .and_raise(@exception)
+          
+          expect(RestClient::Request).to receive(:execute).exactly(1).times
+          expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
+            expect(error).to be_a(Auth0::RateLimitEncountered)
+          }
+        end
+
+        it "should have have random retry times grow with jitter backoff" do
+          retry_instance = DummyClassForProxy.new
+          retry_instance.extend(Auth0::Mixins::HTTPProxy)
+          retry_instance.base_uri = "https://auth0.com"
+          retry_instance.retry_count = 2
+          time_entries = []
+          @time_start
+
+          @exception.response = StubResponse.new({}, false, 429)
+          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+                                                               url: 'https://auth0.com/test',
+                                                               timeout: nil,
+                                                               headers: nil,
+                                                               payload: '{}') do
+
+            time_entries.push(Time.now.to_f - @time_start.to_f)
+            @time_start = Time.now.to_f # restart the clock
+            raise @exception
+          end
+
+          @time_start = Time.now.to_f #start the clock
+          retry_instance.send(http_method, '/test') rescue nil
+          time_entries_first_set = time_entries.shift(time_entries.length)
+
+          retry_instance.send(http_method, '/test') rescue nil
+          time_entries.each_with_index do |entry, index|
+            if index > 0 #skip the first request
+              expect(entry != time_entries_first_set[index])
+            end
+          end
+        end
       end
     end
   end
