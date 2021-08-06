@@ -1,5 +1,13 @@
 # Change Log
 
+## [v5.5.0](https://github.com/auth0/ruby-auth0/tree/v5.5.0) (2021-08-06)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.4.0..v5.5.0)
+
+**Added**
+
+- Automatically retry requests when API returns a 429 rate-limit status header. [\#290](https://github.com/auth0/ruby-auth0/pull/290) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v5.4.0](https://github.com/auth0/ruby-auth0/tree/v5.4.0) (2021-07-23)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.3.0..v5.4.0)
