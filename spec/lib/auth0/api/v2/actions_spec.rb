@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe Auth0::Api::V2::Actions, focus: true do
+describe Auth0::Api::V2::Actions do
   before :all do
     dummy_instance = DummyClass.new
     dummy_instance.extend(Auth0::Api::V2::Actions)
