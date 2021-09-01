@@ -40,8 +40,20 @@ module Auth0
   class MissingClientId < Auth0::Exception; end
   # exception for unset organization_id
   class MissingOrganizationId < Auth0::Exception; end
+  # exception for unset trigger_id
+  class MissingTriggerId < Auth0::Exception; end
+  # exception for unset action_name
+  class MissingActionName < Auth0::Exception; end
+  # exception for unset action_id
+  class MissingActionId < Auth0::Exception; end
+  # exception for unset execution_id
+  class MissingExecutionId < Auth0::Exception; end
+  # exception for unset trigger_id
+  class MissingTriggerId < Auth0::Exception; end
   # exception for an unset parameter
   class MissingParameter < Auth0::Exception; end
+  # exception for unset version_id
+  class MissingVersionId < Auth0::Exception; end
   # Api v2 access denied
   class AccessDenied < Auth0::HTTPError; end
   # Invalid parameter passed, e.g. empty where ID is required
