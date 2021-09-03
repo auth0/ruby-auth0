@@ -1,3 +1,4 @@
+require 'auth0/api/v2/grants'
 require 'auth0/api/v2/actions'
 require 'auth0/api/v2/anomaly'
 require 'auth0/api/v2/blacklists'
@@ -27,6 +28,7 @@ module Auth0
   module Api
     # https://auth0.com/docs/apiv2
     module V2
+      include Auth0::Api::V2::Grants
       include Auth0::Api::V2::Actions
       include Auth0::Api::V2::Anomaly
       include Auth0::Api::V2::Blacklists
