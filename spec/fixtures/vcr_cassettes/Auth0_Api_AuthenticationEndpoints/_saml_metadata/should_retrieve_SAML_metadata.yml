@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,31 +27,84 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:19:59 GMT
+      - Fri, 03 Sep 2021 20:16:11 GMT
       Content-Type:
       - application/xml; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
-      X-Auth0-Requestid:
-      - 261a63e06dbf0b769d6f
+      Cf-Ray:
+      - 6891a7858af95371-LAX
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
       Content-Disposition:
       - attachment; filename="auth0-sdk-tests_auth0_com-metadata.xml"
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Etag:
+      - W/"ddc-QAFQXB4gmA9zvcgzXuOGTsv019o"
+      Set-Cookie:
+      - did=s%3Av0%3Ac7e877d0-0cf3-11ec-8236-31d73f477009.ivDCeyWDcjHFz3Ua9lFzycgG2Y01%2B20JnCLA3vDYkc8;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac7e877d0-0cf3-11ec-8236-31d73f477009.ivDCeyWDcjHFz3Ua9lFzycgG2Y01%2B20JnCLA3vDYkc8;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
-      Content-Encoding:
-      - gzip
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7858af95371
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 2090f6c0773871b2
+      Ot-Tracer-Traceid:
+      - 0f1847b070de64f7
+      X-Auth0-Requestid:
+      - dd19086c7c8610f0a34e
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '999'
+      X-Ratelimit-Reset:
+      - '1630700172'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA81X25KiSBB9368weh+NbgoVb9HTEcVNkXuDiryVgFCKoFQB6tcvavfsTkfMxF56dzbCBzxknspDZhySZymjmJ7FiAQFPtC8aEU3QBG/PJRFNkYlTcAjCXePNCKUPN3+PwX5/qF12qcZuUfliGAyztA+ImMajB2oa+POExjvI4pCRNHDyy+t1rMiWo5j/uGoQ5HTPMhTpzwc8oJKWbmPCkRxnv2Y9j3vRtsQq9EfBZQk+vJAcJzhLH6LuMco2SZ/rzqh9DBmmLqun+ruU17ETAcAwIAR0wSETfavX1ObZI8DI7HR8Tv0BgpRQfEGB4hGL7qiiKIrCHCzjGGt8DBWZmtuHR6BqIUGHegQTATnOHGUdVe0JV6o51AX7JOyhTEfGwse6u5kKbPhJK41z9ihMwt8zwDBmUtC7zXXBW677oB6mgSG7gYnfQtZ3bVrU1TA8opdpOZaAl+xLdzpjlIrcCUubFuUTukbD3vxJ4SGk8UlnOrlylsAJMJy1RnRRgPf1GPw8e6Y7PBkVAMe2pIMoSlAewiv94VYba4lWBz5dCQla6poTIzOKZtAA2nzmepMS/0Aqmp1sgcT0kU5L3QWm4Qh8ll6BcJUU9LUx/7aXUsgCg77/vSc28ap0xEjlG7kU5897b2B8Lrz4618KLrd/ZIlO67cdVHNYHa55JP1frFPEHMuA6dOZH7braDcI4rgZIvpRgq9EbsUqBae83IR9nZAMaxDTakVyqzIzPv89NKHldIJB2DpMMOOyiFWcq2SrXze7/kjqnH7bTXlVXaYzPaBHaSGFaB1ZHMDgsvjydJ2WtVOj5ZZkkvHDvCMr2t56liYcQ5r4QIEly6x56zOuyB2MBW4rjc7v5JpNlczv9MrTX/U9uBKL7aC4a4C0/I9aet6eLS0FRHakM+BUtsitK5zMX3VebgZSrwLm3tTRufBBLLzUIztJc+7fHIJdNq3/HUvsRYM4AeVms2yGcYiNG/59vCe30wbzO1atFczNfeVpAqMpo8ab0MxjpvbsjTwM1nAbSRbakmqjW/FXHtYeQtW1Ez9lO7EkBkAnjPmyOsfBkbptQGi82wF2/bI6nMSnJvnwq6XkeR0gAZLXNnDQdBj28ax55nqYLNTUy81TZ+llwoTuNUihSfaiFI3X1Vuu7c+sKxaZyPRlT2+PTgDuPcMwXEV3h2IJyZP0NBzluj1MExX5FKgwfKkFubsuJW4PpJcJ511qH48gwocha0iVYrV3g7VnB2p1oqd4WqeVqXanTE8Tww2Ro5mjgyzD6rMGZQod0KcFlx1mXdzZ6B7l8zqZheukvpuJpXtgsGJMMHCwpg7ar6eKqJQ9LmLFtZ6BRientJoR0xXlAHp0Da00wjP/Gz15Zn56BS/Gwvz0VmemTejerM25htvewOdxtnSSMvjvKROVFQ4iFo8zsIG/rFxru9BZDx1XevxNQpxEQX0oaXlwZvtXn2RNMb4Xd9nCNqnB6YTZMuyjPsXJHvsFsQRa41GWzjPgNzznFJh0lt1D8znlmyZjvtflGs0dSiinBd7RF++Vx77xN4QHD5ubpHjaI9wCsOwiAh5Zr4h+Qu8V9nf8h6iogmjzav5M1lpgTKCv0d675jTvEfN7H86ZB+m6x/X+m9N19c6IaUFXpc0al0f+NcthARJMznkqVk9SI4Ot3WkJteNhGOaHw7vOxkTpAjvCXObMnSfsocb071xP5aKmrOv6Hv3ywI/tOSi6X+Ynu/lSI96w9yC79R/YsNDhFyNLc8+WWOMqyi7HvepAidX1hvhTxX36bp+uiJSFp8uynnn/MmdumMbHBWf3rOWIv4dec/Mx0+pl1+emY9fci+/AbajGxzcDQAA
-    http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:19:59 GMT
-recorded_with: VCR 4.0.0
+      string: |-
+        <EntityDescriptor entityID="urn:auth0-sdk-tests.auth0.com" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+          <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <KeyDescriptor use="signing">
+              <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+                <X509Data>
+                  <X509Certificate>MIIDDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNVBAMTGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcNMzEwODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl1hANaLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx22DealfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF4sICSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ETPu1vZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwFHSPi/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEjTXi9WQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZb4hPV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAFE7ZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P65EAUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToYvT+4bp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56aETSlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7uaoSdilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/BtxleksOTDF0s2t+AQleiJZnY=</X509Certificate>
+                </X509Data>
+              </KeyInfo>
+            </KeyDescriptor>
+            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://auth0-sdk-tests.auth0.com/samlp/2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI/logout"/>
+            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://auth0-sdk-tests.auth0.com/samlp/2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI/logout"/>
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://auth0-sdk-tests.auth0.com/samlp/2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"/>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://auth0-sdk-tests.auth0.com/samlp/2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"/>
+            <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="E-Mail Address" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+            <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Given Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+            <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+            <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Surname" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+            <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name ID" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+          </IDPSSODescriptor>
+        </EntityDescriptor>
+  recorded_at: Fri, 03 Sep 2021 20:16:11 GMT
+recorded_with: VCR 6.0.0

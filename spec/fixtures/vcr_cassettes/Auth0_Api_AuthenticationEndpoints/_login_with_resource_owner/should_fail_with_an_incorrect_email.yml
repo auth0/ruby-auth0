@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/oauth/token
     body:
       encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com_invalid","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
+      string: '{"username":"rubytest-210908-username-1@auth0.com_invalid","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '266'
+      - '273'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,26 +29,57 @@ http_interactions:
       message: Forbidden
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:17:52 GMT
+      - Fri, 03 Sep 2021 20:16:12 GMT
       Content-Type:
       - application/json
-      Content-Length:
-      - '72'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a78eaa9d04b4-LAX
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Set-Cookie:
+      - did=s%3Av0%3Ac8c67bc0-0cf3-11ec-a06b-fb16f7884f9b.SifCcrmcjM8PKlpAAH8qLYoWeyeN%2FqvtDC0ZweexKDY;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:12 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac8c67bc0-0cf3-11ec-a06b-fb16f7884f9b.SifCcrmcjM8PKlpAAH8qLYoWeyeN%2FqvtDC0ZweexKDY;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:12 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a78eaa9d04b4
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 238a8dd0640d43a0
+      Ot-Tracer-Traceid:
+      - 431cac8f77136f2c
       X-Auth0-Requestid:
-      - b6bab16857282fef5757
+      - b0a5dc12c514c43e1e72
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '94'
+      - '97'
       X-Ratelimit-Reset:
-      - '1539801484'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - '1630702765'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: '{"error":"invalid_grant","error_description":"Wrong email or password."}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:17:52 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Fri, 03 Sep 2021 20:16:12 GMT
+recorded_with: VCR 6.0.0

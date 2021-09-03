@@ -9,23 +9,25 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 20 Jul 2021 02:14:50 GMT
+      - Fri, 03 Sep 2021 20:16:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,11 +35,9 @@ http_interactions:
       Connection:
       - keep-alive
       Cf-Ray:
-      - 6718ada76f58323e-LAX
+      - 6891a7c7da1352fb-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Link:
       - <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=true&page=0&per_page=50>;
         rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=true&page=0&per_page=50>;
@@ -51,13 +51,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Ot-Baggage-Auth0-Request-Id:
-      - 6718ada76f58323e
+      - 6891a7c7da1352fb
       Ot-Tracer-Sampled:
       - 'true'
       Ot-Tracer-Spanid:
-      - 62e7cb956fc072cc
+      - 6559ff2d71b81c7f
       Ot-Tracer-Traceid:
-      - 3f541eaa685fcec5
+      - 261f1ae52a0acceb
       X-Content-Type-Options:
       - nosniff
       X-Ratelimit-Limit:
@@ -65,7 +65,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1626747291'
+      - '1630700182'
       Server:
       - cloudflare
       Alt-Svc:
@@ -73,7 +73,6 @@ http_interactions:
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA4uuVspMUbJSSs7Pi/fNyTX2rfAPMi0tiTAMDy5T0lHKS8xNBcqGpBaXAHmZxfEp+bmJmXnxQOV5qcklmfl5SlZpiTnFqbU6SAblWfh6GRhVGEUVG3g5hYb7oRrkDNerW1SaVFlCmtkRFSbeRaX5iUkGJuVlOZERCLNDi1OLQEzdgMTi4vL8ohRdx9KSjNS8kszkRLBp+C2JBQAk8HzQCwEAAA==
-  recorded_at: Tue, 20 Jul 2021 02:14:50 GMT
+      string: '[{"id":"con_Mlm3MxOR5utX1WSv","name":"Test","is_domain_connection":false},{"id":"con_WltM0fv20JCnxOuY","name":"TestConnection-rubytest-210908","is_domain_connection":false},{"id":"con_Xx4Kruoab04wvlYX","name":"Username-Password-Authentication","is_domain_connection":false}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:21 GMT
 recorded_with: VCR 6.0.0

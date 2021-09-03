@@ -2,23 +2,23 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_Me7CwJxYruZRfq7q/users
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/roles/rol_09CHZmuc9AHc48Ie/users
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjguMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,41 +27,48 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 25 Sep 2019 16:28:52 GMT
+      - Fri, 03 Sep 2021 20:16:37 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Server:
-      - nginx
-      Ot-Tracer-Spanid:
-      - 53f0c303554001e2
-      Ot-Tracer-Traceid:
-      - 565cff3e695dd6f3
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '5'
-      X-Ratelimit-Reset:
-      - '1569428936'
-      Vary:
-      - origin,accept-encoding
+      Cf-Ray:
+      - 6891a8285d130d44-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - max-age=31536000
+      Vary:
+      - origin,accept-encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8285d130d44
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 6cb682a04f2fffcc
+      Ot-Tracer-Traceid:
+      - 1ac09453394b7cf4
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700198'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA2WOywrCMBBF/yVQV/aRtqlToagbf0JE0kysBftgkgii/rtpBRGEWdyBO2fO4cGc0XRqka2ZdPaSPAVCXQrFMQcUkCAqgERkBVsy3cn26ovk6rvVxobfMEF62enwPFBIw1Wb7UyL1ND5w7FV1pH2pxdrR7OOYxM1JG/SSpoq8SfGK1Ci5LwoUfO8RJ5KpVUKq+KcSSh4vTFVDsmCqrFZYDWzgmwXpHs/Cvvo+9PvH6TxiVw09o3XmAx/9f+t2ev4BvvO+5gTAQAA
-    http_version: 
-  recorded_at: Wed, 25 Sep 2019 16:28:52 GMT
-recorded_with: VCR 5.0.0
+      string: '[{"user_id":"auth0|613282a3c2d480007114acbb","email":"rubytest-210908-rubytest-210908-username-for-roles@auth0.com","picture":"https://s.gravatar.com/avatar/b3dbe5ced2cdf6ecb535701bd8245fa4?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","name":"rubytest-210908-username-for-roles"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:37 GMT
+recorded_with: VCR 6.0.0

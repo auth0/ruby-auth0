@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,38 +27,94 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 17:28:52 GMT
+      - Fri, 03 Sep 2021 20:16:39 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538760533'
+      Cf-Ray:
+      - 6891a837aac342d7-LAX
+      Cache-Control:
+      - no-cache
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/rules?page=0&per_page=50>; rel="first",
+        <http://auth0-sdk-tests.auth0.com/api/v2/rules?page=0&per_page=50>; rel="last"
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a837aac342d7
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 1c9dc09c0636c3a2
+      Ot-Tracer-Traceid:
+      - 65cf4a8f34381559
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700200'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA62QQWsCMRCF/0rIaRciLKurVE/W3cOqVKFUsFIkG2c1EBNJ
-        JlIr/vfGQ9GKBQ+9DMN7b3gfszhSuaJdar1atkY7TNM6zyadapAcOpRR0LxS
-        EAI1Vw4YdcLKHYZ87bVAaXSE4DAOSc23EHTg1leHsxg0Y1dgabcZ7pCvz7Yy
-        a6mXzgsBztETu2ovh+15MUvKp2GymU/3zet2tP5eOYm8A8uIMBrhE8NSxeQY
-        ZqS9Uoz8cuPe6YL5A0kapHjpP4+L/ILbegh3Vrj3si/FZGreslR/PfKsf+HN
-        y9cb4OxP4I9vGxU/Bt8BAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 17:28:52 GMT
-recorded_with: VCR 3.0.3
+      string: '[{"id":"rul_7MKFToUZ1xB2BvAq","enabled":false,"script":"function (user,
+        context, callback) {\n  // TODO: implement your rule\n  callback(null, user,
+        context);\n}","name":"Testing Rule - Disabled - DO NOT DELETE","order":1,"stage":"login_success"},{"id":"rul_sxWR96dOYrhtMwhH","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1355015546","order":9,"stage":"login_success"},{"id":"rul_VMW16gL4xzysOhED","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-973421001","order":11,"stage":"login_success"},{"id":"rul_VYXGCYcuGK06tKp9","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-542392910","order":12,"stage":"login_success"},{"id":"rul_Z5UXBV6H9kFlU1zT","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1205327462","order":16,"stage":"login_success"},{"id":"rul_aNDYcteiXnZQcBop","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1172870501","order":19,"stage":"login_success"},{"id":"rul_mjGhkxNuZDku9Zmy","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-601153869","order":21,"stage":"login_success"},{"id":"rul_sjXr9kHO81su6RLa","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1860284439","order":23,"stage":"login_success"},{"id":"rul_7P77tgvrsFpXChX2","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-41643451","order":25,"stage":"login_success"},{"id":"rul_3GYl8HwYDID70g64","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1765834470","order":26,"stage":"login_success"},{"id":"rul_sShsD4ccdMm5lv0g","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-566417894","order":28,"stage":"login_success"},{"id":"rul_MtYeAMV6z2Ns16Z6","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-39737334","order":29,"stage":"login_success"},{"id":"rul_nJBy2BjsyhQGCMRI","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-87703473","order":34,"stage":"login_success"},{"id":"rul_IbJ9aqTsqEwWABwV","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context); }","name":"test-create-rule-1114628245","order":38,"stage":"login_success"},{"id":"rul_bsg64xEPZz4WOkXz","enabled":false,"script":"function
+        (user, context, cb) { cb(null, user, context);}","name":"rubytest-210908 -
+        DISABLED","order":40,"stage":"login_success"},{"id":"rul_XEg7l2SjkSj80TEl","enabled":true,"script":"function
+        (user, context, callback) {\n  // TODO: implement your rule\n  callback(null,
+        user, context);\n}","name":"Testing Rule - Enabled - DO NOT DELETE","order":2,"stage":"login_success"},{"id":"rul_zovKsgDI6p9B7R3E","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-572297978","order":3,"stage":"login_success"},{"id":"rul_4ThsB79m2Ylzi0PR","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1644985744","order":4,"stage":"login_success"},{"id":"rul_9SLLnG5XYVWw6AML","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1617652680","order":5,"stage":"login_success"},{"id":"rul_1sxM0pron2Usb48v","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-158131848","order":6,"stage":"login_success"},{"id":"rul_0np3M51ifkhWUIeJ","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-197846898","order":7,"stage":"login_success"},{"id":"rul_rW2s3cEbE5fNEpLl","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1335774409","order":8,"stage":"login_success"},{"id":"rul_ZbcicKdbT71nhYVu","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1347206543","order":10,"stage":"login_success"},{"id":"rul_D24jWvPklghPjiCy","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-333043480","order":11,"stage":"login_success"},{"id":"rul_dIZhOgbD3Cse9lYc","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-897276455","order":13,"stage":"login_success"},{"id":"rul_BYoI0npqUg1qInYt","enabled":true,"script":"function
+        (user, context, cb) { cb(null, user, context);}","name":"rubytest - ENABLED","order":14,"stage":"login_success"},{"id":"rul_KrsY3b8wVY9diywO","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1580689","order":15,"stage":"login_success"},{"id":"rul_8rKsaUaIdMcfKgvB","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-2065795738","order":18,"stage":"login_success"},{"id":"rul_icKxH34okhl7x73a","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-841289392","order":22,"stage":"login_success"},{"id":"rul_xrk2gO575IKljNVl","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-50717463","order":24,"stage":"login_success"},{"id":"rul_vZyeDhJC2z0NfEz8","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1561298966","order":27,"stage":"login_success"},{"id":"rul_WqRSdWQz6Ewoa8Z9","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-440573815","order":30,"stage":"login_success"},{"id":"rul_dinu5Xde36glw9NB","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1744575305","order":31,"stage":"login_success"},{"id":"rul_vTTKoyMq7twoV53O","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-728769991","order":32,"stage":"login_success"},{"id":"rul_GrZ1Yq2K2Qm3wKxt","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-204085622","order":33,"stage":"login_success"},{"id":"rul_qRXOtfu55SzpkBd2","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1624647222","order":35,"stage":"login_success"},{"id":"rul_K1dlO0lvy8679QEr","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1717882009","order":36,"stage":"login_success"},{"id":"rul_4WrC4GUhyU7AchiK","enabled":true,"script":"function
+        (user, context, callback) { callback(null, user, context); }","name":"test-create-rule-1545284162","order":37,"stage":"login_success"},{"id":"rul_jczlrqACfJJEzyYn","enabled":true,"script":"function
+        (user, context, cb) { cb(null, user, context);}","name":"rubytest-210908 -
+        ENABLED","order":39,"stage":"login_success"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:39 GMT
+recorded_with: VCR 6.0.0

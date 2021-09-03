@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/oauth/token
     body:
       encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
+      string: '{"username":"rubytest-210908-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '258'
+      - '265'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,91 +29,60 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:39:06 GMT
+      - Fri, 03 Sep 2021 20:16:13 GMT
       Content-Type:
       - application/json
-      Content-Length:
-      - '1239'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a7927c93eadb-LAX
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - did=s%3Av0%3Ac92c4270-0cf3-11ec-9769-a5abdd7a9990.6kGZWl%2Fd%2FcT5PTgp0aTFB%2BWCc0hnBg1vX6wC6nI%2ByMY;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:13 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac92c4270-0cf3-11ec-9769-a5abdd7a9990.6kGZWl%2Fd%2FcT5PTgp0aTFB%2BWCc0hnBg1vX6wC6nI%2ByMY;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:13 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7927c93eadb
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 7a53b6c865ebc42d
+      Ot-Tracer-Traceid:
+      - 16429f0f08982981
+      Pragma:
+      - no-cache
       X-Auth0-Requestid:
-      - 031373fa2e586ea674d3
+      - d07579c158f08da90e7a
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '90'
+      - '95'
       X-Ratelimit-Reset:
-      - '1539805804'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - '1630704494'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
-      string: '{"access_token":"dCndEvcBHl5aZwRIFzsMS5PMexVm8B7b","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xN1QxNzozOTowNi4wMDNaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYzc3M2I5MzA1MzNmNDdkNDc2NGI5YyIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5Nzk3OTQ2LCJleHAiOjE1Mzk4MzM5NDZ9.n3yNRcpsGS4BtfE842udTbjURdyaZe9PNizLOFt5uYgVlxXds4aWkkBWlLbw128I6vznzAtqVHt3xLPG-PWR10Ce2yZp3WvdL8_K-yNcRjZYZCidD0tQ1f1F86BqiUzmiyap9Xmz19CjdHTIDrm9UUIuaHRF_IaJW1XizYMYjQwc40w-ZYzZGSpUTGAdTc4o3G5PJVEg3wWzz0ESxcBnYCFDs-bK8A1DOWzcOgK_W0xVx50JK7QoASsSz3YEgDFlSgM2FFHyDEkaZOeSpvnrrFBYT1HoJ7PdMRn4E44MElDW2impGCe-AJIYPXVnvWOSsg-23CVp9bqy0Am0j9Zeaw","scope":"openid
+      encoding: ASCII-8BIT
+      string: '{"access_token":"PPlGNh1wLQbJznsdLCx5XFb04ZPKzPxL","id_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xIiwibmFtZSI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xQGF1dGgwLmNvbSIsInBpY3R1cmUiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci85ZjNkNTJmZDA3Mjc5MjkwMzQ2MmZiYjAwNjc2YTZjNT9zPTQ4MCZyPXBnJmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRnJ1LnBuZyIsInVwZGF0ZWRfYXQiOiIyMDIxLTA5LTAzVDIwOjE2OjEzLjQyN1oiLCJlbWFpbCI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzI4MjhhNDA3ZWM2MDA2OTM1YTg1OCIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNjMwNzAwMTczLCJleHAiOjE2MzA3MzYxNzN9.rTIqucbfo_ftiDHM_l12Saas3OGIrxmZAsGKIHPkbYKC24Tx2aoB6uctPQA5kMIus31bii3Uhr4hqv6qmLuKeiQUYtGe7piUQ1JFz9gxHLqCT6EFT_PRueUiH6E4KJJ6TnXRCPzvvwsUBgUnTyLVbFS0LDDzvzgRU24f0ctoe2g2y4BsBEDJ1sHFxn8W8RxhgSmWJDJUzW-mTktbojywzivT9cun0B_ptcoUXY63ZlUzAhHc0BuJFgJiCUn88id6taYhCxokuUn5KAmX3ZHcVkodEaeeB0If_z9OrKl3jjRr9qx5tc8kmBkggBqSsAqHrFg6mu7bvDvJpYmUn18wUQ","scope":"openid
         profile email address phone","expires_in":86400,"token_type":"Bearer"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:39:06 GMT
-- request:
-    method: post
-    uri: https://auth0-sdk-tests.auth0.com/oauth/token
-    body:
-      encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
-    headers:
-      Accept:
-      - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby/2.5.1
-      Content-Type:
-      - application/json
-      Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
-      Authorization:
-      - Bearer API_TOKEN
-      Content-Length:
-      - '258'
-      Host:
-      - auth0-sdk-tests.auth0.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 17 Oct 2018 17:39:06 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1239'
-      Connection:
-      - keep-alive
-      X-Auth0-Requestid:
-      - 5cec4399e09d986f0e8f
-      X-Ratelimit-Limit:
-      - '100'
-      X-Ratelimit-Remaining:
-      - '90'
-      X-Ratelimit-Reset:
-      - '1539805804'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"ZJsovrcsn2NtbpdY6Qgvy79zQjrkE59d","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xN1QxNzozOTowNi40ODdaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYzc3M2I5MzA1MzNmNDdkNDc2NGI5YyIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5Nzk3OTQ2LCJleHAiOjE1Mzk4MzM5NDZ9.L9rz15foepN6PBq8tcs2ccV7Ct1vdPK2Pa09R0tQU2S8DsgV3KSuWrV3K3pKvztjKfXICSRdSwt240SVnVPHsyxTcrsfEV4dI3lJE-6TtimhctCBfhQEMMgfxMX0CE3N8wp_0gJjvUkPMi3TiWkBFxZlNJyfTft3IMhlbl0JyeZWssurjCBFNxgbVPGxOlLe3gmsLAb4zr44GUEyqkMixtJmAwWer3D9WckCXwKJzJc6rfWZVi_ZJ4PJSySL7uWvob-wPh6dUuV4LMKAEa0mMlhcSosyxf_e6lYvJkW0Trmj3G7R_c7F9yYROYrDsHdPea2wFAgPImyoGqs_adAWtw","scope":"openid
-        profile email address phone","expires_in":86400,"token_type":"Bearer"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:39:06 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Fri, 03 Sep 2021 20:16:13 GMT
+recorded_with: VCR 6.0.0

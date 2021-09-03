@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/resource-servers
     body:
       encoding: UTF-8
-      string: '{"name":"rubytest-test-api-for-roles","scopes":[{"value":"rubytest-test-permission"}],"identifier":"rubytest-test-api-for-roles"}'
+      string: '{"name":"rubytest-210908-test-api-for-roles","scopes":[{"value":"rubytest-210908-test-permission"}],"identifier":"rubytest-210908-test-api-for-roles"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjguMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '129'
+      - '150'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,41 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Wed, 25 Sep 2019 16:28:50 GMT
+      - Fri, 03 Sep 2021 20:16:36 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Server:
-      - nginx
-      Ot-Tracer-Spanid:
-      - 377712c43c3d3f0c
-      Ot-Tracer-Traceid:
-      - 1808ccb97d180ded
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1569428932'
-      Vary:
-      - origin,accept-encoding
+      Cf-Ray:
+      - 6891a8210b410579-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - max-age=31536000
+      Vary:
+      - origin,accept-encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8210b410579
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 4de568830775fba5
+      Ot-Tracer-Traceid:
+      - 1033a0251d6dfbe0
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700197'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA4WPQY7CMAxF7+I1laJCC/QYM0s0stLUrixMUsUBhBB3n8AGiVnMxgv7/a/nO8gEA3TTbtx3oeVN74jdtlszuXW7hxVEf6JK5PN4K2SleQ2/SMMpNzkpWYVkoliEhfK/qFdNV0zMKpHQh0BmMLBXoxXYURYMKVqtw5rCC+Va60clZMlWcPG53DCoVOKdK+lIEVWYijx1d/3Guc/1q/BKIwzb9nk1maPEGb3O1frru+366mchLVV0ONzh4vX89/eF8knMJEV4/Dx+ARDgi0BBAQAA
-    http_version: 
-  recorded_at: Wed, 25 Sep 2019 16:28:50 GMT
-recorded_with: VCR 5.0.0
+      string: '{"id":"613282a4fb0a8d0042bd7496","name":"rubytest-210908-test-api-for-roles","identifier":"rubytest-210908-test-api-for-roles","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":86400,"token_lifetime_for_web":7200,"signing_alg":"RS256","scopes":[{"value":"rubytest-210908-test-permission"}]}'
+  recorded_at: Fri, 03 Sep 2021 20:16:36 GMT
+recorded_with: VCR 6.0.0

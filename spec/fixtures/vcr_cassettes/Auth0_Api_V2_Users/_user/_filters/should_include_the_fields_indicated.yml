@@ -2,23 +2,23 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799?fields=picture,email,user_id&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9?fields=picture,email,user_id&include_fields=true
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,39 +27,48 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:22:06 GMT
+      - Fri, 03 Sep 2021 20:16:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Ot-Tracer-Spanid:
-      - 7e3f13f47347b16b
-      Ot-Tracer-Traceid:
-      - 2c8e9695639d3d9e
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1561749727'
+      Cf-Ray:
+      - 6891a86c8ba55377-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a86c8ba55377
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 57a2bbce6660e69d
+      Ot-Tracer-Traceid:
+      - 30c6eb187ee21b18
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700209'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAz2O2QrCMBBF/yXQPmm2tmlSKOqLvyFpki5ga8giiPrvpi0I83Dmcucwb2BmOd1BA1zsXsH4cPxD9MYtcjZnGcOIoXrM4ADW8DbpdLCln0oTxriueN91hGIjsSKiFiJV7aRCdCZVxxCsbxDycHDyKYN0qw3tiCgrFDY9KSvDCdGU1YyoOgERouS8P/m25Dh3rR1y3W6urLhk9JpG6QX+30v7rvSJXIR2GcD3By34NyriAAAA
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:22:06 GMT
-recorded_with: VCR 4.0.0
+      string: '{"email":"rubytest-210908-rubytest-210908-username@auth0.com","picture":"https://s.gravatar.com/avatar/28607929c5bdf4954ee65d055fea6e69?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","user_id":"auth0|613282adac819400692c0dd9"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:48 GMT
+recorded_with: VCR 6.0.0

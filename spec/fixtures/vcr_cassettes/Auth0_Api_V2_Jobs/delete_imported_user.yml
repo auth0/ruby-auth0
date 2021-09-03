@@ -2,23 +2,23 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users?q=email:rubytest*
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users?q=email:rubytest-210908*
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,54 +27,69 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Feb 2019 16:13:18 GMT
+      - Fri, 03 Sep 2021 20:16:30 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '4'
-      X-Ratelimit-Reset:
-      - '1551284002'
+      Cf-Ray:
+      - 6891a800bde352e9-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a800bde352e9
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 2aa73d6345bad72b
+      Ot-Tracer-Traceid:
+      - 60dde38b04365aec
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700191'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA7WWXW/TMBSG/0skuNoyfzuuNAE3XCMBN0xTdWIft9lWp3LSAYL9d5yuW7eRVDQLUi9s+cRu3ueJ7YtfGa6guslmWdyUP1tsWlitIdbv8Udq3GAesM1OsgArTDX3Y6m/fWh+i7HyFbps5uGmwZNss3bQoptDm4oZoeaUsFOmv1A1I3ImSc6k/JYe3zQY55XrZty0S/JbWq1KKZFoXRitrXaeCml9Kl1Xtt3EbvFl266b2dlZky8i3EILMbf16uy+eebLwnmUjGgKJaU8dYhykhVYoETN3jXnoiBv4/l68dadb+d6wz+8YR/Tz7qQb/9IN2Hq30/ZdK1Vvg6LLoDKXu9CeB5UGqschrZqK2yy2cWvzNYhoG2rOqTir+lNu+dOP0HTfK+jO/2QFurqLWxLnoZxKIZY36Z14kNk3bLN59pWcLNL/+7yJLMR/yH/u5O/qdtlrJp+6NuhUcwpmVGVSy0GmStVEKE9gCZeWeq8oUcw5+iVkWXBuAYGxvpCllLYgjDvjSrEOOZ2Ocz8IYtpkQ+k8FrkT+LvQ34NAZsl9EPfDY7GrnNGyQHs5rnjaI/AbphCQEOkU14T5NyxBNuysrSeK03HYb+GYez7NKYG35vDFOB3APrAx3oF4RF7ymGPfTv0CuhGmIPQn1vOjoCOBmVptNM07fTCcy5MAQK8dyUthRz5rcd6GPpDFtMj70lhGuTb+PuQQ2jrUNVzCNeb4KqwGDjfX5aNU4F3+w7RalAFTe1z7707QgXh0WjwSYJCCp9mA4mKSC6QkJJKP/KoDweO+p5cptViIJFXa7FH0afFEmNyPMxd2t8ejajjYm9EN5Lvyl4hgybDh0F6dSuhsJA+DQ5aKwvH3PuIoqVPtz1QyDgKJylKQJ9mlYSokfc+d+AweBra//CgL4xpPNhS6PPgCsL8ql6GJmne78HTitEe6FwLfsAD9+LVy2PuglpozlNcThiFvOBQpMu/YqUXRktnxnlwdcCDF5FM7UFvGFN4sKNwd/kHrc27Y/0NAAA=
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 16:13:18 GMT
+      string: '[{"created_at":"2021-09-03T20:16:30.504Z","email":"rubytest-210908quintin@example.org","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"6132829e9bb72d00708b7db5","provider":"auth0","isSocial":false}],"name":"quintin","nickname":"rubytest-210908quintin","picture":"https://s.gravatar.com/avatar/5d20473f424951be92de8850ff465f1f?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fqu.png","updated_at":"2021-09-03T20:16:30.504Z","user_id":"auth0|6132829e9bb72d00708b7db5"},{"created_at":"2021-09-03T20:16:29.747Z","email":"rubytest-210908herbert@example.net","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"6132829d2f7d3d006a216aad","provider":"auth0","isSocial":false}],"name":"herbert","nickname":"rubytest-210908herbert","picture":"https://s.gravatar.com/avatar/cd0b06c3c11c846ad51bc8f7ee15ee70?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fhe.png","updated_at":"2021-09-03T20:16:29.747Z","user_id":"auth0|6132829d2f7d3d006a216aad"},{"created_at":"2021-09-03T20:16:29.160Z","email":"rubytest-210908byron_schaden@example.org","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"6132829d7b569700698af981","provider":"auth0","isSocial":false}],"name":"byron.schaden","nickname":"rubytest-210908byron_schaden","picture":"https://s.gravatar.com/avatar/32658f9d62513c10242821f682c242c8?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fby.png","updated_at":"2021-09-03T20:16:29.160Z","user_id":"auth0|6132829d7b569700698af981"},{"email":"rubytest-210908aaron_spencer@example.org","email_verified":false,"user_metadata":{"theme":"light"},"created_at":"2021-09-03T20:16:28.047Z","updated_at":"2021-09-03T20:16:28.047Z","identities":[{"provider":"auth0","connection":"Username-Password-Authentication","isSocial":false,"user_id":"6132829cde90c20019937a21"}],"user_id":"auth0|6132829cde90c20019937a21","name":"rubytest-210908aaron_spencer@example.org","picture":"https://secure.gravatar.com/avatar/c5f74fac7ce98eac0ad11c2a76b5ce4a?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","nickname":"rubytest-210908aaron_spencer","app_metadata":{"roles":["admin"]}},{"email":"rubytest-210908marleen_hagenes@example.net","email_verified":false,"user_metadata":{"theme":"light"},"created_at":"2021-09-03T20:16:27.622Z","updated_at":"2021-09-03T20:16:27.622Z","identities":[{"provider":"auth0","connection":"Username-Password-Authentication","isSocial":false,"user_id":"6132829b11c9b7001aa8341b"}],"user_id":"auth0|6132829b11c9b7001aa8341b","name":"rubytest-210908marleen_hagenes@example.net","picture":"https://secure.gravatar.com/avatar/54ab4835d808c4b61596ef2363c45543?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","nickname":"rubytest-210908marleen_hagenes","app_metadata":{"roles":["admin"]}}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:30 GMT
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5c76b55e0778977c7df145cf
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C6132829e9bb72d00708b7db5
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -83,28 +98,46 @@ http_interactions:
       message: No Content
     headers:
       Date:
-      - Wed, 27 Feb 2019 16:13:18 GMT
+      - Fri, 03 Sep 2021 20:16:31 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '3'
-      X-Ratelimit-Reset:
-      - '1551284002'
+      Cf-Ray:
+      - 6891a801ef61057d-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a801ef61057d
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 56f1a6fd33eaae1b
+      Ot-Tracer-Traceid:
+      - 4166bbfe69b376fa
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700192'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 16:13:18 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Fri, 03 Sep 2021 20:16:31 GMT
+recorded_with: VCR 6.0.0

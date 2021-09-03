@@ -9,23 +9,25 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 20 Jul 2021 02:14:51 GMT
+      - Fri, 03 Sep 2021 20:16:22 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,11 +35,9 @@ http_interactions:
       Connection:
       - keep-alive
       Cf-Ray:
-      - 6718adab19a642b6-LAX
+      - 6891a7ca5ef8eac3-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Link:
       - <http://auth0-sdk-tests.auth0.com/api/v2/connections?page=0&per_page=50>;
         rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/connections?page=0&per_page=50>;
@@ -51,13 +51,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Ot-Baggage-Auth0-Request-Id:
-      - 6718adab19a642b6
+      - 6891a7ca5ef8eac3
       Ot-Tracer-Sampled:
       - 'true'
       Ot-Tracer-Spanid:
-      - 5ad493b861f7eff2
+      - 687e86780928cbf1
       Ot-Tracer-Traceid:
-      - 452b6f063c800f3d
+      - 3a933856695e1bf7
       X-Content-Type-Options:
       - nosniff
       X-Ratelimit-Limit:
@@ -65,7 +65,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1626747292'
+      - '1630700183'
       Server:
       - cloudflare
       Alt-Svc:
@@ -73,41 +73,43 @@ http_interactions:
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        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
-  recorded_at: Tue, 20 Jul 2021 02:14:51 GMT
+      string: '[{"id":"con_rLvSvR44VhsrOo1D","options":{"email":true,"scope":"email,user_birthday,user_website,user_hometown,user_location,user_work_history,user_education_history,user_about_me,user_banana","ads_read":false,"client_id":"1842690432417814","rsvp_event":false,"user_likes":false,"user_posts":false,"read_stream":false,"user_banana":true,"user_events":false,"user_groups":false,"user_photos":false,"user_status":false,"user_videos":false,"manage_pages":false,"read_mailbox":false,"user_friends":false,"user_website":true,"client_secret":"5929c7f62fece2725dd92af45dcfb7d6","publish_pages":false,"publish_video":false,"read_insights":false,"user_about_me":true,"user_birthday":true,"user_hometown":true,"user_location":true,"ads_management":false,"public_profile":false,"pages_messaging":false,"pages_show_list":false,"pages_manage_cta":false,"user_actions-news":false,"user_work_history":true,"user_actions-books":false,"user_actions-music":false,"user_actions-video":false,"user_relationships":false,"user_tagged_places":false,"read_page_mailboxes":false,"user_games_activity":false,"user_managed_groups":false,"manage_notifications":false,"user_actions-fitness":false,"user_education_history":true,"user_religion_politics":false,"read_custom_friendlists":false,"user_relationship_details":false,"pages_messaging_phone_number":false,"pages_messaging_subscriptions":false,"read_audience_network_insights":false},"strategy":"facebook","name":"facebook","is_domain_connection":false,"realms":["facebook"],"enabled_clients":[]},{"id":"con_P9aT06EgvT07eIcW","options":{"email":true,"scope":["email","profile"],"profile":true},"strategy":"google-oauth2","name":"google-oauth2","is_domain_connection":false,"realms":["google-oauth2"],"enabled_clients":["aNG5n4ny57xCrd53MhfwomU85fpsEdyr","2PHoTag6NbnYt3AsBsNxFikZUdIMFk5r","Kp6AEYQvuwFkB2JMAlZbTvsfDPgcf6un","sxByUG46lspLw3w5j7EjZUOix7hC60EG","XKN0TEVg2GZayqspufKTjyubQ9v7TMts","WK5cUC4GcwiEMvoBPD0OEbGgJlelkexK","V92owX4pGOeGC14FT7NUpkHRx0JBZYEw","Obn0UoIOuyht1yKcrFPQlgWygJFlhqGH","zHXTiUnmm3NRQR5HspLv0jZSEeB0tCV2","wZHfhdGPiITmTOiL1ohkoB3zSmucXyVe","K59uHp57aoSfmVCB4hA7307cXCn9Jofb","Ma6tpNQXmreZ4g83nT9sLpaODBiCV0Cf","A2rt0zedSHh85hy08LWmklAYBVI543C9","qpFGNAFfOY44KvnhFb02EuuvaAEd4KAM","ELviY4SzYPX5m6FIBSMFtWG9f9xosHbr","q47ZqPco70spQ1qnzMrBirk1dWoIebJr","c141AubVqXNCQh34hW6T75KqdNr37BSr","VnwxKhJ1RDc9pPsHSh8sE4E4z9KZwatO","CasDGIcCSsNOcgC39lvyFXi1VlZPRTI9","UcQcsWFHOhCLlbJ9HhlvQb1mUNpNK73A","wm2Cg7nnvGPeFpW3cmkTjIq2YXOwUx6z","alIzxHzpPBDmgvtJrakmWrK5MN2flQUS","2aF6N6Vm1sElbcAjchEhRGiXffveu2F1","JrwsqCWw6D438piidwKt9OzMlKsfNVnT","Q3trYfgk8EkecfLjZfvkVN91nIY4oRfv","qufC26Tbd5Qkw6T3PVMcuiKpUErnMPXq","WVmrm37sQY12PmbXlNe6jeezd47mUwky","1oOUnPnJ3nKjNSpRPmo1IGuvQllKFUE2","UvfbUbIEcsRmqR8l4120x4TYEfOPGPWQ","5xHRQ4MSt06BPYfSZwAzG4lKqKEsUuvi","qpjzdesOcWxUBQoH1a4v6RG43l619v5A","Nsjo9of3F7kdk2vkBArSsmU4OLF6wdwn","YJOtNHCaXUMxxxPl4pmc4T7Ry1SFwZei","v9YfJ6K2W8h5KW9NrTDHdOHvFvQrmJ8R","wSbg7v3FWUmgLLydgxzRKuxFbs3Lurz5","HX6dEYgNHqPXBe2x6x6Kq9u8m7OmqNZU","Y2kA8kQoW3DckPDSPmbhxwZ0tGUStPFh","n4tfAcvZi6JhmDR0pJiugw0z8uGvFQUJ","X0r2INQ8fgj4jJAiYOYihjtBbj1FzMnC","ywXzZl7uaMJvcclhAFe2hm1PMq5keq05","0u3N7ucBDtVVyNzwNeAMTuJz11KHWRnB","UkDgqRg12UmQclXGIQ3tpRkRBFkUC1iI","6nDYKXZdnsrKI4hYAcxmQ0ZdvqWbzdTk","3qzWhmfT7YPMpE2OGqaIDhNt1vhKbpXK","OhbZaeMcukhJG5D8n49MAQvxmKQIdopo","DJYlPad951IEbI5xbikjpBxWSQyB8ESN","Wx9SbsxpuRG55EuQzM6c12j2pRp0h6a9","awY4y2O0sNf0ixBr8cxMEDZGXMQR10F0","DRFdFA5hueMCqgQTcgH0HfqC3vFTQ9jl","jc8udaPyn4nKxe4DF1m49ZybkbcfSrSJ","KzT55OMFsaVAw9TzVYUsJR5y7FNwZu5X","PMhv7sKtONJX4BfQ7piL3kZZjhNFdJQq","VmpWbh35vJKJiYuuEpfViR64b5CbMV6A","B2Yao3nQuIdDUu8oGZnQcay9kgRBJXAk","rpBVKEV9TTIXEqh5YdtcuV3FrtoKpg74","3ty4mgVVA7OZPCDzBt9PD1rTR7AgUXwW","i3akc1ejZJW2s637XeeI7mELh5ljV5i6","scgImVeVRnvQBUstLqSKKupCHxRx73Vq","oIrlRIgJmLq0xI4bSaYKkhPjjqXgKibi","fJb3MH6psd17WZN0Snemfk7x5cFjONqR","1KE7cWJ0y00pj0pEhRDGdpZOuR3FbDtV","3Ftt3V2J90AGNdxbZijjivJ8gEhPz8Pg","2T1x15Q0kvpzE2DyCOAmOeuGT6i6m95u","wXPfOQsAVlLyeW8c4FR1MUjur2YW9gSy","3Prqy25OK9UwN8i9ua8cXlgHHGtQzTnr","nAqSFqv3QPV0S0KLSd2vyIOMMvo8Rztk","uBghc9IPQD8a7nT6V3D65vHAaIg5YAfs","UsBLvhAPeTQda7O4xlAxoRi2Hv6l83tz","Vp7CLh1bl7lAA733ewMhDaqLbqEwBkdt","Ze3m2RMqa0Gs6v0irfBdXFdf6V07Uy2P","iveuuxUda6GkuwwCBVo95lACOfgqIk5g","Ni0H8rmaCeixc8sCP83vxsjkgHefb9fx","kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","1TstJOXxYpOWEx32FqjWXylN81C1RU7k","2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","Ei5v5M8765EY6WNRztyAy77t1e2t5AvT","80peYzeAZa6lRtxESoP0EFUXUkTqEk9V","CsU413L8tfUiKqgaOBCiEAoYa0tQRC03","np0ERu7GHFoN0WiWLAbFIfNjSzYKFs0y","VdJ05g0v1yB0UdqiDKBLAfUxNq1B2cH4","3qAIUl8GMdGX1vcbrZZk2Id2zLUFaW79","qzbD3sJyuTYC2X3IAq2vcY37lPcd9T0X","zRPBcafuUFNMa4qsJYQjfdKZU09Zl7Sq","GMNXS0Ctfm64JpVQWKJz72CNhUHiGAQb","cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","3CwQ82ywfdqWNi1P1afA6ajdHFYGh4Is"]},{"id":"con_CYJD0YigZxd7savz","options":{"type":"front_channel","scope":"openid
+        profile email","issuer":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net","jwks_uri":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/.well-known/openid-configuration/jwks","client_id":"Auth0","discovery_url":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/","token_endpoint":null,"userinfo_endpoint":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/connect/userinfo","authorization_endpoint":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/connect/authorize"},"strategy":"oidc","name":"keyless","is_domain_connection":false,"show_as_button":false,"display_name":"keyless","realms":["keyless"],"enabled_clients":[]},{"id":"con_Mlm3MxOR5utX1WSv","options":{"mfa":{"active":true,"return_enroll_settings":true},"disable_signup":false,"passwordPolicy":"good","strategy_version":2,"requires_username":false,"brute_force_protection":true},"strategy":"auth0","name":"Test","is_domain_connection":false,"realms":["Test"],"enabled_clients":[]},{"id":"con_WltM0fv20JCnxOuY","options":{"mfa":{"active":true,"return_enroll_settings":true},"passwordPolicy":"good","strategy_version":2,"brute_force_protection":true},"strategy":"auth0","name":"TestConnection-rubytest-210908","is_domain_connection":false,"realms":["TestConnection-rubytest-210908"],"enabled_clients":[]},{"id":"con_Xx4Kruoab04wvlYX","options":{"mfa":{"active":true,"return_enroll_settings":true},"strategy_version":2,"brute_force_protection":true},"strategy":"auth0","name":"Username-Password-Authentication","is_domain_connection":false,"realms":["Username-Password-Authentication"],"enabled_clients":["aNG5n4ny57xCrd53MhfwomU85fpsEdyr","2PHoTag6NbnYt3AsBsNxFikZUdIMFk5r","Kp6AEYQvuwFkB2JMAlZbTvsfDPgcf6un","sxByUG46lspLw3w5j7EjZUOix7hC60EG","XKN0TEVg2GZayqspufKTjyubQ9v7TMts","WK5cUC4GcwiEMvoBPD0OEbGgJlelkexK","V92owX4pGOeGC14FT7NUpkHRx0JBZYEw","Obn0UoIOuyht1yKcrFPQlgWygJFlhqGH","zHXTiUnmm3NRQR5HspLv0jZSEeB0tCV2","wZHfhdGPiITmTOiL1ohkoB3zSmucXyVe","K59uHp57aoSfmVCB4hA7307cXCn9Jofb","Ma6tpNQXmreZ4g83nT9sLpaODBiCV0Cf","A2rt0zedSHh85hy08LWmklAYBVI543C9","qpFGNAFfOY44KvnhFb02EuuvaAEd4KAM","ELviY4SzYPX5m6FIBSMFtWG9f9xosHbr","q47ZqPco70spQ1qnzMrBirk1dWoIebJr","c141AubVqXNCQh34hW6T75KqdNr37BSr","VnwxKhJ1RDc9pPsHSh8sE4E4z9KZwatO","CasDGIcCSsNOcgC39lvyFXi1VlZPRTI9","UcQcsWFHOhCLlbJ9HhlvQb1mUNpNK73A","wm2Cg7nnvGPeFpW3cmkTjIq2YXOwUx6z","alIzxHzpPBDmgvtJrakmWrK5MN2flQUS","2aF6N6Vm1sElbcAjchEhRGiXffveu2F1","JrwsqCWw6D438piidwKt9OzMlKsfNVnT","Q3trYfgk8EkecfLjZfvkVN91nIY4oRfv","qufC26Tbd5Qkw6T3PVMcuiKpUErnMPXq","WVmrm37sQY12PmbXlNe6jeezd47mUwky","1oOUnPnJ3nKjNSpRPmo1IGuvQllKFUE2","UvfbUbIEcsRmqR8l4120x4TYEfOPGPWQ","5xHRQ4MSt06BPYfSZwAzG4lKqKEsUuvi","qpjzdesOcWxUBQoH1a4v6RG43l619v5A","Nsjo9of3F7kdk2vkBArSsmU4OLF6wdwn","YJOtNHCaXUMxxxPl4pmc4T7Ry1SFwZei","v9YfJ6K2W8h5KW9NrTDHdOHvFvQrmJ8R","wSbg7v3FWUmgLLydgxzRKuxFbs3Lurz5","HX6dEYgNHqPXBe2x6x6Kq9u8m7OmqNZU","Y2kA8kQoW3DckPDSPmbhxwZ0tGUStPFh","n4tfAcvZi6JhmDR0pJiugw0z8uGvFQUJ","X0r2INQ8fgj4jJAiYOYihjtBbj1FzMnC","ywXzZl7uaMJvcclhAFe2hm1PMq5keq05","0u3N7ucBDtVVyNzwNeAMTuJz11KHWRnB","UkDgqRg12UmQclXGIQ3tpRkRBFkUC1iI","6nDYKXZdnsrKI4hYAcxmQ0ZdvqWbzdTk","3qzWhmfT7YPMpE2OGqaIDhNt1vhKbpXK","OhbZaeMcukhJG5D8n49MAQvxmKQIdopo","DJYlPad951IEbI5xbikjpBxWSQyB8ESN","Wx9SbsxpuRG55EuQzM6c12j2pRp0h6a9","awY4y2O0sNf0ixBr8cxMEDZGXMQR10F0","DRFdFA5hueMCqgQTcgH0HfqC3vFTQ9jl","jc8udaPyn4nKxe4DF1m49ZybkbcfSrSJ","KzT55OMFsaVAw9TzVYUsJR5y7FNwZu5X","PMhv7sKtONJX4BfQ7piL3kZZjhNFdJQq","VmpWbh35vJKJiYuuEpfViR64b5CbMV6A","B2Yao3nQuIdDUu8oGZnQcay9kgRBJXAk","rpBVKEV9TTIXEqh5YdtcuV3FrtoKpg74","3ty4mgVVA7OZPCDzBt9PD1rTR7AgUXwW","i3akc1ejZJW2s637XeeI7mELh5ljV5i6","scgImVeVRnvQBUstLqSKKupCHxRx73Vq","oIrlRIgJmLq0xI4bSaYKkhPjjqXgKibi","fJb3MH6psd17WZN0Snemfk7x5cFjONqR","1KE7cWJ0y00pj0pEhRDGdpZOuR3FbDtV","3Ftt3V2J90AGNdxbZijjivJ8gEhPz8Pg","2T1x15Q0kvpzE2DyCOAmOeuGT6i6m95u","wXPfOQsAVlLyeW8c4FR1MUjur2YW9gSy","3Prqy25OK9UwN8i9ua8cXlgHHGtQzTnr","nAqSFqv3QPV0S0KLSd2vyIOMMvo8Rztk","uBghc9IPQD8a7nT6V3D65vHAaIg5YAfs","UsBLvhAPeTQda7O4xlAxoRi2Hv6l83tz","Vp7CLh1bl7lAA733ewMhDaqLbqEwBkdt","Ze3m2RMqa0Gs6v0irfBdXFdf6V07Uy2P","iveuuxUda6GkuwwCBVo95lACOfgqIk5g","Ni0H8rmaCeixc8sCP83vxsjkgHefb9fx","kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","1TstJOXxYpOWEx32FqjWXylN81C1RU7k","2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","Ei5v5M8765EY6WNRztyAy77t1e2t5AvT","80peYzeAZa6lRtxESoP0EFUXUkTqEk9V","CsU413L8tfUiKqgaOBCiEAoYa0tQRC03","np0ERu7GHFoN0WiWLAbFIfNjSzYKFs0y","VdJ05g0v1yB0UdqiDKBLAfUxNq1B2cH4","3qAIUl8GMdGX1vcbrZZk2Id2zLUFaW79","qzbD3sJyuTYC2X3IAq2vcY37lPcd9T0X","zRPBcafuUFNMa4qsJYQjfdKZU09Zl7Sq","GMNXS0Ctfm64JpVQWKJz72CNhUHiGAQb","cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","3CwQ82ywfdqWNi1P1afA6ajdHFYGh4Is"]}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:22 GMT
 - request:
     method: delete
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_Xx4Kruoab04wvlYX/users?email=rubytest-rubytest-username@auth0.com
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_Xx4Kruoab04wvlYX/users?email=rubytest-210908-rubytest-210908-username@auth0.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 204
       message: No Content
     headers:
       Date:
-      - Tue, 20 Jul 2021 02:14:51 GMT
+      - Fri, 03 Sep 2021 20:16:22 GMT
       Content-Type:
       - application/json; charset=utf-8
       Connection:
       - keep-alive
       Cf-Ray:
-      - 6718adacca2242b7-LAX
+      - 6891a7cb6cfa3615-LAX
       Cache-Control:
       - no-cache
       Strict-Transport-Security:
@@ -119,13 +121,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Ot-Baggage-Auth0-Request-Id:
-      - 6718adacca2242b7
+      - 6891a7cb6cfa3615
       Ot-Tracer-Sampled:
       - 'true'
       Ot-Tracer-Spanid:
-      - 6000ff4e6cf602a8
+      - 3eb8e75452ac4b46
       Ot-Tracer-Traceid:
-      - 6130cf9358b2cbdd
+      - 581b86bd30635244
       X-Content-Type-Options:
       - nosniff
       X-Ratelimit-Limit:
@@ -133,7 +135,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1626747292'
+      - '1630700183'
       Server:
       - cloudflare
       Alt-Svc:
@@ -142,5 +144,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Tue, 20 Jul 2021 02:14:51 GMT
+  recorded_at: Fri, 03 Sep 2021 20:16:22 GMT
 recorded_with: VCR 6.0.0

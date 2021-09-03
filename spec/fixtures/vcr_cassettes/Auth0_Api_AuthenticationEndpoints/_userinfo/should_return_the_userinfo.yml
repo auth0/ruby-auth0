@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/oauth/token
     body:
       encoding: UTF-8
-      string: '{"client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","scope":"openid","grant_type":"password"}'
+      string: '{"username":"rubytest-210908-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"openid","grant_type":"password"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '258'
+      - '265'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,35 +29,62 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:20:00 GMT
+      - Fri, 03 Sep 2021 20:16:12 GMT
       Content-Type:
       - application/json
-      Content-Length:
-      - '1239'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a789aab335ec-LAX
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - did=s%3Av0%3Ac855b890-0cf3-11ec-9307-d930b0dd9517.HfDD99WIwJB%2Fq%2BeMy5YKl3jt6HoztY60OBO33nLIt4A;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac855b890-0cf3-11ec-9307-d930b0dd9517.HfDD99WIwJB%2Fq%2BeMy5YKl3jt6HoztY60OBO33nLIt4A;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:12 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a789aab335ec
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 33afbaa96c6fbb6f
+      Ot-Tracer-Traceid:
+      - 70b5703717ee5187
+      Pragma:
+      - no-cache
       X-Auth0-Requestid:
-      - f9b9289a6ea6335d05ab
+      - 7378b5d7fd1d2312bf0a
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '98'
+      - '97'
       X-Ratelimit-Reset:
-      - '1539215300'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - '1630702764'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
-      string: '{"access_token":"ACCESS_TOKEN","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LXVzZXJuYW1lLTEiLCJuYW1lIjoicnVieXRlc3QtdXNlcm5hbWUtMUBhdXRoMC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNjk0NmFlZDk2MGZhMTRjY2I4NjY1N2VkNWM0ZTdmMDE_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZydS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOC0xMC0xMFQyMzoxOTo1OS45OTFaIiwiZW1haWwiOiJydWJ5dGVzdC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDViYmU4OTFlOTAyNTNhMDIzNzdjMWMwYiIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNTM5MjEzNTk5LCJleHAiOjE1MzkyNDk1OTl9.FzU-3QvviQkUyYxVWl2O2y6dOyN82gtu2sKnV1kbhUUAhbOgsHF-OAHdrcD5072b8t0rDBE5Iato2jk51w-b3dlu90TLqHFQOY0m0HrCCvASRTWQHyhI7AGuoC-f3EIzbb8DdQiYh8GjE7oKLoKbDICeEK12JOAfiRt8e7piCdbwcFUQYyFaxV667EzWRSRO4EOQTD10JZSQ6oEphXt4D7GvMElg8-yQ8yCsGu-JKYUFgM89yR37QKv8jpBdEZA76GmSRZ8oOIBoVGBGYV_7ywqaknIjxl7Ol0f5WHE33Ll9VQCaR3IU3KCi8ezhW06CKgVLqmzNSJm5ZV9qMfGcxA","scope":"openid
+      encoding: ASCII-8BIT
+      string: '{"access_token":"z7xFtk3YVjjmtlncdYH9JD2raHngvpiQ","id_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJuaWNrbmFtZSI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xIiwibmFtZSI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xQGF1dGgwLmNvbSIsInBpY3R1cmUiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci85ZjNkNTJmZDA3Mjc5MjkwMzQ2MmZiYjAwNjc2YTZjNT9zPTQ4MCZyPXBnJmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRnJ1LnBuZyIsInVwZGF0ZWRfYXQiOiIyMDIxLTA5LTAzVDIwOjE2OjEyLjAyOVoiLCJlbWFpbCI6InJ1Ynl0ZXN0LTIxMDkwOC11c2VybmFtZS0xQGF1dGgwLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzI4MjhhNDA3ZWM2MDA2OTM1YTg1OCIsImF1ZCI6IjJjbld1dWc2emFGWDFqMGdlMVA5OWpBVW4wRjRYU3VJIiwiaWF0IjoxNjMwNzAwMTcyLCJleHAiOjE2MzA3MzYxNzJ9.DCwwRO7P1KbV279P_9vgI6rZfV1PdYlGWMV91qloVmgo08CNBH0z0_0zIJqzi2tnwmBTXSxPgIahSU6lrwrxEoYUwbSJhKXlWeJ7I-VRaQc4bonMLIPpEp9HOifO2nQ59Ar-QlramV9k8v8FhzsGkp80ddT1SM-8eKOiP7NJ7i27FJFn4z1xskoDTHoJKObYYIScE2WGQSjVpRCAvv0Re5EO5iHZVJAgXHcx5Kvl63XM4doYUHve89p6a3eUDXJGjkDuiGxEI2uNrmGvFCPPmBROzzXLUxcN_iPEf2asJeWXfUKj_sfbG_r0PLeiekBVmW7eH8Dnq7zeUfBrjtywQg","scope":"openid
         profile email address phone","expires_in":86400,"token_type":"Bearer"}'
-    http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:20:00 GMT
+  recorded_at: Fri, 03 Sep 2021 20:16:12 GMT
 - request:
     method: get
     uri: https://auth0-sdk-tests.auth0.com/userinfo
@@ -67,16 +94,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
-      - Bearer ACCESS_TOKEN
+      - Bearer z7xFtk3YVjjmtlncdYH9JD2raHngvpiQ
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -85,34 +112,65 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:20:00 GMT
+      - Fri, 03 Sep 2021 20:16:12 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '350'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Auth0-Requestid:
-      - c00c09543bbc331d3444
+      Cf-Ray:
+      - 6891a78ce8f6058d-LAX
       Access-Control-Allow-Origin:
       - "*"
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Etag:
+      - W/"173-nhv1o7vxeuidrVp4r3jIW/zfwfU"
+      Set-Cookie:
+      - did=s%3Av0%3Ac8a1b5b0-0cf3-11ec-89d4-81c3fc4f1116.a4OZZtan83eKDQGbVuAamYhFnxUxCmSxaywhlpxym%2FI;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:12 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac8a1b5b0-0cf3-11ec-89d4-81c3fc4f1116.a4OZZtan83eKDQGbVuAamYhFnxUxCmSxaywhlpxym%2FI;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:12 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
       Access-Control-Allow-Credentials:
       - 'false'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a78ce8f6058d
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 2760a25361e78876
+      Ot-Tracer-Traceid:
+      - 7353e8bd7cf953c2
+      X-Auth0-Requestid:
+      - 691d95625950532f6b1e
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
-      - '20'
+      - '10'
       X-Ratelimit-Remaining:
-      - '19'
+      - '9'
       X-Ratelimit-Reset:
-      - '1539213607'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - '1630700185'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
-      string: '{"sub":"auth0|5bbe891e90253a02377c1c0b","nickname":"rubytest-username-1","name":"rubytest-username-1@auth0.com","picture":"https://s.gravatar.com/avatar/6946aed960fa14ccb86657ed5c4e7f01?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2018-10-10T23:19:59.991Z","email":"rubytest-username-1@auth0.com","email_verified":false}'
-    http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:20:00 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"sub":"auth0|6132828a407ec6006935a858","nickname":"rubytest-210908-username-1","name":"rubytest-210908-username-1@auth0.com","picture":"https://s.gravatar.com/avatar/9f3d52fd072792903462fbb00676a6c5?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2021-09-03T20:16:12.029Z","email":"rubytest-210908-username-1@auth0.com","email_verified":false}'
+  recorded_at: Fri, 03 Sep 2021 20:16:12 GMT
+recorded_with: VCR 6.0.0

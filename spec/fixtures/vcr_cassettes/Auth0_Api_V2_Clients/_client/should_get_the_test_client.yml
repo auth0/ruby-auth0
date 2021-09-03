@@ -2,23 +2,23 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/9mhyX7O1EokZmaEwtSSmDsBEj352cSlX
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/SftKo9ySyHnMPezQUFd0C70GBoNFM21F
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,66 +27,52 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:40:55 GMT
+      - Fri, 03 Sep 2021 20:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '8'
-      X-Ratelimit-Reset:
-      - '1538772057'
+      Cf-Ray:
+      - 6891a7b589c142e4-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7b589c142e4
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 03df1bda25d2254d
+      Ot-Tracer-Traceid:
+      - 6e89a1b17ef9f08d
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700179'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        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
-        aFK+wTjy6AQ/Wv4FzWP1LgkMAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:40:55 GMT
-recorded_with: VCR 4.0.0
+      string: '{"tenant":"auth0-sdk-tests","global":false,"is_token_endpoint_ip_header_trusted":false,"description":"Client
+        description","name":"TestClient-rubytest-210908","is_first_party":true,"sso_disabled":false,"cross_origin_auth":false,"oidc_conformant":false,"refresh_token":{"expiration_type":"non-expiring","leeway":0,"infinite_token_lifetime":true,"infinite_idle_token_lifetime":true,"token_lifetime":2592000,"idle_token_lifetime":1296000,"rotation_type":"non-rotating"},"signing_keys":[{"cert":"-----BEGIN
+        CERTIFICATE-----\r\nMIIDDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV\r\nBAMTGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcN\r\nMzEwODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAu\r\nY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl\r\n1hANaLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx\r\n22DealfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF\r\n4sICSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ET\r\nPu1vZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwF\r\nHSPi/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEj\r\nTXi9WQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZ\r\nb4hPV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEB\r\nAFE7ZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P\r\n65EAUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToY\r\nvT+4bp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56\r\naETSlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7u\r\naoSdilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/Bt\r\nxleksOTDF0s2t+AQleiJZnY=\r\n-----END
+        CERTIFICATE-----","pkcs7":"-----BEGIN PKCS7-----\r\nMIIDPgYJKoZIhvcNAQcCoIIDLzCCAysCAQExADALBgkqhkiG9w0BBwGgggMRMIID\r\nDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNVBAMT\r\nGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcNMzEw\r\nODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAuY29t\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl1hAN\r\naLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx22De\r\nalfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF4sIC\r\nSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ETPu1v\r\nZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwFHSPi\r\n/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEjTXi9\r\nWQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZb4hP\r\nV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAFE7\r\nZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P65EA\r\nUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToYvT+4\r\nbp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56aETS\r\nlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7uaoSd\r\nilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/Btxlek\r\nsOTDF0s2t+AQleiJZnahADEA\r\n-----END
+        PKCS7-----\r\n","subject":"deprecated"}],"client_id":"SftKo9ySyHnMPezQUFd0C70GBoNFM21F","callback_url_template":false,"client_secret":"kJKYl705CStDbaeiBd9WgZafioFcbFNg0i4Ta7nakxxdGLUIdZvuRUXoY3MOe9xz","jwt_configuration":{"lifetime_in_seconds":36000,"secret_encoded":false},"grant_types":["authorization_code","implicit","refresh_token","client_credentials"],"custom_login_page_on":false}'
+  recorded_at: Fri, 03 Sep 2021 20:16:18 GMT
+recorded_with: VCR 6.0.0

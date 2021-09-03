@@ -9,18 +9,18 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
       - '40'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,54 +29,69 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Feb 2019 16:13:15 GMT
+      - Fri, 03 Sep 2021 20:16:28 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '7'
-      X-Ratelimit-Reset:
-      - '1551283998'
+      Cf-Ray:
+      - 6891a7f27bfdeb89-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7f27bfdeb89
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 59c79e5e1aa4e665
+      Ot-Tracer-Traceid:
+      - 063b836d716e54f9
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700189'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA1WOyw6CMBBF/6VrMbyN7NgZ2ZggCbhpCoxalJa0w8MY/92Rncs598zMfTN8DcASNlowlsMyaINswywKHC3xAVQr1Y1Qo5WCBqVWXLaU0MzLJczMqEXthvP0rErSrtr0An+5nf62CBX0RIkenJOwdtamddIR76BQNmJVyDcgEFq+nvBdb++4vuPvzl6ceEHiRdsoiC7krRU6XfOuyB9xejhWjcmmacnZ5wu9hN4Y1AAAAA==
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 16:13:15 GMT
+      string: '{"type":"users_export","status":"pending","connection_id":"con_Xx4Kruoab04wvlYX","format":"csv","connection":"Username-Password-Authentication","created_at":"2021-09-03T20:16:28.622Z","id":"job_9HuTvJsi2KpY7Vtv"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:28 GMT
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/job_jUSk6AHJYcrKvvxS
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/jobs/job_9HuTvJsi2KpY7Vtv
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -85,33 +100,48 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Feb 2019 16:13:15 GMT
+      - Fri, 03 Sep 2021 20:16:28 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '7'
-      X-Ratelimit-Reset:
-      - '1551283998'
+      Cf-Ray:
+      - 6891a7f3c97c42cb-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7f3c97c42cb
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 58d3eb13489ce756
+      Ot-Tracer-Traceid:
+      - 6b0c2de64527963d
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700189'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA1WOyw6CMBBF/6VrMbyN7NgZ2ZggCbhpCoxalJa0w8MY/92Rncs598zMfTN8DcASNlowlsMyaINswywKHC3xAVQr1Y1Qo5WCBqVWXLaU0MzLJczMqEXthvP0rErSrtr0An+5nf62CBX0RIkenJOwdtamddIR76BQNmJVyDcgEFq+nvBdb++4vuPvzl6ceEHiRdsoiC7krRU6XfOuyB9xejhWjcmmacnZ5wu9hN4Y1AAAAA==
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 16:13:15 GMT
-recorded_with: VCR 4.0.0
+      string: '{"type":"users_export","status":"pending","connection_id":"con_Xx4Kruoab04wvlYX","format":"csv","connection":"Username-Password-Authentication","created_at":"2021-09-03T20:16:28.622Z","id":"job_9HuTvJsi2KpY7Vtv"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:28 GMT
+recorded_with: VCR 6.0.0
