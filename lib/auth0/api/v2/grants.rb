@@ -13,7 +13,7 @@ module Auth0
         # @param per_page [int] The number of results per page. Paging is disabled if parameter not sent.
         # @param include_totals [boolean] Return results inside an object that contains the total result count (true) or as a direct array of results (false, default).
         # @return [json] Returns the grants.
-        def grants(client_id: nil, user_id: nil, audience: nil, page: nil, per_page: nil, include_totals: false)
+        def grants(client_id: nil, user_id: nil, audience: nil, page: nil, per_page: nil, include_totals: nil)
           request_params = {
             client_id: client_id,
             user_id: user_id,

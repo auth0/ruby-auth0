@@ -18,7 +18,7 @@ describe Auth0::Api::V2::Grants do
         audience: nil,
         page: nil,
         per_page: nil,
-        include_totals: false
+        include_totals: nil
       )
       expect { @instance.grants }.not_to raise_error
     end
@@ -33,7 +33,7 @@ describe Auth0::Api::V2::Grants do
         audience: audience,
         page: nil,
         per_page: nil,
-        include_totals: false
+        include_totals: nil
       )
       expect { @instance.grants(client_id: '1', audience: audience) }.not_to raise_error
     end
@@ -46,7 +46,7 @@ describe Auth0::Api::V2::Grants do
         audience: nil,
         page: nil,
         per_page: nil,
-        include_totals: false
+        include_totals: nil
       )
       expect { @instance.grants(client_id: '1', user_id: '1') }.not_to raise_error
     end
@@ -59,7 +59,7 @@ describe Auth0::Api::V2::Grants do
         audience: nil,
         page: 1,
         per_page: 2,
-        include_totals: false
+        include_totals: nil
       )
       expect { @instance.grants(page: 1, per_page: 2) }.not_to raise_error
     end
