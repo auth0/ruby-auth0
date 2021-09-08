@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/users
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-rubytest-username-secondary@auth0.com","password":"H4WbJ7Oa","connection":"Username-Password-Authentication","name":"rubytest-username-secondary"}'
+      string: '{"name":"rubytest-210908-username-secondary","email":"rubytest-210908-rubytest-210908-username-secondary@auth0.com","password":"TeN4eRrIpTy","connection":"Username-Password-Authentication"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '165'
+      - '189'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,39 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:21:58 GMT
+      - Fri, 03 Sep 2021 20:16:45 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Ot-Tracer-Spanid:
-      - 7b99c1c17151a2c8
-      Ot-Tracer-Traceid:
-      - 114a0d1f6fac1be1
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '8'
-      X-Ratelimit-Reset:
-      - '1561749720'
+      Cf-Ray:
+      - 6891a85c1fad0558-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a85c1fad0558
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 744357ce378858dc
+      Ot-Tracer-Traceid:
+      - 4112faca2de9a062
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700206'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA41RTWsCMRD9LwE9uR/ZrNu4IK2XngttLy1FxmSioZpdkqxFrP+9yVpFLEghhxfmfQxv9gQ3oNekJrZb7Dw6n5xB59Aa2GDiUDRGgt09QOdXeSqaDRmROLrU/aUHUu8+36LVSqMktYK1wxHpWgke5Rx8cChyOknyKin4C53UBa3HPC0YfQvy6DnXQUf65O+xpFXFZSVQMUZzBAWAspSB2mrhOxs3WnnfujrLXLq0sAUPNm6cHWGmyjJHrqgqqeKMMykZBS4qShflHS6qezcteT6003Y5lNPea8Bmg+IxPCFNeq4g/I+WLiDbpa1Zxla0+Lxu5nZFWqLx2mt0pH7fkzAwKLxuTLB4PQmewLmvxspkFuIjX0BPuazoVjm22YYceyoyxrrnRmhY/97k8DEiwuI/rnL4AVjra+M0AgAA
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:21:58 GMT
-recorded_with: VCR 4.0.0
+      string: '{"created_at":"2021-09-03T20:16:45.624Z","email":"rubytest-210908-rubytest-210908-username-secondary@auth0.com","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"613282ad45244d0069782b56","provider":"auth0","isSocial":false}],"name":"rubytest-210908-username-secondary","nickname":"rubytest-210908-rubytest-210908-username-secondary","picture":"https://s.gravatar.com/avatar/c2a0e9c069b78548d21aefff897d2897?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2021-09-03T20:16:45.624Z","user_id":"auth0|613282ad45244d0069782b56"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:45 GMT
+recorded_with: VCR 6.0.0

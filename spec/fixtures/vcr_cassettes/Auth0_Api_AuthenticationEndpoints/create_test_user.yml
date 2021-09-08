@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/dbconnections/signup
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","connection":"Username-Password-Authentication","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"}'
+      string: '{"email":"rubytest-210908-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","connection":"Username-Password-Authentication","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '179'
+      - '186'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,30 +29,65 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:39:05 GMT
+      - Fri, 03 Sep 2021 20:16:10 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '97'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a7814f260d3c-LAX
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Etag:
+      - W/"68-P6s284boszZ0JEXSXqoN6Xq3XSE"
+      Set-Cookie:
+      - did=s%3Av0%3Ac78dada0-0cf3-11ec-ba29-7f8a5486a79f.V9rDE%2F5keDd2A0QXZ%2BlumrIzRhDrvAqnQo1qpIog%2B48;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:10 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac78dada0-0cf3-11ec-ba29-7f8a5486a79f.V9rDE%2F5keDd2A0QXZ%2BlumrIzRhDrvAqnQo1qpIog%2B48;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:10 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Credentials:
+      - 'false'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7814f260d3c
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 05e2c0e600c6e89a
+      Ot-Tracer-Traceid:
+      - 3e94592948180616
       X-Auth0-Requestid:
-      - 5b2ee9fb798c78fbe32e
+      - 7697ff952c7488416624
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '50'
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1539797947'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - '1630700172'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
-      string: '{"_id":"5bc773b930533f47d4764b9c","email_verified":false,"email":"rubytest-username-1@auth0.com"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:39:05 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"_id":"6132828a407ec6006935a858","email_verified":false,"email":"rubytest-210908-username-1@auth0.com"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:10 GMT
+recorded_with: VCR 6.0.0

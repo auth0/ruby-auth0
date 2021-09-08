@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer invalid_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,17 +27,28 @@ http_interactions:
       message: Unauthorized
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:19:59 GMT
+      - Fri, 03 Sep 2021 20:16:11 GMT
       Content-Length:
       - '12'
       Connection:
       - keep-alive
-      X-Auth0-Requestid:
-      - 19fb7bb180e9dfbd2b6e
+      Cf-Ray:
+      - 6891a78868f23684-LAX
       Access-Control-Allow-Origin:
       - "*"
-      Access-Control-Allow-Credentials:
-      - 'false'
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Set-Cookie:
+      - did=s%3Av0%3Ac82d9720-0cf3-11ec-b24f-5b72afee6347.LHqhbJG1OPzEnwWI4nCbr6GP3cOK4iM8Tq51N9x9tys;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac82d9720-0cf3-11ec-b24f-5b72afee6347.LHqhbJG1OPzEnwWI4nCbr6GP3cOK4iM8Tq51N9x9tys;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Origin, Accept-Encoding
       Www-Authenticate:
       - Bearer realm="Users", error="invalid_token", error_description="The access
         token signature could not be validated. A common cause of this is requesting
@@ -45,11 +56,39 @@ http_interactions:
         scheme requires only a single recipient for its security. Please change your
         API to employ RS256 if you wish to have multiple audiences for your access
         tokens"
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Credentials:
+      - 'false'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a78868f23684
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 683fea2a5a32d53e
+      Ot-Tracer-Traceid:
+      - 2fc815f05373a807
+      X-Auth0-Requestid:
+      - f44749ff28a010f70802
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '999'
+      X-Ratelimit-Reset:
+      - '1630700172'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: UTF-8
       string: Unauthorized
-    http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:19:59 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Fri, 03 Sep 2021 20:16:11 GMT
+recorded_with: VCR 6.0.0

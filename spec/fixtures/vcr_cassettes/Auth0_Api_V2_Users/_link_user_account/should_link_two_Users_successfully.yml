@@ -2,25 +2,25 @@
 http_interactions:
 - request:
     method: post
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/identities
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/identities
     body:
       encoding: UTF-8
-      string: '{"provider":"auth0","user_id":"auth0|5d1668d6cef3310eafaaed4d"}'
+      string: '{"provider":"auth0","user_id":"auth0|613282ad45244d0069782b56"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
       - '63'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,39 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:22:10 GMT
+      - Fri, 03 Sep 2021 20:16:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Ot-Tracer-Spanid:
-      - 6e89be3d4c7729c7
-      Ot-Tracer-Traceid:
-      - 6dadeea63c9d1113
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1561749731'
+      Cf-Ray:
+      - 6891a8735ff1051b-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8735ff1051b
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - '0459048b2393ddc0'
+      Ot-Tracer-Traceid:
+      - 46ca1fd80756dada
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700210'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA6WPwWrDMAyG30XnZCTLkiU5bbAHGIydSimKLTNBYg/bySil714ldFsPPYT2ZuRPv/5vc4Bv7wz39IYRoT0ADcg9tODHbh8pxPTvMQbyFgd6wTF+ZQ/KDZDAPLikfyH5WpJ2E3k2TBra6Ec6JqCctaQiOyt7n2c8fccQfpzX6auEk42scEESmBN3LPtQ6ryqal3Wpuvyx4wwU3nz3DQCicTEmrxQSzsZcfhwilFcDPZBLt+gmgaSuhr9fpX0P35F/9zifv9KkSmKXPwNIuknvc5/ewKK8N1k7AEAAA==
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:22:10 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"profileData":{"name":"rubytest-210908-username","email":"rubytest-210908-rubytest-210908-username@auth0.com","email_verified":true},"connection":"Username-Password-Authentication","user_id":"613282adac819400692c0dd9","provider":"auth0","isSocial":false},{"profileData":{"name":"rubytest-210908-username-secondary","email":"rubytest-210908-rubytest-210908-username-secondary@auth0.com","email_verified":false},"connection":"Username-Password-Authentication","user_id":"613282ad45244d0069782b56","provider":"auth0","isSocial":false}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:49 GMT
+recorded_with: VCR 6.0.0

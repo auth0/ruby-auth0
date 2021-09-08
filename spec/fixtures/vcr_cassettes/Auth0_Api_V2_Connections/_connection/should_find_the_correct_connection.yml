@@ -2,30 +2,32 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_n8MJ02x2Zs0JBUWN?include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_WltM0fv20JCnxOuY?include_fields=true
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 20 Jul 2021 02:14:49 GMT
+      - Fri, 03 Sep 2021 20:16:20 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,11 +35,9 @@ http_interactions:
       Connection:
       - keep-alive
       Cf-Ray:
-      - 6718ad9c7dbfeadf-LAX
+      - 6891a7bfdf8f42d2-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -47,13 +47,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Ot-Baggage-Auth0-Request-Id:
-      - 6718ad9c7dbfeadf
+      - 6891a7bfdf8f42d2
       Ot-Tracer-Sampled:
       - 'true'
       Ot-Tracer-Spanid:
-      - 4bb13e5568acac26
+      - 2041e7a6509d0760
       Ot-Tracer-Traceid:
-      - 505815493146e9d4
+      - 33a20dda3f52bf0e
       X-Content-Type-Options:
       - nosniff
       X-Ratelimit-Limit:
@@ -61,7 +61,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1626747290'
+      - '1630700181'
       Server:
       - cloudflare
       Alt-Svc:
@@ -69,7 +69,6 @@ http_interactions:
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA3WPQUsDMRCF/8ucV9guInZvKhQsKAUtLUoJ2WR2TcnOLMmkupb+d9NWvfU0MO/N997swVmowTApun2al9VX9RbL+f1y9QwF8CCOKUK9h77Vx6GNuB1CLSFhAQElBVJIgb1XEUUcdfGsHgoYdIyfHOyCvTNjjumYbcZGCVqwG9UOQ8wBUFcFNCEJqpaDQTUEFjRykn5ZfzeZopN8lBlDus9N4BWjPDDR+eAqpGaUvMoGF5XlXjtS5l+HutU+5u5IuvFolfEOSXLpd6gMrVLqbr71bD3Zlh1OFtPp9m5J5ex6/ZIeYXN8Wfv+5L6Uuzn8AGJlr3xVAQAA
-  recorded_at: Tue, 20 Jul 2021 02:14:49 GMT
+      string: '{"id":"con_WltM0fv20JCnxOuY","options":{"mfa":{"active":true,"return_enroll_settings":true},"passwordPolicy":"good","strategy_version":2,"brute_force_protection":true},"strategy":"auth0","name":"TestConnection-rubytest-210908","is_domain_connection":false,"enabled_clients":[],"realms":["TestConnection-rubytest-210908"]}'
+  recorded_at: Fri, 03 Sep 2021 20:16:20 GMT
 recorded_with: VCR 6.0.0

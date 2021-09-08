@@ -9,53 +9,61 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
     headers:
       Date:
-      - Thu, 04 Oct 2018 18:56:04 GMT
+      - Fri, 03 Sep 2021 20:16:24 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538679365'
+      Cf-Ray:
+      - 6891a7db2d7131a9-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7db2d7131a9
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 25024cae34589261
+      Ot-Tracer-Traceid:
+      - 52a2344221986d73
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA1XKTQqAIBAF4Lu8tSfwMiI6xZBOoW5CvHsqBbl6P3wVYiNB
-        I1rxiUOAgkvkSQrbkKEr7MXmoLubrzWFTKWw7BNsnHIx79PZskdieHeK/6H1
-        mKq1BxyN2SaOAAAA
-    http_version: 
-  recorded_at: Thu, 04 Oct 2018 18:56:04 GMT
-recorded_with: VCR 3.0.3
+      string: '{"statusCode":404,"error":"Not Found","message":"There is not a configured
+        email provider","errorCode":"inexistent_email_provider"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:24 GMT
+recorded_with: VCR 6.0.0

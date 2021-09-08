@@ -9,23 +9,25 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin20.2.0 x86_64) ruby/2.7.2p137
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjEuMiIsImVudiI6eyJydWJ5IjoiMi43LjIifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - auth0-sdk-tests.auth0.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 20 Jul 2021 02:14:51 GMT
+      - Fri, 03 Sep 2021 20:16:22 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,11 +35,9 @@ http_interactions:
       Connection:
       - keep-alive
       Cf-Ray:
-      - 6718ada988f531f7-LAX
+      - 6891a7c9191842de-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Link:
       - <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=false&page=0&per_page=50>;
         rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/connections?strategy=auth0&fields=name&include_fields=false&page=0&per_page=50>;
@@ -51,13 +51,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Ot-Baggage-Auth0-Request-Id:
-      - 6718ada988f531f7
+      - 6891a7c9191842de
       Ot-Tracer-Sampled:
       - 'true'
       Ot-Tracer-Spanid:
-      - 43a569100a7a6d38
+      - 0004c226231c497e
       Ot-Tracer-Traceid:
-      - 1968a4b72d72e843
+      - 709fc3ee6395fc0f
       X-Content-Type-Options:
       - nosniff
       X-Ratelimit-Limit:
@@ -65,7 +65,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '49'
       X-Ratelimit-Reset:
-      - '1626747292'
+      - '1630700183'
       Server:
       - cloudflare
       Alt-Svc:
@@ -73,7 +73,6 @@ http_interactions:
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA72Xx67k2JVF/+WNswB6kzMygj7oPYXCA733ngX9u8hUSZAGQqMhdI9iEIv3XO59HP/yx1eZfP38ivvuW25aWD5UA10XD3TN7evHVz8sZd/NXz//+Gqz8PkJ46Xc0q+fy7SmP76mdFmn7jvtpr5pvud0Wcoun//+719/fCXlHEZN+j2XebcOXz+zsJnvp4Zwnvd+SrS+KePzjp73fXJHm5cpXNL8/N7Sab7jfv2EnhDjWk7p/L3O6dSFbfrPY6JpXdLvrJ/i9HuY+iWNl18P/Rn8H6fd54frUgB3gHL+Tvo2LLvv+327f/B/HjelYdPed//Ll5XOy9fvP77S7rl98h03Zdotz1+///XHvwjWEbIIQAcUzIBI267y3wv2v1Lm//T9X/8EfpvW6Fz+oyRfUNy565pjV8h6YAXkKaiRZEXZHcAinrkKX/8umncg0rT2YQQg+9b43n8v2v+vOPafafib9qdXv1H3AbcYZRz+euQ/qKTxvRXmmBJ1/gJTMz0rB1vWgZ0IMluj030BacAoxte3dWdrGhJlqgkia5uzt5bHGbZ2Tx4c9GlzCNbMw2eHd7TCmSqw1fLAixcGMNyNeJICWIyTQ1wQnuM8rJlkVeca6eSGW/J9mR9froTG9gvh4r1k5K2ntTegMhGXi03a1Okh3YhDQv3uIQOnptwLRFgLV+yh5o3jzvTAZ/YbUaMOsHtBXc9iAU8pnlhNb3L3zEW2KUaOv5GL96zS7toWVgzdQPn71htQBSaT0sDycqAb2QM+KxJOKwWrtdTyA/ZF3dPwZbZr7J1O+uiCkis/oHjYm1nrvGikoHAYwGPv1ZFin0U3IofYMii6105pgOQE3Fnk/BlC9U2XLwd4ZTdCQdMCXGli8gWBFidAfNy2biifdgQUgV/kjYwDyykUm6k+gkhbV7ARADHruoUUkyASJd8I89lKHzEvX/PQFmMF2pTZxeXIjDz6mY8eG0cED0Yt7nFgHnRw7C55osupBhO3F9JIfJAYREBqjZzRU156ASOFi1k4Ko2JMsE4bT6I0+2HVIig8Y7JQZt5syBmBmGQi5SCPVzUG3mF85sT4pc5K2qcv2Cy2U7WK0GnCTTDEp43smM9nl2WV4vXp4lEki+aTY/A1lYGRcJh6jGghV453nUbp6Xs4MJxW1uVMEK+p+72gV1PSiWbijoEIUVGaZCTYOXgmkeGJ8eTCWDLEyhshOvgr0Gj322+LeIU1q07SaisQFmj2+aNQCGLKZjTgjPTRDFVxQVTGFzpZdmWrhAL3og47fP4cnfsjcDEUJbJLi2kesmNNGeK01k3osPL5Gd5TTB1GmefKsi22lFIsBN8pDeyZ2iNa/aCMCtKUL3eMQvWHDleS2mwmamTNW98KsBppxbGZ90HIa2NvEZJsSpNrwTBW3uvzxsBe9XutE6EO6lSzMHQ2h4UuHXTm0ZibebJXXvLIjsSmHg22tEgGgSEgAOxfCZTNU5z9RtBD97QEdlcAIzW/MwMdurikEYaJWa21638lXXVlaSzGruHTes9D4bIhhkcAjcYSG7o45EyVz3ZZzCL10kNbTVNTebc2oj6YbE92Z/O4IvqovCv0LPl4zi0BhnaGLFw4wRNdg/SJ9BG+pmISZBLFKjkkspkvflE5Td206dWJIwnGcwoxzeYde02/3zOJD8uQ1oPNprhzzpd6I3wHpYwfq7wo+bRKXRgByaN5Eq0uNqOSmA/d4Fqiqj13oXfca29zVvh4tgDYOFsc9HY4kY6ZMmoeAtKTCzatwEMYrnmO3ARK7exui0+WQdMkKDoRJZXSCVSpa/6ZVEtdFSB7CV3rxs5d+8KGnwNZXGL46ag2BQqWlCTR7ROR+C5LrDCCr7G9HtxnFO5diWlZGsVLxCUeNfo6MfG+p2PRg5CdqvHjccJd44NRm3QbG2/wFK4Eax7+5IXJN08SQJS+FR8tDoQJNvoRldi1TcCj5dbtJmF+5o8MJDKjaHwLpQF3AopGrynqapFFITpnYx1IXLom+gQUqb07WglXUj6ob+Rt+g3WpiQKCgwkYAeUVlXA324pn7SBGM+K4Z7kGY0H8NqcCjKrPolYzEIVdBgDECBhb+qcfeRE1KBWcmA8qAnIj5k5h1wnqwbIMA+0+5tsAlLocWayq8x16045wE+G1/wxlo6WTU3UsXEmoTa2SGddKTImwVbhAzOqI7izJzMxyPpslBUldk5dKidtC7Ht2fRQE+cVfZgRZ/hrsnFhs/Soiqih9CZjg/lB66DoCoUNhH1pxpjtZUQQgLv3letlVMCLEsYDbG3HeVPe/fUtNMOblTA6CZKYumvKzNkTmlgSIS+ItnBniKhIT/s4U5fheRtr0TPBZ0ehydZ5wYtetTj0TTQjsQ4pGUJHjMWqJ8s8erA7LT00pDjyI0k1hryEFaZYFmF56RMKnRKFb+GnM5npvjYCC8n0uaOQ+FqoL3eF72Q2hucLAOnctvb3WfwyVD1CYmqqxFWwTM+zKEgUtUxA4C5hbxf/SXrgRhQocojt1TilFFNWJdH0bl3LrGgnkAZfDgQNtfTUmXilY+k0GKtZx34QeLIpjxDuITDOgbTKhBdaMZg3EtTAW+ZT4E2lYOW2I0gLru1rX4F83yQHLI2+zkdpyv4ozAFCPHsDKZVCNaKSpJ5fe4+KuLqnLhs0bBD+Za9X8vJHOdC66SO0W06bc/LZzQlaR1e/GEcOOw8NvbC1BhCLrafETgEJDJDX6oLrapGL5fK6GlBmRjBMo8NcwLibqAAZpe2WY0faMxWqjI+LQiUGDx2ReAEgKEChntGvLlkCNTVgNnoruLHAHZZYAcSSYDilOSIgrKqyk0kcqbQLkLLn2FjgQeI6kC9DRcDvc+XSrVqunIWVmItia5Pr/O0TNVnymk+Z+oSMcIaoGxX6wT5Lpmbj0ewNo0nhKoSae8KUZJrSMRek/M8t+iX1T26dNRosuMG65oDmID0MRNoOwVVvvcqwriWJ+sOClb0g0+9gg7AfODrTooUCWCwcj/usn4CrXRexKSg6W8ixDsLc+A3hm48FQo56lPZs7TZM/3ZCkpLLT0JcRU5GurojRLiN6wh4OWZ086Avz4FGDV4Q90rEpzucvEOx080MjtdJ8uNBCncQoY8hgA3YxtQThmdeGySYQ6A2yekPSl1j+P1sJMQ4+p131+005NoQ73ULB+FGn3UVUqAJ6Y2fKXlERPzSyPg7ZirOufTLCKz40bq85owHBea1hTRVzDGjjRwPYGPvBg0n/3pUqA1L6LqHf6guswBQ+xYud7ZKAT4Ag0bf6T7H78t7o2sRDdUJnAMZXzMVW7NT+rE8QVMoQWltmdnIIAh9a+UCkKsMZaDMXsNYFjbs2trZGrySanXbCMg/CGWzC6lMQ9V+lUyVO+HwKIbLwB+nB4Axlhxjmd7BXBL90NFrJAp1b0MSuwMPDY6iQigObCBJw3YyVi+JfpDZfahjCANxTzya0xQgt0QnJxwHrjF0RQENSQk0PWx2dDFf62hV/SGZ/FcLf8FebBAjdAW+zDeaHFCWsDTVC9Do+MwW21WkUNknEVfr7JECmyAvOeh+VQjJyueCbyWrMUQcXB0VxIvHHophc2XHKU/W3P8Fse779/2Df0YnO/MBwtAslkB2y7NIp+tGX7tOgGde5aMrlKCGhhmFBZWCc/6XIEI8/1x9/vfAFfMG5REEAAA
-  recorded_at: Tue, 20 Jul 2021 02:14:51 GMT
+      string: '[{"id":"con_Mlm3MxOR5utX1WSv","options":{"mfa":{"active":true,"return_enroll_settings":true},"disable_signup":false,"passwordPolicy":"good","strategy_version":2,"requires_username":false,"brute_force_protection":true},"strategy":"auth0","is_domain_connection":false,"realms":["Test"],"enabled_clients":[]},{"id":"con_WltM0fv20JCnxOuY","options":{"mfa":{"active":true,"return_enroll_settings":true},"passwordPolicy":"good","strategy_version":2,"brute_force_protection":true},"strategy":"auth0","is_domain_connection":false,"realms":["TestConnection-rubytest-210908"],"enabled_clients":[]},{"id":"con_Xx4Kruoab04wvlYX","options":{"mfa":{"active":true,"return_enroll_settings":true},"strategy_version":2,"brute_force_protection":true},"strategy":"auth0","is_domain_connection":false,"realms":["Username-Password-Authentication"],"enabled_clients":["aNG5n4ny57xCrd53MhfwomU85fpsEdyr","2PHoTag6NbnYt3AsBsNxFikZUdIMFk5r","Kp6AEYQvuwFkB2JMAlZbTvsfDPgcf6un","sxByUG46lspLw3w5j7EjZUOix7hC60EG","XKN0TEVg2GZayqspufKTjyubQ9v7TMts","WK5cUC4GcwiEMvoBPD0OEbGgJlelkexK","V92owX4pGOeGC14FT7NUpkHRx0JBZYEw","Obn0UoIOuyht1yKcrFPQlgWygJFlhqGH","zHXTiUnmm3NRQR5HspLv0jZSEeB0tCV2","wZHfhdGPiITmTOiL1ohkoB3zSmucXyVe","K59uHp57aoSfmVCB4hA7307cXCn9Jofb","Ma6tpNQXmreZ4g83nT9sLpaODBiCV0Cf","A2rt0zedSHh85hy08LWmklAYBVI543C9","qpFGNAFfOY44KvnhFb02EuuvaAEd4KAM","ELviY4SzYPX5m6FIBSMFtWG9f9xosHbr","q47ZqPco70spQ1qnzMrBirk1dWoIebJr","c141AubVqXNCQh34hW6T75KqdNr37BSr","VnwxKhJ1RDc9pPsHSh8sE4E4z9KZwatO","CasDGIcCSsNOcgC39lvyFXi1VlZPRTI9","UcQcsWFHOhCLlbJ9HhlvQb1mUNpNK73A","wm2Cg7nnvGPeFpW3cmkTjIq2YXOwUx6z","alIzxHzpPBDmgvtJrakmWrK5MN2flQUS","2aF6N6Vm1sElbcAjchEhRGiXffveu2F1","JrwsqCWw6D438piidwKt9OzMlKsfNVnT","Q3trYfgk8EkecfLjZfvkVN91nIY4oRfv","qufC26Tbd5Qkw6T3PVMcuiKpUErnMPXq","WVmrm37sQY12PmbXlNe6jeezd47mUwky","1oOUnPnJ3nKjNSpRPmo1IGuvQllKFUE2","UvfbUbIEcsRmqR8l4120x4TYEfOPGPWQ","5xHRQ4MSt06BPYfSZwAzG4lKqKEsUuvi","qpjzdesOcWxUBQoH1a4v6RG43l619v5A","Nsjo9of3F7kdk2vkBArSsmU4OLF6wdwn","YJOtNHCaXUMxxxPl4pmc4T7Ry1SFwZei","v9YfJ6K2W8h5KW9NrTDHdOHvFvQrmJ8R","wSbg7v3FWUmgLLydgxzRKuxFbs3Lurz5","HX6dEYgNHqPXBe2x6x6Kq9u8m7OmqNZU","Y2kA8kQoW3DckPDSPmbhxwZ0tGUStPFh","n4tfAcvZi6JhmDR0pJiugw0z8uGvFQUJ","X0r2INQ8fgj4jJAiYOYihjtBbj1FzMnC","ywXzZl7uaMJvcclhAFe2hm1PMq5keq05","0u3N7ucBDtVVyNzwNeAMTuJz11KHWRnB","UkDgqRg12UmQclXGIQ3tpRkRBFkUC1iI","6nDYKXZdnsrKI4hYAcxmQ0ZdvqWbzdTk","3qzWhmfT7YPMpE2OGqaIDhNt1vhKbpXK","OhbZaeMcukhJG5D8n49MAQvxmKQIdopo","DJYlPad951IEbI5xbikjpBxWSQyB8ESN","Wx9SbsxpuRG55EuQzM6c12j2pRp0h6a9","awY4y2O0sNf0ixBr8cxMEDZGXMQR10F0","DRFdFA5hueMCqgQTcgH0HfqC3vFTQ9jl","jc8udaPyn4nKxe4DF1m49ZybkbcfSrSJ","KzT55OMFsaVAw9TzVYUsJR5y7FNwZu5X","PMhv7sKtONJX4BfQ7piL3kZZjhNFdJQq","VmpWbh35vJKJiYuuEpfViR64b5CbMV6A","B2Yao3nQuIdDUu8oGZnQcay9kgRBJXAk","rpBVKEV9TTIXEqh5YdtcuV3FrtoKpg74","3ty4mgVVA7OZPCDzBt9PD1rTR7AgUXwW","i3akc1ejZJW2s637XeeI7mELh5ljV5i6","scgImVeVRnvQBUstLqSKKupCHxRx73Vq","oIrlRIgJmLq0xI4bSaYKkhPjjqXgKibi","fJb3MH6psd17WZN0Snemfk7x5cFjONqR","1KE7cWJ0y00pj0pEhRDGdpZOuR3FbDtV","3Ftt3V2J90AGNdxbZijjivJ8gEhPz8Pg","2T1x15Q0kvpzE2DyCOAmOeuGT6i6m95u","wXPfOQsAVlLyeW8c4FR1MUjur2YW9gSy","3Prqy25OK9UwN8i9ua8cXlgHHGtQzTnr","nAqSFqv3QPV0S0KLSd2vyIOMMvo8Rztk","uBghc9IPQD8a7nT6V3D65vHAaIg5YAfs","UsBLvhAPeTQda7O4xlAxoRi2Hv6l83tz","Vp7CLh1bl7lAA733ewMhDaqLbqEwBkdt","Ze3m2RMqa0Gs6v0irfBdXFdf6V07Uy2P","iveuuxUda6GkuwwCBVo95lACOfgqIk5g","Ni0H8rmaCeixc8sCP83vxsjkgHefb9fx","kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","1TstJOXxYpOWEx32FqjWXylN81C1RU7k","2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","Ei5v5M8765EY6WNRztyAy77t1e2t5AvT","80peYzeAZa6lRtxESoP0EFUXUkTqEk9V","CsU413L8tfUiKqgaOBCiEAoYa0tQRC03","np0ERu7GHFoN0WiWLAbFIfNjSzYKFs0y","VdJ05g0v1yB0UdqiDKBLAfUxNq1B2cH4","3qAIUl8GMdGX1vcbrZZk2Id2zLUFaW79","qzbD3sJyuTYC2X3IAq2vcY37lPcd9T0X","zRPBcafuUFNMa4qsJYQjfdKZU09Zl7Sq","GMNXS0Ctfm64JpVQWKJz72CNhUHiGAQb","cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","3CwQ82ywfdqWNi1P1afA6ajdHFYGh4Is"]}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:22 GMT
 recorded_with: VCR 6.0.0

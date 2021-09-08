@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/clients
     body:
       encoding: UTF-8
-      string: '{"custom_login_page_on":false,"description":"Client description","name":"TestClient-rubytest"}'
+      string: '{"custom_login_page_on":false,"description":"Client description","name":"TestClient-rubytest-210908"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '94'
+      - '101'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,90 +29,53 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:40:54 GMT
+      - Fri, 03 Sep 2021 20:16:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538772056'
+      Cf-Ray:
+      - 6891a7aafd15429e-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7aafd15429e
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 271d672e34c038f6
+      Ot-Tracer-Traceid:
+      - 27e5b64168807a24
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700178'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA6WYV6/iSBqG/8qIW6YHB4yhpbkoB8A5Y+OdFXLCOeAEeLT/
-        fV3uUW/3Bh1pz7nhUDZPBbue1/7+XPVR5VX96uvKG/oE+dKF+Zc+6vpu9esq
-        LmrfK1Zf717RRb+u0u7W13lU3aIqbOq06m9pc0siL4zaW98OXR+F388Noy5o
-        06ZP62pG00UaVf0vPzb+uqq8MpqPmXNn345/aQf/DfteLX3d07brb43X9u/V
-        15k/U7uuvoVp5/nFD10Fbd11t7pN47S6wUl8P1KnYXAL6upet+Uyx7/aoypo
-        380y3L+4aVylVXzLo3e3+vq3P1fzP/PQvsA/ij1x8i+6AX5Rde4CTPYXgb0u
-        R/5o/6gkjmMbwFEACDTQWNA+qOLAJn7PiZvYexdoAmRPtHjBOA9Sg4zj9aWR
-        pw73aorGLvcEMjbd8c3qCH0WuaJwU9c3fRaJgqbcnd+1Jr8wjIm84n587dBX
-        6ZC0nrtxdmxaHC9ttMsJyBhy3HtuUtS2qcQvL2Xibd5DYDyTI5XhIzhuO442
-        qsv5zobOAbXpXgzf9XAJtznCyWrzhIy+V8MjymysHXWedmDksJBEbGOzxwTC
-        Q1lTHdDRpdyte+hFoszGMyWg+4QvAy0oZDXwIMOPNILs0uHxUsVcHNfFQ1WG
-        bsK0IOWp5/N4NtR0YzQ+PSG02dupY1zfeRAbaU8TuMO/IUPvzpUlVC62HRT3
-        sHbAVWozWjavgaK6DpuZTnqwNY4BGqBAPa+9Bri2eGdChiGY6yqQwcWslZjq
-        MegezHu8nqIEx8Ojzmec+B6rk2WdtaQDMdq49tnYjWVzPz6amoouY6llerNf
-        1vSRB7bMo8+h57g1Mk25XIrjhXiJ0/6sX6SCoay7QFwC0gGqr3ta89zyRq4T
-        r8P5wm9oyLjiydknTklx94lJqGt0izbbajoFRyO4X3yqbd8X/yG6WhW/tNS+
-        TqkPRBrLCAdX6t12WdOd2tPt5Ah4c97J7LqMs+q+MeoQP62v1F1vrldW3ZHj
-        daIH3spOTlhcjP3JCB6F+BS70wQZxXvNu1t1GtpWf6IiV0m+W+qW25EVzWZ3
-        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
-        4ugGB/ity38CnTBy9wMTAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:40:54 GMT
-recorded_with: VCR 4.0.0
+      string: '{"tenant":"auth0-sdk-tests","global":false,"is_token_endpoint_ip_header_trusted":false,"description":"Client
+        description","name":"TestClient-rubytest-210908","is_first_party":true,"sso_disabled":false,"cross_origin_auth":false,"oidc_conformant":false,"refresh_token":{"expiration_type":"non-expiring","leeway":0,"infinite_token_lifetime":true,"infinite_idle_token_lifetime":true,"token_lifetime":2592000,"idle_token_lifetime":1296000,"rotation_type":"non-rotating"},"encrypted":true,"signing_keys":[{"key":"-----BEGIN
+        RSA PRIVATE KEY-----\r\nMIIEpAIBAAKCAQEA0COSibTURVawAzrAaGQan2xpIm5Oz5XIa66DGqpv9GyN7Z0L\r\nyUKBDWiXuIqHE0eaDlBDmdkPYSv77C8Pp1+xwU/j+5CaqmYprDUIfeZ1uTH6FT48\r\n6Qr2T936i4vhNaXN5Rwi4tB6rhxeOXG58ux0E3igIdV6U0SdKH/S0OlZ9ylqLFYA\r\n2AWCCPHDI88ePxK9irqh73IiCuFlOXt6Khphd83NpdpZkO6COyDTDz682ggZo5BP\r\nbdIafdg0Ikm4ARclUU+wMgmoaff9F4/FBpVUqfAVJugKzpHL0zDcKk0xu8PdFJEM\r\nVvW8sqkZFSQqNlGgNphArGiAJkmAMt1TyEx6xwIDAQABAoIBAQCv0Vy3dkjZSaDl\r\nGXvusqDKiolEzGlGcQAb9g5JOC/aCNjbHw4VtFfPO8rt2BbB8nnwHVz9WJ3lN4JW\r\nwGo4uF0vLo0ms7/ysNoC3cmOkF5hUhYuW6SYNupaDOjXeBGFf8ms/1d4wSLgcJYn\r\ncCnjSlnDGOIrsmjibdNToqYyUuvsG0m/NQy51VCaFHC5hADd25HnSmYNR+fSIJEh\r\nqt6Twg4wf5MDsfJptFZdH0QI1wnxpEIydwIIZ0kZaAGCz20+cWs3Czjj59QhXOHK\r\nAGg60apY9GxjUt8wEIGpHM0c3XLhDtVo/iCsGpYsAmCPUVvgsIq74qxb1sKCnzRT\r\nr5PlO+QBAoGBAOw1hYM2R8PUdfY3XcAkO1d998ltsNkEiskYRsDxVLINRUcBD2Y1\r\nxIbNeU9eYf658Q3C+7aH9g1lub6Ca8nXs04MOvDI/D+Uy+2lnzB1QIJ284aSg5Pz\r\nGd//Z/x8YEztE8zQMz9ooQ6Xy7kyvoZvYaH9J6BXg3rqmRhv2yXe8zP/AoGBAOGT\r\n+K9uYj65yZYbjTaWH2P3Bo60clDlJxgfvqMIFbtRBIOrR+OK7ec5BcU1B0XtkHGU\r\njUBpEmz643Cw9DNZyN1MOmh6XMMOXElFrzz8ynBWW9RQn1jzz+KupkrYDMiy3DRp\r\nRTEQYyva00EF+gJAOJjNgLe4BlKn2i05OVbz7hk5AoGBAJjrXXBA590D4wpvdaY6\r\nzqAp0Qz6ko8svZzKtqOamTZcGQmKyilljcGnrG2RsOd0AXbjUIovI0AxJzsKvDWE\r\nC3Tvvgi8VXHkJtHHc3OvtP/Beo8Ys05JB+tYMj3nV4D1yufBsivO1NXZt+5Bx87I\r\ntPBmMA1CGsCsuEh1we6Wk+SJAoGADdcbWgAmzPxvLuOP3XqGgIamg1j07puws103\r\nQB993dlRspZuubpLcHViMkBXquWxiBZ6OCp6M++MxtxEj2YB2foUV1aynFEkPmal\r\nItPLw+q4haVQsY98AMeAcnUhC6tVsW2IDkOYIheyAHpSZZL1JgLt09fZo3ai/0VU\r\njE45HJkCgYBSu3dEb3uuaseIQ1g2fMgcfvk22NrIa/7eA88oVpoBHqAw79yxZw9h\r\nhNivsyW80b3L0zN12PyzjGFTwZtm+0h0y1LtGekD9oDfK9HTD6xQd6IRc20BvjRv\r\nW3WCxsbmczthCGl4SbHO5pOzJgk08K7vki4O7IWjj0+E5E90KUEcqw==\r\n-----END
+        RSA PRIVATE KEY-----\r\n","cert":"-----BEGIN CERTIFICATE-----\r\nMIIDDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV\r\nBAMTGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcN\r\nMzEwODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAu\r\nY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl\r\n1hANaLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx\r\n22DealfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF\r\n4sICSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ET\r\nPu1vZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwF\r\nHSPi/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEj\r\nTXi9WQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZ\r\nb4hPV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEB\r\nAFE7ZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P\r\n65EAUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToY\r\nvT+4bp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56\r\naETSlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7u\r\naoSdilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/Bt\r\nxleksOTDF0s2t+AQleiJZnY=\r\n-----END
+        CERTIFICATE-----\r\n","pkcs7":"-----BEGIN PKCS7-----\r\nMIIDPgYJKoZIhvcNAQcCoIIDLzCCAysCAQExADALBgkqhkiG9w0BBwGgggMRMIID\r\nDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNVBAMT\r\nGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcNMzEw\r\nODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAuY29t\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl1hAN\r\naLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx22De\r\nalfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF4sIC\r\nSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ETPu1v\r\nZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwFHSPi\r\n/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEjTXi9\r\nWQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZb4hP\r\nV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAFE7\r\nZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P65EA\r\nUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToYvT+4\r\nbp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56aETS\r\nlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7uaoSd\r\nilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/Btxlek\r\nsOTDF0s2t+AQleiJZnahADEA\r\n-----END
+        PKCS7-----\r\n","subject":"/CN=auth0-sdk-tests.auth0.com"}],"client_id":"SftKo9ySyHnMPezQUFd0C70GBoNFM21F","callback_url_template":false,"client_secret":"kJKYl705CStDbaeiBd9WgZafioFcbFNg0i4Ta7nakxxdGLUIdZvuRUXoY3MOe9xz","jwt_configuration":{"lifetime_in_seconds":36000,"secret_encoded":false},"grant_types":["authorization_code","implicit","refresh_token","client_credentials"],"custom_login_page_on":false}'
+  recorded_at: Fri, 03 Sep 2021 20:16:17 GMT
+recorded_with: VCR 6.0.0

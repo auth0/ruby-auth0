@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/oauth/token
     body:
       encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/custom/api/v1/","grant_type":"password"}'
+      string: '{"username":"rubytest-210908-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/custom/api/v1/","grant_type":"password"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '310'
+      - '317'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,89 +29,59 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:39:07 GMT
+      - Fri, 03 Sep 2021 20:16:14 GMT
       Content-Type:
       - application/json
-      Content-Length:
-      - '843'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a7970af50d54-LAX
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - did=s%3Av0%3Ac99cb780-0cf3-11ec-86df-6d45ff24e154.p2QWc%2BSpGZ7AKfiCBAqs%2Bi35A0N1P1v0a4mZmrG8duI;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:14 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac99cb780-0cf3-11ec-86df-6d45ff24e154.p2QWc%2BSpGZ7AKfiCBAqs%2Bi35A0N1P1v0a4mZmrG8duI;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:14 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7970af50d54
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 230c3516298cd465
+      Ot-Tracer-Traceid:
+      - 6d26f2773b54cd0b
+      Pragma:
+      - no-cache
       X-Auth0-Requestid:
-      - 808b8c17f0dfd9e6e23a
+      - 9142575d183e082d8781
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '90'
+      - '94'
       X-Ratelimit-Reset:
-      - '1539805804'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - '1630705359'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
-      encoding: UTF-8
-      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWJjNzczYjkzMDUzM2Y0N2Q0NzY0YjljIiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTUzOTc5Nzk0NywiZXhwIjoxNTM5ODg0MzQ3LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.XtI-34k_YzEGhBK225OkoDRLY5YtKA9G8bNnQpexXHYv0lT9zHayCC8CKhyjMijVWv0pHLlnGOoJodz0ZkjjBvgSaIR44OwrQxyaGbPySBq8kxZSKneM6CyHR22OwXfPWMJwG1AdcORJAiEDzZs4-KA4Odoo-DBY9UrZbzWySqs0xs7M32CkC62m66lqKTAlkTbF5woRntL56seIe0CawQIKKyB1EdJXaNCTh6vGGAnibwY7zGJ2UVJSmb4mJhKawyakkti-Oc3EfUb_fEoWOuRnwAwjB7gOla1nsAsVQ9F2nfPArBAti2distZJCR9086vtU0SjlvXE6BCwsOBFGQ","expires_in":86400,"token_type":"Bearer"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:39:07 GMT
-- request:
-    method: post
-    uri: https://auth0-sdk-tests.auth0.com/oauth/token
-    body:
-      encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/custom/api/v1/","grant_type":"password"}'
-    headers:
-      Accept:
-      - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby/2.5.1
-      Content-Type:
-      - application/json
-      Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
-      Authorization:
-      - Bearer API_TOKEN
-      Content-Length:
-      - '310'
-      Host:
-      - auth0-sdk-tests.auth0.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 17 Oct 2018 17:39:07 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '843'
-      Connection:
-      - keep-alive
-      X-Auth0-Requestid:
-      - 3639dd9ae800ba6e2c68
-      X-Ratelimit-Limit:
-      - '100'
-      X-Ratelimit-Remaining:
-      - '90'
-      X-Ratelimit-Reset:
-      - '1539805804'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWJjNzczYjkzMDUzM2Y0N2Q0NzY0YjljIiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTUzOTc5Nzk0NywiZXhwIjoxNTM5ODg0MzQ3LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.XtI-34k_YzEGhBK225OkoDRLY5YtKA9G8bNnQpexXHYv0lT9zHayCC8CKhyjMijVWv0pHLlnGOoJodz0ZkjjBvgSaIR44OwrQxyaGbPySBq8kxZSKneM6CyHR22OwXfPWMJwG1AdcORJAiEDzZs4-KA4Odoo-DBY9UrZbzWySqs0xs7M32CkC62m66lqKTAlkTbF5woRntL56seIe0CawQIKKyB1EdJXaNCTh6vGGAnibwY7zGJ2UVJSmb4mJhKawyakkti-Oc3EfUb_fEoWOuRnwAwjB7gOla1nsAsVQ9F2nfPArBAti2distZJCR9086vtU0SjlvXE6BCwsOBFGQ","expires_in":86400,"token_type":"Bearer"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:39:07 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik56QkZRa0pGT1VKQk1rRTBOekF6TWtWQk1EUkZSVU5DUlRaQ01rTXhOVFV5UVRCR1EwUXpNUSJ9.eyJpc3MiOiJodHRwczovL2F1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjEzMjgyOGE0MDdlYzYwMDY5MzVhODU4IiwiYXVkIjoiaHR0cHM6Ly9icnVja2UuY2x1Yi9jdXN0b20vYXBpL3YxLyIsImlhdCI6MTYzMDcwMDE3NCwiZXhwIjoxNjMwNzg2NTc0LCJhenAiOiIyY25XdXVnNnphRlgxajBnZTFQOTlqQVVuMEY0WFN1SSIsInNjb3BlIjoidGVzdDpzY29wZSIsImd0eSI6InBhc3N3b3JkIn0.HeJYUUUxJfAWd6oTSYBKj4dzo7jNIFT7TTNs1Y3fnKQmMZFJ5J6FnPpbWXiDvukLJfEGirGmfITNCirgsV-bYo8RuAL0NAV5wbDLW5EU0YD22cmf7JQQ4QH9m4tyYY26kU_aKmN6I2kg5KCEO6J2qdp8fpXSdWw-X5-S1Pwpo1MvpR_pbIjrUdYwaTkk_VTIpBlUKOj3mfPSpJ7Eoa_PoreqJ0_5-FvpPIp8uHdC_tD0GBZ0xJpsb7joR160dsqCVMXy-KPrhs3B4h14rctMzlY9wAKC1HV9g6ti8MK7Dboscl53fIYc22PxkYjJUBEkDEzem7kvZBX2NyXxSSwctQ","scope":"test:scope","expires_in":86400,"token_type":"Bearer"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:14 GMT
+recorded_with: VCR 6.0.0

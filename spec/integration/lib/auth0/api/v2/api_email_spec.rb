@@ -36,18 +36,6 @@ describe Auth0::Api::V2::Emails do
     }
   end
 
-  describe '.configure_provider', vcr: true do
-    it 'should configure a new email provider' do
-      begin
-        expect(
-          JSON.parse(JSON[client.configure_provider(body)], symbolize_names: true)
-        ).to include(body)
-      rescue Auth0::Unsupported
-        puts 'Email provider is already configured'
-      end
-    end
-  end
-
   describe '.get_provider', vcr: true do
     it 'should get the existing email provider' do
       begin
@@ -83,25 +71,6 @@ describe Auth0::Api::V2::Emails do
           'No email provider configured'
         end
       end
-    end
-  end
-
-  describe '.update_provider', vcr: true do
-    let(:update_body) do
-      {
-        name: 'sendgrid',
-        settings: {
-          first_up_setting: 'first_up_setting_set',
-          second_up_setting: 'second_up_setting_set'
-        }.merge(settings),
-        credentials: credentials
-      }
-    end
-
-    it 'should update the existing email provider' do
-      expect(
-        JSON.parse(JSON[client.update_provider(update_body)], symbolize_names: true)
-      ).to include(update_body)
     end
   end
 

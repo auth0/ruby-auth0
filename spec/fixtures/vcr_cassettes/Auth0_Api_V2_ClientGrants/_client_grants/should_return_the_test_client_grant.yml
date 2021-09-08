@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,36 +27,52 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 21:12:29 GMT
+      - Fri, 03 Sep 2021 20:16:16 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '7'
-      X-Ratelimit-Reset:
-      - '1538773951'
+      Cf-Ray:
+      - 6891a7a3ecb0eb9d-LAX
+      Cache-Control:
+      - no-cache
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/client-grants?page=0&per_page=50>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/client-grants?page=0&per_page=50>;
+        rel="last"
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7a3ecb0eb9d
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 53af561e521baf8d
+      Ot-Tracer-Traceid:
+      - 6644bba93bb63e9c
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700177'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAyXL0QqCMBhA4Xf5r9OlBLFdViOYkAXRxURkbSOnqaPNiKJ3
-        b9rlge8UHzAKCMjbo2rYvj+yJDE5vjYyNbAAeTe699VM6uzV4PeGC3XIOsYz
-        3G5Xu3zN6enS5vRMAxejCl7qSXtvHUFIjL5eRk61kdfOu3juWA4dEtagZ4rC
-        5uRgw1PARMi/ym/5A8+rwz2cAAAA
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 21:12:29 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"id":"cgr_1ZBeiylBn38cTQ1j","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0c6c38056","scope":["test:scope1","test:scope2"]},{"id":"cgr_1vESQ3QlIH8SRN4m","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d851b55b30cd","scope":["test:scope1","test:scope2"]},{"id":"cgr_53mirnr9BAqb7wSc","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0c6c9a3b8","scope":["test:scope1"]},{"id":"cgr_6F9wUo4y2E1NKDY6","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0cad31d45","scope":["test:scope1","test:scope2"]},{"id":"cgr_6xzSSrT2Kr7l0EDl","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d85361d8796b","scope":["test:scope1","test:scope2"]},{"id":"cgr_9FueNE8DUJ2dnxj1","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fc2767e3","scope":["test:scope1"]},{"id":"cgr_BkK4yz21Xo0Qfpyq","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852f67569e3","scope":["test:scope1"]},{"id":"cgr_FZqmelQLwFYVIqll","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0bb874e34","scope":["test:scope1","test:scope2"]},{"id":"cgr_FkUMXXnxkvHP6xMt","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d853154e0a66","scope":["test:scope1"]},{"id":"cgr_LZCn8gzBW9PEhFVD","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0cadee5d5","scope":["test:scope1"]},{"id":"cgr_N6dm8nVRQRyljc1x","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0c8c370de","scope":["test:scope1","test:scope2"]},{"id":"cgr_NSQAWcC9F03NaBCT","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0b4281fdf","scope":["test:scope1","test:scope2"]},{"id":"cgr_QhUNSABrWJrIL2Fy","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fe41d2e6","scope":["test:scope1"]},{"id":"cgr_Scy1oh1dL38AAOYM","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fcb73f66","scope":["test:scope1"]},{"id":"cgr_XnZ5X5QYmrJxCc5z","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8525aff3d8b","scope":["test:scope1"]},{"id":"cgr_j6Sld05vF0Sxr2Le","client_id":"qVx7qDuyruWWCfkTrxeNT74FI6mJc4Vy","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":["test:scope"]},{"id":"cgr_nvbRTliLhUEGzc7n","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":["read:client_grants","create:client_grants","delete:client_grants","update:client_grants","read:users","update:users","delete:users","create:users","read:users_app_metadata","update:users_app_metadata","delete:users_app_metadata","create:users_app_metadata","read:user_custom_blocks","create:user_custom_blocks","delete:user_custom_blocks","create:user_tickets","read:clients","update:clients","delete:clients","create:clients","read:client_keys","update:client_keys","delete:client_keys","create:client_keys","read:connections","update:connections","delete:connections","create:connections","read:resource_servers","update:resource_servers","delete:resource_servers","create:resource_servers","read:device_credentials","update:device_credentials","delete:device_credentials","create:device_credentials","read:rules","update:rules","delete:rules","create:rules","read:rules_configs","update:rules_configs","delete:rules_configs","read:hooks","update:hooks","delete:hooks","create:hooks","read:actions","update:actions","delete:actions","create:actions","read:email_provider","update:email_provider","delete:email_provider","create:email_provider","blacklist:tokens","read:stats","read:insights","read:tenant_settings","update:tenant_settings","read:logs","read:logs_users","read:shields","create:shields","update:shields","delete:shields","read:anomaly_blocks","delete:anomaly_blocks","update:triggers","read:triggers","read:grants","delete:grants","read:guardian_factors","update:guardian_factors","read:guardian_enrollments","delete:guardian_enrollments","create:guardian_enrollment_tickets","read:user_idp_tokens","create:passwords_checking_job","delete:passwords_checking_job","read:custom_domains","delete:custom_domains","create:custom_domains","update:custom_domains","read:email_templates","create:email_templates","update:email_templates","read:mfa_policies","update:mfa_policies","read:roles","create:roles","delete:roles","update:roles","read:prompts","update:prompts","read:branding","update:branding","delete:branding","read:log_streams","create:log_streams","delete:log_streams","update:log_streams","create:signing_keys","read:signing_keys","update:signing_keys","read:limits","update:limits","create:role_members","read:role_members","delete:role_members","read:entitlements","read:attack_protection","update:attack_protection","read:organizations","update:organizations","create:organizations","delete:organizations","create:organization_members","read:organization_members","delete:organization_members","create:organization_connections","read:organization_connections","update:organization_connections","delete:organization_connections","create:organization_member_roles","read:organization_member_roles","delete:organization_member_roles","create:organization_invitations","read:organization_invitations","delete:organization_invitations"]},{"id":"cgr_ozXl4T3AscJuh8Lp","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d11e32ec64","scope":["test:scope1"]},{"id":"cgr_tglRt6RuPaQrmmLG","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":[]},{"id":"cgr_ul9r28U3LVzZyr17","client_id":"kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","audience":"TEST_PHP_SDK_CLIENT_GRANT_API_5d892eed7abd7","scope":["test:scope1"]},{"id":"cgr_ysqZVAc6d4u6y1PJ","client_id":"cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":[]}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:16 GMT
+recorded_with: VCR 6.0.0

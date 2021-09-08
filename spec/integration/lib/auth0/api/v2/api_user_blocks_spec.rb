@@ -8,11 +8,14 @@ describe Auth0::Api::V2::UserBlocks do
       username = Faker::Internet.user_name
       @email = "#{entity_suffix}#{Faker::Internet.safe_email(name: username)}"
       password = Faker::Internet.password
-      @user = client.create_user(username,  'email' => email,
-                                            'password' => password,
-                                            'email_verified' => true,
-                                            'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH,
-                                            'app_metadata' => {})
+      @user = client.create_user(
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: username,
+        email: email,
+        email_verified: true,
+        app_metadata: {},
+        password: Faker::Internet.password
+      )
     end
 
     after(:all) do

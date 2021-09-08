@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,39 +27,48 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:22:01 GMT
+      - Fri, 03 Sep 2021 20:16:46 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Ot-Tracer-Spanid:
-      - 1d2e7a47604ea46d
-      Ot-Tracer-Traceid:
-      - 49ddd2547af20abd
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1561749723'
+      Cf-Ray:
+      - 6891a863b982eb99-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a863b982eb99
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 1c8e8d630b2c6b7c
+      Ot-Tracer-Traceid:
+      - '058e0a4a564fe988'
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700207'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAyWOywrCMBBF/yWgK0ltHm0qFHXjT4jIOJk+wMaQpCKo/25UmMW9cDh3jk9GE4xXtmFSSVkprdRAzlKIN7ejB0z+StxRYis2Rwrn0WYU5jSsXxoMWCxFp9GIUuJF1Ei2wYz6EdMcKKNDSj5uiiLyPsAdEgSOt6n4x6LuhGyqUoLURtRQWZP3K42qrDu4NGYbW2XWy9D6fmnbn2sh9wtxyIfW8d8jX2Huf2XMaSDuXc/epw8ONK2S3gAAAA==
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:22:01 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"email":"rubytest-210903-username-1@auth0.com","picture":"https://s.gravatar.com/avatar/fdd07a60850553d36e9a6360bea6fe72?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","user_id":"auth0|6131c9a8460fa0006a17e4b8"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:46 GMT
+recorded_with: VCR 6.0.0
