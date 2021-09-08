@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/users
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-rubytest-username-for-roles@auth0.com","password":"LlRwJrJ402J7UdX","connection":"Username-Password-Authentication","name":"rubytest-username-for-roles"}'
+      string: '{"name":"rubytest-210908-username-for-roles","email":"rubytest-210908-rubytest-210908-username-for-roles@auth0.com","password":"7F3yEtPc","connection":"Username-Password-Authentication"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjguMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '172'
+      - '186'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,41 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Wed, 25 Sep 2019 16:28:49 GMT
+      - Fri, 03 Sep 2021 20:16:35 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Server:
-      - nginx
-      Ot-Tracer-Spanid:
-      - 3f68371e6cec83cf
-      Ot-Tracer-Traceid:
-      - 19e48fd614f086d2
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1569428930'
-      Vary:
-      - origin,accept-encoding
+      Cf-Ray:
+      - 6891a81f1cfd3197-LAX
       Cache-Control:
       - no-cache
-      Content-Encoding:
-      - gzip
       Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      - max-age=31536000
+      Vary:
+      - origin,accept-encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a81f1cfd3197
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 70a48a35280ea33c
+      Ot-Tracer-Traceid:
+      - 5171477c3ad8e54d
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700196'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA41RXWvCMBT9LwF9sh+pbU0Ksvmy58G2l40h8d5Uw2pSktQxnP99aZ0iDmSQh3PJ+bicuydyK1RDKmK71ZeXzkdn0DlptdjKqDY2sqaR7l50fpPGYLZkQvqvS91feiAN7sudtKpWEklVi8bJCelaFF7iUvjgkKWURymPsuKZllXGqpzHOWevQd57LlXQkSH5u0C24gVQzBkWLEUExtJiWgZqq8B3tt9o433rqiRx8dqKnfDC9hsnR5jMGBSc0pKjpDlHmgmQkLFZWU8FK+nqzs1zlo7tvF2PcT54jaaLUfYQHqCOzxWE+WjpArJd3Op134qCj+tmblekUGqvvApD9bYnYLSW4JXRweLlJHgUzn0ai9EixPd8EAPlsqJb5VizCzn2VGQf654MKNH83uTwPiFg5T+ucvgBoiwbUTQCAAA=
-    http_version: 
-  recorded_at: Wed, 25 Sep 2019 16:28:49 GMT
-recorded_with: VCR 5.0.0
+      string: '{"created_at":"2021-09-03T20:16:35.900Z","email":"rubytest-210908-rubytest-210908-username-for-roles@auth0.com","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"613282a3c2d480007114acbb","provider":"auth0","isSocial":false}],"name":"rubytest-210908-username-for-roles","nickname":"rubytest-210908-rubytest-210908-username-for-roles","picture":"https://s.gravatar.com/avatar/b3dbe5ced2cdf6ecb535701bd8245fa4?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2021-09-03T20:16:35.900Z","user_id":"auth0|613282a3c2d480007114acbb"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:35 GMT
+recorded_with: VCR 6.0.0

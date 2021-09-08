@@ -18,19 +18,19 @@ describe Auth0::Api::V2::Users do
 
     VCR.use_cassette('Auth0_Api_V2_Users/create_test_user') do
       @test_user ||= client.create_user(
-        @test_user_name,
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: @test_user_name,
         email: @test_user_email,
-        password: Faker::Internet.password,
-        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
+        password: Faker::Internet.password
       )
     end
 
     VCR.use_cassette('Auth0_Api_V2_Users/create_secondary_test_user') do
       @test_user_secondary ||= client.create_user(
-        "#{test_user_name}-secondary",
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: "#{test_user_name}-secondary",
         email: "#{entity_suffix}-#{@test_user_name}-secondary@auth0.com",
-        password: Faker::Internet.password,
-        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
+        password: Faker::Internet.password
       )
     end
 
@@ -252,33 +252,6 @@ describe Auth0::Api::V2::Users do
   describe '.get_enrollments', vcr: true do
     it 'should get Enrollments for a User successfully' do
       expect { client.get_enrollments test_user['user_id'] }.to_not raise_error
-    end
-  end
-
-  describe '.add_user_permissions', vcr: true do
-    it 'should add a Permissions for a User successfully' do
-      expect { client.add_user_permissions test_user['user_id'], [ test_permission ] }.to_not raise_error
-    end
-  end
-
-  describe '.get_user_permissions', vcr: true do
-    let(:test_get_user_permissions) do
-      client.get_user_permissions test_user['user_id']
-    end
-
-    it 'should get exactly 1 Permission for a User successfully' do
-      expect( test_get_user_permissions.count ).to eq 1
-    end
-
-    it 'should get the correct Permission for a User successfully' do
-      expect( test_get_user_permissions.first['permission_name'] ).to eq test_permission_name
-      expect( test_get_user_permissions.first['resource_server_name'] ).to eq test_api_name
-    end
-  end
-
-  describe '.remove_user_permissions', vcr: true do
-    it 'should remove a Permission from a User successfully' do
-      expect { client.remove_user_permissions test_user['user_id'], [ test_permission ] }.to_not raise_error
     end
   end
 

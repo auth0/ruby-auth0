@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,33 +27,53 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Feb 2019 16:13:11 GMT
+      - Fri, 03 Sep 2021 20:16:27 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1551283992'
+      Cf-Ray:
+      - 6891a7e898c00ccb-LAX
+      Cache-Control:
+      - no-cache
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/connections?page=0&per_page=50>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/connections?page=0&per_page=50>;
+        rel="last"
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7e898c00ccb
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 2ac60c1e5d3a3977
+      Ot-Tracer-Traceid:
+      - 17b6eb4d33f2a4a5
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700188'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA+1W33OqOhD+X3imM4Ao2jdrtVVba1Wq9kwnE5IAqUCABPxx5vzvJ6i1wrFzOnPv0537osO3Xza7m823+fFToVi5VhCLwGMQ1h43T5N6Jhb6fJorqsJiQVnEleufSujC4g8iQXOiXIs0I6qSEpGlESBRyoIAcCIEjTx+sP5SlRhyvmYpHrOAoq3cxmMMS7eYcugEBHDqRVmsXLsw4HtvSUZTwkHGSRrBkJwsTpoJAlyWIgLilAmCirg+ouAihYJ4W5CTlO9x49cnKreFmfA1ue/BpzIjXMgvygFmIaQRkNlHHy5PscAglJn8OLDfVIVERcwYoICSSOxNBormWeY1drC30N81j+jjVuu9bUdaz1xMs77y9ks9K/BiYw7TjEFHM9d5sFz88wL/u3Wxj2W/Gh/P7aotCTJZiuDe77dr9ldPl+upz7gYPC02y/hp3t3UjF7yPl9sg1FT7+gT21rJAP5aclWpddbPTWO7dnEyH1F9rEO33YDv+L63vPPNPi8oSbtvB827R3y30HPkpK+vK6OPjd2D3YNzqyUpTS0myx1pv8JGMBGb7pSNtW7PXtirWdJdtV4kpcNtU689NIVr02HiwaebDu222RJq4nnS0WqS0qX1vP7YtBr17rIxH012YtveWpbQiSHq7XwmKXePo8VU6wg3bJiD+OV5PhzsLKMz8u17etd+diTlBQ+0uqfl+vZGs3FCb4c3D23X3owS/cZA96akoNtBgrz7zrgZs+R1e+sudV8b2r1+I9+NZy23OOVY604y6+6+x0banM4f2k6v747ep7vlsMe1raQkO+e2xgfbbLbsGItav50YOVrWrGCMcGumFR27m4xvEHQzuzd6hGbCB8vndxcPX22t9RpY06TS8+lDPs0npvni8/SJ6bflnj+cPdiz9aZpNFqaWTNM3Wrq+6QOZk6QvAeSUm8ZLWS5DcMliBiWUce4ZUDXrGPkOhZuyCVx5kitKS6DS4NPASGyZ4OPe1HIC3BoKnwMtyVwTRxOBSlhPguJYOuoBAbs2Mil1SxdAZ9ywdKyW4KzA/2iFTosEyA87QoxByGMoEdCmf0phQKWNwyfgAMHxPKHn8D9F+A+W4NA7lXBj0uQgFUD4Rx6Ulu+wkHss4iAKAsdkn5J4pnDUUo/DviDVZwJ96uRHtGcYsLONQQDmGF58FLTIiL2RaWRHBW+4GUaymQxQ+CmkoyLbCv2y6uKKEDRDg7bnIWT8jwGJD+v+OF09hrHrxzGVvyyyaUikiW4bAwzTtFlU0TWXywq1+TQQ/lBJc+xQ+YV0JO6y/eeciq2ZVtAV6RCP7QEBl7KsrhiE9ArTHEAUXWZbAfBqhjj1QhTEuwbn/u06vzcBDAR8kT+ZFCvuDWxfD/I0VExcwFFVsH2hePVKxIxQd3j6Kl0g5yGBIZl7NgclbJeqI8j3UfwNG4Ri4sxutcatSQy6rm6qCVZUUt6ov4hJOplBVFL0qGeh1Oe8a48u6J3P8f8GfLNcX5acXFslwV/3IIzrdH18plmkT6alwW/pMMnkS7V78eR9Gl/K2ckH5FeQK5Y8XoxPtOqwt/Mrbzs/3fJf/hd8vYbF9Qi/e4MAAA=
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 16:13:11 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"id":"con_rLvSvR44VhsrOo1D","options":{"email":true,"scope":"email,user_birthday,user_website,user_hometown,user_location,user_work_history,user_education_history,user_about_me,user_banana","ads_read":false,"client_id":"1842690432417814","rsvp_event":false,"user_likes":false,"user_posts":false,"read_stream":false,"user_banana":true,"user_events":false,"user_groups":false,"user_photos":false,"user_status":false,"user_videos":false,"manage_pages":false,"read_mailbox":false,"user_friends":false,"user_website":true,"client_secret":"5929c7f62fece2725dd92af45dcfb7d6","publish_pages":false,"publish_video":false,"read_insights":false,"user_about_me":true,"user_birthday":true,"user_hometown":true,"user_location":true,"ads_management":false,"public_profile":false,"pages_messaging":false,"pages_show_list":false,"pages_manage_cta":false,"user_actions-news":false,"user_work_history":true,"user_actions-books":false,"user_actions-music":false,"user_actions-video":false,"user_relationships":false,"user_tagged_places":false,"read_page_mailboxes":false,"user_games_activity":false,"user_managed_groups":false,"manage_notifications":false,"user_actions-fitness":false,"user_education_history":true,"user_religion_politics":false,"read_custom_friendlists":false,"user_relationship_details":false,"pages_messaging_phone_number":false,"pages_messaging_subscriptions":false,"read_audience_network_insights":false},"strategy":"facebook","name":"facebook","is_domain_connection":false,"realms":["facebook"],"enabled_clients":[]},{"id":"con_P9aT06EgvT07eIcW","options":{"email":true,"scope":["email","profile"],"profile":true},"strategy":"google-oauth2","name":"google-oauth2","is_domain_connection":false,"realms":["google-oauth2"],"enabled_clients":["aNG5n4ny57xCrd53MhfwomU85fpsEdyr","2PHoTag6NbnYt3AsBsNxFikZUdIMFk5r","Kp6AEYQvuwFkB2JMAlZbTvsfDPgcf6un","sxByUG46lspLw3w5j7EjZUOix7hC60EG","XKN0TEVg2GZayqspufKTjyubQ9v7TMts","WK5cUC4GcwiEMvoBPD0OEbGgJlelkexK","V92owX4pGOeGC14FT7NUpkHRx0JBZYEw","Obn0UoIOuyht1yKcrFPQlgWygJFlhqGH","zHXTiUnmm3NRQR5HspLv0jZSEeB0tCV2","wZHfhdGPiITmTOiL1ohkoB3zSmucXyVe","K59uHp57aoSfmVCB4hA7307cXCn9Jofb","Ma6tpNQXmreZ4g83nT9sLpaODBiCV0Cf","A2rt0zedSHh85hy08LWmklAYBVI543C9","qpFGNAFfOY44KvnhFb02EuuvaAEd4KAM","ELviY4SzYPX5m6FIBSMFtWG9f9xosHbr","q47ZqPco70spQ1qnzMrBirk1dWoIebJr","c141AubVqXNCQh34hW6T75KqdNr37BSr","VnwxKhJ1RDc9pPsHSh8sE4E4z9KZwatO","CasDGIcCSsNOcgC39lvyFXi1VlZPRTI9","UcQcsWFHOhCLlbJ9HhlvQb1mUNpNK73A","wm2Cg7nnvGPeFpW3cmkTjIq2YXOwUx6z","alIzxHzpPBDmgvtJrakmWrK5MN2flQUS","2aF6N6Vm1sElbcAjchEhRGiXffveu2F1","JrwsqCWw6D438piidwKt9OzMlKsfNVnT","Q3trYfgk8EkecfLjZfvkVN91nIY4oRfv","qufC26Tbd5Qkw6T3PVMcuiKpUErnMPXq","WVmrm37sQY12PmbXlNe6jeezd47mUwky","1oOUnPnJ3nKjNSpRPmo1IGuvQllKFUE2","UvfbUbIEcsRmqR8l4120x4TYEfOPGPWQ","5xHRQ4MSt06BPYfSZwAzG4lKqKEsUuvi","qpjzdesOcWxUBQoH1a4v6RG43l619v5A","Nsjo9of3F7kdk2vkBArSsmU4OLF6wdwn","YJOtNHCaXUMxxxPl4pmc4T7Ry1SFwZei","v9YfJ6K2W8h5KW9NrTDHdOHvFvQrmJ8R","wSbg7v3FWUmgLLydgxzRKuxFbs3Lurz5","HX6dEYgNHqPXBe2x6x6Kq9u8m7OmqNZU","Y2kA8kQoW3DckPDSPmbhxwZ0tGUStPFh","n4tfAcvZi6JhmDR0pJiugw0z8uGvFQUJ","X0r2INQ8fgj4jJAiYOYihjtBbj1FzMnC","ywXzZl7uaMJvcclhAFe2hm1PMq5keq05","0u3N7ucBDtVVyNzwNeAMTuJz11KHWRnB","UkDgqRg12UmQclXGIQ3tpRkRBFkUC1iI","6nDYKXZdnsrKI4hYAcxmQ0ZdvqWbzdTk","3qzWhmfT7YPMpE2OGqaIDhNt1vhKbpXK","OhbZaeMcukhJG5D8n49MAQvxmKQIdopo","DJYlPad951IEbI5xbikjpBxWSQyB8ESN","Wx9SbsxpuRG55EuQzM6c12j2pRp0h6a9","awY4y2O0sNf0ixBr8cxMEDZGXMQR10F0","DRFdFA5hueMCqgQTcgH0HfqC3vFTQ9jl","jc8udaPyn4nKxe4DF1m49ZybkbcfSrSJ","KzT55OMFsaVAw9TzVYUsJR5y7FNwZu5X","PMhv7sKtONJX4BfQ7piL3kZZjhNFdJQq","VmpWbh35vJKJiYuuEpfViR64b5CbMV6A","B2Yao3nQuIdDUu8oGZnQcay9kgRBJXAk","rpBVKEV9TTIXEqh5YdtcuV3FrtoKpg74","3ty4mgVVA7OZPCDzBt9PD1rTR7AgUXwW","i3akc1ejZJW2s637XeeI7mELh5ljV5i6","scgImVeVRnvQBUstLqSKKupCHxRx73Vq","oIrlRIgJmLq0xI4bSaYKkhPjjqXgKibi","fJb3MH6psd17WZN0Snemfk7x5cFjONqR","1KE7cWJ0y00pj0pEhRDGdpZOuR3FbDtV","3Ftt3V2J90AGNdxbZijjivJ8gEhPz8Pg","2T1x15Q0kvpzE2DyCOAmOeuGT6i6m95u","wXPfOQsAVlLyeW8c4FR1MUjur2YW9gSy","3Prqy25OK9UwN8i9ua8cXlgHHGtQzTnr","nAqSFqv3QPV0S0KLSd2vyIOMMvo8Rztk","uBghc9IPQD8a7nT6V3D65vHAaIg5YAfs","UsBLvhAPeTQda7O4xlAxoRi2Hv6l83tz","Vp7CLh1bl7lAA733ewMhDaqLbqEwBkdt","Ze3m2RMqa0Gs6v0irfBdXFdf6V07Uy2P","iveuuxUda6GkuwwCBVo95lACOfgqIk5g","Ni0H8rmaCeixc8sCP83vxsjkgHefb9fx","kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","1TstJOXxYpOWEx32FqjWXylN81C1RU7k","2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","Ei5v5M8765EY6WNRztyAy77t1e2t5AvT","80peYzeAZa6lRtxESoP0EFUXUkTqEk9V","CsU413L8tfUiKqgaOBCiEAoYa0tQRC03","np0ERu7GHFoN0WiWLAbFIfNjSzYKFs0y","VdJ05g0v1yB0UdqiDKBLAfUxNq1B2cH4","3qAIUl8GMdGX1vcbrZZk2Id2zLUFaW79","qzbD3sJyuTYC2X3IAq2vcY37lPcd9T0X","zRPBcafuUFNMa4qsJYQjfdKZU09Zl7Sq","GMNXS0Ctfm64JpVQWKJz72CNhUHiGAQb","cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","3CwQ82ywfdqWNi1P1afA6ajdHFYGh4Is"]},{"id":"con_CYJD0YigZxd7savz","options":{"type":"front_channel","scope":"openid
+        profile email","issuer":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net","jwks_uri":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/.well-known/openid-configuration/jwks","client_id":"Auth0","discovery_url":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/","token_endpoint":null,"userinfo_endpoint":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/connect/userinfo","authorization_endpoint":"https://wap-kls-demo01-klsauth-auth0-01.azurewebsites.net/connect/authorize"},"strategy":"oidc","name":"keyless","is_domain_connection":false,"show_as_button":false,"display_name":"keyless","realms":["keyless"],"enabled_clients":[]},{"id":"con_Mlm3MxOR5utX1WSv","options":{"mfa":{"active":true,"return_enroll_settings":true},"disable_signup":false,"passwordPolicy":"good","strategy_version":2,"requires_username":false,"brute_force_protection":true},"strategy":"auth0","name":"Test","is_domain_connection":false,"realms":["Test"],"enabled_clients":[]},{"id":"con_Xx4Kruoab04wvlYX","options":{"mfa":{"active":true,"return_enroll_settings":true},"strategy_version":2,"brute_force_protection":true},"strategy":"auth0","name":"Username-Password-Authentication","is_domain_connection":false,"realms":["Username-Password-Authentication"],"enabled_clients":["aNG5n4ny57xCrd53MhfwomU85fpsEdyr","2PHoTag6NbnYt3AsBsNxFikZUdIMFk5r","Kp6AEYQvuwFkB2JMAlZbTvsfDPgcf6un","sxByUG46lspLw3w5j7EjZUOix7hC60EG","XKN0TEVg2GZayqspufKTjyubQ9v7TMts","WK5cUC4GcwiEMvoBPD0OEbGgJlelkexK","V92owX4pGOeGC14FT7NUpkHRx0JBZYEw","Obn0UoIOuyht1yKcrFPQlgWygJFlhqGH","zHXTiUnmm3NRQR5HspLv0jZSEeB0tCV2","wZHfhdGPiITmTOiL1ohkoB3zSmucXyVe","K59uHp57aoSfmVCB4hA7307cXCn9Jofb","Ma6tpNQXmreZ4g83nT9sLpaODBiCV0Cf","A2rt0zedSHh85hy08LWmklAYBVI543C9","qpFGNAFfOY44KvnhFb02EuuvaAEd4KAM","ELviY4SzYPX5m6FIBSMFtWG9f9xosHbr","q47ZqPco70spQ1qnzMrBirk1dWoIebJr","c141AubVqXNCQh34hW6T75KqdNr37BSr","VnwxKhJ1RDc9pPsHSh8sE4E4z9KZwatO","CasDGIcCSsNOcgC39lvyFXi1VlZPRTI9","UcQcsWFHOhCLlbJ9HhlvQb1mUNpNK73A","wm2Cg7nnvGPeFpW3cmkTjIq2YXOwUx6z","alIzxHzpPBDmgvtJrakmWrK5MN2flQUS","2aF6N6Vm1sElbcAjchEhRGiXffveu2F1","JrwsqCWw6D438piidwKt9OzMlKsfNVnT","Q3trYfgk8EkecfLjZfvkVN91nIY4oRfv","qufC26Tbd5Qkw6T3PVMcuiKpUErnMPXq","WVmrm37sQY12PmbXlNe6jeezd47mUwky","1oOUnPnJ3nKjNSpRPmo1IGuvQllKFUE2","UvfbUbIEcsRmqR8l4120x4TYEfOPGPWQ","5xHRQ4MSt06BPYfSZwAzG4lKqKEsUuvi","qpjzdesOcWxUBQoH1a4v6RG43l619v5A","Nsjo9of3F7kdk2vkBArSsmU4OLF6wdwn","YJOtNHCaXUMxxxPl4pmc4T7Ry1SFwZei","v9YfJ6K2W8h5KW9NrTDHdOHvFvQrmJ8R","wSbg7v3FWUmgLLydgxzRKuxFbs3Lurz5","HX6dEYgNHqPXBe2x6x6Kq9u8m7OmqNZU","Y2kA8kQoW3DckPDSPmbhxwZ0tGUStPFh","n4tfAcvZi6JhmDR0pJiugw0z8uGvFQUJ","X0r2INQ8fgj4jJAiYOYihjtBbj1FzMnC","ywXzZl7uaMJvcclhAFe2hm1PMq5keq05","0u3N7ucBDtVVyNzwNeAMTuJz11KHWRnB","UkDgqRg12UmQclXGIQ3tpRkRBFkUC1iI","6nDYKXZdnsrKI4hYAcxmQ0ZdvqWbzdTk","3qzWhmfT7YPMpE2OGqaIDhNt1vhKbpXK","OhbZaeMcukhJG5D8n49MAQvxmKQIdopo","DJYlPad951IEbI5xbikjpBxWSQyB8ESN","Wx9SbsxpuRG55EuQzM6c12j2pRp0h6a9","awY4y2O0sNf0ixBr8cxMEDZGXMQR10F0","DRFdFA5hueMCqgQTcgH0HfqC3vFTQ9jl","jc8udaPyn4nKxe4DF1m49ZybkbcfSrSJ","KzT55OMFsaVAw9TzVYUsJR5y7FNwZu5X","PMhv7sKtONJX4BfQ7piL3kZZjhNFdJQq","VmpWbh35vJKJiYuuEpfViR64b5CbMV6A","B2Yao3nQuIdDUu8oGZnQcay9kgRBJXAk","rpBVKEV9TTIXEqh5YdtcuV3FrtoKpg74","3ty4mgVVA7OZPCDzBt9PD1rTR7AgUXwW","i3akc1ejZJW2s637XeeI7mELh5ljV5i6","scgImVeVRnvQBUstLqSKKupCHxRx73Vq","oIrlRIgJmLq0xI4bSaYKkhPjjqXgKibi","fJb3MH6psd17WZN0Snemfk7x5cFjONqR","1KE7cWJ0y00pj0pEhRDGdpZOuR3FbDtV","3Ftt3V2J90AGNdxbZijjivJ8gEhPz8Pg","2T1x15Q0kvpzE2DyCOAmOeuGT6i6m95u","wXPfOQsAVlLyeW8c4FR1MUjur2YW9gSy","3Prqy25OK9UwN8i9ua8cXlgHHGtQzTnr","nAqSFqv3QPV0S0KLSd2vyIOMMvo8Rztk","uBghc9IPQD8a7nT6V3D65vHAaIg5YAfs","UsBLvhAPeTQda7O4xlAxoRi2Hv6l83tz","Vp7CLh1bl7lAA733ewMhDaqLbqEwBkdt","Ze3m2RMqa0Gs6v0irfBdXFdf6V07Uy2P","iveuuxUda6GkuwwCBVo95lACOfgqIk5g","Ni0H8rmaCeixc8sCP83vxsjkgHefb9fx","kyzr677IlmSJ5CZqcVKpGo87qHJZlLw9","1TstJOXxYpOWEx32FqjWXylN81C1RU7k","2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","Ei5v5M8765EY6WNRztyAy77t1e2t5AvT","80peYzeAZa6lRtxESoP0EFUXUkTqEk9V","CsU413L8tfUiKqgaOBCiEAoYa0tQRC03","np0ERu7GHFoN0WiWLAbFIfNjSzYKFs0y","VdJ05g0v1yB0UdqiDKBLAfUxNq1B2cH4","3qAIUl8GMdGX1vcbrZZk2Id2zLUFaW79","qzbD3sJyuTYC2X3IAq2vcY37lPcd9T0X","zRPBcafuUFNMa4qsJYQjfdKZU09Zl7Sq","GMNXS0Ctfm64JpVQWKJz72CNhUHiGAQb","cDJqcgHCP8poqZyDfY1h0KUFI6vzPT9f","3CwQ82ywfdqWNi1P1afA6ajdHFYGh4Is"]}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:27 GMT
+recorded_with: VCR 6.0.0

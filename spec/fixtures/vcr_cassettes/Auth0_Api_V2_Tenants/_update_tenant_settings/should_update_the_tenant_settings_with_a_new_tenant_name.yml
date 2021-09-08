@@ -9,18 +9,18 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
       - '33'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,68 +29,82 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 20:12:42 GMT
+      - Fri, 03 Sep 2021 20:16:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '7'
-      X-Ratelimit-Reset:
-      - '1538770365'
+      Cf-Ray:
+      - 6891a8514db60d54-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8514db60d54
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 605d99756ff314bc
+      Ot-Tracer-Traceid:
+      - 757c56c051d538e9
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700204'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        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
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 20:12:42 GMT
-recorded_with: VCR 4.0.0
+      string: '{"change_password":{"enabled":true,"html":"<!DOCTYPE html>\n<html>\n<head>\n  <meta
+        charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n  <title>Change
+        your password</title>\n  <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" />\n\n  <style type=\"text/css\">\n    body,html{padding:0;margin:0}.table{display:table;position:absolute;height:100%;width:100%;background:linear-gradient(rgba(255,255,255,.3),rgba(255,255,255,0));background-color:#e8ebef}.cell{display:table-cell;vertical-align:middle}.content{padding:25px
+        0;margin-left:auto;margin-right:auto;width:280px}\n  </style>\n\n\n</head>\n<body>\n  <div
+        class=\"table\">\n    <div class=\"cell\">\n      <div class=\"content\">\n        <!--
+        WIDGET -->\n        <div id=\"change-password-widget-container\"></div>\n        <!--
+        END WIDGET -->\n      </div>\n    </div>\n  </div>\n\n  <script src=\"https://cdn.auth0.com/js/change-password-1.1.min.js\"></script>\n\n  <script>\n    new
+        Auth0ChangePassword({\n      container:         \"change-password-widget-container\",     //
+        required\n      email:             \"{{email}}\",                            //
+        DO NOT CHANGE THIS\n      csrf_token:        ''{{csrf_token}}'',                       //
+        DO NOT CHANGE THIS\n      ticket:            ''{{ticket}}'',                           //
+        DO NOT CHANGE THIS\n      password_policy:   ''{{password_policy}}'',                  //
+        DO NOT CHANGE THIS\n      theme: {\n        icon: \"{{tenant.picture_url |
+        default: ''//cdn.auth0.com/styleguide/1.0.0/img/badge.png''}}\",\n        primaryColor:
+        \"#ea5323\"\n      },\n      dict: {\n        // passwordPlaceholder: \"your
+        new password\",\n        // passwordConfirmationPlaceholder: \"confirm your
+        new password\",\n        // passwordConfirmationMatchError: \"Please ensure
+        the password and the confirmation are the same.\",\n        // passwordStrength:
+        {\n        //   containsAtLeast: \"Contain at least %d of the following %d
+        types of characters:\",\n        //   identicalChars: \"No more than %d identical
+        characters in a row (e.g., \\\"%s\\\" not allowed)\",\n        //   nonEmpty:
+        \"Non-empty password required\",\n        //   numbers: \"Numbers (i.e. 0-9)\",\n        //   lengthAtLeast:
+        \"At least %d characters in length\",\n        //   lowerCase: \"Lower case
+        letters (a-z)\",\n        //   shouldContain: \"Should contain:\",\n        //   specialCharacters:
+        \"Special characters (e.g. !@#$%^&*)\",\n        //   upperCase: \"Upper case
+        letters (A-Z)\"\n        // },\n        // successMessage: \"Your password
+        has been reset successfully.\",\n        // configurationError: \"An error
+        ocurred. There appears to be a misconfiguration in the form.\",\n        //
+        networkError: \"The server cannot be reached, there is a problem with the
+        network.\",\n        // timeoutError: \"The server cannot be reached, please
+        try again.\",\n        // serverError: \"There was an error processing the
+        password reset.\",\n        // headerText: \"Enter a new password for<br />{email}\",\n        //
+        title: \"Change Password\",\n        // weakPasswordError: \"Password is too
+        weak.\"\n        // passwordHistoryError: \"Password has previously been used.\"\n      }\n    });\n  </script>\n</body>\n</html>\n"},"default_audience":"","default_directory":"Username-Password-Authentication","enabled_locales":["en"],"error_page":{"html":"","show_log_link":false,"url":""},"flags":{"allow_changing_enable_sso":true,"allow_legacy_tokeninfo_endpoint":true,"cannot_change_enforce_client_authentication_on_passwordless_start":true,"disable_impersonation":true,"enable_idtoken_api2":true,"enable_legacy_profile":true,"enable_public_signup_user_exists_error":true,"enable_sso":false,"enforce_client_authentication_on_passwordless_start":true,"disable_clickjack_protection_headers":true,"include_email_in_reset_pwd_redirect":true,"include_email_in_verify_email_redirect":true},"friendly_name":"Auth0-CHANGED","picture_url":"https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-glyph-109d4c73c4.svg","sandbox_version":"8","support_email":"support@auth0.org","support_url":"https://support.auth0.com"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:43 GMT
+recorded_with: VCR 6.0.0

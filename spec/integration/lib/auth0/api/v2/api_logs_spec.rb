@@ -9,10 +9,10 @@ describe Auth0::Api::V2::Logs do
 
     VCR.use_cassette('Auth0_Api_V2_Logs/create_test_user') do
       @test_user = client.create_user(
-        test_user_name,
-        'email' => "#{entity_suffix}-#{test_user_name}@auth0.com",
-        'password' => Faker::Internet.password,
-        'connection' => Auth0::Api::AuthenticationEndpoints::UP_AUTH
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: test_user_name,
+        email: "#{entity_suffix}-#{test_user_name}@auth0.com",
+        password: Faker::Internet.password
       )
     end
 
@@ -60,7 +60,7 @@ describe Auth0::Api::V2::Logs do
             fields: [:date].join(','),
             include_fields: false
           ).first
-        ).to include('type', 'description')
+        ).to_not include('date')
       end
     end
 

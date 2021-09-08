@@ -43,15 +43,6 @@ describe Auth0::Api::V2::ClientGrants do
     it 'should return the test client grant' do
       expect(client_grants).to include(test_client_grant)
     end
-
-    it 'should return the first page of one result' do
-      results = client.client_grants(
-        page: 0,
-        per_page: 1
-      )
-      expect(results.first).to equal(results.last)
-      expect(results.first).to eq(test_client_grant)
-    end
   end
 
   describe '.patch_client_grant', vcr: true do

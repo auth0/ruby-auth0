@@ -2,23 +2,23 @@
 http_interactions:
 - request:
     method: get
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/logs?per_page=2
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,43 +27,55 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:22:11 GMT
+      - Fri, 03 Sep 2021 20:16:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a87618955233-LAX
+      Cache-Control:
+      - no-cache
       Link:
-      - <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2&page=0>;
-        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799/logs?per_page=2&page=0>;
+      - <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/logs?per_page=2&page=0>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/logs?per_page=2&page=0>;
         rel="last"
-      Ot-Tracer-Spanid:
-      - 639fae9675940ca0
-      Ot-Tracer-Traceid:
-      - 2205766b0b922353
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1561749733'
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a87618955233
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 30c4ee477f56756b
+      Ot-Tracer-Traceid:
+      - 16a54bee05ba63a2
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700210'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA6VTbW/TMBD+K1E+oqa1nRfH/USFhgQIWrFO60AochK3NUvjzHZYo5H/zjnNWAEJ8RJ/iH333N1zz9kfH/ySW+HPfYIwC1ASkHSN2ZzgeUynLCYf/Ilvu8YhjIF9KUyhZWOlqsEEhkLVtSjG85URuuYHEay4MfdKl8GitXtRW1nwAXKOz2QJIXDONsfojW4Vz1F0/6W62ThYJSHsBMFrY18vN8ebZnl9cQzJy7vP15uuepfiF/j9Fb19grvaELBYvfIujk2ltNDeommqp/KycQkJnSJYGAwtUM74DqLBsQSy2nMu5M28s9PQueWyMv78wc9V2bn/X5K0ouZDGQ6ioMCUt4EVxjpZxQFyg0e3eedswfdNO0r6fAiaFuoA8GaUFyKeue8f5jBK9Usdv5/4d63QQ4MHYffKVVktL9cQtFfG8a/UTtbTHwgpDY4oCie+Fka1unDJZ5WaubxmVkoN5Jz+f6RV34+DGeBDoa9xiZMkLeN0m+eYIMFRgRll7HGGPzf0ewWN1XDvd91j+jNTNt53eBg850aACxo+UWEIuYeCEpJiRnBMWRyylIY0IhRFhERxSBCNUkaTEJMI4ZgklFGX/r8TSPNW5bICalteGeFYnaaZyXqrYFx9/+kbX3HxUtADAAA=
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:22:11 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"date":"2021-09-03T20:16:45.272Z","type":"ss","description":"","connection":"Username-Password-Authentication","connection_id":"con_Xx4Kruoab04wvlYX","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_name":"Ruby
+        SDK Integration Tests - DO NOT DELETE","ip":"2603:9008:1a05:f179:b872:5281:13d6:5758","user_agent":"Other
+        0.0.0 / Other 0.0.0","details":{"body":{"client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","tenant":"auth0-sdk-tests","name":"rubytest-210908-username","email":"rubytest-210908-rubytest-210908-username@auth0.com","password":"*****","connection":"Username-Password-Authentication"}},"user_id":"auth0|613282adac819400692c0dd9","user_name":"rubytest-210908-rubytest-210908-username@auth0.com","strategy":"auth0","strategy_type":"database","log_id":"90020210903201649024782996693783848742043710581901361218","_id":"90020210903201649024782996693783848742043710581901361218","isMobile":false,"location_info":{"country_code":"US","country_code3":"USA","country_name":"United
+        States","city_name":"Bakersfield","latitude":35.3407,"longitude":-119.0596,"time_zone":"America/Los_Angeles","continent_code":"NA"}}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:49 GMT
+recorded_with: VCR 6.0.0

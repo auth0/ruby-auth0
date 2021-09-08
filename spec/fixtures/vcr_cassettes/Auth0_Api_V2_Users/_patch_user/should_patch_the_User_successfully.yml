@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C5d1668d58fbb120ea0c19799?fields=email&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9?fields=email&include_fields=true
     body:
       encoding: UTF-8
       string: '{"email_verified":true,"user_metadata":{"addresses":{"home_address":"742
@@ -10,18 +10,18 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjcuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
       - '94'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -30,39 +30,49 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 28 Jun 2019 19:22:08 GMT
+      - Fri, 03 Sep 2021 20:16:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Ot-Tracer-Spanid:
-      - 1b3a1c064deb572b
-      Ot-Tracer-Traceid:
-      - 18ded72b03f5ea21
-      Ot-Tracer-Sampled:
-      - 'true'
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1561749730'
+      Cf-Ray:
+      - 6891a8707eed31a3-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8707eed31a3
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - '0293209b7d397631'
+      Ot-Tracer-Traceid:
+      - 289e6802678bf46e
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700209'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA31R20oDMRD9lRKwT91tkm73BkX7oM+C9UWRMk1m22D3wiRbkbr/brY3iqiQh8nkzDmTc/YMSzBbljNqV58OrQsuRWuRKijxDlq34aGqSzZifeMafQb5pwPTcodkCoOa5Y5aHLG20eBQL8H5MclFFvA4kOlCZLmUOU/DWEQvfronWho/xg5yX1Mt4jjV07RYrYTkCFyJLMkyD22Mci31a2yca2w+HttwTbADB9SvOT6WYxlPFMdCRFNMhdAyTmKhEl+ILIvStLi1syjlQ5o166GeHbhuJvMb+eCP0lV4+be/Hymtr6gNm2rdW2HU+087fvPFaKyccQYty1/3TNVVhcqZuvKDzydY8AjWftSkg7kX7fEKDpBrY/6zhOqd16Gzfb2sfaqVAZ9tAVuL3duIKcI/sxD5NAmzmF+yKNGBjw5YvmegNaG1/Q/2bFOXuDx1PE8SycG9T31NiNVggUSgkHVd9w3m/wpQXAIAAA==
-    http_version: 
-  recorded_at: Fri, 28 Jun 2019 19:22:08 GMT
-recorded_with: VCR 4.0.0
+      string: '{"created_at":"2021-09-03T20:16:45.288Z","email":"rubytest-210908-rubytest-210908-username@auth0.com","email_verified":true,"identities":[{"connection":"Username-Password-Authentication","user_id":"613282adac819400692c0dd9","provider":"auth0","isSocial":false}],"name":"rubytest-210908-username","nickname":"rubytest-210908-rubytest-210908-username","picture":"https://s.gravatar.com/avatar/28607929c5bdf4954ee65d055fea6e69?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2021-09-03T20:16:48.864Z","user_id":"auth0|613282adac819400692c0dd9","user_metadata":{"addresses":{"home_address":"742
+        Evergreen Terrace"}}}'
+  recorded_at: Fri, 03 Sep 2021 20:16:48 GMT
+recorded_with: VCR 6.0.0

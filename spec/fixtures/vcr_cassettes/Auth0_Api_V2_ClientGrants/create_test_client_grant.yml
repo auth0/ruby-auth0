@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/client-grants
     body:
       encoding: UTF-8
-      string: '{"client_id":"hKxj9zBZadNKmJZK9kC4DO7ZEQVkOETE","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":["test:scope"]}'
+      string: '{"client_id":"qVx7qDuyruWWCfkTrxeNT74FI6mJc4Vy","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":["test:scope"]}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
       - '126'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,36 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 05 Oct 2018 21:12:28 GMT
+      - Fri, 03 Sep 2021 20:16:15 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '8'
-      X-Ratelimit-Reset:
-      - '1538773950'
+      Cf-Ray:
+      - 6891a7a14f1a31a9-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7a14f1a31a9
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 01c148d90bd03faa
+      Ot-Tracer-Traceid:
+      - 4a1dee9e206d961d
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700176'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAyXLwQrCIACA4Xfx3GYbQbhjJYFCFkQHI4apNLVtki6i6N1z
-        6/jD93+AUaAC8vaoLdl2e1IUhqGrlaUBMyDvRnexnkhDXxa9V1yoHW0Jp8it
-        Fxu25PhwcgwfceJiUMlLPeoYfaggFENs5llQLos6xJBPncu+hcIb+Cxh2oLs
-        fXrOYCTVvy7fHwplPteaAAAA
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 21:12:28 GMT
-recorded_with: VCR 4.0.0
+      string: '{"id":"cgr_j6Sld05vF0Sxr2Le","client_id":"qVx7qDuyruWWCfkTrxeNT74FI6mJc4Vy","audience":"https://auth0-sdk-tests.auth0.com/api/v2/","scope":["test:scope"]}'
+  recorded_at: Fri, 03 Sep 2021 20:16:15 GMT
+recorded_with: VCR 6.0.0

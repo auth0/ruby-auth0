@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/oauth/token
     body:
       encoding: UTF-8
-      string: '{"username":"rubytest-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/invalid/api/v1/","grant_type":"password"}'
+      string: '{"username":"rubytest-210908-username-1@auth0.com","password":"23kejn2jk3en2jke2jk3be2jk3ber","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_secret":"CLIENT_SECRET","scope":"test:scope","audience":"https://brucke.club/invalid/api/v1/","grant_type":"password"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '311'
+      - '318'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,27 +29,58 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Wed, 17 Oct 2018 17:17:59 GMT
+      - Fri, 03 Sep 2021 20:16:13 GMT
       Content-Type:
       - application/json
       Content-Length:
       - '104'
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a794fdc45251-LAX
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Set-Cookie:
+      - did=s%3Av0%3Ac9613520-0cf3-11ec-8999-619415867d7d.ko8DJYu1RDBGsrmNAoLhW%2Fzzg4uXXxVhAGlZqlMFJfQ;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:13 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac9613520-0cf3-11ec-8999-619415867d7d.ko8DJYu1RDBGsrmNAoLhW%2Fzzg4uXXxVhAGlZqlMFJfQ;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:13 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Origin, Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a794fdc45251
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 544dccce2b60c403
+      Ot-Tracer-Traceid:
+      - 4de0c0937ff7c4ed
       X-Auth0-Requestid:
-      - 4e25e371ed76da7184c9
+      - 25d6b1d98c7216c1d4ec
+      X-Content-Type-Options:
+      - nosniff
       X-Ratelimit-Limit:
       - '100'
       X-Ratelimit-Remaining:
-      - '92'
+      - '95'
       X-Ratelimit-Reset:
-      - '1539803212'
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - '1630704494'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: UTF-8
       string: '{"error":"invalid_request","error_description":"invalid audience specified
         for password grant exchange"}'
-    http_version: 
-  recorded_at: Wed, 17 Oct 2018 17:17:59 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Fri, 03 Sep 2021 20:16:13 GMT
+recorded_with: VCR 6.0.0

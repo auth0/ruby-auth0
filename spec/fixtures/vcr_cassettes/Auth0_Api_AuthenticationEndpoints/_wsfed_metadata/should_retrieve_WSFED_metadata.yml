@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.5.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,29 +27,72 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 10 Oct 2018 23:19:59 GMT
+      - Fri, 03 Sep 2021 20:16:11 GMT
       Content-Type:
       - application/xml; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a787099eeaec-LAX
+      Cache-Control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      Etag:
+      - W/"1288-nyG3YT/S2RvnHR+Y2UN7iraUe50"
+      Set-Cookie:
+      - did=s%3Av0%3Ac80cc8b0-0cf3-11ec-b965-1350af3d7915.dcN26n9CYwn7n8pERtrxk8u7AzWxUS1WurysMFR%2BAPs;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3Ac80cc8b0-0cf3-11ec-b965-1350af3d7915.dcN26n9CYwn7n8pERtrxk8u7AzWxUS1WurysMFR%2BAPs;
+        Max-Age=31557600; Path=/; Expires=Sun, 04 Sep 2022 02:16:11 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a787099eeaec
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 5dbc184a6b4da3bf
+      Ot-Tracer-Traceid:
+      - 5039f1ff291e9eaa
       X-Auth0-Requestid:
-      - 50d2231fa16d59aa1376
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
-      Content-Encoding:
-      - gzip
+      - '09ff369bd4cf60e379c0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '999'
+      X-Ratelimit-Reset:
+      - '1630700172'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        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
-    http_version: 
-  recorded_at: Wed, 10 Oct 2018 23:19:59 GMT
-recorded_with: VCR 4.0.0
+      string: <EntityDescriptor entityID="urn:auth0auth0-sdk-tests" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">  <RoleDescriptor
+        xsi:type="fed:SecurityTokenServiceType"                   protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706"                   ServiceDisplayName="urn:auth0auth0-sdk-tests"                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                   xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706">    <KeyDescriptor
+        use="signing">      <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">        <X509Data>          <X509Certificate>MIIDDTCCAfWgAwIBAgIJb5bdq0DLdNt7MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNVBAMTGWF1dGgwLXNkay10ZXN0cy5hdXRoMC5jb20wHhcNMTcxMjA1MTQwODI0WhcNMzEwODE0MTQwODI0WjAkMSIwIAYDVQQDExlhdXRoMC1zZGstdGVzdHMuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqBl9EhbtIL/gayl1hANaLUJKSHuMp0vvYxQ7Gs3aoBC2Vfh/sFyER0CHLIllZiZbTbE0ecpm6HyoQNx22DealfFx61xmX7CRkZgjFpr33mW1sk5uk3aw/i1WWBhbmVmha/yucSwhFBj3vAF4sICSnVHfEdX91WCtLdyouVd4k0INPpwttPdF1D/U6BHz6AvI2d70WS/82K5a1ETPu1vZBZ4Z9tL5mjvHBK18hJmcQclNPcabeQ57siuqxPLkLv+lqPOusz2QciJBwwFHSPi/SpbCz0CTtWiXSYykcgSitC53XJyRsHnUKnZ24uOZ9+XAYMrjCNTYcOPZXEjTXi9WQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTBhzcMt6PZb4hPV/0B7vKnJnJiiDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAFE7ZnFCi+aFPKusvfZPg5+8vXV1DLOMxlkDd/70B5NUaX6p7NuX+0atUnYA+Q9P65EAUOyrQwWeES20LAuivQ87c41+Nq4XOK7fkKlXlOOZ1tzvisAjLeIBsL9ttToYvT+4bp11Kwn9DTFXB+7y0AmXNCSTIBT7Dx/oha8XSWaRp8lYszra7WxKrOJqjE56aETSlJ2tMqy0v0qCjIEvIP+j8Ko19KPY1JivUlvuK3J/BBsN1gaSLO9NO60vnS7uaoSdilr5vzU3oS7MXznP3nz5vE6TnEu+r/ihCGiCVNUSKobHIDCr65zLdwMv0/BtxleksOTDF0s2t+AQleiJZnY=</X509Certificate>        </X509Data>      </KeyInfo>    </KeyDescriptor>    <fed:TokenTypesOffered>      <fed:TokenType
+        Uri="urn:oasis:names:tc:SAML:2.0:assertion"/>      <fed:TokenType Uri="urn:oasis:names:tc:SAML:1.0:assertion"/>    </fed:TokenTypesOffered>    <fed:ClaimTypesOffered>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>E-Mail
+        Address</auth:DisplayName>        <auth:Description>The e-mail address of
+        the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>Given
+        Name</auth:DisplayName>        <auth:Description>The given name of the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>Name</auth:DisplayName>        <auth:Description>The
+        unique name of the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>Surname</auth:DisplayName>        <auth:Description>The
+        surname of the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>Name
+        ID</auth:DisplayName>        <auth:Description>The SAML name identifier of
+        the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>UPN</auth:DisplayName>        <auth:Description>The
+        user principal name (UPN) of the user</auth:Description>      </auth:ClaimType>            <auth:ClaimType           Uri="http://schemas.xmlsoap.org/claims/Group"           Optional="true"           xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">        <auth:DisplayName>Group</auth:DisplayName>        <auth:Description>A
+        group that the user is a member of</auth:Description>      </auth:ClaimType>          </fed:ClaimTypesOffered>        <fed:PassiveRequestorEndpoint>      <EndpointReference
+        xmlns="http://www.w3.org/2005/08/addressing"><Address>https://auth0-sdk-tests.auth0.com/wsfed</Address></EndpointReference>    </fed:PassiveRequestorEndpoint>  </RoleDescriptor></EntityDescriptor>
+  recorded_at: Fri, 03 Sep 2021 20:16:11 GMT
+recorded_with: VCR 6.0.0

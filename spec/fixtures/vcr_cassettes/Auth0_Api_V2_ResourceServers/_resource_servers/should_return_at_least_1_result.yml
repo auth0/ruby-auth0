@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.1p57
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjYuMCIsImVudiI6eyJydWJ5IjoiMi41LjEifX0=
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,33 +27,156 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Feb 2019 20:44:25 GMT
+      - Fri, 03 Sep 2021 20:16:34 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '8'
-      X-Ratelimit-Reset:
-      - '1551300267'
+      Cf-Ray:
+      - 6891a8164f633203-LAX
+      Cache-Control:
+      - no-cache
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/resource-servers?page=0&per_page=50>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/resource-servers?page=0&per_page=50>;
+        rel="last"
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a8164f633203
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 349af1aa2c9e9a1a
+      Ot-Tracer-Traceid:
+      - 0a0ee31914549058
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700195'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA72Y227jNhCGX4XQdRIf4kPsO6+zCII2RbDJoi0WAUFRlM01LQoi5SBd5N1LUWQsSxrJ2xbNlaOZ+TTzc0iR/PYj4FGwDKZkPCM305tRuLiek2k0mk5Gw+FkEVwECdkz47HK9XaIHkhCNmzPEo1Wj/fGyiPzm8ecZcZnq3WqloMBKXwvVbS71ExpdWX/v6JyPyApHxzGAxNIhJCvWMax4AnDhFKmVLCMiVDsIlA7nmIqE2XgOJYZPrDMvISEguGYZ0rjlGT6DVPBjccxTssdS7DgMdO8yHo0n02Gw2HdYJGvLAyW83FhVXyT8GSDidiYKr48jaczk6GiMmWG/e1HEDFFM55qLpPCgZEIre2r0V1GigQuggMReaFTZozLMi+8KY3vF3XC2nhpBjKoNfdSbplgHZTImnspX9OoK5fcmnspVpOvimUNLXL7EHxvPca9D4pyNdejXK1QlNO7HuV0hqKONaFVmqIHponJjbQWiEma4r336K4WolVL7+NVdYB4VVH6eFWFIF5Vrp/goWdOd6ytwQsS1s4K6L92U7x1hvX2M9jJvfMJnEm98xmcyT01ol/YG7SS7ApT39ytxZ/OXIBwuobUCKcrCEA4XctqhNOVDCCUGsgkYbR40tSgYoI1aI33GnQSvAatBK9BJ8Fr0ErwGnQSrAZfmJJ5Rhl6YtmhZSnNnB0rZwfV6CA5Sc5gOV06WE6cM1hOoQ6Wk+kMltXqlh244Riu3YGY739drch6YFrxAPXqpDnFzuI5zTp5TrWzeE63Tp5T7ixe2We5YM3msg/hjqrF+DYConzv1KJ8wwBRvktqUb41gKhjTcUMjPmmvbZiQ2mN3TW2MKq1dlCqNbdQqrV3UGw1n/eEC/SYyYPZYGf1clhhxam3gvWAFFdQL8dVBHJcSb0cN64gxw1wL+eTIHQnuNLoudjQV9UNvWmpSxOg7JMmzd2Esg+BiGeWmE2vWbG0NoeERqy2ZrNcOTM4GjDHDUc/yebzq2wmISTs/7TlTETNmt1jcLSacW6Y4EjXL81I1yhwpM10lcg9EW9mtdPllxJ9EpLuGqmT0g+HpRXM4wyeS6yX6Mcw45tN6/dUewvURc3Isn164uwOuv2U2XcwbA91FXef5O5ykkWcJCgmVEtzJCjXqzwj1queiPPGzhvWr85t6ngG6zRDlmRSiH3bIeGDVfUB5eohet3OY7o5dHRC7pyDYpl9vKo5t1rwfSek8sx2f/uIdH1R/DifYh6lGFwYXbIpUepVZhGiW0Z3ZglC32XYMv+9n/mKOUdsHEFhVTsYkSRCRAjEjSh+19ci+Nlvs2LQXGm5R5GZzjyptW3zYGGdsXOGO+NcqD8r9GHXDsBQwl5r9JaDQx/OFm6/nUizfSpMUKPU8tN6NMMdC3JOPtJdJDfXYdLJ9qOLZCt7yIXm5WqAilvIYnNLrfYolYJT3qx2HxP8YQMT/DmwS7oHbTM2M7dlfy0797z1GL/nBaJcZ9aj/B4TiHKF16P8/raMerkIuMLqTZmRCcz3KWcFqLwmDou/2Zhds+vRYrygCzKfjSJ6vCZ+ZmZzti47uuOGOMxys6ZdUZGHg7K/y6vh0X9/NVwU0LwZvikuhv/1vbAXsLjmXtrnxn4q+QoVRlQa31+OUtL5LJ6RxXw8YXR4PR9Ho+ENmYxPpSyPyZdZHr4VGEhOs2shYiuVviq8KlL6ChQz/aRNxPfHaBQNn38PN/P0twV/pH9E+k/9+f7+brWb/rXdr/n/djc/vp5MZ/9kCN5f/gYAZnj1txgAAA==
-    http_version: 
-  recorded_at: Wed, 27 Feb 2019 20:44:28 GMT
-recorded_with: VCR 4.0.0
+      string: '[{"id":"5a26a8581b937a5d15410049","name":"Auth0 Management API","identifier":"https://auth0-sdk-tests.auth0.com/api/v2/","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":86400,"token_lifetime_for_web":7200,"signing_alg":"RS256","scopes":[{"description":"Read
+        Client Grants","value":"read:client_grants"},{"description":"Create Client
+        Grants","value":"create:client_grants"},{"description":"Delete Client Grants","value":"delete:client_grants"},{"description":"Update
+        Client Grants","value":"update:client_grants"},{"description":"Read Users","value":"read:users"},{"description":"Update
+        Users","value":"update:users"},{"description":"Delete Users","value":"delete:users"},{"description":"Create
+        Users","value":"create:users"},{"description":"Read Users App Metadata","value":"read:users_app_metadata"},{"description":"Update
+        Users App Metadata","value":"update:users_app_metadata"},{"description":"Delete
+        Users App Metadata","value":"delete:users_app_metadata"},{"description":"Create
+        Users App Metadata","value":"create:users_app_metadata"},{"description":"Read
+        Custom User Blocks","value":"read:user_custom_blocks"},{"description":"Create
+        Custom User Blocks","value":"create:user_custom_blocks"},{"description":"Delete
+        Custom User Blocks","value":"delete:user_custom_blocks"},{"description":"Create
+        User Tickets","value":"create:user_tickets"},{"description":"Read Clients","value":"read:clients"},{"description":"Update
+        Clients","value":"update:clients"},{"description":"Delete Clients","value":"delete:clients"},{"description":"Create
+        Clients","value":"create:clients"},{"description":"Read Client Keys","value":"read:client_keys"},{"description":"Update
+        Client Keys","value":"update:client_keys"},{"description":"Delete Client Keys","value":"delete:client_keys"},{"description":"Create
+        Client Keys","value":"create:client_keys"},{"description":"Read Connections","value":"read:connections"},{"description":"Update
+        Connections","value":"update:connections"},{"description":"Delete Connections","value":"delete:connections"},{"description":"Create
+        Connections","value":"create:connections"},{"description":"Read Resource Servers","value":"read:resource_servers"},{"description":"Update
+        Resource Servers","value":"update:resource_servers"},{"description":"Delete
+        Resource Servers","value":"delete:resource_servers"},{"description":"Create
+        Resource Servers","value":"create:resource_servers"},{"description":"Read
+        Device Credentials","value":"read:device_credentials"},{"description":"Update
+        Device Credentials","value":"update:device_credentials"},{"description":"Delete
+        Device Credentials","value":"delete:device_credentials"},{"description":"Create
+        Device Credentials","value":"create:device_credentials"},{"description":"Read
+        Rules","value":"read:rules"},{"description":"Update Rules","value":"update:rules"},{"description":"Delete
+        Rules","value":"delete:rules"},{"description":"Create Rules","value":"create:rules"},{"description":"Read
+        Rules Configs","value":"read:rules_configs"},{"description":"Update Rules
+        Configs","value":"update:rules_configs"},{"description":"Delete Rules Configs","value":"delete:rules_configs"},{"description":"Read
+        Hooks","value":"read:hooks"},{"description":"Update Hooks","value":"update:hooks"},{"description":"Delete
+        Hooks","value":"delete:hooks"},{"description":"Create Hooks","value":"create:hooks"},{"description":"Read
+        Actions","value":"read:actions"},{"description":"Update Actions","value":"update:actions"},{"description":"Delete
+        Actions","value":"delete:actions"},{"description":"Create Actions","value":"create:actions"},{"description":"Read
+        Email Provider","value":"read:email_provider"},{"description":"Update Email
+        Provider","value":"update:email_provider"},{"description":"Delete Email Provider","value":"delete:email_provider"},{"description":"Create
+        Email Provider","value":"create:email_provider"},{"description":"Blacklist
+        Tokens","value":"blacklist:tokens"},{"description":"Read Stats","value":"read:stats"},{"description":"Read
+        Insights","value":"read:insights"},{"description":"Read Tenant Settings","value":"read:tenant_settings"},{"description":"Update
+        Tenant Settings","value":"update:tenant_settings"},{"description":"Read Logs","value":"read:logs"},{"description":"Read
+        logs relating to users","value":"read:logs_users"},{"description":"Read Shields","value":"read:shields"},{"description":"Create
+        Shields","value":"create:shields"},{"description":"Update Shields","value":"update:shields"},{"description":"Delete
+        Shields","value":"delete:shields"},{"description":"Read Anomaly Detection
+        Blocks","value":"read:anomaly_blocks"},{"description":"Delete Anomaly Detection
+        Blocks","value":"delete:anomaly_blocks"},{"description":"Update Triggers","value":"update:triggers"},{"description":"Read
+        Triggers","value":"read:triggers"},{"description":"Read User Grants","value":"read:grants"},{"description":"Delete
+        User Grants","value":"delete:grants"},{"description":"Read Guardian factors
+        configuration","value":"read:guardian_factors"},{"description":"Update Guardian
+        factors","value":"update:guardian_factors"},{"description":"Read Guardian
+        enrollments","value":"read:guardian_enrollments"},{"description":"Delete Guardian
+        enrollments","value":"delete:guardian_enrollments"},{"description":"Create
+        enrollment tickets for Guardian","value":"create:guardian_enrollment_tickets"},{"description":"Read
+        Users IDP tokens","value":"read:user_idp_tokens"},{"description":"Create password
+        checking jobs","value":"create:passwords_checking_job"},{"description":"Deletes
+        password checking job and all its resources","value":"delete:passwords_checking_job"},{"description":"Read
+        custom domains configurations","value":"read:custom_domains"},{"description":"Delete
+        custom domains configurations","value":"delete:custom_domains"},{"description":"Configure
+        new custom domains","value":"create:custom_domains"},{"description":"Update
+        custom domain configurations","value":"update:custom_domains"},{"description":"Read
+        email templates","value":"read:email_templates"},{"description":"Create email
+        templates","value":"create:email_templates"},{"description":"Update email
+        templates","value":"update:email_templates"},{"description":"Read Multifactor
+        Authentication policies","value":"read:mfa_policies"},{"description":"Update
+        Multifactor Authentication policies","value":"update:mfa_policies"},{"description":"Read
+        roles","value":"read:roles"},{"description":"Create roles","value":"create:roles"},{"description":"Delete
+        roles","value":"delete:roles"},{"description":"Update roles","value":"update:roles"},{"description":"Read
+        prompts settings","value":"read:prompts"},{"description":"Update prompts settings","value":"update:prompts"},{"description":"Read
+        branding settings","value":"read:branding"},{"description":"Update branding
+        settings","value":"update:branding"},{"description":"Delete branding settings","value":"delete:branding"},{"description":"Read
+        log_streams","value":"read:log_streams"},{"description":"Create log_streams","value":"create:log_streams"},{"description":"Delete
+        log_streams","value":"delete:log_streams"},{"description":"Update log_streams","value":"update:log_streams"},{"description":"Create
+        signing keys","value":"create:signing_keys"},{"description":"Read signing
+        keys","value":"read:signing_keys"},{"description":"Update signing keys","value":"update:signing_keys"},{"description":"Read
+        entity limits","value":"read:limits"},{"description":"Update entity limits","value":"update:limits"},{"description":"Create
+        role members","value":"create:role_members"},{"description":"Read role members","value":"read:role_members"},{"description":"Update
+        role members","value":"delete:role_members"},{"description":"Read entitlements","value":"read:entitlements"},{"description":"Read
+        attack protection","value":"read:attack_protection"},{"description":"Update
+        attack protection","value":"update:attack_protection"},{"value":"read:organizations","description":"Read
+        Organizations"},{"value":"update:organizations","description":"Update Organizations"},{"value":"create:organizations","description":"Create
+        Organizations"},{"value":"delete:organizations","description":"Delete Organizations"},{"value":"create:organization_members","description":"Create
+        organization members"},{"value":"read:organization_members","description":"Read
+        organization members"},{"value":"delete:organization_members","description":"Delete
+        organization members"},{"value":"create:organization_connections","description":"Create
+        organization connections"},{"value":"read:organization_connections","description":"Read
+        organization connections"},{"value":"update:organization_connections","description":"Update
+        organization connections"},{"value":"delete:organization_connections","description":"Delete
+        organization connections"},{"value":"create:organization_member_roles","description":"Create
+        organization member roles"},{"value":"read:organization_member_roles","description":"Read
+        organization member roles"},{"value":"delete:organization_member_roles","description":"Delete
+        organization member roles"},{"value":"create:organization_invitations","description":"Create
+        organization invitations"},{"value":"read:organization_invitations","description":"Read
+        organization invitations"},{"value":"delete:organization_invitations","description":"Delete
+        organization invitations"}],"is_system":true},{"id":"5bbbbb62e3e31929c9a761dc","name":"Test
+        Custom API","identifier":"https://brucke.club/custom/api/v1/","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":true,"token_lifetime":86400,"token_lifetime_for_web":7200,"signing_alg":"RS256","scopes":[{"value":"test:scope","description":"A
+        test scope"}]},{"id":"5d1a6921c3c57e0694a674d8","name":"PHP SDK Integration
+        Tests - DO NOT DELETE","identifier":"php-sdk-integration-tests","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":true,"token_lifetime":86400,"token_lifetime_for_web":7200,"signing_alg":"RS256","enforce_policies":false,"token_dialect":"access_token"},{"id":"5d2d06551374a706b687d09e","name":"TEST_PHP_SDK_UPDATE_5d2d0655988b6","identifier":"TEST_PHP_SDK_ID_5d2d0654eefac","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":25069,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"mhk5P7NTtAtBVaB2vbA4b3KvdjwAEJXp","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d2d06b731702e06abb042e4","name":"TEST_PHP_SDK_UPDATE_5d2d06b82c07c","identifier":"TEST_PHP_SDK_ID_5d2d06b754ed2","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":25123,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"XnR7QRBbAbaBt1BpbxNe2bpeyAftK7Fi","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d2d070b4d065e06aea34559","name":"TEST_PHP_SDK_UPDATE_5d2d070c3e23e","identifier":"TEST_PHP_SDK_ID_5d2d070b917e4","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":21807,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"j06zuVXrlk3e7PhZHOqJN2lg0SXmpkal","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d2d0bb6b25377069fce01ce","name":"TEST_PHP_SDK_CREATE_5d2d0bb511bc8","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0bb611d13","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":10917,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d2d0bc756138006a73f32f3","name":"TEST_PHP_SDK_UPDATE_5d2d0bca4859a","identifier":"TEST_PHP_SDK_ID_5d2d0bc6865fd","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":29539,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"jIIkF4TvY0RrSq8nAvZz874dG4C0C2P9","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d2d0c6c5b197406ab3167c4","name":"TEST_PHP_SDK_CREATE_5d2d0c6c38026","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d2d0c6c38056","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":18395,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d6e812aa3194e0708dafba3","name":"TEST_PHP_SDK_CREATE_5d6e812a446dc","identifier":"TEST_PHP_SDK_ID_5d6e812942d73","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":17662,"token_lifetime_for_web":7200,"signing_alg":"HS256","signing_secret":"K74M54vHigT1r6Shk761V4423SySDQfD","scopes":[{"value":"read:test1","description":"Testing
+        scope"}]},{"id":"5d826a11e5cb6c0704528ae1","name":"TEST_PHP_SDK_UPDATE_5d826a1516331","identifier":"TEST_PHP_SDK_ID_5d826a0fbd929","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":25115,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"euGeOaWjE1gckTtOsT8uSB0Ca2BsWuZo","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d826b4f6dbbd00703ace09a","name":"TEST_PHP_SDK_CREATE_5d826b4cbe2e3","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d826b4ebe435","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":16059,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d83fb49616f0c075b2d7f21","name":"TEST_PHP_SDK_CREATE_5d83fb4743ba3","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d83fb4943c84","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":18414,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d851b56651d8407666fca58","name":"TEST_PHP_SDK_CREATE_5d851b53b2fd8","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d851b55b30cd","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":14984,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d851f7c882414075a8e095a","name":"TEST_PHP_SDK_CREATE_5d851f79b9056","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d851f7bb9169","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":14644,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8525b0735bc4070777e087","name":"TEST_PHP_SDK_CREATE_5d8525adf3bf5","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8525aff3d8b","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19164,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8529330cc3100759e4a284","name":"TEST_PHP_SDK_UPDATE_5d852936cdbcc","identifier":"TEST_PHP_SDK_ID_5d852930d4807","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":24036,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"LDsBO8bn9xtlezY01L0FJl23ZsaqNcRU","scopes":[{"value":"read:test1","description":"Testing
+        scope"},{"value":"read:test2","description":"Testing scope"}]},{"id":"5d852f66c87e160708e707d5","name":"TEST_PHP_SDK_CREATE_5d852f66b014c","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852f66b015c","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19382,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852f676cfebd07433778fc","name":"TEST_PHP_SDK_CREATE_5d852f67569d0","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852f67569e3","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":10667,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852fc22204ec06f3f2d265","name":"TEST_PHP_SDK_CREATE_5d852fc2767b7","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fc2767e3","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19551,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852fcb9e0e32074971a758","name":"TEST_PHP_SDK_CREATE_5d852fcb73f5b","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fcb73f66","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19886,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852fcd1bbd3c0710424924","name":"TEST_PHP_SDK_CREATE_5d852fccde96a","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fccde971","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":14063,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852fe40cc3100759e4a28c","name":"TEST_PHP_SDK_CREATE_5d852fe41d2dd","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fe41d2e6","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":18603,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d852fe56c3e05071b3ff963","name":"TEST_PHP_SDK_CREATE_5d852fe56982b","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d852fe569858","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":18128,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d853155b4b0480711a50523","name":"TEST_PHP_SDK_CREATE_5d853154e0a5e","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d853154e0a66","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":15836,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8531ab1ff01a0701271a7b","name":"TEST_PHP_SDK_CREATE_5d8531ab50f72","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8531ab50fa0","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":11187,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8531fb38625b070e09a907","name":"TEST_PHP_SDK_CREATE_5d8531fae9fd8","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8531fae9fec","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":17872,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8533af9b915e070e0545b1","name":"TEST_PHP_SDK_CREATE_5d8533af50216","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8533af50254","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":13437,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8535f5d4842906fa0c0659","name":"TEST_PHP_SDK_CREATE_5d8535f52e1eb","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8535f52e215","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":18345,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d85361d3482ee0717748000","name":"TEST_PHP_SDK_CREATE_5d85361d87958","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d85361d8796b","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":12031,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d8536e156daa70700b23cd7","name":"TEST_PHP_SDK_CREATE_5d8536e144800","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d8536e14483d","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":13328,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d892eedcdf9dd06f6c671a2","name":"TEST_PHP_SDK_CREATE_5d892eed7ab99","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5d892eed7abd7","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":12317,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5d892ef14efdb6077a80796d","name":"TEST_PHP_SDK_CREATE_5d892ef140a0e","identifier":"TEST_PHP_SDK_ID_5d892ef13d6a6","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19650,"token_lifetime_for_web":7200,"signing_alg":"HS256","signing_secret":"MC8SatBxBgjiXH2a3CvDF8CoTZr1U9H3","scopes":[{"value":"read:test1","description":"Testing
+        scope"}]},{"id":"5d8b9412039b3206fe68ce70","name":"TEST_PHP_SDK_CREATE_131312312","identifier":"TEST_PHP_SDK_CREATE_131312312","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":86400,"token_lifetime_for_web":7200,"signing_alg":"RS256","scopes":[{"value":"banana"}]},{"id":"5dcdc7cba421e007cb38524e","name":"TEST_PHP_SDK_CREATE_5dcdc7ca2d8d1","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5dcdc7ca2d8df","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":12046,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5dd57ac220f165081b242ae3","name":"TEST_PHP_SDK_CREATE_5dd57ac241e49","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5dd57ac241e5e","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":11405,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"5e3df232403c5209c28d0343","name":"TEST_PHP_SDK_CREATE_5e3df23066e03","identifier":"TEST_PHP_SDK_ID_5e3df23065e9f","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":19080,"token_lifetime_for_web":7200,"signing_alg":"HS256","signing_secret":"5Lr82tIUI2Kwb0ktS5cx6wp1ykQCrENl","scopes":[{"value":"read:test1","description":"Testing
+        scope"}]},{"id":"5e9f263bb4b76a090131060c","name":"TEST_PHP_SDK_CREATE_5e9f2638664d5","identifier":"TEST_PHP_SDK_CLIENT_GRANT_API_5e9f2638664f4","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":10279,"token_lifetime_for_web":7200,"signing_alg":"RS256"},{"id":"613282a2cdbe5d00408561ea","name":"TestServer-rubytest-210908","identifier":"https://localhost.test/api/v1/","allow_offline_access":false,"skip_consent_for_verifiable_first_party_clients":false,"token_lifetime":123456,"token_lifetime_for_web":7200,"signing_alg":"RS256","signing_secret":"jPd1d0TWbg7pN9iPcXdtYtEIIGAk5zhmCi"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:34 GMT
+recorded_with: VCR 6.0.0

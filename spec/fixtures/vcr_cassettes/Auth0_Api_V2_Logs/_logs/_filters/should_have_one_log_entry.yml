@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,50 +27,51 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 16:53:55 GMT
+      - Fri, 03 Sep 2021 20:16:31 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538758437'
+      Cf-Ray:
+      - 6891a805c9885319-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a805c9885319
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 0cef33bb2fd5be12
+      Ot-Tracer-Traceid:
+      - 05b8ad832b4c6961
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700192'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA6VVTY/bIBD9K5Gl3hoHO7YT51Ztr1WlqqeuVhYxJGZDDAWc
-        VbTKf+8Y4xp/bC9VDvG8N7z5YIDn94BgQ4NDEKNov47QGqU/o+yQbg8IhXES
-        /Qo+B+YuWw+NJQOLUF0qJg0TNYBfKaeGrvCq0VQBW3JGa1MwAlxljNSHzQY3
-        pkJrTS5rQ7XRobXDUlw3oLi5xZthXY2vbSgAmIT/XRTGURxGcRbGewDbIAU+
-        gyeQ301F1QqF8FttVp5lkzSYcR0c3gNFfzcQtv28UlOJNjNiswY/iU0Fdp9I
-        q6+7fD/tntLjcZdnFCUJ3mb5riTRKU7KNIN1IKnuIPnocvriUvrRHO+bONyG
-        EfgcBQGXuuEcyqtwXVMOLl0TF6tr47Zp2lZabW0U7M4ZZILXN9O2SVECoRju
-        atOlkBS+nqFKTA6uiWeFa6M7b1g+g7vqZ3AjyZK3VbaNGXx60yn1povXm8PK
-        AktZQPcxrMYTmSnna045P8A/uMKw8kKH7LuSZjXOejHr2UShuND7vFMOHHfV
-        geMdcGCnKGAgyvYU+YojsFccgb3iCLSKimrRqJIW0IHbaLsWGKe9wLgAC4yN
-        QuiNAeoP4t84i5yLtMi5WItcV1PDqV+IM/vsndmn7MxhZQFtOrHzVMGDfSUP
-        thL0CndIIZW4MWIvN6cxw53IDHd5zfAjx+WFM20ORlzosIPa4GHkDK3hBEL7
-        jWG1X8KcsP5cDN+6YpQTrzUD4HIdgF5VsfPZ2+epPb09xvfDucGKMFwXJ1wa
-        4c/eAjNeQWslOL+Oz+MHrKtmgZ0eeXsNMCKLvx12ayXW+k0oArtd0fICHSxe
-        xXGI/CHfndpGG3EtiIAtHZ3RKd4f0ynuDZahV8nBSU8nxSdGIzcQL4/HoxXT
-        Ei4Aap8CmJ1GPwkCVoyS/vl5t47de5wj1L7yEUJplKVbsJI4TbI8TVMUZ/s8
-        ypNdkidpEu22CUr3KdrnSZK27ykM139rMP1NHBmH/E5wwunj5Q+QpqdxfQgA
-        AA==
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 16:53:55 GMT
-recorded_with: VCR 3.0.3
+      string: '[{"date":"2021-09-03T20:16:29.169Z","type":"sapi","description":"Create
+        a User","client_id":"2cnWuug6zaFX1j0ge1P99jAUn0F4XSuI","client_name":"","ip":"2603:9008:1a05:f179:b872:5281:13d6:5758","user_agent":"Other
+        0.0.0 / Other 0.0.0","details":{"request":{"method":"post","path":"/api/v2/users","query":{},"userAgent":"rest-client/2.1.0
+        (darwin19.6.0 x86_64) ruby/2.7.0p0","body":{"name":"byron.schaden","email":"rubytest-210908byron_schaden@example.org","connection":"Username-Password-Authentication"},"channel":"api","ip":"2603:9008:1a05:f179:b872:5281:13d6:5758","auth":{"user":{},"strategy":"jwt","credentials":{"scopes":["read:client_grants","create:client_grants","delete:client_grants","update:client_grants","read:users","update:users","delete:users","create:users","read:users_app_metadata","update:users_app_metadata","delete:users_app_metadata","create:users_app_metadata","create:user_tickets","read:clients","update:clients","delete:clients","create:clients","read:client_keys","update:client_keys","delete:client_keys","create:client_keys","read:connections","update:connections","delete:connections","create:connections","read:resource_servers","update:resource_servers","delete:resource_servers","create:resource_servers","read:device_credentials","update:device_credentials","delete:device_credentials","create:device_credentials","read:rules","update:rules","delete:rules","create:rules","read:rules_configs","update:rules_configs","delete:rules_configs","read:email_provider","update:email_provider","delete:email_provider","create:email_provider","blacklist:tokens","read:stats","read:tenant_settings","update:tenant_settings","read:logs","read:shields","create:shields","delete:shields","read:anomaly_blocks","delete:anomaly_blocks","update:triggers","read:triggers","read:grants","delete:grants","read:guardian_factors","update:guardian_factors","read:guardian_enrollments","delete:guardian_enrollments","create:guardian_enrollment_tickets","read:user_idp_tokens","create:passwords_checking_job","delete:passwords_checking_job","read:custom_domains","delete:custom_domains","create:custom_domains","read:email_templates","create:email_templates","update:email_templates","read:mfa_policies","update:mfa_policies","read:roles","create:roles","delete:roles","update:roles","read:prompts","update:prompts","read:branding","update:branding"]}}},"response":{"statusCode":201,"body":{"created_at":"2021-09-03T20:16:29.160Z","email":"rubytest-210908byron_schaden@example.org","email_verified":false,"identities":[{"connection":"Username-Password-Authentication","user_id":"6132829d7b569700698af981","provider":"auth0","isSocial":false}],"name":"byron.schaden","nickname":"rubytest-210908byron_schaden","picture":"https://s.gravatar.com/avatar/32658f9d62513c10242821f682c242c8?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fby.png","updated_at":"2021-09-03T20:16:29.160Z","user_id":"auth0|6132829d7b569700698af981"}}},"auth0_client":{"name":"ruby-auth0","version":"5.5.0","env":{"ruby":"2.7.0"}},"log_id":"90020210903201631597782996667058125647823102248440823874","_id":"90020210903201631597782996667058125647823102248440823874","isMobile":false}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:31 GMT
+recorded_with: VCR 6.0.0

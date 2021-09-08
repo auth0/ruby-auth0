@@ -18,10 +18,10 @@ describe Auth0::Api::V2::Roles do
 
     VCR.use_cassette('Auth0_Api_V2_Roles/create_test_user') do
       @test_user ||= client.create_user(
-        @test_user_name,
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: @test_user_name,
         email: @test_user_email,
-        password: Faker::Internet.password,
-        connection: Auth0::Api::AuthenticationEndpoints::UP_AUTH
+        password: Faker::Internet.password
       )
     end
 

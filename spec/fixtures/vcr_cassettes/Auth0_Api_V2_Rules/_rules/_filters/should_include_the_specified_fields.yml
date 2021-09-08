@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,35 +27,92 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 17:28:54 GMT
+      - Fri, 03 Sep 2021 20:16:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538760535'
+      Cf-Ray:
+      - 6891a83b1c9952f5-LAX
+      Cache-Control:
+      - no-cache
+      Link:
+      - <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=script%2Corder&page=0&per_page=50>;
+        rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=script%2Corder&page=0&per_page=50>;
+        rel="last"
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a83b1c9952f5
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 2ee16ac804bc6603
+      Ot-Tracer-Traceid:
+      - 60179d002ad2ad8c
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700201'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA4uuVipOLsosKFGyUkorzUsuyczP0yhJLS7RVNJRyi9KSS1S
-        sjKu1cGiSkGjtDi1SEchOT+vJLWiBMhI0lSoBpIaeaU5OToKKLKa1rUI80yo
-        bJ5pbSwAPskeyccAAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 17:28:54 GMT
-recorded_with: VCR 3.0.3
+      string: '[{"script":"function (user, context, callback) {\n  // TODO: implement
+        your rule\n  callback(null, user, context);\n}","order":1},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":9},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":11},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":12},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":16},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":19},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":21},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":23},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":25},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":26},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":28},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":29},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":34},{"script":"function
+        (user, context, cb) { cb(null, user, context); }","order":38},{"script":"function
+        (user, context, cb) { cb(null, user, context);}","order":40},{"script":"function
+        (user, context, callback) {\n  // TODO: implement your rule\n  callback(null,
+        user, context);\n}","order":2},{"script":"function (user, context, callback)
+        { callback(null, user, context); }","order":3},{"script":"function (user,
+        context, callback) { callback(null, user, context); }","order":4},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":5},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":6},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":7},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":8},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":10},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":11},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":13},{"script":"function
+        (user, context, cb) { cb(null, user, context);}","order":14},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":15},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":18},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":22},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":24},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":27},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":30},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":31},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":32},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":33},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":35},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":36},{"script":"function
+        (user, context, callback) { callback(null, user, context); }","order":37},{"script":"function
+        (user, context, cb) { cb(null, user, context);}","order":39}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:40 GMT
+recorded_with: VCR 6.0.0

@@ -5,22 +5,22 @@ http_interactions:
     uri: https://auth0-sdk-tests.auth0.com/api/v2/users
     body:
       encoding: UTF-8
-      string: '{"email":"rubytest-rubytest-username@auth0.com","password":"SwGzExJ3Z90kI0I0","email_verified":true,"connection":"Username-Password-Authentication","name":"rubytest-username"}'
+      string: '{"name":"rubytest-210908-username","email":"rubytest-210908-rubytest-210908-username@auth0.com","password":"B4zM4jFm9B62b1","email_verified":true,"connection":"Username-Password-Authentication"}'
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
       Content-Length:
-      - '175'
+      - '194'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -29,40 +29,48 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 05 Oct 2018 18:16:50 GMT
+      - Fri, 03 Sep 2021 20:16:23 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538763411'
+      Cf-Ray:
+      - 6891a7d03a5904b4-LAX
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a7d03a5904b4
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 34fb2a0a3384231b
+      Ot-Tracer-Traceid:
+      - 44cd8563757f1c82
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700184'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA42RS2vDMBCE/4sgPcW25HcMoc2l50LbS0sJa2mdiCay0SOl
-        pPnvXSdNyCkUdBjBtzOz7J7hFvSGNcyG9tuj89FFBIfWwBYfIPg1j2W/ZdMT
-        vtyh1Z1GxRpvA07ZiF17nEdpIAwKPKoleAJSLupI8IgXL6JuRNkUPM6y4o24
-        QUsf7Oiy9n5wTZK4eGVhBx7smJ2cZJKWmeTYibzAWgiVllUpZEVCzGZ5XXf3
-        bp7X/M7Oh9Wdmh+9Jtlikj7Sk8rEl2Xof7J0pGyIB7Ma61LzpabF2BH8Kdq2
-        ApilCHmZ57xKWwEt8opQo+XnjcW1QuO11+hY875nsjcGpde9If71D4uewLmv
-        3qpoQWkjL+GIXBe5UWGw/Y5y7LnuGOuee6mBTtrBxuHhY8qkxX+c4PALQO4v
-        MQwCAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 18:16:50 GMT
-recorded_with: VCR 3.0.3
+      string: '{"created_at":"2021-09-03T20:16:23.259Z","email":"rubytest-210908-rubytest-210908-username@auth0.com","email_verified":true,"identities":[{"connection":"Username-Password-Authentication","user_id":"61328297148a95006b37e566","provider":"auth0","isSocial":false}],"name":"rubytest-210908-username","nickname":"rubytest-210908-rubytest-210908-username","picture":"https://s.gravatar.com/avatar/28607929c5bdf4954ee65d055fea6e69?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fru.png","updated_at":"2021-09-03T20:16:23.259Z","user_id":"auth0|61328297148a95006b37e566"}'
+  recorded_at: Fri, 03 Sep 2021 20:16:23 GMT
+recorded_with: VCR 6.0.0

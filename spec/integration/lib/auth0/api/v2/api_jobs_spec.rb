@@ -73,10 +73,10 @@ describe Auth0::Api::V2::Jobs do
   describe '.send_verification_email and .get_job', vcr: true do
     let(:user) do
       client.create_user(
-        username,
-        'email' => email,
-        'password' => Faker::Internet.password,
-        'connection' => UP_AUTH
+        Auth0::Api::AuthenticationEndpoints::UP_AUTH,
+        name: username,
+        email: email,
+        password: Faker::Internet.password
       )
     end
     let(:email_verification_job) { client.send_verification_email(user['user_id']) }

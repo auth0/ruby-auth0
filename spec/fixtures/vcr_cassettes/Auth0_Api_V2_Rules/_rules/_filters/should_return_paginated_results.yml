@@ -9,16 +9,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -27,41 +27,56 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 17:28:55 GMT
+      - Fri, 03 Sep 2021 20:16:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a83dacd842f3-LAX
+      Cache-Control:
+      - no-cache
       Link:
       - <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=0&per_page=2>;
         rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=1&per_page=2>;
-        rel="next", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=1&per_page=2>;
+        rel="next", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=19&per_page=2>;
         rel="last"
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538760537'
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a83dacd842f3
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - '0393451714793f5d'
+      Ot-Tracer-Traceid:
+      - 3164a0a8468aaf93
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700201'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA4uuVspLzE1VslJKTSwqTaosSS0uUarVgYvCxBR0FVz9HJ18
-        XF2UamMBQcVG7jUAAAA=
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 17:28:55 GMT
+      string: '[{"name":"Testing Rule - Disabled - DO NOT DELETE"},{"name":"Testing
+        Rule - Enabled - DO NOT DELETE"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:40 GMT
 - request:
     method: get
     uri: https://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=1&per_page=1
@@ -71,16 +86,16 @@ http_interactions:
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby/2.3.1
+      - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
       - application/json
       Auth0-Client:
-      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI0LjUuMCJ9
+      - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=
       Authorization:
       - Bearer API_TOKEN
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - auth0-sdk-tests.auth0.com
   response:
@@ -89,40 +104,54 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 05 Oct 2018 17:28:56 GMT
+      - Fri, 03 Sep 2021 20:16:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - 6891a83f1a7042b7-LAX
+      Cache-Control:
+      - no-cache
       Link:
       - <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=0&per_page=1>;
         rel="first", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=0&per_page=1>;
         rel="prev", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=2&per_page=1>;
-        rel="next", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=2&per_page=1>;
+        rel="next", <http://auth0-sdk-tests.auth0.com/api/v2/rules?fields=name&page=38&per_page=1>;
         rel="last"
-      X-Ratelimit-Limit:
-      - '10'
-      X-Ratelimit-Remaining:
-      - '9'
-      X-Ratelimit-Reset:
-      - '1538760537'
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - origin,accept-encoding
-      Cache-Control:
-      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Content-Encoding:
-      - gzip
-      Strict-Transport-Security:
-      - max-age=15724800
-      X-Robots-Tag:
-      - noindex, nofollow, nosnippet, noarchive
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6891a83f1a7042b7
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 6e2ed49b1b586f72
+      Ot-Tracer-Traceid:
+      - 115e28e9329af11f
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '49'
+      X-Ratelimit-Reset:
+      - '1630700201'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAA4uuVspLzE1VslIqKk2qLEktLlHQVXD1c3TycXVRqo0FAOEA
-        ldYfAAAA
-    http_version: 
-  recorded_at: Fri, 05 Oct 2018 17:28:56 GMT
-recorded_with: VCR 3.0.3
+      string: '[{"name":"Testing Rule - Enabled - DO NOT DELETE"}]'
+  recorded_at: Fri, 03 Sep 2021 20:16:40 GMT
+recorded_with: VCR 6.0.0
