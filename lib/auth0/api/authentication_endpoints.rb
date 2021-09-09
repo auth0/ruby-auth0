@@ -150,15 +150,34 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#change-password
       # @see https://auth0.com/docs/connections/database/password-change
       # @param email [string] User's current email
-      # @param password [string] User's new password; empty to trigger a
-      #   password reset email
+      # @param password [string] User's new password. This is only available
+      #   on legacy tenants with change password v1 flow enabled
       # @param connection_name [string] Database connection name
+      # @deprecated Use {#password_reset} instead.
       def change_password(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
 
         request_params = {
           email: email,
           password: password,
+          connection: connection_name,
+          client_id: @client_id
+        }
+        post('/dbconnections/change_password', request_params)
+      end
+
+      # Trigger a password reset email.
+      # @see https://auth0.com/docs/api/authentication#change-password
+      # @see https://auth0.com/docs/connections/database/password-change
+      # @param email [string] User's current email
+      # @param password [string] User's new password; empty to trigger a
+      #   password reset email
+      # @param connection_name [string] Database connection name
+      def reset_password(email, connection_name = UP_AUTH)
+        raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
+
+        request_params = {
+          email: email,
           connection: connection_name,
           client_id: @client_id
         }
