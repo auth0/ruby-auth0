@@ -151,7 +151,7 @@ module Auth0
       # @see https://auth0.com/docs/connections/database/password-change
       # @param email [string] User's current email
       # @param password [string] User's new password. This is only available
-      #   on legacy tenants with the change_pwd_flow_v1 flag enabled
+      #   on legacy tenants with change password v1 flow enabled
       # @param connection_name [string] Database connection name
       # @deprecated Use {#password_reset} instead.
       def change_password(email, password, connection_name = UP_AUTH)
