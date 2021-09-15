@@ -1,5 +1,21 @@
 # Change Log
 
+## [v5.6.0](https://github.com/auth0/ruby-auth0/tree/v5.6.0) (2021-09-14)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.5.0..v5.6.0)
+
+**Added**
+
+- New Actions endpoints  CH: Added review:medium. [\#293](https://github.com/auth0/ruby-auth0/pull/293) ([davidpatrick](https://github.com/davidpatrick))
+
+- Updates rest-client to 2.1. [\#296](https://github.com/auth0/ruby-auth0/pull/296) ([davidpatrick](https://github.com/davidpatrick))
+
+- Add New Grants. [\#295](https://github.com/auth0/ruby-auth0/pull/295) ([Norio4](https://github.com/Norio4))
+
+**Deprecated**
+
+- Deprecate change_password in favor of reset_password. [\#297](https://github.com/auth0/ruby-auth0/pull/297) ([davidpatrick](https://github.com/davidpatrick))
+
 ## [v5.5.0](https://github.com/auth0/ruby-auth0/tree/v5.5.0) (2021-08-06)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.4.0..v5.5.0)
