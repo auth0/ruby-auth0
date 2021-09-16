@@ -173,13 +173,15 @@ module Auth0
       # @param password [string] User's new password; empty to trigger a
       #   password reset email
       # @param connection_name [string] Database connection name
-      def reset_password(email, connection_name = UP_AUTH)
+      # @param client_id [string] Client ID override (to allow forwarding
+      #   to a different application's login URI on password reset success page)
+      def reset_password(email, connection_name = UP_AUTH, client_id = @client_id)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
 
         request_params = {
           email: email,
           connection: connection_name,
-          client_id: @client_id
+          client_id: client_id
         }
         post('/dbconnections/change_password', request_params)
       end
