@@ -15,4 +15,5 @@ group :test do
   gem 'vcr', require: false
   gem 'codecov', require: false
   gem 'simplecov'
+  gem 'timecop', require: false
 end

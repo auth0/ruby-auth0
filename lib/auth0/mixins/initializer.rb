@@ -59,9 +59,7 @@ module Auth0
 
       def initialize_v2(options)
         extend Auth0::Api::V2
-        @token = options[:access_token] || options[:token]
-        api_identifier = options[:api_identifier] || "https://#{@domain}/api/v2/"
-        @token = api_token(audience: api_identifier).token if @token.nil? && @client_id && @client_secret
+        initialize_token(options)
       end
 
       def api_v2?(options)

@@ -22,7 +22,6 @@ module Auth0
         organization: @organization,
         audience: nil
       )
-
         request_params = {
           grant_type: 'client_credentials',
           client_id: client_id,
@@ -32,7 +31,9 @@ module Auth0
         }
 
         response = post('/oauth/token', request_params)
-        ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
+
+        expires_at = response['expires_in'] ? Time.now.to_i + response['expires_in'] : nil
+        ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'], expires_at)
       end
 
       # Get access and ID tokens using an Authorization Code.
