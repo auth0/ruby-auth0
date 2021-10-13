@@ -26,8 +26,7 @@ module Auth0
           grant_type: 'client_credentials',
           client_id: client_id,
           client_secret: client_secret,
-          audience: audience,
-          organization: organization
+          audience: audience
         }
 
         response = post('/oauth/token', request_params, {})
