@@ -19,6 +19,9 @@ module Auth0
         define_method(method) do |uri, body = {}, extra_headers = {}|
           body = body.delete_if { |_, v| v.nil? }
 
+          token = get_token()
+          add_headers('Authorization' => "Bearer #{token}") unless token.nil?
+          
           Retryable.retryable(retry_options) do
             request(method, uri, body, extra_headers)
           end

@@ -65,9 +65,33 @@ describe Auth0::Mixins::Initializer do
         true, 
         200))
 
-      expect(instance.instance_variable_get('@token_response')).to eq(
-        ::Auth0::ApiToken.new 'test', nil, 86400, Time.now.to_i + 86400
-      )
+      expect(instance.instance_variable_get('@token')).to eq('test')
+      expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
+    end
+
+    it "doesn't get a new token if one was supplied" do
+      params[:token] = 'access-token'
+
+      expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+          method: :post,
+          url: 'https://samples.auth0.com/oauth/token',
+      ))
+
+      expect(instance.instance_variable_get('@token')).to eq('access-token')
+      expect(instance.instance_variable_get('@token_expires_at')).to eq(Time.now.to_i + 3600)
+    end
+
+    it 'can supply token_expires_at option' do
+      params[:token] = 'access-token'
+      params[:token_expires_at] = time_now.to_i + 300
+
+      expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+          method: :post,
+          url: 'https://samples.auth0.com/oauth/token',
+      ))
+
+      expect(instance.instance_variable_get('@token')).to eq('access-token')
+      expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 300)
     end
   end
 end

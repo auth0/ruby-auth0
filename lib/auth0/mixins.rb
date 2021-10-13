@@ -18,8 +18,8 @@ module Auth0
   # Collecting dependencies here
   module Mixins
     include Auth0::Mixins::Headers
-    include Auth0::Mixins::HTTPProxy
     include Auth0::Mixins::TokenManagement
+    include Auth0::Mixins::HTTPProxy
     include Auth0::Mixins::Initializer
   end
 end
