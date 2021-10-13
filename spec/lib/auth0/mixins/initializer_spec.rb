@@ -13,7 +13,17 @@ describe Auth0::Mixins::Initializer do
   let(:params) { { namespace: 'samples.auth0.com' } }
   let(:instance) { DummyClassForProxy.send(:include, described_class).new(params) }
   let(:time_now) { Time.now }
+
   context 'api v2' do
+    it 'sets retry_count when passed' do
+      params[:token] = '123'
+      params[:retry_count] = 10
+
+      expect(instance.instance_variable_get('@retry_count')).to eq(10)
+    end
+  end
+
+  context 'token initialization' do
     before do
       params[:api_version] = 2
       Timecop.freeze(time_now)
@@ -35,14 +45,7 @@ describe Auth0::Mixins::Initializer do
       expect(instance.instance_variable_get('@token')).to eq('123')
     end
 
-    it 'sets retry_count when passed' do
-      params[:token] = '123'
-      params[:retry_count] = 10
-
-      expect(instance.instance_variable_get('@retry_count')).to eq(10)
-    end
-
-    it 'sets token_response' do
+    it 'fetches a token if none was given' do
       params[:client_id] = client_id = 'test_client_id'
       params[:client_secret] = client_secret = 'test_client_secret'
       params[:api_identifier] = api_identifier = 'test'
@@ -92,6 +95,11 @@ describe Auth0::Mixins::Initializer do
 
       expect(instance.instance_variable_get('@token')).to eq('access-token')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 300)
+    end
+
+    it 'throws if no token or credentials were given' do
+      params[:client_id] = 'test-client-id'
+      expect { instance }.to raise_error(Auth0::InvalidCredentials)
     end
   end
 end
