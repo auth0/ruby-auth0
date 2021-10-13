@@ -11,11 +11,13 @@ module Auth0
         @token_expires_at = @token ? options[:token_expires_at] || Time.now.to_i + 3600 : nil 
 
         @audience = options[:api_identifier] || "https://#{@domain}/api/v2/"
-        @token = get_token() if @token.nil?
+        get_token() if @token.nil?
       end
 
       def get_token
-        if @token.nil? && @client_id && @client_secret
+        has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
+
+        if (@token.nil? || has_expired) && @client_id && @client_secret
           request_params = {
             grant_type: 'client_credentials',
             client_id: @client_id,
@@ -24,8 +26,11 @@ module Auth0
           }
 
           response = request(:post, '/oauth/token', request_params, {})
+          
+          @token = response["access_token"]
           @token_expires_at = response['expires_in'] ? Time.now.to_i + response['expires_in'] : nil
-          response["access_token"]
+
+          @token
         else
           @token
         end
