@@ -30,10 +30,8 @@ module Auth0
           organization: organization
         }
 
-        response = post('/oauth/token', request_params)
-
-        expires_at = response['expires_in'] ? Time.now.to_i + response['expires_in'] : nil
-        ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'], expires_at)
+        response = post('/oauth/token', request_params, {})
+        ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
       end
 
       # Get access and ID tokens using an Authorization Code.
