@@ -29,7 +29,7 @@ module Auth0
           audience: audience
         }
 
-        response = post('/oauth/token', request_params, {})
+        response = post('/oauth/token', request_params)
         ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
       end
 
