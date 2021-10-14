@@ -22,9 +22,7 @@ module Auth0
           token = get_token()
           add_headers('Authorization' => "Bearer #{token}") unless token.nil?
           
-          Retryable.retryable(retry_options) do
-            request(method, uri, body, extra_headers)
-          end
+          request_with_retry(method, uri, body, extra_headers)
         end
       end
 
@@ -66,6 +64,12 @@ module Auth0
         JSON.parse(body.to_s)
       rescue JSON::ParserError
         body
+      end
+
+      def request_with_retry(method, uri, body, extra_headers)
+        Retryable.retryable(retry_options) do
+          request(method, uri, body, extra_headers)
+        end
       end
 
       def request(method, uri, body, extra_headers)
