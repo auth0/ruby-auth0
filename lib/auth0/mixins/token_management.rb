@@ -16,7 +16,7 @@ module Auth0
 
       def get_token
         has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
-
+        
         if (@token.nil? || has_expired) && @client_id && @client_secret
           request_params = {
             grant_type: 'client_credentials',
