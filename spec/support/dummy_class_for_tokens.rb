@@ -4,6 +4,7 @@ class DummyClassForTokens
   include Auth0::Mixins::TokenManagement
 
   def initialize(config)
+    extend Auth0::Api::AuthenticationEndpoints
     @client_id = config[:client_id]
     @client_secret = config[:client_secret]
     @audience = config[:api_identifier]

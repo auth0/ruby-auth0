@@ -18,17 +18,10 @@ module Auth0
         has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
         
         if (@token.nil? || has_expired) && @client_id && @client_secret
-          request_params = {
-            grant_type: 'client_credentials',
-            client_id: @client_id,
-            client_secret: @client_secret,
-            audience: @audience
-          }
-
-          response = request(:post, '/oauth/token', request_params, {})
-          
-          @token = response["access_token"]
-          @token_expires_at = response['expires_in'] ? Time.now.to_i + response['expires_in'] : nil
+          response = api_token(audience: @audience)
+          puts response
+          @token = response.token
+          @token_expires_at = response.expires_in ? Time.now.to_i + response.expires_in : nil
 
           @token
         else
