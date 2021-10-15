@@ -2,6 +2,7 @@ class DummyClassForTokens
   include Auth0::Mixins::HTTPProxy
   include Auth0::Mixins::Headers
   include Auth0::Mixins::TokenManagement
+  include Auth0::Mixins::Initializer
 
   def initialize(config)
     extend Auth0::Api::AuthenticationEndpoints

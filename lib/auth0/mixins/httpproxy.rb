@@ -18,8 +18,8 @@ module Auth0
       %i(get post post_file put patch delete delete_with_body).each do |method|
         define_method(method) do |uri, body = {}, extra_headers = {}|
           body = body.delete_if { |_, v| v.nil? }
-          token = get_token
-          add_headers('Authorization' => "Bearer #{token}") unless token.nil?
+          token = get_token()
+          authorization_header(token) unless token.nil?
           request_with_retry(method, uri, body, extra_headers)
         end
       end
