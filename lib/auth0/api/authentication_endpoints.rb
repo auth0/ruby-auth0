@@ -56,7 +56,7 @@ module Auth0
           code: code,
           redirect_uri: redirect_uri
         }
-        ::Auth0::AccessToken.from_response post('/oauth/token', request_params)
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
 
       # Get access and ID tokens using a refresh token.
@@ -81,7 +81,7 @@ module Auth0
           client_secret: client_secret,
           refresh_token: refresh_token
         }
-        ::Auth0::AccessToken.from_response post('/oauth/token', request_params)
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
 
       # rubocop:disable Metrics/ParameterLists
@@ -121,7 +121,7 @@ module Auth0
           audience: audience,
           grant_type: realm ? 'http://auth0.com/oauth/grant-type/password-realm' : 'password'
         }
-        ::Auth0::AccessToken.from_response post('/oauth/token', request_params)
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
       # rubocop:enable Metrics/ParameterLists
 
@@ -141,7 +141,8 @@ module Auth0
           connection: connection_name,
           client_id: @client_id
         }
-        post('/dbconnections/signup', request_params)
+
+        request_with_retry(:post, '/dbconnections/signup', request_params)
       end
 
       # Change a user's password or trigger a password reset email.
@@ -161,7 +162,8 @@ module Auth0
           connection: connection_name,
           client_id: @client_id
         }
-        post('/dbconnections/change_password', request_params)
+
+        request_with_retry(:post, '/dbconnections/change_password', request_params)
       end
 
       # Trigger a password reset email.
@@ -179,7 +181,8 @@ module Auth0
           connection: connection_name,
           client_id: @client_id
         }
-        post('/dbconnections/change_password', request_params)
+
+        request_with_retry(:post, '/dbconnections/change_password', request_params)
       end
 
       # Start Passwordless email login flow.
@@ -199,7 +202,8 @@ module Auth0
           client_id: @client_id,
           client_secret: @client_secret
         }
-        post('/passwordless/start', request_params)
+
+        request_with_retry(:post, '/passwordless/start', request_params)
       end
 
       # Start Passwordless SMS login flow.
@@ -215,28 +219,29 @@ module Auth0
           client_id: @client_id,
           client_secret: @client_secret
         }
-        post('/passwordless/start', request_params)
+
+        request_with_retry(:post, '/passwordless/start', request_params)
       end
 
       # Retrive SAML 2.0 metadata XML for an Application.
       # @see https://auth0.com/docs/api/authentication#get-metadata
       # @return [xml] SAML 2.0 metadata
       def saml_metadata
-        get("/samlp/metadata/#{@client_id}")
+        request_with_retry(:get, "/samlp/metadata/#{@client_id}")
       end
 
       # Retrieve WS-Federation metadata XML for a tenant.
       # @see https://auth0.com/docs/api/authentication#get-metadata36
       # @return [xml] WS-Federation metadata
       def wsfed_metadata
-        get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
+        request_with_retry(:get, '/wsfed/FederationMetadata/2007-06/FederationMetadata.xml')
       end
 
       # Return the user information based on the Auth0 access token.
       # @see https://auth0.com/docs/api/authentication#get-user-info
       # @return [json] User information based on the Auth0 access token
       def userinfo(access_token)
-        get('/userinfo', {}, 'Authorization' => "Bearer #{access_token}")
+        request_with_retry(:get, '/userinfo', {}, 'Authorization' => "Bearer #{access_token}")
       end
 
       # Return an authorization URL.

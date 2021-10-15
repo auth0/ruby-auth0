@@ -64,13 +64,13 @@ module Auth0
         body
       end
 
-      def request_with_retry(method, uri, body, extra_headers)
+      def request_with_retry(method, uri, body = {}, extra_headers = {})
         Retryable.retryable(retry_options) do
           request(method, uri, body, extra_headers)
         end
       end
 
-      def request(method, uri, body, extra_headers)
+      def request(method, uri, body = {}, extra_headers = {})
         result = if method == :get
           # Mutate the headers property to add parameters.
           add_headers({params: body})

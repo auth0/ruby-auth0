@@ -19,7 +19,6 @@ module Auth0
         
         if (@token.nil? || has_expired) && @client_id && @client_secret
           response = api_token(audience: @audience)
-          puts response
           @token = response.token
           @token_expires_at = response.expires_in ? Time.now.to_i + response.expires_in : nil
 
