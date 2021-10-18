@@ -77,6 +77,10 @@ class AllUsersController < ApplicationController
       # Otherwise, you can pass in a Management API token directly for testing or temporary
       # access using the key below.
       # token: ENV['AUTH0_RUBY_API_TOKEN'],
+      #
+      # When passing a token, you can also specify when the token expires in seconds from epoch. Otherwise, expiry is set
+      # by default to an hour from now.
+      # token_expires_at: Time.now.to_i + 86400,
       domain: ENV['AUTH0_RUBY_DOMAIN'],
       api_version: 2,
       timeout: 15 # optional, defaults to 10
@@ -98,6 +102,12 @@ Finally, we'll add a view to display the results:
 
 This should show the parameters passed to the `users` method and a list of users that matched the query (or an empty array if none).
 
+### Token management
+
+If `token` is omitted, the SDK will attempt to fetch a new token using the `client_credentials` grant, provided that `client_id` and `client_secret` are provided in the configuration. Once the token is about to expire (or has already expired), a new token will be fetched and cached for future calls.
+
+For this to work, ensure your application can make a Client Credentials grant (Application settings in Auth0 > Advanced > Grant Types tab) and that the application is authorized for the Management API: https://auth0.com/docs/api-auth/config/using-the-auth0-dashboard
+
 ## Authentication
 
 In addition to the Management API, this SDK also provides access to [Authentication API](https://auth0.com/docs/api/authentication) endpoints with the `Auth0::API::AuthenticationEndpoints` module. For basic login capability, we suggest using our OmniAuth stategy [detailed here](https://auth0.com/docs/quickstart/webapp/rails/01-login). Other authentication tasks currently supported are:
@@ -116,14 +126,6 @@ Please note that this module implements endpoints that might be deprecated for n
 ### Organizations
 
 [Organizations](https://auth0.com/docs/organizations) is a set of features that provide better support for developers who build and maintain SaaS and Business-to-Business (B2B) applications.
-
-Using Organizations, you can:
-
-- Represent teams, business customers, partner companies, or any logical grouping of users that should have different ways of accessing your applications, as organizations.
-- Manage their membership in a variety of ways, including user invitation.
-- Configure branded, federated login flows for each organization.
-- Implement role-based access control, such that users can have different roles when authenticating in the context of different organizations.
-- Build administration capabilities into your products, using Organizations APIs, so that those businesses can manage their own organizations.
 
 Note that Organizations is currently only available to customers on our Enterprise and Startup subscription plans.
 
