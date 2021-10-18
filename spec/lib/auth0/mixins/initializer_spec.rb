@@ -72,8 +72,20 @@ describe Auth0::Mixins::Initializer do
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
     end
 
-    it "doesn't get a new token if one was supplied" do
+    it "doesn't get a new token if one was supplied using 'token'" do
       params[:token] = 'access-token'
+
+      expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+          method: :post,
+          url: 'https://samples.auth0.com/oauth/token',
+      ))
+
+      expect(instance.instance_variable_get('@token')).to eq('access-token')
+      expect(instance.instance_variable_get('@token_expires_at')).to eq(Time.now.to_i + 3600)
+    end
+
+    it "doesn't get a new token if one was supplied using 'access_token'" do
+      params[:access_token] = 'access-token'
 
       expect(RestClient::Request).not_to receive(:execute).with(hash_including(
           method: :post,
