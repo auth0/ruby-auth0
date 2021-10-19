@@ -12,6 +12,10 @@
 
 - Add New Grants. [\#295](https://github.com/auth0/ruby-auth0/pull/295) ([Norio4](https://github.com/Norio4))
 
+- Add token cache and renew functionality for API requests [\#301](https://github.com/auth0/ruby-auth0/pull/295) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+- Optional `client_id` parameter for `reset_password` [\#299](https://github.com/auth0/ruby-auth0/pull/295) ([DJRH](https://github.com/DJRH))
+
 **Deprecated**
 
 - Deprecate change_password in favor of reset_password. [\#297](https://github.com/auth0/ruby-auth0/pull/297) ([davidpatrick](https://github.com/davidpatrick))
