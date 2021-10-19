@@ -335,7 +335,7 @@ module Auth0
           private
 
           def fetch_jwks
-            result = get(@jwks_url)
+            result = request_with_retry(:get, @jwks_url, {}, {})
             @did_fetch_jwks = result.is_a?(Hash) && result.key?('keys')
             result if @did_fetch_jwks
           end

@@ -134,7 +134,7 @@ describe Auth0::Client do
       it_should_behave_like 'Authentication API client'  
     end
 
-    context 'when try to get an API tokenwith organization' do
+    context 'when try to get an API token with organization' do
       before do
         stub_api_token_with_organization
       end
@@ -147,6 +147,7 @@ describe Auth0::Client do
           organization: organization
         )
       end
+
       it_should_behave_like 'v2 API client'
       it_should_behave_like 'Authentication API client'
     end
@@ -209,8 +210,7 @@ describe Auth0::Client do
           {
             grant_type: 'client_credentials',
             client_id: client_id,
-            client_secret: client_secret,
-            organization: organization
+            client_secret: client_secret
           }
         )
       )

@@ -18,10 +18,9 @@ module Auth0
       %i(get post post_file put patch delete delete_with_body).each do |method|
         define_method(method) do |uri, body = {}, extra_headers = {}|
           body = body.delete_if { |_, v| v.nil? }
-
-          Retryable.retryable(retry_options) do
-            request(method, uri, body, extra_headers)
-          end
+          token = get_token()
+          authorization_header(token) unless token.nil?
+          request_with_retry(method, uri, body, extra_headers)
         end
       end
 
@@ -65,7 +64,13 @@ module Auth0
         body
       end
 
-      def request(method, uri, body, extra_headers)
+      def request_with_retry(method, uri, body = {}, extra_headers = {})
+        Retryable.retryable(retry_options) do
+          request(method, uri, body, extra_headers)
+        end
+      end
+
+      def request(method, uri, body = {}, extra_headers = {})
         result = if method == :get
           # Mutate the headers property to add parameters.
           add_headers({params: body})
