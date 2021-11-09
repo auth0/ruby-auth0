@@ -1,4 +1,12 @@
-# Change Log
+# Changelog
+
+## [v5.6.1](https://github.com/auth0/ruby-auth0/tree/v5.6.1) (2021-09-14)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.6.0..v5.6.1)
+
+**Fixed**
+
+- Fix `delete_grant` API call [\#304](https://github.com/auth0/ruby-auth0/pull/304) ([danimal141](https://github.com/danimal141))
 
 ## [v5.6.0](https://github.com/auth0/ruby-auth0/tree/v5.6.0) (2021-09-14)
 
@@ -6,7 +14,7 @@
 
 **Added**
 
-- New Actions endpoints  CH: Added review:medium. [\#293](https://github.com/auth0/ruby-auth0/pull/293) ([davidpatrick](https://github.com/davidpatrick))
+- New Actions endpoints CH: Added review:medium. [\#293](https://github.com/auth0/ruby-auth0/pull/293) ([davidpatrick](https://github.com/davidpatrick))
 
 - Updates rest-client to 2.1. [\#296](https://github.com/auth0/ruby-auth0/pull/296) ([davidpatrick](https://github.com/davidpatrick))
 
@@ -80,14 +88,13 @@
 
 - Fixes create_organizations_enabled_connection [\#269](https://github.com/auth0/ruby-auth0/pull/269) ([davidpatrick](https://github.com/apps/davidpatrick))
 
-
 ## [v5.1.0](https://github.com/auth0/ruby-auth0/tree/v5.1.0) (2021-04-09)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.0.1..v5.1.0)
 
 **Added**
 
-- Org idtoken validation guidance  [\#267](https://github.com/auth0/ruby-auth0/pull/267) ([davidpatrick](https://github.com/davidpatrick))
+- Org idtoken validation guidance [\#267](https://github.com/auth0/ruby-auth0/pull/267) ([davidpatrick](https://github.com/davidpatrick))
 - Adds Branding endpoints [\#266](https://github.com/auth0/ruby-auth0/pull/266) ([davidpatrick](https://github.com/davidpatrick))
 - Organizations feature [\#264](https://github.com/auth0/ruby-auth0/pull/264) ([davidpatrick](https://github.com/davidpatrick))
 - Add Organizations support to Authentication API Client [\#263](https://github.com/auth0/ruby-auth0/pull/263) ([davidpatrick](https://github.com/davidpatrick))
@@ -112,35 +119,43 @@
 
 ## [v5.0.0](https://github.com/auth0/ruby-auth0/tree/v5.0.0) (2020-10-22)
 
-This release addresses some long standing issues with the library that could only be addressed in a major.  We have also removed Api/v1 endpoints and other deprecated methods.
+This release addresses some long standing issues with the library that could only be addressed in a major. We have also removed Api/v1 endpoints and other deprecated methods.
 
 ### Migration from v4 to v5
 
 #### Top Level Structs
+
 The following top level structs were colliding with other libraries, this was addressed in [\#183](183) and have been namespaced with `::Auth0::`
+
 - `ApiToken` changed to `::Auth0::ApiToken`
 - `Permission` changed to `::Auth0::Permission`
 - `AccessToken` changed to `::AccessToken::AccessToken`
 
 #### Api2 Users create_user method
+
 This method was requiring you send in a `name`, which was optional, but didn't require `connection_name` which isn't optional. This was fixed in [\#244](244).
 
 `Auth0::Api::V2::Users.create_user(name, options = {})` has changed to `Auth0::Api::V2::Users.create_user(connection_name, options = {})`
 
 #### APIv1 End of Life
-APIv1 endpoints were deprecated in 4.x and now have been removed in v5.  They reached end-of-life in the Public Cloud on 13 July 2020. Migration from v1 to v2 has been documented here https://auth0.com/docs/product-lifecycle/deprecations-and-migrations/migrate-to-management-api-v2
+
+APIv1 endpoints were deprecated in 4.x and now have been removed in v5. They reached end-of-life in the Public Cloud on 13 July 2020. Migration from v1 to v2 has been documented here https://auth0.com/docs/product-lifecycle/deprecations-and-migrations/migrate-to-management-api-v2
 
 #### Catching 429 Errors
-In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order for backwards compatibility. This class is now inheriting `Auth0::HTTPError`.  If you are catching 429 errors with `Auth0::Unsupported` then you will need to migrate to catching with `Auth0::HTTPError`.
+
+In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order for backwards compatibility. This class is now inheriting `Auth0::HTTPError`. If you are catching 429 errors with `Auth0::Unsupported` then you will need to migrate to catching with `Auth0::HTTPError`.
 
 ### Changes
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.17.1...v5.0.0)
 
-**Fixed** 
+**Fixed**
+
 - Don't define structs as top-level constants (breaking changes) [\#183](https://github.com/auth0/ruby-auth0/pull/183) ([makimoto](https://github.com/makimoto))
 - Fix create_user implementation (breaking changes) [\#244](https://github.com/auth0/ruby-auth0/pull/244) ([davidpatrick](https://github.com/davidpatrick))
 
 **Removed**
+
 - Removed Deprecations (breaking changes) [\#245](https://github.com/auth0/ruby-auth0/pull/245) ([davidpatrick](https://github.com/davidpatrick))
 
 ## [v4.17.1](https://github.com/auth0/ruby-auth0/tree/v4.17.1) (2020-10-21)
@@ -149,8 +164,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 
 **Fixed**
 
-- Addressable dependency  [\#247](https://github.com/auth0/ruby-auth0/pull/247) ([davidpatrick](https://github.com/davidpatrick))
-
+- Addressable dependency [\#247](https://github.com/auth0/ruby-auth0/pull/247) ([davidpatrick](https://github.com/davidpatrick))
 
 ## [v4.17.0](https://github.com/auth0/ruby-auth0/tree/v4.17.0) (2020-10-19)
 
@@ -158,12 +172,11 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 
 **Added**
 
-- Add pagination to user permissions  [\#241](https://github.com/auth0/ruby-auth0/pull/241) ([davidpatrick](https://github.com/davidpatrick))
+- Add pagination to user permissions [\#241](https://github.com/auth0/ruby-auth0/pull/241) ([davidpatrick](https://github.com/davidpatrick))
 
 **Deprecated**
 
-- Addressable URI Escape  [\#240](https://github.com/auth0/ruby-auth0/pull/240) ([davidpatrick](https://github.com/apps/davidpatrick))
-
+- Addressable URI Escape [\#240](https://github.com/auth0/ruby-auth0/pull/240) ([davidpatrick](https://github.com/apps/davidpatrick))
 
 ## [v4.16.0](https://github.com/auth0/ruby-auth0/tree/v4.16.0) (2020-10-02)
 
@@ -238,8 +251,8 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 
 **Added**
 
-- Added support for name\_filter parameter \[SDK-1607\] [\#214](https://github.com/auth0/ruby-auth0/pull/214) ([Widcket](https://github.com/Widcket))
-- Pass client\_id, audience at Auth0::Api::V2::ClientGrants\#client\_grants [\#209](https://github.com/auth0/ruby-auth0/pull/209) ([hkdnet](https://github.com/hkdnet))
+- Added support for name_filter parameter \[SDK-1607\] [\#214](https://github.com/auth0/ruby-auth0/pull/214) ([Widcket](https://github.com/Widcket))
+- Pass client_id, audience at Auth0::Api::V2::ClientGrants\#client_grants [\#209](https://github.com/auth0/ruby-auth0/pull/209) ([hkdnet](https://github.com/hkdnet))
 - Add rubocop-rails [\#200](https://github.com/auth0/ruby-auth0/pull/200) ([tknzk](https://github.com/tknzk))
 
 **Security**
@@ -249,8 +262,8 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Update dependencies and CI script [\#210](https://github.com/auth0/ruby-auth0/pull/210) ([lbalmaceda](https://github.com/lbalmaceda))
 
 ## [v4.9.0](https://github.com/auth0/ruby-auth0/tree/v4.9.0) (2019-09-25)
-[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.8.0...v4.9.0)
 
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.8.0...v4.9.0)
 
 **Closed issues:**
 
@@ -268,12 +281,15 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Add Management API Guardian enrollments endpoint [\#182](https://github.com/auth0/ruby-auth0/pull/182) ([tomgi](https://github.com/tomgi))
 
 ## [v4.8.0](https://github.com/auth0/ruby-auth0/tree/v4.8.0) (2019-08-01)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.7.0...v4.8.0)
 
 **Closed issues**
+
 - Not enough information in exception when Rate Limiting is encountered [\#158](https://github.com/auth0/ruby-auth0/issues/158)
 
 **Added**
+
 - Add Management API Anomaly endpoints [\#179](https://github.com/auth0/ruby-auth0/pull/179) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
 - Add parameters for users imports [\#177](https://github.com/auth0/ruby-auth0/pull/177) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
 - Add failed job error details endpoint [\#176](https://github.com/auth0/ruby-auth0/pull/176) ([makoto-matsumoto](https://github.com/makoto-matsumoto))
@@ -283,34 +299,43 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Add Gemfile.lock file [\#165](https://github.com/auth0/ruby-auth0/pull/165) ([lbalmaceda](https://github.com/lbalmaceda))
 
 **Changed**
+
 - Add Roles and Users endpoints integration tests [\#174](https://github.com/auth0/ruby-auth0/pull/174) ([joshcanhelp](https://github.com/joshcanhelp))
 
 **Deprecated**
+
 - Deprecate Auth0::Api::V2::Users.delete_users [\#181](https://github.com/auth0/ruby-auth0/pull/181) ([joshcanhelp](https://github.com/joshcanhelp))
 
 **Removed**
+
 - Gemspec: Drop EOL'd property rubyforge_project [\#180](https://github.com/auth0/ruby-auth0/pull/180) ([olleolleolle](https://github.com/olleolleolle))
 
 **Security**
+
 - Fix Yard dependency vulnerability [\#184](https://github.com/auth0/ruby-auth0/pull/184) ([joshcanhelp](https://github.com/joshcanhelp))
 
 ## [v4.7.0](https://github.com/auth0/ruby-auth0/tree/v4.7.0) (2019-03-19)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.6.0...v4.7.0)
 
 **Closed issues**
+
 - No method to update/patch resource servers [\#156](https://github.com/auth0/ruby-auth0/issues/156)
 - No method to get all resource servers [\#154](https://github.com/auth0/ruby-auth0/issues/154)
 
 **Added**
+
 - Add Client ID to send_verification_email [\#162](https://github.com/auth0/ruby-auth0/pull/162) ([joshcanhelp](https://github.com/joshcanhelp))
 - More password change params [\#159](https://github.com/auth0/ruby-auth0/pull/159) ([nhusher](https://github.com/nhusher))
 - Add patch resource server [\#157](https://github.com/auth0/ruby-auth0/pull/157) ([philomory](https://github.com/philomory))
 - Get all resource servers [\#155](https://github.com/auth0/ruby-auth0/pull/155) ([philomory](https://github.com/philomory))
 
 ## [v4.6.0](https://github.com/auth0/ruby-auth0/tree/v4.6.0) (2018-12-17)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.5.0...v4.6.0)
 
 **Closed issues**
+
 - New Release with Client Token work [\#148](https://github.com/auth0/ruby-auth0/issues/148)
 - Unable to initialize Auth0Api [\#147](https://github.com/auth0/ruby-auth0/issues/147)
 - Issues building the documentation [\#135](https://github.com/auth0/ruby-auth0/issues/135)
@@ -321,6 +346,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Obtain APIv2 Token [\#86](https://github.com/auth0/ruby-auth0/issues/86)
 
 **Added**
+
 - Add refresh token method and unit tests [\#150](https://github.com/auth0/ruby-auth0/pull/150) ([joshcanhelp](https://github.com/joshcanhelp))
 - Improve telemetry; more modular Auth API [\#149](https://github.com/auth0/ruby-auth0/pull/149) ([joshcanhelp](https://github.com/joshcanhelp))
 - Add ttl_sec argument to post_email_verification request. [\#145](https://github.com/auth0/ruby-auth0/pull/145) ([digitaldawn](https://github.com/digitaldawn))
@@ -332,52 +358,57 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Add Client Credentials grant [\#129](https://github.com/auth0/ruby-auth0/pull/129) ([joshcanhelp](https://github.com/joshcanhelp))
 
 **Changed**
+
 - Improve the test suite [\#143](https://github.com/auth0/ruby-auth0/pull/143) ([joshcanhelp](https://github.com/joshcanhelp))
 
 **Deprecated**
+
 - Formal deprecation of 4 auth endpoint methods; rubocop [\#151](https://github.com/auth0/ruby-auth0/pull/151) ([joshcanhelp](https://github.com/joshcanhelp))
 
 **Fixed**
+
 - Documentation improvements [\#139](https://github.com/auth0/ruby-auth0/pull/139) ([szemek](https://github.com/szemek))
 - Fix typos in README.md [\#137](https://github.com/auth0/ruby-auth0/pull/137) ([swetax](https://github.com/swetax))
 - Explicitly require JSON dependency [\#126](https://github.com/auth0/ruby-auth0/pull/126) ([jgaskins](https://github.com/jgaskins))
 
-
 ## [v4.5.0](https://github.com/auth0/ruby-auth0/tree/v4.5.0) (2018-07-27)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.4.0...v4.5.0)
 
 **Closed issues:**
 
 - New version with updated rest-client dependency [\#93](https://github.com/auth0/ruby-auth0/issues/93)
 - Bug?: `result` from auth0/mixins/httpproxy.rb returns 'nil' [\#88](https://github.com/auth0/ruby-auth0/issues/88)
-- import\_users fails with EOFError [\#56](https://github.com/auth0/ruby-auth0/issues/56)
+- import_users fails with EOFError [\#56](https://github.com/auth0/ruby-auth0/issues/56)
 - Using inside of a Rails API [\#55](https://github.com/auth0/ruby-auth0/issues/55)
 - Add documentation? [\#102](https://github.com/auth0/ruby-auth0/issues/102)
-- logout\_url does not include client\_id parameter [\#81](https://github.com/auth0/ruby-auth0/issues/81)
+- logout_url does not include client_id parameter [\#81](https://github.com/auth0/ruby-auth0/issues/81)
 
 **Merged pull requests:**
 
-- Correctly default grant\_type to 'password' in login method [\#107](https://github.com/auth0/ruby-auth0/pull/107) ([psparrow](https://github.com/psparrow))
+- Correctly default grant_type to 'password' in login method [\#107](https://github.com/auth0/ruby-auth0/pull/107) ([psparrow](https://github.com/psparrow))
 - Add additional parameters for WS-Fed URL [\#123](https://github.com/auth0/ruby-auth0/pull/123) ([joshcanhelp](https://github.com/joshcanhelp))
 - Deprecate Authentication API endpoints [\#121](https://github.com/auth0/ruby-auth0/pull/121) ([joshcanhelp](https://github.com/joshcanhelp))
 - Clean up auth endpoint tests [\#120](https://github.com/auth0/ruby-auth0/pull/120) ([joshcanhelp](https://github.com/joshcanhelp))
 - Fix docblocks for Authentication API endpoints [\#119](https://github.com/auth0/ruby-auth0/pull/119) ([joshcanhelp](https://github.com/joshcanhelp))
-- Add Client ID to logout\_url [\#118](https://github.com/auth0/ruby-auth0/pull/118) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add Client ID to logout_url [\#118](https://github.com/auth0/ruby-auth0/pull/118) ([joshcanhelp](https://github.com/joshcanhelp))
 - Add pagination and tests for Rules endpoint [\#117](https://github.com/auth0/ruby-auth0/pull/117) ([joshcanhelp](https://github.com/joshcanhelp))
 - Add pagination and tests for Client Grants [\#116](https://github.com/auth0/ruby-auth0/pull/116) ([joshcanhelp](https://github.com/joshcanhelp))
-- Add search\_engine parameter to Users endpoint + tests [\#115](https://github.com/auth0/ruby-auth0/pull/115) ([joshcanhelp](https://github.com/joshcanhelp))
+- Add search_engine parameter to Users endpoint + tests [\#115](https://github.com/auth0/ruby-auth0/pull/115) ([joshcanhelp](https://github.com/joshcanhelp))
 - Improve README [\#114](https://github.com/auth0/ruby-auth0/pull/114) ([joshcanhelp](https://github.com/joshcanhelp))
 - Add pagination and tests to Clients and Connections endpoints [\#113](https://github.com/auth0/ruby-auth0/pull/113) ([joshcanhelp](https://github.com/joshcanhelp))
 - Use Secure RubyGems Source [\#112](https://github.com/auth0/ruby-auth0/pull/112) ([markprovan](https://github.com/markprovan))
 
 ## [v4.4.0](https://github.com/auth0/ruby-auth0/tree/v4.4.0) (2018-02-19)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.3.0...v4.4.0)
 
 **Closed issues:**
 
-- Authentication Login is using `/oauth/ro`.  [\#89](https://github.com/auth0/ruby-auth0/issues/89)
+- Authentication Login is using `/oauth/ro`. [\#89](https://github.com/auth0/ruby-auth0/issues/89)
 
 ## [v4.3.0](https://github.com/auth0/ruby-auth0/tree/v4.3.0) (2018-02-19)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.2.0...v4.3.0)
 
 **Merged pull requests:**
@@ -388,12 +419,13 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Fix error in the readme regarding timeouts [\#90](https://github.com/auth0/ruby-auth0/pull/90) ([ksamc](https://github.com/ksamc))
 
 ## [v4.2.0](https://github.com/auth0/ruby-auth0/tree/v4.2.0) (2018-02-15)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.1.0...v4.2.0)
 
 **Closed issues:**
 
 - Vulnerable dependency: yard [\#99](https://github.com/auth0/ruby-auth0/issues/99)
-- post\_password\_change results in payload validation error [\#84](https://github.com/auth0/ruby-auth0/issues/84)
+- post_password_change results in payload validation error [\#84](https://github.com/auth0/ruby-auth0/issues/84)
 - Unsupported on latest ruby version \(2.4.0\) [\#83](https://github.com/auth0/ruby-auth0/issues/83)
 - Adding a resource server breaks authentication. [\#76](https://github.com/auth0/ruby-auth0/issues/76)
 - outdated dependencies in ror-api example [\#75](https://github.com/auth0/ruby-auth0/issues/75)
@@ -415,14 +447,15 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - updated dependencies in ror api example. Fix \#75 [\#77](https://github.com/auth0/ruby-auth0/pull/77) ([Amialc](https://github.com/Amialc))
 - Add a badge to documentation [\#74](https://github.com/auth0/ruby-auth0/pull/74) ([amingilani](https://github.com/amingilani))
 - Typo [\#73](https://github.com/auth0/ruby-auth0/pull/73) ([amingilani](https://github.com/amingilani))
-- Add how to generate documentation to the README.md + patch\_user [\#72](https://github.com/auth0/ruby-auth0/pull/72) ([ignaciojonas](https://github.com/ignaciojonas))
+- Add how to generate documentation to the README.md + patch_user [\#72](https://github.com/auth0/ruby-auth0/pull/72) ([ignaciojonas](https://github.com/ignaciojonas))
 
 ## [v4.1.0](https://github.com/auth0/ruby-auth0/tree/v4.1.0) (2016-07-25)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v4.0.0...v4.1.0)
 
 **Closed issues:**
 
-- \#post\_password\_change requires a password for ticket. [\#69](https://github.com/auth0/ruby-auth0/issues/69)
+- \#post_password_change requires a password for ticket. [\#69](https://github.com/auth0/ruby-auth0/issues/69)
 - Exception messages are ruby hash string literals [\#63](https://github.com/auth0/ruby-auth0/issues/63)
 - Ruby on Rails API issue [\#61](https://github.com/auth0/ruby-auth0/issues/61)
 - Not possible to have V1 and V2 clients at the same time [\#60](https://github.com/auth0/ruby-auth0/issues/60)
@@ -438,6 +471,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Add api v2 log endpoints to the gem [\#59](https://github.com/auth0/ruby-auth0/pull/59) ([LindseyB](https://github.com/LindseyB))
 
 ## [v4.0.0](https://github.com/auth0/ruby-auth0/tree/v4.0.0) (2016-02-12)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.6.1...v4.0.0)
 
 **Closed issues:**
@@ -458,6 +492,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Remove semi-colons in README [\#37](https://github.com/auth0/ruby-auth0/pull/37) ([l4u](https://github.com/l4u))
 
 ## [v3.6.1](https://github.com/auth0/ruby-auth0/tree/v3.6.1) (2015-07-09)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.6.0...v3.6.1)
 
 **Merged pull requests:**
@@ -466,15 +501,17 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - email validation is broken by \_, which breaks the tests [\#35](https://github.com/auth0/ruby-auth0/pull/35) ([taylorfinnell](https://github.com/taylorfinnell))
 
 ## [v3.6.0](https://github.com/auth0/ruby-auth0/tree/v3.6.0) (2015-06-01)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.5.0...v3.6.0)
 
 **Merged pull requests:**
 
-- Remove exclude\_fields parameter for getting users [\#34](https://github.com/auth0/ruby-auth0/pull/34) ([hzalaz](https://github.com/hzalaz))
+- Remove exclude_fields parameter for getting users [\#34](https://github.com/auth0/ruby-auth0/pull/34) ([hzalaz](https://github.com/hzalaz))
 - Add connections [\#33](https://github.com/auth0/ruby-auth0/pull/33) ([taylorfinnell](https://github.com/taylorfinnell))
 - Use client header spec as per documentation [\#32](https://github.com/auth0/ruby-auth0/pull/32) ([benschwarz](https://github.com/benschwarz))
 
 ## [v3.5.0](https://github.com/auth0/ruby-auth0/tree/v3.5.0) (2015-05-21)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.4.0...v3.5.0)
 
 **Merged pull requests:**
@@ -482,6 +519,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Client information headers [\#31](https://github.com/auth0/ruby-auth0/pull/31) ([benschwarz](https://github.com/benschwarz))
 
 ## [v3.4.0](https://github.com/auth0/ruby-auth0/tree/v3.4.0) (2015-05-07)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.3.0...v3.4.0)
 
 **Closed issues:**
@@ -495,6 +533,7 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Fix broken link in README [\#28](https://github.com/auth0/ruby-auth0/pull/28) ([dentarg](https://github.com/dentarg))
 
 ## [v3.3.0](https://github.com/auth0/ruby-auth0/tree/v3.3.0) (2015-04-15)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v3.2.0...v3.3.0)
 
 **Closed issues:**
@@ -510,15 +549,16 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - allow to pass extra parameters to delegation method [\#23](https://github.com/auth0/ruby-auth0/pull/23) ([Maxim-Filimonov](https://github.com/Maxim-Filimonov))
 
 ## [v3.2.0](https://github.com/auth0/ruby-auth0/tree/v3.2.0) (2015-04-14)
+
 **Merged pull requests:**
 
 - Impersonation [\#26](https://github.com/auth0/ruby-auth0/pull/26) ([dentarg](https://github.com/dentarg))
-- Allow to set api\_type to use with salesforce\_api [\#25](https://github.com/auth0/ruby-auth0/pull/25) ([Maxim-Filimonov](https://github.com/Maxim-Filimonov))
+- Allow to set api_type to use with salesforce_api [\#25](https://github.com/auth0/ruby-auth0/pull/25) ([Maxim-Filimonov](https://github.com/Maxim-Filimonov))
 - Fixed few issues from issues list [\#22](https://github.com/auth0/ruby-auth0/pull/22) ([offtop](https://github.com/offtop))
 - Update readme.md api v2 basic usage example [\#19](https://github.com/auth0/ruby-auth0/pull/19) ([ethancrawford](https://github.com/ethancrawford))
 - fix token initialization to prevent nil token value [\#18](https://github.com/auth0/ruby-auth0/pull/18) ([ethancrawford](https://github.com/ethancrawford))
 - Make the client work for API v1 [\#13](https://github.com/auth0/ruby-auth0/pull/13) ([dentarg](https://github.com/dentarg))
-- Fix typo delegation signature; open\_id =\> openid [\#12](https://github.com/auth0/ruby-auth0/pull/12) ([dentarg](https://github.com/dentarg))
+- Fix typo delegation signature; open_id =\> openid [\#12](https://github.com/auth0/ruby-auth0/pull/12) ([dentarg](https://github.com/dentarg))
 - Make the tests run on Travis CI [\#11](https://github.com/auth0/ruby-auth0/pull/11) ([dentarg](https://github.com/dentarg))
 - Added support for API V1 and API V2 [\#9](https://github.com/auth0/ruby-auth0/pull/9) ([offtop](https://github.com/offtop))
 - Update README.md [\#8](https://github.com/auth0/ruby-auth0/pull/8) ([pose](https://github.com/pose))
@@ -527,6 +567,4 @@ In 4.x `RateLimitEncountered` was inheriting from `Auth0::Unsupported` in order 
 - Fix rspec deprecation warning [\#2](https://github.com/auth0/ruby-auth0/pull/2) ([dentarg](https://github.com/dentarg))
 - Add method to access delegation endpoint [\#1](https://github.com/auth0/ruby-auth0/pull/1) ([FrancisPlaza](https://github.com/FrancisPlaza))
 
-
-
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* _This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)_
