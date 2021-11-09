@@ -1,0 +1,7 @@
+{
+  "files": {
+    "lib/auth0/version.rb": []
+  },
+  "prebump": "bundle install && bundle exec rake test",
+  "postbump": "bundle update"
+}
