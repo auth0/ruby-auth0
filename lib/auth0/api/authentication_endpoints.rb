@@ -38,14 +38,20 @@ module Auth0
       # @param code [string] The authentication code obtained from /authorize
       # @param redirect_uri [string] URL to redirect to after authorization.
       #   Required only if it was set at the GET /authorize endpoint
+      # @param code_verifier [string] PKCE code verifier
+      #   Required only if PKCE code verification is enabled for your tenant
       # @param client_id [string] Client ID for the Application
       # @param client_secret [string] Client Secret for the Application.
+      # @param additional_params [hash] Any other params you may need to provide.
       # @return [Auth0::AccessToken] Returns the access_token and id_token
+      # rubocop:disable Metrics/ParameterLists
       def exchange_auth_code_for_tokens(
         code,
         redirect_uri: nil,
+        code_verifier: nil,
         client_id: @client_id,
-        client_secret: @client_secret
+        client_secret: @client_secret,
+        **additional_params
       )
         raise Auth0::InvalidParameter, 'Must provide an authorization code' if code.to_s.empty?
 
@@ -54,10 +60,12 @@ module Auth0
           client_id: client_id,
           client_secret: client_secret,
           code: code,
-          redirect_uri: redirect_uri
-        }
+          redirect_uri: redirect_uri,
+          code_verifier: code_verifier
+        }.merge(additional_params)
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
+      # rubocop:enable Metrics/ParameterLists
 
       # Get access and ID tokens using a refresh token.
       # @see https://auth0.com/docs/api/authentication#refresh-token
