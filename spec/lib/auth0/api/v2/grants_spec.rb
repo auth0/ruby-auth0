@@ -81,7 +81,7 @@ describe Auth0::Api::V2::Grants do
   context '.delete_grant' do
     it { expect(@instance).to respond_to(:delete_grant) }
     it 'is expected to send delete to /api/v2/grants/1?user_id=1' do
-      expect(@instance).to receive(:delete).with('/api/v2/grants/1?user_id=1')
+      expect(@instance).to receive(:delete).with('/api/v2/grants/1', user_id: '1')
       expect { @instance.delete_grant('1', '1') }.not_to raise_error
     end
     it { expect { @instance.delete_grant('', '') }.to raise_error 'Must specify a grant id as id' }

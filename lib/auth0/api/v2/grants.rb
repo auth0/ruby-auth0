@@ -33,8 +33,8 @@ module Auth0
         def delete_grant(id, user_id)
           raise Auth0::InvalidParameter, 'Must specify a grant id as id' if id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must specify a user id' if user_id.to_s.empty?
-          path = "#{grants_path}/#{id}?user_id=#{user_id}"
-          delete(path)
+          path = "#{grants_path}/#{id}"
+          delete(path, user_id: user_id)
         end
 
         private
