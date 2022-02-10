@@ -17,14 +17,14 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to get /api/v2/actions with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/actions/actions',
+        '/api/v2/actions/actions', {
         trigger_id: 'post-login',
         action_name: 'loginHandler',
         deployed: true,
         per_page: 10,
         page: 1,
         installed: true
-      )
+      })
       expect do
         @instance.actions(
           'post-login',
@@ -71,9 +71,9 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to post to /api/v2/actions' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/actions',
+        '/api/v2/actions', {
           name: 'test_org'
-        )
+        })
       expect do
         @instance.create_action(
           name: 'test_org'
@@ -141,10 +141,10 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to call get request to /api/v2/actions/actions/{id}/versions' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/actions/actions/123/versions',
+        '/api/v2/actions/actions/123/versions', {
         per_page: nil,
         page: nil
-      )
+      })
       expect { @instance.actions_versions('123') }.not_to raise_error
     end
 
@@ -154,10 +154,10 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to get /api/v2/actions/actions/{id}/versions with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/actions/actions/123/versions',
+        '/api/v2/actions/actions/123/versions', {
         per_page: 10,
         page: 1
-      )
+      })
       expect do
         @instance.actions_versions(
           '123',
@@ -176,10 +176,10 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to call get request to /api/v2/actions/triggers/{id}/bindings' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/actions/triggers/123/bindings',
+        '/api/v2/actions/triggers/123/bindings', {
         per_page: nil,
         page: nil
-      )
+      })
       expect { @instance.trigger_bindings('123') }.not_to raise_error
     end
 
@@ -189,10 +189,10 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to get /api/v2/actions/triggers/{id}/bindings with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/actions/triggers/123/bindings',
+        '/api/v2/actions/triggers/123/bindings', {
         per_page: 10,
         page: 1
-      )
+      })
       expect do
         @instance.trigger_bindings(
           '123',
@@ -278,7 +278,7 @@ describe Auth0::Api::V2::Actions do
     it 'is expected to post to /api/v2/actions/{id}/test' do
       expect(@instance).to receive(:post).with(
         '/api/v2/actions/actions/123/test',
-          name: 'test_org'
+          { name: 'test_org' }
         )
       expect do
         @instance.test_action(
