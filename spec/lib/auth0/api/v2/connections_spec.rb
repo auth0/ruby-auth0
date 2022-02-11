@@ -12,27 +12,27 @@ describe Auth0::Api::V2::Connections do
 
     it 'is expected to call /api/v2/connections' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/connections',
+        '/api/v2/connections', {
         strategy: nil,
         name: nil,
         fields: nil,
         include_fields: nil,
         page: nil,
         per_page: nil
-      )
+      })
       expect { @instance.connections }.not_to raise_error
     end
 
     it 'is expected to send get request to /api/v2/connections?fields=name' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/connections',
+        '/api/v2/connections', {
         include_fields: true,
         fields: 'name',
         strategy: nil,
         name: nil,
         page: nil,
         per_page: nil
-      )
+      })
       expect {
         @instance.connections(fields: 'name', include_fields: true)
       }.not_to raise_error
@@ -40,14 +40,14 @@ describe Auth0::Api::V2::Connections do
 
     it 'is expected to convert fields param from Array to string' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/connections',
+        '/api/v2/connections', {
         include_fields: true,
         fields: 'name,strategy',
         strategy: nil,
         name: nil,
         page: nil,
         per_page: nil
-      )
+      })
       expect {
         @instance.connections(fields: ['name','strategy'], include_fields: true)
       }.not_to raise_error
@@ -55,14 +55,14 @@ describe Auth0::Api::V2::Connections do
 
     it 'is expected to add pagination' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/connections',
+        '/api/v2/connections', {
         page: 1,
         per_page: 10,
         strategy: nil,
         name: nil,
         fields: nil,
         include_fields: nil
-      )
+      })
       expect {
         @instance.connections(page: 1, per_page: 10)
       }.not_to raise_error
@@ -88,7 +88,7 @@ describe Auth0::Api::V2::Connections do
   context '.connection' do
     it { expect(@instance).to respond_to(:connection) }
     it 'is expected to call get request to /api/v2/connection/connectionId' do
-      expect(@instance).to receive(:get).with('/api/v2/connections/connectionId', fields: nil, include_fields: true)
+      expect(@instance).to receive(:get).with('/api/v2/connections/connectionId', { fields: nil, include_fields: true })
       expect { @instance.connection('connectionId') }.not_to raise_error
     end
     it 'is expected raise an error when calling with empty id' do
@@ -113,7 +113,7 @@ describe Auth0::Api::V2::Connections do
   context '.delete_connection_user' do
     it { expect(@instance).to respond_to(:delete_connection_user) }
     it 'is expected to call delete to /api/v2/connections/connectionId/users' do
-      expect(@instance).to receive(:delete).with('/api/v2/connections/connectionId/users', email: 'email@test.com')
+      expect(@instance).to receive(:delete).with('/api/v2/connections/connectionId/users', { email: 'email@test.com' })
       @instance.delete_connection_user('connectionId', 'email@test.com')
     end
 

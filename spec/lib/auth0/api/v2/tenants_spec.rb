@@ -7,7 +7,7 @@ describe Auth0::Api::V2::Tenants do
   context '.get_tenant_settings' do
     it { expect(@instance).to respond_to(:get_tenant_settings) }
     it 'expect client to send post to /api/v2/tenants/settings with fields' do
-      expect(@instance).to receive(:get).with('/api/v2/tenants/settings', fields: 'field', include_fields: true)
+      expect(@instance).to receive(:get).with('/api/v2/tenants/settings', { fields: 'field', include_fields: true })
       expect { @instance.get_tenant_settings(fields: 'field') }.not_to raise_error
     end
   end

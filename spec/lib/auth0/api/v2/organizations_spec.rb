@@ -17,25 +17,25 @@ describe Auth0::Api::V2::Organizations do
 
     it 'is expected to get /api/v2/organizations' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/organizations',
+        '/api/v2/organizations', {
         per_page: nil,
         page: nil,
         from: nil,
         take: nil,
         include_totals: nil
-      )
+      })
       expect { @instance.organizations }.not_to raise_error
     end
 
     it 'is expected to get /api/v2/organizations with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/organizations',
+        '/api/v2/organizations', {
         per_page: 10,
         page: 1,
         from: 'org_id',
         take: 50,
         include_totals: true
-      )
+      })
       expect do
         @instance.organizations(
           per_page: 10,
@@ -72,9 +72,9 @@ describe Auth0::Api::V2::Organizations do
 
     it 'is expected to post to /api/v2/organizations' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/organizations',
+        '/api/v2/organizations', {
           name: 'test_org'
-        )
+        })
       expect do
         @instance.create_organization(
           name: 'test_org'
@@ -130,9 +130,9 @@ describe Auth0::Api::V2::Organizations do
 
     it 'is expected to patch /api/v2/organizations/org_id' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/organizations/org_id',
+        '/api/v2/organizations/org_id', {
         name: 'name'
-      )
+      })
       @instance.patch_organization(
         'org_id',
         name: 'name'
@@ -446,13 +446,13 @@ describe Auth0::Api::V2::Organizations do
 
     it 'is expected to get members for an org' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/organizations/org_id/members',
+        '/api/v2/organizations/org_id/members', {
         per_page: nil,
         page: nil,
         from: nil,
         take: nil,
         include_totals: nil
-      )
+      })
       expect do
         @instance.get_organizations_members('org_id')
       end.not_to raise_error
@@ -460,13 +460,13 @@ describe Auth0::Api::V2::Organizations do
 
     it 'is expected to get /api/v2/organizations with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/organizations/org_id/members',
+        '/api/v2/organizations/org_id/members', {
         per_page: 10,
         page: 1,
         from: 'org_id',
         take: 50,
         include_totals: true
-      )
+      })
       expect do
         @instance.get_organizations_members(
           'org_id',

@@ -33,7 +33,7 @@ describe Auth0::Api::V2::LogStreams do
     it { expect(@instance).to respond_to(:create_log_stream) }
     it 'is expected to call post /api/v2/log-streams' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/log-streams',
+        '/api/v2/log-streams', {
         name: 'test',
         type: 'https',
         sink: {
@@ -42,7 +42,7 @@ describe Auth0::Api::V2::LogStreams do
           httpContentFormat: "JSONLINES",
           httpAuthorization: "string"
         }
-      )
+      })
 
       @instance.create_log_stream('test', 'https',
         httpEndpoint: "https://mycompany.com",
@@ -75,7 +75,7 @@ describe Auth0::Api::V2::LogStreams do
   context '.patch_log_stream' do
     it { expect(@instance).to respond_to(:patch_log_stream) }
     it 'is expected to send patch to /api/v2/log_streams/test' do
-      expect(@instance).to receive(:patch).with('/api/v2/log-streams/test', status: 'paused')
+      expect(@instance).to receive(:patch).with('/api/v2/log-streams/test', { status: 'paused' })
       expect { @instance.patch_log_stream('test', 'paused') }.not_to raise_error
     end
     it { expect { @instance.patch_log_stream('', nil) }.to raise_error 'Must specify a log stream id' }

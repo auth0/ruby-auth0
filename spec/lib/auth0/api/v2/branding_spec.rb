@@ -24,8 +24,9 @@ describe Auth0::Api::V2::Branding do
     it { expect(@instance).to respond_to(:patch_branding) }
     it 'is expected to call post /api/v2/branding' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/branding',
-        template: 'Test'
+        '/api/v2/branding', {
+          template: 'Test'
+        }
       )
       expect { @instance.patch_branding({ template: 'Test' }) }.not_to raise_error
     end
@@ -52,7 +53,7 @@ describe Auth0::Api::V2::Branding do
     it { expect(@instance).to respond_to(:put_branding_templates_for_universal_login) }
     it 'is expected to call put /api/v2/branding/templates/universal-login' do
       expect(@instance).to receive(:put).with(
-        '/api/v2/branding/templates/universal-login', template: 'Template'
+        '/api/v2/branding/templates/universal-login', { template: 'Template' }
       )
       expect do
         @instance.put_branding_templates_for_universal_login(template: 'Template')

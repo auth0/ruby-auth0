@@ -17,7 +17,7 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to get /api/v2/users' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users',
+        '/api/v2/users', {
         per_page: nil,
         page: nil,
         include_totals: nil,
@@ -27,13 +27,13 @@ describe Auth0::Api::V2::Users do
         include_fields: nil,
         q: nil,
         search_engine: nil
-      )
+      })
       expect { @instance.users }.not_to raise_error
     end
 
     it 'is expected to get /api/v2/users with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users',
+        '/api/v2/users', {
         per_page: 10,
         page: 1,
         include_totals: true,
@@ -43,7 +43,7 @@ describe Auth0::Api::V2::Users do
         include_fields: nil,
         q: nil,
         search_engine: 'v3'
-      )
+      })
       expect do
         @instance.users(
           search_engine: 'v3',
@@ -64,10 +64,10 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to call get request to /api/v2/users/USER_ID' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID',
+        '/api/v2/users/USER_ID', {
         fields: nil,
         include_fields: true
-      )
+      })
       expect { @instance.user('USER_ID') }.not_to raise_error
     end
 
@@ -83,11 +83,11 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to post to /api/v2/users' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/users',
+        '/api/v2/users', {
         email: 'test@test.com',
         password: 'password',
         connection: 'conn'
-      )
+      })
       expect do
         @instance.create_user(
           'conn',
@@ -169,12 +169,12 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to patch /api/v2/users/USER_ID' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/users/USER_ID',
+        '/api/v2/users/USER_ID', {
         email: 'test@test.com',
         password: 'password',
         connection: 'conn',
         name: 'name'
-      )
+      })
       @instance.patch_user(
         'USER_ID',
         email: 'test@test.com',
@@ -199,7 +199,7 @@ describe Auth0::Api::V2::Users do
     end
 
     it 'is expected to post to /api/v2/users/UserId/identities' do
-      expect(@instance).to receive(:post).with('/api/v2/users/USER_ID/identities', body: 'json body')
+      expect(@instance).to receive(:post).with('/api/v2/users/USER_ID/identities', { body: 'json body' })
       @instance.link_user_account('USER_ID', body: 'json body')
     end
 
@@ -255,12 +255,12 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to get /api/v2/USER_ID/logs' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/logs',
+        '/api/v2/users/USER_ID/logs', {
         per_page: nil,
         page: nil,
         include_totals: nil,
         sort: nil
-      )
+      })
       expect { @instance.user_logs('USER_ID') }.not_to raise_error
     end
 
@@ -292,21 +292,21 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to get roles with default parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/roles',
+        '/api/v2/users/USER_ID/roles', {
         per_page: nil,
         page: nil,
         include_totals: nil
-      )
+      })
       expect { @instance.get_user_roles('USER_ID') }.not_to raise_error
     end
 
     it 'is expected to get roles with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/roles',
+        '/api/v2/users/USER_ID/roles', {
         per_page: 20,
         page: 2,
         include_totals: true
-      )
+      })
       expect do
         @instance.get_user_roles('USER_ID', per_page: 20, page: 2, include_totals: true)
       end.not_to raise_error
@@ -401,11 +401,11 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to get permissions' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/permissions',
+        '/api/v2/users/USER_ID/permissions', {
         per_page: nil,
         page: nil,
         include_totals: nil,
-      )
+      })
       expect do
         @instance.get_user_permissions('USER_ID')
       end.not_to raise_error
@@ -413,11 +413,11 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to get permissions with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/permissions',
+        '/api/v2/users/USER_ID/permissions', {
         per_page: 10,
         page: 3,
         include_totals: true
-      )
+      })
       expect do
         @instance.get_user_permissions('USER_ID', per_page: 10, page: 3, include_totals: true)
       end.not_to raise_error
@@ -445,7 +445,7 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to remove permissions' do
       expect(@instance).to receive(:delete_with_body).with(
-        '/api/v2/users/USER_ID/permissions',
+        '/api/v2/users/USER_ID/permissions', {
         permissions: [
           {
             permission_name: 'permission-name-1',
@@ -456,7 +456,7 @@ describe Auth0::Api::V2::Users do
             resource_server_identifier: 'server-id-2'
           }
         ]
-      )
+      })
       expect do
         @instance.remove_user_permissions(
           'USER_ID',

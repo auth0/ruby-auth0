@@ -12,12 +12,12 @@ describe Auth0::Api::V2::ClientGrants do
 
     it 'is expected to get /api/v2/client-grants/' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/client-grants',
+        '/api/v2/client-grants', {
         client_id: nil,
         audience: nil,
         page: nil,
         per_page: nil
-      )
+      })
       expect { @instance.client_grants }.not_to raise_error
     end
 
@@ -25,23 +25,23 @@ describe Auth0::Api::V2::ClientGrants do
       audience = "https://samples.auth0.com/api/v2/"
 
       expect(@instance).to receive(:get).with(
-        '/api/v2/client-grants',
+        '/api/v2/client-grants', {
         client_id: '1',
         audience: audience,
         page: nil,
         per_page: nil
-      )
-      expect { @instance.client_grants(client_id: '1', audience: audience) }.not_to raise_error
+      })
+      expect { @instance.client_grants(client_id: '1', audience: audience ) }.not_to raise_error
     end
 
     it 'is expected to send get /api/v2/client-grants/ with pagination' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/client-grants',
+        '/api/v2/client-grants', {
         client_id: nil,
         audience: nil,
         page: 1,
         per_page: 2
-      )
+      })
       expect { @instance.client_grants(page: 1, per_page: 2) }.not_to raise_error
     end
   end
@@ -49,7 +49,7 @@ describe Auth0::Api::V2::ClientGrants do
   context '.create_client_grant' do
     it { expect(@instance).to respond_to(:create_client_grant) }
     it 'is expected to send post to /api/v2/client-grants' do
-      expect(@instance).to receive(:post).with('/api/v2/client-grants', opt: 'test body')
+      expect(@instance).to receive(:post).with('/api/v2/client-grants', { opt: 'test body' })
       expect { @instance.create_client_grant(opt: 'test body') }.not_to raise_error
     end
   end

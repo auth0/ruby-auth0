@@ -9,11 +9,11 @@ describe Auth0::Api::V2::Emails do
   context '.get_email' do
     it { expect(@instance).to respond_to(:get_provider) }
     it 'expect client to send get to /api/v2/emails/provider with fields' do
-      expect(@instance).to receive(:get).with('/api/v2/emails/provider', fields: 'some', include_fields: true)
+      expect(@instance).to receive(:get).with('/api/v2/emails/provider', { fields: 'some', include_fields: true })
       expect { @instance.get_provider(fields: 'some', include_fields: true) }.not_to raise_error
     end
     it 'expect client to send get to /api/v2/emails/provider with empty fields' do
-      expect(@instance).to receive(:get).with('/api/v2/emails/provider', fields: nil, include_fields: nil)
+      expect(@instance).to receive(:get).with('/api/v2/emails/provider', { fields: nil, include_fields: nil })
       expect { @instance.get_provider }.not_to raise_error
     end
   end
