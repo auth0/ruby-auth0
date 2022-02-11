@@ -25,24 +25,24 @@ describe Auth0::Api::V2::Jobs do
     it { expect(@instance).to respond_to(:import_users) }
     it 'expect client to send post to /api/v2/jobs/users-imports' do
       expect(@instance).to receive(:post_file).with(
-        '/api/v2/jobs/users-imports',
+        '/api/v2/jobs/users-imports', {
         users: 'file',
         connection_id: 'connnection_id',
         upsert: false,
         external_id: nil,
         send_completion_email: true
-      )
+      })
       expect { @instance.import_users('file', 'connnection_id') }.not_to raise_error
     end
     it 'expect client to send post to /api/v2/jobs/users-imports with options' do
       expect(@instance).to receive(:post_file).with(
-        '/api/v2/jobs/users-imports',
+        '/api/v2/jobs/users-imports', {
         users: 'file',
         connection_id: 'connnection_id',
         upsert: true,
         external_id: 'external_1',
         send_completion_email: false
-      )
+      })
       expect do
         @instance.import_users(
           'file',
@@ -61,12 +61,12 @@ describe Auth0::Api::V2::Jobs do
     it { expect { @instance.export_users }.not_to raise_error }
     it 'sends post to /api/v2/jobs/users-exports with correct params' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/jobs/users-exports',
+        '/api/v2/jobs/users-exports', {
         fields: [{ name: 'author' }],
         connection_id: 'test-connection',
         format: 'csv',
         limit: 10
-      )
+      })
       @instance.export_users(
         fields: ['author'],
         connection_id: 'test-connection',
@@ -83,9 +83,9 @@ describe Auth0::Api::V2::Jobs do
 
     it 'should post to the jobs email verification endpoint' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/jobs/verification-email',
+        '/api/v2/jobs/verification-email', {
         user_id: 'test_user_id'
-      )
+      })
       expect do
         @instance.send_verification_email('test_user_id')
       end.not_to raise_error
@@ -93,21 +93,22 @@ describe Auth0::Api::V2::Jobs do
 
     it 'should post to the jobs email verification endpoint with a client_id' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/jobs/verification-email',
+        '/api/v2/jobs/verification-email', {
         user_id: 'test_user_id',
         client_id: 'test_client_id'
-      )
+      })
       expect do
         @instance.send_verification_email('test_user_id', 'test_client_id')
       end.not_to raise_error
     end
 
     it 'expect client to accept hash identity' do
-      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', user_id: 'user_id',
-                                                                                  identity: {
-                                                                                    provider: "auth0",
-                                                                                    user_id: "user_id"
-                                                                                  })
+      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', {
+        user_id: 'user_id',
+        identity: {
+        provider: "auth0",
+        user_id: "user_id"
+      }})
       expect {
         @instance.send_verification_email('user_id', identity: { provider: "auth0", user_id: "user_id"}) 
       }.not_to raise_error
@@ -120,10 +121,10 @@ describe Auth0::Api::V2::Jobs do
     end
 
     it 'expect client to accept organization_id' do
-      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email',
+      expect(@instance).to receive(:post).with('/api/v2/jobs/verification-email', {
         user_id: 'user_id',
         organization_id: 'org_id'
-      )
+      })
 
       expect {
         @instance.send_verification_email('user_id', organization_id: 'org_id')

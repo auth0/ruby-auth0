@@ -12,27 +12,27 @@ describe Auth0::Api::V2::Rules do
 
     it 'is expected to call get /api/v2/rules' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/rules',
+        '/api/v2/rules', {
         enabled: nil,
         fields: nil,
         include_fields: nil,
         stage: nil,
         page: nil,
         per_page: nil
-      )
+      })
       expect { @instance.rules }.not_to raise_error
     end
 
     it 'is expected to call get /api/v2/rules with pagination' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/rules',
+        '/api/v2/rules', {
         enabled: nil,
         fields: nil,
         include_fields: nil,
         stage: nil,
         page: 1,
         per_page: 2
-      )
+      })
       expect {
         @instance.rules(page: 1, per_page: 2)
       }.not_to raise_error
@@ -43,7 +43,7 @@ describe Auth0::Api::V2::Rules do
     it { expect(@instance).to respond_to(:rule) }
     it 'is expected to call get /api/v2/rules/test' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/rules/test', fields: nil, include_fields: nil
+        '/api/v2/rules/test', { fields: nil, include_fields: nil }
       )
       expect { @instance.rule('test') }.not_to raise_error
     end
@@ -57,7 +57,7 @@ describe Auth0::Api::V2::Rules do
     it 'is expected to call post /api/v2/rules' do
       expect(@instance).to receive(:post).with(
         '/api/v2/rules',
-        name: 'test', script: 'script', order: 'order', enabled: false, stage: 'login_success'
+        { name: 'test', script: 'script', order: 'order', enabled: false, stage: 'login_success' }
       )
       expect { @instance.create_rule('test', 'script', 'order', false) }.not_to raise_error
     end
@@ -72,7 +72,7 @@ describe Auth0::Api::V2::Rules do
     it { expect(@instance).to respond_to(:update_rule) }
     it 'is expected to call put /api/v2/rules/test' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/rules/test', script: 'script', order: 'order', enabled: true, stage: 'some_stage'
+        '/api/v2/rules/test', { script: 'script', order: 'order', enabled: true, stage: 'some_stage' }
       )
       expect do
         @instance.update_rule('test', script: 'script', order: 'order', enabled: true, stage: 'some_stage')

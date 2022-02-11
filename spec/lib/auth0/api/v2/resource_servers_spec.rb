@@ -12,10 +12,10 @@ describe Auth0::Api::V2::ResourceServers do
     it { expect(@instance).to respond_to(:get_resource_servers) }
     it 'is expected to call get /api/v2/resource-servers' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/resource-servers',
+        '/api/v2/resource-servers', {
         page: nil,
         per_page: nil,
-      )
+      })
       expect { @instance.resource_servers }.not_to raise_error
     end
   end
@@ -35,14 +35,14 @@ describe Auth0::Api::V2::ResourceServers do
     it { expect(@instance).to respond_to(:create_resource_server) }
     it 'is expected to call post /api/v2/resource-servers' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/resource-servers',
+        '/api/v2/resource-servers', {
         identifier: 'test',
         name: 'name',
         signing_alg: 'signing_alg',
         signing_secret: 'signing_secret',
         token_lifetime: 'token_lifetime',
         scopes: 'scopes'
-      )
+      })
 
       @instance.create_resource_server('test', name: 'name',
                                                signing_alg: 'signing_alg',
@@ -77,7 +77,7 @@ describe Auth0::Api::V2::ResourceServers do
   context '.patch_resource_server' do
     it { expect(@instance).to respond_to(:patch_resource_server) }
     it 'is expected to send patch to /api/v2/resource_servers/1' do
-      expect(@instance).to receive(:patch).with('/api/v2/resource-servers/1', fields: 'fields')
+      expect(@instance).to receive(:patch).with('/api/v2/resource-servers/1', { fields: 'fields' })
       expect { @instance.patch_resource_server('1', fields: 'fields') }.not_to raise_error
     end
     it { expect { @instance.patch_resource_server('', nil) }.to raise_error Auth0::InvalidParameter }

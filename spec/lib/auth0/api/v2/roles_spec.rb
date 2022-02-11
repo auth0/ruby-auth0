@@ -17,23 +17,23 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to get Roles with default parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles',
+        '/api/v2/roles', {
         per_page: nil,
         page: nil,
         include_totals: nil,
         name_filter: nil
-      )
+      })
       expect { @instance.get_roles }.not_to raise_error
     end
 
     it 'is expected to get Roles with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles',
+        '/api/v2/roles', {
         per_page: 10,
         page: 3,
         include_totals: true,
         name_filter: 'test'
-      )
+      })
       expect do
         @instance.get_roles(per_page: 10, page: 3, include_totals: true, name_filter: 'test')
       end.not_to raise_error
@@ -76,10 +76,10 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to post a new Role' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/roles',
+        '/api/v2/roles', {
         name: 'ROLE_NAME',
         description: 'ROLE_DESCRIPTION'
-      )
+      })
       expect do
         @instance.create_role(
           'ROLE_NAME',
@@ -103,10 +103,10 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to post an updated Role' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/roles/ROLE_ID',
+        '/api/v2/roles/ROLE_ID', {
         name: 'ROLE_NAME',
         description: 'ROLE_DESCRIPTION'
-      )
+      })
       expect do
         @instance.update_role(
           'ROLE_ID',
@@ -149,25 +149,25 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to get Users for a Role with default parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles/ROLE_ID/users',
+        '/api/v2/roles/ROLE_ID/users', {
         per_page: nil,
         page: nil,
         from: nil,
         take: nil,
         include_totals: nil
-      )
+      })
       expect { @instance.get_role_users('ROLE_ID') }.not_to raise_error
     end
 
     it 'is expected to get Users for a Role with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles/ROLE_ID/users',
+        '/api/v2/roles/ROLE_ID/users', {
         per_page: 30,
         page: 4,
         from: 'org_id',
         take: 50,
         include_totals: true
-      )
+      })
       expect do
         @instance.get_role_users('ROLE_ID', per_page: 30, page: 4, from: 'org_id', take: 50, include_totals: true)
       end.not_to raise_error
@@ -202,9 +202,9 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to add Users to a Role' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/roles/ROLE_ID/users',
+        '/api/v2/roles/ROLE_ID/users', {
         users: %w[test|user-01 test|user-02]
-      )
+      })
       expect do
         @instance.add_role_users('ROLE_ID', %w[test|user-01 test|user-02])
       end.not_to raise_error
@@ -225,21 +225,21 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to get Roles with default parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles/ROLE_ID/permissions',
+        '/api/v2/roles/ROLE_ID/permissions', {
         per_page: nil,
         page: nil,
         include_totals: nil
-      )
+      })
       expect { @instance.get_role_permissions('ROLE_ID') }.not_to raise_error
     end
 
     it 'is expected to get Roles with custom parameters' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/roles/ROLE_ID/permissions',
+        '/api/v2/roles/ROLE_ID/permissions', {
         per_page: 15,
         page: 5,
         include_totals: true
-      )
+      })
       expect do
         @instance.get_role_permissions('ROLE_ID', per_page: 15, page: 5, include_totals: true)
       end.not_to raise_error
@@ -281,7 +281,7 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to add permissions to a Role' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/roles/ROLE_ID/permissions',
+        '/api/v2/roles/ROLE_ID/permissions', {
         permissions: [
           {
             permission_name: 'permission-name-1',
@@ -292,7 +292,7 @@ describe Auth0::Api::V2::Roles do
             resource_server_identifier: 'server-id-2'
           }
         ]
-      )
+      })
       expect do
         @instance.add_role_permissions(
           'ROLE_ID',
@@ -340,7 +340,7 @@ describe Auth0::Api::V2::Roles do
 
     it 'is expected to remove permissions from a Role' do
       expect(@instance).to receive(:delete_with_body).with(
-        '/api/v2/roles/ROLE_ID/permissions',
+        '/api/v2/roles/ROLE_ID/permissions', {
         permissions: [
           {
             permission_name: 'permission-name-3',
@@ -351,7 +351,7 @@ describe Auth0::Api::V2::Roles do
             resource_server_identifier: 'server-id-4'
           }
         ]
-      )
+      })
       expect do
         @instance.remove_role_permissions(
           'ROLE_ID',

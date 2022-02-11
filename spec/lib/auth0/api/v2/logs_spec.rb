@@ -11,7 +11,7 @@ describe Auth0::Api::V2::Logs do
     it { expect(@instance).to respond_to(:get_logs) }
     it 'is expected to call /api/v2/logs' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/logs',
+        '/api/v2/logs', {
         q: nil,
         page: nil,
         per_page: nil,
@@ -21,7 +21,7 @@ describe Auth0::Api::V2::Logs do
         include_totals: nil,
         from: nil,
         take: nil
-      )
+      })
       expect { @instance.logs }.not_to raise_error
     end
     it 'is expect to rise an error when take is higher than 100' do
