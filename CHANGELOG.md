@@ -1,4 +1,13 @@
-# Changelog
+# Change Log
+
+## [v5.6.2](https://github.com/auth0/ruby-auth0/tree/v5.6.2) (2022-02-14)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.6.1...v5.6.2)
+
+**Fixed**
+
+- [SDK-3106] Fix up tests for Ruby 3 and rspec-mocks update [\#313](https://github.com/auth0/ruby-auth0/pull/313) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- `delete_organizations_member_roles` should use `delete_with_body` instead of `delete` [\#311](https://github.com/auth0/ruby-auth0/pull/311) ([SanterreJo](https://github.com/SanterreJo))
 
 ## [v5.6.1](https://github.com/auth0/ruby-auth0/tree/v5.6.1) (2021-09-14)
 
