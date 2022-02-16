@@ -24,4 +24,27 @@ describe Auth0::Api::V2::AttackProtection do
       expect { @instance.breached_password_detection }.not_to raise_error
     end
   end
+
+  context '.patch breached-password-detection' do
+    it 'is expected to respond to a patch_breached_password_detection method' do
+      expect(@instance).to respond_to(:patch_breached_password_detection)
+    end
+
+    it 'is expected to respond to a update_breached_password_detection_settings method' do
+      expect(@instance).to respond_to(:update_breached_password_detection_settings)
+    end
+
+    it 'is expected to patch /api/v2/attack-protection/breached-password-detection' do
+      expect(@instance).to receive(:patch).with(
+        '/api/v2/attack-protection/breached-password-detection', {
+          enabled: true
+        }
+      )
+
+      @instance.patch_breached_password_detection({
+        enabled: true
+      })
+    end
+  end
+
 end

@@ -8,12 +8,17 @@ module Auth0
           get(breached_password_settings_path)
         end
         alias get_breached_password_detection_settings breached_password_detection
+
+        def patch_breached_password_detection(body)
+          patch(breached_password_settings_path, body)
+        end
         
         private
         
         def attack_protection_path
           @attack_protection_path ||= '/api/v2/attack-protection'
         end
+        alias update_breached_password_detection_settings patch_breached_password_detection
         
         def breached_password_settings_path
           "#{attack_protection_path}/breached-password-detection"
