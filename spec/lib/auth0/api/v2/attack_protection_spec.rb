@@ -7,12 +7,12 @@ describe Auth0::Api::V2::AttackProtection do
     @instance = dummy_instance
   end
 
-  context '.attack_protection' do
-    it 'is expected to respond to a breached_password_detection method' do
+  context '.get breached-password-detection' do
+    it 'responds to a breached_password_detection method' do
       expect(@instance).to respond_to(:breached_password_detection)
     end
 
-    it 'is expected to respond to get_breached_password_detection_settings' do
+    it 'responds to get_breached_password_detection_settings' do
       expect(@instance).to respond_to(:get_breached_password_detection_settings)
     end
 
@@ -26,17 +26,18 @@ describe Auth0::Api::V2::AttackProtection do
   end
 
   context '.patch breached-password-detection' do
-    it 'is expected to respond to a patch_breached_password_detection method' do
+    it 'responds to a patch_breached_password_detection method' do
       expect(@instance).to respond_to(:patch_breached_password_detection)
     end
 
-    it 'is expected to respond to a update_breached_password_detection_settings method' do
+    it 'responds to a update_breached_password_detection_settings method' do
       expect(@instance).to respond_to(:update_breached_password_detection_settings)
     end
 
     it 'is expected to patch /api/v2/attack-protection/breached-password-detection' do
       expect(@instance).to receive(:patch).with(
-        '/api/v2/attack-protection/breached-password-detection', {
+        '/api/v2/attack-protection/breached-password-detection',
+        {
           enabled: true
         }
       )
@@ -47,4 +48,44 @@ describe Auth0::Api::V2::AttackProtection do
     end
   end
 
+  context '.get brute_force_protection' do
+    it 'responds to brute_force_protection' do
+      expect(@instance).to respond_to(:brute_force_protection)
+    end
+
+    it 'responds to get_brute_force_protection_settings' do
+      expect(@instance).to respond_to(:get_brute_force_protection_settings)
+    end
+
+    it 'is expected to get /api/v2/attack-protection/brute-force-protection' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/attack-protection/brute-force-protection'
+      )
+
+      expect { @instance.brute_force_protection }.not_to raise_error
+    end
+  end
+
+  context '.patch brute-force-protection' do
+    it 'responds to patch_brute-force-protection' do
+      expect(@instance).to respond_to(:patch_brute_force_protection)
+    end
+
+    it 'responds to update_brute_force_protection_settings' do
+      expect(@instance).to respond_to(:update_brute_force_protection_settings)
+    end
+
+    it 'is expected to respond to patch /api/v2/attack-protection/brute-force-protection' do
+      expect(@instance).to receive(:patch).with(
+        '/api/v2/attack-protection/brute-force-protection',
+        {
+          enabled: true
+        }
+      )
+
+      @instance.patch_brute_force_protection({
+        enabled: true
+      })
+    end
+  end
 end

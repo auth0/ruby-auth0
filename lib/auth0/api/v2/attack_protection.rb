@@ -12,6 +12,16 @@ module Auth0
         def patch_breached_password_detection(body)
           patch(breached_password_settings_path, body)
         end
+
+        def brute_force_protection
+          get(brute_force_protection_settings_path)
+        end
+        alias get_brute_force_protection_settings brute_force_protection
+
+        def patch_brute_force_protection(body)
+          patch(brute_force_protection_settings_path, body)
+        end
+        alias update_brute_force_protection_settings patch_brute_force_protection
         
         private
         
@@ -22,6 +32,10 @@ module Auth0
         
         def breached_password_settings_path
           "#{attack_protection_path}/breached-password-detection"
+        end
+
+        def brute_force_protection_settings_path
+          "#{attack_protection_path}/brute-force-protection"
         end
       end
     end
