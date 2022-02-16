@@ -88,4 +88,45 @@ describe Auth0::Api::V2::AttackProtection do
       })
     end
   end
+
+  context '.get suspicious-ip-throttling' do
+    it 'responds to suspicious_ip_throttling' do
+      expect(@instance).to respond_to(:suspicious_ip_throttling)
+    end
+
+    it 'responds to get_suspicious_ip_throttling_settings' do
+      expect(@instance).to respond_to(:get_suspicious_ip_throttling_settings)
+    end
+
+    it 'is expected to get /api/v2/attack-protection/suspicious-ip-throttling' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/attack-protection/suspicious-ip-throttling'
+      )
+
+      expect { @instance.suspicious_ip_throttling }.not_to raise_error
+    end
+  end
+
+  context '.patch suspicious-ip-throttling' do
+    it 'responds to patch_suspicious_ip_throttling' do
+      expect(@instance).to respond_to(:patch_suspicious_ip_throttling)
+    end
+
+    it 'responds to update_suspicious_ip_throttling_settings' do
+      expect(@instance).to respond_to(:update_suspicious_ip_throttling_settings)
+    end
+
+    it 'is expected to patch /api/v2/attack-protection/suspicious-ip-throttling' do
+      expect(@instance).to receive(:patch).with(
+        '/api/v2/attack-protection/suspicious-ip-throttling',
+        {
+          enabled: true
+        }
+      )
+
+      @instance.patch_suspicious_ip_throttling({
+        enabled: true
+      })
+    end
+  end
 end

@@ -22,7 +22,17 @@ module Auth0
           patch(brute_force_protection_settings_path, body)
         end
         alias update_brute_force_protection_settings patch_brute_force_protection
-        
+
+        def suspicious_ip_throttling
+          get(suspicious_ip_throttling_settings_path)
+        end
+        alias get_suspicious_ip_throttling_settings suspicious_ip_throttling
+
+        def patch_suspicious_ip_throttling(body)
+          patch(suspicious_ip_throttling_settings_path, body)
+        end
+        alias update_suspicious_ip_throttling_settings patch_suspicious_ip_throttling
+
         private
         
         def attack_protection_path
@@ -36,6 +46,10 @@ module Auth0
 
         def brute_force_protection_settings_path
           "#{attack_protection_path}/brute-force-protection"
+        end
+
+        def suspicious_ip_throttling_settings_path
+          "#{attack_protection_path}/suspicious-ip-throttling"
         end
       end
     end
