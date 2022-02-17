@@ -1,4 +1,14 @@
-# Changelog
+# Change Log
+
+## [v5.7.0](https://github.com/auth0/ruby-auth0/tree/v5.7.0) (2022-02-17)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.6.1...v5.7.0)
+
+**Added**
+- [SDK-3118] Add attack protection endpoints [\#316](https://github.com/auth0/ruby-auth0/pull/316) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Fixed**
+- [SDK-3106] Fix up tests for Ruby 3 and rspec-mocks update [\#313](https://github.com/auth0/ruby-auth0/pull/313) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- Fix #310: delete_organizations_member_roles should use delete_with_body instead of delete [\#311](https://github.com/auth0/ruby-auth0/pull/311) ([SanterreJo](https://github.com/SanterreJo))
 
 ## [v5.6.1](https://github.com/auth0/ruby-auth0/tree/v5.6.1) (2021-09-14)
 
