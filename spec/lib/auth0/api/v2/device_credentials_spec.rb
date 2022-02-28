@@ -18,9 +18,26 @@ describe Auth0::Api::V2::DeviceCredentials do
         include_fields: nil,
         user_id: nil,
         client_id: client_id,
-        type: nil
+        type: nil,
+        page: nil,
+        per_page: nil,
+        include_totals: nil
       })
       expect { @instance.device_credentials(client_id) }.not_to raise_error
+    end
+    it 'is expected to send get request with options to /api/v2/device-credentials' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/device-credentials', {
+        fields: 'name',
+        include_fields: true,
+        user_id: '1',
+        client_id: client_id,
+        type: 'rotating_refresh_token',
+        page: 1,
+        per_page: 10,
+        include_totals: true
+      })
+      expect { @instance.device_credentials(client_id, fields: 'name', include_fields: true, user_id: '1', type: 'rotating_refresh_token', page: 1, per_page: 10, include_totals: true) }.not_to raise_error
     end
     it 'is expect to raise an error when type is not one of \'public_key\', \'refresh_token\', \'rotating_refresh_token\'' do
       expect { @instance.device_credentials(client_id, type: 'invalid_type') }.to raise_error(

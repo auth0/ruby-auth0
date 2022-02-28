@@ -13,6 +13,9 @@ module Auth0
         #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #   * :user_id [string] The user_id of the devices to retrieve.
         #   * :type [string] Type of credentials to retrieve. Must be 'public_key', 'refresh_token' or 'rotating_refresh_token'
+        #   * :page [integer] The page number. Zero based
+        #   * :per_page [integer] The amount of entries per page
+        #   * :include_totals [boolean] Return results inside an object that contains the total result count (true) or as a direct array of results (false, default).
         #
         # @return [json] Returns the list of existing devices for the specified client_id.
         # rubocop:disable Metrics/AbcSize
@@ -22,7 +25,10 @@ module Auth0
             include_fields: options.fetch(:include_fields, nil),
             user_id: options.fetch(:user_id, nil),
             client_id: client_id,
-            type: options.fetch(:type, nil)
+            type: options.fetch(:type, nil),
+            page: options.fetch(:page, nil),
+            per_page: options.fetch(:per_page, nil),
+            include_totals: options.fetch(:include_totals, nil)
           }
           raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
           if !request_params[:type].nil? && !%w(public_key refresh_token rotating_refresh_token).include?(request_params[:type])
