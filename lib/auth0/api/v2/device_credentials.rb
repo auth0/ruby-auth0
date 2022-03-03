@@ -19,7 +19,7 @@ module Auth0
         #
         # @return [json] Returns the list of existing devices for the specified client_id.
         # rubocop:disable Metrics/AbcSize
-        def device_credentials(client_id, options = {})
+        def device_credentials(client_id = nil, options = {})
           request_params = {
             fields: options.fetch(:fields, nil),
             include_fields: options.fetch(:include_fields, nil),
@@ -30,7 +30,6 @@ module Auth0
             per_page: options.fetch(:per_page, nil),
             include_totals: options.fetch(:include_totals, nil)
           }
-          raise Auth0::InvalidParameter, 'Must supply a valid client_id' if client_id.to_s.empty?
           if !request_params[:type].nil? && !%w(public_key refresh_token rotating_refresh_token).include?(request_params[:type])
             raise Auth0::InvalidParameter, 'Type must be one of \'public_key\', \'refresh_token\', \'rotating_refresh_token\''
           end
