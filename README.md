@@ -45,7 +45,7 @@ end
 ... and a Controller to handle that route:
 
 ```ruby
-# app/controllers/all_users_controllers.rb
+# app/controllers/all_users_controller.rb
 require 'auth0'
 
 class AllUsersController < ApplicationController
