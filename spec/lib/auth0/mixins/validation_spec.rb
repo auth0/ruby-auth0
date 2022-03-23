@@ -6,6 +6,7 @@ RSA_PUB_KEY_JWK_2 = { 'kty': "RSA", 'use': 'sig', 'n': "uGbXWiK3dQTyCbX5xdE4yCuY
 JWKS_RESPONSE_1 = { 'keys': [RSA_PUB_KEY_JWK_1] }.freeze
 JWKS_RESPONSE_2 = { 'keys': [RSA_PUB_KEY_JWK_2] }.freeze
 JWKS_URL = 'https://tokens-test.auth0.com/.well-known/jwks.json'.freeze
+JWKS_URL_2 = 'https://tokens-test2.auth0.com/.well-known/jwks.json'.freeze
 HMAC_SHARED_SECRET = 'secret'.freeze
 
 LEEWAY = 60
@@ -459,6 +460,19 @@ describe Auth0::Algorithm::RS256 do
       expect(a_request(:get, JWKS_URL)).to have_been_made.once
     end
 
+    it 'is expected to fetch the jwks from multiple urls' do
+      stub_jwks(JWKS_RESPONSE_2, JWKS_URL_2)
+
+      instance1 = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
+      instance2 = Auth0::Algorithm::RS256.jwks_url(JWKS_URL_2)
+      instance1.jwks
+      instance2.jwks
+      instance1.jwks
+
+      expect(a_request(:get, JWKS_URL)).to have_been_made.once
+      expect(a_request(:get, JWKS_URL_2)).to have_been_made.once
+    end
+
     it 'is expected to forcibly fetch the jwks from the url' do
       instance = Auth0::Algorithm::RS256.jwks_url(JWKS_URL)
       instance.jwks
@@ -493,6 +507,6 @@ describe Auth0::Algorithm::RS256 do
 end
 # rubocop:enable Metrics/BlockLength
 
-def stub_jwks(stub = JWKS_RESPONSE_1)
-  stub_request(:get, JWKS_URL).to_return(body: stub.to_json)
+def stub_jwks(stub = JWKS_RESPONSE_1, url = JWKS_URL)
+  stub_request(:get, url).to_return(body: stub.to_json)
 end
