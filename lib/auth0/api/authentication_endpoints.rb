@@ -152,7 +152,7 @@ module Auth0
       # @param password [string] User's new password. This is only available
       #   on legacy tenants with change password v1 flow enabled
       # @param connection_name [string] Database connection name
-      # @deprecated Use {#password_reset} instead.
+      # @deprecated Use {#reset_password} instead.
       def change_password(email, password, connection_name = UP_AUTH)
         raise Auth0::InvalidParameter, 'Must supply a valid email' if email.to_s.empty?
 
