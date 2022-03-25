@@ -286,7 +286,7 @@ module Auth0
 
             # Clear the JWK set cache.
             def remove_jwks
-              @@cache.remove(:jwks)
+              @@cache.remove_by { true }
             end
           end
 
@@ -311,13 +311,13 @@ module Auth0
             result = fetch_jwks if force
 
             if result
-              @@cache.put(:jwks, result, lifetime: @lifetime)
+              @@cache.put(@jwks_url, result, lifetime: @lifetime)
               return result
             end
 
-            previous_value = @@cache.last(:jwks)
+            previous_value = @@cache.last(@jwks_url)
 
-            @@cache.get(:jwks, lifetime: @lifetime, dirty: true) do
+            @@cache.get(@jwks_url, lifetime: @lifetime, dirty: true) do
               new_value = fetch_jwks
 
               raise Auth0::InvalidIdToken, 'Could not fetch the JWK set' unless new_value || previous_value
