@@ -29,7 +29,7 @@ jobs:
       ruby_version: << parameters.ruby_version >>
     steps:
       - checkout
-      - run: gem install bundler
+      - run: gem install bundler:1.17.2
       - restore_cache:
           key: gems-v2-{{ checksum "Gemfile.lock" }}
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
