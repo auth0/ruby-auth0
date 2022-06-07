@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  ship: auth0/ship@dev:alpha
 
 matrix_ruby_versions: &matrix_ruby_versions
   matrix:
@@ -43,3 +45,13 @@ workflows:
     jobs:
       - run-tests:
           <<: *matrix_ruby_versions
+      - ship/node-publish:
+          context:
+            - publish-rubygems
+            - publish-gh
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - run-tests
