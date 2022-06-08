@@ -3,7 +3,7 @@ PATH
   specs:
     auth0 (5.8.0)
       addressable (~> 2.8)
-      jwt (~> 2.2)
+      jwt (~> 2.3.0)
       rest-client (~> 2.1)
       retryable (~> 3.0)
       zache (~> 0.12)
