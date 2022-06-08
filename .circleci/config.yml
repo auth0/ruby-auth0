@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ship: auth0/ship@dev:alpha
+  ship: auth0/ship@0.4.0
 
 matrix_ruby_versions: &matrix_ruby_versions
   matrix:
