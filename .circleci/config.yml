@@ -46,7 +46,7 @@ workflows:
     jobs:
       - run-tests:
           <<: *matrix_ruby_versions
-      - ship/node-publish:
+      - ship/ruby-publish:
           context:
             - publish-rubygems
             - publish-gh
