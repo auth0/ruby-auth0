@@ -5,7 +5,7 @@ orbs:
 matrix_ruby_versions: &matrix_ruby_versions
   matrix:
     parameters:
-      ruby_version: ["2.5", "2.6", "2.7", "3.0"]
+      ruby_version: ["2.7", "3.0", "3.1"]
 # Default version of ruby to use for lint and publishing
 default_ruby_version: &default_ruby_version "2.7"
 
