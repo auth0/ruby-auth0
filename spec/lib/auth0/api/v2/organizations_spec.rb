@@ -514,7 +514,7 @@ describe Auth0::Api::V2::Organizations do
     end
 
     it 'is expected to delete /api/v2/organizations/org_id/members' do
-      expect(@instance).to receive(:delete).with(
+      expect(@instance).to receive(:delete_with_body).with(
         '/api/v2/organizations/org_id/members', {
           members: ['123', '456']
         }
