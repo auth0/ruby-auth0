@@ -267,7 +267,7 @@ module Auth0
           body = {}
           body[:members] = members
 
-          delete(path, body)
+          delete_with_body(path, body)
         end
         alias remove_organizations_members delete_organizations_members
 
