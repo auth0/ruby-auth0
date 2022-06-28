@@ -4,22 +4,32 @@ on:
   pull_request: {}
 
   push:
-    branches: ["master", "main"]
+    branches:
+      - master
+      - main
 
   schedule:
-    - cron: '30 0 1,15 * *'
+    - cron: '0 * * * *'
 
 jobs:
+  fail_if_pull_request_is_draft:
+    if: github.event.pull_request.draft == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fails in order to indicate that pull request needs to be marked as ready to review and unit tests workflow needs to pass.
+        run: exit 1
+
   semgrep:
     name: Scan
     runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep
-    # Skip any PR created by dependabot to avoid permission issues
-    if: (github.actor != 'dependabot[bot]')
+    if: (github.repository_owner == 'auth0')
+    
     steps:
       - uses: actions/checkout@v3
 
-      - run: semgrep ci
+      - if: (github.actor != 'dependabot[bot]')
+        run: semgrep ci
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
