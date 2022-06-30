@@ -1,25 +1,44 @@
 # Change Log
 
+## [v5.8.1](https://github.com/auth0/ruby-auth0/tree/v5.8.1) (2022-06-30)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.8.0...v5.8.1)
+
+**Fixed**
+
+- FIX: delete_organizations_members does not send `members` in body [\#345](https://github.com/auth0/ruby-auth0/pull/345) ([T-800](https://github.com/T-800))
+
+**Security**
+
+- Security: Update dependencies lockfile [\#348](https://github.com/auth0/ruby-auth0/pull/348) ([evansims](https://github.com/evansims))
+
 ## [v5.8.0](https://github.com/auth0/ruby-auth0/tree/v5.8.0) (2022-03-25)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.7.0...v5.8.0)
 
 **Added**
+
 - Add parameters for pager to device_credentials method [\#318](https://github.com/auth0/ruby-auth0/pull/318) ([shibayu36](https://github.com/shibayu36))
 
 **Fixed**
+
 - Cache RS256 JWKS by url to allow for multiple Auth0 tenants per runtime [\#325](https://github.com/auth0/ruby-auth0/pull/325) ([rmm5t](https://github.com/rmm5t))
 - Allow to pass nil to client_id arg of device_credentials [\#321](https://github.com/auth0/ruby-auth0/pull/321) ([shibayu36](https://github.com/shibayu36))
 
 **Security**
+
 - Bump nokogiri from 1.13.1 to 1.13.3 [\#320](https://github.com/auth0/ruby-auth0/pull/320) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v5.7.0](https://github.com/auth0/ruby-auth0/tree/v5.7.0) (2022-02-17)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.6.1...v5.7.0)
 
 **Added**
+
 - [SDK-3118] Add attack protection endpoints [\#316](https://github.com/auth0/ruby-auth0/pull/316) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Fixed**
+
 - [SDK-3106] Fix up tests for Ruby 3 and rspec-mocks update [\#313](https://github.com/auth0/ruby-auth0/pull/313) ([stevehobbsdev](https://github.com/stevehobbsdev))
 - Fix #310: delete_organizations_member_roles should use delete_with_body instead of delete [\#311](https://github.com/auth0/ruby-auth0/pull/311) ([SanterreJo](https://github.com/SanterreJo))
 
