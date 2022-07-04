@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
-  ship: auth0/ship@0.4.0
+  ship: auth0/ship@0.4.
+  codecov: codecov/codecov@3.1.1
 
 matrix_ruby_versions: &matrix_ruby_versions
   matrix:
@@ -40,6 +41,7 @@ jobs:
             - vendor/bundle
       # Must define DOMAIN, CLIENT_ID, CLIENT_SECRET and MASTER_JWT env
       - run: bundle exec rake test
+      - codecov/upload
 
 workflows:
   tests:
