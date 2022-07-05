@@ -14,7 +14,6 @@ end
 group :test do
   gem 'webmock', require: false
   gem 'vcr', require: false
-  gem 'codecov', require: false
-  gem 'simplecov'
+  gem 'simplecov-cobertura'
   gem 'timecop', require: false
 end
