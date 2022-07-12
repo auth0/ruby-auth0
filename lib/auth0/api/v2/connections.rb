@@ -14,6 +14,7 @@ module Auth0
         # @param include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         # @param page [int] Page number to get, 0-based.
         # @param per_page [int] Results per page if also passing a page number.
+        # @param include_totals [boolean] True if query totals should be included in the result. Defaults to false.
         # @return [json] Returns the existing connections matching the strategy.
         def connections(
           strategy: nil,
@@ -21,7 +22,8 @@ module Auth0
           fields: nil,
           include_fields: nil,
           page: nil,
-          per_page: nil
+          per_page: nil,
+          include_totals: nil
         )
           include_fields = true if !fields.nil? && include_fields.nil?
           request_params = {
@@ -30,7 +32,8 @@ module Auth0
             fields: fields.is_a?(Array) ? fields.join(',') : fields,
             include_fields: include_fields,
             page: !page.nil? ? page.to_i : nil,
-            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil
+            per_page: !page.nil? && !per_page.nil? ? per_page.to_i : nil,
+            include_totals: include_totals
           }
           get(connections_path, request_params)
         end
@@ -38,7 +41,7 @@ module Auth0
 
         # Creates a new connection according to the JSON object received in body.
         # @see https://auth0.com/docs/api/v2#!/Connections/post_connections
-        # @param body [hash] The Hash options used to define the conecctions's properties.
+        # @param body [hash] The Hash options used to define the connections's properties.
         #
         # @return [json] Returns the created connection.
         def create_connection(body)

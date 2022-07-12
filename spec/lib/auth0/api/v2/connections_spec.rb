@@ -18,7 +18,8 @@ describe Auth0::Api::V2::Connections do
         fields: nil,
         include_fields: nil,
         page: nil,
-        per_page: nil
+        per_page: nil,
+        include_totals: nil
       })
       expect { @instance.connections }.not_to raise_error
     end
@@ -31,7 +32,8 @@ describe Auth0::Api::V2::Connections do
         strategy: nil,
         name: nil,
         page: nil,
-        per_page: nil
+        per_page: nil,
+        include_totals: nil
       })
       expect {
         @instance.connections(fields: 'name', include_fields: true)
@@ -46,7 +48,8 @@ describe Auth0::Api::V2::Connections do
         strategy: nil,
         name: nil,
         page: nil,
-        per_page: nil
+        per_page: nil,
+        include_totals: nil
       })
       expect {
         @instance.connections(fields: ['name','strategy'], include_fields: true)
@@ -61,10 +64,27 @@ describe Auth0::Api::V2::Connections do
         strategy: nil,
         name: nil,
         fields: nil,
-        include_fields: nil
+        include_fields: nil,
+        include_totals: nil
       })
       expect {
         @instance.connections(page: 1, per_page: 10)
+      }.not_to raise_error
+    end
+
+    it 'is expected to include totals' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/connections', {
+        page: 1,
+        per_page: 10,
+        strategy: nil,
+        name: nil,
+        fields: nil,
+        include_fields: nil,
+        include_totals: true
+      })
+      expect {
+        @instance.connections(page: 1, per_page: 10, include_totals: true)
       }.not_to raise_error
     end
   end
