@@ -170,8 +170,6 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#change-password
       # @see https://auth0.com/docs/connections/database/password-change
       # @param email [string] User's current email
-      # @param password [string] User's new password; empty to trigger a
-      #   password reset email
       # @param connection_name [string] Database connection name
       # @param client_id [string] Client ID override (to allow forwarding
       #   to a different application's login URI on password reset success page)

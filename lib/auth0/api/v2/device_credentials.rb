@@ -1,7 +1,7 @@
 module Auth0
   module Api
     module V2
-      # Methods to use the device crenditials endpoints
+      # Methods to use the device credentials endpoints
       module DeviceCredentials
         attr_reader :device_credentials_path
 
