@@ -111,6 +111,15 @@ module Auth0
         end
         alias update_user patch_user
 
+        # Delete all authenticators
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_authenticators
+        # @param user_id [string] The user_id of the user to delete all authenticators
+        def delete_user_authenticators(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          path = "#{users_path}/#{user_id}/authenticators"
+          delete(path)
+        end
+
         # Delete a user's multifactor provider
         # @see https://auth0.com/docs/api/v2#!/Users/delete_multifactor_by_provider
         # @param user_id [string] The user_id of the user to delete the multifactor provider from.

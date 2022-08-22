@@ -139,6 +139,21 @@ describe Auth0::Api::V2::Users do
     end
   end
 
+  context '.delete_user_authenticators' do
+    it 'is expected to respond to a delete_user_authenticators method' do
+      expect(@instance).to respond_to(:delete_user_authenticators)
+    end
+
+    it 'is expected to delete /api/v2/users/userId/authenticators' do
+      expect(@instance).to receive(:delete).with('/api/v2/users/USER_ID/authenticators')
+      @instance.delete_user_authenticators('USER_ID')
+    end
+
+    it 'is expected to raise an exception when the user ID is empty' do
+      expect { @instance.delete_user_authenticators(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+  end
+
   context '.delete_user_provider' do
     it 'is expected to respond to a delete_user_provider method' do
       expect(@instance).to respond_to(:delete_user_provider)
