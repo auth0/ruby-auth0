@@ -1,5 +1,18 @@
 # Change Log
 
+## [v5.9.0](https://github.com/auth0/ruby-auth0/tree/v5.9.0) (2022-08-24)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.8.1...v5.9.0)
+
+**Added**
+- Add Delete All Authenticators API for Users [\#375](https://github.com/auth0/ruby-auth0/pull/375) ([phongnh](https://github.com/phongnh))
+
+**Changed**
+- Add include_totals to get connections options [\#357](https://github.com/auth0/ruby-auth0/pull/357) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Fixed**
+- Fix typo and remove param that is not used [\#365](https://github.com/auth0/ruby-auth0/pull/365) ([MatthewRDodds](https://github.com/MatthewRDodds))
+- correct remove_user_roles doc: roles param is ids, not names [\#359](https://github.com/auth0/ruby-auth0/pull/359) ([gbirchmeier](https://github.com/gbirchmeier))
+
 ## [v5.8.1](https://github.com/auth0/ruby-auth0/tree/v5.8.1) (2022-06-30)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.8.0...v5.8.1)
