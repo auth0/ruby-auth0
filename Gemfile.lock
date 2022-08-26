@@ -3,7 +3,7 @@ PATH
   specs:
     auth0 (5.9.0)
       addressable (~> 2.8)
-      jwt (~> 2.3.0)
+      jwt (>= 2.3, < 2.6)
       rest-client (~> 2.1)
       retryable (~> 3.0)
       zache (~> 0.12)
@@ -85,7 +85,7 @@ GEM
     irb (1.4.1)
       reline (>= 0.3.0)
     json (2.6.2)
-    jwt (2.3.0)
+    jwt (2.5.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
