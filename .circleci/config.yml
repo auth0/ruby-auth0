@@ -6,9 +6,9 @@ orbs:
 matrix_ruby_versions: &matrix_ruby_versions
   matrix:
     parameters:
-      ruby_version: ["2.5", "2.6", "2.7", "3.0"]
+      ruby_version: ["2.7", "3.0", "3.1"]
 # Default version of ruby to use for lint and publishing
-default_ruby_version: &default_ruby_version "2.7"
+default_ruby_version: &default_ruby_version "3.1"
 
 executors:
   ruby-image:
@@ -30,7 +30,7 @@ jobs:
       ruby_version: << parameters.ruby_version >>
     steps:
       - checkout
-      - run: gem install bundler:1.17.2
+      - run: gem install bundler:2.3.22
       - run: rm Gemfile.lock
       - restore_cache:
           key: gems-v2-{{ checksum "Gemfile.lock" }}

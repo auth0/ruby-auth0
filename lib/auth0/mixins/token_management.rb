@@ -6,7 +6,6 @@ module Auth0
 
       def initialize_token(options)
         @token = options[:access_token] || options[:token]
-        
         # default expiry to an hour if a token was given but no expires_at
         @token_expires_at = @token ? options[:token_expires_at] || Time.now.to_i + 3600 : nil 
 
@@ -15,6 +14,7 @@ module Auth0
       end
 
       def get_token
+        # pp @token_expires_at
         has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
         
         if (@token.nil? || has_expired) && @client_id && @client_secret

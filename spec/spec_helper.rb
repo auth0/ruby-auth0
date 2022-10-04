@@ -51,6 +51,10 @@ RSpec.configure do |config|
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
   config.include Credentials
+
+  config.expect_with :rspec do |c|
+    c.max_formatted_output_length = 1000000
+  end
 end
 
 def wait(time, increment = 5, elapsed_time = 0, &block)

@@ -494,12 +494,13 @@ describe Auth0::Mixins::HTTPProxy do
   end
 
   context "Renewing tokens" do
-    before :each do
-      @token_instance = DummyClassForTokens.new(
+    let(:httpproxy_instance) {
+      DummyClassForTokens.new(
         client_id: 'test-client-id',
         client_secret: 'test-client-secret',
-        domain: 'auth0.com')
-    end
+        domain: 'auth0.com',
+      )
+    }
 
     %i(get delete).each do |http_method|
       context "for #{http_method}" do
@@ -507,7 +508,7 @@ describe Auth0::Mixins::HTTPProxy do
           expect(RestClient::Request).to receive(:execute).with(hash_including(
             method: :post,
             url: 'https://auth0.com/oauth/token',
-          ) ).and_return(StubResponse.new({ 
+          )).and_return(StubResponse.new({ 
             "access_token" => "access_token", 
             "expires_in" => 86400}, 
             true, 
@@ -515,11 +516,10 @@ describe Auth0::Mixins::HTTPProxy do
 
           expect(RestClient::Request).to receive(:execute).with(hash_including(
             method: http_method,
-            url: 'https://auth0.com/test',
-            headers: { params: {}, "Authorization" => "Bearer access_token" }
+            url: 'https://auth0.com/test'
           )).and_return(StubResponse.new('Some random text here', true, 200))
 
-          expect { @token_instance.send(http_method, '/test') }.not_to raise_error
+          expect { httpproxy_instance.send(http_method, '/test') }.not_to raise_error
         end
       end
     end
@@ -539,24 +539,24 @@ describe Auth0::Mixins::HTTPProxy do
           expect(RestClient::Request).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
-            headers: { "Authorization" => "Bearer access_token" }
+            headers: hash_including( "Authorization" => "Bearer access_token")
           )).and_return(StubResponse.new('Some random text here', true, 200))
 
-          expect { @token_instance.send(http_method, '/test') }.not_to raise_error
+          expect { httpproxy_instance.send(http_method, '/test') }.not_to raise_error
         end
       end
     end
   end
 
   context "Using cached tokens" do
-    before :each do
-      @token_instance = DummyClassForTokens.new(
+    let(:httpproxy_instance) {
+      DummyClassForTokens.new(
         client_id: 'test-client-id',
         client_secret: 'test-client-secret',
         domain: 'auth0.com',
         token: 'access_token',
         token_expires_at: Time.now.to_i + 86400)
-    end
+    }
 
     %i(get delete).each do |http_method|
       context "for #{http_method}" do
@@ -569,10 +569,10 @@ describe Auth0::Mixins::HTTPProxy do
           expect(RestClient::Request).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
-            headers: { params: {}, "Authorization" => "Bearer access_token" }
+            headers: hash_including(params: {}, "Authorization" => "Bearer access_token")
           )).and_return(StubResponse.new('Some random text here', true, 200))
 
-          expect { @token_instance.send(http_method, '/test') }.not_to raise_error
+          expect { httpproxy_instance.send(http_method, '/test') }.not_to raise_error
         end
       end
     end
@@ -588,10 +588,10 @@ describe Auth0::Mixins::HTTPProxy do
           expect(RestClient::Request).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
-            headers: { "Authorization" => "Bearer access_token" }
+            headers: hash_including("Authorization" => "Bearer access_token")
           )).and_return(StubResponse.new('Some random text here', true, 200))
 
-          expect { @token_instance.send(http_method, '/test') }.not_to raise_error
+          expect { httpproxy_instance.send(http_method, '/test') }.not_to raise_error
         end
       end
     end
