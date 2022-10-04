@@ -8,11 +8,12 @@ module Auth0
     # for now, if you want to feel free to use your own http client
     module HTTPProxy
       attr_accessor :headers, :base_uri, :timeout, :retry_count
-      DEAFULT_RETRIES = 3
+      DEFAULT_RETRIES = 3
       MAX_ALLOWED_RETRIES = 10
       MAX_REQUEST_RETRY_JITTER = 250
       MAX_REQUEST_RETRY_DELAY = 1000
-      MIN_REQUEST_RETRY_DELAY = 100
+      MIN_REQUEST_RETRY_DELAY = 250
+      BASE_DELAY = 100
 
       # proxying requests from instance methods to HTTP class methods
       %i(get post post_file put patch delete delete_with_body).each do |method|
@@ -26,14 +27,14 @@ module Auth0
 
       def retry_options
         sleep_timer = lambda do |attempt|
-          wait = 1000 * 2**attempt # Exponential delay with each subsequent request attempt.
-          wait += rand(wait..wait+MAX_REQUEST_RETRY_JITTER) # Add jitter to the delay window.
+          wait = BASE_DELAY * (2**attempt-1) # Exponential delay with each subsequent request attempt.
+          wait += rand(wait+1..wait+MAX_REQUEST_RETRY_JITTER) # Add jitter to the delay window.
           wait = [MAX_REQUEST_RETRY_DELAY, wait].min # Cap delay at MAX_REQUEST_RETRY_DELAY.
           wait = [MIN_REQUEST_RETRY_DELAY, wait].max # Ensure delay is no less than MIN_REQUEST_RETRY_DELAY.
           wait / 1000.to_f.round(2) # convert ms to seconds
         end
 
-        tries = 1 + [Integer(retry_count || DEAFULT_RETRIES), MAX_ALLOWED_RETRIES].min # Cap retries at MAX_ALLOWED_RETRIES
+        tries = 1 + [Integer(retry_count || DEFAULT_RETRIES), MAX_ALLOWED_RETRIES].min # Cap retries at MAX_ALLOWED_RETRIES
 
         {
           tries: tries,
