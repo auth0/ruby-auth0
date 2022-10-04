@@ -110,16 +110,11 @@ describe Auth0::Mixins::TokenManagement do
 
     it 'does not renew existing token if no token_expires_at' do
       params[:token] = 'test-token'
+      instance.instance_variable_set '@token_expires_at', nil
 
-      expect(RestClient::Request).not_to receive(:execute).with(hash_including(
-        method: :post,
-        url: 'https://samples.auth0.com/oauth/token',
-      ))
+      expect(RestClient::Request).not_to receive(:execute)
 
       instance.send(:get_token)
-
-      expect(instance.instance_variable_get('@token')).to eq('test-token')
-      expect(instance.instance_variable_get('@token_expires_at')).to be_nil
     end
   end
 end
