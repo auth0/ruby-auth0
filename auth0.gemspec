@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'rest-client', '~> 2.1'
-  s.add_runtime_dependency 'jwt', '~> 2.3.0'
+  s.add_runtime_dependency 'jwt', '~> 2.5'
   s.add_runtime_dependency 'zache', '~> 0.12'
   s.add_runtime_dependency 'addressable', '~> 2.8'
   s.add_runtime_dependency 'retryable', '~> 3.0'
@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'pry', '~> 0.10'
   s.add_development_dependency 'pry-nav', '~> 0.2'
-  s.add_development_dependency 'rspec', '~> 3.5'
+  s.add_development_dependency 'rspec', '~> 3.11'
   s.add_development_dependency 'rack-test', '~> 0.6'
   s.add_development_dependency 'rack', '~> 2.1'
   s.add_development_dependency 'simplecov', '~> 0.9'

@@ -16,4 +16,5 @@ group :test do
   gem 'vcr', require: false
   gem 'simplecov-cobertura'
   gem 'timecop', require: false
+  gem 'pp'
 end
