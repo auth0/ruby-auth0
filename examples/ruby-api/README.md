@@ -1,8 +1,8 @@
-#Auth0 + Ruby API Seed
+# Auth0 + Ruby API Seed
 
 This is the seed project you need to use if you're going to create a Ruby API. You'll mostly use this API either for a SPA or a Mobile app.
 
-#Running the example
+# Running the example
 
 In order to run the example you need to have ruby installed.
 
