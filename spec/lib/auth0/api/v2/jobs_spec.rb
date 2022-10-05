@@ -56,7 +56,7 @@ describe Auth0::Api::V2::Jobs do
     it { expect { @instance.import_users('', 'connnection_id') }.to raise_error('Must specify a valid file') }
     it { expect { @instance.import_users('users', '') }.to raise_error('Must specify a connection_id') }
   end
-  context '.export_users', focus: true do
+  context '.export_users' do
     it { expect(@instance).to respond_to(:export_users) }
     it { expect { @instance.export_users }.not_to raise_error }
     it 'sends post to /api/v2/jobs/users-exports with correct params' do
