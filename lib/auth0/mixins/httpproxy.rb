@@ -73,15 +73,13 @@ module Auth0
 
       def request(method, uri, body = {}, extra_headers = {})
         result = if method == :get
-          # Mutate the headers property to add parameters.
-          add_headers({params: body})
-          # Merge custom headers into existing ones for this req.
-          # This prevents future calls from using them.
-          get_headers = headers.merge extra_headers
-          # Make the call with extra_headers, if provided.
+          @headers ||= {}
+          get_headers = @headers.merge({params: body}).merge(extra_headers)
           call(:get, encode_uri(uri), timeout, get_headers)
         elsif method == :delete
-          call(:delete, encode_uri(uri), timeout, add_headers({params: body}))
+          @headers ||= {}
+          delete_headers = @headers.merge({ params: body })
+          call(:delete, encode_uri(uri), timeout, delete_headers)
         elsif method == :delete_with_body
           call(:delete, encode_uri(uri), timeout, headers, body.to_json)
         elsif method == :post_file
