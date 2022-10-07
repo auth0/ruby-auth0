@@ -609,25 +609,25 @@ describe Auth0::Mixins::HTTPProxy do
 
     # This sets up a test matrix to verify that both :get and :delete calls (the only two HTTP methods in the proxy that mutated headers)
     # don't bleed query params into subsequent calls to :post :patch and :put.
-    %i(get delete).each do |modifying_method|
-      %i(post patch put).each do |affected_method|
-        it "should not bleed :#{modifying_method} headers/parameters to the subsequent :#{affected_method} request" do
+    %i(get delete).each do |http_get_delete|
+      %i(post patch put).each do |http_ppp|
+        it "should not bleed :#{http_get_delete} headers/parameters to the subsequent :#{http_ppp} request" do
           expect(RestClient::Request).to receive(:execute).with(hash_including(
-            method: modifying_method,
-            url: 'https://auth0.com/test',
+            method: http_get_delete,
+            url: "https://auth0.com/test-#{http_get_delete}",
             headers: hash_including(params: { email: 'test@test.com' })
           )).and_return(StubResponse.new('OK', true, 200))
 
           # email: parameter that is sent in the GET request should not appear
           # as a parameter in the `headers` hash for the subsequent PATCH request.
           expect(RestClient::Request).to receive(:execute).with(hash_including(
-            method: affected_method,
-            url: 'https://auth0.com/test-patch',
+            method: http_ppp,
+            url: "https://auth0.com/test-#{http_ppp}",
             headers: hash_not_including(:params)
           )).and_return(StubResponse.new('OK', true, 200))
 
-          expect { httpproxy_instance.send(modifying_method, '/test', { email: 'test@test.com' }) }.not_to raise_error
-          expect { httpproxy_instance.send(affected_method, '/test-patch') }.not_to raise_error
+          expect { httpproxy_instance.send(http_get_delete, "/test-#{http_get_delete}", { email: 'test@test.com' }) }.not_to raise_error
+          expect { httpproxy_instance.send(http_ppp, "/test-#{http_ppp}") }.not_to raise_error
         end
       end
     end
