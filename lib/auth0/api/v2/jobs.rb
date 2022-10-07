@@ -60,6 +60,9 @@ module Auth0
         #   :format [string] The format of the file. Valid values are: "json" and "csv".
         #   :limit [integer] Limit the number of users to export.
         #   :fields [array] A list of fields to be included in the CSV.
+        #     This can either be an array of strings representing field names, or an object.
+        #     If it's a string, it is mapped to the correct { name: '<field name>' } object required by the endpoint.
+        #     If it's an object, it is passed through as-is to the endpoint.
         #     If omitted, a set of predefined fields will be exported.
         #
         # @return [json] Returns the job status and properties.
@@ -109,14 +112,22 @@ module Auth0
           @jobs_path ||= '/api/v2/jobs'
         end
 
-        # Map array of field names for export to array of objects
-        # @param fields [array] Field names to be included in the export
-
+        # Map array of fields for export to array of objects
+        # @param fields [array] Fields to be included in the export
+        #     This can either be an array of strings representing field names, or an object.
+        #     If it's a string, it is mapped to the correct { name: '<field name>' } object required by the endpoint.
+        #     If it's an object, it is passed through as-is to the endpoint.
         # @return [array] Returns the fields mapped as array of objects for the export_users endpoint
         def fields_for_export(fields)
           return nil if fields.to_s.empty?
 
-          fields.map { |field| { name: field } }
+          fields.map { |field|             
+            if field.is_a? String
+              { name: field }
+            else
+              field
+            end
+          }
         end
       end
     end

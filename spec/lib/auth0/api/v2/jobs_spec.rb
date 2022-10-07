@@ -67,8 +67,26 @@ describe Auth0::Api::V2::Jobs do
         format: 'csv',
         limit: 10
       })
+
       @instance.export_users(
         fields: ['author'],
+        connection_id: 'test-connection',
+        format: 'csv',
+        limit: 10
+      )
+    end
+
+    it 'sends post to /api/v2/jobs/users-exports with export_as field' do
+      expect(@instance).to receive(:post).with(
+        '/api/v2/jobs/users-exports', {
+        fields: [{ name: 'author', export_as: 'writer' }],
+        connection_id: 'test-connection',
+        format: 'csv',
+        limit: 10
+      })
+      
+      @instance.export_users(
+        fields: [{ name: 'author', export_as: 'writer' }],
         connection_id: 'test-connection',
         format: 'csv',
         limit: 10
