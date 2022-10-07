@@ -9,7 +9,7 @@ module Auth0
 
         # Get all organizations.
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_organizations
-        # @param options [hash] The Hash options used to define the paging of rersults
+        # @param options [hash] The Hash options used to define the paging of results
         #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
         #   * :page [integer] The page number. Zero based.
         #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
