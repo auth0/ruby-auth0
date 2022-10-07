@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/SftKo9ySyHnMPezQUFd0C70GBoNFM21F?fields=jwt_configuration&include_fields=false
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/clients/SftKo9ySyHnMPezQUFd0C70GBoNFM21F
     body:
       encoding: UTF-8
       string: '{"custom_login_page_on":false,"sso":true}'
@@ -12,6 +12,7 @@ http_interactions:
       User-Agent:
       - rest-client/2.1.0 (darwin19.6.0 x86_64) ruby/2.7.0p0
       Content-Type:
+
       - application/json
       Auth0-Client:
       - eyJuYW1lIjoicnVieS1hdXRoMCIsInZlcnNpb24iOiI1LjUuMCIsImVudiI6eyJydWJ5IjoiMi43LjAifX0=

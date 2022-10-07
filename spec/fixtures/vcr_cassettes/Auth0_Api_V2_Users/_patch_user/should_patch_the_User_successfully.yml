@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9?fields=email&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9
     body:
       encoding: UTF-8
       string: '{"email_verified":true,"user_metadata":{"addresses":{"home_address":"742

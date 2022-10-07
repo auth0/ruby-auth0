@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_WltM0fv20JCnxOuY?email=rubytest-210908-rubytest-210908-username@auth0.com
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/connections/con_WltM0fv20JCnxOuY
     body:
       encoding: UTF-8
       string: '{"options":{"mfa":{"active":true,"return_enroll_settings":true},"passwordPolicy":"excellent","strategy_version":2,"brute_force_protection":true}}'

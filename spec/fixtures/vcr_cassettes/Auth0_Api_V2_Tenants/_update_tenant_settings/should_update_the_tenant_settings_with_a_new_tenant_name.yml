@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/tenants/settings?fields=support_email&include_fields=true
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/tenants/settings
     body:
       encoding: UTF-8
       string: '{"friendly_name":"Auth0-CHANGED"}'
