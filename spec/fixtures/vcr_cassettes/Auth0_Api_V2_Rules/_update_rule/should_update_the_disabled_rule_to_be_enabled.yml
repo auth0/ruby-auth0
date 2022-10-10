@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/rules/rul_bsg64xEPZz4WOkXz?fields=stage&include_fields=false
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/rules/rul_bsg64xEPZz4WOkXz
     body:
       encoding: UTF-8
       string: '{"enabled":true}'

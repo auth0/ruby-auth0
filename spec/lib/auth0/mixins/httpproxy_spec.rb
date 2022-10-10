@@ -596,4 +596,40 @@ describe Auth0::Mixins::HTTPProxy do
       end
     end
   end
+
+  context 'Normal operation' do
+    let(:httpproxy_instance) {
+      DummyClassForTokens.new(
+        client_id: 'test-client-id',
+        client_secret: 'test-client-secret',
+        domain: 'auth0.com',
+        token: 'access_token',
+        token_expires_at: Time.now.to_i + 86400)
+    }
+
+    # This sets up a test matrix to verify that both :get and :delete calls (the only two HTTP methods in the proxy that mutated headers)
+    # don't bleed query params into subsequent calls to :post :patch and :put.
+    %i(get delete).each do |http_get_delete|
+      %i(post patch put).each do |http_ppp|
+        it "should not bleed :#{http_get_delete} headers/parameters to the subsequent :#{http_ppp} request" do
+          expect(RestClient::Request).to receive(:execute).with(hash_including(
+            method: http_get_delete,
+            url: "https://auth0.com/test-#{http_get_delete}",
+            headers: hash_including(params: { email: 'test@test.com' })
+          )).and_return(StubResponse.new('OK', true, 200))
+
+          # email: parameter that is sent in the GET request should not appear
+          # as a parameter in the `headers` hash for the subsequent PATCH request.
+          expect(RestClient::Request).to receive(:execute).with(hash_including(
+            method: http_ppp,
+            url: "https://auth0.com/test-#{http_ppp}",
+            headers: hash_not_including(:params)
+          )).and_return(StubResponse.new('OK', true, 200))
+
+          expect { httpproxy_instance.send(http_get_delete, "/test-#{http_get_delete}", { email: 'test@test.com' }) }.not_to raise_error
+          expect { httpproxy_instance.send(http_ppp, "/test-#{http_ppp}") }.not_to raise_error
+        end
+      end
+    end
+  end
 end

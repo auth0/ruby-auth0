@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/roles?per_page=2
+    uri: https://auth0-sdk-tests.auth0.com/api/v2/users/auth0%7C613282adac819400692c0dd9/roles
     body:
       encoding: UTF-8
       string: '{"roles":["rol_2VZOCes8HgBar3Tp"]}'
