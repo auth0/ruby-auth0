@@ -1,5 +1,16 @@
 # Change Log
 
+## [v5.10.0](https://github.com/auth0/ruby-auth0/tree/v5.10.0) (2022-10-10)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.9.0...v5.10.0)
+
+**Changed**
+- Update jwt ~2.5 [\#384](https://github.com/auth0/ruby-auth0/pull/384) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Fixed**
+- Stop :get, :delete parameters from bleeding into subsequent requests [\#388](https://github.com/auth0/ruby-auth0/pull/388) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- Support complex field names in export_users [\#387](https://github.com/auth0/ruby-auth0/pull/387) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- Reconfigure rate limiting exponential backoff [\#386](https://github.com/auth0/ruby-auth0/pull/386) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
 ## [v5.9.0](https://github.com/auth0/ruby-auth0/tree/v5.9.0) (2022-08-24)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.8.1...v5.9.0)
 
