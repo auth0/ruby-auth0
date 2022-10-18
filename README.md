@@ -8,7 +8,7 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
 [![MIT licensed](https://img.shields.io/dub/l/vibe-d.svg?style=flat)](https://github.com/auth0/ruby-auth0/blob/master/LICENSE)
 
-:books: [Documentation](#documentation) - :rocket: [Getting Started](#getting-started) - :computer: [API Reference](#api-reference) - :speech_balloon: [Feedback](#feedback)
+:books: [Documentation](#documentation) - :rocket: [Getting Started](#getting-started) - :computer: [API Reference](https://www.rubydoc.info/gems/auth0) - :speech_balloon: [Feedback](#feedback)
 
 ## Documentation
 
