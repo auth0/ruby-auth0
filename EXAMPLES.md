@@ -1,4 +1,6 @@
-## Build a URL to the Universal Login Page
+# Examples using ruby-auth0
+
+## Build a URL to Universal Login Page
 
 ```ruby
 require 'auth0'
