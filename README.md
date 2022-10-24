@@ -1,4 +1,4 @@
-# ruby-auth0
+![ruby-auth0](https://cdn.auth0.com/website/sdks/banners/ruby-auth0-banner.png)
 
 Ruby API client for the [Auth0](https://auth0.com) platform.
 
