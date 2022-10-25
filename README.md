@@ -15,8 +15,8 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 ## Documentation
 
 - [API documentation](https://www.rubydoc.info/gems/auth0) - documentation auto-generated from the code comments that explains all the available features
-- [Examples](EXAMPLES.md) - examples that demonstrate the different ways in which this SDK can be used
-- [FAQ](FAQ.md) - frequently asked questions about the SDK
+- [Examples](https://github.com/auth0/ruby-auth0/blob/master/EXAMPLES.md) - examples that demonstrate the different ways in which this SDK can be used
+[FAQ](https://github.com/auth0/ruby-auth0/blob/master/FAQ.md) - frequently asked questions about the SDK
 - [Docs Site](https://auth0.com/docs) - explore our Docs site and learn more about Auth0
 
 ## Getting Started
@@ -105,11 +105,10 @@ We appreciate feedback and contribution to this repo! Before you get started, pl
 
 - [Auth0's general contribution guidelines](https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md)
 - [Auth0's code of conduct guidelines](https://github.com/auth0/open-source-template/blob/master/CODE-OF-CONDUCT.md)
-- [The contribution guide](https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md)
 
 ### Raise an issue
 
-To provide feedback or report a bug, please [raise an issue on our issue tracker](https://github.com/auth0/auth0-flutter/issues).
+To provide feedback or report a bug, please [raise an issue on our issue tracker](https://github.com/auth0/ruby-auth0/issues).
 
 ### Vulnerability Reporting
 
