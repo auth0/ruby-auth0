@@ -87,7 +87,7 @@ Please note that this module implements endpoints that might be deprecated for n
 
 This SDK provides access to the [Management API](https://auth0.com/docs/api/management/v2) via modules that help create clear and accurate calls. Most of the interaction is done through the `Auth0Client` class, instantiated with the required credentials.
 
-For an example of using the management API client to read of users, see the [examples document](EXAMPLES.md).
+For an example of using the management API client to read of users, see the [examples document](https://github.com/auth0/ruby-auth0/blob/master/EXAMPLES.md).
 
 ## Further reading
 
