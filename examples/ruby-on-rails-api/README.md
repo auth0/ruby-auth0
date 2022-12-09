@@ -2,8 +2,6 @@
 
 This is the seed project you need to use if you're going to create a Ruby on Rails API. You'll mostly use this API either for a SPA or a Mobile app. If you just want to create a Regular Ruby on Rails WebApp, please check this [other seed project](https://github.com/auth0/omniauth-auth0)
 
-This example is deployed at Heroku at http://auth0-rorapi-sample.herokuapp.com/ping
-
 #Running the example
 
 In order to run the example you need to have ruby installed.
