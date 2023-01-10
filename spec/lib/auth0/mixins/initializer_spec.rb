@@ -57,16 +57,22 @@ describe Auth0::Mixins::Initializer do
         audience: api_identifier
       }  
 
-      expect(RestClient::Request).to receive(:execute).with(hash_including(
-        method: :post,
-        url: 'https://samples.auth0.com/oauth/token',
-        payload: payload.to_json
-      ))
-      .and_return(StubResponse.new({ 
+      expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(arg).to(match(
+          include(
+            method: :post,
+            url: 'https://samples.auth0.com/oauth/token'
+          )
+        ))
+
+        expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
+        
+        StubResponse.new({ 
         "access_token" => "test", 
         "expires_in" => 86400}, 
         true, 
-        200))
+        200)
+      end
 
       expect(instance.instance_variable_get('@token')).to eq('test')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)

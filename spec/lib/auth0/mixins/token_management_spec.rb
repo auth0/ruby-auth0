@@ -34,16 +34,21 @@ describe Auth0::Mixins::TokenManagement do
 
   context 'get_token' do
     it 'renews the token if there is no token set' do
-      expect(RestClient::Request).to receive(:execute).with(hash_including(
-        method: :post,
-        url: 'https://samples.auth0.com/oauth/token',
-        payload: payload.to_json
-      ))
-      .and_return(StubResponse.new({ 
-        "access_token" => "test", 
-        "expires_in" => 86400}, 
-        true, 
-        200))
+      expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(arg).to(match(
+          include(
+            method: :post,
+            url: 'https://samples.auth0.com/oauth/token'
+        )))
+
+        expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
+      
+        StubResponse.new({ 
+          "access_token" => "test", 
+          "expires_in" => 86400}, 
+          true, 
+          200)
+      end
 
       instance.send(:get_token)
 
@@ -70,16 +75,21 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       params[:token_expires_at] = time_now.to_i + 5
 
-      expect(RestClient::Request).to receive(:execute).with(hash_including(
-        method: :post,
-        url: 'https://samples.auth0.com/oauth/token',
-        payload: payload.to_json
-      ))
-      .and_return(StubResponse.new({ 
-        "access_token" => "renewed_token", 
-        "expires_in" => 86400}, 
-        true, 
-        200))
+      expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(arg).to(match(
+          include(
+            method: :post,
+            url: 'https://samples.auth0.com/oauth/token'
+        )))
+
+        expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
+      
+        StubResponse.new({ 
+          "access_token" => "renewed_token", 
+          "expires_in" => 86400}, 
+          true, 
+          200)
+      end
 
       instance.send(:get_token)
 
@@ -91,16 +101,21 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       params[:token_expires_at] = time_now.to_i - 10
 
-      expect(RestClient::Request).to receive(:execute).with(hash_including(
-        method: :post,
-        url: 'https://samples.auth0.com/oauth/token',
-        payload: payload.to_json
-      ))
-      .and_return(StubResponse.new({ 
-        "access_token" => "renewed_token", 
-        "expires_in" => 86400}, 
-        true, 
-        200))
+      expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(arg).to(match(
+          include(
+            method: :post,
+            url: 'https://samples.auth0.com/oauth/token'
+        )))
+
+        expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
+      
+        StubResponse.new({ 
+          "access_token" => "renewed_token", 
+          "expires_in" => 86400}, 
+          true, 
+          200)
+      end
 
       instance.send(:get_token)
 
