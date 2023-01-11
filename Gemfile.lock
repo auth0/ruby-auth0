@@ -125,7 +125,7 @@ GEM
       pry (>= 0.9.10, < 0.13.0)
     public_suffix (5.0.1)
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.5)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)
