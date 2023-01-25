@@ -16,6 +16,8 @@ module Auth0
 
       # Request an API access token using a Client Credentials grant
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       # @param audience [string] API audience to use
       # @param organization [string] Organization ID
       # @return [json] Returns the API token
@@ -41,9 +43,9 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#authorization-code
       # @param code [string] The authentication code obtained from /authorize
       # @param redirect_uri [string] URL to redirect to after authorization.
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       #   Required only if it was set at the GET /authorize endpoint
-      # @param client_id [string] Client ID for the Application
-      # @param client_secret [string] Client Secret for the Application. Ignored if using Client Assertion
       # @return [Auth0::AccessToken] Returns the access_token and id_token
       def exchange_auth_code_for_tokens(
         code,
@@ -69,8 +71,8 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#refresh-token
       # @param refresh_token [string] Refresh token to use. Request this with
       #   the offline_access scope when logging in.
-      # @param client_id [string] Client ID for the Application
-      # @param client_secret [string] Client Secret for the Application.
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       #   Required when the Application's Token Endpoint Authentication Method
       #   is Post or Basic.
       # @return [Auth0::AccessToken] Returns tokens allowed in the refresh_token
@@ -98,8 +100,8 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
       # @param login_name [string] Email or username for the connection
       # @param password [string] Password
-      # @param client_id [string] Client ID from Application settings
-      # @param client_secret [string] Client Secret from Application settings
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       # @param realm [string] Specific realm to authenticate against
       # @param audience [string] API audience
       # @param scope [string] Scope(s) requested
