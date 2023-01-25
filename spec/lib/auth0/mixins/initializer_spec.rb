@@ -13,6 +13,15 @@ describe Auth0::Mixins::Initializer do
   let(:params) { { namespace: 'samples.auth0.com' } }
   let(:instance) { DummyClassForProxy.send(:include, described_class).new(params) }
   let(:time_now) { Time.now }
+  
+  let(:client_assertion_signing_key_pair) do
+    rsa_private = OpenSSL::PKey::RSA.generate 2048
+
+    { 
+      public_key: rsa_private.public_key,
+      private_key: rsa_private
+    }
+  end
 
   context 'api v2' do
     it 'sets retry_count when passed' do
@@ -45,37 +54,75 @@ describe Auth0::Mixins::Initializer do
       expect(instance.instance_variable_get('@token')).to eq('123')
     end
 
-    it 'fetches a token if none was given' do
-      params[:client_id] = client_id = 'test_client_id'
-      params[:client_secret] = client_secret = 'test_client_secret'
-      params[:api_identifier] = api_identifier = 'test'
+    context 'with a client secret' do
+      it 'fetches a token if none was given' do
+        params[:client_id] = client_id = 'test_client_id'
+        params[:client_secret] = client_secret = 'test_client_secret'
+        params[:api_identifier] = api_identifier = 'test'
 
-      payload = {
-        grant_type: 'client_credentials',
-        client_id: client_id,
-        client_secret: client_secret,
-        audience: api_identifier
-      }  
+        payload = {
+          grant_type: 'client_credentials',
+          client_id: client_id,
+          client_secret: client_secret,
+          audience: api_identifier
+        }  
 
-      expect(RestClient::Request).to receive(:execute) do |arg|
-        expect(arg).to(match(
-          include(
-            method: :post,
-            url: 'https://samples.auth0.com/oauth/token'
-          )
-        ))
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to(match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          ))
 
-        expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
-        
-        StubResponse.new({ 
-        "access_token" => "test", 
-        "expires_in" => 86400}, 
-        true, 
-        200)
+          expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
+          
+          StubResponse.new({ 
+          "access_token" => "test", 
+          "expires_in" => 86400}, 
+          true, 
+          200)
+        end
+
+        expect(instance.instance_variable_get('@token')).to eq('test')
+        expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
       end
+    end
 
-      expect(instance.instance_variable_get('@token')).to eq('test')
-      expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
+    context 'with a client assertion signing key', focus: true do
+      it 'fetches a token if none was given' do
+        client_assertion_signing_key_pair => {private_key:}
+        params[:client_id] = client_id = 'test_client_id'
+        params[:api_identifier] = api_identifier = 'test'
+        params[:client_assertion_signing_key] = private_key
+
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to(match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          ))
+
+          payload = JSON.parse(arg[:payload], { symbolize_names: true })
+          
+          expect(payload[:grant_type]).to eq 'client_credentials'
+          expect(payload[:client_id]).to eq client_id
+          expect(payload[:audience]).to eq api_identifier
+          expect(payload[:client_secret]).to be_nil
+          expect(payload[:client_assertion]).not_to be_nil
+          expect(payload[:client_assertion_type]).to eq Auth0::ClientAssertion::CLIENT_ASSERTION_TYPE
+          
+          StubResponse.new({ 
+          "access_token" => "test", 
+          "expires_in" => 86400}, 
+          true, 
+          200)
+        end
+
+        expect(instance.instance_variable_get('@token')).to eq('test')
+        expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
+      end
     end
 
     it "doesn't get a new token if one was supplied using 'token'" do
