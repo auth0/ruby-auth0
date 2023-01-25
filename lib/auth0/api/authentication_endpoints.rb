@@ -18,8 +18,6 @@ module Auth0
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
       # @param audience [string] API audience to use
       # @param organization [string] Organization ID
-      # @param client_assertion_signing_key [string] Signing key to use with Client Assertion
-      # @param client_assertion_signing_alg [string] The algorithm to use with Client Assertion. Defaults to 'RS256'
       # @return [json] Returns the API token
       def api_token(
         client_id: @client_id,
@@ -46,8 +44,6 @@ module Auth0
       #   Required only if it was set at the GET /authorize endpoint
       # @param client_id [string] Client ID for the Application
       # @param client_secret [string] Client Secret for the Application. Ignored if using Client Assertion
-      # @param client_assertion_signing_key [string] Signing key to use with Client Assertion
-      # @param client_assertion_signing_alg [string] The algorithm to use with Client Assertion. Defaults to 'RS256'
       # @return [Auth0::AccessToken] Returns the access_token and id_token
       def exchange_auth_code_for_tokens(
         code,
