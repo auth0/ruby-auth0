@@ -89,9 +89,10 @@ describe Auth0::Mixins::Initializer do
       end
     end
 
-    context 'with a client assertion signing key', focus: true do
+    context 'with a client assertion signing key' do
       it 'fetches a token if none was given' do
-        client_assertion_signing_key_pair => {private_key:}
+        private_key = client_assertion_signing_key_pair[:private_key]
+
         params[:client_id] = client_id = 'test_client_id'
         params[:api_identifier] = api_identifier = 'test'
         params[:client_assertion_signing_key] = private_key
@@ -105,7 +106,7 @@ describe Auth0::Mixins::Initializer do
           ))
 
           payload = JSON.parse(arg[:payload], { symbolize_names: true })
-          
+
           expect(payload[:grant_type]).to eq 'client_credentials'
           expect(payload[:client_id]).to eq client_id
           expect(payload[:audience]).to eq api_identifier
