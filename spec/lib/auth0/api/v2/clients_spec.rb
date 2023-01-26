@@ -101,4 +101,18 @@ describe Auth0::Api::V2::Clients do
     it { expect { @instance.patch_client('', nil) }.to raise_error 'Must specify a client id' }
     it { expect { @instance.patch_client('some', nil) }.to raise_error 'Must specify a valid body' }
   end
+
+  context '.create_credentials' do
+    it { expect(@instance).to respond_to(:create_credentials) }
+
+    it 'is expected to send post to /api/v2/clients/1/credentials' do
+      payload = { credential_type: 'public_key', name: 'my credentials', pem: '' }
+
+      expect(@instance).to receive(:post).with('/api/v2/clients/1/credentials', payload)
+      expect { @instance.create_credentials('1', payload) }.not_to raise_error
+    end
+
+    it { expect { @instance.create_credentials('', nil) }.to raise_error 'Must specify a client id' }
+    it { expect { @instance.create_credentials('1', nil) }.to raise_error 'Must specify a valid body' }
+  end
 end

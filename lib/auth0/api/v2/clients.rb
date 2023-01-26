@@ -73,11 +73,23 @@ module Auth0
           patch(path, options)
         end
 
+        # Creates credentials for a client
+        # @param client_id [string] The Id of the client to update
+        def create_credentials(client_id, options)
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must specify a valid body' if options.to_s.empty?
+          post(client_credentials_path(client_id), options)
+        end
+
         private
 
         # Clients API path
         def clients_path
           @clients_path ||= '/api/v2/clients'
+        end
+
+        def client_credentials_path(client_id)
+          "#{clients_path}/#{client_id}/credentials"
         end
       end
     end
