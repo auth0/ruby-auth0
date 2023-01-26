@@ -75,11 +75,18 @@ module Auth0
 
         # Creates credentials for a client
         # @param client_id [string] The Id of the client to update
-        def create_credentials(client_id, options)
+        # @param options [hash] The payload to send to the endpoint
+        def create_client_credentials(client_id, options)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           raise Auth0::MissingParameter, 'Must specify a valid body' if options.to_s.empty?
           post(client_credentials_path(client_id), options)
         end
+
+        def client_credentials(client_id)
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          get(client_credentials_path(client_id))
+        end
+        alias get_client_credentials client_credentials
 
         private
 
