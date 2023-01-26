@@ -88,6 +88,13 @@ module Auth0
         end
         alias get_client_credentials client_credentials
 
+        def client_credential(client_id, credential_id)
+          raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must specify a credential id' if credential_id.to_s.empty?
+          get("#{client_credentials_path(client_id)}/#{credential_id}")
+        end
+        alias get_client_credential client_credential
+
         private
 
         # Clients API path

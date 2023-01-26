@@ -127,4 +127,17 @@ describe Auth0::Api::V2::Clients do
 
     it { expect { @instance.client_credentials('') }.to raise_error 'Must specify a client id' }
   end
+
+  context '.client_credential' do
+    it { expect(@instance).to respond_to(:client_credential) }
+    it { expect(@instance).to respond_to(:get_client_credential) }
+
+    it 'is expected to send get to /api/v2/clients/1/credentials/2' do
+      expect(@instance).to receive(:get).with('/api/v2/clients/1/credentials/2')
+      expect { @instance.client_credential('1', '2') }.not_to raise_error
+    end
+
+    it { expect { @instance.client_credential('', '') }.to raise_error 'Must specify a client id' }
+    it { expect { @instance.client_credential('1', '') }.to raise_error 'Must specify a credential id' }
+  end
 end
