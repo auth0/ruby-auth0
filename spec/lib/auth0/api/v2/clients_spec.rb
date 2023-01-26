@@ -141,7 +141,7 @@ describe Auth0::Api::V2::Clients do
     it { expect { @instance.client_credential('1', '') }.to raise_error 'Must specify a credential id' }
   end
 
-  context '.delete_client_credential', focus: true do
+  context '.delete_client_credential' do
     it { expect(@instance).to respond_to(:delete_client_credential) }
     
     it 'is expected to delete /api/v2/clients/1/credentials/2' do
