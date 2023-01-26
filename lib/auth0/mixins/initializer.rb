@@ -16,6 +16,8 @@ module Auth0
         @headers = client_headers
         @timeout = options[:timeout] || 10
         @retry_count = options[:retry_count]
+        @client_assertion_signing_key = options[:client_assertion_signing_key]
+        @client_assertion_signing_alg = options[:client_assertion_signing_alg] || 'RS256';        
         extend Auth0::Api::AuthenticationEndpoints
         @client_id = options[:client_id]
         @client_secret = options[:client_secret]

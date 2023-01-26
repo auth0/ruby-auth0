@@ -2,17 +2,22 @@
 # rubocop:disable Metrics/ModuleLength
 
 require 'jwt'
+require_relative '../client_assertion'
 
 module Auth0
   module Api
     # {https://auth0.com/docs/api/authentication}
     # Methods to use the Authentication API
     module AuthenticationEndpoints
+      include Auth0::ClientAssertion
+
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
 
       # Request an API access token using a Client Credentials grant
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       # @param audience [string] API audience to use
       # @param organization [string] Organization ID
       # @return [json] Returns the API token
@@ -25,9 +30,10 @@ module Auth0
         request_params = {
           grant_type: 'client_credentials',
           client_id: client_id,
-          client_secret: client_secret,
           audience: audience
         }
+
+        populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
 
         response = request_with_retry(:post, '/oauth/token', request_params)
         ::Auth0::ApiToken.new(response['access_token'], response['scope'], response['expires_in'])
@@ -37,9 +43,9 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#authorization-code
       # @param code [string] The authentication code obtained from /authorize
       # @param redirect_uri [string] URL to redirect to after authorization.
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       #   Required only if it was set at the GET /authorize endpoint
-      # @param client_id [string] Client ID for the Application
-      # @param client_secret [string] Client Secret for the Application.
       # @return [Auth0::AccessToken] Returns the access_token and id_token
       def exchange_auth_code_for_tokens(
         code,
@@ -51,11 +57,13 @@ module Auth0
 
         request_params = {
           grant_type: 'authorization_code',
-          client_id: client_id,
-          client_secret: client_secret,
+          client_id: client_id,          
           code: code,
           redirect_uri: redirect_uri
         }
+
+        populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
+
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
 
@@ -63,8 +71,8 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#refresh-token
       # @param refresh_token [string] Refresh token to use. Request this with
       #   the offline_access scope when logging in.
-      # @param client_id [string] Client ID for the Application
-      # @param client_secret [string] Client Secret for the Application.
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       #   Required when the Application's Token Endpoint Authentication Method
       #   is Post or Basic.
       # @return [Auth0::AccessToken] Returns tokens allowed in the refresh_token
@@ -78,9 +86,11 @@ module Auth0
         request_params = {
           grant_type: 'refresh_token',
           client_id: client_id,
-          client_secret: client_secret,
           refresh_token: refresh_token
         }
+
+        populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
+
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
 
@@ -90,8 +100,8 @@ module Auth0
       # @see https://auth0.com/docs/api/authentication#resource-owner-password
       # @param login_name [string] Email or username for the connection
       # @param password [string] Password
-      # @param client_id [string] Client ID from Application settings
-      # @param client_secret [string] Client Secret from Application settings
+      # @param client_id [string] Client ID for the application
+      # @param client_secret [string] Client secret for the application. Ignored if using Client Assertion
       # @param realm [string] Specific realm to authenticate against
       # @param audience [string] API audience
       # @param scope [string] Scope(s) requested
@@ -115,12 +125,14 @@ module Auth0
           username: login_name,
           password: password,
           client_id: client_id,
-          client_secret: client_secret,
           realm: realm,
           scope: scope,
           audience: audience,
           grant_type: realm ? 'http://auth0.com/oauth/grant-type/password-realm' : 'password'
         }
+
+        populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
+
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
       # rubocop:enable Metrics/ParameterLists
@@ -200,8 +212,9 @@ module Auth0
           authParams: auth_params,
           connection: 'email',
           client_id: @client_id,
-          client_secret: @client_secret
         }
+
+        populate_client_assertion_or_secret(request_params)
 
         request_with_retry(:post, '/passwordless/start', request_params)
       end
@@ -217,8 +230,9 @@ module Auth0
           phone_number: phone_number,
           connection: 'sms',
           client_id: @client_id,
-          client_secret: @client_secret
         }
+
+        populate_client_assertion_or_secret(request_params)
 
         request_with_retry(:post, '/passwordless/start', request_params)
       end

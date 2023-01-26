@@ -17,7 +17,7 @@ module Auth0
         # pp @token_expires_at
         has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
         
-        if (@token.nil? || has_expired) && @client_id && @client_secret
+        if (@token.nil? || has_expired) && @client_id && (@client_secret || @client_assertion_signing_key)
           response = api_token(audience: @audience)
           @token = response.token
           @token_expires_at = response.expires_in ? Time.now.to_i + response.expires_in : nil

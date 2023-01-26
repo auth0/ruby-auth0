@@ -193,3 +193,28 @@ end
 ```
 
 For more information, please read [Work with Tokens and Organizations](https://auth0.com/docs/organizations/using-tokens) on Auth0 Docs.
+
+## Use a private key to authenticate with Auth0
+
+You are able to take advantage of using a JWT signed with a private key to authenticate with Auth0 in place of using a client secret.
+
+**Note:** you must upload the corresponding public key to your Auth0 tenant, so that Auth0 is able to verify the JWT signature.
+
+Specify the client assertion key when creating the Auth0 client as in the following example:
+
+```ruby
+key_string = File.read 'key.pem'
+key = OpenSSL::PKey::RSA.new key_string
+
+client = Auth0Client.new(
+  domain: 'AUTH0_DOMAIN',
+  client_id: 'AUTH0_CLIENT_ID',
+  client_assertion_signing_key: key,
+  client_assertion_signing_alg: 'RS256')
+```
+
+Some notes:
+
+* If both `client_secret` and `client_assertion_signing_key` are specified, `client_assertion_signing_key` takes precedence
+* `client_assertion_signing_alg` is optional and defaults to `RS256` if omitted
+* Only `RS256`, `RS384` and `PS256` algorithms are supported by Auth0 currently
