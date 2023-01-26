@@ -1,4 +1,3 @@
-require 'pry'
 require 'rack/test'
 require 'faker'
 require 'json'
