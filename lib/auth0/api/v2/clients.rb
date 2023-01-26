@@ -82,12 +82,19 @@ module Auth0
           post(client_credentials_path(client_id), options)
         end
 
+        # Gets the credentials for a client
+        # @param client_id [string] The Id of the client
+        # @return [hash] The client credentials 
         def client_credentials(client_id)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           get(client_credentials_path(client_id))
         end
         alias get_client_credentials client_credentials
 
+        # Gets a client credential by ID
+        # @param client_id [string] The Id of the client
+        # @param credential_id [string] The Id of the credential to retrieve
+        # @return [hash] The credential
         def client_credential(client_id, credential_id)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           raise Auth0::MissingParameter, 'Must specify a credential id' if credential_id.to_s.empty?
@@ -95,10 +102,12 @@ module Auth0
         end
         alias get_client_credential client_credential
 
+        # Deletes a credential from the specified client
+        # @param client_id [string] The Id of the client
+        # @param credential_id [string] The Id of the credential to delete
         def delete_client_credential(client_id, credential_id)
           raise Auth0::MissingClientId, 'Must specify a client id' if client_id.to_s.empty?
           raise Auth0::MissingParameter, 'Must specify a credential id' if credential_id.to_s.empty?
-
           delete("#{client_credentials_path(client_id)}/#{credential_id}")
         end
 
