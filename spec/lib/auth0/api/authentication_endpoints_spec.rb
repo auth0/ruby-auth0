@@ -237,6 +237,200 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
     end
 
+    context 'exchange_sms_otp_for_tokens', focus: true do
+      it 'requests the tokens using an OTP from SMS' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:grant_type]).to eq 'http://auth0.com/oauth/grant-type/passwordless/otp'
+          expect(payload[:username]).to eq 'phone_number'
+          expect(payload[:realm]).to eq 'sms'
+          expect(payload[:otp]).to eq 'code'
+          expect(payload[:client_id]).to eq client_id
+          expect(payload[:client_secret]).to eq client_secret
+          expect(payload[:scope]).to eq 'openid profile email'
+          expect(payload[:audience]).to be_nil
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        result = client_secret_instance.send :exchange_sms_otp_for_tokens, 'phone_number', 'code'
+
+        expect(result).to be_a_kind_of(Auth0::AccessToken)
+        expect(result.id_token).not_to be_nil
+        expect(result.access_token).not_to be_nil
+        expect(result.expires_in).not_to be_nil
+      end
+
+      it 'requests the tokens using OTP from SMS, and overrides scope and audience' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:scope]).to eq 'openid'
+          expect(payload[:audience]).to eq api_identifier
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        result = client_secret_instance.send(:exchange_sms_otp_for_tokens, 'phone_number', 'code',
+          audience: api_identifier,
+          scope: 'openid'
+        )
+
+        expect(result).to be_a_kind_of(Auth0::AccessToken)
+        expect(result.id_token).not_to be_nil
+        expect(result.access_token).not_to be_nil
+        expect(result.expires_in).not_to be_nil
+      end
+
+      it 'requests the tokens using an OTP from SMS using client assertion' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:grant_type]).to eq 'http://auth0.com/oauth/grant-type/passwordless/otp'
+          expect(payload[:client_secret]).to be_nil
+          expect(payload[:client_assertion]).not_to be_nil
+          expect(payload[:client_assertion_type]).to eq Auth0::ClientAssertion::CLIENT_ASSERTION_TYPE
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        client_assertion_instance.send :exchange_sms_otp_for_tokens, 'phone_number', 'code'
+      end
+    end
+
+    context 'exchange_email_otp_for_tokens', focus: true do
+      it 'requests the tokens using email OTP' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:grant_type]).to eq 'http://auth0.com/oauth/grant-type/passwordless/otp'
+          expect(payload[:username]).to eq 'email_address'
+          expect(payload[:realm]).to eq 'email'
+          expect(payload[:otp]).to eq 'code'
+          expect(payload[:client_id]).to eq client_id
+          expect(payload[:client_secret]).to eq client_secret
+          expect(payload[:scope]).to eq 'openid profile email'
+          expect(payload[:audience]).to be_nil
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        result = client_secret_instance.send :exchange_email_otp_for_tokens, 'email_address', 'code'
+
+        expect(result).to be_a_kind_of(Auth0::AccessToken)
+        expect(result.id_token).not_to be_nil
+        expect(result.access_token).not_to be_nil
+        expect(result.expires_in).not_to be_nil
+      end
+
+      it 'requests the tokens using OTP from email, and overrides scope and audience' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:scope]).to eq 'openid'
+          expect(payload[:audience]).to eq api_identifier
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        client_secret_instance.send(:exchange_email_otp_for_tokens, 'email_address', 'code',
+          audience: api_identifier,
+          scope: 'openid'
+        )
+      end
+
+      it 'requests the tokens using OTP from email using client assertion' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg).to match(
+            include(
+              method: :post,
+              url: 'https://samples.auth0.com/oauth/token'
+            )
+          )
+
+          payload = JSON.parse arg[:payload], symbolize_names: true
+
+          expect(payload[:grant_type]).to eq 'http://auth0.com/oauth/grant-type/passwordless/otp'
+          expect(payload[:client_secret]).to be_nil
+          expect(payload[:client_assertion]).not_to be_nil
+          expect(payload[:client_assertion_type]).to eq Auth0::ClientAssertion::CLIENT_ASSERTION_TYPE
+          
+          StubResponse.new({ 
+            "id_token" => "id_token",
+            "access_token" => "test_access_token", 
+            "expires_in" => 86400}, 
+            true,
+            200)
+        end
+
+        client_assertion_instance.send(:exchange_email_otp_for_tokens, 'email_address', 'code',
+          audience: api_identifier,
+          scope: 'openid'
+        )
+      end
+    end
+
     context 'login_with_resource_owner' do
       it 'logs in using a client secret' do
         expect(RestClient::Request).to receive(:execute) do |arg|

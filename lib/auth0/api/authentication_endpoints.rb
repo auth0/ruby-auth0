@@ -13,6 +13,7 @@ module Auth0
 
       UP_AUTH = 'Username-Password-Authentication'.freeze
       JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'.freeze
+      GRANT_TYPE_PASSWORDLESS_OPT = 'http://auth0.com/oauth/grant-type/passwordless/otp'.freeze
 
       # Request an API access token using a Client Credentials grant
       # @see https://auth0.com/docs/api-auth/tutorials/client-credentials
@@ -90,6 +91,48 @@ module Auth0
         }
 
         populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
+
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
+      end
+
+      # Exchange an OTP recieved through SMS for ID and access tokens
+      # @param phone_number [string] The user's phone number used to receive the OTP
+      # @param otp [string] The OTP contained in the SMS
+      # @param audience [string] The audience for the access token (defaults to nil)
+      # @param scope [string] The scope (defaults to 'openid profile email')
+      def exchange_sms_otp_for_tokens(phone_number, otp, audience: nil, scope: nil)
+        request_params = {
+          grant_type: GRANT_TYPE_PASSWORDLESS_OPT,
+          client_id: @client_id,
+          username: phone_number,
+          otp: otp,
+          realm: 'sms',
+          audience: audience,
+          scope: scope || 'openid profile email'
+        }
+
+        populate_client_assertion_or_secret(request_params)
+
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
+      end
+
+      # Exchange an OTP recieved through email for ID and access tokens
+      # @param email_address [string] The user's email address used to receive the OTP
+      # @param otp [string] The OTP contained in the email
+      # @param audience [string] The audience for the access token (defaults to nil)
+      # @param scope [string] The scope (defaults to 'openid profile email')
+      def exchange_email_otp_for_tokens(email_address, otp, audience: nil, scope: nil)
+        request_params = {
+          grant_type: GRANT_TYPE_PASSWORDLESS_OPT,
+          client_id: @client_id,
+          username: email_address,
+          otp: otp,
+          realm: 'email',
+          audience: audience,
+          scope: scope || 'openid profile email'
+        }
+
+        populate_client_assertion_or_secret(request_params)
 
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
