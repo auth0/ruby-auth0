@@ -1,5 +1,16 @@
 # Change Log
 
+## [v5.11.0](https://github.com/auth0/ruby-auth0/tree/v5.11.0) (2023-01-27)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.10.0...v5.11.0)
+
+**Added**
+- feat: support exchanging OTP codes for tokens [\#438](https://github.com/auth0/ruby-auth0/pull/438) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- [SDK-3869] Support client credentials in management client [\#437](https://github.com/auth0/ruby-auth0/pull/437) ([stevehobbsdev](https://github.com/stevehobbsdev))
+- [SDK-3863] Add support for Client Assertion in authentication endpoints [\#434](https://github.com/auth0/ruby-auth0/pull/434) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Changed**
+- ci: include Ruby 3.2 in test matrix [\#436](https://github.com/auth0/ruby-auth0/pull/436) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
 ## [v5.10.0](https://github.com/auth0/ruby-auth0/tree/v5.10.0) (2022-10-10)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.9.0...v5.10.0)
 
