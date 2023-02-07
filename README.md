@@ -16,7 +16,7 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 
 - [API documentation](https://www.rubydoc.info/gems/auth0) - documentation auto-generated from the code comments that explains all the available features
 - [Examples](https://github.com/auth0/ruby-auth0/blob/master/EXAMPLES.md) - examples that demonstrate the different ways in which this SDK can be used
-[FAQ](https://github.com/auth0/ruby-auth0/blob/master/FAQ.md) - frequently asked questions about the SDK
+- [FAQ](https://github.com/auth0/ruby-auth0/blob/master/FAQ.md) - frequently asked questions about the SDK
 - [Docs Site](https://auth0.com/docs) - explore our Docs site and learn more about Auth0
 
 ## Getting Started
