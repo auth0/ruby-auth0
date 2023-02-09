@@ -237,7 +237,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
     end
 
-    context 'exchange_sms_otp_for_tokens', focus: true do
+    context 'exchange_sms_otp_for_tokens' do
       it 'requests the tokens using an OTP from SMS' do
         expect(RestClient::Request).to receive(:execute) do |arg|
           expect(arg).to match(
@@ -335,7 +335,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
     end
 
-    context 'exchange_email_otp_for_tokens', focus: true do
+    context 'exchange_email_otp_for_tokens' do
       it 'requests the tokens using email OTP' do
         expect(RestClient::Request).to receive(:execute) do |arg|
           expect(arg).to match(
