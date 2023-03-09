@@ -679,4 +679,37 @@ describe Auth0::Api::V2::Users do
       end.not_to raise_error
     end
   end
+
+  context '.put_all_user_authentication_methods' do
+    it 'is expected to respond to put_all_user_authentication_methods' do
+      expect(@instance).to respond_to(:put_all_user_authentication_methods)
+    end
+
+    it 'is expected to respond to update_all_user_authentication_methods' do
+      expect(@instance).to respond_to(:update_all_user_authentication_methods)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.put_all_user_authentication_methods(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.put_all_user_authentication_methods('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        type: 'phone'
+      }
+      
+      expect(@instance).to receive(:put).with(
+        '/api/v2/users/USER_ID/authentication-methods',
+        [body]
+      )
+
+      expect do
+        @instance.put_all_user_authentication_methods 'USER_ID', [body]
+      end.to_not raise_error
+    end
+  end
 end
