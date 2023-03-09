@@ -583,4 +583,43 @@ describe Auth0::Api::V2::Users do
       end.not_to raise_error
     end
   end
+
+  context '.get_user_authentication_methods' do
+    it 'is expected to respond to get_user_authentication_methods method' do
+      expect(@instance).to respond_to(:get_user_authentication_methods)
+    end
+
+    it 'is expected to raise an exception when the user ID is empty' do
+      expect { @instance.get_user_authentication_methods(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to get user authentication methods' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods', {
+        per_page: nil,
+        page: nil,
+        include_totals: nil
+        }
+      )
+
+      expect do
+        @instance.get_user_authentication_methods('USER_ID')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get user authentication methods with paging' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods', {
+        per_page: 1,
+        page: 2,
+        include_totals: true
+        }
+      )
+
+      expect do
+        @instance.get_user_authentication_methods('USER_ID', per_page: 1, page: 2, include_totals: true)
+      end.not_to raise_error
+    end
+  end
+
 end
