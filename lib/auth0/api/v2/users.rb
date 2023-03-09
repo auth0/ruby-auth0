@@ -420,6 +420,16 @@ module Auth0
         end
         alias update_user_authentication_method patch_user_authentication_method
 
+        # Deletes all of the user's authentication methods
+        #
+        # @param user_id [string] The user ID
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_authentication_methods
+        def delete_user_authentication_methods(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/authentication-methods"          
+        end
+
         private
 
         # Users API path
