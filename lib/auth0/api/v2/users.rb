@@ -338,7 +338,7 @@ module Auth0
         #   * :include_totals [boolean] True if a query summary must be included in the result. (optional)
         # @return [json] The user's authentication methods
         # @see https://auth0.com/docs/api/management/v2#!/Users/get_authentication_methods
-        def get_user_authentication_methods(user_id, options = {})
+        def user_authentication_methods(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
 
           request_params = {
@@ -349,6 +349,7 @@ module Auth0
 
           get "#{users_path}/#{user_id}/authentication-methods", request_params
         end
+        alias get_user_authentication_methods user_authentication_methods
 
         # Get a specific authentication method for a user.
         #
@@ -356,12 +357,13 @@ module Auth0
         # @param authentication_method_id [string] The ID of the authentication method
         # @return [json] The user authentication method
         # @see https://auth0.com/docs/api/management/v2#!/Users/get_authentication_methods_by_authentication_method_id
-        def get_user_authentication_method(user_id, authentication_method_id)
+        def user_authentication_method(user_id, authentication_method_id)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
           raise Auth0::MissingParameter, 'Must supply a valid authentication_method_id' if authentication_method_id.to_s.empty?
 
           get "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
         end
+        alias get_user_authentication_method user_authentication_method
 
         # Create an authentication method for a user
         #

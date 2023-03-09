@@ -585,12 +585,16 @@ describe Auth0::Api::V2::Users do
   end
 
   context '.get_user_authentication_methods' do
+    it 'is expected to respond to user_authentication_methods method' do
+      expect(@instance).to respond_to(:user_authentication_methods)
+    end
+    
     it 'is expected to respond to get_user_authentication_methods method' do
       expect(@instance).to respond_to(:get_user_authentication_methods)
     end
 
     it 'is expected to raise an exception when the user ID is empty' do
-      expect { @instance.get_user_authentication_methods(nil) }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.user_authentication_methods(nil) }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to get user authentication methods' do
@@ -603,7 +607,7 @@ describe Auth0::Api::V2::Users do
       )
 
       expect do
-        @instance.get_user_authentication_methods('USER_ID')
+        @instance.user_authentication_methods('USER_ID')
       end.not_to raise_error
     end
 
@@ -617,22 +621,26 @@ describe Auth0::Api::V2::Users do
       )
 
       expect do
-        @instance.get_user_authentication_methods('USER_ID', per_page: 1, page: 2, include_totals: true)
+        @instance.user_authentication_methods('USER_ID', per_page: 1, page: 2, include_totals: true)
       end.not_to raise_error
     end
   end
 
   context '.get_user_authentication_method' do
     it 'is expected to respond to get_user_authentication_method' do
+      expect(@instance).to respond_to :user_authentication_method
+    end
+    
+    it 'is expected to respond to get_user_authentication_method' do
       expect(@instance).to respond_to :get_user_authentication_method
     end
 
     it 'is expected to raise an exception for a missing user ID' do
-      expect { @instance.get_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+      expect { @instance.user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
     end
 
     it 'is expected to raise an exception for a missing authentication method ID' do
-      expect { @instance.get_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+      expect { @instance.user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
     end
 
     it 'is expected to GET a user authentication method' do
@@ -641,7 +649,7 @@ describe Auth0::Api::V2::Users do
       )
 
       expect do
-        @instance.get_user_authentication_method('USER_ID', 'AUTH_METHOD_ID')
+        @instance.user_authentication_method('USER_ID', 'AUTH_METHOD_ID')
       end.not_to raise_error
 
     end
