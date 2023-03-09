@@ -363,6 +363,29 @@ module Auth0
           get "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
         end
 
+        # Create an authentication method for a user
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param body [hash] The post body content
+        #   * :type [string] "phone" or "email" or "totp" or "webauthn-roaming"
+        #   * :name [string] A human-readable label to identify the authentication method (optional)
+        #   * :totp_secret [string] Base32 encoded secret for TOTP generation (optional)
+        #   * :phone_number [string] Applies to phone authentication methods only. The destination phone number used to send verification codes via text and voice (optional)
+        #   * :email [string] Applies to email authentication methods only. The email address used to send verification messages (optional)
+        #   * :preferred_authentication_method [string] Preferred phone authentication method (optional)
+        #   * :key_id [string] Applies to email webauthn authenticators only. The id of the credential (optional)
+        #   * :public_key [string] Applies to email webauthn authenticators only. The public key (optional)
+        #   * :relying_party_identifier [string] Applies to email webauthn authenticators only. The relying party identifier (optional)
+        # @return [json] The user authentication method
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_authentication_methods
+        def post_user_authentication_method(user_id, body)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a body' if body.to_s.empty?
+
+          post "#{users_path}/#{user_id}/authentication-methods", body
+        end
+        alias create_user_authentication_method post_user_authentication_method
+
         private
 
         # Users API path

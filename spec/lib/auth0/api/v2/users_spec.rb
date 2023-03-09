@@ -647,4 +647,36 @@ describe Auth0::Api::V2::Users do
     end
   end
 
+  context '.create_user_authentication_method' do
+    it 'is expected to respond to create_user_authentication_method' do
+      expect(@instance).to respond_to :create_user_authentication_method
+    end
+
+    it 'is expected to respond to post_user_authentication_method' do
+      expect(@instance).to respond_to :post_user_authentication_method
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.create_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.create_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        type: 'phone'
+      }
+
+      expect(@instance).to receive(:post).with(
+        '/api/v2/users/USER_ID/authentication-methods',
+        body
+      )
+
+      expect do
+        @instance.create_user_authentication_method 'USER_ID', body
+      end.not_to raise_error
+    end
+  end
 end
