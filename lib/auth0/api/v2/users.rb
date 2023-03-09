@@ -404,6 +404,22 @@ module Auth0
         end
         alias update_all_user_authentication_methods put_all_user_authentication_methods
 
+        # Updates a user authentication method
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param body [hash array] The mehods to update
+        #   * :name [string] A human-readable label to identify the authentication method (optional)
+        #   * :preferred_authentication_method [string] Preferred phone authentication method (optional)
+        # @see https://auth0.com/docs/api/management/v2#!/Users/put_authentication_methods
+        def patch_user_authentication_method(user_id, authentication_method_id, body)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply an authentication_method_id' if authentication_method_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a body' if body.to_s.empty?
+
+          patch "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}", body
+        end
+        alias update_user_authentication_method patch_user_authentication_method
+
         private
 
         # Users API path

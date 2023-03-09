@@ -712,4 +712,41 @@ describe Auth0::Api::V2::Users do
       end.to_not raise_error
     end
   end
+
+  context '.patch_user_authentication_method' do
+    it 'is expected to respond to patch_user_authentication_method' do
+      expect(@instance).to respond_to(:patch_user_authentication_method)
+    end
+
+    it 'is expected to respond to update_user_authentication_method' do
+      expect(@instance).to respond_to(:update_user_authentication_method)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.patch_user_authentication_method(nil, nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication_method_id' do
+      expect { @instance.patch_user_authentication_method('USER_ID', nil, nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.patch_user_authentication_method('USER_ID', 'AUTH_METHOD_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        name: 'auth method name'
+      }
+
+      expect(@instance).to receive(:patch).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID',
+        body
+      )
+
+      expect do
+        @instance.patch_user_authentication_method 'USER_ID', 'AUTH_METHOD_ID', body
+      end.to_not raise_error
+    end
+  end
 end
