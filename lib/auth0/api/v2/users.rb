@@ -429,6 +429,19 @@ module Auth0
 
           delete "#{users_path}/#{user_id}/authentication-methods"          
         end
+ 
+        
+        # Deletes the user's authentication method specified by authentication_method_id
+        #
+        # @param user_id [string] The user ID
+        # @param authentication_method_id [string] The ID of the authentication method
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_authentication_methods_by_authentication_method_id
+        def delete_user_authentication_method(user_id, authentication_method_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply an authentication_method_id' if authentication_method_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
+        end
 
         private
 

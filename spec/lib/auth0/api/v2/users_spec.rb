@@ -750,7 +750,7 @@ describe Auth0::Api::V2::Users do
     end
   end
   
-  context 'delete_user_authentication_methods' do
+  context '.delete_user_authentication_methods' do
     it 'is expected to respond to delete_user_authentication_methods' do
       expect(@instance).to respond_to(:delete_user_authentication_methods)
     end
@@ -766,6 +766,30 @@ describe Auth0::Api::V2::Users do
 
       expect do
         @instance.delete_user_authentication_methods 'USER_ID'
+      end.to_not raise_error
+    end
+  end
+
+  context '.delete_user_authentication_method' do
+    it 'is expected to respond to delete_user_authentication_method' do
+      expect(@instance).to respond_to(:delete_user_authentication_method)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.delete_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication_method_id' do
+      expect { @instance.delete_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to call the endpoint' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID'
+      )
+
+      expect do
+        @instance.delete_user_authentication_method 'USER_ID', 'AUTH_METHOD_ID'
       end.to_not raise_error
     end
   end
