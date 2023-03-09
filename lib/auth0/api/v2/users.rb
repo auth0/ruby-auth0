@@ -350,6 +350,19 @@ module Auth0
           get "#{users_path}/#{user_id}/authentication-methods", request_params
         end
 
+        # Get a specific authentication method for a user.
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param authentication_method_id [string] The ID of the authentication method
+        # @return [json] The user authentication method
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_authentication_methods_by_authentication_method_id
+        def get_user_authentication_method(user_id, authentication_method_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a valid authentication_method_id' if authentication_method_id.to_s.empty?
+
+          get "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
+        end
+
         private
 
         # Users API path

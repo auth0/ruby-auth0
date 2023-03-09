@@ -622,4 +622,29 @@ describe Auth0::Api::V2::Users do
     end
   end
 
+  context '.get_user_authentication_method' do
+    it 'is expected to respond to get_user_authentication_method' do
+      expect(@instance).to respond_to :get_user_authentication_method
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.get_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication method ID' do
+      expect { @instance.get_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to GET a user authentication method' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID'
+      )
+
+      expect do
+        @instance.get_user_authentication_method('USER_ID', 'AUTH_METHOD_ID')
+      end.not_to raise_error
+
+    end
+  end
+
 end
