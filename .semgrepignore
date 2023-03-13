@@ -1,0 +1,6 @@
+.bundle/
+.circleci/
+.devcontainer/
+.github/
+examples/
+spec/
