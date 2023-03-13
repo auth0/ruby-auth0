@@ -1,5 +1,14 @@
 # Change Log
 
+## [v5.12.0](https://github.com/auth0/ruby-auth0/tree/v5.12.0) (2023-03-13)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.11.0...v5.12.0)
+
+**Added**
+- [SDK-4014] User Authentication Method management API support [\#450](https://github.com/auth0/ruby-auth0/pull/450) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Fixed**
+- Remove broken FAQ link from README [\#441](https://github.com/auth0/ruby-auth0/pull/441) ([joxxoxo](https://github.com/joxxoxo))
+
 ## [v5.11.0](https://github.com/auth0/ruby-auth0/tree/v5.11.0) (2023-01-27)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.10.0...v5.11.0)
 
