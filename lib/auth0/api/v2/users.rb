@@ -329,6 +329,122 @@ module Auth0
           get "#{users_path}/#{user_id}/organizations"
         end
 
+        # Get the available authentication methods for a user.
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param options [hash] A hash of options for getting permissions
+        #   * :per_page [integer] The amount of permissions per page. (optional)
+        #   * :page [integer]  The page number. Zero based. (optional)
+        #   * :include_totals [boolean] True if a query summary must be included in the result. (optional)
+        # @return [json] The user's authentication methods
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_authentication_methods
+        def user_authentication_methods(user_id, options = {})
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          request_params = {
+            per_page: options.fetch(:per_page, nil),
+            page: options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+
+          get "#{users_path}/#{user_id}/authentication-methods", request_params
+        end
+        alias get_user_authentication_methods user_authentication_methods
+
+        # Get a specific authentication method for a user.
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param authentication_method_id [string] The ID of the authentication method
+        # @return [json] The user authentication method
+        # @see https://auth0.com/docs/api/management/v2#!/Users/get_authentication_methods_by_authentication_method_id
+        def user_authentication_method(user_id, authentication_method_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a valid authentication_method_id' if authentication_method_id.to_s.empty?
+
+          get "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
+        end
+        alias get_user_authentication_method user_authentication_method
+
+        # Create an authentication method for a user
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param body [hash] The post body content
+        #   * :type [string] "phone" or "email" or "totp" or "webauthn-roaming"
+        #   * :name [string] A human-readable label to identify the authentication method (optional)
+        #   * :totp_secret [string] Base32 encoded secret for TOTP generation (optional)
+        #   * :phone_number [string] Applies to phone authentication methods only. The destination phone number used to send verification codes via text and voice (optional)
+        #   * :email [string] Applies to email authentication methods only. The email address used to send verification messages (optional)
+        #   * :preferred_authentication_method [string] Preferred phone authentication method (optional)
+        #   * :key_id [string] Applies to email webauthn authenticators only. The id of the credential (optional)
+        #   * :public_key [string] Applies to email webauthn authenticators only. The public key (optional)
+        #   * :relying_party_identifier [string] Applies to email webauthn authenticators only. The relying party identifier (optional)
+        # @see https://auth0.com/docs/api/management/v2#!/Users/post_authentication_methods
+        def post_user_authentication_method(user_id, body)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a body' if body.to_s.empty?
+
+          post "#{users_path}/#{user_id}/authentication-methods", body
+        end
+        alias create_user_authentication_method post_user_authentication_method
+
+        # Updates all authentication methods by replacing them with the given ones
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param body [hash array] The mehods to update
+        #   * :type [string] "phone" or "email" or "totp" or "webauthn-roaming"
+        #   * :name [string] A human-readable label to identify the authentication method (optional)
+        #   * :totp_secret [string] Base32 encoded secret for TOTP generation (optional)
+        #   * :phone_number [string] Applies to phone authentication methods only. The destination phone number used to send verification codes via text and voice (optional)
+        #   * :email [string] Applies to email authentication methods only. The email address used to send verification messages (optional)
+        #   * :preferred_authentication_method [string] Preferred phone authentication method (optional)
+        # @see https://auth0.com/docs/api/management/v2#!/Users/put_authentication_methods
+        def put_all_user_authentication_methods(user_id, body)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a body' if body.to_s.empty?
+
+          put "#{users_path}/#{user_id}/authentication-methods", body
+        end
+        alias update_all_user_authentication_methods put_all_user_authentication_methods
+
+        # Updates a user authentication method
+        #
+        # @param user_id [string] The user ID of the authentication methods to get
+        # @param body [hash array] The mehods to update
+        #   * :name [string] A human-readable label to identify the authentication method (optional)
+        #   * :preferred_authentication_method [string] Preferred phone authentication method (optional)
+        # @see https://auth0.com/docs/api/management/v2#!/Users/put_authentication_methods
+        def patch_user_authentication_method(user_id, authentication_method_id, body)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply an authentication_method_id' if authentication_method_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply a body' if body.to_s.empty?
+
+          patch "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}", body
+        end
+        alias update_user_authentication_method patch_user_authentication_method
+
+        # Deletes all of the user's authentication methods
+        #
+        # @param user_id [string] The user ID
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_authentication_methods
+        def delete_user_authentication_methods(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/authentication-methods"          
+        end
+ 
+        
+        # Deletes the user's authentication method specified by authentication_method_id
+        #
+        # @param user_id [string] The user ID
+        # @param authentication_method_id [string] The ID of the authentication method
+        # @see https://auth0.com/docs/api/management/v2#!/Users/delete_authentication_methods_by_authentication_method_id
+        def delete_user_authentication_method(user_id, authentication_method_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+          raise Auth0::MissingParameter, 'Must supply an authentication_method_id' if authentication_method_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
+        end
+
         private
 
         # Users API path

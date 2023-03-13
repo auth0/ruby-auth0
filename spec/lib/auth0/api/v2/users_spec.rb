@@ -583,4 +583,222 @@ describe Auth0::Api::V2::Users do
       end.not_to raise_error
     end
   end
+
+  context '.get_user_authentication_methods' do
+    it 'is expected to respond to user_authentication_methods method' do
+      expect(@instance).to respond_to(:user_authentication_methods)
+    end
+    
+    it 'is expected to respond to get_user_authentication_methods method' do
+      expect(@instance).to respond_to(:get_user_authentication_methods)
+    end
+
+    it 'is expected to raise an exception when the user ID is empty' do
+      expect { @instance.user_authentication_methods(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to get user authentication methods' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods', {
+        per_page: nil,
+        page: nil,
+        include_totals: nil
+        }
+      )
+
+      expect do
+        @instance.user_authentication_methods('USER_ID')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get user authentication methods with paging' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods', {
+        per_page: 1,
+        page: 2,
+        include_totals: true
+        }
+      )
+
+      expect do
+        @instance.user_authentication_methods('USER_ID', per_page: 1, page: 2, include_totals: true)
+      end.not_to raise_error
+    end
+  end
+
+  context '.get_user_authentication_method' do
+    it 'is expected to respond to get_user_authentication_method' do
+      expect(@instance).to respond_to :user_authentication_method
+    end
+    
+    it 'is expected to respond to get_user_authentication_method' do
+      expect(@instance).to respond_to :get_user_authentication_method
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication method ID' do
+      expect { @instance.user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to GET a user authentication method' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID'
+      )
+
+      expect do
+        @instance.user_authentication_method('USER_ID', 'AUTH_METHOD_ID')
+      end.not_to raise_error
+
+    end
+  end
+
+  context '.create_user_authentication_method' do
+    it 'is expected to respond to create_user_authentication_method' do
+      expect(@instance).to respond_to :create_user_authentication_method
+    end
+
+    it 'is expected to respond to post_user_authentication_method' do
+      expect(@instance).to respond_to :post_user_authentication_method
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.create_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.create_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        type: 'phone'
+      }
+
+      expect(@instance).to receive(:post).with(
+        '/api/v2/users/USER_ID/authentication-methods',
+        body
+      )
+
+      expect do
+        @instance.create_user_authentication_method 'USER_ID', body
+      end.not_to raise_error
+    end
+  end
+
+  context '.put_all_user_authentication_methods' do
+    it 'is expected to respond to put_all_user_authentication_methods' do
+      expect(@instance).to respond_to(:put_all_user_authentication_methods)
+    end
+
+    it 'is expected to respond to update_all_user_authentication_methods' do
+      expect(@instance).to respond_to(:update_all_user_authentication_methods)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.put_all_user_authentication_methods(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.put_all_user_authentication_methods('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        type: 'phone'
+      }
+      
+      expect(@instance).to receive(:put).with(
+        '/api/v2/users/USER_ID/authentication-methods',
+        [body]
+      )
+
+      expect do
+        @instance.put_all_user_authentication_methods 'USER_ID', [body]
+      end.to_not raise_error
+    end
+  end
+
+  context '.patch_user_authentication_method' do
+    it 'is expected to respond to patch_user_authentication_method' do
+      expect(@instance).to respond_to(:patch_user_authentication_method)
+    end
+
+    it 'is expected to respond to update_user_authentication_method' do
+      expect(@instance).to respond_to(:update_user_authentication_method)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.patch_user_authentication_method(nil, nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication_method_id' do
+      expect { @instance.patch_user_authentication_method('USER_ID', nil, nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to raise an exception for a missing body' do
+      expect { @instance.patch_user_authentication_method('USER_ID', 'AUTH_METHOD_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to send the body to the endpoint' do
+      body = {
+        name: 'auth method name'
+      }
+
+      expect(@instance).to receive(:patch).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID',
+        body
+      )
+
+      expect do
+        @instance.patch_user_authentication_method 'USER_ID', 'AUTH_METHOD_ID', body
+      end.to_not raise_error
+    end
+  end
+  
+  context '.delete_user_authentication_methods' do
+    it 'is expected to respond to delete_user_authentication_methods' do
+      expect(@instance).to respond_to(:delete_user_authentication_methods)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.delete_user_authentication_methods(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to call the endpoint' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/users/USER_ID/authentication-methods'
+      )
+
+      expect do
+        @instance.delete_user_authentication_methods 'USER_ID'
+      end.to_not raise_error
+    end
+  end
+
+  context '.delete_user_authentication_method' do
+    it 'is expected to respond to delete_user_authentication_method' do
+      expect(@instance).to respond_to(:delete_user_authentication_method)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.delete_user_authentication_method(nil, nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to raise an exception for a missing authentication_method_id' do
+      expect { @instance.delete_user_authentication_method('USER_ID', nil) }.to raise_exception(Auth0::MissingParameter)
+    end
+
+    it 'is expected to call the endpoint' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/users/USER_ID/authentication-methods/AUTH_METHOD_ID'
+      )
+
+      expect do
+        @instance.delete_user_authentication_method 'USER_ID', 'AUTH_METHOD_ID'
+      end.to_not raise_error
+    end
+  end
 end
