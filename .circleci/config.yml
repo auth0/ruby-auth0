@@ -41,7 +41,8 @@ jobs:
             - vendor/bundle
       # Must define DOMAIN, CLIENT_ID, CLIENT_SECRET and MASTER_JWT env
       - run: bundle exec rake test
-      - codecov/upload
+      - codecov/upload:
+        file: /home/circleci/project/coverage/coverage.xml
 
 workflows:
   tests:
