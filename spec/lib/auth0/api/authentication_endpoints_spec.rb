@@ -628,5 +628,74 @@ describe Auth0::Api::AuthenticationEndpoints do
         client_assertion_instance.send :start_passwordless_sms_flow, '123456789'
       end
     end
+
+    context 'pushed_authorization_request', focus: true do
+      it 'sends the request as a form post' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          
+          expect(arg[:payload]).to eq({
+            client_id: client_id,
+            client_secret: client_secret,
+            connection: nil,
+            organization: nil,
+            invitation: nil,
+            redirect_uri: nil,
+            response_type: 'code',
+            scope: nil,
+            state: nil
+          })
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.send :pushed_authorization_request
+      end
+
+      it 'sends the request as a form post with all known overrides' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          
+          expect(arg[:payload]).to eq({
+            client_id: client_id,
+            client_secret: client_secret,
+            connection: 'google-oauth2',
+            organization: 'org_id',
+            invitation: 'http://invite.url',
+            redirect_uri: 'http://localhost:3000',
+            response_type: 'id_token',
+            scope: 'openid',
+            state: 'random_value'
+          })
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.send(:pushed_authorization_request,
+          response_type: 'id_token',
+          redirect_uri: 'http://localhost:3000',
+          organization: 'org_id',
+          invitation: 'http://invite.url',
+          scope: 'openid',
+          state: 'random_value',
+          connection: 'google-oauth2')
+      end
+
+      it 'sends the request as a form post using client assertion' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          expect(arg[:payload][:client_secret]).to be_nil
+          expect(arg[:payload][:client_assertion]).not_to be_nil
+          expect(arg[:payload][:client_assertion_type]).to eq Auth0::ClientAssertion::CLIENT_ASSERTION_TYPE
+  
+          StubResponse.new({}, true, 200)
+        end
+  
+        client_assertion_instance.send :pushed_authorization_request
+      end
+    end
   end
 end

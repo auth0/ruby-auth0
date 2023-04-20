@@ -271,7 +271,7 @@ describe Auth0::Mixins::HTTPProxy do
   end
 
   %i(post post_form put patch).each do |http_method|
-    context ".#{http_method}", focus: true  do
+    context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP"do
         expect(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
