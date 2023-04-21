@@ -671,6 +671,7 @@ describe Auth0::Api::AuthenticationEndpoints do
           StubResponse.new({}, true, 200)
         end
 
+        client_secret_instance.headers = {} if client_secret_instance.headers == nil
         client_secret_instance.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         client_secret_instance.send :pushed_authorization_request
       end
