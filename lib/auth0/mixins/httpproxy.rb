@@ -85,12 +85,12 @@ module Auth0
         elsif method == :post_file
           body.merge!(multipart: true)
           # Ignore the default Content-Type headers and let the HTTP client define them
-          post_file_headers = headers.slice(*headers.keys - ['Content-Type'])
+          post_file_headers = headers.except('Content-Type') if headers != nil
           # Actual call with the altered headers
           call(:post, encode_uri(uri), timeout, post_file_headers, body)
         elsif method == :post_form
-          form_post_headers = headers.slice(*headers.keys - ['Content-Type']) if headers != nil
-          call(:post, encode_uri(uri), timeout, form_post_headers, body)
+          form_post_headers = headers.except('Content-Type') if headers != nil
+          call(:post, encode_uri(uri), timeout, form_post_headers, body.compact)
         else
           call(method, encode_uri(uri), timeout, headers, body.to_json)
         end

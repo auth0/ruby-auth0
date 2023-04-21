@@ -638,18 +638,24 @@ describe Auth0::Api::AuthenticationEndpoints do
           expect(arg[:payload]).to eq({
             client_id: client_id,
             client_secret: client_secret,
-            connection: nil,
-            organization: nil,
-            invitation: nil,
-            redirect_uri: nil,
             response_type: 'code',
-            scope: nil,
-            state: nil
           })
 
           StubResponse.new({}, true, 200)
         end
 
+        client_secret_instance.send :pushed_authorization_request
+      end
+
+      it 'allows the RestClient to handle the correct header defaults' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:headers]).not_to have_key('Content-Type')
+          expect(arg[:headers]).to have_key('Auth0-Client')
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         client_secret_instance.send :pushed_authorization_request
       end
 
