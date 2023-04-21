@@ -6,6 +6,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   let(:client_secret) { 'test-client-secret' }
   let(:api_identifier) { 'test-audience' }
   let(:domain) { 'samples.auth0.com' }
+  let(:request_uri) { 'urn:ietf:params:oauth:request_uri:the.request.uri' }
 
   let(:client_secret_config) { { 
     domain: domain,
@@ -629,7 +630,22 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
     end
 
-    context 'pushed_authorization_request', focus: true do
+    context 'par_authorization_url' do
+      it 'throws an exception if request_uri is nil' do
+        expect { client_secret_instance.send :par_authorization_url, nil}.to raise_error Auth0::InvalidParameter
+      end
+
+      it 'throws an exception if request_uri is empty' do
+        expect { client_secret_instance.send :par_authorization_url, ''}.to raise_error Auth0::InvalidParameter
+      end
+      
+      it 'builds a URL containing the request_uri' do
+        url = client_secret_instance.send :par_authorization_url, request_uri
+        expect(CGI.unescape(url.to_s)).to eq("https://samples.auth0.com/authorize?client_id=#{client_id}&request_uri=#{request_uri}")
+      end
+    end
+
+    context 'pushed_authorization_request' do
       it 'sends the request as a form post' do
         expect(RestClient::Request).to receive(:execute) do |arg|
           expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')

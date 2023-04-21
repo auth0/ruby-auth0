@@ -323,6 +323,21 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
       end
 
+      # Return an authorization URL for PAR requests
+      # @see https://www.rfc-editor.org/rfc/rfc9126.html
+      # @param request_uri [string] The request_uri as obtained by calling `pushed_authorization_request`
+      # @param additional_parameters Any additional parameters to send
+      def par_authorization_url(request_uri)
+        raise Auth0::InvalidParameter, 'Must supply a valid request_uri' if request_uri.to_s.empty?
+
+        request_params = {
+          client_id: @client_id,
+          request_uri: request_uri,
+        }
+
+        URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
+      end
+
       # Returns an Auth0 logout URL with a return URL.
       # @see https://auth0.com/docs/api/authentication#logout
       # @see https://auth0.com/docs/logout
