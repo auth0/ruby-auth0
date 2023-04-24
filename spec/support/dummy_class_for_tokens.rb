@@ -15,5 +15,6 @@ class DummyClassForTokens
     @token_expires_at = config[:token_expires_at]
     @client_assertion_signing_key = config[:client_assertion_signing_key]
     @client_assertion_signing_alg = config[:client_assertion_signing_alg] || 'RS256'
+    @headers ||= {}
   end
 end

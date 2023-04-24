@@ -6,6 +6,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   let(:client_secret) { 'test-client-secret' }
   let(:api_identifier) { 'test-audience' }
   let(:domain) { 'samples.auth0.com' }
+  let(:request_uri) { 'urn:ietf:params:oauth:request_uri:the.request.uri' }
 
   let(:client_secret_config) { { 
     domain: domain,
@@ -626,6 +627,95 @@ describe Auth0::Api::AuthenticationEndpoints do
         end
 
         client_assertion_instance.send :start_passwordless_sms_flow, '123456789'
+      end
+    end
+
+    context 'par_authorization_url' do
+      it 'throws an exception if request_uri is nil' do
+        expect { client_secret_instance.send :par_authorization_url, nil}.to raise_error Auth0::InvalidParameter
+      end
+
+      it 'throws an exception if request_uri is empty' do
+        expect { client_secret_instance.send :par_authorization_url, ''}.to raise_error Auth0::InvalidParameter
+      end
+      
+      it 'builds a URL containing the request_uri' do
+        url = client_secret_instance.send :par_authorization_url, request_uri
+        expect(CGI.unescape(url.to_s)).to eq("https://samples.auth0.com/authorize?client_id=#{client_id}&request_uri=#{request_uri}")
+      end
+    end
+
+    context 'pushed_authorization_request' do
+      it 'sends the request as a form post' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          
+          expect(arg[:payload]).to eq({
+            client_id: client_id,
+            client_secret: client_secret,
+            response_type: 'code',
+          })
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.send :pushed_authorization_request
+      end
+
+      it 'allows the RestClient to handle the correct header defaults' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:headers]).not_to have_key('Content-Type')
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        client_secret_instance.send :pushed_authorization_request
+      end
+
+      it 'sends the request as a form post with all known overrides' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          
+          expect(arg[:payload]).to eq({
+            client_id: client_id,
+            client_secret: client_secret,
+            connection: 'google-oauth2',
+            organization: 'org_id',
+            invitation: 'http://invite.url',
+            redirect_uri: 'http://localhost:3000',
+            response_type: 'id_token',
+            scope: 'openid',
+            state: 'random_value'
+          })
+
+          StubResponse.new({}, true, 200)
+        end
+
+        client_secret_instance.send(:pushed_authorization_request,
+          response_type: 'id_token',
+          redirect_uri: 'http://localhost:3000',
+          organization: 'org_id',
+          invitation: 'http://invite.url',
+          scope: 'openid',
+          state: 'random_value',
+          connection: 'google-oauth2')
+      end
+
+      it 'sends the request as a form post using client assertion' do
+        expect(RestClient::Request).to receive(:execute) do |arg|
+          expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
+          expect(arg[:method]).to eq(:post)
+          expect(arg[:payload][:client_secret]).to be_nil
+          expect(arg[:payload][:client_assertion]).not_to be_nil
+          expect(arg[:payload][:client_assertion_type]).to eq Auth0::ClientAssertion::CLIENT_ASSERTION_TYPE
+  
+          StubResponse.new({}, true, 200)
+        end
+  
+        client_assertion_instance.send :pushed_authorization_request
       end
     end
   end

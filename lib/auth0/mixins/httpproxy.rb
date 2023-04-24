@@ -16,7 +16,7 @@ module Auth0
       BASE_DELAY = 100
 
       # proxying requests from instance methods to HTTP class methods
-      %i(get post post_file put patch delete delete_with_body).each do |method|
+      %i(get post post_file post_form put patch delete delete_with_body).each do |method|
         define_method(method) do |uri, body = {}, extra_headers = {}|
           body = body.delete_if { |_, v| v.nil? }
           token = get_token()
@@ -85,9 +85,12 @@ module Auth0
         elsif method == :post_file
           body.merge!(multipart: true)
           # Ignore the default Content-Type headers and let the HTTP client define them
-          post_file_headers = headers.slice(*headers.keys - ['Content-Type'])
+          post_file_headers = headers.except('Content-Type') if headers != nil
           # Actual call with the altered headers
           call(:post, encode_uri(uri), timeout, post_file_headers, body)
+        elsif method == :post_form
+          form_post_headers = headers.except('Content-Type') if headers != nil
+          call(:post, encode_uri(uri), timeout, form_post_headers, body.compact)
         else
           call(method, encode_uri(uri), timeout, headers, body.to_json)
         end

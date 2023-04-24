@@ -323,6 +323,21 @@ module Auth0
         URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
       end
 
+      # Return an authorization URL for PAR requests
+      # @see https://www.rfc-editor.org/rfc/rfc9126.html
+      # @param request_uri [string] The request_uri as obtained by calling `pushed_authorization_request`
+      # @param additional_parameters Any additional parameters to send
+      def par_authorization_url(request_uri)
+        raise Auth0::InvalidParameter, 'Must supply a valid request_uri' if request_uri.to_s.empty?
+
+        request_params = {
+          client_id: @client_id,
+          request_uri: request_uri,
+        }
+
+        URI::HTTPS.build(host: @domain, path: '/authorize', query: to_query(request_params))
+      end
+
       # Returns an Auth0 logout URL with a return URL.
       # @see https://auth0.com/docs/api/authentication#logout
       # @see https://auth0.com/docs/logout
@@ -342,6 +357,28 @@ module Auth0
           path: '/v2/logout',
           query: to_query(request_params)
         )
+      end
+
+      # Make a request to the PAR endpoint and receive a `request_uri` to send to the '/authorize' endpoint.
+      # @see https://auth0.com/docs/api/authentication#authorization-code-grant
+      # @param redirect_uri [string] URL to redirect after authorization
+      # @param options [hash] Can contain response_type, connection, state, organization, invitation, and additional_parameters.
+      # @return [url] Authorization URL.
+      def pushed_authorization_request(parameters = {})
+        request_params = {
+          client_id: @client_id,
+          response_type: parameters.fetch(:response_type, 'code'),
+          connection: parameters.fetch(:connection, nil),
+          redirect_uri: parameters.fetch(:redirect_uri, nil),
+          state: parameters.fetch(:state, nil),
+          scope: parameters.fetch(:scope, nil),
+          organization: parameters.fetch(:organization, nil),
+          invitation: parameters.fetch(:invitation, nil)
+        }.merge(parameters.fetch(:additional_parameters, {}))
+
+        populate_client_assertion_or_secret(request_params)
+        
+        request_with_retry(:post_form, '/oauth/par', request_params, {})
       end
 
       # Return a SAMLP URL.
