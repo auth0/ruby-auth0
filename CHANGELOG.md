@@ -1,5 +1,14 @@
 # Change Log
 
+## [v5.13.0](https://github.com/auth0/ruby-auth0/tree/v5.13.0) (2023-04-24)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.12.0...v5.13.0)
+
+**Added**
+- [SDK-4142] Add support for /oauth/par [\#470](https://github.com/auth0/ruby-auth0/pull/470) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
+**Deprecated**
+- Drop support for 2.7 in CI build [\#467](https://github.com/auth0/ruby-auth0/pull/467) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
 ## [v5.12.0](https://github.com/auth0/ruby-auth0/tree/v5.12.0) (2023-03-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.11.0...v5.12.0)
 
