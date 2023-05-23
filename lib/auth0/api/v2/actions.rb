@@ -16,10 +16,7 @@ module Auth0
         # @param page [integer] The page number. Zero based.
         # @param installed [boolean] When true, return only installed actions. When false, return only custom actions. Returns all actions by default.
         # @return [json] Actions and pagination info
-        def actions(trigger_id, action_name, deployed: nil, per_page: nil, page: nil, installed: nil)
-          raise Auth0::MissingTriggerId, 'Must supply a valid trigger_id' if trigger_id.to_s.empty?
-          raise Auth0::MissingActionName, 'Must supply a valid action_name' if action_name.to_s.empty?
-
+        def actions(trigger_id: nil, action_name: nil, deployed: nil, per_page: nil, page: nil, installed: nil)
           request_params = {
             trigger_id: trigger_id,
             action_name: action_name,
@@ -38,7 +35,8 @@ module Auth0
         # @param body [hash] See https://auth0.com/docs/api/management/v2/#!/actions/post_action for available options
         # @return [json] Returns the created action.
         def create_action(body = {})
-          post(actions_path, body)
+          path = "#{actions_path}/actions"
+          post(path, body)
         end
 
         # Retrieve the set of triggers currently available within actions. A trigger is an extensibility point to which actions can be bound.
