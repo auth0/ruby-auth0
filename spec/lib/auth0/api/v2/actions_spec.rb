@@ -27,8 +27,8 @@ describe Auth0::Api::V2::Actions do
       })
       expect do
         @instance.actions(
-          'post-login',
-          'loginHandler',
+          trigger_id: 'post-login',
+          action_name: 'loginHandler',
           deployed: true,
           per_page: 10,
           page: 1,
@@ -37,13 +37,6 @@ describe Auth0::Api::V2::Actions do
       end.not_to raise_error
     end
 
-    it 'is expected to raise an exception when the trigger id is empty' do
-      expect { @instance.actions(nil, nil) }.to raise_exception(Auth0::MissingTriggerId)
-    end
-
-    it 'is expected to raise an exception when the action name is empty' do
-      expect { @instance.actions(1, nil) }.to raise_exception(Auth0::MissingActionName)
-    end
   end
 
   context '.action' do
@@ -71,7 +64,7 @@ describe Auth0::Api::V2::Actions do
 
     it 'is expected to post to /api/v2/actions' do
       expect(@instance).to receive(:post).with(
-        '/api/v2/actions', {
+        '/api/v2/actions/actions', {
           name: 'test_org'
         })
       expect do
