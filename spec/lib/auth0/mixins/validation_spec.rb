@@ -347,6 +347,18 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
 
         expect { instance.validate(token) }.not_to raise_exception
       end
+
+      it 'validates org_id when both claims are present in the token' do
+        token = build_id_token org_name: 'my-organization', org_id: 'org_1234'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'org_1234' }))
+        expect { instance.validate(token) }.not_to raise_exception        
+      end
+
+      it 'validates org_name when both claims are present in the token' do
+        token = build_id_token org_name: 'my-organization', org_id: 'org_1234'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+        expect { instance.validate(token) }.not_to raise_exception        
+      end
     end
   end
 end
