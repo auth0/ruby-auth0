@@ -85,7 +85,7 @@ Note that Organizations is currently only available to customers on our Enterpri
 
 ### Logging in with an Organization
 
-Configure the Authentication API client and pass your Organization ID to the authorize url:
+Configure the Authentication API client and pass your Organization ID or name to the authorize url:
 
 ```ruby
 require 'auth0'
@@ -94,7 +94,7 @@ require 'auth0'
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_SECRET}',
   domain: '{YOUR_TENANT}.auth0.com',
-  organization: "{YOUR_ORGANIZATION_ID}"
+  organization: "{YOUR_ORGANIZATION_ID_OR_NAME}"
 )
 
 universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}")
@@ -113,7 +113,7 @@ require 'auth0'
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_ID}',
   domain: '{YOUR_TENANT}.auth0.com',
-  organization: "{YOUR_ORGANIZATION_ID}"
+  organization: "{YOUR_ORGANIZATION_ID_OR_NAME}"
 )
 
 universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION_CALLBACK_URL}", {
@@ -148,7 +148,7 @@ The method takes the following optional keyword parameters:
 | `max_age`      | Integer        | The `max_age` value you sent in the call to `/authorize`, if any.                                                         | `nil`                                                                                                                  |
 | `issuer`       | String         | By default the `iss` claim will be checked against the URL of your **Auth0 Domain**. Use this parameter to override that. | `nil`                                                                                                                  |
 | `audience`     | String         | By default the `aud` claim will be compared to your **Auth0 Client ID**. Use this parameter to override that.             | `nil`                                                                                                                  |
-| `organization` | String         | By default the `org_id` claim will be compared to your **Organization ID**. Use this parameter to override that.          | `nil`                                                                                                                  |
+| `organization` | String         | By default the `org_id` or `org_name` claims will be compared to the `organization` value specified at client creation. Use this parameter to override that.          | `nil`                                                                                                                  |
 
 You can check the signing algorithm value under **Advanced Settings > OAuth > JsonWebToken Signature Algorithm** in your Auth0 application settings panel. [We recommend](https://auth0.com/docs/tokens/concepts/signing-algorithms#our-recommendation) that you make use of asymmetric signing algorithms like `RS256` instead of symmetric ones like `HS256`.
 
@@ -170,15 +170,17 @@ rescue Auth0::InvalidIdToken => e
 end
 ```
 
-### Organization ID Token Validation
+### Organization claim validation
 
-If an org_id claim is present in the Access Token, then the claim should be validated by the API to ensure that the value received is expected or known.
+If an `org_id` or `org_name` claim is present in the access   token, then the claim should be validated by the API to ensure that the value received is expected or known.
 
 In particular:
 
 - The issuer (iss) claim should be checked to ensure the token was issued by Auth0
 
-- the org_id claim should be checked to ensure it is a value that is already known to the application. This could be validated against a known list of organization IDs, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the Access Token.
+- the `org_id` or `org_name` claim should be checked to ensure it is a value that is already known to the application. Which claim you check depends on the organization value being validated: if it starts with `org_`, validate against the `org_id` claim. Otherwise, validate against `org_name`. Further, `org_name` validation should be done using a **case-insensitive** check, whereas `org_id` should be an exact case-sensitive match.
+
+This could be validated against a known list of organization IDs or names, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the Access Token.
 
 Normally, validating the issuer would be enough to ensure that the token was issued by Auth0. In the case of organizations, additional checks should be made so that the organization within an Auth0 tenant is expected.
 
@@ -186,7 +188,7 @@ If the claim cannot be validated, then the application should deem the token inv
 
 ```ruby
 begin
-  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', organization: '{Expected org_id}'
+  @auth0_client.validate_id_token 'YOUR_ID_TOKEN', organization: '{Expected org_id or org_name}'
 rescue Auth0::InvalidIdToken => e
   # In this case the ID Token contents should not be trusted
 end

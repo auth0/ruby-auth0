@@ -1,5 +1,6 @@
 # rubocop:disable Metrics/BlockLength
 require 'spec_helper'
+require 'jwt'
 
 RSA_PUB_KEY_JWK_1 = { 'kty': "RSA", 'use': 'sig', 'n': "uGbXWiK3dQTyCbX5xdE4yCuYp0AF2d15Qq1JSXT_lx8CEcXb9RbDddl8jGDv-spi5qPa8qEHiK7FwV2KpRE983wGPnYsAm9BxLFb4YrLYcDFOIGULuk2FtrPS512Qea1bXASuvYXEpQNpGbnTGVsWXI9C-yjHztqyL2h8P6mlThPY9E9ue2fCqdgixfTFIF9Dm4SLHbphUS2iw7w1JgT69s7of9-I9l5lsJ9cozf1rxrXX4V1u_SotUuNB3Fp8oB4C1fLBEhSlMcUJirz1E8AziMCxS-VrRPDM-zfvpIJg3JljAh3PJHDiLu902v9w-Iplu1WyoB2aPfitxEhRN0Yw", 'e': 'AQAB', 'kid': 'test-key-1' }.freeze
 RSA_PUB_KEY_JWK_2 = { 'kty': "RSA", 'use': 'sig', 'n': "uGbXWiK3dQTyCbX5xdE4yCuYp0AF2d15Qq1JSXT_lx8CEcXb9RbDddl8jGDv-spi5qPa8qEHiK7FwV2KpRE983wGPnYsAm9BxLFb4YrLYcDFOIGULuk2FtrPS512Qea1bXASuvYXEpQNpGbnTGVsWXI9C-yjHztqyL2h8P6mlThPY9E9ue2fCqdgixfTFIF9Dm4SLHbphUS2iw7w1JgT69s7of9-I9l5lsJ9cozf1rxrXX4V1u_SotUuNB3Fp8oB4C1fLBEhSlMcUJirz1E8AziMCxS-VrRPDM-zfvpIJg3JljAh3PJHDiLu902v9w-Iplu1WyoB2aPfitxEhRN0Yw", 'e': 'AQAB', 'kid': 'test-key-2' }.freeze
@@ -13,8 +14,14 @@ LEEWAY = 60
 CLOCK = 1587592561 # Apr 22 2020 21:56:01 UTC
 CONTEXT = { algorithm: Auth0::Algorithm::HS256.secret(HMAC_SHARED_SECRET), leeway: LEEWAY, audience: 'tokens-test-123', issuer: 'https://tokens-test.auth0.com/', clock: CLOCK }.freeze
 
+def build_id_token(payload = {})
+  default_payload = { iss: CONTEXT[:issuer], sub: 'user123', aud: CONTEXT[:audience], exp: CLOCK, iat: CLOCK }
+  JWT.encode(default_payload.merge(payload), HMAC_SHARED_SECRET, 'HS256')
+end
+
 describe Auth0::Mixins::Validation::IdTokenValidator do
   subject { @instance }
+  let (:minimal_id_token) { build_id_token }
 
   context 'instance' do
     it 'is expected respond to :validate' do
@@ -285,30 +292,73 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       expect { instance.validate(token) }.to raise_exception("Authentication Time (auth_time) claim in the ID token indicates that too much time has passed since the last end-user authentication. Current time \"#{clock}\" is after last auth at \"#{auth_time}\"")
     end
 
-    it 'is expected not to raise an error when org_id exsist in the token, but not required' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
-      expect { @instance.validate(token) }.not_to raise_exception
-    end
+    context 'Organization claims validation' do
+      it 'is expected not to raise an error when org_id exsist in the token, but not required' do
+        token = build_id_token org_id: 'org_123'
+        expect { @instance.validate(token) }.not_to raise_exception
+      end
 
-    it 'is expected to raise an error with a missing but required organization' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE4MTg1LCJpYXQiOjE2MTY0NDUzODUsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTc4NX0.UMo5pmgceXO9lIKzbk7X0ZhE5DOe0IP2LfMKdUj03zQ'
-      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'a1b2c3d4e5' }))
+      it 'is expected not to raise an error when org_name exists in the token, but not required' do
+        token = build_id_token org_name: 'my-organization'
+        expect { @instance.validate(token) }.not_to raise_exception
+      end
 
-      expect { instance.validate(token) }.to raise_exception('Organization Id (org_id) claim must be a string present in the ID token')
-    end
+      it 'is expected to raise an error with a missing but required organization ID' do
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'org_1234' }))
+        expect { instance.validate(minimal_id_token) }.to raise_exception('Organization Id (org_id) claim must be a string present in the ID token')
+      end
 
-    it 'is expected to raise an error with an invalid organization' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
-      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'a1b2c3d4e5' }))
+      it 'is expected to raise an error with a missing but required organization name' do
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+        expect { instance.validate(minimal_id_token) }.to raise_exception('Organization Name (org_name) claim must be a string present in the ID token')
+      end
 
-      expect { instance.validate(token) }.to raise_exception('Organization Id (org_id) claim value mismatch in the ID token; expected "a1b2c3d4e5", found "testOrg"')
-    end
+      it 'is expected to raise an error with an invalid organization ID' do
+        token = build_id_token org_id: 'org_1234'      
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'org_5678' }))
 
-    it 'is expected to NOT raise an error with a valid organization' do
-      token = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Rva2Vucy10ZXN0LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHwxMjM0NTY3ODkiLCJhdWQiOlsidG9rZW5zLXRlc3QtMTIzIiwiZXh0ZXJuYWwtdGVzdC05OTkiXSwiZXhwIjoxNjE2NjE3ODgxLCJpYXQiOjE2MTY0NDUwODEsIm5vbmNlIjoiYTFiMmMzZDRlNSIsImF6cCI6InRva2Vucy10ZXN0LTEyMyIsImF1dGhfdGltZSI6MTYxNjUzMTQ4MSwib3JnX2lkIjoidGVzdE9yZyJ9.AOafUKUNgaxUXpSRYFCeJERcwrQZ4q2NZlutwGXnh9I'
-      instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'testOrg' }))
+        expect { instance.validate(token) }.to raise_exception('Organization Id (org_id) claim value mismatch in the ID token; expected "org_5678", found "org_1234"')
+      end
 
-      expect { instance.validate(token) }.not_to raise_exception
+      it 'is expected to raise an error with an invalid organization name' do
+        token = build_id_token org_name: 'another-organization'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+
+        expect { instance.validate(token) }.to raise_exception('Organization Name (org_name) claim value mismatch in the ID token; expected "my-organization", found "another-organization"')
+      end
+
+      it 'is expected to NOT raise an error with a valid organization ID' do
+        token = build_id_token org_id: 'org_1234'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'org_1234' }))
+
+        expect { instance.validate(token) }.not_to raise_exception
+      end
+
+      it 'is expected to NOT raise an error with a valid organization name' do
+        token = build_id_token org_name: 'my-organization'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+
+        expect { instance.validate(token) }.not_to raise_exception
+      end
+
+      it 'is expected to NOT raise an error with organization name in different casing' do
+        token = build_id_token org_name: 'MY-ORGANIZATION'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+
+        expect { instance.validate(token) }.not_to raise_exception
+      end
+
+      it 'validates org_id when both claims are present in the token' do
+        token = build_id_token org_name: 'my-organization', org_id: 'org_1234'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'org_1234' }))
+        expect { instance.validate(token) }.not_to raise_exception        
+      end
+
+      it 'validates org_name when both claims are present in the token' do
+        token = build_id_token org_name: 'my-organization', org_id: 'org_1234'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+        expect { instance.validate(token) }.not_to raise_exception        
+      end
     end
   end
 end
