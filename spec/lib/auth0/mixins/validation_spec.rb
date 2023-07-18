@@ -342,8 +342,8 @@ describe Auth0::Mixins::Validation::IdTokenValidator do
       end
 
       it 'is expected to NOT raise an error with organization name in different casing' do
-        token = build_id_token org_name: 'MY-ORGANIZATION'
-        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'my-organization' }))
+        token = build_id_token org_name: 'my-organization'
+        instance = Auth0::Mixins::Validation::IdTokenValidator.new(CONTEXT.merge({ organization: 'MY-ORGANIZATION' }))
 
         expect { instance.validate(token) }.not_to raise_exception
       end
