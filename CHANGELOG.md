@@ -1,5 +1,11 @@
 # Change Log
 
+## [v5.14.1](https://github.com/auth0/ruby-auth0/tree/v5.14.1) (2023-07-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.0...v5.14.1)
+
+**Fixed**
+- chore: should not lowercase org_name claim [\#499](https://github.com/auth0/ruby-auth0/pull/499) ([stevehobbsdev](https://github.com/stevehobbsdev))
+
 ## [v5.14.0](https://github.com/auth0/ruby-auth0/tree/v5.14.0) (2023-07-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.13.0...v5.14.0)
 
