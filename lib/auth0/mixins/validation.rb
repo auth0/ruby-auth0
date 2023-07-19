@@ -204,7 +204,7 @@ module Auth0
               raise Auth0::InvalidIdToken, 'Organization Name (org_name) claim must be a string present in the ID token'
             end
 
-            unless expected.downcase == claims['org_name'].downcase
+            unless expected.downcase == claims['org_name']
               raise Auth0::InvalidIdToken, "Organization Name (org_name) claim value mismatch in the ID token; expected \"#{expected}\","\
                                           " found \"#{claims['org_name']}\""
             end

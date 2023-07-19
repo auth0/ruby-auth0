@@ -178,7 +178,7 @@ In particular:
 
 - The issuer (iss) claim should be checked to ensure the token was issued by Auth0
 
-- the `org_id` or `org_name` claim should be checked to ensure it is a value that is already known to the application. Which claim you check depends on the organization value being validated: if it starts with `org_`, validate against the `org_id` claim. Otherwise, validate against `org_name`. Further, `org_name` validation should be done using a **case-insensitive** check, whereas `org_id` should be an exact case-sensitive match.
+- the `org_id` or `org_name` claim should be checked to ensure it is a value that is already known to the application. Which claim you check depends on the organization value being validated: if it starts with `org_`, validate against the `org_id` claim. Otherwise, validate against `org_name`. Further, the value of the `org_name` claim will always be lowercase. To aid the developer experience, you may also lowercase the input organization name when checking against the `org_name`, but do not modify the `org_name` claim value.
 
 This could be validated against a known list of organization IDs or names, or perhaps checked in conjunction with the current request URL. e.g. the sub-domain may hint at what organization should be used to validate the Access Token.
 
