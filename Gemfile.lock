@@ -201,7 +201,7 @@ GEM
       tins (~> 1.0)
     terminal-notifier-guard (1.7.0)
     thor (1.2.2)
-    timecop (0.9.7)
+    timecop (0.9.8)
     tins (1.32.1)
       sync
     tzinfo (2.0.6)
