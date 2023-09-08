@@ -16,15 +16,16 @@ module Auth0
         # @param page [integer] The page number. Zero based.
         # @param installed [boolean] When true, return only installed actions. When false, return only custom actions. Returns all actions by default.
         # @return [json] Actions and pagination info
-        def actions(trigger_id: nil, action_name: nil, deployed: nil, per_page: nil, page: nil, installed: nil)
+        def actions(trigger_id = nil, action_name = nil, deployed: nil, per_page: nil, page: nil, installed: nil)
           request_params = {
-            trigger_id: trigger_id,
-            action_name: action_name,
+            triggerId: trigger_id,
+            actionName: action_name,
             deployed: deployed,
             per_page: per_page,
             page: page,
             installed: installed
           }
+          
           path = "#{actions_path}/actions"
           get(path, request_params)
         end
