@@ -1,0 +1,32 @@
+name: Build package
+description: Build the SDK package
+
+inputs:
+  ruby:
+    description: The Ruby version to use
+    required: false
+    default: 3.2
+  bundle-path:
+    description: The path to the bundle cache
+    required: false
+    default: vendor/bundle
+  bundler-cache:
+    description: Whether to use the bundler cache
+    required: false
+    default: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Configure Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ inputs.ruby }}
+        bundler-cache: ${{ inputs.bundle-cache }}
+
+    - name: Install dependencies
+      run: bundle check || bundle install
+      shell: bash
+      env:
+        BUNDLE_PATH: ${{ inputs.bundle-path }}
