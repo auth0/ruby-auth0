@@ -50,6 +50,7 @@ jobs:
       CLIENT_ID: example-client
       CLIENT_SECRET: example-secret
       MASTER_JWT: example-jwt
+      BUNDLE_PATH: vendor/bundle
 
     steps:
       - name: Checkout code
