@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    name: Publish to NPM
+    name: Publish to RubyGems
     runs-on: ubuntu-latest
     environment: release
 
