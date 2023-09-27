@@ -1,0 +1,37 @@
+name: Publish Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: The branch to release from.
+        required: true
+        default: master
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish to RubyGems
+    runs-on: ubuntu-latest
+    environment: release
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Configure Ruby
+        uses: ./.github/actions/setup
+        with:
+          ruby: 3.2
+
+      - name: Publish to RubyGems
+        run: |
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
