@@ -28,8 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'rspec', '~> 3.11'
-  s.add_development_dependency 'rack-test', '~> 0.6'
-  s.add_development_dependency 'rack', '~> 2.1'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 2.0'
   s.license = 'MIT'
