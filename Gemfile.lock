@@ -244,8 +244,6 @@ DEPENDENCIES
   guard-rspec (~> 4.5)
   irb
   pp
-  rack (~> 2.1)
-  rack-test (~> 0.6)
   rake (~> 13.0)
   rspec (~> 3.11)
   rubocop
