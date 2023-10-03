@@ -1,4 +1,4 @@
 # current version of gem
 module Auth0
-  VERSION = '5.14.1'.freeze
+  VERSION = '5.14.2'.freeze
 end

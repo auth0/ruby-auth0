@@ -1,67 +1,95 @@
 # Change Log
 
+## [v5.14.2](https://github.com/auth0/ruby-auth0/tree/v5.14.2) (2023-10-03)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.1...v5.14.2)
+
+**Fixed**
+
+- [API] `trigger_id` and `action_name` parameters for `create_action` endpoint are now optional [\#478](https://github.com/auth0/ruby-auth0/pull/478) [rapito](https://github.com/rapito)
+
 ## [v5.14.1](https://github.com/auth0/ruby-auth0/tree/v5.14.1) (2023-07-19)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.0...v5.14.1)
 
 **Fixed**
+
 - chore: should not lowercase org_name claim [\#499](https://github.com/auth0/ruby-auth0/pull/499) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 ## [v5.14.0](https://github.com/auth0/ruby-auth0/tree/v5.14.0) (2023-07-13)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.13.0...v5.14.0)
 
 **Added**
+
 - [SDK-4386] Support Organization Name in Authorize [\#495](https://github.com/auth0/ruby-auth0/pull/495) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 ## [v5.13.0](https://github.com/auth0/ruby-auth0/tree/v5.13.0) (2023-04-24)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.12.0...v5.13.0)
 
 **Added**
+
 - [SDK-4142] Add support for /oauth/par [\#470](https://github.com/auth0/ruby-auth0/pull/470) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Deprecated**
+
 - Drop support for 2.7 in CI build [\#467](https://github.com/auth0/ruby-auth0/pull/467) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 ## [v5.12.0](https://github.com/auth0/ruby-auth0/tree/v5.12.0) (2023-03-13)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.11.0...v5.12.0)
 
 **Added**
+
 - [SDK-4014] User Authentication Method management API support [\#450](https://github.com/auth0/ruby-auth0/pull/450) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Fixed**
+
 - Remove broken FAQ link from README [\#441](https://github.com/auth0/ruby-auth0/pull/441) ([joxxoxo](https://github.com/joxxoxo))
 
 ## [v5.11.0](https://github.com/auth0/ruby-auth0/tree/v5.11.0) (2023-01-27)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.10.0...v5.11.0)
 
 **Added**
+
 - feat: support exchanging OTP codes for tokens [\#438](https://github.com/auth0/ruby-auth0/pull/438) ([stevehobbsdev](https://github.com/stevehobbsdev))
 - [SDK-3869] Support client credentials in management client [\#437](https://github.com/auth0/ruby-auth0/pull/437) ([stevehobbsdev](https://github.com/stevehobbsdev))
 - [SDK-3863] Add support for Client Assertion in authentication endpoints [\#434](https://github.com/auth0/ruby-auth0/pull/434) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Changed**
+
 - ci: include Ruby 3.2 in test matrix [\#436](https://github.com/auth0/ruby-auth0/pull/436) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 ## [v5.10.0](https://github.com/auth0/ruby-auth0/tree/v5.10.0) (2022-10-10)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.9.0...v5.10.0)
 
 **Changed**
+
 - Update jwt ~2.5 [\#384](https://github.com/auth0/ruby-auth0/pull/384) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Fixed**
+
 - Stop :get, :delete parameters from bleeding into subsequent requests [\#388](https://github.com/auth0/ruby-auth0/pull/388) ([stevehobbsdev](https://github.com/stevehobbsdev))
 - Support complex field names in export_users [\#387](https://github.com/auth0/ruby-auth0/pull/387) ([stevehobbsdev](https://github.com/stevehobbsdev))
 - Reconfigure rate limiting exponential backoff [\#386](https://github.com/auth0/ruby-auth0/pull/386) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 ## [v5.9.0](https://github.com/auth0/ruby-auth0/tree/v5.9.0) (2022-08-24)
+
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.8.1...v5.9.0)
 
 **Added**
+
 - Add Delete All Authenticators API for Users [\#375](https://github.com/auth0/ruby-auth0/pull/375) ([phongnh](https://github.com/phongnh))
 
 **Changed**
+
 - Add include_totals to get connections options [\#357](https://github.com/auth0/ruby-auth0/pull/357) ([stevehobbsdev](https://github.com/stevehobbsdev))
 
 **Fixed**
+
 - Fix typo and remove param that is not used [\#365](https://github.com/auth0/ruby-auth0/pull/365) ([MatthewRDodds](https://github.com/MatthewRDodds))
 - correct remove_user_roles doc: roles param is ids, not names [\#359](https://github.com/auth0/ruby-auth0/pull/359) ([gbirchmeier](https://github.com/gbirchmeier))
 
