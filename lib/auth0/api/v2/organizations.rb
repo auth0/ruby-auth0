@@ -214,6 +214,8 @@ module Auth0
         ### Organization Member
 
         # Get Members in a Organization
+        # Member roles are not sent by default. Use `fields=roles` to retrieve the roles assigned to each listed member.
+        # To use this parameter, you must include the `read:organization_member_roles scope` in the token.
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_members
         # @param organization_id [string] The Organization ID
         # @param options [hash] The Hash options used to define the paging of rersults
@@ -222,6 +224,8 @@ module Auth0
         #   * :from [string] For checkpoint pagination, the ID from which to start selection from.
         #   * :take [integer] For checkpoint pagination, the number of entries to retrieve. Default is 50.
         #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
+        #   * :fields [string] A comma separated list of fields to include or exclude from the result. If fields is left blank, all fields (except roles) are returned.
+        #   * :include_fields [boolean] True if the fields specified are to be included in the result, false otherwise.
         #
         # @return [json] Returns the members for the given organization
         def get_organizations_members(organization_id, options = {})
@@ -231,7 +235,9 @@ module Auth0
             page:           options.fetch(:page, nil),
             from:           options.fetch(:from, nil),
             take:           options.fetch(:take, nil),
-            include_totals: options.fetch(:include_totals, nil)
+            include_totals: options.fetch(:include_totals, nil),
+            fields: options.fetch(:fields, nil),
+            include_fields: options.fetch(:include_fields, nil)
           }
           path = "#{organizations_members_path(organization_id)}"
           get(path, request_params)

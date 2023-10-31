@@ -1,5 +1,11 @@
 # Change Log
 
+## [v5.15.0](https://github.com/auth0/ruby-auth0/tree/v5.15.0) (2023-10-30)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.2...v5.15.0)
+
+**Added**
+- [SDK-4659] Add fields to get_organizations_members [\#532](https://github.com/auth0/ruby-auth0/pull/532) ([adamjmcgrath](https://github.com/adamjmcgrath))
+
 ## [v5.14.2](https://github.com/auth0/ruby-auth0/tree/v5.14.2) (2023-10-03)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.1...v5.14.2)

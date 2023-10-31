@@ -451,7 +451,9 @@ describe Auth0::Api::V2::Organizations do
         page: nil,
         from: nil,
         take: nil,
-        include_totals: nil
+        include_totals: nil,
+        fields: nil,
+        include_fields: nil
       })
       expect do
         @instance.get_organizations_members('org_id')
@@ -465,7 +467,9 @@ describe Auth0::Api::V2::Organizations do
         page: 1,
         from: 'org_id',
         take: 50,
-        include_totals: true
+        include_totals: true,
+        fields: nil,
+        include_fields: nil
       })
       expect do
         @instance.get_organizations_members(
@@ -475,6 +479,26 @@ describe Auth0::Api::V2::Organizations do
           from: 'org_id',
           take: 50,
           include_totals: true
+        )
+      end.not_to raise_error
+    end
+
+    it 'is expected to get /api/v2/organizations with custom fields' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/organizations/org_id/members', {
+        per_page: nil,
+        page: nil,
+        from: nil,
+        take: nil,
+        include_totals: nil,
+        fields: 'foo,bar',
+        include_fields: false
+      })
+      expect do
+        @instance.get_organizations_members(
+          'org_id',
+          fields: 'foo,bar',
+          include_fields: false
         )
       end.not_to raise_error
     end
