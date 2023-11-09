@@ -14,6 +14,7 @@ describe Auth0::Api::V2::ClientGrants do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants', {
         client_id: nil,
+        allow_any_organization: nil,
         audience: nil,
         page: nil,
         per_page: nil
@@ -27,6 +28,7 @@ describe Auth0::Api::V2::ClientGrants do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants', {
         client_id: '1',
+        allow_any_organization: nil,
         audience: audience,
         page: nil,
         per_page: nil
@@ -38,11 +40,24 @@ describe Auth0::Api::V2::ClientGrants do
       expect(@instance).to receive(:get).with(
         '/api/v2/client-grants', {
         client_id: nil,
+        allow_any_organization: nil,
         audience: nil,
         page: 1,
         per_page: 2
       })
       expect { @instance.client_grants(page: 1, per_page: 2) }.not_to raise_error
+    end
+
+    it 'is expected to send get /api/v2/client-grants/ with allow_any_organization' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/client-grants', {
+        client_id: nil,
+        allow_any_organization: true,
+        audience: nil,
+        page: nil,
+        per_page: nil
+      })
+      expect { @instance.client_grants(allow_any_organization: true) }.not_to raise_error
     end
   end
 
@@ -72,5 +87,20 @@ describe Auth0::Api::V2::ClientGrants do
     end
     it { expect { @instance.patch_client_grant('', nil) }.to raise_error 'Must specify a client grant id' }
     it { expect { @instance.patch_client_grant('some', nil) }.to raise_error 'Must specify a valid body' }
+  end
+
+  context '.get_client_grants_organizations' do
+    it { expect(@instance).to respond_to(:get_client_grants_organizations) }
+    it 'is expected to send get to /api/v2/client-grants/organizations' do
+      expect(@instance).to receive(:get).with('/api/v2/client-grants/1/organizations', {
+        per_page: nil,
+        page: nil,
+        from: nil,
+        take: nil,
+        include_totals: nil
+      })
+      expect { @instance.get_client_grants_organizations('1') }.not_to raise_error
+    end
+    it { expect { @instance.get_client_grants_organizations('') }.to raise_error 'Must specify a client grant id' }
   end
 end
