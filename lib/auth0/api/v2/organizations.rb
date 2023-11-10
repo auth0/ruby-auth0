@@ -370,7 +370,7 @@ module Auth0
         # @param grant_id [string] The Client Grant ID you want to remove from the Organization.
         def delete_organizations_client_grant(organization_id, grant_id)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
-          raise Auth0::InvalidParameter, 'Must supply a valid grant_id' if grant_id.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid grant_id' if grant_id.to_s.empty?
 
           path = "#{organizations_path}/#{organization_id}/client-grants/#{grant_id}"
           delete(path)
