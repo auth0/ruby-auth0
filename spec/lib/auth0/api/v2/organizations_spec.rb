@@ -693,8 +693,8 @@ describe Auth0::Api::V2::Organizations do
     end
   end
 
-  context '.delete_organizations_client_grants' do
-    it 'is expected to respond to a delete_organizations_client_grants method' do
+  context '.delete_organizations_client_grant' do
+    it 'is expected to respond to a delete_organizations_client_grant method' do
       expect(@instance).to respond_to(:delete_organizations_client_grant)
     end
 
