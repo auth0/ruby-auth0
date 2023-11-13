@@ -639,4 +639,70 @@ describe Auth0::Api::V2::Organizations do
       expect { @instance.delete_organizations_member_roles('org_id', 'user_id') }.to raise_error 'Must supply an array of role ids'
     end
   end
+
+  context '.get_organizations_client_grants' do
+    it 'is expected to respond to a get_organizations_client_grants method' do
+      expect(@instance).to respond_to(:get_organizations_client_grants)
+    end
+
+    it 'is expected to get /api/v2/organizations/org_id/client-grants' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/organizations/org_id/client-grants', {
+        per_page: nil,
+        page: nil,
+        client_id: nil,
+        audience: nil,
+        include_totals: nil
+      })
+      expect { @instance.get_organizations_client_grants('org_id') }.not_to raise_error
+    end
+
+    it 'is expected to get /api/v2/organizations/org_id/client-grants with custom parameters' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/organizations/org_id/client-grants', {
+        per_page: 10,
+        page: 1,
+        client_id: 'client_id',
+        audience: 'api',
+        include_totals: true
+      })
+      expect do
+        @instance.get_organizations_client_grants(
+          'org_id',
+          per_page: 10,
+          page: 1,
+          client_id: 'client_id',
+          audience: 'api',
+          include_totals: true
+        )
+      end.not_to raise_error
+    end
+  end
+
+  context '.create_organizations_client_grants' do
+    it 'is expected to respond to a create_organizations_client_grants method' do
+      expect(@instance).to respond_to(:create_organizations_client_grant)
+    end
+
+    it 'is expected to post /api/v2/organizations/org_id/client-grants' do
+      expect(@instance).to receive(:post).with(
+        '/api/v2/organizations/org_id/client-grants', {
+        grant_id: 'grant_id'
+      })
+      expect { @instance.create_organizations_client_grant('org_id', 'grant_id') }.not_to raise_error
+    end
+  end
+
+  context '.delete_organizations_client_grant' do
+    it 'is expected to respond to a delete_organizations_client_grant method' do
+      expect(@instance).to respond_to(:delete_organizations_client_grant)
+    end
+
+    it 'is expected to delete /api/v2/organizations/org_id/client-grants' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/organizations/org_id/client-grants/grant_id')
+      expect { @instance.delete_organizations_client_grant('org_id', 'grant_id') }.not_to raise_error
+    end
+  end
+  
 end

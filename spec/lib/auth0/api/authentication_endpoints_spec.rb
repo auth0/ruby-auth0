@@ -56,6 +56,7 @@ describe Auth0::Api::AuthenticationEndpoints do
             grant_type: 'client_credentials',
             client_id: client_id,
             audience: api_identifier,
+            organization: nil,
             client_secret: client_secret
           }.to_json
         ))
@@ -67,6 +68,33 @@ describe Auth0::Api::AuthenticationEndpoints do
           200))
 
         result = client_secret_instance.send :api_token, audience: api_identifier
+        
+        expect(result).to be_a_kind_of(Auth0::ApiToken)
+        expect(result.access_token).not_to be_nil
+        expect(result.scope).not_to be_nil
+        expect(result.expires_in).not_to be_nil
+      end
+
+      it 'requests a new token using organization' do
+        expect(RestClient::Request).to receive(:execute).with(hash_including(
+          method: :post,
+          url: 'https://samples.auth0.com/oauth/token',
+          payload: {
+            grant_type: 'client_credentials',
+            client_id: client_id,
+            audience: api_identifier,
+            organization: 'foo',
+            client_secret: client_secret
+          }.to_json
+        ))
+        .and_return(StubResponse.new({ 
+          "access_token" => "test_response", 
+          "expires_in" => 86400,
+          "scope" => "scope"}, 
+          true, 
+          200))
+
+        result = client_secret_instance.send :api_token, audience: api_identifier, organization: 'foo'
         
         expect(result).to be_a_kind_of(Auth0::ApiToken)
         expect(result.access_token).not_to be_nil

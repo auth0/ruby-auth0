@@ -31,7 +31,8 @@ module Auth0
         request_params = {
           grant_type: 'client_credentials',
           client_id: client_id,
-          audience: audience
+          audience: audience,
+          organization: organization
         }
 
         populate_client_assertion_or_secret(request_params, client_id: client_id, client_secret: client_secret)
