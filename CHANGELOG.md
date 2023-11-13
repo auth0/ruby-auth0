@@ -1,5 +1,11 @@
 # Change Log
 
+## [v5.16.0](https://github.com/auth0/ruby-auth0/tree/v5.16.0) (2023-11-13)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.15.0...v5.16.0)
+
+**Added**
+- [SDK-4546] Add orgs in client credentials support [\#540](https://github.com/auth0/ruby-auth0/pull/540) ([adamjmcgrath](https://github.com/adamjmcgrath))
+
 ## [v5.15.0](https://github.com/auth0/ruby-auth0/tree/v5.15.0) (2023-10-30)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.14.2...v5.15.0)
 
