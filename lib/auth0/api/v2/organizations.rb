@@ -330,6 +330,52 @@ module Auth0
         end
         alias remove_organizations_member_roles delete_organizations_member_roles
 
+        # Get client grants associated to an organization
+        # @param organization_id [string] The Organization ID
+        # @param options [hash] The Hash options used to define the paging of results
+        #   * :client_id [string] The client_id of the client grant to retrieve.
+        #   * :audience [string] The audience of the client grant to retrieve.
+        #   * :per_page [integer] The amount of entries per page. Default: 50. Max value: 100.
+        #   * :page [integer] The page number. Zero based.
+        #   * :include_totals [boolean] True to include query summary in the result, false or nil otherwise.
+        def get_organizations_client_grants(organization_id, options= {})
+          raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
+          request_params = {
+            client_id:      options.fetch(:client_id, nil),
+            audience:       options.fetch(:audience, nil),
+            per_page:       options.fetch(:per_page, nil),
+            page:           options.fetch(:page, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+          path = "#{organizations_client_grants_path(organization_id)}"
+          get(path, request_params)
+        end
+
+        # Associate a client grant with an organization
+        # @param organization_id [string] The Organization ID
+        # @param grant_id [string] The Client Grant ID you want to associate to the Organization.
+        def create_organizations_client_grant(organization_id, grant_id)
+          raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid grant_id' if grant_id.to_s.empty?
+          
+          body = {}
+          body[:grant_id] = grant_id
+
+          path = "#{organizations_client_grants_path(organization_id)}"
+          post(path, body)
+        end
+
+        # Remove a client grant from an organization
+        # @param organization_id [string] The Organization ID
+        # @param grant_id [string] The Client Grant ID you want to remove from the Organization.
+        def delete_organizations_client_grant(organization_id, grant_id)
+          raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
+          raise Auth0::InvalidParameter, 'Must supply a valid grant_id' if grant_id.to_s.empty?
+
+          path = "#{organizations_path}/#{organization_id}/client-grants/#{grant_id}"
+          delete(path)
+        end
+
         private
         # Organizations API path
         def organizations_path
@@ -350,6 +396,10 @@ module Auth0
 
         def organizations_invitations_path(org_id)
           "#{organizations_path}/#{org_id}/invitations"
+        end
+
+        def organizations_client_grants_path(org_id)
+          "#{organizations_path}/#{org_id}/client-grants"
         end
       end
     end

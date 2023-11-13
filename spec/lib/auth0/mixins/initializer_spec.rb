@@ -64,7 +64,8 @@ describe Auth0::Mixins::Initializer do
           grant_type: 'client_credentials',
           client_id: client_id,
           client_secret: client_secret,
-          audience: api_identifier
+          audience: api_identifier,
+          organization: nil
         }  
 
         expect(RestClient::Request).to receive(:execute) do |arg|
