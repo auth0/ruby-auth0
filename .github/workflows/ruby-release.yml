@@ -10,7 +10,6 @@ on:
       github-token:
         required: true
 
-### TODO: Replace instances of './.github/actions/' with reference to the `dx-sdk-actions` repo is made public and this file is transferred over
 
 jobs:
   release:
