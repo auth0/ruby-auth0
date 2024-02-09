@@ -94,8 +94,8 @@ GEM
       domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    io-console (0.7.1)
-    irb (1.11.1)
+    io-console (0.7.2)
+    irb (1.11.2)
       rdoc
       reline (>= 0.4.2)
     json (2.7.1)
