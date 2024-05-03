@@ -801,4 +801,49 @@ describe Auth0::Api::V2::Users do
       end.to_not raise_error
     end
   end
+
+  context '.delete_user_sessions' do
+    it 'is expected to respond to delete_user_sessions' do
+      expect(@instance).to respond_to(:delete_user_sessions)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.delete_user_sessions(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to call the endpoint' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/users/USER_ID/sessions'
+      )
+
+      expect do
+        @instance.delete_user_sessions 'USER_ID'
+      end.to_not raise_error
+    end
+  end
+
+  context '.user_sessions' do
+    it 'is expected to respond to user_sessions' do
+      expect(@instance).to respond_to :user_authentication_method
+    end
+
+    it 'is expected to respond to user_sessions' do
+      expect(@instance).to respond_to :user_sessions
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.user_sessions(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to GET a user authentication method' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/sessions'
+      )
+
+      expect do
+        @instance.user_sessions('USER_ID')
+      end.not_to raise_error
+
+    end
+  end
 end
