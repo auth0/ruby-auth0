@@ -9,14 +9,13 @@ describe Auth0::Mixins::HTTPProxy do
     dummy_instance.retry_count = 0
 
     @instance = dummy_instance
-    @exception = DummyClassForRestClient.new
   end
 
   %i(get delete).each do |http_method|
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP" do
-        expect(RestClient::Request).to receive(:execute).with(method: http_method,
+        expect(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
@@ -26,7 +25,7 @@ describe Auth0::Mixins::HTTPProxy do
       end
 
       it 'should not raise exception if data returned not in json format (should be fixed in v2)' do
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
@@ -38,7 +37,7 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::Unauthorized on send http #{http_method}
         method to path defined through HTTP when 401 status received" do
-        expect(RestClient::Request).to receive(:execute).with(method: http_method,
+        expect(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
@@ -49,7 +48,7 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::NotFound on send http #{http_method} method
         to path defined through HTTP when 404 status received" do
-        expect(RestClient::Request).to receive(:execute).with(method: http_method,
+        expect(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
@@ -60,7 +59,7 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::Unsupported on send http #{http_method} method
         to path defined through HTTP when 418 or other unknown status received" do
-        expect(RestClient::Request).to receive(:execute).with(method: http_method,
+        expect(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
@@ -71,36 +70,34 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::RequestTimeout on send http #{http_method} method
         to path defined through HTTP when RestClient::RequestTimeout received" do
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(RestClient::Exceptions::OpenTimeout.new)
+          .and_raise(Faraday::RequestTimeoutError.new)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::RequestTimeout)
       end
 
       it "should raise Auth0::BadRequest on send http #{http_method} method
         to path defined through HTTP when 400 status received" do
-        @exception.response = StubResponse.new({}, false, 400)
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+          .and_return(StubResponse.new({}, false, 400))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::BadRequest)
       end
 
       it "should raise Auth0::AccessDenied on send http #{http_method} method
         to path defined through HTTP when 403" do
-        @exception.response = StubResponse.new({}, false, 403)
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+          .and_return(StubResponse.new({}, false, 403))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::AccessDenied)
       end
 
@@ -111,13 +108,13 @@ describe Auth0::Mixins::HTTPProxy do
           :x_ratelimit_remaining => 0,
           :x_ratelimit_reset     => 1560564149
         }
-        @exception.response = StubResponse.new({}, false, 429, headers)
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        response = StubResponse.new({}, false, 429, headers)
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error { |error|
           expect(error).to be_a(Auth0::RateLimitEncountered)
           expect(error).to have_attributes(
@@ -134,18 +131,18 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::ServerError on send http #{http_method} method
         to path defined through HTTP when 500 received" do
-        @exception.response = StubResponse.new({}, false, 500)
-        allow(RestClient::Request).to receive(:execute).with(method: http_method,
+        response = StubResponse.new({}, false, 500)
+        allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                              url: 'https://auth0.com/test',
                                                              timeout: nil,
                                                              headers: { params: {} },
                                                              payload: nil)
-          .and_raise(@exception)
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
       it 'should normalize path with Addressable::URI' do
-        expect(RestClient::Request).to receive(:execute).with(method: http_method,
+        expect(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/te%20st%23test',
                                                               timeout: nil,
                                                               headers: { params: {} },
@@ -160,14 +157,14 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.extend(Auth0::Mixins::HTTPProxy)
           retry_instance.base_uri = "https://auth0.com"
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+          response = StubResponse.new({}, false, 429)
+          allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-            .and_raise(@exception)
-          expect(RestClient::Request).to receive(:execute).exactly(4).times
+            .and_return(response)
+          expect(Auth0::HttpClient).to receive(:execute).exactly(4).times
 
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
@@ -180,14 +177,14 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.base_uri = "https://auth0.com"
           retry_instance.retry_count = 2
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+          response = StubResponse.new({}, false, 429)
+          allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-            .and_raise(@exception)
-          expect(RestClient::Request).to receive(:execute).exactly(3).times
+            .and_return(response)
+          expect(Auth0::HttpClient).to receive(:execute).exactly(3).times
 
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
@@ -200,16 +197,16 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.base_uri = "https://auth0.com"
           retry_instance.retry_count = 0
 
-          @exception.response = StubResponse.new({}, false, 429)
+          response = StubResponse.new({}, false, 429)
 
-          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+          allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                               url: 'https://auth0.com/test',
                                                               timeout: nil,
                                                               headers: { params: {} },
                                                               payload: nil)
-            .and_raise(@exception)
-          
-          expect(RestClient::Request).to receive(:execute).exactly(1).times
+            .and_return(response)
+
+          expect(Auth0::HttpClient).to receive(:execute).exactly(1).times
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
           }
@@ -223,8 +220,7 @@ describe Auth0::Mixins::HTTPProxy do
           time_entries = []
           @time_start
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(method: http_method,
+          allow(Auth0::HttpClient).to receive(:execute).with(method: http_method,
                                                                url: 'https://auth0.com/test',
                                                                timeout: nil,
                                                                headers: { params: {} },
@@ -232,7 +228,8 @@ describe Auth0::Mixins::HTTPProxy do
 
             time_entries.push(Time.now.to_f - @time_start.to_f)
             @time_start = Time.now.to_f # restart the clock
-            raise @exception
+
+            StubResponse.new({}, false, 429)
           end
 
           @time_start = Time.now.to_f #start the clock
@@ -259,7 +256,7 @@ describe Auth0::Mixins::HTTPProxy do
         headers: nil,
         payload: {}
       }.merge(overrides)
-    else 
+    else
       {
         method: method,
         url: 'https://auth0.com/test',
@@ -274,13 +271,13 @@ describe Auth0::Mixins::HTTPProxy do
     context ".#{http_method}" do
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP"do
-        expect(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
+        expect(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
           .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
       end
 
       it 'should not raise exception if data returned not in json format (should be fixed in v2)' do
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
           .and_return(StubResponse.new('Some random text here', true, 200))
         expect { @instance.send(http_method, '/test') }.not_to raise_error
         expect(@instance.send(http_method, '/test')).to eql('Some random text here')
@@ -288,9 +285,9 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::Unauthorized on send http #{http_method} method
         to path defined through HTTP when 401 status received" do
-        @exception.response = StubResponse.new({}, false, 401)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 401)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unauthorized)
       end
 
@@ -301,9 +298,9 @@ describe Auth0::Mixins::HTTPProxy do
           :x_ratelimit_remaining => 0,
           :x_ratelimit_reset     => 1560564149
         }
-        @exception.response = StubResponse.new({}, false, 429,headers)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 429,headers)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error { |error|
           expect(error).to be_a(Auth0::RateLimitEncountered)
           expect(error).to have_attributes(
@@ -320,45 +317,45 @@ describe Auth0::Mixins::HTTPProxy do
 
       it "should raise Auth0::NotFound on send http #{http_method} method
         to path defined through HTTP when 404 status received" do
-        @exception.response = StubResponse.new({}, false, 404)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 404)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound)
       end
 
       it "should raise Auth0::Unsupported on send http #{http_method} method
         to path defined through HTTP when 418 or other unknown status received" do
-        @exception.response = StubResponse.new({}, false, 418)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 418)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Unsupported)
       end
 
       it "should raise Auth0::RequestTimeout on send http #{http_method} method
         to path defined through HTTP when RestClient::RequestTimeout received" do
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(RestClient::Exceptions::OpenTimeout.new)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_raise(Faraday::RequestTimeoutError.new)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::RequestTimeout)
       end
 
       it "should raise Auth0::BadRequest on send http #{http_method} method
         to path defined through HTTP when 400 status received" do
-        @exception.response = StubResponse.new({}, false, 400)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 400)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::BadRequest)
       end
 
       it "should raise Auth0::ServerError on send http #{http_method} method
         to path defined through HTTP when 500 received" do
-        @exception.response = StubResponse.new({}, false, 500)
-        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-          .and_raise(@exception)
+        response = StubResponse.new({}, false, 500)
+        allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+          .and_return(response)
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::ServerError)
       end
 
       it 'should normalize path with Addressable::URI' do
-        expect(RestClient::Request).to receive(:execute).with(expected_payload(http_method, url: 'https://auth0.com/te%20st'))
+        expect(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method, url: 'https://auth0.com/te%20st'))
           .and_return(StubResponse.new({}, true, 200))
         expect { @instance.send(http_method, '/te st') }.not_to raise_error
       end
@@ -369,7 +366,7 @@ describe Auth0::Mixins::HTTPProxy do
                             'message' => "Path validation error: 'String does not match pattern ^.+\\|.+$:
                                             3241312' on property id (The user_id of the user to retrieve).",
                             'errorCode' => 'invalid_uri')
-        expect(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
+        expect(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
           .and_return(StubResponse.new(res, true, 404))
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound, res)
       end
@@ -380,10 +377,10 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.extend(Auth0::Mixins::HTTPProxy)
           retry_instance.base_uri = "https://auth0.com"
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-            .and_raise(@exception)
-          expect(RestClient::Request).to receive(:execute).exactly(4).times
+          response = StubResponse.new({}, false, 429)
+          allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+            .and_return(response)
+          expect(Auth0::HttpClient).to receive(:execute).exactly(4).times
 
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
@@ -396,10 +393,10 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.base_uri = "https://auth0.com"
           retry_instance.retry_count = 2
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-            .and_raise(@exception)
-          expect(RestClient::Request).to receive(:execute).exactly(3).times
+          response = StubResponse.new({}, false, 429)
+          allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+            .and_return(response)
+          expect(Auth0::HttpClient).to receive(:execute).exactly(3).times
 
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
@@ -412,12 +409,12 @@ describe Auth0::Mixins::HTTPProxy do
           retry_instance.base_uri = "https://auth0.com"
           retry_instance.retry_count = 0
 
-          @exception.response = StubResponse.new({}, false, 429)
+          response = StubResponse.new({}, false, 429)
 
-          allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
-            .and_raise(@exception)
-          
-          expect(RestClient::Request).to receive(:execute).exactly(1).times
+          allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method))
+            .and_return(response)
+
+          expect(Auth0::HttpClient).to receive(:execute).exactly(1).times
           expect { retry_instance.send(http_method, '/test') }.to raise_error { |error|
             expect(error).to be_a(Auth0::RateLimitEncountered)
           }
@@ -431,12 +428,12 @@ describe Auth0::Mixins::HTTPProxy do
           time_entries = []
           @time_start
 
-          @exception.response = StubResponse.new({}, false, 429)
-          allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method)) do
+          allow(Auth0::HttpClient).to receive(:execute).with(expected_payload(http_method)) do
 
             time_entries.push(Time.now.to_f - @time_start.to_f)
             @time_start = Time.now.to_f # restart the clock
-            raise @exception
+
+            StubResponse.new({}, false, 429)
           end
 
           @time_start = Time.now.to_f #start the clock
@@ -467,16 +464,16 @@ end
     %i(get delete).each do |http_method|
       context "for #{http_method}" do
         it 'should renew the token' do
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: :post,
             url: 'https://auth0.com/oauth/token',
-          )).and_return(StubResponse.new({ 
-            "access_token" => "access_token", 
-            "expires_in" => 86400}, 
-            true, 
+          )).and_return(StubResponse.new({
+            "access_token" => "access_token",
+            "expires_in" => 86400},
+            true,
             200))
 
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test'
           )).and_return(StubResponse.new('Some random text here', true, 200))
@@ -489,16 +486,16 @@ end
     %i(post put patch).each do |http_method|
       context "for #{http_method}" do
         it 'should renew the token' do
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: :post,
             url: 'https://auth0.com/oauth/token',
-          ) ).and_return(StubResponse.new({ 
-            "access_token" => "access_token", 
-            "expires_in" => 86400}, 
-            true, 
+          ) ).and_return(StubResponse.new({
+            "access_token" => "access_token",
+            "expires_in" => 86400},
+            true,
             200))
 
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
             headers: hash_including( "Authorization" => "Bearer access_token")
@@ -522,12 +519,12 @@ end
     %i(get delete).each do |http_method|
       context "for #{http_method}" do
         it 'should use the cached token' do
-          expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).not_to receive(:execute).with(hash_including(
             method: :post,
             url: 'https://auth0.com/oauth/token',
           ))
 
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
             headers: hash_including(params: {}, "Authorization" => "Bearer access_token")
@@ -541,12 +538,12 @@ end
     %i(post put patch).each do |http_method|
       context "for #{http_method}" do
         it 'should use the cached token' do
-          expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).not_to receive(:execute).with(hash_including(
             method: :post,
             url: 'https://auth0.com/oauth/token',
           ))
 
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_method,
             url: 'https://auth0.com/test',
             headers: hash_including("Authorization" => "Bearer access_token")
@@ -573,7 +570,7 @@ end
     %i(get delete).each do |http_get_delete|
       %i(post patch put).each do |http_ppp|
         it "should not bleed :#{http_get_delete} headers/parameters to the subsequent :#{http_ppp} request" do
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_get_delete,
             url: "https://auth0.com/test-#{http_get_delete}",
             headers: hash_including(params: { email: 'test@test.com' })
@@ -581,7 +578,7 @@ end
 
           # email: parameter that is sent in the GET request should not appear
           # as a parameter in the `headers` hash for the subsequent PATCH request.
-          expect(RestClient::Request).to receive(:execute).with(hash_including(
+          expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
             method: http_ppp,
             url: "https://auth0.com/test-#{http_ppp}",
             headers: hash_not_including(:params)

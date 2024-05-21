@@ -1,5 +1,4 @@
 require 'base64'
-require 'rest-client'
 require 'uri'
 
 require 'auth0/mixins/access_token_struct'
