@@ -445,6 +445,26 @@ module Auth0
           delete "#{users_path}/#{user_id}/authentication-methods/#{authentication_method_id}"
         end
 
+        # Delete all sessions for a user.
+        #
+        # @param user_id [string] The user ID
+        # @see https://auth0.com/docs/api/management/v2/users/delete-sessions-for-user
+        def delete_user_sessions(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/sessions"
+        end
+
+        # Retrieve details for a user's sessions.
+        #
+        # @param user_id [string] The user ID
+        # @see https://auth0.com/docs/api/management/v2/users/get-sessions-for-user
+        def user_sessions(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          get "#{users_path}/#{user_id}/sessions"
+        end
+
         private
 
         # Users API path
