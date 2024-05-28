@@ -1,4 +1,4 @@
-name: Create Release 
+name: Create Release
 
 on:
   workflow_call:
@@ -11,7 +11,6 @@ on:
         required: true
       rubygems-token:
         required: true
-
 
 jobs:
   release:
@@ -57,10 +56,10 @@ jobs:
         run: exit 1
 
       # Publish the release to our package manager
-      - uses: ./.github/actions/ruby-publish
+      - uses: ./.github/actions/rubygems-publish
         with:
           ruby-version: ${{ inputs.ruby-version }}
-          rubygems-token: ${{ secrets.rubgems-token }}
+          rubygems-token: ${{ secrets.rubygems-token }}
 
       # Create a release for the tag
       - uses: ./.github/actions/release-create
