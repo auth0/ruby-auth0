@@ -59,7 +59,7 @@ jobs:
       - uses: ./.github/actions/rubygems-publish
         with:
           ruby-version: ${{ inputs.ruby-version }}
-          rubygems-token: ${{ secrets.rubgems-token }}
+          rubygems-token: ${{ secrets.rubygems-token }}
 
       # Create a release for the tag
       - uses: ./.github/actions/release-create
