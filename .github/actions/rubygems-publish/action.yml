@@ -22,6 +22,7 @@ runs:
         ruby: ${{ inputs.ruby-version }}
 
     - name: Publish to RubyGems
+      shell: bash
       run: |
         gem build *.gemspec
         gem push *.gem
