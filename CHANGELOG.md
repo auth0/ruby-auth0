@@ -1,5 +1,11 @@
 # Change Log
 
+## [v5.17.0](https://github.com/auth0/ruby-auth0/tree/v5.17.0) (2024-05-24)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.16.0...v5.17.0)
+
+**Added**
+- Add user session management API calls [\#588](https://github.com/auth0/ruby-auth0/pull/588) ([wjohnstondrip](https://github.com/wjohnstondrip))
+
 ## [v5.16.0](https://github.com/auth0/ruby-auth0/tree/v5.16.0) (2023-11-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.15.0...v5.16.0)
 
