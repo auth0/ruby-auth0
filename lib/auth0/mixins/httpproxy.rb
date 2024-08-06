@@ -1,8 +1,40 @@
 require "addressable/uri"
+require "faraday"
 require "retryable"
 require_relative "../exception.rb"
 
 module Auth0
+  # Shim for Faraday with interface similar to RestClient
+  class HttpClient
+    def self.execute(method:, url:, payload:, headers:, timeout:)
+      params = headers.delete(:params)
+      case method
+      when :get
+        Faraday.get(url, params, headers) do |req|
+          req.options[:timeout] = timeout
+        end
+      when :post
+        Faraday.post(url, payload, headers) do |req|
+          req.options[:timeout] = timeout
+        end
+      when :patch
+        Faraday.patch(url, payload, headers) do |req|
+          req.options[:timeout] = timeout
+        end
+      when :put
+        Faraday.put(url, payload, headers) do |req|
+          req.options[:timeout] = timeout
+        end
+      when :delete
+        Faraday.delete(url, params, headers) do |req|
+          req.options[:timeout] = timeout
+        end
+      else
+        raise 'Unsupported HTTP method'
+      end
+    end
+  end
+
   module Mixins
     # here's the proxy for Rest calls based on rest-client, we're building all request on that gem
     # for now, if you want to feel free to use your own http client
@@ -95,33 +127,28 @@ module Auth0
           call(method, encode_uri(uri), timeout, headers, body.to_json)
         end
 
-        case result.code
+        case result.status
         when 200...226 then safe_parse_json(result.body)
-        when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
-        when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
-        when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
-        when 404       then raise Auth0::NotFound.new(result.body, code: result.code, headers: result.headers)
-        when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.code, headers: result.headers)
-        when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
-        else           raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
+        when 400       then raise Auth0::BadRequest.new(result.body, code: result.status, headers: result.headers)
+        when 401       then raise Auth0::Unauthorized.new(result.body, code: result.status, headers: result.headers)
+        when 403       then raise Auth0::AccessDenied.new(result.body, code: result.status, headers: result.headers)
+        when 404       then raise Auth0::NotFound.new(result.body, code: result.status, headers: result.headers)
+        when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.status, headers: result.headers)
+        when 500       then raise Auth0::ServerError.new(result.body, code: result.status, headers: result.headers)
+        else           raise Auth0::Unsupported.new(result.body, code: result.status, headers: result.headers)
         end
       end
 
       def call(method, url, timeout, headers, body = nil)
-        RestClient::Request.execute(
+        Auth0::HttpClient.execute(
           method: method,
           url: url,
           timeout: timeout,
           headers: headers,
           payload: body
         )
-      rescue RestClient::Exception => e
-        case e
-        when RestClient::RequestTimeout
-          raise Auth0::RequestTimeout.new(e.message)
-        else
-          return e.response
-        end
+      rescue Faraday::RequestTimeoutError => e
+        raise Auth0::RequestTimeout.new(e.message)
       end
     end
   end
