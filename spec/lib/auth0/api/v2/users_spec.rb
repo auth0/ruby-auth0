@@ -843,7 +843,62 @@ describe Auth0::Api::V2::Users do
       expect do
         @instance.user_sessions('USER_ID')
       end.not_to raise_error
+    end
+  end
 
+  context '.user_refresh_tokens' do
+    it 'is expected to respond to a user_refresh_tokens method' do
+      expect(@instance).to respond_to(:user_refresh_tokens)
+    end
+
+    it 'is expected to raise an exception when the user ID is empty' do
+      expect { @instance.user_refresh_tokens(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to get user refresh tokens' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/refresh-tokens', {
+          from: nil,
+          take: nil,
+          include_totals: nil
+        }
+      )
+      expect do
+        @instance.user_refresh_tokens('USER_ID')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get user refresh tokens with custom parameters' do
+      expect(@instance).to receive(:get).with(
+        '/api/v2/users/USER_ID/refresh-tokens', {
+          from: 'TOKEN_ID',
+          take: 10,
+          include_totals: true
+        }
+      )
+      expect do
+        @instance.user_refresh_tokens('USER_ID', from: 'TOKEN_ID', take: 10, include_totals: true)
+      end.not_to raise_error
+    end
+  end
+
+  context '.delete_user_refresh_tokens' do
+    it 'is expected to respond to delete_user_refresh_tokens' do
+      expect(@instance).to respond_to(:delete_user_refresh_tokens)
+    end
+
+    it 'is expected to raise an exception for a missing user ID' do
+      expect { @instance.delete_user_refresh_tokens(nil) }.to raise_exception(Auth0::MissingUserId)
+    end
+
+    it 'is expected to call the endpoint' do
+      expect(@instance).to receive(:delete).with(
+        '/api/v2/users/USER_ID/refresh-tokens'
+      )
+
+      expect do
+        @instance.delete_user_refresh_tokens 'USER_ID'
+      end.to_not raise_error
     end
   end
 end
