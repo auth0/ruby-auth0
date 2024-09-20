@@ -465,13 +465,45 @@ module Auth0
           get "#{users_path}/#{user_id}/sessions"
         end
 
+        # Retrieve details for a user's refresh tokens.
+        # @see https://auth0.com/docs/api/management/v2/users/get-refresh-tokens-for-user
+        #
+        # @param use_id [String] The user ID
+        # @param options [hash] A hash of options for getting permissions
+        #   * :take [Integer] Number of results per page. Defaults to 50.
+        #   * :from [String] Optional token ID from which to start selection (exclusive).
+        #   * :include_totals [boolean] Return results inside an object that contains the total result count (true)
+        #     or as a direct array of results (false, default)
+        #
+        # @return [json] Returns refresh tokens for the given user_id.
+        def user_refresh_tokens(user_id, options = {})
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          request_params = {
+            take: options.fetch(:take, nil),
+            from: options.fetch(:from, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+
+          get "#{users_path}/#{user_id}/refresh-tokens", request_params
+        end
+
+        # Delete all refresh tokens for a user.
+        #
+        # @param user_id [String] ID of the user to get remove refresh tokens for
+        # @see https://auth0.com/docs/api/management/v2/users/delete-refresh-tokens-for-user
+        def delete_user_refresh_tokens(user_id)
+          raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
+
+          delete "#{users_path}/#{user_id}/refresh-tokens"
+        end
+
         private
 
         # Users API path
         def users_path
           @users_path ||= '/api/v2/users'
         end
-
       end
     end
   end
