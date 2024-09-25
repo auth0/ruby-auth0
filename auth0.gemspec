@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'rest-client', '~> 2.1'
+  s.add_runtime_dependency 'faraday', '~> 2.9'
   s.add_runtime_dependency 'jwt', '~> 2.7'
   s.add_runtime_dependency 'zache', '~> 0.12'
   s.add_runtime_dependency 'addressable', '~> 2.8'
