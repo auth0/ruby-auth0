@@ -23,6 +23,15 @@ module Auth0
           delete "#{sessions_path}/#{session_id}"
         end
 
+        # Revokes a session by ID and all associated refresh tokens
+        # @see https://auth0.com/docs/api/management/v2/sessions/revoke-session
+        # @param id [string] The ID of the session to revoke
+        def revoke_session(session_id)
+          raise Auth0::InvalidParameter, 'Must supply a valid session_id' if session_id.to_s.empty?
+
+          post "#{sessions_path}/#{session_id}/revoke"
+        end
+
         private
 
         def sessions_path
