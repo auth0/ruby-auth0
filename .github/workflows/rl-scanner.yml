@@ -20,7 +20,7 @@ jobs:
 
     permissions:
       pull-requests: write
-      id-token: write # This is required for requesting the JWT
+      id-token: write # This is required for requesting the JW
 
     steps:
       - name: Checkout code
