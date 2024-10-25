@@ -27,6 +27,7 @@ jobs:
 
   release:
     uses: ./.github/workflows/ruby-release.yml
+    needs: rl-scanner
     with:
       ruby-version: 3.2
     secrets:
