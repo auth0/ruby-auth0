@@ -39,6 +39,8 @@ jobs:
         shell: bash
         run: |
           gem build *.gemspec
+          export GEM_FILE=$(ls *.gem)
+          echo "gem_file=$GEM_FILE" >> $GITHUB_ENV
 
       - name: Get Artifact Version
         id: get_version
@@ -48,7 +50,7 @@ jobs:
         id: rl-scan-conclusion
         uses: ./.github/actions/rl-scanner
         with:
-          artifact-path: "$(pwd)/*.gem"
+          artifact-path: "$(pwd)/${{ env.gem_file }}"
           version: "${{ steps.get_version.outputs.version }}"
         env:
           RLSECURE_LICENSE: ${{ secrets.RLSECURE_LICENSE }}
