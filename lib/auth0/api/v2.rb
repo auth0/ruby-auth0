@@ -11,6 +11,7 @@ require 'auth0/api/v2/emails'
 require 'auth0/api/v2/jobs'
 require 'auth0/api/v2/prompts'
 require 'auth0/api/v2/organizations'
+require 'auth0/api/v2/refresh_tokens'
 require 'auth0/api/v2/rules'
 require 'auth0/api/v2/roles'
 require 'auth0/api/v2/stats'
@@ -46,6 +47,7 @@ module Auth0
       include Auth0::Api::V2::LogStreams
       include Auth0::Api::V2::Prompts
       include Auth0::Api::V2::Organizations
+      include Auth0::Api::V2::RefreshTokens
       include Auth0::Api::V2::Rules
       include Auth0::Api::V2::Roles
       include Auth0::Api::V2::Stats
