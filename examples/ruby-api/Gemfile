@@ -3,7 +3,7 @@
 source 'http://rubygems.org'
 
 # gem "rails"
-gem 'sinatra', '~> 2.2'
+gem 'sinatra', '~> 4.1'
 gem 'jwt', '~> 2.5'
 gem 'dotenv'
 gem 'puma'
