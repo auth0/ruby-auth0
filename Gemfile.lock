@@ -235,7 +235,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
-    vcr (6.2.0)
+    vcr (6.3.1)
+      base64
     webmock (3.23.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
