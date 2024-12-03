@@ -1,4 +1,3 @@
-require 'rack/test'
 require 'faker'
 require 'json'
 require 'auth0'

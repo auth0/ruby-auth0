@@ -1,5 +1,12 @@
 # Change Log
 
+## [v5.18.0](https://github.com/auth0/ruby-auth0/tree/v5.18.0) (2024-11-25)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.17.0...v5.18.0)
+
+**Added**
+- Add Refresh Token endpoints for the Auth0 Management API #614 [\#623](https://github.com/auth0/ruby-auth0/pull/623) ([arpit-jn](https://github.com/arpit-jn))
+- Add Management API calls for session API endpoints #613 [\#616](https://github.com/auth0/ruby-auth0/pull/616) ([arpit-jn](https://github.com/arpit-jn))
+
 ## [v5.17.0](https://github.com/auth0/ruby-auth0/tree/v5.17.0) (2024-05-24)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.16.0...v5.17.0)
 
