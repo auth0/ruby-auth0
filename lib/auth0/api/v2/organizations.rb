@@ -131,7 +131,7 @@ module Auth0
         # Add an enabled connection for an Organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/post_enabled_connections
         # @param organization_id [string] The Organization ID
-        # @param connection_id [string] The Organization ID
+        # @param connection_id [string] The Connection ID
         # @param assign_membership_on_login [boolean] flag to allow assign membership on login
         #
         # @return [json] Returns the connection for the given organization
@@ -139,7 +139,7 @@ module Auth0
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
           path = "#{organizations_enabled_connections_path(organization_id)}"
-          
+
           body = {}
           body[:assign_membership_on_login] = assign_membership_on_login
           body[:connection_id] = connection_id
@@ -176,7 +176,7 @@ module Auth0
         # Get invite by id in an Organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/get_invitations_by_invitation_id
         # @param organization_id [string] The Organization ID
-        # @param invitation_id [string] The invitation id
+        # @param invitation_id [string] The Invitation ID
         #
         # @return [json] Returns the invitation for the given organization
         def get_organizations_invite(organization_id, invitation_id)
@@ -194,7 +194,7 @@ module Auth0
         def create_organizations_invite(organization_id, options = {})
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           path = "#{organizations_invitations_path(organization_id)}"
-          
+
           post(path, options)
         end
         alias add_organizations_invite create_organizations_invite
@@ -202,7 +202,7 @@ module Auth0
         # Delete an invitation to organization
         # @see https://auth0.com/docs/api/management/v2/#!/Organizations/delete_invitations_by_invitation_id
         # @param organization_id [string] The Organization ID
-        # @param invitation_id [string] The Invitation id
+        # @param invitation_id [string] The Invitation ID
         def delete_organizations_invite(organization_id, invitation_id)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid invitation id' if invitation_id.to_s.empty?
@@ -253,7 +253,7 @@ module Auth0
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply an array of member ids' if members.empty?
           path = "#{organizations_members_path(organization_id)}"
-          
+
           body = {}
           body[:members] = members
 
@@ -304,7 +304,7 @@ module Auth0
           raise Auth0::InvalidParameter, 'Must supply a valid user id' if user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply an array of role ids' if roles.empty?
           path = "#{organizations_member_roles_path(organization_id, user_id)}"
-          
+
           body = {}
           body[:roles] = roles
 
@@ -322,7 +322,7 @@ module Auth0
           raise Auth0::InvalidParameter, 'Must supply a valid user id' if user_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply an array of role ids' if roles.empty?
           path = "#{organizations_member_roles_path(organization_id, user_id)}"
-                    
+
           body = {}
           body[:roles] = roles
 
@@ -357,7 +357,7 @@ module Auth0
         def create_organizations_client_grant(organization_id, grant_id)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid grant_id' if grant_id.to_s.empty?
-          
+
           body = {}
           body[:grant_id] = grant_id
 
