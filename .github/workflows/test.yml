@@ -66,4 +66,4 @@ jobs:
 
       - name: Upload coverage
         if: matrix.ruby == '3.2' || matrix.ruby == '3.3'
-        uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0 # pin@3.1.5
+        uses: codecov/codecov-action@5a605bd92782ce0810fa3b8acc235c921b497052 # pin@5.2.0
