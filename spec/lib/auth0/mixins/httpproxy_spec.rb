@@ -374,6 +374,14 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::NotFound, res)
       end
 
+      it "should raise Auth0::Conflict on send http #{http_method} method
+        to path defined through HTTP when 409 status received" do
+        @exception.response = StubResponse.new({}, false, 409)
+        allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
+          .and_raise(@exception)
+        expect { @instance.send(http_method, '/test') }.to raise_error(Auth0::Conflict)
+      end
+
       context "when status 429 is recieved on send http #{http_method} method" do
         it "should retry 3 times when retry_count is not set" do
           retry_instance = DummyClassForProxy.new

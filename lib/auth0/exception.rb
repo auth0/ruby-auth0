@@ -70,4 +70,7 @@ module Auth0
   end
 
   class InvalidIdToken < Auth0::Exception; end
+  # When trying to create a resource that already exists
+  # e.g: an organization with the same name
+  class Conflict < Auth0::HTTPError; end
 end
