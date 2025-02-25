@@ -458,11 +458,22 @@ module Auth0
         # Retrieve details for a user's sessions.
         #
         # @param user_id [string] The user ID
+        # @param options [hash] A hash of options for getting permissions
+        #   * :take [Integer] Number of results per page. Defaults to 50.
+        #   * :from [String] Optional token ID from which to start selection (exclusive).
+        #   * :include_totals [boolean] Return results inside an object that contains the total result count (true)
+        #     or as a direct array of results (false, default)
         # @see https://auth0.com/docs/api/management/v2/users/get-sessions-for-user
-        def user_sessions(user_id)
+        def user_sessions(user_id, options = {})
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
 
-          get "#{users_path}/#{user_id}/sessions"
+          request_params = {
+            take: options.fetch(:take, nil),
+            from: options.fetch(:from, nil),
+            include_totals: options.fetch(:include_totals, nil)
+          }
+
+          get "#{users_path}/#{user_id}/sessions", request_params
         end
 
         # Retrieve details for a user's refresh tokens.

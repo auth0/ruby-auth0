@@ -837,11 +837,29 @@ describe Auth0::Api::V2::Users do
 
     it 'is expected to GET a user authentication method' do
       expect(@instance).to receive(:get).with(
-        '/api/v2/users/USER_ID/sessions'
+        '/api/v2/users/USER_ID/sessions',
+        {
+          from: nil,
+          take: nil,
+          include_totals: nil
+        }
       )
-
       expect do
         @instance.user_sessions('USER_ID')
+      end.not_to raise_error
+    end
+
+    it 'is expected to get user sessions with custom parameters' do
+        expect(@instance).to receive(:get).with(
+          '/api/v2/users/USER_ID/sessions',
+          {
+            from: 'TOKEN_ID',
+            take: 10,
+            include_totals: true
+          }
+      )
+      expect do
+        @instance.user_sessions('USER_ID', from: 'TOKEN_ID', take: 10, include_totals: true)
       end.not_to raise_error
     end
   end
