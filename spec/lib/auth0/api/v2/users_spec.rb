@@ -824,10 +824,6 @@ describe Auth0::Api::V2::Users do
 
   context '.user_sessions' do
     it 'is expected to respond to user_sessions' do
-      expect(@instance).to respond_to :user_authentication_method
-    end
-
-    it 'is expected to respond to user_sessions' do
       expect(@instance).to respond_to :user_sessions
     end
 
