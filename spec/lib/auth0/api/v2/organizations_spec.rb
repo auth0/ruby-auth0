@@ -254,7 +254,8 @@ describe Auth0::Api::V2::Organizations do
         '/api/v2/organizations/org_id/enabled_connections',
         {
           connection_id: 'connection_id',
-          assign_membership_on_login: true
+          assign_membership_on_login: true,
+          show_as_button: true
         }
       )
       @instance.create_organizations_enabled_connection('org_id', 'connection_id', assign_membership_on_login: true)
