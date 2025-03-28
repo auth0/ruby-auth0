@@ -133,9 +133,10 @@ module Auth0
         # @param organization_id [string] The Organization ID
         # @param connection_id [string] The Organization ID
         # @param assign_membership_on_login [boolean] flag to allow assign membership on login
+        # @param show_as_button [boolean] flag to show a button for the connection on this organization’s login prompt
         #
         # @return [json] Returns the connection for the given organization
-        def create_organizations_enabled_connection(organization_id, connection_id, assign_membership_on_login: false)
+        def create_organizations_enabled_connection(organization_id, connection_id, assign_membership_on_login: false, show_as_button: true)
           raise Auth0::MissingOrganizationId, 'Must supply a valid organization_id' if organization_id.to_s.empty?
           raise Auth0::InvalidParameter, 'Must supply a valid connection id' if connection_id.to_s.empty?
           path = "#{organizations_enabled_connections_path(organization_id)}"
@@ -143,6 +144,7 @@ module Auth0
           body = {}
           body[:assign_membership_on_login] = assign_membership_on_login
           body[:connection_id] = connection_id
+          body[:show_as_button] = show_as_button
 
           post(path, body)
         end
