@@ -15,7 +15,7 @@ describe Auth0::Mixins::TokenManagement do
     organization: nil
   } }
 
-  let(:params) { { 
+  let(:params) { {
     domain: domain,
     client_id: client_id,
     client_secret: client_secret,
@@ -43,15 +43,15 @@ describe Auth0::Mixins::TokenManagement do
         )))
 
         expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
-      
-        StubResponse.new({ 
-          "access_token" => "test", 
-          "expires_in" => 86400}, 
-          true, 
+
+        StubResponse.new({
+          "access_token" => "test",
+          "expires_in" => 86400},
+          true,
           200)
       end
 
-      instance.send(:get_token)
+      instance.get_token
 
       expect(instance.instance_variable_get('@token')).to eq('test')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
@@ -66,7 +66,7 @@ describe Auth0::Mixins::TokenManagement do
         url: 'https://samples.auth0.com/oauth/token',
       ))
 
-      instance.send(:get_token)
+      instance.get_token
 
       expect(instance.instance_variable_get('@token')).to eq('test-token')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
@@ -84,15 +84,15 @@ describe Auth0::Mixins::TokenManagement do
         )))
 
         expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
-      
-        StubResponse.new({ 
-          "access_token" => "renewed_token", 
-          "expires_in" => 86400}, 
-          true, 
+
+        StubResponse.new({
+          "access_token" => "renewed_token",
+          "expires_in" => 86400},
+          true,
           200)
       end
 
-      instance.send(:get_token)
+      instance.get_token
 
       expect(instance.instance_variable_get('@token')).to eq('renewed_token')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
@@ -110,15 +110,15 @@ describe Auth0::Mixins::TokenManagement do
         )))
 
         expect(JSON.parse(arg[:payload], { symbolize_names: true })).to eq(payload)
-      
-        StubResponse.new({ 
-          "access_token" => "renewed_token", 
-          "expires_in" => 86400}, 
-          true, 
+
+        StubResponse.new({
+          "access_token" => "renewed_token",
+          "expires_in" => 86400},
+          true,
           200)
       end
 
-      instance.send(:get_token)
+      instance.get_token
 
       expect(instance.instance_variable_get('@token')).to eq('renewed_token')
       expect(instance.instance_variable_get('@token_expires_at')).to eq(time_now.to_i + 86400)
@@ -130,7 +130,7 @@ describe Auth0::Mixins::TokenManagement do
 
       expect(RestClient::Request).not_to receive(:execute)
 
-      instance.send(:get_token)
+      instance.get_token
     end
   end
 end
