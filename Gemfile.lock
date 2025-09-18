@@ -261,7 +261,7 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zache (0.13.2)
+    zache (0.15.0)
     zeitwerk (2.7.1)
 
 PLATFORMS
