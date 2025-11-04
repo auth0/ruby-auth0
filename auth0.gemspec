@@ -11,9 +11,8 @@ Gem::Specification.new do |s|
   s.summary     = 'Auth0 API Client'
   s.description = 'Ruby toolkit for Auth0 API https://auth0.com.'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.files         = `git ls-files -z -- LICENSE README.md lib`.split("\x0")
+  s.executables   = s.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'rest-client', '~> 2.1'
