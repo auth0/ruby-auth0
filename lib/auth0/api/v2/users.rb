@@ -1,7 +1,7 @@
 module Auth0
   module Api
     module V2
-      # Methods to use the users endpoints
+      # Methods to use the users' endpoints
       module Users
         include Auth0::Mixins::Validation
 
@@ -94,10 +94,10 @@ module Auth0
         # Some considerations:
         # The properties of the new object will replace the old ones.
         # The metadata fields are an exception to this rule (user_metadata and app_metadata). These properties are
-        # merged instead of being replaced but be careful, the merge only occurs on the first level.
+        # merged instead of being replaced, but be careful, the merge only occurs on the first level.
         # If you are updating email_verified, phone_verified, username or password you need to specify the connection
         # property too.
-        # If your are updating email or phone_number you need to specify the connection and the client_id properties.
+        # If you are updating email or phone_number you need to specify the connection and the client_id properties.
         # @see https://auth0.com/docs/api/v2#!/Users/patch_users_by_id
         # @param user_id [string] The user_id of the user to update.
         # @param body [hash] The optional parameters to update.
@@ -137,7 +137,7 @@ module Auth0
         # update:current_user_identities scope. In this case only the link_with param is required in the body,
         # containing the JWT obtained upon the secondary account's authentication.
         # 2. With an API V2 generated token with update:users scope. In this case you need to send provider and user_id
-        # in the body. Optionally you can also send the connection_id param which is suitable for identifying a
+        # in the body. Optionally, you can also send the connection_id param, which is suitable for identifying a
         # particular database connection for the 'auth0' provider.
         # @see https://auth0.com/docs/api/v2#!/Users/post_identities
         # @param user_id [string] The user_id of the primary identity where you are linking the secondary account to.
