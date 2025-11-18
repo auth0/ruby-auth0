@@ -160,7 +160,7 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    pp (0.6.1)
+    pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
     prism (1.6.0)
