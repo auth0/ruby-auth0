@@ -1,1 +1,1 @@
-StubResponse = Struct.new(:body, :success?, :code, :headers)
+StubResponse = Struct.new(:body, :success?, :status, :headers)

@@ -35,7 +35,7 @@ describe Auth0::Mixins::TokenManagement do
 
   context 'get_token' do
     it 'renews the token if there is no token set' do
-      expect(RestClient::Request).to receive(:execute) do |arg|
+      expect(Auth0::HttpClient).to receive(:execute) do |arg|
         expect(arg).to(match(
           include(
             method: :post,
@@ -61,7 +61,7 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       params[:token_expires_at] = time_now.to_i + 86400
 
-      expect(RestClient::Request).not_to receive(:execute).with(hash_including(
+      expect(Auth0::HttpClient).not_to receive(:execute).with(hash_including(
         method: :post,
         url: 'https://samples.auth0.com/oauth/token',
       ))
@@ -76,7 +76,7 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       params[:token_expires_at] = time_now.to_i + 5
 
-      expect(RestClient::Request).to receive(:execute) do |arg|
+      expect(Auth0::HttpClient).to receive(:execute) do |arg|
         expect(arg).to(match(
           include(
             method: :post,
@@ -102,7 +102,7 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       params[:token_expires_at] = time_now.to_i - 10
 
-      expect(RestClient::Request).to receive(:execute) do |arg|
+      expect(Auth0::HttpClient).to receive(:execute) do |arg|
         expect(arg).to(match(
           include(
             method: :post,
@@ -128,7 +128,7 @@ describe Auth0::Mixins::TokenManagement do
       params[:token] = 'test-token'
       instance.instance_variable_set '@token_expires_at', nil
 
-      expect(RestClient::Request).not_to receive(:execute)
+      expect(Auth0::HttpClient).not_to receive(:execute)
 
       instance.send(:get_token)
     end

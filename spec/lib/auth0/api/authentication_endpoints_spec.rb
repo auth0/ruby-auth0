@@ -49,7 +49,7 @@ describe Auth0::Api::AuthenticationEndpoints do
   context 'AuthenticationEndponts' do
     context 'api_token' do
       it 'requests a new token using client_secret' do
-        expect(RestClient::Request).to receive(:execute).with(hash_including(
+        expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
           method: :post,
           url: 'https://samples.auth0.com/oauth/token',
           payload: {
@@ -76,7 +76,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests a new token using organization' do
-        expect(RestClient::Request).to receive(:execute).with(hash_including(
+        expect(Auth0::HttpClient).to receive(:execute).with(hash_including(
           method: :post,
           url: 'https://samples.auth0.com/oauth/token',
           payload: {
@@ -103,7 +103,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests a new token using client_assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -135,7 +135,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'exchange_auth_code_for_tokens' do
       it 'requests a new token using client_secret' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -168,7 +168,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests a new token using client_assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -201,7 +201,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'exchange_refresh_token' do
       it 'exchanges the refresh token using a client secret' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -233,7 +233,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'exchanges the refresh token using client_assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -268,7 +268,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'exchange_sms_otp_for_tokens' do
       it 'requests the tokens using an OTP from SMS' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -304,7 +304,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests the tokens using OTP from SMS, and overrides scope and audience' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -337,7 +337,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests the tokens using an OTP from SMS using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -366,7 +366,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'exchange_email_otp_for_tokens' do
       it 'requests the tokens using email OTP' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -402,7 +402,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests the tokens using OTP from email, and overrides scope and audience' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -430,7 +430,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'requests the tokens using OTP from email using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -462,7 +462,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'login_with_resource_owner' do
       it 'logs in using a client secret' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -498,7 +498,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'logs in using a client secret, realm and audience' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -534,7 +534,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'logs in using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -568,7 +568,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'start_passwordless_email_flow' do
       it 'starts passwordless flow using a client secret' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -592,7 +592,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'starts passwordless email flow using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -615,7 +615,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'start_passwordless_sms_flow' do
       it 'starts passwordless flow using a client secret' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -637,7 +637,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'starts passwordless email flow using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg).to match(
             include(
               method: :post,
@@ -675,7 +675,7 @@ describe Auth0::Api::AuthenticationEndpoints do
 
     context 'pushed_authorization_request' do
       it 'sends the request as a form post' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
           expect(arg[:method]).to eq(:post)
           
@@ -692,7 +692,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'allows the RestClient to handle the correct header defaults' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg[:headers]).not_to have_key('Content-Type')
 
           StubResponse.new({}, true, 200)
@@ -703,7 +703,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'sends the request as a form post with all known overrides' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
           expect(arg[:method]).to eq(:post)
           
@@ -733,7 +733,7 @@ describe Auth0::Api::AuthenticationEndpoints do
       end
 
       it 'sends the request as a form post using client assertion' do
-        expect(RestClient::Request).to receive(:execute) do |arg|
+        expect(Auth0::HttpClient).to receive(:execute) do |arg|
           expect(arg[:url]).to eq('https://samples.auth0.com/oauth/par')
           expect(arg[:method]).to eq(:post)
           expect(arg[:payload][:client_secret]).to be_nil

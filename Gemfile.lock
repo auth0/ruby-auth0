@@ -3,8 +3,8 @@ PATH
   specs:
     auth0 (5.18.0)
       addressable (~> 2.8)
+      faraday (~> 2.9)
       jwt (~> 2.7)
-      rest-client (~> 2.1)
       retryable (~> 3.0)
       zache (~> 0.12)
 
@@ -72,6 +72,12 @@ GEM
     erubi (1.13.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.12.2)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -133,6 +139,8 @@ GEM
     minitest (5.26.2)
     multi_json (1.15.0)
     nenv (0.3.0)
+    net-http (0.6.0)
+      uri
     netrc (0.11.0)
     nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
