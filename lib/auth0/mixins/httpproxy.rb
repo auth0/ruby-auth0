@@ -101,6 +101,7 @@ module Auth0
         when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
         when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)
         when 404       then raise Auth0::NotFound.new(result.body, code: result.code, headers: result.headers)
+        when 409       then raise Auth0::Conflict.new(result.body, code: result.code, headers: result.headers)
         when 429       then raise Auth0::RateLimitEncountered.new(result.body, code: result.code, headers: result.headers)
         when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
         else           raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
