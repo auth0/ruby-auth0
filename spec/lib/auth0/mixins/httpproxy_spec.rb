@@ -279,6 +279,19 @@ describe Auth0::Mixins::HTTPProxy do
         expect { @instance.send(http_method, '/test') }.not_to raise_error
       end
 
+      it "should handle array parameters for #{http_method} method" do
+        array_data = ['param1', 'param2']
+        if http_method == :post_form
+          expected_params = expected_payload(http_method, { payload: array_data })
+        else
+          expected_params = expected_payload(http_method, { payload: array_data.to_json })
+        end
+
+        expect(RestClient::Request).to receive(:execute).with(expected_params)
+          .and_return(StubResponse.new({}, true, 200))
+        expect { @instance.send(http_method, '/test', array_data) }.not_to raise_error
+      end
+
       it 'should not raise exception if data returned not in json format (should be fixed in v2)' do
         allow(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
           .and_return(StubResponse.new('Some random text here', true, 200))
