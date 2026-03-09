@@ -272,6 +272,55 @@ describe Auth0::Mixins::HTTPProxy do
 
   %i(post post_form put patch).each do |http_method|
     context ".#{http_method}" do
+      context 'when body is an Array' do
+        let(:payload) { [{ permission_name: 'read:data', resource_server_identifier: 'https://api.example.com' }] }
+
+        if http_method == :post_form
+          it 'sends the array as-is without wrapping in a Hash' do
+            expect(RestClient::Request).to receive(:execute) do |args|
+              expect(args[:payload]).to be_an(Array)
+              expect(args[:payload]).to eq(payload)
+            end.and_return(StubResponse.new('[]', true, 200))
+
+            @instance.send(http_method, '/test', payload)
+          end
+        else
+          it 'sends the array as-is without wrapping in a Hash' do
+            expect(RestClient::Request).to receive(:execute) do |args|
+              parsed = JSON.parse(args[:payload], symbolize_names: true)
+              expect(parsed).to be_an(Array)
+              expect(parsed).to eq(payload)
+            end.and_return(StubResponse.new('[]', true, 200))
+
+            @instance.send(http_method, '/test', payload)
+          end
+        end
+      end
+
+      context 'when body is a Hash' do
+        let(:payload) { { permission_name: 'read:data', resource_server_identifier: 'https://api.example.com' } }
+
+        if http_method == :post_form
+          it 'sends the Hash without modification' do
+            expect(RestClient::Request).to receive(:execute) do |args|
+              expect(args[:payload]).to be_a(Hash)
+              expect(args[:payload]).to include(payload)
+            end.and_return(StubResponse.new('{}', true, 200))
+
+            @instance.send(http_method, '/test', payload)
+          end
+        else
+          it 'sends the Hash as JSON without modification' do
+            expect(RestClient::Request).to receive(:execute) do |args|
+              parsed = JSON.parse(args[:payload], symbolize_names: true)
+              expect(parsed).to be_a(Hash)
+              expect(parsed).to eq(payload)
+            end.and_return(StubResponse.new('{}', true, 200))
+
+            @instance.send(http_method, '/test', payload)
+          end
+        end
+      end
       it { expect(@instance).to respond_to(http_method.to_sym) }
       it "should call send http #{http_method} method to path defined through HTTP"do
         expect(RestClient::Request).to receive(:execute).with(expected_payload(http_method))
@@ -465,6 +514,7 @@ describe Auth0::Mixins::HTTPProxy do
         end
       end
     end
+
   end
 end
 

@@ -21,7 +21,7 @@ module Auth0
       # proxying requests from instance methods to HTTP class methods
       %i[get post post_file post_form put patch delete delete_with_body].each do |method|
         define_method(method) do |uri, body = {}, extra_headers = {}|
-          body = body.dup.delete_if { |_, v| v.nil? } if body.is_a?(Hash)
+          body = safe_merge_body(body, extra_headers)
           token = get_token
           authorization_header(token) unless token.nil?
           request_with_retry(method, uri, body, extra_headers)
@@ -128,6 +128,12 @@ module Auth0
         else
           e.response
         end
+      end
+      private
+      def safe_merge_body(body, extra = {})
+        return body unless body.is_a?(Hash)
+        merged = extra.any? ? body.merge(extra) : body
+        merged.compact
       end
     end
   end
