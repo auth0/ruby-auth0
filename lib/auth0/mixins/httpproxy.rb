@@ -129,7 +129,9 @@ module Auth0
           e.response
         end
       end
+
       private
+      
       def safe_merge_body(body, extra = {})
         return body unless body.is_a?(Hash)
         merged = extra.any? ? body.merge(extra) : body
