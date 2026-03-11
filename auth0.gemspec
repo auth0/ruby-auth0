@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'fuubar', '~> 2.0'
   s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
-  s.add_development_dependency 'dotenv-rails', '~> 2.0'
+  s.add_development_dependency 'dotenv', '~> 3.0'
   s.add_development_dependency 'rspec', '~> 3.11'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 2.0'
