@@ -1,5 +1,20 @@
 # Change Log
 
+## [v5.18.1](https://github.com/auth0/ruby-auth0/tree/v5.18.1) (2026-03-13)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.0...v5.18.1)
+
+**Changed**
+- chore(deps): bump zache from 0.15.0 to 0.15.2 [\#691](https://github.com/auth0/ruby-auth0/pull/691) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore(deps): bump jwt from 2.9.3 to 2.10.2 [\#682](https://github.com/auth0/ruby-auth0/pull/682) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore(deps): bump addressable from 2.8.7 to 2.8.8 [\#686](https://github.com/auth0/ruby-auth0/pull/686) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore(deps): bump zache from 0.13.2 to 0.15.0 [\#649](https://github.com/auth0/ruby-auth0/pull/649) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+**Fixed**
+- fix deleting array content when passing an array as payload [\#697](https://github.com/auth0/ruby-auth0/pull/697) ([carlastabile](https://github.com/carlastabile))
+
+**Security**
+- fix(deps): upgrade dev dependencies to resolve Snyk security vulnerab… [\#704](https://github.com/auth0/ruby-auth0/pull/704) ([arpit-jn](https://github.com/arpit-jn))
+
 ## [v5.18.0](https://github.com/auth0/ruby-auth0/tree/v5.18.0) (2024-11-25)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.17.0...v5.18.0)
 
