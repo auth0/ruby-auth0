@@ -12,3 +12,6 @@ ignore:
   snyk:lic:rubygems:json:Ruby:
     - '*':
         reason: Ruby standard library gem, Ruby license is acceptable
+  snyk:lic:rubygems:reline:Ruby:
+    - '*':
+        reason: Ruby standard library gem, Ruby license is acceptable
