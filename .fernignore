@@ -1,0 +1,29 @@
+# Specify files that shouldn't be modified by Fern
+changelog.md
+lib/auth0/client.rb
+lib/auth0/auth_client.rb
+lib/auth0/exception.rb
+lib/auth0/algorithm.rb
+lib/auth0/client_assertion.rb
+lib/auth0/mixins.rb
+lib/auth0/mixins/
+lib/auth0/api/
+lib/auth0_client.rb
+custom.gemspec.rb
+
+# Telemetry customization
+lib/auth0/internal/http/raw_client.rb
+test/unit/authentication_endpoints_test.rb
+
+.rubocop.yml
+
+# Documentation
+README.md
+EXAMPLES.md
+DEVELOPMENT.md
+DEPLOYMENT.md
+CODE_OF_CONDUCT.md
+RUBYGEM.md
+v6_MIGRATION_GUIDE.md
+.github/PULL_REQUEST_TEMPLATE.md
+examples/

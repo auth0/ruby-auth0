@@ -6,16 +6,18 @@ on:
   pull_request:
     branches:
       - master
+      - v6
   push:
     branches:
       - master
+      - v6
 
 permissions:
   contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/v6' }}
 
 env:
   CACHE_KEY: "${{ github.ref }}-${{ github.run_id }}-${{ github.run_attempt }}"
@@ -46,10 +48,6 @@ jobs:
       matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
 
     env:
-      DOMAIN: example.auth0.dev
-      CLIENT_ID: example-client
-      CLIENT_SECRET: example-secret
-      MASTER_JWT: example-jwt
       BUNDLE_PATH: vendor/bundle
 
     steps:
@@ -62,7 +60,7 @@ jobs:
           ruby: ${{ matrix.ruby }}
 
       - name: Run tests
-        run: bundle exec rake test
+        run: RUN_WIRE_TESTS=true bundle exec rake test
 
       - name: Upload coverage
         if: matrix.ruby == '3.2' || matrix.ruby == '3.3'

@@ -1,34 +1,38 @@
-# -*- encoding: utf-8 -*-
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'auth0/version'
+# frozen_string_literal: true
 
-Gem::Specification.new do |s|
-  s.name        = 'auth0'
-  s.version     = Auth0::VERSION
-  s.authors     = ['Auth0', 'Jose Romaniello', 'Ivan Petroe', 'Patrik Ragnarsson']
-  s.email       = ['support@auth0.com']
-  s.homepage    = 'https://github.com/auth0/ruby-auth0'
-  s.summary     = 'Auth0 API Client'
-  s.description = 'Ruby toolkit for Auth0 API https://auth0.com.'
+require_relative "lib/auth0/version"
+require_relative "custom.gemspec"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
-  s.require_paths = ['lib']
+# NOTE: A handful of these fields are required as part of the Ruby specification.
+#       You can change them here or overwrite them in the custom gemspec file.
+Gem::Specification.new do |spec|
+  spec.name = "auth0"
+  spec.authors = ["Auth0"]
+  spec.version = Auth0::VERSION
+  spec.summary = "Ruby client library for the Auth0 API"
+  spec.description = "The Auth0 Ruby library provides convenient access to the Auth0 API from Ruby."
+  spec.homepage = "https://github.com/auth0/ruby-auth0"
+  spec.license = "MIT"
+  spec.required_ruby_version = ">= 3.3.0"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
-  s.add_runtime_dependency 'rest-client', '~> 2.1'
-  s.add_runtime_dependency 'jwt', '~> 2.7'
-  s.add_runtime_dependency 'zache', '~> 0.12'
-  s.add_runtime_dependency 'addressable', '~> 2.8'
-  s.add_runtime_dependency 'retryable', '~> 3.0'
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  gemspec = File.basename(__FILE__)
+  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
+    ls.readlines("\x0", chomp: true).reject do |f|
+      (f == gemspec) ||
+        f.start_with?(*%w[bin/ test/ spec/ features/ .git appveyor Gemfile])
+    end
+  end
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 
-  s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'fuubar', '~> 2.0'
-  s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
-  s.add_development_dependency 'dotenv', '~> 3.0'
-  s.add_development_dependency 'rspec', '~> 3.11'
-  s.add_development_dependency 'simplecov', '~> 0.9'
-  s.add_development_dependency 'faker', '~> 2.0'
-  s.license = 'MIT'
+  # For more information and examples about making a new gem, check out our
+  # guide at: https://bundler.io/guides/creating_gem.html
+
+  # Load custom gemspec configuration if it exists
+  custom_gemspec_file = File.join(__dir__, "custom.gemspec.rb")
+  add_custom_gemspec_data(spec) if File.exist?(custom_gemspec_file)
 end

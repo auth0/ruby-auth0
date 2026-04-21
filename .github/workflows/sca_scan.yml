@@ -1,0 +1,15 @@
+name: SCA
+on:
+  push:
+    branches: ["master", "v6"]
+  pull_request:
+    branches: ["master", "v6"]
+jobs:
+  snyk-cli:
+    uses: auth0/devsecops-tooling/.github/workflows/sca-scan.yml@main
+    with:
+      additional-arguments: "--exclude=README.md,.jfrog"
+      pre-scan-commands: |
+        gem install bundler
+        bundle install
+    secrets: inherit

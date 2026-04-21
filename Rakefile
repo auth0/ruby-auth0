@@ -1,31 +1,20 @@
-#!/usr/bin/env rake
-require 'bundler/gem_tasks'
+# frozen_string_literal: true
 
-begin
-  require 'rubocop/rake_task'
+require "bundler/gem_tasks"
+require "minitest/test_task"
 
-  require 'rspec/core/rake_task'
+Minitest::TestTask.create
 
-  desc 'Run Rubocop'
-  RuboCop::RakeTask.new(:rubocop)
+require "rubocop/rake_task"
 
-  desc 'Run Integration Tests'
-  RSpec::Core::RakeTask.new(:integration) do |t|
-    t.pattern = FileList["spec/integration/**/*#{ENV['PATTERN']}*_spec.rb"]
-  end
+RuboCop::RakeTask.new
 
-  desc 'Run Unit Tests'
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = FileList["spec/lib/auth0/**/*#{ENV['PATTERN']}*_spec.rb"]
-  end
+task default: %i[test]
 
-  desc 'Run All Suites'
-  RSpec::Core::RakeTask.new(:all)
+task lint: %i[rubocop]
 
-  desc 'Run unit and integration tests'
-  task test: [:spec, :integration]
-
-  task default: [:rubocop, :test]
-rescue LoadError
-  puts 'Load Error - No RSpec'
+# Run only the custom test file
+Minitest::TestTask.create(:customtest) do |t|
+  t.libs << "test"
+  t.test_globs = ["test/custom.test.rb"]
 end

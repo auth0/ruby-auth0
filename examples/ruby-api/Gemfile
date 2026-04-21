@@ -1,9 +1,10 @@
 # frozen_string_literal: true
-# A sample Gemfile
-source 'http://rubygems.org'
 
-# gem "rails"
-gem 'sinatra', '~> 4.2'
-gem 'jwt', '~> 2.5'
-gem 'dotenv'
-gem 'puma'
+source "https://rubygems.org"
+
+gem "sinatra", "~> 4.0"
+gem "rackup", "~> 2.1"
+gem "puma", "~> 6.0"
+gem "auth0", path: "../.."
+gem "dotenv", "~> 3.0"
+gem "jwt", "~> 2.7"

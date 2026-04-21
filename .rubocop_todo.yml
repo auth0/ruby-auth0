@@ -1,5 +1,0 @@
-Metrics/MethodLength:
-  Max: 15
-
-Metrics/LineLength:
-  Max: 121

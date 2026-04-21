@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+module Auth0
+  module Types
+    class CreateEventStreamRedeliveryResponseContent < Internal::Types::Model
+      field :date_from, -> { String }, optional: true, nullable: false
+      field :date_to, -> { String }, optional: true, nullable: false
+      field :statuses, -> { Internal::Types::Array[Auth0::Types::EventStreamDeliveryStatusEnum] }, optional: true, nullable: false
+      field :event_types, -> { Internal::Types::Array[Auth0::Types::EventStreamEventTypeEnum] }, optional: true, nullable: false
+    end
+  end
+end

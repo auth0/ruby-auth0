@@ -1,25 +1,44 @@
-#Auth0 + Ruby on Rails API Seed
+# Auth0 Ruby on Rails API Example
 
-This is the seed project you need to use if you're going to create a Ruby on Rails API. You'll mostly use this API either for a SPA or a Mobile app. If you just want to create a Regular Ruby on Rails WebApp, please check this [other seed project](https://github.com/auth0/omniauth-auth0)
+A minimal Rails API-only application demonstrating authentication and management API usage with the Auth0 Ruby SDK.
 
-#Running the example
+## Setup
 
-In order to run the example you need to have ruby installed.
+1. Copy the environment file and fill in your Auth0 credentials:
 
-You also need to set the ClientSecret and ClientId for your Auth0 app as enviroment variables with the following names respectively: AUTH0_CLIENT_SECRET and AUTH0_CLIENT_ID.
+   ```bash
+   cp .env.example .env
+   ```
 
-For that, if you just create a file named .env in the directory and set the values like the following, the app will just work:
+2. Install dependencies:
 
-````bash
-# .env file
-AUTH0_CLIENT_SECRET=myCoolSecret
-AUTH0_CLIENT_ID=myCoolClientId
-````
+   ```bash
+   bundle install
+   ```
 
-Once you've set those 2 enviroment variables, run `bundle install`, then run `rails s` and try calling [http://localhost:3000/ping](http://localhost:3000/ping)
+3. Start the server:
 
-You can then try to do a GET to [http://localhost:3000/secured/ping](http://localhost:3000/secured/ping) which will throw an error if you don't send the JWT in the header.
+   ```bash
+   bin/rails server -p 3000
+   ```
 
-__Note:__ if you need to enable cross-origin resource sharing, check out the [rack-cors](https://github.com/cyu/rack-cors) gem.
+## Endpoints
 
-__Note:__ if you are using Windows, add the `tzinfo-data` gem to the gemfile.
+| Endpoint | Auth Required | Description |
+|----------|--------------|-------------|
+| `GET /api/public` | No | Returns a public message |
+| `GET /api/private` | Yes | Returns a message with the authenticated user's `sub` claim |
+| `GET /api/users` | Yes | Lists users from the Management API via `Auth0::Client` |
+
+## Testing
+
+```bash
+# Public endpoint
+curl http://localhost:3000/api/public
+
+# Private endpoint (replace TOKEN with a valid Auth0 access token)
+curl -H "Authorization: Bearer TOKEN" http://localhost:3000/api/private
+
+# Management API endpoint
+curl -H "Authorization: Bearer TOKEN" http://localhost:3000/api/users
+```

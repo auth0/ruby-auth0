@@ -1,42 +1,74 @@
-GEM
-  remote: http://rubygems.org/
+PATH
+  remote: ../..
   specs:
+    auth0 (0.0.0)
+      addressable (~> 2.8)
+      jwt (~> 2.7)
+      rest-client (~> 2.1)
+      retryable (~> 3.0)
+      zache (~> 0.12)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.9.0)
+      public_suffix (>= 2.0.2, < 8.0)
     base64 (0.3.0)
-    dotenv (2.8.1)
-    jwt (2.5.0)
+    domain_name (0.6.20240107)
+    dotenv (3.2.0)
+    http-accept (1.7.0)
+    http-cookie (1.1.6)
+      domain_name (~> 0.5)
+    jwt (2.10.2)
+      base64
     logger (1.7.0)
-    mustermann (3.0.4)
-      ruby2_keywords (~> 0.0.1)
-    nio4r (2.7.3)
-    puma (5.6.9)
+    mime-types (3.7.0)
+      logger
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2026.0414)
+    mustermann (3.1.1)
+    netrc (0.11.0)
+    nio4r (2.7.5)
+    public_suffix (7.0.5)
+    puma (6.6.1)
       nio4r (~> 2.0)
-    rack (3.2.5)
-    rack-protection (4.2.0)
+    rack (3.2.6)
+    rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
       rack (>= 3.0.0, < 4)
-    rack-session (2.1.1)
+    rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
-    ruby2_keywords (0.0.5)
-    sinatra (4.2.0)
+    rackup (2.3.1)
+      rack (>= 3)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    retryable (3.0.5)
+    sinatra (4.2.1)
       logger (>= 1.6.0)
       mustermann (~> 3.0)
       rack (>= 3.0.0, < 4)
-      rack-protection (= 4.2.0)
+      rack-protection (= 4.2.1)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
     tilt (2.7.0)
+    zache (0.15.2)
 
 PLATFORMS
-  aarch64-linux
-  x86_64-linux
+  arm64-darwin-24
+  ruby
 
 DEPENDENCIES
-  dotenv
-  jwt (~> 2.5)
-  puma
-  sinatra (~> 4.2)
+  auth0!
+  dotenv (~> 3.0)
+  jwt (~> 2.7)
+  puma (~> 6.0)
+  rackup (~> 2.1)
+  sinatra (~> 4.0)
 
 BUNDLED WITH
-   2.3.7
+   2.6.7

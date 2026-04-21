@@ -1,5 +1,4 @@
 bin/
-!examples/ruby-on-rails-api/bin/
 vendor/
 doc/
 .DS_Store
@@ -9,10 +8,10 @@ coverage
 .ruby-gemset
 *.swp
 *.swo
-spec/auth0.yml
 .env
-/.yardoc/checksums
-/.yardoc/complete
-/.yardoc/object_types
-/.yardoc/objects/root.dat
-/.yardoc/proxy_types
+/.yardoc/
+test-script/
+
+# AI tools
+.claude/
+.copilot/
