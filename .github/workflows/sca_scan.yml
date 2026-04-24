@@ -8,8 +8,8 @@ jobs:
   snyk-cli:
     uses: auth0/devsecops-tooling/.github/workflows/sca-scan.yml@main
     with:
-      additional-arguments: "--exclude=README.md,.jfrog"
+      ruby-version: "3.4"
+      additional-arguments: "--exclude=README.md,.jfrog,examples"
       pre-scan-commands: |
-        gem install bundler
         bundle install
     secrets: inherit
