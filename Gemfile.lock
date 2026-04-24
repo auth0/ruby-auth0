@@ -122,7 +122,7 @@ GEM
       reline (>= 0.6.0)
     public_suffix (7.0.5)
     racc (1.8.1)
-    rack (3.2.5)
+    rack (3.2.6)
     rainbow (3.1.1)
     rake (13.3.1)
     rb-fsevent (0.11.2)
