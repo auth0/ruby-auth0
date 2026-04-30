@@ -1,5 +1,35 @@
 # Change Log
 
+## 6.0.0-beta.0 (2026-04-30)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v6.0.0.beta.0)
+
+This beta release completely rewrites the Management API client using [Fern](https://buildwithfern.com/) code generation from the Auth0 OpenAPI specification. The Authentication API is ported from v5 and maintains full feature parity.
+
+**Breaking Changes**
+- Management API client rewritten using Fern code generation
+- `Auth0Client` replaced by `Auth0::Client` (unified client for Auth + Management APIs)
+- Management API methods accessed via namespaced sub-clients (`client.users.list` instead of `client.users`)
+- API methods return strongly-typed response objects instead of raw hashes
+- List methods return paginated iterators instead of arrays
+- Non-2xx responses raise typed exceptions (`Auth0::Errors::NotFoundError`, etc.) instead of returning error hashes
+- `rest-client` dependency removed; uses `net/http` internally
+- Minimum Ruby version raised to 3.3
+
+**Added**
+- Auto-generated Management API with complete endpoint coverage from Auth0 OpenAPI spec
+- Automatic OAuth 2.0 client credentials token management
+- Built-in retry with exponential backoff for rate-limited (429) responses
+- Configurable timeouts per request via `request_options`
+- Offset-based pagination with `each` iterators for all list endpoints
+- Telemetry headers on Management API requests
+- Wire tests (WireMock-based) for all Management API endpoints
+- New examples (Sinatra API and Rails 7 API)
+- `v6_MIGRATION_GUIDE.md` for upgrading from v5
+
+**Unchanged**
+- Authentication API (login, signup, token exchange, passwordless, MFA) — ported from v5 with identical interface
+
 ## [v5.18.1](https://github.com/auth0/ruby-auth0/tree/v5.18.1) (2026-03-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.0...v5.18.1)
 

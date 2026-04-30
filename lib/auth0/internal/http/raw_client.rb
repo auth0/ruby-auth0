@@ -29,9 +29,9 @@ module Auth0
           @max_retries = max_retries
           @timeout = timeout
 
-          # Auth0 telemetry in standard format (matches auth0-python pattern)
+          # Auth0 telemetry in standard format
           telemetry = {
-            name: "auth0-ruby",
+            name: "ruby-auth0",
             version: Auth0::VERSION,
             env: { ruby: RUBY_VERSION }
           }
