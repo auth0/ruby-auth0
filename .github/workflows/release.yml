@@ -31,7 +31,7 @@ jobs:
     uses: ./.github/workflows/ruby-release.yml
     # needs: rl-scanner
     with:
-      ruby-version: 3.2
+      ruby-version: 3.3
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       rubygems-token: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
