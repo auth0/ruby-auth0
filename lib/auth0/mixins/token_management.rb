@@ -4,9 +4,9 @@ module Auth0
 
       # Get the Client's api token (or generate a new one if it has expired).
       #
+      # @note This method may perform a network request to refresh an expired token. It is not thread-safe.
       # @return [String] the api token
       def get_token
-        # pp @token_expires_at
         has_expired = @token && @token_expires_at ? @token_expires_at < (Time.now.to_i + 10) : false
 
         if (@token.nil? || has_expired) && @client_id && (@client_secret || @client_assertion_signing_key)

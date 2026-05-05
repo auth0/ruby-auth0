@@ -130,7 +130,7 @@ describe Auth0::Mixins::TokenManagement do
 
       expect(RestClient::Request).not_to receive(:execute)
 
-      instance.get_token
+      expect(instance.get_token).to eq('test-token')
     end
   end
 end
