@@ -1,5 +1,14 @@
 # Change Log
 
+## [v5.19.0](https://github.com/auth0/ruby-auth0/tree/v5.19.0) (2026-05-08)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v5.19.0)
+
+**Added**
+- Make Auth0::Client#get_token public [\#725](https://github.com/auth0/ruby-auth0/pull/725) ([arpit-jn](https://github.com/arpit-jn))
+
+**Fixed**
+- Ship only runtime files in packaged gem to eliminate scanner false positives [\#721](https://github.com/auth0/ruby-auth0/pull/721) ([tmertens](https://github.com/tmertens))
+
 ## [v5.18.1](https://github.com/auth0/ruby-auth0/tree/v5.18.1) (2026-03-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.0...v5.18.1)
 
