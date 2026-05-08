@@ -13,6 +13,17 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 📚 <a href="#documentation">Documentation</a> - 🚀 <a href="#getting-started">Getting started</a> - 💻 <a href="#api-reference">API reference</a> - 💬 <a href="#feedback">Feedback</a>
 </div>
 
+> [!NOTE]
+> **[v6.0.0.beta.0](https://github.com/auth0/ruby-auth0/releases/tag/v6.0.0.beta.0) is now available!** This release features a completely rewritten Management API client, auto-generated from the Auth0 OpenAPI spec using [Fern](https://buildwithfern.com/), with strongly-typed responses, built-in pagination, and automatic token management.
+>
+> ```bash
+> gem install auth0 --pre
+> ```
+>
+> We'd love your feedback - please [open an issue](https://github.com/auth0/ruby-auth0/issues/new) if you encounter any problems.
+>
+> 📖 [Migration Guide](https://github.com/auth0/ruby-auth0/blob/v6/v6_MIGRATION_GUIDE.md) ・ [Changelog](https://github.com/auth0/ruby-auth0/blob/v6/CHANGELOG.md) ・ [API Reference](https://github.com/auth0/ruby-auth0/blob/v6/reference.md)
+
 ## Documentation
 
 - [API documentation](https://www.rubydoc.info/gems/auth0) - documentation auto-generated from the code comments that explains all the available features
