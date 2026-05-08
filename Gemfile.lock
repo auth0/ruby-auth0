@@ -3,7 +3,7 @@ PATH
   specs:
     auth0 (5.19.0)
       addressable (~> 2.8)
-      jwt (~> 2.7)
+      jwt (>= 2.7, < 4.0)
       rest-client (~> 2.1)
       retryable (~> 3.0)
       zache (~> 0.12)
@@ -80,7 +80,7 @@ GEM
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
     json (2.19.5)
-    jwt (2.10.2)
+    jwt (3.1.2)
       base64
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
