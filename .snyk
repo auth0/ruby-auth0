@@ -9,3 +9,9 @@ ignore:
     - dotenv-rails > railties > actionpack > rack-test:
         reason: No direct upgrade available
         expires: "2023-11-02T12:00:00.000Z"
+  snyk:lic:rubygems:json:Ruby:
+    - '*':
+        reason: Ruby standard library gem, Ruby license is acceptable
+  snyk:lic:rubygems:reline:Ruby:
+    - '*':
+        reason: Ruby standard library gem, Ruby license is acceptable
