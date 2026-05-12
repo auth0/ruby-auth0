@@ -2,7 +2,8 @@
 
 module Auth0
   module Types
-    # If provided, this will create a new connection for the SSO flow with the given configuration
+    # If provided, this will create a new connection for the Self-Service Enterprise Configuration flow with the given
+    # configuration
     class SelfServiceProfileSSOTicketConnectionConfig < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
       field :display_name, -> { String }, optional: true, nullable: false

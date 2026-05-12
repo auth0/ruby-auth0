@@ -23,6 +23,7 @@ module Auth0
       field :token_endpoint, -> { String }, optional: true, nullable: false
       field :token_endpoint_auth_method, -> { Auth0::Types::ConnectionTokenEndpointAuthMethodEnum }, optional: true, nullable: false
       field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false
+      field :token_endpoint_jwtca_aud_format, -> { Auth0::Types::ConnectionTokenEndpointJwtcaAudFormatEnumOidc }, optional: true, nullable: false
       field :upstream_params, -> { Internal::Types::Hash[String, Auth0::Types::ConnectionUpstreamAdditionalProperties] }, optional: true, nullable: false
       field :userinfo_endpoint, -> { String }, optional: true, nullable: false
     end

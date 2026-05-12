@@ -10,6 +10,7 @@ module Auth0
       field :enforce_device_binding, -> { Auth0::Types::ClientSessionTransferDeviceBindingEnum }, optional: true, nullable: false
       field :allow_refresh_token, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :enforce_online_refresh_tokens, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :delegation, -> { Auth0::Types::ClientSessionTransferDelegationConfiguration }, optional: true, nullable: false
     end
   end
 end

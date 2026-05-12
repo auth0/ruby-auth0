@@ -22,6 +22,7 @@ module Auth0
       # @option params [String, nil] :connection_id
       # @option params [String, nil] :name
       # @option params [String, nil] :external_id
+      # @option params [String, nil] :search
       # @option params [String, nil] :fields
       # @option params [Boolean, nil] :include_fields
       # @option params [String, nil] :from
@@ -30,11 +31,12 @@ module Auth0
       # @return [Auth0::Types::ListGroupsPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[connection_id name external_id fields include_fields from take]
+        query_param_names = %i[connection_id name external_id search fields include_fields from take]
         query_params = {}
         query_params["connection_id"] = params[:connection_id] if params.key?(:connection_id)
         query_params["name"] = params[:name] if params.key?(:name)
         query_params["external_id"] = params[:external_id] if params.key?(:external_id)
+        query_params["search"] = params[:search] if params.key?(:search)
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
         query_params["from"] = params[:from] if params.key?(:from)

@@ -1,17 +1,1 @@
-bin/
-vendor/
-doc/
-.DS_Store
-.ruby-version
-coverage
 *.gem
-.ruby-gemset
-*.swp
-*.swo
-.env
-/.yardoc/
-test-script/
-
-# AI tools
-.claude/
-.copilot/

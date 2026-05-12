@@ -12,7 +12,7 @@ module Auth0
             @client = client
           end
 
-          # List a verifiable credential templates.
+          # List verifiable credential templates.
           #
           # @param request_options [Hash]
           # @param params [Hash]

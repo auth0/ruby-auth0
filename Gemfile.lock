@@ -1,53 +1,30 @@
 PATH
   remote: .
   specs:
-    auth0 (6.0.0.beta.0)
-      addressable (~> 2.8)
-      jwt (~> 2.7)
-      rest-client (~> 2.1)
-      retryable (~> 3.0)
-      zache (~> 0.12)
+    auth0 (6.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
-    base64 (0.3.0)
-    bigdecimal (4.0.1)
+    bigdecimal (4.1.2)
     coderay (1.1.3)
     crack (1.0.1)
       bigdecimal
       rexml
-    domain_name (0.6.20240107)
     hashdiff (1.2.1)
-    http-accept (1.7.0)
-    http-cookie (1.1.0)
-      domain_name (~> 0.5)
     io-console (0.8.2)
-    json (2.19.1)
-    json-schema (6.2.0)
-      addressable (~> 2.8)
-      bigdecimal (>= 3.1, < 5)
-    jwt (2.10.2)
-      base64
+    json (2.19.5)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
-    logger (1.7.0)
-    mcp (0.8.0)
-      json-schema (>= 4.1)
     method_source (1.1.0)
-    mime-types (3.7.0)
-      logger
-      mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.0303)
     minitest (5.27.0)
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
-    netrc (0.11.0)
-    parallel (1.27.0)
-    parser (3.3.10.2)
+    parallel (2.1.0)
+    parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
     prism (1.9.0)
@@ -58,23 +35,16 @@ GEM
     public_suffix (7.0.5)
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.3.1)
-    regexp_parser (2.11.3)
+    rake (13.4.2)
+    regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
-    rest-client (2.1.0)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    retryable (3.0.5)
     rexml (3.4.4)
-    rubocop (1.85.1)
+    rubocop (1.86.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
-      mcp (~> 0.6)
-      parallel (~> 1.10)
+      parallel (>= 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
@@ -92,26 +62,13 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
-    webmock (3.26.1)
+    webmock (3.26.2)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zache (0.15.2)
 
 PLATFORMS
-  aarch64-linux
-  aarch64-linux-gnu
-  aarch64-linux-musl
-  arm-linux
-  arm-linux-gnu
-  arm-linux-musl
-  arm64-darwin
-  x86-linux
-  x86-linux-gnu
-  x86-linux-musl
-  x86_64-darwin
-  x86_64-linux
-  x86_64-linux-gnu
+  ruby
   x86_64-linux-musl
 
 DEPENDENCIES
@@ -125,4 +82,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.5.23
+   2.5.22

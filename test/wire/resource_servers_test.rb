@@ -16,6 +16,7 @@ class ResourceServersWireTest < WireMockTestCase
     test_id = "resource_servers.list.0"
 
     result = @client.resource_servers.list(
+      identifiers: ["identifiers"],
       page: 1,
       per_page: 1,
       include_totals: true,

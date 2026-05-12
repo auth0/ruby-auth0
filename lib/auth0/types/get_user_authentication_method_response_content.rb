@@ -21,6 +21,8 @@ module Auth0
       field :credential_backed_up, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :identity_user_id, -> { String }, optional: true, nullable: false
       field :user_agent, -> { String }, optional: true, nullable: false
+      field :user_handle, -> { String }, optional: true, nullable: false
+      field :transports, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :aaguid, -> { String }, optional: true, nullable: false
       field :relying_party_identifier, -> { String }, optional: true, nullable: false
     end

@@ -19,6 +19,7 @@ class FormsWireTest < WireMockTestCase
       page: 1,
       per_page: 1,
       include_totals: true,
+      hydrate: ["flow_count"],
       request_options: {
         additional_headers: {
           "X-Test-Id" => "forms.list.0"
@@ -63,6 +64,7 @@ class FormsWireTest < WireMockTestCase
 
     @client.forms.get(
       id: "id",
+      hydrate: ["flow_count"],
       request_options: {
         additional_headers: {
           "X-Test-Id" => "forms.get.0"

@@ -40,6 +40,24 @@ class RefreshTokensWireTest < WireMockTestCase
     )
   end
 
+  def test_refresh_tokens_revoke_with_wiremock
+    test_id = "refresh_tokens.revoke.0"
+
+    @client.refresh_tokens.revoke(request_options: {
+                                    additional_headers: {
+                                      "X-Test-Id" => "refresh_tokens.revoke.0"
+                                    }
+                                  })
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/refresh-tokens/revoke",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_refresh_tokens_get_with_wiremock
     test_id = "refresh_tokens.get.0"
 

@@ -11,8 +11,6 @@ Gem::Specification.new do |spec|
   spec.version = Auth0::VERSION
   spec.summary = "Ruby client library for the Auth0 API"
   spec.description = "The Auth0 Ruby library provides convenient access to the Auth0 API from Ruby."
-  spec.homepage = "https://github.com/auth0/ruby-auth0"
-  spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
   spec.metadata["rubygems_mfa_required"] = "true"
 

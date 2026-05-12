@@ -68,6 +68,38 @@ module Auth0
         end
       end
 
+      # Revoke refresh tokens in bulk by ID list, user, user+client, or client.
+      #
+      # @param request_options [Hash]
+      # @param params [Auth0::RefreshTokens::Types::RevokeRefreshTokensRequestContent]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @return [untyped]
+      def revoke(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        request = Auth0::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "refresh-tokens/revoke",
+          body: Auth0::RefreshTokens::Types::RevokeRefreshTokensRequestContent.new(params).to_h,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Auth0::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        return if code.between?(200, 299)
+
+        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(response.body, code: code)
+      end
+
       # Retrieve refresh token information.
       #
       # @param request_options [Hash]

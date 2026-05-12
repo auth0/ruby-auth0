@@ -11,6 +11,7 @@ module Auth0
         field :signing_secret, -> { String }, optional: true, nullable: false
         field :allow_offline_access, -> { Internal::Types::Boolean }, optional: true, nullable: false
         field :allow_online_access, -> { Internal::Types::Boolean }, optional: true, nullable: false
+        field :allow_online_access_with_ephemeral_sessions, -> { Internal::Types::Boolean }, optional: true, nullable: false
         field :token_lifetime, -> { Integer }, optional: true, nullable: false
         field :token_dialect, -> { Auth0::Types::ResourceServerTokenDialectSchemaEnum }, optional: true, nullable: false
         field :skip_consent_for_verifiable_first_party_clients, -> { Internal::Types::Boolean }, optional: true, nullable: false
@@ -20,6 +21,7 @@ module Auth0
         field :authorization_details, -> { Internal::Types::Array[Object] }, optional: true, nullable: false
         field :proof_of_possession, -> { Auth0::Types::ResourceServerProofOfPossession }, optional: true, nullable: false
         field :subject_type_authorization, -> { Auth0::Types::ResourceServerSubjectTypeAuthorization }, optional: true, nullable: false
+        field :authorization_policy, -> { Auth0::Types::ResourceServerAuthorizationPolicy }, optional: true, nullable: false
       end
     end
   end

@@ -741,6 +741,14 @@ client.branding.update
 <dl>
 <dd>
 
+**identifiers:** `Auth0::Types::UpdateBrandingIdentifiers` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **font:** `Auth0::Types::UpdateBrandingFont` 
     
 </dd>
@@ -860,7 +868,7 @@ client.client_grants.list(
 <dl>
 <dd>
 
-**default_for:** `Auth0::Types::ClientGrantDefaultForEnum` — Used to filter the returned client grants to include only default client grants for the specified group of clients.
+**default_for:** `Auth0::Types::ClientGrantDefaultForEnum` — Applies this client grant as the default for all clients in the specified group. The only accepted value is <a href="https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants#default-permissions-for-third-party-applications">`third_party_clients`</a>, which applies the grant to all third-party clients. Per-client grants for the same audience take precedence. Mutually exclusive with `client_id`.
     
 </dd>
 </dl>
@@ -938,7 +946,7 @@ client.client_grants.create(audience: "audience")
 <dl>
 <dd>
 
-**default_for:** `Auth0::Types::ClientGrantDefaultForEnum` — Applies this client grant as the default for all clients in the specified group. The only accepted value is `third_party_clients`, which applies the grant to all third-party clients. Per-client grants for the same audience take precedence. Mutually exclusive with `client_id`. If specified, a value for `client_id` must not be specified.
+**default_for:** `Auth0::Types::ClientGrantDefaultForEnum` 
     
 </dd>
 </dl>
@@ -3350,6 +3358,7 @@ To search by checkpoint, use the following parameters:
 client.connections.list(
   from: "from",
   take: 1,
+  strategy: ["ad"],
   name: "name",
   fields: "fields",
   include_fields: true
@@ -5736,6 +5745,89 @@ client.event_streams.test(
 </dl>
 </details>
 
+## Events
+<details><summary><code>client.events.<a href="/lib/auth0/events/client.rb">subscribe</a>() -> Auth0::Types::EventStreamSubscribeEventsResponseContent</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Subscribe to events via Server-Sent Events (SSE)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.events.subscribe(
+  from: "from",
+  from_timestamp: "from_timestamp",
+  event_type: ["group.created"]
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**from:** `String` — Opaque token representing position in the stream. If not provided, stream will start from the latest events.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_timestamp:** `String` — RFC-3339 timestamp indicating where to start streaming events from. This should only be used on the initial query when a cursor may not be available. Subsequent requests should use the cursor (from) as it will be more accurate.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_type:** `Auth0::Types::EventStreamSubscribeEventsEventTypeEnum` — Event type(s) to listen for. Specify multiple times for multiple types (e.g., ?event_type=user.created&event_type=user.updated). If not provided, all event types will be streamed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Auth0::Events::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Flows
 <details><summary><code>client.flows.<a href="/lib/auth0/flows/client.rb">list</a>() -> Auth0::Types::ListFlowsOffsetPaginatedResponseContent</code></summary>
 <dl>
@@ -5754,6 +5846,7 @@ client.flows.list(
   page: 1,
   per_page: 1,
   include_totals: true,
+  hydrate: ["form_count"],
   synchronous: true
 )
 ```
@@ -5891,7 +5984,10 @@ client.flows.create(name: "name")
 <dd>
 
 ```ruby
-client.flows.get(id: "id")
+client.flows.get(
+  id: "id",
+  hydrate: ["form_count"]
+)
 ```
 </dd>
 </dl>
@@ -6063,7 +6159,8 @@ client.flows.update(id: "id")
 client.forms.list(
   page: 1,
   per_page: 1,
-  include_totals: true
+  include_totals: true,
+  hydrate: ["flow_count"]
 )
 ```
 </dd>
@@ -6240,7 +6337,10 @@ client.forms.create(name: "name")
 <dd>
 
 ```ruby
-client.forms.get(id: "id")
+client.forms.get(
+  id: "id",
+  hydrate: ["flow_count"]
+)
 ```
 </dd>
 </dl>
@@ -6709,6 +6809,7 @@ client.groups.list(
   connection_id: "connection_id",
   name: "name",
   external_id: "external_id",
+  search: "search",
   fields: "fields",
   include_fields: true,
   from: "from",
@@ -6745,6 +6846,14 @@ client.groups.list(
 <dd>
 
 **external_id:** `String` — Filter groups by external ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `String` — Search for groups by name or external ID.
     
 </dd>
 </dl>
@@ -7433,72 +7542,77 @@ client.jobs.get(id: "id")
 <dl>
 <dd>
 
-Retrieve details on <a href="https://auth0.com/docs/logs/streams">log streams</a>.
-<h5>Sample Response</h5><pre><code>[{
-	"id": "string",
-	"name": "string",
-	"type": "eventbridge",
-	"status": "active|paused|suspended",
-	"sink": {
-		"awsAccountId": "string",
-		"awsRegion": "string",
-		"awsPartnerEventSource": "string"
-	}
+Retrieve details on [log streams](https://auth0.com/docs/logs/streams).
+
+**Sample Response**
+
+```json
+[{
+  "id": "string",
+  "name": "string",
+  "type": "eventbridge",
+  "status": "active|paused|suspended",
+  "sink": {
+    "awsAccountId": "string",
+    "awsRegion": "string",
+    "awsPartnerEventSource": "string"
+  }
 }, {
-	"id": "string",
-	"name": "string",
-	"type": "http",
-	"status": "active|paused|suspended",
-	"sink": {
-		"httpContentFormat": "JSONLINES|JSONARRAY",
-		"httpContentType": "string",
-		"httpEndpoint": "string",
-		"httpAuthorization": "string"
-	}
+  "id": "string",
+  "name": "string",
+  "type": "http",
+  "status": "active|paused|suspended",
+  "sink": {
+    "httpContentFormat": "JSONLINES|JSONARRAY",
+    "httpContentType": "string",
+    "httpEndpoint": "string",
+    "httpAuthorization": "string"
+  }
 },
 {
-	"id": "string",
-	"name": "string",
-	"type": "eventgrid",
-	"status": "active|paused|suspended",
-	"sink": {
-		"azureSubscriptionId": "string",
-		"azureResourceGroup": "string",
-		"azureRegion": "string",
-		"azurePartnerTopic": "string"
-	}
+  "id": "string",
+  "name": "string",
+  "type": "eventgrid",
+  "status": "active|paused|suspended",
+  "sink": {
+    "azureSubscriptionId": "string",
+    "azureResourceGroup": "string",
+    "azureRegion": "string",
+    "azurePartnerTopic": "string"
+  }
 },
 {
-	"id": "string",
-	"name": "string",
-	"type": "splunk",
-	"status": "active|paused|suspended",
-	"sink": {
-		"splunkDomain": "string",
-		"splunkToken": "string",
-		"splunkPort": "string",
-		"splunkSecure": "boolean"
-	}
+  "id": "string",
+  "name": "string",
+  "type": "splunk",
+  "status": "active|paused|suspended",
+  "sink": {
+    "splunkDomain": "string",
+    "splunkToken": "string",
+    "splunkPort": "string",
+    "splunkSecure": "boolean"
+  }
 },
 {
-	"id": "string",
-	"name": "string",
-	"type": "sumo",
-	"status": "active|paused|suspended",
-	"sink": {
-		"sumoSourceAddress": "string",
-	}
+  "id": "string",
+  "name": "string",
+  "type": "sumo",
+  "status": "active|paused|suspended",
+  "sink": {
+    "sumoSourceAddress": "string"
+  }
 },
 {
-	"id": "string",
-	"name": "string",
-	"type": "datadog",
-	"status": "active|paused|suspended",
-	"sink": {
-		"datadogRegion": "string",
-		"datadogApiKey": "string"
-	}
-}]</code></pre>
+  "id": "string",
+  "name": "string",
+  "type": "datadog",
+  "status": "active|paused|suspended",
+  "sink": {
+    "datadogRegion": "string",
+    "datadogApiKey": "string"
+  }
+}]
+```
 </dd>
 </dl>
 </dd>
@@ -7553,131 +7667,202 @@ client.log_streams.list
 <dd>
 
 Create a log stream.
-<h5>Log Stream Types</h5> The <code>type</code> of log stream being created determines the properties required in the <code>sink</code> payload.
-<h5>HTTP Stream</h5> For an <code>http</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "http",
-	"sink": {
-		"httpEndpoint": "string",
-		"httpContentType": "string",
-		"httpContentFormat": "JSONLINES|JSONARRAY",
-		"httpAuthorization": "string"
-	}
-}</code></pre>
-Response: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "http",
-	"status": "active",
-	"sink": {
-		"httpEndpoint": "string",
-		"httpContentType": "string",
-		"httpContentFormat": "JSONLINES|JSONARRAY",
-		"httpAuthorization": "string"
-	}
-}</code></pre>
-<h5>Amazon EventBridge Stream</h5> For an <code>eventbridge</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "eventbridge",
-	"sink": {
-		"awsRegion": "string",
-		"awsAccountId": "string"
-	}
-}</code></pre>
-The response will include an additional field <code>awsPartnerEventSource</code> in the <code>sink</code>: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "eventbridge",
-	"status": "active",
-	"sink": {
-		"awsAccountId": "string",
-		"awsRegion": "string",
-		"awsPartnerEventSource": "string"
-	}
-}</code></pre>
-<h5>Azure Event Grid Stream</h5> For an <code>Azure Event Grid</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "eventgrid",
-	"sink": {
-		"azureSubscriptionId": "string",
-		"azureResourceGroup": "string",
-		"azureRegion": "string"
-	}
-}</code></pre>
-Response: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "http",
-	"status": "active",
-	"sink": {
-		"azureSubscriptionId": "string",
-		"azureResourceGroup": "string",
-		"azureRegion": "string",
-		"azurePartnerTopic": "string"
-	}
-}</code></pre>
-<h5>Datadog Stream</h5> For a <code>Datadog</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "datadog",
-	"sink": {
-		"datadogRegion": "string",
-		"datadogApiKey": "string"
-	}
-}</code></pre>
-Response: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "datadog",
-	"status": "active",
-	"sink": {
-		"datadogRegion": "string",
-		"datadogApiKey": "string"
-	}
-}</code></pre>
-<h5>Splunk Stream</h5> For a <code>Splunk</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "splunk",
-	"sink": {
-		"splunkDomain": "string",
-		"splunkToken": "string",
-		"splunkPort": "string",
-		"splunkSecure": "boolean"
-	}
-}</code></pre>
-Response: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "splunk",
-	"status": "active",
-	"sink": {
-		"splunkDomain": "string",
-		"splunkToken": "string",
-		"splunkPort": "string",
-		"splunkSecure": "boolean"
-	}
-}</code></pre>
-<h5>Sumo Logic Stream</h5> For a <code>Sumo Logic</code> Stream, the <code>sink</code> properties are listed in the payload below
-Request: <pre><code>{
-	"name": "string",
-	"type": "sumo",
-	"sink": {
-		"sumoSourceAddress": "string",
-	}
-}</code></pre>
-Response: <pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "sumo",
-	"status": "active",
-	"sink": {
-		"sumoSourceAddress": "string",
-	}
-}</code></pre>
+
+**Log Stream Types**
+
+The `type` of log stream being created determines the properties required in the `sink` payload.
+
+**HTTP Stream**
+
+For an `http` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "http",
+  "sink": {
+    "httpEndpoint": "string",
+    "httpContentType": "string",
+    "httpContentFormat": "JSONLINES|JSONARRAY",
+    "httpAuthorization": "string"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "http",
+  "status": "active",
+  "sink": {
+    "httpEndpoint": "string",
+    "httpContentType": "string",
+    "httpContentFormat": "JSONLINES|JSONARRAY",
+    "httpAuthorization": "string"
+  }
+}
+```
+
+**Amazon EventBridge Stream**
+
+For an `eventbridge` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "eventbridge",
+  "sink": {
+    "awsRegion": "string",
+    "awsAccountId": "string"
+  }
+}
+```
+
+The response will include an additional field `awsPartnerEventSource` in the `sink`:
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "eventbridge",
+  "status": "active",
+  "sink": {
+    "awsAccountId": "string",
+    "awsRegion": "string",
+    "awsPartnerEventSource": "string"
+  }
+}
+```
+
+**Azure Event Grid Stream**
+
+For an `Azure Event Grid` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "eventgrid",
+  "sink": {
+    "azureSubscriptionId": "string",
+    "azureResourceGroup": "string",
+    "azureRegion": "string"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "http",
+  "status": "active",
+  "sink": {
+    "azureSubscriptionId": "string",
+    "azureResourceGroup": "string",
+    "azureRegion": "string",
+    "azurePartnerTopic": "string"
+  }
+}
+```
+
+**Datadog Stream**
+
+For a `Datadog` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "datadog",
+  "sink": {
+    "datadogRegion": "string",
+    "datadogApiKey": "string"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "datadog",
+  "status": "active",
+  "sink": {
+    "datadogRegion": "string",
+    "datadogApiKey": "string"
+  }
+}
+```
+
+**Splunk Stream**
+
+For a `Splunk` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "splunk",
+  "sink": {
+    "splunkDomain": "string",
+    "splunkToken": "string",
+    "splunkPort": "string",
+    "splunkSecure": "boolean"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "splunk",
+  "status": "active",
+  "sink": {
+    "splunkDomain": "string",
+    "splunkToken": "string",
+    "splunkPort": "string",
+    "splunkSecure": "boolean"
+  }
+}
+```
+
+**Sumo Logic Stream**
+
+For a `Sumo Logic` Stream, the `sink` properties are listed in the payload below.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "type": "sumo",
+  "sink": {
+    "sumoSourceAddress": "string"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "sumo",
+  "status": "active",
+  "sink": {
+    "sumoSourceAddress": "string"
+  }
+}
+```
 </dd>
 </dl>
 </dd>
@@ -7745,107 +7930,157 @@ client.log_streams.create(
 <dd>
 
 Retrieve a log stream configuration and status.
-<h5>Sample responses</h5><h5>Amazon EventBridge Log Stream</h5><pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "eventbridge",
-	"status": "active|paused|suspended",
-	"sink": {
-		"awsAccountId": "string",
-		"awsRegion": "string",
-		"awsPartnerEventSource": "string"
-	}
-}</code></pre> <h5>HTTP Log Stream</h5><pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "http",
-	"status": "active|paused|suspended",
-	"sink": {
-		"httpContentFormat": "JSONLINES|JSONARRAY",
-		"httpContentType": "string",
-		"httpEndpoint": "string",
-		"httpAuthorization": "string"
-	}
-}</code></pre> <h5>Datadog Log Stream</h5><pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "datadog",
-	"status": "active|paused|suspended",
-	"sink": {
-		"datadogRegion": "string",
-		"datadogApiKey": "string"
-	}
 
-}</code></pre><h5>Mixpanel</h5>
-	
-	Request: <pre><code>{
-	  "name": "string",
-	  "type": "mixpanel",
-	  "sink": {
-		"mixpanelRegion": "string", // "us" | "eu",
-		"mixpanelProjectId": "string",
-		"mixpanelServiceAccountUsername": "string",
-		"mixpanelServiceAccountPassword": "string"
-	  }
-	} </code></pre>
-	
-	
-	Response: <pre><code>{
-		"id": "string",
-		"name": "string",
-		"type": "mixpanel",
-		"status": "active",
-		"sink": {
-		  "mixpanelRegion": "string", // "us" | "eu",
-		  "mixpanelProjectId": "string",
-		  "mixpanelServiceAccountUsername": "string",
-		  "mixpanelServiceAccountPassword": "string" // the following is redacted on return
-		}
-	  } </code></pre>
+**Sample responses**
 
-	<h5>Segment</h5>
+**Amazon EventBridge Log Stream**
 
-	Request: <pre><code> {
-	  "name": "string",
-	  "type": "segment",
-	  "sink": {
-		"segmentWriteKey": "string"
-	  }
-	}</code></pre>
-	
-	Response: <pre><code>{
-	  "id": "string",
-	  "name": "string",
-	  "type": "segment",
-	  "status": "active",
-	  "sink": {
-		"segmentWriteKey": "string"
-	  }
-	} </code></pre>
-	
-<h5>Splunk Log Stream</h5><pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "splunk",
-	"status": "active|paused|suspended",
-	"sink": {
-		"splunkDomain": "string",
-		"splunkToken": "string",
-		"splunkPort": "string",
-		"splunkSecure": "boolean"
-	}
-}</code></pre> <h5>Sumo Logic Log Stream</h5><pre><code>{
-	"id": "string",
-	"name": "string",
-	"type": "sumo",
-	"status": "active|paused|suspended",
-	"sink": {
-		"sumoSourceAddress": "string",
-	}
-}</code></pre> <h5>Status</h5> The <code>status</code> of a log stream maybe any of the following:
-1. <code>active</code> - Stream is currently enabled.
-2. <code>paused</code> - Stream is currently user disabled and will not attempt log delivery.
-3. <code>suspended</code> - Stream is currently disabled because of errors and will not attempt log delivery.
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "eventbridge",
+  "status": "active|paused|suspended",
+  "sink": {
+    "awsAccountId": "string",
+    "awsRegion": "string",
+    "awsPartnerEventSource": "string"
+  }
+}
+```
+
+**HTTP Log Stream**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "http",
+  "status": "active|paused|suspended",
+  "sink": {
+    "httpContentFormat": "JSONLINES|JSONARRAY",
+    "httpContentType": "string",
+    "httpEndpoint": "string",
+    "httpAuthorization": "string"
+  }
+}
+```
+
+**Datadog Log Stream**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "datadog",
+  "status": "active|paused|suspended",
+  "sink": {
+    "datadogRegion": "string",
+    "datadogApiKey": "string"
+  }
+}
+```
+
+**Mixpanel**
+
+**Request:**
+
+```json
+{
+  "name": "string",
+  "type": "mixpanel",
+  "sink": {
+    "mixpanelRegion": "string",
+    "mixpanelProjectId": "string",
+    "mixpanelServiceAccountUsername": "string",
+    "mixpanelServiceAccountPassword": "string"
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "mixpanel",
+  "status": "active",
+  "sink": {
+    "mixpanelRegion": "string",
+    "mixpanelProjectId": "string",
+    "mixpanelServiceAccountUsername": "string",
+    "mixpanelServiceAccountPassword": "string"
+  }
+}
+```
+
+**Segment**
+
+**Request:**
+
+```json
+{
+  "name": "string",
+  "type": "segment",
+  "sink": {
+    "segmentWriteKey": "string"
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "segment",
+  "status": "active",
+  "sink": {
+    "segmentWriteKey": "string"
+  }
+}
+```
+
+**Splunk Log Stream**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "splunk",
+  "status": "active|paused|suspended",
+  "sink": {
+    "splunkDomain": "string",
+    "splunkToken": "string",
+    "splunkPort": "string",
+    "splunkSecure": "boolean"
+  }
+}
+```
+
+**Sumo Logic Log Stream**
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "type": "sumo",
+  "status": "active|paused|suspended",
+  "sink": {
+    "sumoSourceAddress": "string"
+  }
+}
+```
+
+**Status**
+
+The `status` of a log stream maybe any of the following:
+
+1. `active` - Stream is currently enabled.
+2. `paused` - Stream is currently user disabled and will not attempt log delivery.
+3. `suspended` - Stream is currently disabled because of errors and will not attempt log delivery.
 </dd>
 </dl>
 </dd>
@@ -7970,40 +8205,79 @@ client.log_streams.delete(id: "id")
 <dd>
 
 Update a log stream.
-<h4>Examples of how to use the PATCH endpoint.</h4> The following fields may be updated in a PATCH operation: <ul><li>name</li><li>status</li><li>sink</li></ul> Note: For log streams of type <code>eventbridge</code> and <code>eventgrid</code>, updating the <code>sink</code> is not permitted.
-<h5>Update the status of a log stream</h5><pre><code>{
-	"status": "active|paused"
-}</code></pre>
-<h5>Update the name of a log stream</h5><pre><code>{
-	"name": "string"
-}</code></pre>
-<h5>Update the sink properties of a stream of type <code>http</code></h5><pre><code>{
+
+**Examples of how to use the PATCH endpoint.**
+
+The following fields may be updated in a PATCH operation:
+
+- name
+- status
+- sink
+
+Note: For log streams of type `eventbridge` and `eventgrid`, updating the `sink` is not permitted.
+
+**Update the status of a log stream**
+
+```json
+{
+  "status": "active|paused"
+}
+```
+
+**Update the name of a log stream**
+
+```json
+{
+  "name": "string"
+}
+```
+
+**Update the sink properties of a stream of type `http`**
+
+```json
+{
   "sink": {
     "httpEndpoint": "string",
     "httpContentType": "string",
     "httpContentFormat": "JSONARRAY|JSONLINES",
     "httpAuthorization": "string"
   }
-}</code></pre>
-<h5>Update the sink properties of a stream of type <code>datadog</code></h5><pre><code>{
+}
+```
+
+**Update the sink properties of a stream of type `datadog`**
+
+```json
+{
   "sink": {
-		"datadogRegion": "string",
-		"datadogApiKey": "string"
+    "datadogRegion": "string",
+    "datadogApiKey": "string"
   }
-}</code></pre>
-<h5>Update the sink properties of a stream of type <code>splunk</code></h5><pre><code>{
+}
+```
+
+**Update the sink properties of a stream of type `splunk`**
+
+```json
+{
   "sink": {
     "splunkDomain": "string",
     "splunkToken": "string",
     "splunkPort": "string",
     "splunkSecure": "boolean"
   }
-}</code></pre>
-<h5>Update the sink properties of a stream of type <code>sumo</code></h5><pre><code>{
+}
+```
+
+**Update the sink properties of a stream of type `sumo`**
+
+```json
+{
   "sink": {
     "sumoSourceAddress": "string"
   }
-}</code></pre> 
+}
+```
 </dd>
 </dl>
 </dd>
@@ -9546,6 +9820,92 @@ client.refresh_tokens.list(
 </dl>
 </details>
 
+<details><summary><code>client.refresh_tokens.<a href="/lib/auth0/refresh_tokens/client.rb">revoke</a>(request) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Revoke refresh tokens in bulk by ID list, user, user+client, or client.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.refresh_tokens.revoke
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ids:** `Internal::Types::Array[String]` — Array of refresh token IDs to revoke. Limited to 100 at a time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `String` — Revoke all refresh tokens for this user.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `String` — Revoke all refresh tokens for this client.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**audience:** `String` — Resource server identifier (audience) to scope the revocation. Must be used with both `user_id` and `client_id`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Auth0::RefreshTokens::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.refresh_tokens.<a href="/lib/auth0/refresh_tokens/client.rb">get</a>(id) -> Auth0::Types::GetRefreshTokenResponseContent</code></summary>
 <dl>
 <dd>
@@ -9769,6 +10129,7 @@ Retrieve details of all APIs associated with your tenant.
 
 ```ruby
 client.resource_servers.list(
+  identifiers: ["identifiers"],
   page: 1,
   per_page: 1,
   include_totals: true,
@@ -9938,6 +10299,14 @@ client.resource_servers.create(identifier: "identifier")
 <dl>
 <dd>
 
+**allow_online_access_with_ephemeral_sessions:** `Internal::Types::Boolean` — Whether Online Refresh Tokens can be issued even when sessions are configured as ephemeral (true) or not (false).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **token_lifetime:** `Integer` — Expiration value (in seconds) for access tokens issued for this API from the token endpoint.
     
 </dd>
@@ -10003,6 +10372,14 @@ client.resource_servers.create(identifier: "identifier")
 <dd>
 
 **subject_type_authorization:** `Auth0::Types::ResourceServerSubjectTypeAuthorization` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**authorization_policy:** `Auth0::Types::ResourceServerAuthorizationPolicy` 
     
 </dd>
 </dl>
@@ -10263,6 +10640,14 @@ client.resource_servers.update(id: "id")
 <dl>
 <dd>
 
+**allow_online_access_with_ephemeral_sessions:** `Internal::Types::Boolean` — Whether Online Refresh Tokens can be issued even when sessions are configured as ephemeral (true) or not (false).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **token_lifetime:** `Integer` — Expiration value (in seconds) for access tokens issued for this API from the token endpoint.
     
 </dd>
@@ -10320,6 +10705,14 @@ client.resource_servers.update(id: "id")
 <dd>
 
 **subject_type_authorization:** `Auth0::Types::ResourceServerSubjectTypeAuthorization` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**authorization_policy:** `Auth0::Types::ResourceServerAuthorizationPolicy` 
     
 </dd>
 </dl>
@@ -11487,7 +11880,7 @@ client.self_service_profiles.create(name: "name")
 <dl>
 <dd>
 
-**allowed_strategies:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileAllowedStrategyEnum]` — List of IdP strategies that will be shown to users during the Self-Service SSO flow. Possible values: [`oidc`, `samlp`, `waad`, `google-apps`, `adfs`, `okta`, `auth0-samlp`, `okta-samlp`, `keycloak-samlp`, `pingfederate`]
+**allowed_strategies:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileAllowedStrategyEnum]` — List of IdP strategies that will be shown to users during the Self-Service Enterprise Configuration flow. Possible values: [`oidc`, `samlp`, `waad`, `google-apps`, `adfs`, `okta`, `auth0-samlp`, `okta-samlp`, `keycloak-samlp`, `pingfederate`]
     
 </dd>
 </dl>
@@ -11495,7 +11888,7 @@ client.self_service_profiles.create(name: "name")
 <dl>
 <dd>
 
-**user_attributes:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileUserAttribute]` — List of attributes to be mapped that will be shown to the user during the SS-SSO flow.
+**user_attributes:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileUserAttribute]` — List of attributes to be mapped that will be shown to the user during the Self-Service Enterprise Configuration flow.
     
 </dd>
 </dl>
@@ -11721,7 +12114,7 @@ client.self_service_profiles.update(id: "id")
 <dl>
 <dd>
 
-**allowed_strategies:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileAllowedStrategyEnum]` — List of IdP strategies that will be shown to users during the Self-Service SSO flow. Possible values: [`oidc`, `samlp`, `waad`, `google-apps`, `adfs`, `okta`, `auth0-samlp`, `okta-samlp`, `keycloak-samlp`, `pingfederate`]
+**allowed_strategies:** `Internal::Types::Array[Auth0::Types::SelfServiceProfileAllowedStrategyEnum]` — List of IdP strategies that will be shown to users during the Self-Service Enterprise Configuration flow. Possible values: [`oidc`, `samlp`, `waad`, `google-apps`, `adfs`, `okta`, `auth0-samlp`, `okta-samlp`, `keycloak-samlp`, `pingfederate`]
     
 </dd>
 </dl>
@@ -12414,7 +12807,7 @@ client.tickets.change_password
 <dl>
 <dd>
 
-**result_url:** `String` — URL the user will be redirected to in the classic Universal Login experience once the ticket is used. Cannot be specified when using client_id or organization_id.
+**result_url:** `String` — URL the user will be redirected to in the classic Universal Login experience once the ticket is used. Cannot be specified when using organization_id. May be specified together with client_id when the tenant has a custom password reset page enabled and a password-reset-post-challenge Action bound.
     
 </dd>
 </dl>
@@ -12979,7 +13372,7 @@ client.user_attribute_profiles.list(
 <dl>
 <dd>
 
-Retrieve details about a single User Attribute Profile specified by ID. 
+Create a User Attribute Profile
 </dd>
 </dl>
 </dd>
@@ -18938,6 +19331,7 @@ Retrieve all connections that are enabled for the specified <a href="https://www
 ```ruby
 client.clients.connections.get(
   id: "id",
+  strategy: ["ad"],
   from: "from",
   take: 1,
   fields: "fields",
@@ -21491,7 +21885,8 @@ client.flows.executions.list(
 ```ruby
 client.flows.executions.get(
   flow_id: "flow_id",
-  execution_id: "execution_id"
+  execution_id: "execution_id",
+  hydrate: ["debug"]
 )
 ```
 </dd>
@@ -25837,6 +26232,7 @@ client.organizations.client_grants.list(
   id: "id",
   audience: "audience",
   client_id: "client_id",
+  grant_ids: ["grant_ids"],
   page: 1,
   per_page: 1,
   include_totals: true
@@ -29650,7 +30046,7 @@ client.roles.users.assign(
 <dl>
 <dd>
 
-Retrieves text customizations for a given self-service profile, language and Self Service SSO Flow page.
+Retrieves text customizations for a given self-service profile, language and Self-Service Enterprise Configuration flow page.
 </dd>
 </dl>
 </dd>
@@ -29732,7 +30128,7 @@ client.self_service_profiles.custom_text.list(
 <dl>
 <dd>
 
-Updates text customizations for a given self-service profile, language and Self Service SSO Flow page.
+Updates text customizations for a given self-service profile, language and Self-Service Enterprise Configuration flow page.
 </dd>
 </dl>
 </dd>
@@ -29826,7 +30222,7 @@ client.self_service_profiles.custom_text.set(
 <dl>
 <dd>
 
-Creates an SSO access ticket to initiate the Self Service SSO Flow using a self-service profile.
+Creates an access ticket to initiate the Self-Service Enterprise Configuration flow using a self-service profile.
 </dd>
 </dl>
 </dd>
@@ -29864,7 +30260,7 @@ client.self_service_profiles.sso_ticket.create(id: "id")
 <dl>
 <dd>
 
-**connection_id:** `String` — If provided, this will allow editing of the provided connection during the SSO Flow
+**connection_id:** `String` — If provided, this will allow editing of the provided connection during the Self-Service Enterprise Configuration flow
     
 </dd>
 </dl>
@@ -29960,7 +30356,7 @@ client.self_service_profiles.sso_ticket.create(id: "id")
 <dl>
 <dd>
 
-Revokes an SSO access ticket and invalidates associated sessions. The ticket will no longer be accepted to initiate a Self-Service SSO session. If any users have already started a session through this ticket, their session will be terminated. Clients should expect a `202 Accepted` response upon successful processing, indicating that the request has been acknowledged and that the revocation is underway but may not be fully completed at the time of response. If the specified ticket does not exist, a `202 Accepted` response is also returned, signaling that no further action is required.
+Revokes a Self-Service Enterprise Configuration access ticket and invalidates associated sessions. The ticket will no longer be accepted to initiate a Self-Service Enterprise Configuration session. If any users have already started a session through this ticket, their session will be terminated. Clients should expect a `202 Accepted` response upon successful processing, indicating that the request has been acknowledged and that the revocation is underway but may not be fully completed at the time of response. If the specified ticket does not exist, a `202 Accepted` response is also returned, signaling that no further action is required.
 Clients should treat these `202` responses as an acknowledgment that the request has been accepted and is in progress, even if the ticket was not found.
 </dd>
 </dl>
@@ -30635,7 +31031,7 @@ client.users.authentication_methods.create(
 <dl>
 <dd>
 
-**key_id:** `String` — Applies to webauthn authentication methods only. The id of the credential.
+**key_id:** `String` — Applies to webauthn/passkey authentication methods only. The id of the credential.
     
 </dd>
 </dl>
@@ -30643,7 +31039,15 @@ client.users.authentication_methods.create(
 <dl>
 <dd>
 
-**public_key:** `String` — Applies to webauthn authentication methods only. The public key, which is encoded as base64.
+**public_key:** `String` — Applies to webauthn/passkey authentication methods only. The public key, which is encoded as base64.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**aaguid:** `String` — Applies to passkeys only. Authenticator Attestation Globally Unique Identifier
     
 </dd>
 </dl>
@@ -30652,6 +31056,54 @@ client.users.authentication_methods.create(
 <dd>
 
 **relying_party_identifier:** `String` — Applies to webauthn authentication methods only. The relying party identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_device_type:** `Auth0::Types::CredentialDeviceTypeEnum` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_backed_up:** `Internal::Types::Boolean` — Applies to passkeys only. Whether the credential was backed up.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**identity_user_id:** `String` — Applies to passkeys only. The ID of the user identity linked with the authentication method.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_agent:** `String` — Applies to passkeys only. The user-agent of the browser used to create the passkey.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_handle:** `String` — Applies to passkeys only. The user handle of the user identity.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transports:** `Internal::Types::Array[String]` — Applies to passkeys only. The transports used by clients to communicate with the authenticator.
     
 </dd>
 </dl>
@@ -32878,7 +33330,7 @@ client.users.sessions.delete(user_id: "user_id")
 <dl>
 <dd>
 
-List a verifiable credential templates.
+List verifiable credential templates.
 </dd>
 </dl>
 </dd>

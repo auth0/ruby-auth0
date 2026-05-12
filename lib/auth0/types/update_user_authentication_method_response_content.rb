@@ -16,6 +16,7 @@ module Auth0
       field :public_key, -> { String }, optional: true, nullable: false
       field :aaguid, -> { String }, optional: true, nullable: false
       field :relying_party_identifier, -> { String }, optional: true, nullable: false
+      field :confirmed, -> { Internal::Types::Boolean }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
     end
   end

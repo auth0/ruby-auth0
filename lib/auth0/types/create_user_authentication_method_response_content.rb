@@ -16,6 +16,12 @@ module Auth0
       field :public_key, -> { String }, optional: true, nullable: false
       field :aaguid, -> { String }, optional: true, nullable: false
       field :relying_party_identifier, -> { String }, optional: true, nullable: false
+      field :credential_device_type, -> { Auth0::Types::CredentialDeviceTypeEnum }, optional: true, nullable: false
+      field :credential_backed_up, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      field :identity_user_id, -> { String }, optional: true, nullable: false
+      field :user_agent, -> { String }, optional: true, nullable: false
+      field :user_handle, -> { String }, optional: true, nullable: false
+      field :transports, -> { Internal::Types::Array[String] }, optional: true, nullable: false
       field :created_at, -> { String }, optional: true, nullable: false
     end
   end

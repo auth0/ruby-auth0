@@ -1,0 +1,14 @@
+{
+  "cliVersion": "5.20.1",
+  "generatorName": "fernapi/fern-ruby-sdk",
+  "generatorVersion": "1.1.13",
+  "generatorConfig": {
+    "clientModuleName": "Management",
+    "package-name": "auth0",
+    "useProvidedDefaults": true,
+    "enableWireTests": true,
+    "useDefaultRequestParameterValues": true
+  },
+  "originGitCommit": "219914accde9916f411f553a3e3eb35a8478eaaf",
+  "sdkVersion": "6.0.0"
+}

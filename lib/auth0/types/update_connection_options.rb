@@ -38,6 +38,11 @@ module Auth0
       field :gateway_authentication, -> { Auth0::Types::ConnectionGatewayAuthentication }, optional: true, nullable: false
       field :federated_connections_access_tokens, -> { Auth0::Types::ConnectionFederatedConnectionsAccessTokens }, optional: true, nullable: false
       field :password_options, -> { Auth0::Types::ConnectionPasswordOptions }, optional: true, nullable: false
+      field :assertion_decryption_settings, -> { Auth0::Types::ConnectionAssertionDecryptionSettings }, optional: true, nullable: false
+      field :id_token_signed_response_algs, -> { Internal::Types::Array[Auth0::Types::ConnectionIDTokenSignedResponseAlgEnum] }, optional: true, nullable: false
+      field :token_endpoint_auth_method, -> { Auth0::Types::ConnectionTokenEndpointAuthMethodEnum }, optional: true, nullable: false
+      field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false
+      field :token_endpoint_jwtca_aud_format, -> { Auth0::Types::ConnectionTokenEndpointJwtcaAudFormatEnumOidc }, optional: true, nullable: false
     end
   end
 end

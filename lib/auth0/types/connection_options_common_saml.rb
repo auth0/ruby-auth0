@@ -4,6 +4,7 @@ module Auth0
   module Types
     # Common options for SAML-based enterprise connections (shared by samlp and pingfederate).
     class ConnectionOptionsCommonSAML < Internal::Types::Model
+      field :assertion_decryption_settings, -> { Auth0::Types::ConnectionAssertionDecryptionSettings }, optional: true, nullable: false
       field :cert, -> { String }, optional: true, nullable: false
       field :decryption_key, -> { Auth0::Types::ConnectionDecryptionKeySAML }, optional: true, nullable: false, api_name: "decryptionKey"
       field :digest_algorithm, -> { Auth0::Types::ConnectionDigestAlgorithmEnumSAML }, optional: true, nullable: false, api_name: "digestAlgorithm"
