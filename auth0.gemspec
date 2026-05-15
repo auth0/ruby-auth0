@@ -11,9 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Auth0 API Client'
   s.description = 'Ruby toolkit for Auth0 API https://auth0.com.'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.files         = Dir['lib/**/*.rb'] + %w[LICENSE README.md CHANGELOG.md auth0.gemspec .version]
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'rest-client', '~> 2.1'
@@ -26,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'fuubar', '~> 2.0'
   s.add_development_dependency 'guard-rspec', '~> 4.5' unless ENV['CIRCLECI']
-  s.add_development_dependency 'dotenv-rails', '~> 2.0'
+  s.add_development_dependency 'dotenv', '~> 3.0'
   s.add_development_dependency 'rspec', '~> 3.11'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'faker', '~> 2.0'
