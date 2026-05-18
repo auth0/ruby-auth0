@@ -3,7 +3,8 @@ GEM
   specs:
     base64 (0.3.0)
     dotenv (2.8.1)
-    jwt (2.5.0)
+    jwt (3.2.0)
+      base64
     logger (1.7.0)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
@@ -34,7 +35,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
-  jwt (~> 2.5)
+  jwt (~> 3.2)
   puma
   sinatra (~> 4.2)
 
