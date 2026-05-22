@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionAuth0OauthApp }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionAuth0Uninitialized }
     end
   end

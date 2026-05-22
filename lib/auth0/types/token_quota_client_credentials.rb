@@ -5,7 +5,9 @@ module Auth0
     # The token quota configuration
     class TokenQuotaClientCredentials < Internal::Types::Model
       field :enforce, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :per_day, -> { Integer }, optional: true, nullable: false
+
       field :per_hour, -> { Integer }, optional: true, nullable: false
     end
   end

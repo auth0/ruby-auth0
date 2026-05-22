@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::FlowActionJwtDecodeJwt }
+
       member -> { Auth0::Types::FlowActionJwtSignJwt }
+
       member -> { Auth0::Types::FlowActionJwtVerifyJwt }
     end
   end

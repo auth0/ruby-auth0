@@ -6,8 +6,11 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::FlowActionSalesforceCreateLead }
+
       member -> { Auth0::Types::FlowActionSalesforceGetLead }
+
       member -> { Auth0::Types::FlowActionSalesforceSearchLeads }
+
       member -> { Auth0::Types::FlowActionSalesforceUpdateLead }
     end
   end

@@ -6,6 +6,7 @@ module Auth0
       module Types
         class ImportEncryptionKeyRequestContent < Internal::Types::Model
           field :kid, -> { String }, optional: false, nullable: false
+
           field :wrapped_key, -> { String }, optional: false, nullable: false
         end
       end

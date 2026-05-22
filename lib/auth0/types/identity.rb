@@ -6,7 +6,9 @@ module Auth0
     # verify secondary identities.
     class Identity < Internal::Types::Model
       field :user_id, -> { String }, optional: false, nullable: false
+
       field :provider, -> { Auth0::Types::IdentityProviderEnum }, optional: false, nullable: false
+
       field :connection_id, -> { String }, optional: true, nullable: false
     end
   end

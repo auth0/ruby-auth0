@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDOAuth1
-      # ConnectionClientIDOAuth1 is an alias for ConnectionClientID
+      # ConnectionClientIDOAuth1 is an alias for String
 
       # @option str [String]
       #

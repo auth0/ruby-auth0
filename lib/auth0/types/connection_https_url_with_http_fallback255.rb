@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionHttpsUrlWithHttpFallback255
-      # ConnectionHttpsUrlWithHttpFallback255 is an alias for ConnectionHttpsUrlWithHttpFallback
+      # ConnectionHttpsUrlWithHttpFallback255 is an alias for String
 
       # @option str [String]
       #

@@ -4,6 +4,7 @@ module Auth0
   module Types
     class FormFieldURLConfig < Internal::Types::Model
       field :default_value, -> { String }, optional: true, nullable: false
+
       field :placeholder, -> { String }, optional: true, nullable: false
     end
   end

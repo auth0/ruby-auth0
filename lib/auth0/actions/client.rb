@@ -29,7 +29,6 @@ module Auth0
       # @return [Auth0::Types::ListActionsPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[trigger_id action_name deployed page per_page installed]
         query_params = {}
         query_params["triggerId"] = params[:trigger_id] if params.key?(:trigger_id)
         query_params["actionName"] = params[:action_name] if params.key?(:action_name)
@@ -37,13 +36,12 @@ module Auth0
         query_params["page"] = params.fetch(:page, 0)
         query_params["per_page"] = params.fetch(:per_page, 50)
         query_params["installed"] = params[:installed] if params.key?(:installed)
-        params.except(*query_param_names)
 
         Auth0::Internal::OffsetItemIterator.new(
           initial_page: query_params["page"],
           item_field: :actions,
           has_next_field: nil,
-          step: true
+          step: false
         ) do |next_page|
           query_params["page"] = next_page
           request = Auth0::Internal::JSON::Request.new(
@@ -60,7 +58,8 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::ListActionsPaginatedResponseContent.load(response.body)
+            parsed_response = Auth0::Types::ListActionsPaginatedResponseContent.load(response.body)
+            [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -153,10 +152,8 @@ module Auth0
       # @return [untyped]
       def delete(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[force]
         query_params = {}
         query_params["force"] = params[:force] if params.key?(:force)
-        params = params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -177,8 +174,8 @@ module Auth0
         raise error_class.new(response.body, code: code)
       end
 
-      # Update an existing action. If this action is currently bound to a trigger, updating it will <strong>not</strong>
-      # affect any user flows until the action is deployed.
+      # Update an existing action. If this action is currently bound to a trigger, updating it will **not** affect any
+      # user flows until the action is deployed.
       #
       # @param request_options [Hash]
       # @param params [Auth0::Actions::Types::UpdateActionRequestContent]
@@ -193,7 +190,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::Actions::Types::UpdateActionRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
@@ -269,7 +266,7 @@ module Auth0
       def test(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::Actions::Types::TestActionRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(

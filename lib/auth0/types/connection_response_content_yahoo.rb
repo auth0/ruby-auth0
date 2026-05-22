@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=yahoo
     class ConnectionResponseContentYahoo < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentYahooStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsYahoo }, optional: true, nullable: false
     end
   end

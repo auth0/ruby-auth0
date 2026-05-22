@@ -10,7 +10,7 @@ module Auth0
         @client = client
       end
 
-      # Retrieve details on <a href="https://auth0.com/docs/custom-domains">custom domains</a>.
+      # Retrieve details on [custom domains](https://auth0.com/docs/custom-domains).
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -27,13 +27,11 @@ module Auth0
       # @return [Array[Auth0::Types::CustomDomain]]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[q fields include_fields sort]
         query_params = {}
         query_params["q"] = params[:q] if params.key?(:q)
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
         query_params["sort"] = params[:sort] if params.key?(:sort)
-        params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -65,7 +63,6 @@ module Auth0
       #
       # - custom_client_ip_header
       # - tls_policy
-      #
       #
       # TLS Policies:
       #
@@ -106,7 +103,7 @@ module Auth0
       # Retrieve the tenant's default domain.
       #
       # @param request_options [Hash]
-      # @param params [Hash]
+      # @param _params [Hash]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
       # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -114,8 +111,7 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @return [Auth0::Types::GetDefaultDomainResponseContent]
-      def get_default(request_options: {}, **params)
-        Auth0::Internal::Types::Utils.normalize_keys(params)
+      def get_default(request_options: {}, **_params)
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
           method: "GET",
@@ -243,26 +239,32 @@ module Auth0
       # - custom_client_ip_header
       # - tls_policy
       #
-      # <h5>Updating CUSTOM_CLIENT_IP_HEADER for a custom domain</h5>To update the <code>custom_client_ip_header</code>
-      # for a domain, the body to
-      # send should be:
-      # <pre><code>{ "custom_client_ip_header": "cf-connecting-ip" }</code></pre>
+      # **Updating CUSTOM_CLIENT_IP_HEADER for a custom domain**
       #
-      # <h5>Updating TLS_POLICY for a custom domain</h5>To update the <code>tls_policy</code> for a domain, the body to
+      # To update the `custom_client_ip_header` for a domain, the body to
       # send should be:
-      # <pre><code>{ "tls_policy": "recommended" }</code></pre>
       #
+      # ```json
+      # { "custom_client_ip_header": "cf-connecting-ip" }
+      # ```
+      #
+      # **Updating TLS_POLICY for a custom domain**
+      #
+      # To update the `tls_policy` for a domain, the body to send should be:
+      #
+      # ```json
+      # { "tls_policy": "recommended" }
+      # ```
       #
       # TLS Policies:
       #
       # - recommended - for modern usage this includes TLS 1.2 only
       #
-      #
       # Some considerations:
       #
       # - The TLS ciphers and protocols available in each TLS policy follow industry recommendations, and may be updated
       # occasionally.
-      # - The <code>compatible</code> TLS policy is no longer supported.
+      # - The `compatible` TLS policy is no longer supported.
       #
       # @param request_options [Hash]
       # @param params [Auth0::CustomDomains::Types::UpdateCustomDomainRequestContent]
@@ -277,7 +279,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::CustomDomains::Types::UpdateCustomDomainRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
@@ -337,17 +339,17 @@ module Auth0
 
       # Run the verification process on a custom domain.
       #
-      # Note: Check the <code>status</code> field to see its verification status. Once verification is complete, it may
-      # take up to 10 minutes before the custom domain can start accepting requests.
+      # Note: Check the `status` field to see its verification status. Once verification is complete, it may take up to
+      # 10 minutes before the custom domain can start accepting requests.
       #
-      # For <code>self_managed_certs</code>, when the custom domain is verified for the first time, the response will
-      # also include the <code>cname_api_key</code> which you will need to configure your proxy. This key must be kept
-      # secret, and is used to validate the proxy requests.
+      # For `self_managed_certs`, when the custom domain is verified for the first time, the response will also include
+      # the `cname_api_key` which you will need to configure your proxy. This key must be kept secret, and is used to
+      # validate the proxy requests.
       #
-      # <a href="https://auth0.com/docs/custom-domains#step-2-verify-ownership">Learn more</a> about verifying custom
-      # domains that use Auth0 Managed certificates.
-      # <a href="https://auth0.com/docs/custom-domains/self-managed-certificates#step-2-verify-ownership">Learn more</a>
-      # about verifying custom domains that use Self Managed certificates.
+      # [Learn more](https://auth0.com/docs/custom-domains#step-2-verify-ownership) about verifying custom domains that
+      # use Auth0 Managed certificates.
+      # [Learn more](https://auth0.com/docs/custom-domains/self-managed-certificates#step-2-verify-ownership) about
+      # verifying custom domains that use Self Managed certificates.
       #
       # @param request_options [Hash]
       # @param params [Hash]

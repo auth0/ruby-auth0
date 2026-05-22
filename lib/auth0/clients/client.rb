@@ -69,7 +69,6 @@ module Auth0
       # @return [Auth0::Types::ListClientsOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[fields include_fields page per_page include_totals is_global is_first_party app_type external_client_id q]
         query_params = {}
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
@@ -81,13 +80,12 @@ module Auth0
         query_params["app_type"] = params[:app_type] if params.key?(:app_type)
         query_params["external_client_id"] = params[:external_client_id] if params.key?(:external_client_id)
         query_params["q"] = params[:q] if params.key?(:q)
-        params.except(*query_param_names)
 
         Auth0::Internal::OffsetItemIterator.new(
           initial_page: query_params["page"],
           item_field: :clients,
           has_next_field: nil,
-          step: true
+          step: false
         ) do |next_page|
           query_params["page"] = next_page
           request = Auth0::Internal::JSON::Request.new(
@@ -104,7 +102,8 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::ListClientsOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = Auth0::Types::ListClientsOffsetPaginatedResponseContent.load(response.body)
+            [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -205,10 +204,20 @@ module Auth0
         end
       end
 
+      # Idempotent registration for Client ID Metadata Document (CIMD) clients.
+      # Uses external_client_id as the unique identifier for upsert operations.
       #
-      #       Idempotent registration for Client ID Metadata Document (CIMD) clients.
-      #       Uses external_client_id as the unique identifier for upsert operations.
-      #       **Create:** Returns 201 when a new client is created (requires \
+      # <strong>Create:</strong> Returns 201 when a new client is created (requires <code>create:clients</code> scope).
+      # <strong>Update:</strong> Returns 200 when an existing client is updated (requires <code>update:clients</code>
+      # scope).
+      #
+      # This endpoint automatically:
+      # <ul>
+      #   <li>Fetches and validates the metadata document</li>
+      #   <li>Maps CIMD fields to Auth0 client configuration</li>
+      #   <li>Creates/rotates credentials from the JWKS</li>
+      #   <li>Enforces CIMD security policies (HTTPS-only, no shared secrets)</li>
+      # </ul>
       #
       # @param request_options [Hash]
       # @param params [Auth0::Clients::Types::RegisterCimdClientRequestContent]
@@ -293,11 +302,9 @@ module Auth0
       # @return [Auth0::Types::GetClientResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[fields include_fields]
         query_params = {}
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-        params = params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -385,7 +392,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::Clients::Types::UpdateClientRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(

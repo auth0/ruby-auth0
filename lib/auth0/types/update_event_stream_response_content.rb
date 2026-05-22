@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::EventStreamWebhookResponseContent }
+
       member -> { Auth0::Types::EventStreamEventBridgeResponseContent }
+
       member -> { Auth0::Types::EventStreamActionResponseContent }
     end
   end

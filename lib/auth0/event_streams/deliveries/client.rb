@@ -29,7 +29,6 @@ module Auth0
         # @return [Array[Auth0::Types::EventStreamDelivery]]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[statuses event_types date_from date_to from take]
           query_params = {}
           query_params["statuses"] = params[:statuses] if params.key?(:statuses)
           query_params["event_types"] = params[:event_types] if params.key?(:event_types)
@@ -37,7 +36,6 @@ module Auth0
           query_params["date_to"] = params[:date_to] if params.key?(:date_to)
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
-          params = params.except(*query_param_names)
 
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],

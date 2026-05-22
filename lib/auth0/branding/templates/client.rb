@@ -12,7 +12,7 @@ module Auth0
         end
 
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -20,8 +20,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Auth0::Types::GetUniversalLoginTemplateResponseContent]
-        def get_universal_login(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def get_universal_login(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -44,30 +43,30 @@ module Auth0
 
         # Update the Universal Login branding template.
         #
-        # <p>When <code>content-type</code> header is set to <code>application/json</code>:</p>
-        # <pre>
-        # {
-        # "template": "&lt;!DOCTYPE html&gt;{% assign resolved_dir = dir | default: "auto" %}&lt;html lang="{{locale}}"
-        # dir="{{resolved_dir}}"&gt;&lt;head&gt;{%- auth0:head -%}&lt;/head&gt;&lt;body
-        # class="_widget-auto-layout"&gt;{%- auth0:widget -%}&lt;/body&gt;&lt;/html&gt;"
-        # }
-        # </pre>
+        # When `content-type` header is set to `application/json`:
         #
-        # <p>
-        #   When <code>content-type</code> header is set to <code>text/html</code>:
-        # </p>
-        # <pre>
-        # &lt!DOCTYPE html&gt;
+        # ```json
+        # {
+        # "template": "<!DOCTYPE html>{% assign resolved_dir = dir | default: \"auto\" %}<html lang=\"{{locale}}\"
+        # dir=\"{{resolved_dir}}\"><head>{%- auth0:head -%}</head><body class=\"_widget-auto-layout\">{%- auth0:widget
+        # -%}</body></html>"
+        # }
+        # ```
+        #
+        # When `content-type` header is set to `text/html`:
+        #
+        # ```html
+        # <!DOCTYPE html>
         # {% assign resolved_dir = dir | default: "auto" %}
-        # &lt;html lang="{{locale}}" dir="{{resolved_dir}}"&gt;
-        #   &lt;head&gt;
+        # <html lang="{{locale}}" dir="{{resolved_dir}}">
+        #   <head>
         #     {%- auth0:head -%}
-        #   &lt;/head&gt;
-        #   &lt;body class="_widget-auto-layout"&gt;
+        #   </head>
+        #   <body class="_widget-auto-layout">
         #     {%- auth0:widget -%}
-        #   &lt;/body&gt;
-        # &lt;/html&gt;
-        # </pre>
+        #   </body>
+        # </html>
+        # ```
         #
         # @param request_options [Hash]
         # @param params [Auth0::Types::UpdateUniversalLoginTemplateRequestContent]
@@ -100,7 +99,7 @@ module Auth0
         end
 
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -108,8 +107,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [untyped]
-        def delete_universal_login(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def delete_universal_login(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

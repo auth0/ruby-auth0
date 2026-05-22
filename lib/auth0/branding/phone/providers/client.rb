@@ -28,10 +28,8 @@ module Auth0
           # @return [Auth0::Types::ListBrandingPhoneProvidersResponseContent]
           def list(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
-            query_param_names = %i[disabled]
             query_params = {}
             query_params["disabled"] = params[:disabled] if params.key?(:disabled)
-            params.except(*query_param_names)
 
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
@@ -176,7 +174,7 @@ module Auth0
           def update(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request_data = Auth0::Branding::Phone::Providers::Types::UpdateBrandingPhoneProviderRequestContent.new(params).to_h
-            non_body_param_names = ["id"]
+            non_body_param_names = %w[id]
             body = request_data.except(*non_body_param_names)
 
             request = Auth0::Internal::JSON::Request.new(
@@ -213,7 +211,7 @@ module Auth0
           def test(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request_data = Auth0::Branding::Phone::Providers::Types::CreatePhoneProviderSendTestRequestContent.new(params).to_h
-            non_body_param_names = ["id"]
+            non_body_param_names = %w[id]
             body = request_data.except(*non_body_param_names)
 
             request = Auth0::Internal::JSON::Request.new(

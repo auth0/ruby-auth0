@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionStripeKeyPair }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionStripeOauthCode }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionStripeUninitialized }
     end
   end

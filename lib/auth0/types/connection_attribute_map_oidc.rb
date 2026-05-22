@@ -6,7 +6,9 @@ module Auth0
     # which IdP claims populate user fields and how they are transformed.
     class ConnectionAttributeMapOidc < Internal::Types::Model
       field :attributes, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
+
       field :mapping_mode, -> { Auth0::Types::ConnectionMappingModeEnumOidc }, optional: true, nullable: false
+
       field :userinfo_scope, -> { String }, optional: true, nullable: false
     end
   end

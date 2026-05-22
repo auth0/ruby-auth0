@@ -14,7 +14,7 @@ module Auth0
         # Get the Bot Detection configuration of your tenant.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -22,8 +22,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Auth0::Types::GetBotDetectionSettingsResponseContent]
-        def get(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def get(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",

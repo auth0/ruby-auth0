@@ -32,7 +32,6 @@ module Auth0
         # @return [Auth0::Types::ListAculsOffsetPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[fields include_fields page per_page include_totals prompt screen rendering_mode]
           query_params = {}
           query_params["fields"] = params[:fields] if params.key?(:fields)
           query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
@@ -42,13 +41,12 @@ module Auth0
           query_params["prompt"] = params[:prompt] if params.key?(:prompt)
           query_params["screen"] = params[:screen] if params.key?(:screen)
           query_params["rendering_mode"] = params[:rendering_mode] if params.key?(:rendering_mode)
-          params.except(*query_param_names)
 
           Auth0::Internal::OffsetItemIterator.new(
             initial_page: query_params["page"],
             item_field: :configs,
             has_next_field: nil,
-            step: true
+            step: false
           ) do |next_page|
             query_params["page"] = next_page
             request = Auth0::Internal::JSON::Request.new(
@@ -65,7 +63,8 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::ListAculsOffsetPaginatedResponseContent.load(response.body)
+              parsed_response = Auth0::Types::ListAculsOffsetPaginatedResponseContent.load(response.body)
+              [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -73,9 +72,9 @@ module Auth0
           end
         end
 
-        # Learn more about <a
-        # href='https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens'>configuring
-        # render settings</a> for advanced customization.
+        # Learn more about [configuring render
+        # settings](https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens)
+        # for advanced customization.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Prompts::Rendering::Types::BulkUpdateAculRequestContent]
@@ -144,9 +143,9 @@ module Auth0
           end
         end
 
-        # Learn more about <a
-        # href='https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens'>configuring
-        # render settings</a> for advanced customization.
+        # Learn more about [configuring render
+        # settings](https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens)
+        # for advanced customization.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Prompts::Rendering::Types::UpdateAculRequestContent]

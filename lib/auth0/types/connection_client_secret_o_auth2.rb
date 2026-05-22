@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientSecretOAuth2
-      # ConnectionClientSecretOAuth2 is an alias for ConnectionClientSecret
+      # ConnectionClientSecretOAuth2 is an alias for String
 
       # @option str [String]
       #

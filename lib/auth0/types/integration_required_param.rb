@@ -10,13 +10,21 @@ module Auth0
     # actions.
     class IntegrationRequiredParam < Internal::Types::Model
       field :type, -> { Auth0::Types::IntegrationRequiredParamTypeEnum }, optional: true, nullable: false
+
       field :name, -> { String }, optional: true, nullable: false
+
       field :required, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :optional, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :label, -> { String }, optional: true, nullable: false
+
       field :description, -> { String }, optional: true, nullable: false
+
       field :default_value, -> { String }, optional: true, nullable: false
+
       field :placeholder, -> { String }, optional: true, nullable: false
+
       field :options, -> { Internal::Types::Array[Auth0::Types::IntegrationRequiredParamOption] }, optional: true, nullable: false
     end
   end

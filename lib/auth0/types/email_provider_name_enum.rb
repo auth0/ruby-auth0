@@ -8,6 +8,7 @@ module Auth0
       MAILGUN = "mailgun"
       MANDRILL = "mandrill"
       SENDGRID = "sendgrid"
+      RESEND = "resend"
       SES = "ses"
       SPARKPOST = "sparkpost"
       SMTP = "smtp"

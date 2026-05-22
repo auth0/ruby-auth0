@@ -27,10 +27,8 @@ module Auth0
         # @return [untyped]
         def delete_by_email(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[email]
           query_params = {}
           query_params["email"] = params[:email] if params.key?(:email)
-          params = params.except(*query_param_names)
 
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],

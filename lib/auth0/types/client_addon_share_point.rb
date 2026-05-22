@@ -5,6 +5,7 @@ module Auth0
     # SharePoint SSO configuration.
     class ClientAddonSharePoint < Internal::Types::Model
       field :url, -> { String }, optional: true, nullable: false
+
       field :external_url, -> { Auth0::Types::ClientAddonSharePointExternalURL }, optional: true, nullable: false
     end
   end

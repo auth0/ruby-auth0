@@ -61,7 +61,7 @@ module Auth0
           def create(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request_data = Auth0::Connections::SCIMConfiguration::Tokens::Types::CreateSCIMTokenRequestContent.new(params).to_h
-            non_body_param_names = ["id"]
+            non_body_param_names = %w[id]
             body = request_data.except(*non_body_param_names)
 
             request = Auth0::Internal::JSON::Request.new(

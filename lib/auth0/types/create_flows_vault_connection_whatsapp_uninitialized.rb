@@ -4,6 +4,7 @@ module Auth0
   module Types
     class CreateFlowsVaultConnectionWhatsappUninitialized < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
+
       field :app_id, -> { Auth0::Types::FlowsVaultConnectionAppIDWhatsappEnum }, optional: false, nullable: false
     end
   end

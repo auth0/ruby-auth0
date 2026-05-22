@@ -5,6 +5,7 @@ module Auth0
     # Information about security-related signals.
     class LogSecurityContext < Internal::Types::Model
       field :ja3, -> { String }, optional: true, nullable: false
+
       field :ja4, -> { String }, optional: true, nullable: false
     end
   end

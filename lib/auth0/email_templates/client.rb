@@ -96,7 +96,7 @@ module Auth0
       def set(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::EmailTemplates::Types::SetEmailTemplateRequestContent.new(params).to_h
-        non_body_param_names = ["templateName"]
+        non_body_param_names = %w[templateName]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
@@ -135,7 +135,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::EmailTemplates::Types::UpdateEmailTemplateRequestContent.new(params).to_h
-        non_body_param_names = ["templateName"]
+        non_body_param_names = %w[templateName]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(

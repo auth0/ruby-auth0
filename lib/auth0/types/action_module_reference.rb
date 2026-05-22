@@ -5,8 +5,11 @@ module Auth0
     # Reference to a module and its version used by an action.
     class ActionModuleReference < Internal::Types::Model
       field :module_id, -> { String }, optional: true, nullable: false
+
       field :module_name, -> { String }, optional: true, nullable: false
+
       field :module_version_id, -> { String }, optional: true, nullable: false
+
       field :module_version_number, -> { Integer }, optional: true, nullable: false
     end
   end

@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=bitbucket
     class ConnectionResponseContentBitbucket < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentBitbucketStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsBitbucket }, optional: true, nullable: false
     end
   end

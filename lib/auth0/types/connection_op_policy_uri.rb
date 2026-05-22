@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionOpPolicyURI
-      # ConnectionOpPolicyURI is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionOpPolicyURI is an alias for String
 
       # @option str [String]
       #

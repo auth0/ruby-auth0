@@ -6,9 +6,13 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionHTTPBearer }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionHTTPBasicAuth }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionHttpApiKey }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionHTTPOauthClientCredentials }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionHTTPUninitialized }
     end
   end

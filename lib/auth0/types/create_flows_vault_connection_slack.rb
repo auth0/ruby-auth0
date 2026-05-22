@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionSlackWebhook }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionSlackOauthCode }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionSlackUninitialized }
     end
   end

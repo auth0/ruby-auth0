@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionTenantDomainSAML
-      # ConnectionTenantDomainSAML is an alias for ConnectionTenantDomain
+      # ConnectionTenantDomainSAML is an alias for String
 
       # @option str [String]
       #

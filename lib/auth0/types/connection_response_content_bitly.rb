@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=bitly
     class ConnectionResponseContentBitly < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentBitlyStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsBitly }, optional: true, nullable: false
     end
   end

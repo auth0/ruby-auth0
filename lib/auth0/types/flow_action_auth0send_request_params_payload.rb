@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { String }
+
       member -> { Internal::Types::Array[Object] }
+
       member -> { Internal::Types::Hash[String, Object] }
     end
   end

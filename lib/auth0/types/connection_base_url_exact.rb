@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionBaseURLExact
-      # ConnectionBaseURLExact is an alias for ConnectionHttpsUrlWithHttpFallback
+      # ConnectionBaseURLExact is an alias for String
 
       # @option str [String]
       #

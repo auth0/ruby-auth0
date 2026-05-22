@@ -5,6 +5,7 @@ module Auth0
     # Custom color settings.
     class UpdateBrandingColors < Internal::Types::Model
       field :primary, -> { String }, optional: true, nullable: false
+
       field :page_background, -> { Auth0::Types::UpdateBrandingPageBackground }, optional: true, nullable: false
     end
   end

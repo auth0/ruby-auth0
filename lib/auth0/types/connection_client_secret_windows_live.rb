@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientSecretWindowsLive
-      # ConnectionClientSecretWindowsLive is an alias for ConnectionClientSecret
+      # ConnectionClientSecretWindowsLive is an alias for String
 
       # @option str [String]
       #

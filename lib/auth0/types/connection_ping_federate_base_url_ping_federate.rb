@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionPingFederateBaseURLPingFederate
-      # ConnectionPingFederateBaseURLPingFederate is an alias for ConnectionHttpsUrlWithHttpFallback
+      # ConnectionPingFederateBaseURLPingFederate is an alias for String
 
       # @option str [String]
       #

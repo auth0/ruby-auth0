@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionServiceDocumentation
-      # ConnectionServiceDocumentation is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionServiceDocumentation is an alias for String
 
       # @option str [String]
       #

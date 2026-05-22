@@ -4,6 +4,7 @@ module Auth0
   module Types
     class AttackProtectionUpdateCaptchaRecaptchaV2 < Internal::Types::Model
       field :site_key, -> { String }, optional: false, nullable: false
+
       field :secret, -> { String }, optional: false, nullable: false
     end
   end
