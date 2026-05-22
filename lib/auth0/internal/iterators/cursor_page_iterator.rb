@@ -37,12 +37,19 @@ module Auth0
 
       # Retrieves the next page from the API.
       #
-      # @return [Boolean]
+      # @return [Object, nil]
       def next_page
         return if !@need_initial_load && @cursor.nil?
 
         @need_initial_load = false
-        fetched_page = @get_next_page.call(@cursor)
+        result = @get_next_page.call(@cursor)
+        # The block returns either the parsed page directly, or a
+        # [parsed_page, raw_http_response] tuple. Unwrap accordingly.
+        fetched_page = if result.is_a?(Array)
+                         result[0]
+                       else
+                         result
+                       end
         @cursor = fetched_page.send(@cursor_field)
         fetched_page
       end
