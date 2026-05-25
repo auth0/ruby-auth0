@@ -43,7 +43,7 @@ module Auth0
         return @has_next_page unless @has_next_page.nil?
         return true if @next_page
 
-        fetched_page = @get_next_page.call(@page_number)
+        fetched_page = fetch_page(@page_number)
         fetched_page_items = fetched_page&.send(@item_field)
         if fetched_page_items.nil? || fetched_page_items.empty?
           @has_next_page = false
@@ -61,7 +61,7 @@ module Auth0
           this_page = @next_page
           @next_page = nil
         else
-          this_page = @get_next_page.call(@page_number)
+          this_page = fetch_page(@page_number)
         end
 
         @has_next_page = this_page&.send(@has_next_field) if @has_next_field
@@ -77,6 +77,20 @@ module Auth0
         end
 
         this_page
+      end
+
+      private
+
+      # The block returns either the parsed page directly, or a
+      # [parsed_page, raw_http_response] tuple. Unwrap accordingly.
+      def fetch_page(page_number)
+        result = @get_next_page.call(page_number)
+        if result.is_a?(Array)
+          fetched_page, _raw_response = result
+          fetched_page
+        else
+          result
+        end
       end
     end
   end
