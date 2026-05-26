@@ -12,7 +12,7 @@ module Auth0
             @client = client
           end
 
-          # Retrieves all scim tokens by its connection <code>id</code>.
+          # Retrieves all scim tokens by its connection `id`.
           #
           # @param request_options [Hash]
           # @param params [Hash]
@@ -61,7 +61,7 @@ module Auth0
           def create(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request_data = Auth0::Connections::SCIMConfiguration::Tokens::Types::CreateSCIMTokenRequestContent.new(params).to_h
-            non_body_param_names = ["id"]
+            non_body_param_names = %w[id]
             body = request_data.except(*non_body_param_names)
 
             request = Auth0::Internal::JSON::Request.new(
@@ -85,7 +85,7 @@ module Auth0
             end
           end
 
-          # Deletes a scim token by its connection <code>id</code> and <code>tokenId</code>.
+          # Deletes a scim token by its connection `id` and `tokenId`.
           #
           # @param request_options [Hash]
           # @param params [Hash]

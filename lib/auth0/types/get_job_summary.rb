@@ -5,8 +5,11 @@ module Auth0
     # Job execution summary.
     class GetJobSummary < Internal::Types::Model
       field :failed, -> { Integer }, optional: true, nullable: false
+
       field :updated, -> { Integer }, optional: true, nullable: false
+
       field :inserted, -> { Integer }, optional: true, nullable: false
+
       field :total, -> { Integer }, optional: true, nullable: false
     end
   end

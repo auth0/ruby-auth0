@@ -5,6 +5,7 @@ module Auth0
     # Create a connection with strategy=bitly
     class CreateConnectionRequestContentBitly < Internal::Types::Model
       field :strategy, -> { Auth0::Types::CreateConnectionRequestContentBitlyStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsBitly }, optional: true, nullable: false
     end
   end

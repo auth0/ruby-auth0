@@ -5,6 +5,7 @@ module Auth0
     # Create a connection with strategy=line
     class CreateConnectionRequestContentLine < Internal::Types::Model
       field :strategy, -> { Auth0::Types::CreateConnectionRequestContentLineStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsLine }, optional: true, nullable: false
     end
   end

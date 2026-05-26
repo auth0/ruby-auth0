@@ -5,6 +5,7 @@ module Auth0
     # iOS native app configuration.
     class ClientMobileiOs < Internal::Types::Model
       field :team_id, -> { String }, optional: true, nullable: false
+
       field :app_bundle_identifier, -> { String }, optional: true, nullable: false
     end
   end

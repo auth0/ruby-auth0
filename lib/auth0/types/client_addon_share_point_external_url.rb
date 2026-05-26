@@ -7,6 +7,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Internal::Types::Array[String] }
+
       member -> { String }
     end
   end

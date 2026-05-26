@@ -4,6 +4,7 @@ module Auth0
   module Types
     class FlowsVaultConnectioSetupHTTPBearer < Internal::Types::Model
       field :type, -> { Auth0::Types::FlowsVaultConnectioSetupTypeBearerEnum }, optional: false, nullable: false
+
       field :token, -> { String }, optional: false, nullable: false
     end
   end

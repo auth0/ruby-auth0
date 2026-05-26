@@ -7,6 +7,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::AculOrganizationFilterByID }
+
       member -> { Auth0::Types::AculOrganizationFilterByMetadata }
     end
   end

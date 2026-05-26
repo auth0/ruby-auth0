@@ -11,12 +11,12 @@ module Auth0
           @client = client
         end
 
-        # Retrieve all clients that have the specified <a
-        # href="https://auth0.com/docs/authenticate/identity-providers">connection</a> enabled.
+        # Retrieve all clients that have the specified
+        # [connection](https://auth0.com/docs/authenticate/identity-providers) enabled.
         #
-        # <b>Note</b>: The first time you call this endpoint, omit the <code>from</code> parameter. If there are more
-        # results, a <code>next</code> value is included in the response. You can use this for subsequent API calls.
-        # When <code>next</code> is no longer included in the response, no further results are remaining.
+        # **Note**: The first time you call this endpoint, omit the `from` parameter. If there are more results, a
+        # `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer
+        # included in the response, no further results are remaining.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -32,11 +32,9 @@ module Auth0
         # @return [Auth0::Types::GetConnectionEnabledClientsResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[take from]
           query_params = {}
           query_params["take"] = params.fetch(:take, 50)
           query_params["from"] = params[:from] if params.key?(:from)
-          params = params.except(*query_param_names)
 
           Auth0::Internal::CursorItemIterator.new(
             cursor_field: :next_,
@@ -58,7 +56,8 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetConnectionEnabledClientsResponseContent.load(response.body)
+              parsed_response = Auth0::Types::GetConnectionEnabledClientsResponseContent.load(response.body)
+              [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

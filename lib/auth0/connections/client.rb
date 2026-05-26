@@ -10,30 +10,27 @@ module Auth0
         @client = client
       end
 
-      # Retrieves detailed list of all <a href="https://auth0.com/docs/authenticate/identity-providers">connections</a>
-      # that match the specified strategy. If no strategy is provided, all connections within your tenant are retrieved.
-      # This action can accept a list of fields to include or exclude from the resulting list of connections.
+      # Retrieves detailed list of all [connections](https://auth0.com/docs/authenticate/identity-providers) that match
+      # the specified strategy. If no strategy is provided, all connections within your tenant are retrieved. This
+      # action can accept a list of fields to include or exclude from the resulting list of connections.
       #
       # This endpoint supports two types of pagination:
-      # <ul>
-      # <li>Offset pagination</li>
-      # <li>Checkpoint pagination</li>
-      # </ul>
+      #
+      # - Offset pagination
+      # - Checkpoint pagination
       #
       # Checkpoint pagination must be used if you need to retrieve more than 1000 connections.
       #
-      # <h2>Checkpoint Pagination</h2>
+      # **Checkpoint Pagination**
       #
       # To search by checkpoint, use the following parameters:
-      # <ul>
-      # <li><code>from</code>: Optional id from which to start selection.</li>
-      # <li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to
-      # 50.</li>
-      # </ul>
       #
-      # <b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code>
-      # parameter. If there are more results, a <code>next</code> value is included in the response. You can use this
-      # for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
+      # - `from`: Optional id from which to start selection.
+      # - `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
+      #
+      # **Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there
+      # are more results, a `next` value is included in the response. You can use this for subsequent API calls. When
+      # `next` is no longer included in the response, no pages are remaining.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -52,7 +49,6 @@ module Auth0
       # @return [Auth0::Types::ListConnectionsCheckpointPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[from take strategy name fields include_fields]
         query_params = {}
         query_params["from"] = params[:from] if params.key?(:from)
         query_params["take"] = params.fetch(:take, 50)
@@ -60,7 +56,6 @@ module Auth0
         query_params["name"] = params[:name] if params.key?(:name)
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-        params.except(*query_param_names)
 
         Auth0::Internal::CursorItemIterator.new(
           cursor_field: :next_,
@@ -82,7 +77,8 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::ListConnectionsCheckpointPaginatedResponseContent.load(response.body)
+            parsed_response = Auth0::Types::ListConnectionsCheckpointPaginatedResponseContent.load(response.body)
+            [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -90,9 +86,9 @@ module Auth0
         end
       end
 
-      # Creates a new connection according to the JSON object received in <code>body</code>.
+      # Creates a new connection according to the JSON object received in `body`.
       #
-      # <b>Note:</b> If a connection with the same name was recently deleted and had a large number of associated users,
+      # **Note:** If a connection with the same name was recently deleted and had a large number of associated users,
       # the deletion may still be processing. Creating a new connection with that name before the deletion completes may
       # fail or produce unexpected results.
       #
@@ -128,8 +124,8 @@ module Auth0
         end
       end
 
-      # Retrieve details for a specified <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a>
-      # along with options that can be used for identity provider configuration.
+      # Retrieve details for a specified [connection](https://auth0.com/docs/authenticate/identity-providers) along with
+      # options that can be used for identity provider configuration.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -145,11 +141,9 @@ module Auth0
       # @return [Auth0::Types::GetConnectionResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[fields include_fields]
         query_params = {}
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-        params = params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -172,13 +166,13 @@ module Auth0
         end
       end
 
-      # Removes a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> from your
-      # tenant. This action cannot be undone. Once removed, users can no longer use this connection to authenticate.
+      # Removes a specific [connection](https://auth0.com/docs/authenticate/identity-providers) from your tenant. This
+      # action cannot be undone. Once removed, users can no longer use this connection to authenticate.
       #
-      # <b>Note:</b> If your connection has a large amount of users associated with it, please be aware that this
-      # operation can be long running after the response is returned and may impact concurrent <a
-      # href="https://auth0.com/docs/api/management/v2/connections/post-connections">create connection</a> requests, if
-      # they use an identical connection name.
+      # **Note:** If your connection has a large amount of users associated with it, please be aware that this operation
+      # can be long running after the response is returned and may impact concurrent [create
+      # connection](https://auth0.com/docs/api/management/v2/connections/post-connections) requests, if they use an
+      # identical connection name.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -210,11 +204,11 @@ module Auth0
         raise error_class.new(response.body, code: code)
       end
 
-      # Update details for a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a>,
-      # including option properties for identity provider configuration.
+      # Update details for a specific [connection](https://auth0.com/docs/authenticate/identity-providers), including
+      # option properties for identity provider configuration.
       #
-      # <b>Note</b>: If you use the <code>options</code> parameter, the entire <code>options</code> object is overriden.
-      # To avoid partial data or other issues, ensure all parameters are present when using this option.
+      # **Note**: If you use the `options` parameter, the entire `options` object is overridden. To avoid partial data
+      # or other issues, ensure all parameters are present when using this option.
       #
       # @param request_options [Hash]
       # @param params [Auth0::Connections::Types::UpdateConnectionRequestContent]
@@ -229,7 +223,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::Connections::Types::UpdateConnectionRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
@@ -253,9 +247,8 @@ module Auth0
         end
       end
 
-      # Retrieves the status of an ad/ldap connection referenced by its <code>ID</code>. <code>200 OK</code> http status
-      # code response is returned  when the connection is online, otherwise a <code>404</code> status code is returned
-      # along with an error message
+      # Retrieves the status of an ad/ldap connection referenced by its `ID`. `200 OK` http status code response is
+      # returned  when the connection is online, otherwise a `404` status code is returned along with an error message
       #
       # @param request_options [Hash]
       # @param params [Hash]

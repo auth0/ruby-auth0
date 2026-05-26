@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionTwilioAPIKey }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionTwilioUninitialized }
     end
   end

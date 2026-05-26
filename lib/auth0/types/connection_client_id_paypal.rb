@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDPaypal
-      # ConnectionClientIDPaypal is an alias for ConnectionClientID
+      # ConnectionClientIDPaypal is an alias for String
 
       # @option str [String]
       #

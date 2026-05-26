@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::EventStreamWebhookBasicAuth }
+
       member -> { Auth0::Types::EventStreamWebhookBearerAuth }
+
       member -> { Auth0::Types::EventStreamWebhookCustomHeaderAuth }
     end
   end

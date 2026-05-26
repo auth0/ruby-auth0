@@ -6,7 +6,9 @@ module Auth0
     # provided.
     class SelfServiceProfileSSOTicketEnabledFeatures < Internal::Types::Model
       field :sso, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :domain_verification, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :provisioning, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end

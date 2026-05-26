@@ -6,6 +6,7 @@ module Auth0
       module Types
         class SetGuardianFactorRequestContent < Internal::Types::Model
           field :name, -> { Auth0::Types::GuardianFactorNameEnum }, optional: false, nullable: false
+
           field :enabled, -> { Internal::Types::Boolean }, optional: false, nullable: false
         end
       end

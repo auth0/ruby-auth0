@@ -8,6 +8,7 @@ module Auth0
           extend Auth0::Internal::Types::Union
 
           member -> { Internal::Types::Array[Auth0::Types::GetJobErrorResponseContent] }
+
           member -> { Auth0::Types::GetJobGenericErrorResponseContent }
         end
       end

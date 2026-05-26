@@ -106,7 +106,7 @@ module Auth0
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request_data = Auth0::Clients::Credentials::Types::PostClientCredentialRequestContent.new(params).to_h
-          non_body_param_names = ["client_id"]
+          non_body_param_names = %w[client_id]
           body = request_data.except(*non_body_param_names)
 
           request = Auth0::Internal::JSON::Request.new(

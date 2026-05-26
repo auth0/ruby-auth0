@@ -5,6 +5,7 @@ module Auth0
     # Key pair with 'key' and 'cert' properties.
     class ConnectionDecryptionKeySAMLCert < Internal::Types::Model
       field :cert, -> { String }, optional: true, nullable: false
+
       field :key, -> { String }, optional: true, nullable: false
     end
   end

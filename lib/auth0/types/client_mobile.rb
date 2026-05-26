@@ -5,6 +5,7 @@ module Auth0
     # Additional configuration for native mobile apps.
     class ClientMobile < Internal::Types::Model
       field :android, -> { Auth0::Types::ClientMobileAndroid }, optional: true, nullable: false
+
       field :ios, -> { Auth0::Types::ClientMobileiOs }, optional: true, nullable: false
     end
   end

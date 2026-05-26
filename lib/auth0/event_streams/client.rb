@@ -23,11 +23,9 @@ module Auth0
       # @return [Auth0::Types::ListEventStreamsResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[from take]
         query_params = {}
         query_params["from"] = params[:from] if params.key?(:from)
         query_params["take"] = params.fetch(:take, 50)
-        params.except(*query_param_names)
 
         Auth0::Internal::CursorItemIterator.new(
           cursor_field: :next_,
@@ -49,7 +47,8 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::ListEventStreamsResponseContent.load(response.body)
+            parsed_response = Auth0::Types::ListEventStreamsResponseContent.load(response.body)
+            [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -164,7 +163,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::EventStreams::Types::UpdateEventStreamRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
@@ -201,7 +200,7 @@ module Auth0
       def test(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::EventStreams::Types::CreateEventStreamTestEventRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(

@@ -6,7 +6,9 @@ module Auth0
       module Types
         class GetConnectionEnabledClientsRequestParameters < Internal::Types::Model
           field :id, -> { String }, optional: false, nullable: false
+
           field :take, -> { Integer }, optional: true, nullable: false
+
           field :from, -> { String }, optional: true, nullable: false
         end
       end

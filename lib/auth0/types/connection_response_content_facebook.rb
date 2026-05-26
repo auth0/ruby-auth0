@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=facebook
     class ConnectionResponseContentFacebook < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentFacebookStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsFacebook }, optional: true, nullable: false
     end
   end

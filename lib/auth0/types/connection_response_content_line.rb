@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=line
     class ConnectionResponseContentLine < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentLineStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsLine }, optional: true, nullable: false
     end
   end

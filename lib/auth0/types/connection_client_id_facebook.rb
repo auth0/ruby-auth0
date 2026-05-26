@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDFacebook
-      # ConnectionClientIDFacebook is an alias for ConnectionClientID
+      # ConnectionClientIDFacebook is an alias for String
 
       # @option str [String]
       #

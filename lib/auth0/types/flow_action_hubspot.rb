@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::FlowActionHubspotEnrollContact }
+
       member -> { Auth0::Types::FlowActionHubspotGetContact }
+
       member -> { Auth0::Types::FlowActionHubspotUpsertContact }
     end
   end

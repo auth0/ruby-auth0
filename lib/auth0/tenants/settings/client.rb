@@ -26,11 +26,9 @@ module Auth0
         # @return [Auth0::Types::GetTenantSettingsResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[fields include_fields]
           query_params = {}
           query_params["fields"] = params[:fields] if params.key?(:fields)
           query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-          params.except(*query_param_names)
 
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],

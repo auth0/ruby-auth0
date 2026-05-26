@@ -27,11 +27,9 @@ module Auth0
       # @return [Auth0::Types::ListUserBlocksByIdentifierResponseContent]
       def list_by_identifier(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[identifier consider_brute_force_enablement]
         query_params = {}
         query_params["identifier"] = params[:identifier] if params.key?(:identifier)
         query_params["consider_brute_force_enablement"] = params[:consider_brute_force_enablement] if params.key?(:consider_brute_force_enablement)
-        params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -72,10 +70,8 @@ module Auth0
       # @return [untyped]
       def delete_by_identifier(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[identifier]
         query_params = {}
         query_params["identifier"] = params[:identifier] if params.key?(:identifier)
-        params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],
@@ -113,10 +109,8 @@ module Auth0
       # @return [Auth0::Types::ListUserBlocksResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[consider_brute_force_enablement]
         query_params = {}
         query_params["consider_brute_force_enablement"] = params[:consider_brute_force_enablement] if params.key?(:consider_brute_force_enablement)
-        params = params.except(*query_param_names)
 
         request = Auth0::Internal::JSON::Request.new(
           base_url: request_options[:base_url],

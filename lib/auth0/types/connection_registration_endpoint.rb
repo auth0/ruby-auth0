@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionRegistrationEndpoint
-      # ConnectionRegistrationEndpoint is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionRegistrationEndpoint is an alias for String
 
       # @option str [String]
       #

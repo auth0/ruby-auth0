@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=paypal-sandbox
     class ConnectionResponseContentPaypalSandbox < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentPaypalSandboxStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsPaypal }, optional: true, nullable: false
     end
   end

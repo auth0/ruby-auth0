@@ -4,6 +4,7 @@ module Auth0
   module Types
     class CreateFlowsVaultConnectionTwilioUninitialized < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
+
       field :app_id, -> { Auth0::Types::FlowsVaultConnectionAppIDTwilioEnum }, optional: false, nullable: false
     end
   end

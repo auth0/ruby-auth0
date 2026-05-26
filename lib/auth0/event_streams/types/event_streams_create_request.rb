@@ -7,7 +7,9 @@ module Auth0
         extend Auth0::Internal::Types::Union
 
         member -> { Auth0::Types::CreateEventStreamWebHookRequestContent }
+
         member -> { Auth0::Types::CreateEventStreamEventBridgeRequestContent }
+
         member -> { Auth0::Types::CreateEventStreamActionRequestContent }
       end
     end

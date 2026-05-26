@@ -13,10 +13,9 @@ module Auth0
 
         # Retrieve detailed list of all user roles currently assigned to a user.
         #
-        # <b>Note</b>: This action retrieves all roles assigned to a user in the context of your whole tenant. To
-        # retrieve Organization-specific roles, use the following endpoint: <a
-        # href="https://auth0.com/docs/api/management/v2/organizations/get-organization-member-roles">Get user roles
-        # assigned to an Organization member</a>.
+        # **Note**: This action retrieves all roles assigned to a user in the context of your whole tenant. To retrieve
+        # Organization-specific roles, use the following endpoint: [Get user roles assigned to an Organization
+        # member](https://auth0.com/docs/api/management/v2/organizations/get-organization-member-roles).
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -33,18 +32,16 @@ module Auth0
         # @return [Auth0::Types::ListUserRolesOffsetPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[per_page page include_totals]
           query_params = {}
           query_params["per_page"] = params.fetch(:per_page, 50)
           query_params["page"] = params.fetch(:page, 0)
           query_params["include_totals"] = params.fetch(:include_totals, true)
-          params = params.except(*query_param_names)
 
           Auth0::Internal::OffsetItemIterator.new(
             initial_page: query_params["page"],
             item_field: :roles,
             has_next_field: nil,
-            step: true
+            step: false
           ) do |next_page|
             query_params["page"] = next_page
             request = Auth0::Internal::JSON::Request.new(
@@ -61,7 +58,8 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::ListUserRolesOffsetPaginatedResponseContent.load(response.body)
+              parsed_response = Auth0::Types::ListUserRolesOffsetPaginatedResponseContent.load(response.body)
+              [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -69,14 +67,13 @@ module Auth0
           end
         end
 
-        # Assign one or more existing user roles to a user. For more information, review <a
-        # href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access Control</a>.
+        # Assign one or more existing user roles to a user. For more information, review [Role-Based Access
+        # Control](https://auth0.com/docs/manage-users/access-control/rbac).
         #
-        # <b>Note</b>: New roles cannot be created through this action. Additionally, this action is used to assign
-        # roles to a user in the context of your whole tenant. To assign roles in the context of a specific
-        # Organization, use the following endpoint: <a
-        # href="https://auth0.com/docs/api/management/v2/organizations/post-organization-member-roles">Assign user roles
-        # to an Organization member</a>.
+        # **Note**: New roles cannot be created through this action. Additionally, this action is used to assign roles
+        # to a user in the context of your whole tenant. To assign roles in the context of a specific Organization, use
+        # the following endpoint: [Assign user roles to an Organization
+        # member](https://auth0.com/docs/api/management/v2/organizations/post-organization-member-roles).
         #
         # @param request_options [Hash]
         # @param params [Auth0::Users::Roles::Types::AssignUserRolesRequestContent]
@@ -91,7 +88,7 @@ module Auth0
         def assign(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request_data = Auth0::Users::Roles::Types::AssignUserRolesRequestContent.new(params).to_h
-          non_body_param_names = ["id"]
+          non_body_param_names = %w[id]
           body = request_data.except(*non_body_param_names)
 
           request = Auth0::Internal::JSON::Request.new(
@@ -115,10 +112,10 @@ module Auth0
 
         # Remove one or more specified user roles assigned to a user.
         #
-        # <b>Note</b>: This action removes a role from a user in the context of your whole tenant. If you want to
-        # unassign a role from a user in the context of a specific Organization, use the following endpoint: <a
-        # href="https://auth0.com/docs/api/management/v2/organizations/delete-organization-member-roles">Delete user
-        # roles from an Organization member</a>.
+        # **Note**: This action removes a role from a user in the context of your whole tenant. If you want to unassign
+        # a role from a user in the context of a specific Organization, use the following endpoint: [Delete user roles
+        # from an Organization
+        # member](https://auth0.com/docs/api/management/v2/organizations/delete-organization-member-roles).
         #
         # @param request_options [Hash]
         # @param params [Auth0::Users::Roles::Types::DeleteUserRolesRequestContent]
@@ -133,7 +130,7 @@ module Auth0
         def delete(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request_data = Auth0::Users::Roles::Types::DeleteUserRolesRequestContent.new(params).to_h
-          non_body_param_names = ["id"]
+          non_body_param_names = %w[id]
           body = request_data.except(*non_body_param_names)
 
           request = Auth0::Internal::JSON::Request.new(

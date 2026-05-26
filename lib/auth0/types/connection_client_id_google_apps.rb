@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDGoogleApps
-      # ConnectionClientIDGoogleApps is an alias for ConnectionClientID
+      # ConnectionClientIDGoogleApps is an alias for String
 
       # @option str [String]
       #

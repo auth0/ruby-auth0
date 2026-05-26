@@ -6,6 +6,7 @@ module Auth0
       module Types
         class RollbackActionModuleRequestParameters < Internal::Types::Model
           field :id, -> { String }, optional: false, nullable: false
+
           field :module_version_id, -> { String }, optional: false, nullable: false
         end
       end

@@ -27,11 +27,9 @@ module Auth0
         # @return [Auth0::Types::GetEmailProviderResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[fields include_fields]
           query_params = {}
           query_params["fields"] = params[:fields] if params.key?(:fields)
           query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-          params.except(*query_param_names)
 
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
@@ -141,7 +139,7 @@ module Auth0
         # Delete the email provider.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -149,8 +147,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [untyped]
-        def delete(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def delete(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

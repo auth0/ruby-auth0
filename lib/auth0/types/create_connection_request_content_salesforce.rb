@@ -5,6 +5,7 @@ module Auth0
     # Create a connection with strategy=salesforce
     class CreateConnectionRequestContentSalesforce < Internal::Types::Model
       field :strategy, -> { Auth0::Types::CreateConnectionRequestContentSalesforceStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsSalesforce }, optional: true, nullable: false
     end
   end

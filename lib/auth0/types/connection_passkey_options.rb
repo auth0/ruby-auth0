@@ -5,7 +5,9 @@ module Auth0
     # Options for the passkey authentication method
     class ConnectionPasskeyOptions < Internal::Types::Model
       field :challenge_ui, -> { Auth0::Types::ConnectionPasskeyChallengeUIEnum }, optional: true, nullable: false
+
       field :progressive_enrollment_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :local_enrollment_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end

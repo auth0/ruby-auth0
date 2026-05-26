@@ -16,7 +16,7 @@ module Auth0
           # tenant.
           #
           # @param request_options [Hash]
-          # @param params [Hash]
+          # @param _params [Hash]
           # @option request_options [String] :base_url
           # @option request_options [Hash{String => Object}] :additional_headers
           # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -24,8 +24,7 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           #
           # @return [Auth0::Types::GetGuardianFactorsProviderApnsResponseContent]
-          def get_apns_provider(request_options: {}, **params)
-            Auth0::Internal::Types::Utils.normalize_keys(params)
+          def get_apns_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -254,12 +253,11 @@ module Auth0
           end
 
           # Retrieve configuration details for an AWS SNS push notification provider that has been enabled for MFA. To
-          # learn more, review <a
-          # href="https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa">Configure
-          # Push Notifications for MFA</a>.
+          # learn more, review [Configure Push Notifications for
+          # MFA](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa).
           #
           # @param request_options [Hash]
-          # @param params [Hash]
+          # @param _params [Hash]
           # @option request_options [String] :base_url
           # @option request_options [Hash{String => Object}] :additional_headers
           # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -267,8 +265,7 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           #
           # @return [Auth0::Types::GetGuardianFactorsProviderSnsResponseContent]
-          def get_sns_provider(request_options: {}, **params)
-            Auth0::Internal::Types::Utils.normalize_keys(params)
+          def get_sns_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",
@@ -289,8 +286,9 @@ module Auth0
             end
           end
 
-          # Configure the <a href="https://auth0.com/docs/multifactor-authentication/developer/sns-configuration">AWS
-          # SNS push notification provider configuration</a> (subscription required).
+          # Configure the [AWS SNS push notification provider
+          # configuration](https://auth0.com/docs/multifactor-authentication/developer/sns-configuration) (subscription
+          # required).
           #
           # @param request_options [Hash]
           # @param params [Auth0::Guardian::Factors::PushNotification::Types::SetGuardianFactorsProviderPushNotificationSnsRequestContent]
@@ -324,8 +322,9 @@ module Auth0
             end
           end
 
-          # Configure the <a href="https://auth0.com/docs/multifactor-authentication/developer/sns-configuration">AWS
-          # SNS push notification provider configuration</a> (subscription required).
+          # Configure the [AWS SNS push notification provider
+          # configuration](https://auth0.com/docs/multifactor-authentication/developer/sns-configuration) (subscription
+          # required).
           #
           # @param request_options [Hash]
           # @param params [Auth0::Guardian::Factors::PushNotification::Types::UpdateGuardianFactorsProviderPushNotificationSnsRequestContent]
@@ -364,7 +363,7 @@ module Auth0
           # Push Notifications for MFA</a>.
           #
           # @param request_options [Hash]
-          # @param params [Hash]
+          # @param _params [Hash]
           # @option request_options [String] :base_url
           # @option request_options [Hash{String => Object}] :additional_headers
           # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -372,8 +371,7 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           #
           # @return [Auth0::Types::GetGuardianFactorsProviderPushNotificationResponseContent]
-          def get_selected_provider(request_options: {}, **params)
-            Auth0::Internal::Types::Utils.normalize_keys(params)
+          def get_selected_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "GET",

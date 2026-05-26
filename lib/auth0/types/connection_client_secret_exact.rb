@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientSecretExact
-      # ConnectionClientSecretExact is an alias for ConnectionClientSecret
+      # ConnectionClientSecretExact is an alias for String
 
       # @option str [String]
       #

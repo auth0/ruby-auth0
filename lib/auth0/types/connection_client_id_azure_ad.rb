@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDAzureAd
-      # ConnectionClientIDAzureAd is an alias for ConnectionClientID
+      # ConnectionClientIDAzureAd is an alias for String
 
       # @option str [String]
       #

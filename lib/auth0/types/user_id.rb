@@ -7,6 +7,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { String }
+
       member -> { Integer }
     end
   end

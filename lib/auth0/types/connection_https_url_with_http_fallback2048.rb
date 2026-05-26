@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionHttpsUrlWithHttpFallback2048
-      # ConnectionHttpsUrlWithHttpFallback2048 is an alias for ConnectionHttpsUrlWithHttpFallback
+      # ConnectionHttpsUrlWithHttpFallback2048 is an alias for String
 
       # @option str [String]
       #

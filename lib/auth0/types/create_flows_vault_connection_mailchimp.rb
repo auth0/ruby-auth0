@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionMailchimpAPIKey }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionMailchimpOauthCode }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionMailchimpUninitialized }
     end
   end

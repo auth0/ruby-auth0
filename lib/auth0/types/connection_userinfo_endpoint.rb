@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionUserinfoEndpoint
-      # ConnectionUserinfoEndpoint is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionUserinfoEndpoint is an alias for String
 
       # @option str [String]
       #

@@ -4,6 +4,7 @@ module Auth0
   module Types
     class CreateFlowsVaultConnectionAirtableUninitialized < Internal::Types::Model
       field :name, -> { String }, optional: false, nullable: false
+
       field :app_id, -> { Auth0::Types::FlowsVaultConnectionAppIDAirtableEnum }, optional: false, nullable: false
     end
   end
