@@ -11,9 +11,9 @@ module Auth0
           @client = client
         end
 
-        # Retrieve the first <a
-        # href="https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors">multi-factor
-        # authentication</a> enrollment that a specific user has confirmed.
+        # Retrieve the first [multi-factor
+        # authentication](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors)
+        # enrollment that a specific user has confirmed.
         #
         # @param request_options [Hash]
         # @param params [Hash]

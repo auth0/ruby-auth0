@@ -12,7 +12,7 @@ module Auth0
 
       # Retrieve detailed list of user roles created in your tenant.
       #
-      # <b>Note</b>: The returned list does not include standard roles available for tenant members, such as Admin or
+      # **Note**: The returned list does not include standard roles available for tenant members, such as Admin or
       # Support Access.
       #
       # @param request_options [Hash]
@@ -66,11 +66,10 @@ module Auth0
         end
       end
 
-      # Create a user role for <a href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access
-      # Control</a>.
+      # Create a user role for [Role-Based Access Control](https://auth0.com/docs/manage-users/access-control/rbac).
       #
-      # <b>Note</b>: New roles are not associated with any permissions by default. To assign existing permissions to
-      # your role, review Associate Permissions with a Role. To create new permissions, review Add API Permissions.
+      # **Note**: New roles are not associated with any permissions by default. To assign existing permissions to your
+      # role, review Associate Permissions with a Role. To create new permissions, review Add API Permissions.
       #
       # @param request_options [Hash]
       # @param params [Auth0::Roles::Types::CreateRoleRequestContent]
@@ -104,8 +103,8 @@ module Auth0
         end
       end
 
-      # Retrieve details about a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user
-      # role</a> specified by ID.
+      # Retrieve details about a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) specified
+      # by ID.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -139,9 +138,8 @@ module Auth0
         end
       end
 
-      # Delete a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user role</a> from your
-      # tenant. Once deleted, it is removed from any user who was previously assigned that role. This action cannot be
-      # undone.
+      # Delete a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) from your tenant. Once
+      # deleted, it is removed from any user who was previously assigned that role. This action cannot be undone.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -173,8 +171,8 @@ module Auth0
         raise error_class.new(response.body, code: code)
       end
 
-      # Modify the details of a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user role</a>
-      # specified by ID.
+      # Modify the details of a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) specified
+      # by ID.
       #
       # @param request_options [Hash]
       # @param params [Auth0::Roles::Types::UpdateRoleRequestContent]
@@ -211,6 +209,11 @@ module Auth0
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
         end
+      end
+
+      # @return [Auth0::Groups::Client]
+      def groups
+        @groups ||= Auth0::Roles::Groups::Client.new(client: @client)
       end
 
       # @return [Auth0::Permissions::Client]

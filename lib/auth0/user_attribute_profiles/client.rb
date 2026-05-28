@@ -58,7 +58,7 @@ module Auth0
         end
       end
 
-      # Create a User Attribute Profile
+      # Create a User Attribute Profile.
       #
       # @param request_options [Hash]
       # @param params [Auth0::UserAttributeProfiles::Types::CreateUserAttributeProfileRequestContent]

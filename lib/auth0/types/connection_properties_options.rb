@@ -70,6 +70,8 @@ module Auth0
 
       field :id_token_signed_response_algs, -> { Internal::Types::Array[Auth0::Types::ConnectionIDTokenSignedResponseAlgEnum] }, optional: true, nullable: false
 
+      field :dpop_signing_alg, -> { Auth0::Types::ConnectionDpopSigningAlgEnum }, optional: true, nullable: false
+
       field :token_endpoint_auth_method, -> { Auth0::Types::ConnectionTokenEndpointAuthMethodEnum }, optional: true, nullable: false
 
       field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false

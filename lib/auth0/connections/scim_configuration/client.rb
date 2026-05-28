@@ -59,7 +59,7 @@ module Auth0
           end
         end
 
-        # Retrieves a scim configuration by its <code>connectionId</code>.
+        # Retrieves a scim configuration by its `connectionId`.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -128,7 +128,7 @@ module Auth0
           end
         end
 
-        # Deletes a scim configuration by its <code>connectionId</code>.
+        # Deletes a scim configuration by its `connectionId`.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -160,7 +160,7 @@ module Auth0
           raise error_class.new(response.body, code: code)
         end
 
-        # Update a scim configuration by its <code>connectionId</code>.
+        # Update a scim configuration by its `connectionId`.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Connections::SCIMConfiguration::Types::UpdateSCIMConfigurationRequestContent]
@@ -199,7 +199,7 @@ module Auth0
           end
         end
 
-        # Retrieves a scim configuration's default mapping by its <code>connectionId</code>.
+        # Retrieves a scim configuration's default mapping by its `connectionId`.
         #
         # @param request_options [Hash]
         # @param params [Hash]

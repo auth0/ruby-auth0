@@ -209,9 +209,8 @@ module Auth0
         end
 
         # Update the verification status and/or use_for_organization_discovery for an organization discovery domain. The
-        # <code>status</code> field must be either <code>pending</code> or <code>verified</code>. The
-        # <code>use_for_organization_discovery</code> field can be <code>true</code> or <code>false</code> (default:
-        # <code>true</code>).
+        # `status` field must be either `pending` or `verified`. The `use_for_organization_discovery` field can be
+        # `true` or `false` (default: `true`).
         #
         # @param request_options [Hash]
         # @param params [Auth0::Organizations::DiscoveryDomains::Types::UpdateOrganizationDiscoveryDomainRequestContent]

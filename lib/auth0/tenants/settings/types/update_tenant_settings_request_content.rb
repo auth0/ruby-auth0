@@ -76,6 +76,8 @@ module Auth0
           field :phone_consolidated_experience, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
           field :dynamic_client_registration_security_mode, -> { Auth0::Types::TenantSettingsDynamicClientRegistrationSecurityMode }, optional: true, nullable: false
+
+          field :country_codes, -> { Auth0::Types::TenantSettingsCountryCodes }, optional: true, nullable: false
         end
       end
     end
