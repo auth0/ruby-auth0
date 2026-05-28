@@ -14,7 +14,7 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 </div>
 
 > [!NOTE]
-> **[v6.0.0.beta.0](https://github.com/auth0/ruby-auth0/releases/tag/v6.0.0.beta.0) is now available!** This release features a completely rewritten Management API client, auto-generated from the Auth0 OpenAPI spec using [Fern](https://buildwithfern.com/), with strongly-typed responses, built-in pagination, and automatic token management.
+> **[v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/releases/tag/v6.0.0.beta.1) is now available!** This release features a completely rewritten Management API client, auto-generated from the Auth0 OpenAPI spec using [Fern](https://buildwithfern.com/), with strongly-typed responses, built-in pagination, and automatic token management.
 >
 > ```bash
 > gem install auth0 --pre
