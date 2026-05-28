@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::FormBlock }
+
       member -> { Auth0::Types::FormWidget }
+
       member -> { Auth0::Types::FormField }
     end
   end

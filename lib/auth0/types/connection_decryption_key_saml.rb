@@ -9,6 +9,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::ConnectionDecryptionKeySAMLCert }
+
       member -> { String }
     end
   end

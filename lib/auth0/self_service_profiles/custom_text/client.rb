@@ -11,7 +11,8 @@ module Auth0
           @client = client
         end
 
-        # Retrieves text customizations for a given self-service profile, language and Self Service SSO Flow page.
+        # Retrieves text customizations for a given self-service profile, language and Self-Service Enterprise
+        # Configuration flow page.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -47,7 +48,8 @@ module Auth0
           end
         end
 
-        # Updates text customizations for a given self-service profile, language and Self Service SSO Flow page.
+        # Updates text customizations for a given self-service profile, language and Self-Service Enterprise
+        # Configuration flow page.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Types::SetSelfServiceProfileCustomTextRequestContent]

@@ -6,7 +6,9 @@ module Auth0
     # layer_id.
     class ActionVersionDependency < Internal::Types::Model
       field :name, -> { String }, optional: true, nullable: false
+
       field :version, -> { String }, optional: true, nullable: false
+
       field :registry_url, -> { String }, optional: true, nullable: false
     end
   end

@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=salesforce-community
     class ConnectionResponseContentSalesforceCommunity < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentSalesforceCommunityStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsSalesforceCommunity }, optional: true, nullable: false
     end
   end

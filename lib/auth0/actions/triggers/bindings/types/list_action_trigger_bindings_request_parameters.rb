@@ -7,7 +7,9 @@ module Auth0
         module Types
           class ListActionTriggerBindingsRequestParameters < Internal::Types::Model
             field :trigger_id, -> { Auth0::Types::ActionTriggerTypeEnum }, optional: false, nullable: false, api_name: "triggerId"
+
             field :page, -> { Integer }, optional: true, nullable: false
+
             field :per_page, -> { Integer }, optional: true, nullable: false
           end
         end

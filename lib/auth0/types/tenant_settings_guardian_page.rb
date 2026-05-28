@@ -5,6 +5,7 @@ module Auth0
     # Guardian page customization.
     class TenantSettingsGuardianPage < Internal::Types::Model
       field :enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :html, -> { String }, optional: true, nullable: false
     end
   end

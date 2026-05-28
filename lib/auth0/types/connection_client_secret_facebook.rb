@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientSecretFacebook
-      # ConnectionClientSecretFacebook is an alias for ConnectionClientSecret
+      # ConnectionClientSecretFacebook is an alias for String
 
       # @option str [String]
       #

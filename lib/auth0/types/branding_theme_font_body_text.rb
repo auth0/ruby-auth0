@@ -5,6 +5,7 @@ module Auth0
     # Body text
     class BrandingThemeFontBodyText < Internal::Types::Model
       field :bold, -> { Internal::Types::Boolean }, optional: false, nullable: false
+
       field :size, -> { Integer }, optional: false, nullable: false
     end
   end

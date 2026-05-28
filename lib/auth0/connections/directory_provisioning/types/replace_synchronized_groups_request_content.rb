@@ -6,6 +6,7 @@ module Auth0
       module Types
         class ReplaceSynchronizedGroupsRequestContent < Internal::Types::Model
           field :id, -> { String }, optional: false, nullable: false
+
           field :groups, -> { Internal::Types::Array[Auth0::Types::SynchronizedGroupPayload] }, optional: false, nullable: false
         end
       end

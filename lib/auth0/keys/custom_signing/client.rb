@@ -14,7 +14,7 @@ module Auth0
         # Get entire jwks representation of custom signing keys.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -22,8 +22,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Auth0::Types::GetCustomSigningKeysResponseContent]
-        def get(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def get(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -81,7 +80,7 @@ module Auth0
         # Delete entire jwks representation of custom signing keys.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -89,8 +88,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [untyped]
-        def delete(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def delete(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "DELETE",

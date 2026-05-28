@@ -5,9 +5,13 @@ module Auth0
     module Types
       class SetNetworkACLRequestContent < Internal::Types::Model
         field :id, -> { String }, optional: false, nullable: false
+
         field :description, -> { String }, optional: false, nullable: false
+
         field :active, -> { Internal::Types::Boolean }, optional: false, nullable: false
+
         field :priority, -> { Integer }, optional: true, nullable: false
+
         field :rule, -> { Auth0::Types::NetworkACLRule }, optional: false, nullable: false
       end
     end

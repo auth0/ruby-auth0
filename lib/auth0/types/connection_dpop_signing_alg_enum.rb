@@ -6,6 +6,8 @@ module Auth0
       extend Auth0::Internal::Types::Enum
 
       ES256 = "ES256"
+      ES384 = "ES384"
+      ES512 = "ES512"
       ED25519 = "Ed25519"
     end
   end

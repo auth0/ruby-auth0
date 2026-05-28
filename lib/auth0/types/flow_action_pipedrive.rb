@@ -6,7 +6,9 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::FlowActionPipedriveAddDeal }
+
       member -> { Auth0::Types::FlowActionPipedriveAddOrganization }
+
       member -> { Auth0::Types::FlowActionPipedriveAddPerson }
     end
   end

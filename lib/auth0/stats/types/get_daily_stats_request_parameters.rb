@@ -5,6 +5,7 @@ module Auth0
     module Types
       class GetDailyStatsRequestParameters < Internal::Types::Model
         field :from, -> { String }, optional: true, nullable: false
+
         field :to, -> { String }, optional: true, nullable: false
       end
     end

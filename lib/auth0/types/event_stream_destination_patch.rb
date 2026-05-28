@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::EventStreamWebhookDestination }
+
       member -> { Auth0::Types::EventStreamActionDestination }
     end
   end

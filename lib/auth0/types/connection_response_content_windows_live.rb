@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=windowslive
     class ConnectionResponseContentWindowsLive < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentWindowsLiveStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsWindowsLive }, optional: true, nullable: false
     end
   end

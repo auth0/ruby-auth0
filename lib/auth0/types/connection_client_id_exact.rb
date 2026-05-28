@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientIDExact
-      # ConnectionClientIDExact is an alias for ConnectionClientID
+      # ConnectionClientIDExact is an alias for String
 
       # @option str [String]
       #

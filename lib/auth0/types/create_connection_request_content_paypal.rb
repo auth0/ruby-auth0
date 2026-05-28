@@ -5,6 +5,7 @@ module Auth0
     # Create a connection with strategy=paypal
     class CreateConnectionRequestContentPaypal < Internal::Types::Model
       field :strategy, -> { Auth0::Types::CreateConnectionRequestContentPaypalStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsPaypal }, optional: true, nullable: false
     end
   end

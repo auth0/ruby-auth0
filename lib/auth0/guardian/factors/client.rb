@@ -16,7 +16,7 @@ module Auth0
         # authentication factors</a> associated with your tenant.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -24,8 +24,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Array[Auth0::Types::GuardianFactor]]
-        def list(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def list(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -59,7 +58,7 @@ module Auth0
         def set(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request_data = Auth0::Guardian::Factors::Types::SetGuardianFactorRequestContent.new(params).to_h
-          non_body_param_names = ["name"]
+          non_body_param_names = %w[name]
           body = request_data.except(*non_body_param_names)
 
           request = Auth0::Internal::JSON::Request.new(

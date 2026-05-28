@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=paypal
     class ConnectionResponseContentPaypal < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentPaypalStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsPaypal }, optional: true, nullable: false
     end
   end

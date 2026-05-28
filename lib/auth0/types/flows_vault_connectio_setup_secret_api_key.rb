@@ -4,6 +4,7 @@ module Auth0
   module Types
     class FlowsVaultConnectioSetupSecretAPIKey < Internal::Types::Model
       field :type, -> { Auth0::Types::FlowsVaultConnectioSetupTypeAPIKeyEnum }, optional: false, nullable: false
+
       field :secret_key, -> { String }, optional: false, nullable: false
     end
   end

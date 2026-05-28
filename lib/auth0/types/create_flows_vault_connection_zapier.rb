@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Union
 
       member -> { Auth0::Types::CreateFlowsVaultConnectionZapierWebhook }
+
       member -> { Auth0::Types::CreateFlowsVaultConnectionZapierUninitialized }
     end
   end

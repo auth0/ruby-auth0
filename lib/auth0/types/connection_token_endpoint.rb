@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionTokenEndpoint
-      # ConnectionTokenEndpoint is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionTokenEndpoint is an alias for String
 
       # @option str [String]
       #

@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionIssuer
-      # ConnectionIssuer is an alias for ConnectionHttpsUrlWithHttpFallback255
+      # ConnectionIssuer is an alias for String
 
       # @option str [String]
       #

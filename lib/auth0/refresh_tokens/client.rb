@@ -30,7 +30,6 @@ module Auth0
       # @return [Auth0::Types::GetRefreshTokensPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
-        query_param_names = %i[user_id client_id from take fields include_fields]
         query_params = {}
         query_params["user_id"] = params[:user_id] if params.key?(:user_id)
         query_params["client_id"] = params[:client_id] if params.key?(:client_id)
@@ -38,7 +37,6 @@ module Auth0
         query_params["take"] = params.fetch(:take, 50)
         query_params["fields"] = params[:fields] if params.key?(:fields)
         query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
-        params.except(*query_param_names)
 
         Auth0::Internal::CursorItemIterator.new(
           cursor_field: :next_,
@@ -60,12 +58,45 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetRefreshTokensPaginatedResponseContent.load(response.body)
+            parsed_response = Auth0::Types::GetRefreshTokensPaginatedResponseContent.load(response.body)
+            [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
           end
         end
+      end
+
+      # Revoke refresh tokens in bulk by ID list, user, user+client, or client.
+      #
+      # @param request_options [Hash]
+      # @param params [Auth0::RefreshTokens::Types::RevokeRefreshTokensRequestContent]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @return [untyped]
+      def revoke(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        request = Auth0::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "refresh-tokens/revoke",
+          body: Auth0::RefreshTokens::Types::RevokeRefreshTokensRequestContent.new(params).to_h,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Auth0::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        return if code.between?(200, 299)
+
+        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(response.body, code: code)
       end
 
       # Retrieve refresh token information.
@@ -149,7 +180,7 @@ module Auth0
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request_data = Auth0::RefreshTokens::Types::UpdateRefreshTokenRequestContent.new(params).to_h
-        non_body_param_names = ["id"]
+        non_body_param_names = %w[id]
         body = request_data.except(*non_body_param_names)
 
         request = Auth0::Internal::JSON::Request.new(

@@ -29,13 +29,11 @@ module Auth0
         # @return [Auth0::Types::GetGroupMembersResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[fields include_fields from take]
           query_params = {}
           query_params["fields"] = params[:fields] if params.key?(:fields)
           query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
-          params = params.except(*query_param_names)
 
           Auth0::Internal::CursorItemIterator.new(
             cursor_field: :next_,
@@ -57,7 +55,8 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGroupMembersResponseContent.load(response.body)
+              parsed_response = Auth0::Types::GetGroupMembersResponseContent.load(response.body)
+              [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

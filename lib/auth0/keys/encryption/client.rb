@@ -27,18 +27,16 @@ module Auth0
         # @return [Auth0::Types::ListEncryptionKeyOffsetPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[page per_page include_totals]
           query_params = {}
           query_params["page"] = params.fetch(:page, 0)
           query_params["per_page"] = params.fetch(:per_page, 50)
           query_params["include_totals"] = params.fetch(:include_totals, true)
-          params.except(*query_param_names)
 
           Auth0::Internal::OffsetItemIterator.new(
             initial_page: query_params["page"],
             item_field: :keys,
             has_next_field: nil,
-            step: true
+            step: false
           ) do |next_page|
             query_params["page"] = next_page
             request = Auth0::Internal::JSON::Request.new(
@@ -55,7 +53,8 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::ListEncryptionKeyOffsetPaginatedResponseContent.load(response.body)
+              parsed_response = Auth0::Types::ListEncryptionKeyOffsetPaginatedResponseContent.load(response.body)
+              [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -100,7 +99,7 @@ module Auth0
         # Perform rekeying operation on the key hierarchy.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -108,8 +107,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [untyped]
-        def rekey(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def rekey(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
@@ -177,7 +175,7 @@ module Auth0
         def import(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request_data = Auth0::Keys::Encryption::Types::ImportEncryptionKeyRequestContent.new(params).to_h
-          non_body_param_names = ["kid"]
+          non_body_param_names = %w[kid]
           body = request_data.except(*non_body_param_names)
 
           request = Auth0::Internal::JSON::Request.new(

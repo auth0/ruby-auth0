@@ -14,7 +14,7 @@ module Auth0
         # Retrieve details of all the application signing keys associated with your tenant.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -22,8 +22,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Array[Auth0::Types::SigningKeys]]
-        def list(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def list(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "GET",
@@ -45,7 +44,7 @@ module Auth0
         # Rotate the application signing key of your tenant.
         #
         # @param request_options [Hash]
-        # @param params [Hash]
+        # @param _params [Hash]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers
         # @option request_options [Hash{String => Object}] :additional_query_parameters
@@ -53,8 +52,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @return [Auth0::Types::RotateSigningKeysResponseContent]
-        def rotate(request_options: {}, **params)
-          Auth0::Internal::Types::Utils.normalize_keys(params)
+        def rotate(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",

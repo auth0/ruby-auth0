@@ -5,6 +5,7 @@ module Auth0
     # Response for connections with strategy=shop
     class ConnectionResponseContentShop < Internal::Types::Model
       field :strategy, -> { Auth0::Types::ConnectionResponseContentShopStrategy }, optional: false, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsShop }, optional: true, nullable: false
     end
   end

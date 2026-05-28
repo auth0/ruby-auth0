@@ -5,6 +5,7 @@ module Auth0
     # Defines the default Organization ID and flows
     class ClientDefaultOrganization < Internal::Types::Model
       field :organization_id, -> { String }, optional: false, nullable: false
+
       field :flows, -> { Internal::Types::Array[Auth0::Types::ClientDefaultOrganizationFlowsEnum] }, optional: false, nullable: false
     end
   end

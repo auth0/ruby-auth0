@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module ConnectionClientSecretOidc
-      # ConnectionClientSecretOidc is an alias for ConnectionClientSecret
+      # ConnectionClientSecretOidc is an alias for String
 
       # @option str [String]
       #

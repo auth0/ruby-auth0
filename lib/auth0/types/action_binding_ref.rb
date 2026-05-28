@@ -5,6 +5,7 @@ module Auth0
     # A reference to an action. An action can be referred to by ID or by Name.
     class ActionBindingRef < Internal::Types::Model
       field :type, -> { Auth0::Types::ActionBindingRefTypeEnum }, optional: true, nullable: false
+
       field :value, -> { String }, optional: true, nullable: false
     end
   end
