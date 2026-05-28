@@ -12,7 +12,7 @@ module Auth0
             @client = client
           end
 
-          # Retrieves all scim tokens by its connection <code>id</code>.
+          # Retrieves all scim tokens by its connection `id`.
           #
           # @param request_options [Hash]
           # @param params [Hash]
@@ -85,7 +85,7 @@ module Auth0
             end
           end
 
-          # Deletes a scim token by its connection <code>id</code> and <code>tokenId</code>.
+          # Deletes a scim token by its connection `id` and `tokenId`.
           #
           # @param request_options [Hash]
           # @param params [Hash]

@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Enum
 
       CIMD = "cimd"
+      DCR = "dcr"
     end
   end
 end

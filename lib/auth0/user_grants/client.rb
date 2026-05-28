@@ -10,8 +10,7 @@ module Auth0
         @client = client
       end
 
-      # Retrieve the <a href="https://auth0.com/docs/api-auth/which-oauth-flow-to-use">grants</a> associated with your
-      # account.
+      # Retrieve the [grants](https://auth0.com/docs/api-auth/which-oauth-flow-to-use) associated with your account.
       #
       # @param request_options [Hash]
       # @param params [Hash]

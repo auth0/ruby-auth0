@@ -63,9 +63,9 @@ module Auth0
           end
         end
 
-        # Add one or more <a
-        # href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions">permissions</a>
-        # to a specified user role.
+        # Add one or more
+        # [permissions](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions) to a
+        # specified user role.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Roles::Permissions::Types::AddRolePermissionsRequestContent]
@@ -102,9 +102,9 @@ module Auth0
           raise error_class.new(response.body, code: code)
         end
 
-        # Remove one or more <a
-        # href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions">permissions</a>
-        # from a specified user role.
+        # Remove one or more
+        # [permissions](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions) from
+        # a specified user role.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Roles::Permissions::Types::DeleteRolePermissionsRequestContent]

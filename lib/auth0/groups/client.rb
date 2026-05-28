@@ -140,6 +140,11 @@ module Auth0
       def members
         @members ||= Auth0::Groups::Members::Client.new(client: @client)
       end
+
+      # @return [Auth0::Roles::Client]
+      def roles
+        @roles ||= Auth0::Groups::Roles::Client.new(client: @client)
+      end
     end
   end
 end

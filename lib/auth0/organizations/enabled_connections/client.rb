@@ -68,8 +68,8 @@ module Auth0
         # Enable a specific connection for a given Organization. To enable a connection, it must already exist within
         # your tenant; connections cannot be created through this action.
         #
-        # <a href="https://auth0.com/docs/authenticate/identity-providers">Connections</a> represent the relationship
-        # between Auth0 and a source of users. Available types of connections include database, enterprise, and social.
+        # [Connections](https://auth0.com/docs/authenticate/identity-providers) represent the relationship between Auth0
+        # and a source of users. Available types of connections include database, enterprise, and social.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Organizations::EnabledConnections::Types::AddOrganizationConnectionRequestContent]
@@ -148,7 +148,7 @@ module Auth0
         # Disable a specific connection for an Organization. Once disabled, Organization members can no longer use that
         # connection to authenticate.
         #
-        # <b>Note</b>: This action does not remove the connection from your tenant.
+        # **Note**: This action does not remove the connection from your tenant.
         #
         # @param request_options [Hash]
         # @param params [Hash]

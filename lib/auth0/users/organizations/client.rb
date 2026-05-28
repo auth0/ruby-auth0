@@ -12,7 +12,7 @@ module Auth0
         end
 
         # Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For
-        # more information, review <a href="https://auth0.com/docs/manage-users/organizations">Auth0 Organizations</a>.
+        # more information, review [Auth0 Organizations](https://auth0.com/docs/manage-users/organizations).
         #
         # @param request_options [Hash]
         # @param params [Hash]
