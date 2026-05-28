@@ -1,5 +1,12 @@
 # Change Log
 
+## [v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.1) (2026-05-28)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.0...v6.0.0.beta.1)
+
+**Added**
+- feat: Events API, Rate Limit Policies, refresh token revocation, FedCM, DPoP GA [\#732](https://github.com/auth0/ruby-auth0/pull/732) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add SCIM Groups RBAC, User Effective Permissions/Roles, and Tenant Country Codes [\#742](https://github.com/auth0/ruby-auth0/pull/742) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## 6.0.0-beta.0 (2026-04-30)
 
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v6.0.0.beta.0)
