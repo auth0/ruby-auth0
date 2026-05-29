@@ -4,6 +4,6 @@ source 'http://rubygems.org'
 
 # gem "rails"
 gem 'sinatra', '~> 4.2'
-gem 'jwt', '~> 2.5'
+gem 'jwt', '~> 3.2'
 gem 'dotenv'
 gem 'puma'
