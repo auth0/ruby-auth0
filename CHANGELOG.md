@@ -1,5 +1,17 @@
 # Change Log
 
+## [v5.20.0](https://github.com/auth0/ruby-auth0/tree/v5.20.0) (2026-05-29)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.19.0...v5.20.0)
+
+**Changed**
+- Support jwt gem 3.x alongside 2.x [\#726](https://github.com/auth0/ruby-auth0/pull/726) ([dan98765](https://github.com/dan98765))
+
+**Fixed**
+- Fix YARD comment with extra space [\#637](https://github.com/auth0/ruby-auth0/pull/637) ([qtro](https://github.com/qtro))
+
+**Security**
+- chore(deps): bump jwt from 3.1.2 to 3.2.0 [\#745](https://github.com/auth0/ruby-auth0/pull/745) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v5.19.0](https://github.com/auth0/ruby-auth0/tree/v5.19.0) (2026-05-08)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v5.19.0)
 
