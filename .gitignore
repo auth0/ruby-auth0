@@ -16,3 +16,4 @@ spec/auth0.yml
 /.yardoc/object_types
 /.yardoc/objects/root.dat
 /.yardoc/proxy_types
+.claude/
