@@ -33,11 +33,19 @@ module Auth0
 
           field :session_lifetime, -> { Integer }, optional: true, nullable: false
 
+          field :session_lifetime_in_minutes, -> { Integer }, optional: true, nullable: false
+
           field :idle_session_lifetime, -> { Integer }, optional: true, nullable: false
+
+          field :idle_session_lifetime_in_minutes, -> { Integer }, optional: true, nullable: false
 
           field :ephemeral_session_lifetime, -> { Integer }, optional: true, nullable: false
 
           field :idle_ephemeral_session_lifetime, -> { Integer }, optional: true, nullable: false
+
+          field :ephemeral_session_lifetime_in_minutes, -> { Integer }, optional: true, nullable: false
+
+          field :idle_ephemeral_session_lifetime_in_minutes, -> { Integer }, optional: true, nullable: false
 
           field :sandbox_version, -> { String }, optional: true, nullable: false
 
@@ -46,6 +54,8 @@ module Auth0
           field :default_redirection_uri, -> { String }, optional: true, nullable: false
 
           field :enabled_locales, -> { Internal::Types::Array[Auth0::Types::TenantSettingsSupportedLocalesEnum] }, optional: true, nullable: false
+
+          field :security_headers, -> { Auth0::Types::TenantSettingsNullableSecurityHeaders }, optional: true, nullable: false
 
           field :session_cookie, -> { Auth0::Types::SessionCookieSchema }, optional: true, nullable: false
 
@@ -74,6 +84,8 @@ module Auth0
           field :enable_ai_guide, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
           field :phone_consolidated_experience, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+          field :include_session_metadata_in_tenant_logs, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
           field :dynamic_client_registration_security_mode, -> { Auth0::Types::TenantSettingsDynamicClientRegistrationSecurityMode }, optional: true, nullable: false
 

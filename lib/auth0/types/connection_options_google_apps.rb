@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'google-apps' connection
     class ConnectionOptionsGoogleApps < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :admin_access_token, -> { String }, optional: true, nullable: false
 
       field :admin_access_token_expiresin, -> { String }, optional: true, nullable: false

@@ -67,7 +67,7 @@ module Auth0
         end
       end
 
-      # Revoke refresh tokens in bulk by ID list, user, user+client, or client.
+      # Revoke refresh tokens in bulk by ID list, user, user+client, or user+client+audience.
       #
       # @param request_options [Hash]
       # @param params [Auth0::RefreshTokens::Types::RevokeRefreshTokensRequestContent]

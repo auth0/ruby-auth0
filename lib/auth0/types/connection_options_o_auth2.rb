@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'oauth2' connection
     class ConnectionOptionsOAuth2 < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :auth_params, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false, api_name: "authParams"
 
       field :auth_params_map, -> { Internal::Types::Hash[String, String] }, optional: true, nullable: false, api_name: "authParamsMap"

@@ -93,6 +93,7 @@ module Auth0
       ASYNC_APPROVAL_ERROR = "async-approval-error"
       ASYNC_APPROVAL_ACCEPTED = "async-approval-accepted"
       ASYNC_APPROVAL_DENIED = "async-approval-denied"
+      CONFIRMATION = "confirmation"
       ASYNC_APPROVAL_WRONG_USER = "async-approval-wrong-user"
     end
   end

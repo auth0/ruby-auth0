@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'ad' connection
     class ConnectionOptionsAd < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :agent_ip, -> { String }, optional: true, nullable: false, api_name: "agentIP"
 
       field :agent_mode, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "agentMode"

@@ -41,6 +41,7 @@ module Auth0
       CAPTCHA = "captcha"
       BRUTE_FORCE_PROTECTION = "brute-force-protection"
       ASYNC_APPROVAL_FLOW = "async-approval-flow"
+      CONFIRMATION = "confirmation"
     end
   end
 end

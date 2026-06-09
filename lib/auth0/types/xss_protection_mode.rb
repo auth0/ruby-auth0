@@ -2,11 +2,10 @@
 
 module Auth0
   module Types
-    module UpdateBrandingPhoneFormattingEnum
+    module XSSProtectionMode
       extend Auth0::Internal::Types::Enum
 
-      REGIONAL = "regional"
-      INTERNATIONAL = "international"
+      BLOCK = "block"
     end
   end
 end

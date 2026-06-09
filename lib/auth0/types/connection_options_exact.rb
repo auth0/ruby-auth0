@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'exact' connection
     class ConnectionOptionsExact < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :base_url, -> { String }, optional: true, nullable: false, api_name: "baseUrl"
 
       field :client_id, -> { String }, optional: true, nullable: false

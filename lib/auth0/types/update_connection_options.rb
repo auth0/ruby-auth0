@@ -80,6 +80,8 @@ module Auth0
       field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false
 
       field :token_endpoint_jwtca_aud_format, -> { Auth0::Types::ConnectionTokenEndpointJwtcaAudFormatEnumOidc }, optional: true, nullable: false
+
+      field :id_token_session_expiry_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

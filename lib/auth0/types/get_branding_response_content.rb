@@ -9,8 +9,6 @@ module Auth0
 
       field :logo_url, -> { String }, optional: true, nullable: false
 
-      field :identifiers, -> { Auth0::Types::BrandingIdentifiers }, optional: true, nullable: false
-
       field :font, -> { Auth0::Types::BrandingFont }, optional: true, nullable: false
     end
   end

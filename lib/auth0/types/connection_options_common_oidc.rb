@@ -20,6 +20,8 @@ module Auth0
 
       field :icon_url, -> { String }, optional: true, nullable: false
 
+      field :id_token_session_expiry_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :id_token_signed_response_algs, -> { Internal::Types::Array[Auth0::Types::ConnectionIDTokenSignedResponseAlgEnum] }, optional: true, nullable: false
 
       field :issuer, -> { String }, optional: true, nullable: false

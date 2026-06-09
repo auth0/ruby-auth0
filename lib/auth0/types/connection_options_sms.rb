@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'sms' connection
     class ConnectionOptionsSms < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :brute_force_protection, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :disable_signup, -> { Internal::Types::Boolean }, optional: true, nullable: false

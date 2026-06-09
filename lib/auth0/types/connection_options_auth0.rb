@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'auth0' connection
     class ConnectionOptionsAuth0 < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :attributes, -> { Auth0::Types::ConnectionAttributes }, optional: true, nullable: false
 
       field :authentication_methods, -> { Auth0::Types::ConnectionAuthenticationMethods }, optional: true, nullable: false

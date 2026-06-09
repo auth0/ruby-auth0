@@ -12,9 +12,9 @@ module Auth0
             @client = client
           end
 
-          # Retrieve a list of <a
-          # href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone
-          # providers</a> details set for a Tenant. A list of fields to include or exclude may also be specified.
+          # Retrieve a list of [phone
+          # providers](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details set
+          # for a Tenant. A list of fields to include or exclude may also be specified.
           #
           # @param request_options [Hash]
           # @param params [Hash]
@@ -52,10 +52,10 @@ module Auth0
             end
           end
 
-          # Create a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone
-          # provider</a>.
-          # The <code>credentials</code> object requires different properties depending on the phone provider (which is
-          # specified using the <code>name</code> property).
+          # Create a [phone
+          # provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
+          # The `credentials` object requires different properties depending on the phone provider (which is specified
+          # using the `name` property).
           #
           # @param request_options [Hash]
           # @param params [Auth0::Branding::Phone::Providers::Types::CreateBrandingPhoneProviderRequestContent]
@@ -89,8 +89,9 @@ module Auth0
             end
           end
 
-          # Retrieve <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone
-          # provider</a> details. A list of fields to include or exclude may also be specified.
+          # Retrieve [phone
+          # provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details. A
+          # list of fields to include or exclude may also be specified.
           #
           # @param request_options [Hash]
           # @param params [Hash]
@@ -156,10 +157,10 @@ module Auth0
             raise error_class.new(response.body, code: code)
           end
 
-          # Update a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone
-          # provider</a>.
-          # The <code>credentials</code> object requires different properties depending on the phone provider (which is
-          # specified using the <code>name</code> property).
+          # Update a [phone
+          # provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
+          # The `credentials` object requires different properties depending on the phone provider (which is specified
+          # using the `name` property).
           #
           # @param request_options [Hash]
           # @param params [Auth0::Branding::Phone::Providers::Types::UpdateBrandingPhoneProviderRequestContent]
