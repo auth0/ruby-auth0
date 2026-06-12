@@ -1,5 +1,11 @@
 # Change Log
 
+## [v6.0.0.beta.2](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.2) (2026-06-12)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.1...v6.0.0.beta.2)
+
+**Added**
+- feat: add Tenant Security Headers and Connection Session Expiry; remove Branding Phone Display [\#751](https://github.com/auth0/ruby-auth0/pull/751) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.1) (2026-05-28)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.0...v6.0.0.beta.1)
 
