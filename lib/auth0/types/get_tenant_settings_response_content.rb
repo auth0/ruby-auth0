@@ -47,6 +47,8 @@ module Auth0
 
       field :enabled_locales, -> { Internal::Types::Array[Auth0::Types::SupportedLocales] }, optional: true, nullable: false
 
+      field :security_headers, -> { Auth0::Types::TenantSettingsNullableSecurityHeaders }, optional: true, nullable: false
+
       field :session_cookie, -> { Auth0::Types::SessionCookieSchema }, optional: true, nullable: false
 
       field :sessions, -> { Auth0::Types::TenantSettingsSessions }, optional: true, nullable: false
@@ -74,6 +76,8 @@ module Auth0
       field :phone_consolidated_experience, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :enable_ai_guide, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :include_session_metadata_in_tenant_logs, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :dynamic_client_registration_security_mode, -> { Auth0::Types::TenantSettingsDynamicClientRegistrationSecurityMode }, optional: true, nullable: false
 

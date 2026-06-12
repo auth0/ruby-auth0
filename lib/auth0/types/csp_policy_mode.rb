@@ -2,11 +2,11 @@
 
 module Auth0
   module Types
-    module UpdateBrandingLoginDisplayEnum
+    module CspPolicyMode
       extend Auth0::Internal::Types::Enum
 
-      UNIFIED = "unified"
-      SEPARATE = "separate"
+      ENFORCING = "enforcing"
+      REPORTING = "reporting"
     end
   end
 end

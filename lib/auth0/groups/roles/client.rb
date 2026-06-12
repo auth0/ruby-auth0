@@ -11,7 +11,7 @@ module Auth0
           @client = client
         end
 
-        # Lists the <a href="https://auth0.com/docs/manage-users/access-control/rbac">roles</a> assigned to a group.
+        # Lists the [roles](https://auth0.com/docs/manage-users/access-control/rbac) assigned to a group.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -60,8 +60,7 @@ module Auth0
           end
         end
 
-        # Assign one or more <a href="https://auth0.com/docs/manage-users/access-control/rbac">roles</a> to a specified
-        # group.
+        # Assign one or more [roles](https://auth0.com/docs/manage-users/access-control/rbac) to a specified group.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Groups::Roles::Types::CreateGroupRolesRequestParameters]
@@ -98,8 +97,7 @@ module Auth0
           raise error_class.new(response.body, code: code)
         end
 
-        # Unassign one or more <a href="https://auth0.com/docs/manage-users/access-control/rbac">roles</a> from a
-        # specified group.
+        # Unassign one or more [roles](https://auth0.com/docs/manage-users/access-control/rbac) from a specified group.
         #
         # @param request_options [Hash]
         # @param params [Auth0::Groups::Roles::Types::DeleteGroupRolesRequestContent]

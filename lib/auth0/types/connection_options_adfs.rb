@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'adfs' connection
     class ConnectionOptionsAdfs < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :adfs_server, -> { String }, optional: true, nullable: false
 
       field :domain_aliases, -> { Internal::Types::Array[String] }, optional: true, nullable: false

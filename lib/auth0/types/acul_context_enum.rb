@@ -22,6 +22,7 @@ module Auth0
       UNTRUSTED_DATA_AUTHORIZATION_PARAMS_UI_LOCALES = "untrusted_data.authorization_params.ui_locales"
       USER_ORGANIZATIONS = "user.organizations"
       TRANSACTION_CUSTOM_DOMAIN_DOMAIN = "transaction.custom_domain.domain"
+      EXPERIMENT = "experiment"
     end
   end
 end

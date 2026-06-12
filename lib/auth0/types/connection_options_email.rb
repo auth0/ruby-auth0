@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'email' connection
     class ConnectionOptionsEmail < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :auth_params, -> { String }, optional: true, nullable: false, api_name: "authParams"
 
       field :brute_force_protection, -> { Internal::Types::Boolean }, optional: false, nullable: false

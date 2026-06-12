@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the salesforce family of connections (salesforce, salesforce-sandbox, salesforce-community)
     class ConnectionOptionsSalesforce < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :client_id, -> { String }, optional: true, nullable: false
 
       field :client_secret, -> { String }, optional: true, nullable: false

@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'github' connection
     class ConnectionOptionsGitHub < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :client_id, -> { String }, optional: true, nullable: false
 
       field :client_secret, -> { String }, optional: true, nullable: false

@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'oauth1' connection
     class ConnectionOptionsOAuth1 < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :access_token_url, -> { String }, optional: true, nullable: false, api_name: "accessTokenURL"
 
       field :client_id, -> { String }, optional: true, nullable: false

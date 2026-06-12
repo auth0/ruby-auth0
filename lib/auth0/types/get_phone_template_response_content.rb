@@ -3,7 +3,7 @@
 module Auth0
   module Types
     class GetPhoneTemplateResponseContent < Internal::Types::Model
-      field :id, -> { String }, optional: false, nullable: false
+      field :id, -> { String }, optional: true, nullable: false
 
       field :channel, -> { String }, optional: true, nullable: false
 

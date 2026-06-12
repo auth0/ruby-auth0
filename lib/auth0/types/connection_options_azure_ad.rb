@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'waad' connection
     class ConnectionOptionsAzureAd < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :api_enable_users, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :app_domain, -> { String }, optional: true, nullable: false

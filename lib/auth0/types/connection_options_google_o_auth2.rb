@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Options for the 'google-oauth2' connection
     class ConnectionOptionsGoogleOAuth2 < Internal::Types::Model
+      field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :allowed_audiences, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :client_id, -> { String }, optional: true, nullable: false
