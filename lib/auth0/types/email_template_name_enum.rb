@@ -7,6 +7,7 @@ module Auth0
 
       VERIFY_EMAIL = "verify_email"
       VERIFY_EMAIL_BY_CODE = "verify_email_by_code"
+      AUTH_EMAIL_BY_CODE = "auth_email_by_code"
       RESET_EMAIL = "reset_email"
       RESET_EMAIL_BY_CODE = "reset_email_by_code"
       WELCOME_EMAIL = "welcome_email"

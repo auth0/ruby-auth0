@@ -5,7 +5,7 @@ module Auth0
     class DeleteUserIdentityResponseContentItem < Internal::Types::Model
       field :connection, -> { String }, optional: false, nullable: false
 
-      field :user_id, -> { String }, optional: false, nullable: false
+      field :user_id, -> { Auth0::Types::UserID }, optional: false, nullable: false
 
       field :provider, -> { String }, optional: false, nullable: false
 

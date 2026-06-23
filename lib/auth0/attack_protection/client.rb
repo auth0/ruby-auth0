@@ -30,6 +30,11 @@ module Auth0
         @captcha ||= Auth0::AttackProtection::Captcha::Client.new(client: @client)
       end
 
+      # @return [Auth0::PhoneProviderProtection::Client]
+      def phone_provider_protection
+        @phone_provider_protection ||= Auth0::AttackProtection::PhoneProviderProtection::Client.new(client: @client)
+      end
+
       # @return [Auth0::SuspiciousIPThrottling::Client]
       def suspicious_ip_throttling
         @suspicious_ip_throttling ||= Auth0::AttackProtection::SuspiciousIPThrottling::Client.new(client: @client)

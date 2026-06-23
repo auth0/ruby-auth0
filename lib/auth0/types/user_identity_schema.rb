@@ -5,7 +5,7 @@ module Auth0
     class UserIdentitySchema < Internal::Types::Model
       field :connection, -> { String }, optional: true, nullable: false
 
-      field :user_id, -> { String }, optional: true, nullable: false
+      field :user_id, -> { Auth0::Types::UserID }, optional: true, nullable: false
 
       field :provider, -> { Auth0::Types::UserIdentityProviderEnum }, optional: true, nullable: false
 

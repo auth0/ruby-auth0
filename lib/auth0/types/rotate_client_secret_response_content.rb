@@ -75,6 +75,10 @@ module Auth0
 
       field :initiate_login_uri, -> { String }, optional: true, nullable: false
 
+      field :native_social_login, -> { Auth0::Types::NativeSocialLogin }, optional: true, nullable: false
+
+      field :fedcm_login, -> { Auth0::Types::FedCmLogin }, optional: true, nullable: false
+
       field :refresh_token, -> { Auth0::Types::ClientRefreshTokenConfiguration }, optional: true, nullable: false
 
       field :default_organization, -> { Auth0::Types::ClientDefaultOrganization }, optional: true, nullable: false
@@ -92,6 +96,8 @@ module Auth0
       field :require_proof_of_possession, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :signed_request_object, -> { Auth0::Types::ClientSignedRequestObjectWithCredentialID }, optional: true, nullable: false
+
+      field :token_vault_privileged_access, -> { Auth0::Types::ClientTokenVaultPrivilegedAccessWithCredentialID }, optional: true, nullable: false
 
       field :compliance_level, -> { Auth0::Types::ClientComplianceLevelEnum }, optional: true, nullable: false
 

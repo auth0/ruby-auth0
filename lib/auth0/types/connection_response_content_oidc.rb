@@ -24,6 +24,8 @@ module Auth0
 
       field :connected_accounts, -> { Auth0::Types::ConnectionConnectedAccountsPurposeXaa }, optional: true, nullable: false
 
+      field :cross_app_access_requesting_app, -> { Auth0::Types::CrossAppAccessRequestingApp }, optional: true, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsOidc }, optional: true, nullable: false
 
       field :show_as_button, -> { Internal::Types::Boolean }, optional: true, nullable: false
