@@ -15,9 +15,9 @@ module Auth0
 
       field :phone_verified, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
-      field :created_at, -> { Auth0::Types::UserDateSchema }, optional: true, nullable: false
+      field :created_at, -> { String }, optional: true, nullable: false
 
-      field :updated_at, -> { Auth0::Types::UserDateSchema }, optional: true, nullable: false
+      field :updated_at, -> { String }, optional: true, nullable: false
 
       field :identities, -> { Internal::Types::Array[Auth0::Types::UserIdentitySchema] }, optional: true, nullable: false
 
@@ -33,13 +33,13 @@ module Auth0
 
       field :multifactor, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :multifactor_last_modified, -> { Auth0::Types::UserDateSchema }, optional: true, nullable: false
+      field :multifactor_last_modified, -> { String }, optional: true, nullable: false
 
       field :last_ip, -> { String }, optional: true, nullable: false
 
-      field :last_login, -> { Auth0::Types::UserDateSchema }, optional: true, nullable: false
+      field :last_login, -> { String }, optional: true, nullable: false
 
-      field :last_password_reset, -> { Auth0::Types::UserDateSchema }, optional: true, nullable: false
+      field :last_password_reset, -> { String }, optional: true, nullable: false
 
       field :logins_count, -> { Integer }, optional: true, nullable: false
 

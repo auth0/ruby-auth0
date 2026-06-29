@@ -24,6 +24,8 @@ module Auth0
 
       field :strategy, -> { Auth0::Types::ConnectionResponseContentOktaStrategy }, optional: false, nullable: false
 
+      field :cross_app_access_requesting_app, -> { Auth0::Types::CrossAppAccessRequestingApp }, optional: true, nullable: false
+
       field :options, -> { Auth0::Types::ConnectionOptionsOkta }, optional: true, nullable: false
 
       field :show_as_button, -> { Internal::Types::Boolean }, optional: true, nullable: false

@@ -90,6 +90,8 @@ module Auth0
 
         field :signed_request_object, -> { Auth0::Types::ClientSignedRequestObjectWithPublicKey }, optional: true, nullable: false
 
+        field :token_vault_privileged_access, -> { Auth0::Types::ClientTokenVaultPrivilegedAccessWithPublicKey }, optional: true, nullable: false
+
         field :compliance_level, -> { Auth0::Types::ClientComplianceLevelEnum }, optional: true, nullable: false
 
         field :skip_non_verifiable_callback_uri_confirmation_prompt, -> { Internal::Types::Boolean }, optional: true, nullable: false
