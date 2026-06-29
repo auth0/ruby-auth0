@@ -1,5 +1,11 @@
 # Change Log
 
+## [v6.0.0.beta.3](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.3) (2026-06-29)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.2...v6.0.0.beta.3)
+
+**Added**
+- feat: add Phone Provider Protection, Token Vault IP allowlist, and Cross App Access requesting app [\#758](https://github.com/auth0/ruby-auth0/pull/758) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.0.0.beta.2](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.2) (2026-06-12)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.1...v6.0.0.beta.2)
 
