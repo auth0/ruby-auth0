@@ -4,7 +4,7 @@ module Auth0
   module Types
     # Configuration for the email attribute for users.
     class EmailAttribute < Internal::Types::Model
-      field :identifier, -> { Auth0::Types::ConnectionAttributeIdentifier }, optional: true, nullable: false
+      field :identifier, -> { Auth0::Types::EmailAttributeIdentifier }, optional: true, nullable: false
 
       field :unique, -> { Internal::Types::Boolean }, optional: true, nullable: false
 

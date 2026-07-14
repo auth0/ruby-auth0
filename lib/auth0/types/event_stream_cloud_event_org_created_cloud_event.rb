@@ -4,7 +4,7 @@ module Auth0
   module Types
     # Represents an event that occurs when an organization is created.
     class EventStreamCloudEventOrgCreatedCloudEvent < Internal::Types::Model
-      field :specversion, -> { String }, optional: false, nullable: false
+      field :specversion, -> { Auth0::Types::EventStreamCloudEventSpecVersionEnum }, optional: false, nullable: false
 
       field :type, -> { Auth0::Types::EventStreamCloudEventOrgCreatedCloudEventTypeEnum }, optional: false, nullable: false
 

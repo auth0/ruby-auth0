@@ -15,6 +15,8 @@ module Auth0
         field :enabled_connections, -> { Internal::Types::Array[Auth0::Types::ConnectionForOrganization] }, optional: true, nullable: false
 
         field :token_quota, -> { Auth0::Types::CreateTokenQuota }, optional: true, nullable: false
+
+        field :third_party_client_access, -> { Auth0::Types::OrganizationThirdPartyClientAccessEnum }, optional: true, nullable: false
       end
     end
   end

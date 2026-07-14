@@ -22,7 +22,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
-        # @return [Auth0::Jobs::Errors::Types::ErrorsGetResponse]
+        # @return [Auth0::Jobs::Errors::Types::ErrorsGetResponse, nil]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           request = Auth0::Internal::JSON::Request.new(
@@ -37,12 +37,10 @@ module Auth0
             raise Auth0::Errors::TimeoutError
           end
           code = response.code.to_i
-          if code.between?(200, 299)
-            Auth0::Jobs::Errors::Types::ErrorsGetResponse.load(response.body)
-          else
-            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(response.body, code: code)
-          end
+          return if code.between?(200, 299)
+
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

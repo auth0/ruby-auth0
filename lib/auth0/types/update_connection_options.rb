@@ -82,6 +82,10 @@ module Auth0
       field :token_endpoint_jwtca_aud_format, -> { Auth0::Types::ConnectionTokenEndpointJwtcaAudFormatEnumOidc }, optional: true, nullable: false
 
       field :id_token_session_expiry_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :discovery_url, -> { String }, optional: true, nullable: false
+
+      field :oidc_metadata, -> { Auth0::Types::ConnectionsOidcMetadata }, optional: true, nullable: false
     end
   end
 end

@@ -6,7 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Enum
 
       EXPONENTIAL = "exponential"
-      NONE = "none"
+      DEFAULT = "default"
     end
   end
 end

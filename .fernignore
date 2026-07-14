@@ -57,3 +57,6 @@ wiremock/
 
 # Examples
 examples/
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes

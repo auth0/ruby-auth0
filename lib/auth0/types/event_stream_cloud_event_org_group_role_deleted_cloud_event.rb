@@ -4,7 +4,7 @@ module Auth0
   module Types
     # Represents an event that occurs when a role is removed from an organization group.
     class EventStreamCloudEventOrgGroupRoleDeletedCloudEvent < Internal::Types::Model
-      field :specversion, -> { String }, optional: false, nullable: false
+      field :specversion, -> { Auth0::Types::EventStreamCloudEventSpecVersionEnum }, optional: false, nullable: false
 
       field :type, -> { Auth0::Types::EventStreamCloudEventOrgGroupRoleDeletedCloudEventTypeEnum }, optional: false, nullable: false
 
