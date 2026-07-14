@@ -496,11 +496,6 @@ module Auth0
         @enrollments ||= Auth0::Users::Enrollments::Client.new(client: @client)
       end
 
-      # @return [Auth0::FederatedConnectionsTokensets::Client]
-      def federated_connections_tokensets
-        @federated_connections_tokensets ||= Auth0::Users::FederatedConnectionsTokensets::Client.new(client: @client)
-      end
-
       # @return [Auth0::Groups::Client]
       def groups
         @groups ||= Auth0::Users::Groups::Client.new(client: @client)

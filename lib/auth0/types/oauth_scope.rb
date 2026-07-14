@@ -85,8 +85,6 @@ module Auth0
       UPDATE_EVENT_STREAMS = "update:event_streams"
       DELETE_EVENT_STREAMS = "delete:event_streams"
       READ_EVENTS = "read:events"
-      READ_FEDERATED_CONNECTIONS_TOKENS = "read:federated_connections_tokens"
-      DELETE_FEDERATED_CONNECTIONS_TOKENS = "delete:federated_connections_tokens"
       CREATE_FLOWS = "create:flows"
       READ_FLOWS = "read:flows"
       UPDATE_FLOWS = "update:flows"
