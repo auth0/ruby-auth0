@@ -12,6 +12,8 @@ module Auth0
       field :audience, -> { String }, optional: true, nullable: false
 
       field :scope, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
+      field :organization_id, -> { String }, optional: true, nullable: false
     end
   end
 end

@@ -14,6 +14,7 @@ module Auth0
       SIGNUP_PASSWORD = "signup-password"
       CUSTOMIZED_CONSENT = "customized-consent"
       PASSKEYS = "passkeys"
+      CONFIRMATION = "confirmation"
     end
   end
 end

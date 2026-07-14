@@ -10,6 +10,12 @@ module Auth0
 
       discriminant :type
 
+      member -> { Auth0::Types::EventStreamCloudEventConnectionCreated }, key: "CONNECTION_CREATED"
+
+      member -> { Auth0::Types::EventStreamCloudEventConnectionDeleted }, key: "CONNECTION_DELETED"
+
+      member -> { Auth0::Types::EventStreamCloudEventConnectionUpdated }, key: "CONNECTION_UPDATED"
+
       member -> { Auth0::Types::EventStreamCloudEventGroupCreated }, key: "GROUP_CREATED"
 
       member -> { Auth0::Types::EventStreamCloudEventGroupDeleted }, key: "GROUP_DELETED"

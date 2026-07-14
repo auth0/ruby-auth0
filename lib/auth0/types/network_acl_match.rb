@@ -5,6 +5,8 @@ module Auth0
     class NetworkACLMatch < Internal::Types::Model
       field :asns, -> { Internal::Types::Array[Integer] }, optional: true, nullable: false
 
+      field :auth0managed, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "auth0_managed"
+
       field :geo_country_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :geo_subdivision_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false

@@ -7,6 +7,8 @@ module Auth0
       field :credentials, -> { Internal::Types::Array[Auth0::Types::PublicKeyCredential] }, optional: false, nullable: false
 
       field :ip_allowlist, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
+      field :grants, -> { Internal::Types::Array[Auth0::Types::TokenVaultPrivilegedAccessGrant] }, optional: true, nullable: false
     end
   end
 end

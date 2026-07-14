@@ -5,6 +5,9 @@ module Auth0
     module EventStreamDeliveryEventTypeEnum
       extend Auth0::Internal::Types::Enum
 
+      CONNECTION_CREATED = "connection.created"
+      CONNECTION_DELETED = "connection.deleted"
+      CONNECTION_UPDATED = "connection.updated"
       GROUP_CREATED = "group.created"
       GROUP_DELETED = "group.deleted"
       GROUP_MEMBER_ADDED = "group.member.added"

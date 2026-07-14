@@ -178,7 +178,7 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
-          # @return [Auth0::Types::GetGuardianFactorSmsTemplatesResponseContent]
+          # @return [Auth0::Types::GetGuardianFactorSmsTemplatesResponseContent, nil]
           def get_templates(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
@@ -192,12 +192,10 @@ module Auth0
               raise Auth0::Errors::TimeoutError
             end
             code = response.code.to_i
-            if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorSmsTemplatesResponseContent.load(response.body)
-            else
-              error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-              raise error_class.new(response.body, code: code)
-            end
+            return if code.between?(200, 299)
+
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
           end
 
           # This endpoint has been deprecated. To complete this action, use the <a

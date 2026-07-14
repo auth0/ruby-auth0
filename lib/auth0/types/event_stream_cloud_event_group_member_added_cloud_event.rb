@@ -4,7 +4,7 @@ module Auth0
   module Types
     # Represents an event that occurs when a member is added to a group.
     class EventStreamCloudEventGroupMemberAddedCloudEvent < Internal::Types::Model
-      field :specversion, -> { String }, optional: false, nullable: false
+      field :specversion, -> { Auth0::Types::EventStreamCloudEventSpecVersionEnum }, optional: false, nullable: false
 
       field :type, -> { Auth0::Types::EventStreamCloudEventGroupMemberAddedCloudEventTypeEnum }, optional: false, nullable: false
 

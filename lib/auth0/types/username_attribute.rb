@@ -4,7 +4,7 @@ module Auth0
   module Types
     # Configuration for the username attribute for users.
     class UsernameAttribute < Internal::Types::Model
-      field :identifier, -> { Auth0::Types::ConnectionAttributeIdentifier }, optional: true, nullable: false
+      field :identifier, -> { Auth0::Types::UsernameAttributeIdentifier }, optional: true, nullable: false
 
       field :profile_required, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
