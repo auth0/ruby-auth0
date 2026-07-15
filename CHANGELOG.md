@@ -1,5 +1,18 @@
 # Change Log
 
+## [v6.0.0.beta.4](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.4) (2026-07-15)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.3...v6.0.0.beta.4)
+
+**Added**
+- feat: add Organization Role Members, Connection event streams, and Token Vault access grants [\#762](https://github.com/auth0/ruby-auth0/pull/762) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Events and Rate Limit Policies clients, remove Federated Connections Tokensets [\#767](https://github.com/auth0/ruby-auth0/pull/767) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+**Breaking Changes**
+- Rename `ConnectionAttributeIdentifier` to `EmailAttributeIdentifier`; the `identifier` field on email, phone, and username attributes is now `EmailAttributeIdentifier`, `PhoneAttributeIdentifier`, and `UsernameAttributeIdentifier` respectively [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- Replace the `none` member on `PhoneProviderProtectionBackoffStrategyEnum` with `default` [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- `start`, `limit`, and `total` on `ListRolesOffsetPaginatedResponseContent` are now required [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- Remove the Federated Connections Tokensets client (`users.federated_connections_tokensets`) and the `FederatedConnectionTokenSet` type [\#767](https://github.com/auth0/ruby-auth0/pull/767)
+
 ## [v6.0.0.beta.3](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.3) (2026-06-29)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.2...v6.0.0.beta.3)
 
