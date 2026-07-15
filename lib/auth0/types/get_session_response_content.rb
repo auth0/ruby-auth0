@@ -28,6 +28,8 @@ module Auth0
       field :cookie, -> { Auth0::Types::SessionCookieMetadata }, optional: true, nullable: false
 
       field :session_metadata, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
+
+      field :actor, -> { Auth0::Types::SessionActorMetadata }, optional: true, nullable: false
     end
   end
 end

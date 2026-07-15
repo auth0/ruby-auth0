@@ -9,7 +9,7 @@ module Auth0
 
       field :profile_required, -> { Internal::Types::Boolean }, optional: false, nullable: false
 
-      field :auth0mapping, -> { String }, optional: false, nullable: false, api_name: "auth0_mapping"
+      field :auth0_mapping, -> { String }, optional: false, nullable: false
 
       field :oidc_mapping, -> { Auth0::Types::UserAttributeProfileOidcMapping }, optional: true, nullable: false
 

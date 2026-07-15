@@ -11,7 +11,7 @@ module Auth0
       APPLE = "apple"
       DROPBOX = "dropbox"
       BITBUCKET = "bitbucket"
-      AUTH0OIDC = "auth0-oidc"
+      AUTH0_OIDC = "auth0-oidc"
       AUTH0 = "auth0"
       BAIDU = "baidu"
       BITLY = "bitly"
@@ -60,7 +60,7 @@ module Auth0
       WORDPRESS = "wordpress"
       YAHOO = "yahoo"
       YANDEX = "yandex"
-      AUTH0ADLDAP = "auth0-adldap"
+      AUTH0_ADLDAP = "auth0-adldap"
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module Auth0
   module Types
-    module ConnectionProtocolBindingEnumSAML
+    module EventStreamCloudEventConnectionCreatedObject2OptionsProtocolBindingEnum
       extend Auth0::Internal::Types::Enum
 
       URN_OASIS_NAMES_TC_SAML20_BINDINGS_HTTP_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"

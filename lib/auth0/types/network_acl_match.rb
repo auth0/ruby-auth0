@@ -5,27 +5,27 @@ module Auth0
     class NetworkACLMatch < Internal::Types::Model
       field :asns, -> { Internal::Types::Array[Integer] }, optional: true, nullable: false
 
-      field :auth0managed, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "auth0_managed"
+      field :auth0_managed, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :geo_country_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :geo_subdivision_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :ipv4cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "ipv4_cidrs"
+      field :ipv4_cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :ipv6cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "ipv6_cidrs"
+      field :ipv6_cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :ja3fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "ja3_fingerprints"
+      field :ja3_fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :ja4fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "ja4_fingerprints"
+      field :ja4_fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :user_agents, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :hostnames, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :connecting_ipv4cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "connecting_ipv4_cidrs"
+      field :connecting_ipv4_cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-      field :connecting_ipv6cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "connecting_ipv6_cidrs"
+      field :connecting_ipv6_cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end
 end

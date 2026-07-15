@@ -5,7 +5,7 @@ module Auth0
     module CreateConnectionRequestContentAuth0OidcStrategy
       extend Auth0::Internal::Types::Enum
 
-      AUTH0OIDC = "auth0-oidc"
+      AUTH0_OIDC = "auth0-oidc"
     end
   end
 end

@@ -7,7 +7,7 @@ module Auth0
 
       PUBLIC_KEY = "public_key"
       CERT_SUBJECT_DN = "cert_subject_dn"
-      X509CERT = "x509_cert"
+      X509_CERT = "x509_cert"
     end
   end
 end

@@ -11,7 +11,7 @@ module Auth0
       GOOGLE_APPS = "google-apps"
       ADFS = "adfs"
       OKTA = "okta"
-      AUTH0SAMLP = "auth0-samlp"
+      AUTH0_SAMLP = "auth0-samlp"
       OKTA_SAMLP = "okta-samlp"
       KEYCLOAK_SAMLP = "keycloak-samlp"
       PINGFEDERATE = "pingfederate"

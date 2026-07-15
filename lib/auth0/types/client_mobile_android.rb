@@ -6,7 +6,7 @@ module Auth0
     class ClientMobileAndroid < Internal::Types::Model
       field :app_package_name, -> { String }, optional: true, nullable: false
 
-      field :sha256cert_fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "sha256_cert_fingerprints"
+      field :sha256_cert_fingerprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end
 end

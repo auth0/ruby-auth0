@@ -119,6 +119,9 @@ class BrandingPhoneTemplatesWireTest < WireMockTestCase
 
     @client.branding.phone.templates.reset(
       id: "id",
+      request: {
+        key: "value"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "branding.phone.templates.reset.0"

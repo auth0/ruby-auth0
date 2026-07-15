@@ -5,7 +5,7 @@ module Auth0
     module X509CertificateCredentialTypeEnum
       extend Auth0::Internal::Types::Enum
 
-      X509CERT = "x509_cert"
+      X509_CERT = "x509_cert"
     end
   end
 end

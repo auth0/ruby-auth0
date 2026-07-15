@@ -9,7 +9,7 @@ module Auth0
       APPLE = "apple"
       DROPBOX = "dropbox"
       BITBUCKET = "bitbucket"
-      AUTH0OIDC = "auth0-oidc"
+      AUTH0_OIDC = "auth0-oidc"
       BAIDU = "baidu"
       BITLY = "bitly"
       BOX = "box"

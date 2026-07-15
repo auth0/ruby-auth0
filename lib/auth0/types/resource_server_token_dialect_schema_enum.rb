@@ -7,8 +7,8 @@ module Auth0
 
       ACCESS_TOKEN = "access_token"
       ACCESS_TOKEN_AUTHZ = "access_token_authz"
-      RFC9068PROFILE = "rfc9068_profile"
-      RFC9068PROFILE_AUTHZ = "rfc9068_profile_authz"
+      RFC9068_PROFILE = "rfc9068_profile"
+      RFC9068_PROFILE_AUTHZ = "rfc9068_profile_authz"
     end
   end
 end

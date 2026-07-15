@@ -2,10 +2,11 @@
 
 module Auth0
   module Types
-    module ConnectionResponseContentAuth0OidcStrategy
+    module BrandingThemeIdentifiersLoginDisplayEnum
       extend Auth0::Internal::Types::Enum
 
-      AUTH0OIDC = "auth0-oidc"
+      SEPARATE = "separate"
+      UNIFIED = "unified"
     end
   end
 end

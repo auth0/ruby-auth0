@@ -102,12 +102,12 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     )
   end
 
-  def test_guardian_factors_push_notification_set_fcmv1provider_with_wiremock
-    test_id = "guardian.factors.push_notification.set_fcmv1provider.0"
+  def test_guardian_factors_push_notification_set_fcmv1_provider_with_wiremock
+    test_id = "guardian.factors.push_notification.set_fcmv1_provider.0"
 
     @client.guardian.factors.push_notification.set_fcmv1provider(request_options: {
       additional_headers: {
-        "X-Test-Id" => "guardian.factors.push_notification.set_fcmv1provider.0"
+        "X-Test-Id" => "guardian.factors.push_notification.set_fcmv1_provider.0"
       }
     })
 
@@ -120,12 +120,12 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     )
   end
 
-  def test_guardian_factors_push_notification_update_fcmv1provider_with_wiremock
-    test_id = "guardian.factors.push_notification.update_fcmv1provider.0"
+  def test_guardian_factors_push_notification_update_fcmv1_provider_with_wiremock
+    test_id = "guardian.factors.push_notification.update_fcmv1_provider.0"
 
     @client.guardian.factors.push_notification.update_fcmv1provider(request_options: {
       additional_headers: {
-        "X-Test-Id" => "guardian.factors.push_notification.update_fcmv1provider.0"
+        "X-Test-Id" => "guardian.factors.push_notification.update_fcmv1_provider.0"
       }
     })
 

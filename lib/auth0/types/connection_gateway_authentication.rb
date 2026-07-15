@@ -12,7 +12,7 @@ module Auth0
 
       field :secret, -> { String }, optional: false, nullable: false
 
-      field :secret_base64encoded, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "secret_base64_encoded"
+      field :secret_base64_encoded, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

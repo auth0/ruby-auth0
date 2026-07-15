@@ -195,7 +195,7 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           #
           # @return [Hash[String, Object]]
-          def set_fcmv1provider(request_options: {}, **params)
+          def set_fcmv1_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
@@ -229,7 +229,7 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           #
           # @return [Hash[String, Object]]
-          def update_fcmv1provider(request_options: {}, **params)
+          def update_fcmv1_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],

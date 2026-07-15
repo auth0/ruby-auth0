@@ -5,7 +5,7 @@ module Auth0
     module CustomDomainTypeEnum
       extend Auth0::Internal::Types::Enum
 
-      AUTH0MANAGED_CERTS = "auth0_managed_certs"
+      AUTH0_MANAGED_CERTS = "auth0_managed_certs"
       SELF_MANAGED_CERTS = "self_managed_certs"
     end
   end
