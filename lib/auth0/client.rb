@@ -244,3 +244,5 @@ module Auth0
     end
   end
 end
+
+require_relative "auth_client"
