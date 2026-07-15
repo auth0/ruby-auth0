@@ -37,10 +37,10 @@ class TicketsWireTest < WireMockTestCase
     test_id = "tickets.change_password.0"
 
     @client.tickets.change_password(request_options: {
-                                      additional_headers: {
-                                        "X-Test-Id" => "tickets.change_password.0"
-                                      }
-                                    })
+      additional_headers: {
+        "X-Test-Id" => "tickets.change_password.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

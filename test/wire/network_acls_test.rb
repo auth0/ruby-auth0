@@ -25,7 +25,6 @@ class NetworkAclsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

@@ -17,6 +17,7 @@ class ClientsConnectionsWireTest < WireMockTestCase
 
     result = @client.clients.connections.get(
       id: "id",
+      strategy: ["ad"],
       from: "from",
       take: 1,
       fields: "fields",
@@ -27,7 +28,6 @@ class ClientsConnectionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

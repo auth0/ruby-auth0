@@ -2,8 +2,8 @@
 
 module Auth0
   class Management
-    # @param base_url [String, nil]
     # @param token [String]
+    # @param base_url [String, nil]
     # @param timeout [Float, nil] Request timeout in seconds.
     # @param max_retries [Integer, nil] Maximum number of request retries.
     # @param headers [Hash, nil] Additional headers to include in requests.
@@ -73,6 +73,11 @@ module Auth0
       @event_streams ||= Auth0::EventStreams::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::Events::Client]
+    def events
+      @events ||= Auth0::Events::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Flows::Client]
     def flows
       @flows ||= Auth0::Flows::Client.new(client: @raw_client)
@@ -126,6 +131,11 @@ module Auth0
     # @return [Auth0::Prompts::Client]
     def prompts
       @prompts ||= Auth0::Prompts::Client.new(client: @raw_client)
+    end
+
+    # @return [Auth0::RateLimitPolicies::Client]
+    def rate_limit_policies
+      @rate_limit_policies ||= Auth0::RateLimitPolicies::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::RefreshTokens::Client]

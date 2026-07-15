@@ -16,10 +16,10 @@ class RiskAssessmentsSettingsWireTest < WireMockTestCase
     test_id = "risk_assessments.settings.get.0"
 
     @client.risk_assessments.settings.get(request_options: {
-                                            additional_headers: {
-                                              "X-Test-Id" => "risk_assessments.settings.get.0"
-                                            }
-                                          })
+      additional_headers: {
+        "X-Test-Id" => "risk_assessments.settings.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

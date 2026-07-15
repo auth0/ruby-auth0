@@ -16,10 +16,10 @@ class AttackProtectionSuspiciousIpThrottlingWireTest < WireMockTestCase
     test_id = "attack_protection.suspicious_ip_throttling.get.0"
 
     @client.attack_protection.suspicious_ip_throttling.get(request_options: {
-                                                             additional_headers: {
-                                                               "X-Test-Id" => "attack_protection.suspicious_ip_throttling.get.0"
-                                                             }
-                                                           })
+      additional_headers: {
+        "X-Test-Id" => "attack_protection.suspicious_ip_throttling.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class AttackProtectionSuspiciousIpThrottlingWireTest < WireMockTestCase
     test_id = "attack_protection.suspicious_ip_throttling.update.0"
 
     @client.attack_protection.suspicious_ip_throttling.update(request_options: {
-                                                                additional_headers: {
-                                                                  "X-Test-Id" => "attack_protection.suspicious_ip_throttling.update.0"
-                                                                }
-                                                              })
+      additional_headers: {
+        "X-Test-Id" => "attack_protection.suspicious_ip_throttling.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

@@ -16,10 +16,10 @@ class AttackProtectionBotDetectionWireTest < WireMockTestCase
     test_id = "attack_protection.bot_detection.get.0"
 
     @client.attack_protection.bot_detection.get(request_options: {
-                                                  additional_headers: {
-                                                    "X-Test-Id" => "attack_protection.bot_detection.get.0"
-                                                  }
-                                                })
+      additional_headers: {
+        "X-Test-Id" => "attack_protection.bot_detection.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class AttackProtectionBotDetectionWireTest < WireMockTestCase
     test_id = "attack_protection.bot_detection.update.0"
 
     @client.attack_protection.bot_detection.update(request_options: {
-                                                     additional_headers: {
-                                                       "X-Test-Id" => "attack_protection.bot_detection.update.0"
-                                                     }
-                                                   })
+      additional_headers: {
+        "X-Test-Id" => "attack_protection.bot_detection.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

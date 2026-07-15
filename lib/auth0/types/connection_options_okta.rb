@@ -18,8 +18,6 @@ module Auth0
 
       field :dpop_signing_alg, -> { Auth0::Types::ConnectionDpopSigningAlgEnum }, optional: true, nullable: false
 
-      field :federated_connections_access_tokens, -> { Auth0::Types::ConnectionFederatedConnectionsAccessTokens }, optional: true, nullable: false
-
       field :icon_url, -> { String }, optional: true, nullable: false
 
       field :id_token_session_expiry_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false

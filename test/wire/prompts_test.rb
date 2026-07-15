@@ -16,10 +16,10 @@ class PromptsWireTest < WireMockTestCase
     test_id = "prompts.get_settings.0"
 
     @client.prompts.get_settings(request_options: {
-                                   additional_headers: {
-                                     "X-Test-Id" => "prompts.get_settings.0"
-                                   }
-                                 })
+      additional_headers: {
+        "X-Test-Id" => "prompts.get_settings.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class PromptsWireTest < WireMockTestCase
     test_id = "prompts.update_settings.0"
 
     @client.prompts.update_settings(request_options: {
-                                      additional_headers: {
-                                        "X-Test-Id" => "prompts.update_settings.0"
-                                      }
-                                    })
+      additional_headers: {
+        "X-Test-Id" => "prompts.update_settings.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

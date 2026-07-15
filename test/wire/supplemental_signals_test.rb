@@ -16,10 +16,10 @@ class SupplementalSignalsWireTest < WireMockTestCase
     test_id = "supplemental_signals.get.0"
 
     @client.supplemental_signals.get(request_options: {
-                                       additional_headers: {
-                                         "X-Test-Id" => "supplemental_signals.get.0"
-                                       }
-                                     })
+      additional_headers: {
+        "X-Test-Id" => "supplemental_signals.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

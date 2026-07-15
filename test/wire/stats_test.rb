@@ -16,10 +16,10 @@ class StatsWireTest < WireMockTestCase
     test_id = "stats.get_active_users_count.0"
 
     @client.stats.get_active_users_count(request_options: {
-                                           additional_headers: {
-                                             "X-Test-Id" => "stats.get_active_users_count.0"
-                                           }
-                                         })
+      additional_headers: {
+        "X-Test-Id" => "stats.get_active_users_count.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

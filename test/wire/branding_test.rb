@@ -16,10 +16,10 @@ class BrandingWireTest < WireMockTestCase
     test_id = "branding.get.0"
 
     @client.branding.get(request_options: {
-                           additional_headers: {
-                             "X-Test-Id" => "branding.get.0"
-                           }
-                         })
+      additional_headers: {
+        "X-Test-Id" => "branding.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class BrandingWireTest < WireMockTestCase
     test_id = "branding.update.0"
 
     @client.branding.update(request_options: {
-                              additional_headers: {
-                                "X-Test-Id" => "branding.update.0"
-                              }
-                            })
+      additional_headers: {
+        "X-Test-Id" => "branding.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

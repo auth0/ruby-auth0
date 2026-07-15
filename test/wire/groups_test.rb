@@ -19,6 +19,7 @@ class GroupsWireTest < WireMockTestCase
       connection_id: "connection_id",
       name: "name",
       external_id: "external_id",
+      search: "search",
       fields: "fields",
       include_fields: true,
       from: "from",
@@ -29,7 +30,6 @@ class GroupsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
