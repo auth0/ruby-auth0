@@ -16,10 +16,10 @@ class LogStreamsWireTest < WireMockTestCase
     test_id = "log_streams.list.0"
 
     @client.log_streams.list(request_options: {
-                               additional_headers: {
-                                 "X-Test-Id" => "log_streams.list.0"
-                               }
-                             })
+      additional_headers: {
+        "X-Test-Id" => "log_streams.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

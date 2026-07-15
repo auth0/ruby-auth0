@@ -38,8 +38,6 @@ module Auth0
 
       field :ext_is_suspended, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
-      field :federated_connections_access_tokens, -> { Auth0::Types::ConnectionFederatedConnectionsAccessTokens }, optional: true, nullable: false
-
       field :handle_login_from_social, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :icon_url, -> { String }, optional: true, nullable: false

@@ -62,10 +62,10 @@ class CustomDomainsWireTest < WireMockTestCase
     test_id = "custom_domains.get_default.0"
 
     @client.custom_domains.get_default(request_options: {
-                                         additional_headers: {
-                                           "X-Test-Id" => "custom_domains.get_default.0"
-                                         }
-                                       })
+      additional_headers: {
+        "X-Test-Id" => "custom_domains.get_default.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

@@ -106,10 +106,10 @@ class BrandingThemesWireTest < WireMockTestCase
     test_id = "branding.themes.get_default.0"
 
     @client.branding.themes.get_default(request_options: {
-                                          additional_headers: {
-                                            "X-Test-Id" => "branding.themes.get_default.0"
-                                          }
-                                        })
+      additional_headers: {
+        "X-Test-Id" => "branding.themes.get_default.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

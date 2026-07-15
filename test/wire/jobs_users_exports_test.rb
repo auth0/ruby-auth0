@@ -16,10 +16,10 @@ class JobsUsersExportsWireTest < WireMockTestCase
     test_id = "jobs.users_exports.create.0"
 
     @client.jobs.users_exports.create(request_options: {
-                                        additional_headers: {
-                                          "X-Test-Id" => "jobs.users_exports.create.0"
-                                        }
-                                      })
+      additional_headers: {
+        "X-Test-Id" => "jobs.users_exports.create.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

@@ -16,10 +16,10 @@ class BrandingTemplatesWireTest < WireMockTestCase
     test_id = "branding.templates.get_universal_login.0"
 
     @client.branding.templates.get_universal_login(request_options: {
-                                                     additional_headers: {
-                                                       "X-Test-Id" => "branding.templates.get_universal_login.0"
-                                                     }
-                                                   })
+      additional_headers: {
+        "X-Test-Id" => "branding.templates.get_universal_login.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -55,10 +55,10 @@ class BrandingTemplatesWireTest < WireMockTestCase
     test_id = "branding.templates.delete_universal_login.0"
 
     @client.branding.templates.delete_universal_login(request_options: {
-                                                        additional_headers: {
-                                                          "X-Test-Id" => "branding.templates.delete_universal_login.0"
-                                                        }
-                                                      })
+      additional_headers: {
+        "X-Test-Id" => "branding.templates.delete_universal_login.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

@@ -24,7 +24,6 @@ class EventStreamsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -134,7 +133,7 @@ class EventStreamsWireTest < WireMockTestCase
 
     @client.event_streams.test(
       id: "id",
-      event_type: "group.created",
+      event_type: "connection.created",
       request_options: {
         additional_headers: {
           "X-Test-Id" => "event_streams.test.0"

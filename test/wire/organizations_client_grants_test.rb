@@ -19,6 +19,7 @@ class OrganizationsClientGrantsWireTest < WireMockTestCase
       id: "id",
       audience: "audience",
       client_id: "client_id",
+      grant_ids: ["grant_ids"],
       page: 1,
       per_page: 1,
       include_totals: true,
@@ -28,7 +29,6 @@ class OrganizationsClientGrantsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

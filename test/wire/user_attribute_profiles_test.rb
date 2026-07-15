@@ -24,7 +24,6 @@ class UserAttributeProfilesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -69,10 +68,10 @@ class UserAttributeProfilesWireTest < WireMockTestCase
     test_id = "user_attribute_profiles.list_templates.0"
 
     @client.user_attribute_profiles.list_templates(request_options: {
-                                                     additional_headers: {
-                                                       "X-Test-Id" => "user_attribute_profiles.list_templates.0"
-                                                     }
-                                                   })
+      additional_headers: {
+        "X-Test-Id" => "user_attribute_profiles.list_templates.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

@@ -62,10 +62,10 @@ class EmailsProviderWireTest < WireMockTestCase
     test_id = "emails.provider.delete.0"
 
     @client.emails.provider.delete(request_options: {
-                                     additional_headers: {
-                                       "X-Test-Id" => "emails.provider.delete.0"
-                                     }
-                                   })
+      additional_headers: {
+        "X-Test-Id" => "emails.provider.delete.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -80,10 +80,10 @@ class EmailsProviderWireTest < WireMockTestCase
     test_id = "emails.provider.update.0"
 
     @client.emails.provider.update(request_options: {
-                                     additional_headers: {
-                                       "X-Test-Id" => "emails.provider.update.0"
-                                     }
-                                   })
+      additional_headers: {
+        "X-Test-Id" => "emails.provider.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

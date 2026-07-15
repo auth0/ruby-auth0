@@ -62,8 +62,6 @@ module Auth0
 
       field :gateway_authentication, -> { Auth0::Types::ConnectionGatewayAuthentication }, optional: true, nullable: false
 
-      field :federated_connections_access_tokens, -> { Auth0::Types::ConnectionFederatedConnectionsAccessTokens }, optional: true, nullable: false
-
       field :password_options, -> { Auth0::Types::ConnectionPasswordOptions }, optional: true, nullable: false
 
       field :assertion_decryption_settings, -> { Auth0::Types::ConnectionAssertionDecryptionSettings }, optional: true, nullable: false

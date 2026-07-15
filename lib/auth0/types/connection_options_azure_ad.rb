@@ -108,8 +108,6 @@ module Auth0
 
       field :ext_user_id, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
-      field :federated_connections_access_tokens, -> { Auth0::Types::ConnectionFederatedConnectionsAccessTokens }, optional: true, nullable: false
-
       field :granted, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :icon_url, -> { String }, optional: true, nullable: false

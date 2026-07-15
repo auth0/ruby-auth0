@@ -38,10 +38,10 @@ class TenantsSettingsWireTest < WireMockTestCase
     test_id = "tenants.settings.update.0"
 
     @client.tenants.settings.update(request_options: {
-                                      additional_headers: {
-                                        "X-Test-Id" => "tenants.settings.update.0"
-                                      }
-                                    })
+      additional_headers: {
+        "X-Test-Id" => "tenants.settings.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

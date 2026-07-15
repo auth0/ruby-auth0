@@ -16,10 +16,10 @@ class KeysCustomSigningWireTest < WireMockTestCase
     test_id = "keys.custom_signing.get.0"
 
     @client.keys.custom_signing.get(request_options: {
-                                      additional_headers: {
-                                        "X-Test-Id" => "keys.custom_signing.get.0"
-                                      }
-                                    })
+      additional_headers: {
+        "X-Test-Id" => "keys.custom_signing.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -57,10 +57,10 @@ class KeysCustomSigningWireTest < WireMockTestCase
     test_id = "keys.custom_signing.delete.0"
 
     @client.keys.custom_signing.delete(request_options: {
-                                         additional_headers: {
-                                           "X-Test-Id" => "keys.custom_signing.delete.0"
-                                         }
-                                       })
+      additional_headers: {
+        "X-Test-Id" => "keys.custom_signing.delete.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

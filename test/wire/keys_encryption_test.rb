@@ -25,7 +25,6 @@ class KeysEncryptionWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -62,10 +61,10 @@ class KeysEncryptionWireTest < WireMockTestCase
     test_id = "keys.encryption.rekey.0"
 
     @client.keys.encryption.rekey(request_options: {
-                                    additional_headers: {
-                                      "X-Test-Id" => "keys.encryption.rekey.0"
-                                    }
-                                  })
+      additional_headers: {
+        "X-Test-Id" => "keys.encryption.rekey.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

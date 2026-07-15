@@ -16,10 +16,10 @@ class KeysSigningWireTest < WireMockTestCase
     test_id = "keys.signing.list.0"
 
     @client.keys.signing.list(request_options: {
-                                additional_headers: {
-                                  "X-Test-Id" => "keys.signing.list.0"
-                                }
-                              })
+      additional_headers: {
+        "X-Test-Id" => "keys.signing.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class KeysSigningWireTest < WireMockTestCase
     test_id = "keys.signing.rotate.0"
 
     @client.keys.signing.rotate(request_options: {
-                                  additional_headers: {
-                                    "X-Test-Id" => "keys.signing.rotate.0"
-                                  }
-                                })
+      additional_headers: {
+        "X-Test-Id" => "keys.signing.rotate.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

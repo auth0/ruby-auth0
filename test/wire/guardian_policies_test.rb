@@ -16,10 +16,10 @@ class GuardianPoliciesWireTest < WireMockTestCase
     test_id = "guardian.policies.list.0"
 
     @client.guardian.policies.list(request_options: {
-                                     additional_headers: {
-                                       "X-Test-Id" => "guardian.policies.list.0"
-                                     }
-                                   })
+      additional_headers: {
+        "X-Test-Id" => "guardian.policies.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

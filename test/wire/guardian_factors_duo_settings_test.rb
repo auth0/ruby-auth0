@@ -16,10 +16,10 @@ class GuardianFactorsDuoSettingsWireTest < WireMockTestCase
     test_id = "guardian.factors.duo.settings.get.0"
 
     @client.guardian.factors.duo.settings.get(request_options: {
-                                                additional_headers: {
-                                                  "X-Test-Id" => "guardian.factors.duo.settings.get.0"
-                                                }
-                                              })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.duo.settings.get.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class GuardianFactorsDuoSettingsWireTest < WireMockTestCase
     test_id = "guardian.factors.duo.settings.set.0"
 
     @client.guardian.factors.duo.settings.set(request_options: {
-                                                additional_headers: {
-                                                  "X-Test-Id" => "guardian.factors.duo.settings.set.0"
-                                                }
-                                              })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.duo.settings.set.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -52,10 +52,10 @@ class GuardianFactorsDuoSettingsWireTest < WireMockTestCase
     test_id = "guardian.factors.duo.settings.update.0"
 
     @client.guardian.factors.duo.settings.update(request_options: {
-                                                   additional_headers: {
-                                                     "X-Test-Id" => "guardian.factors.duo.settings.update.0"
-                                                   }
-                                                 })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.duo.settings.update.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

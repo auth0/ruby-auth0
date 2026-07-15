@@ -19,6 +19,7 @@ class FlowsWireTest < WireMockTestCase
       page: 1,
       per_page: 1,
       include_totals: true,
+      hydrate: ["form_count"],
       synchronous: true,
       request_options: {
         additional_headers: {
@@ -26,7 +27,6 @@ class FlowsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -64,6 +64,7 @@ class FlowsWireTest < WireMockTestCase
 
     @client.flows.get(
       id: "id",
+      hydrate: ["form_count"],
       request_options: {
         additional_headers: {
           "X-Test-Id" => "flows.get.0"

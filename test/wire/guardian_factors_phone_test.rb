@@ -16,10 +16,10 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     test_id = "guardian.factors.phone.get_message_types.0"
 
     @client.guardian.factors.phone.get_message_types(request_options: {
-                                                       additional_headers: {
-                                                         "X-Test-Id" => "guardian.factors.phone.get_message_types.0"
-                                                       }
-                                                     })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.get_message_types.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -55,10 +55,10 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     test_id = "guardian.factors.phone.get_twilio_provider.0"
 
     @client.guardian.factors.phone.get_twilio_provider(request_options: {
-                                                         additional_headers: {
-                                                           "X-Test-Id" => "guardian.factors.phone.get_twilio_provider.0"
-                                                         }
-                                                       })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.get_twilio_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -73,10 +73,10 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     test_id = "guardian.factors.phone.set_twilio_provider.0"
 
     @client.guardian.factors.phone.set_twilio_provider(request_options: {
-                                                         additional_headers: {
-                                                           "X-Test-Id" => "guardian.factors.phone.set_twilio_provider.0"
-                                                         }
-                                                       })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.set_twilio_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -91,10 +91,10 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     test_id = "guardian.factors.phone.get_selected_provider.0"
 
     @client.guardian.factors.phone.get_selected_provider(request_options: {
-                                                           additional_headers: {
-                                                             "X-Test-Id" => "guardian.factors.phone.get_selected_provider.0"
-                                                           }
-                                                         })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.get_selected_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -130,10 +130,10 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     test_id = "guardian.factors.phone.get_templates.0"
 
     @client.guardian.factors.phone.get_templates(request_options: {
-                                                   additional_headers: {
-                                                     "X-Test-Id" => "guardian.factors.phone.get_templates.0"
-                                                   }
-                                                 })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.get_templates.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

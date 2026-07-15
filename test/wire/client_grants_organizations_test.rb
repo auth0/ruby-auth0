@@ -25,7 +25,6 @@ class ClientGrantsOrganizationsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(

@@ -24,7 +24,6 @@ class ActionsModulesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -134,7 +133,6 @@ class ActionsModulesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
