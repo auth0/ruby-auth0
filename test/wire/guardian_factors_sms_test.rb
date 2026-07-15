@@ -16,10 +16,10 @@ class GuardianFactorsSmsWireTest < WireMockTestCase
     test_id = "guardian.factors.sms.get_twilio_provider.0"
 
     @client.guardian.factors.sms.get_twilio_provider(request_options: {
-                                                       additional_headers: {
-                                                         "X-Test-Id" => "guardian.factors.sms.get_twilio_provider.0"
-                                                       }
-                                                     })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.sms.get_twilio_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class GuardianFactorsSmsWireTest < WireMockTestCase
     test_id = "guardian.factors.sms.set_twilio_provider.0"
 
     @client.guardian.factors.sms.set_twilio_provider(request_options: {
-                                                       additional_headers: {
-                                                         "X-Test-Id" => "guardian.factors.sms.set_twilio_provider.0"
-                                                       }
-                                                     })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.sms.set_twilio_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -52,10 +52,10 @@ class GuardianFactorsSmsWireTest < WireMockTestCase
     test_id = "guardian.factors.sms.get_selected_provider.0"
 
     @client.guardian.factors.sms.get_selected_provider(request_options: {
-                                                         additional_headers: {
-                                                           "X-Test-Id" => "guardian.factors.sms.get_selected_provider.0"
-                                                         }
-                                                       })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.sms.get_selected_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -91,10 +91,10 @@ class GuardianFactorsSmsWireTest < WireMockTestCase
     test_id = "guardian.factors.sms.get_templates.0"
 
     @client.guardian.factors.sms.get_templates(request_options: {
-                                                 additional_headers: {
-                                                   "X-Test-Id" => "guardian.factors.sms.get_templates.0"
-                                                 }
-                                               })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.sms.get_templates.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

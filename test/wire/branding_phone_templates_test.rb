@@ -37,10 +37,10 @@ class BrandingPhoneTemplatesWireTest < WireMockTestCase
     test_id = "branding.phone.templates.create.0"
 
     @client.branding.phone.templates.create(request_options: {
-                                              additional_headers: {
-                                                "X-Test-Id" => "branding.phone.templates.create.0"
-                                              }
-                                            })
+      additional_headers: {
+        "X-Test-Id" => "branding.phone.templates.create.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

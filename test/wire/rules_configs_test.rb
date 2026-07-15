@@ -16,10 +16,10 @@ class RulesConfigsWireTest < WireMockTestCase
     test_id = "rules_configs.list.0"
 
     @client.rules_configs.list(request_options: {
-                                 additional_headers: {
-                                   "X-Test-Id" => "rules_configs.list.0"
-                                 }
-                               })
+      additional_headers: {
+        "X-Test-Id" => "rules_configs.list.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

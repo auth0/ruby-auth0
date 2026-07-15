@@ -24,7 +24,6 @@ class ConnectionProfilesWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -61,10 +60,10 @@ class ConnectionProfilesWireTest < WireMockTestCase
     test_id = "connection_profiles.list_templates.0"
 
     @client.connection_profiles.list_templates(request_options: {
-                                                 additional_headers: {
-                                                   "X-Test-Id" => "connection_profiles.list_templates.0"
-                                                 }
-                                               })
+      additional_headers: {
+        "X-Test-Id" => "connection_profiles.list_templates.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

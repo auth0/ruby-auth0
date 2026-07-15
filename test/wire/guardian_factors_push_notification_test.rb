@@ -16,10 +16,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.get_apns_provider.0"
 
     @client.guardian.factors.push_notification.get_apns_provider(request_options: {
-                                                                   additional_headers: {
-                                                                     "X-Test-Id" => "guardian.factors.push_notification.get_apns_provider.0"
-                                                                   }
-                                                                 })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.get_apns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -34,10 +34,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.set_apns_provider.0"
 
     @client.guardian.factors.push_notification.set_apns_provider(request_options: {
-                                                                   additional_headers: {
-                                                                     "X-Test-Id" => "guardian.factors.push_notification.set_apns_provider.0"
-                                                                   }
-                                                                 })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.set_apns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -52,10 +52,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.update_apns_provider.0"
 
     @client.guardian.factors.push_notification.update_apns_provider(request_options: {
-                                                                      additional_headers: {
-                                                                        "X-Test-Id" => "guardian.factors.push_notification.update_apns_provider.0"
-                                                                      }
-                                                                    })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.update_apns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -70,10 +70,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.set_fcm_provider.0"
 
     @client.guardian.factors.push_notification.set_fcm_provider(request_options: {
-                                                                  additional_headers: {
-                                                                    "X-Test-Id" => "guardian.factors.push_notification.set_fcm_provider.0"
-                                                                  }
-                                                                })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.set_fcm_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -88,10 +88,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.update_fcm_provider.0"
 
     @client.guardian.factors.push_notification.update_fcm_provider(request_options: {
-                                                                     additional_headers: {
-                                                                       "X-Test-Id" => "guardian.factors.push_notification.update_fcm_provider.0"
-                                                                     }
-                                                                   })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.update_fcm_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -106,10 +106,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.set_fcmv1provider.0"
 
     @client.guardian.factors.push_notification.set_fcmv1provider(request_options: {
-                                                                   additional_headers: {
-                                                                     "X-Test-Id" => "guardian.factors.push_notification.set_fcmv1provider.0"
-                                                                   }
-                                                                 })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.set_fcmv1provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -124,10 +124,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.update_fcmv1provider.0"
 
     @client.guardian.factors.push_notification.update_fcmv1provider(request_options: {
-                                                                      additional_headers: {
-                                                                        "X-Test-Id" => "guardian.factors.push_notification.update_fcmv1provider.0"
-                                                                      }
-                                                                    })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.update_fcmv1provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -142,10 +142,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.get_sns_provider.0"
 
     @client.guardian.factors.push_notification.get_sns_provider(request_options: {
-                                                                  additional_headers: {
-                                                                    "X-Test-Id" => "guardian.factors.push_notification.get_sns_provider.0"
-                                                                  }
-                                                                })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.get_sns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -160,10 +160,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.set_sns_provider.0"
 
     @client.guardian.factors.push_notification.set_sns_provider(request_options: {
-                                                                  additional_headers: {
-                                                                    "X-Test-Id" => "guardian.factors.push_notification.set_sns_provider.0"
-                                                                  }
-                                                                })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.set_sns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -178,10 +178,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.update_sns_provider.0"
 
     @client.guardian.factors.push_notification.update_sns_provider(request_options: {
-                                                                     additional_headers: {
-                                                                       "X-Test-Id" => "guardian.factors.push_notification.update_sns_provider.0"
-                                                                     }
-                                                                   })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.update_sns_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,
@@ -196,10 +196,10 @@ class GuardianFactorsPushNotificationWireTest < WireMockTestCase
     test_id = "guardian.factors.push_notification.get_selected_provider.0"
 
     @client.guardian.factors.push_notification.get_selected_provider(request_options: {
-                                                                       additional_headers: {
-                                                                         "X-Test-Id" => "guardian.factors.push_notification.get_selected_provider.0"
-                                                                       }
-                                                                     })
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.push_notification.get_selected_provider.0"
+      }
+    })
 
     verify_request_count(
       test_id: test_id,

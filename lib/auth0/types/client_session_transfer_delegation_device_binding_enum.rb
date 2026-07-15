@@ -6,7 +6,6 @@ module Auth0
       extend Auth0::Internal::Types::Enum
 
       IP = "ip"
-      ASN = "asn"
     end
   end
 end

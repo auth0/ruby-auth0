@@ -28,7 +28,6 @@ class RefreshTokensWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -36,6 +35,24 @@ class RefreshTokensWireTest < WireMockTestCase
       method: "GET",
       url_path: "/refresh-tokens",
       query_params: { "user_id" => "user_id" },
+      expected: 1
+    )
+  end
+
+  def test_refresh_tokens_revoke_with_wiremock
+    test_id = "refresh_tokens.revoke.0"
+
+    @client.refresh_tokens.revoke(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "refresh_tokens.revoke.0"
+      }
+    })
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/refresh-tokens/revoke",
+      query_params: nil,
       expected: 1
     )
   end

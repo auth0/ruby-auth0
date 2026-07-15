@@ -2,25 +2,20 @@
 
 module Auth0
   class Management
-    # @param base_url [String, nil]
     # @param token [String]
-    # @param timeout [Float, nil] Request timeout in seconds.
-    # @param max_retries [Integer, nil] Maximum number of request retries.
-    # @param headers [Hash, nil] Additional headers to include in requests.
+    # @param base_url [String, nil]
+    # @param max_retries [Integer]
     #
     # @return [void]
-    def initialize(token:, base_url: nil, timeout: nil, max_retries: nil, headers: nil)
-      raw_client_opts = {
+    def initialize(token:, base_url: nil, max_retries: 2)
+      @raw_client = Auth0::Internal::Http::RawClient.new(
         base_url: base_url || Auth0::Environment::DEFAULT,
         headers: {
           "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
-        }.merge(headers || {})
-      }
-      raw_client_opts[:timeout] = timeout if timeout
-      raw_client_opts[:max_retries] = max_retries if max_retries
-
-      @raw_client = Auth0::Internal::Http::RawClient.new(**raw_client_opts)
+        },
+        max_retries: max_retries
+      )
     end
 
     # @return [Auth0::Actions::Client]
@@ -71,6 +66,11 @@ module Auth0
     # @return [Auth0::EventStreams::Client]
     def event_streams
       @event_streams ||= Auth0::EventStreams::Client.new(client: @raw_client)
+    end
+
+    # @return [Auth0::Events::Client]
+    def events
+      @events ||= Auth0::Events::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Flows::Client]
@@ -126,6 +126,11 @@ module Auth0
     # @return [Auth0::Prompts::Client]
     def prompts
       @prompts ||= Auth0::Prompts::Client.new(client: @raw_client)
+    end
+
+    # @return [Auth0::RateLimitPolicies::Client]
+    def rate_limit_policies
+      @rate_limit_policies ||= Auth0::RateLimitPolicies::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::RefreshTokens::Client]
@@ -239,5 +244,3 @@ module Auth0
     end
   end
 end
-
-require_relative "auth_client"

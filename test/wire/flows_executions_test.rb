@@ -25,7 +25,6 @@ class FlowsExecutionsWireTest < WireMockTestCase
         }
       }
     )
-
     result.pages.next_page
 
     verify_request_count(
@@ -43,6 +42,7 @@ class FlowsExecutionsWireTest < WireMockTestCase
     @client.flows.executions.get(
       flow_id: "flow_id",
       execution_id: "execution_id",
+      hydrate: ["debug"],
       request_options: {
         additional_headers: {
           "X-Test-Id" => "flows.executions.get.0"
