@@ -51,9 +51,10 @@ reference.md
 # GitHub (entire directory - workflows, actions, templates, CODEOWNERS)
 .github/
 
-# Tests
-test/
-wiremock/
+# Tests (custom only - Fern owns test/wire/)
+test/unit/
+test/test_helper.rb
+test/custom.test.rb
 
 # Examples
 examples/
