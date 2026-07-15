@@ -1,7 +1,6 @@
 # Specify files that shouldn't be modified by Fern
 
 # Custom SDK files
-lib/auth0/client.rb
 lib/auth0/auth_client.rb
 lib/auth0/exception.rb
 lib/auth0/algorithm.rb
