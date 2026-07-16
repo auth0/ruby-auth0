@@ -4,18 +4,12 @@ module Auth0
   class Management
     # @param token [String]
     # @param base_url [String, nil]
-    # @param tenant_domain [String, nil]
     # @param timeout [Float, nil] Request timeout in seconds.
     # @param max_retries [Integer, nil] Maximum number of request retries.
     # @param headers [Hash, nil] Additional headers to include in requests.
     #
     # @return [void]
-    def initialize(token:, base_url: nil, tenant_domain: nil, timeout: nil, max_retries: nil, headers: nil)
-      if base_url.nil? && (!tenant_domain.nil?)
-        tenant_domain_value = tenant_domain.nil? ? "{TENANT}.auth0.com" : tenant_domain
-        base_url = "https://#{tenant_domain_value}/api/v2"
-      end
-
+    def initialize(token:, base_url: nil, timeout: nil, max_retries: nil, headers: nil)
       raw_client_opts = {
         base_url: base_url || Auth0::Environment::DEFAULT,
         headers: {
