@@ -1,7 +1,7 @@
 {
-  "cliVersion": "5.66.1",
+  "cliVersion": "5.75.6",
   "generatorName": "fernapi/fern-ruby-sdk",
-  "generatorVersion": "1.13.1",
+  "generatorVersion": "1.17.8",
   "generatorConfig": {
     "clientModuleName": "Management",
     "package-name": "auth0",
@@ -10,7 +10,7 @@
     "offsetSemantics": "page-index",
     "useDefaultRequestParameterValues": true
   },
-  "originGitCommit": "1c93e58c45b63276cecfd549533df0b3f663969a",
+  "originGitCommit": "e2027b1584b1668f39ed802f114e54458b09bb57",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
   "ciProvider": "github",

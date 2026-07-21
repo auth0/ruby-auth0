@@ -38,7 +38,9 @@ class PromptsPartialsWireTest < WireMockTestCase
 
     @client.prompts.partials.set(
       prompt: "login",
-      request: {},
+      request: {
+        key: "value"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "prompts.partials.set.0"

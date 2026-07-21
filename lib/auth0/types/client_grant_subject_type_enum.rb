@@ -7,6 +7,7 @@ module Auth0
 
       CLIENT = "client"
       USER = "user"
+      ANONYMOUS_USER = "anonymous_user"
     end
   end
 end

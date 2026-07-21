@@ -113,6 +113,8 @@ module Auth0
 
       field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationResponseConfiguration }, optional: true, nullable: false
 
+      field :identity_assertion_authorization_grant, -> { Auth0::Types::IdentityAssertionAuthorizationGrant }, optional: true, nullable: false
+
       field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
       field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false

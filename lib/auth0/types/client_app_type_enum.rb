@@ -11,6 +11,7 @@ module Auth0
       NON_INTERACTIVE = "non_interactive"
       RESOURCE_SERVER = "resource_server"
       EXPRESS_CONFIGURATION = "express_configuration"
+      B2B_INTEGRATION = "b2b_integration"
       RMS = "rms"
       BOX = "box"
       CLOUDBEES = "cloudbees"

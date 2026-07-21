@@ -23,6 +23,8 @@ module Auth0
 
           field :use_for_organization_discovery, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
+          field :third_party_client_access_config, -> { Auth0::Types::ThirdPartyClientAccessConfig }, optional: true, nullable: false
+
           field :enabled_features, -> { Auth0::Types::SelfServiceProfileSSOTicketEnabledFeatures }, optional: true, nullable: false
         end
       end

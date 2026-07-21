@@ -64,6 +64,8 @@ module Auth0
 
         field :token_quota, -> { Auth0::Types::UpdateTokenQuota }, optional: true, nullable: false
 
+        field :identity_assertion_authorization_grant, -> { Auth0::Types::UpdateIdentityAssertionAuthorizationGrant }, optional: true, nullable: false
+
         field :form_template, -> { String }, optional: true, nullable: false
 
         field :addons, -> { Auth0::Types::ClientAddons }, optional: true, nullable: false

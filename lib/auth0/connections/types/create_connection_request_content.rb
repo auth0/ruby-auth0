@@ -27,6 +27,8 @@ module Auth0
         field :connected_accounts, -> { Auth0::Types::ConnectionConnectedAccountsPurpose }, optional: true, nullable: false
 
         field :cross_app_access_requesting_app, -> { Auth0::Types::CrossAppAccessRequestingApp }, optional: true, nullable: false
+
+        field :cross_app_access_resource_app, -> { Auth0::Types::CreateCrossAppAccessResourceApp }, optional: true, nullable: false
       end
     end
   end

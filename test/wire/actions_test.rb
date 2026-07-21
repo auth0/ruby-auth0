@@ -153,7 +153,9 @@ class ActionsWireTest < WireMockTestCase
 
     @client.actions.test(
       id: "id",
-      payload: {},
+      payload: {
+        key: "value"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "actions.test.0"

@@ -15,6 +15,8 @@ module Auth0
 
           field :fonts, -> { Auth0::Types::BrandingThemeFonts }, optional: false, nullable: false
 
+          field :identifiers, -> { Auth0::Types::BrandingThemeIdentifiers }, optional: true, nullable: false
+
           field :page_background, -> { Auth0::Types::BrandingThemePageBackground }, optional: false, nullable: false
 
           field :widget, -> { Auth0::Types::BrandingThemeWidget }, optional: false, nullable: false
