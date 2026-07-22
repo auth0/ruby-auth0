@@ -1,11 +1,12 @@
 # Change Log
 
-## [v6.0.0.beta.4](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.4) (2026-07-15)
+## [v6.0.0.beta.4](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.4) (2026-07-22)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.3...v6.0.0.beta.4)
 
 **Added**
 - feat: add Organization Role Members, Connection event streams, and Token Vault access grants [\#762](https://github.com/auth0/ruby-auth0/pull/762) ([fern-api[bot]](https://github.com/apps/fern-api))
 - feat: add Events and Rate Limit Policies clients, remove Federated Connections Tokensets [\#767](https://github.com/auth0/ruby-auth0/pull/767) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Cross App Access and Identity Assertion grants, Branding Theme Identifiers, and Session actor [\#771](https://github.com/auth0/ruby-auth0/pull/771) ([fern-api[bot]](https://github.com/apps/fern-api))
 
 **Breaking Changes**
 - Rename `ConnectionAttributeIdentifier` to `EmailAttributeIdentifier`; the `identifier` field on email, phone, and username attributes is now `EmailAttributeIdentifier`, `PhoneAttributeIdentifier`, and `UsernameAttributeIdentifier` respectively [\#762](https://github.com/auth0/ruby-auth0/pull/762)
