@@ -40,7 +40,9 @@ class PromptsCustomTextWireTest < WireMockTestCase
     @client.prompts.custom_text.set(
       prompt: "login",
       language: "am",
-      request: {},
+      request: {
+        key: "value"
+      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "prompts.custom_text.set.0"
