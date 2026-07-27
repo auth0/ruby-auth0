@@ -840,6 +840,19 @@ describe Auth0::Api::V2::Users do
         @instance.user_sessions('USER_ID')
       end.not_to raise_error
     end
+
+    it 'is expected to forward an optional block through to the request' do
+      rate_limit = Auth0::RateLimit.from_headers(x_ratelimit_remaining: '5')
+      allow(@instance).to receive(:get).with('/api/v2/users/USER_ID/sessions') do |_path, &block|
+        block&.call({ 'sessions' => [] }, rate_limit)
+        { 'sessions' => [] }
+      end
+
+      yielded = nil
+      @instance.user_sessions('USER_ID') { |body, rl| yielded = [body, rl] }
+
+      expect(yielded).to eq([{ 'sessions' => [] }, rate_limit])
+    end
   end
 
   context '.user_refresh_tokens' do

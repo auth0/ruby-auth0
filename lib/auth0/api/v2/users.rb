@@ -458,11 +458,14 @@ module Auth0
         # Retrieve details for a user's sessions.
         #
         # @param user_id [string] The user ID
+        # @yield [response, rate_limit] optional block yielded with the parsed
+        #   response body and an {Auth0::RateLimit} built from the response's
+        #   `x-ratelimit-*` headers. The return value is unchanged.
         # @see https://auth0.com/docs/api/management/v2/users/get-sessions-for-user
-        def user_sessions(user_id)
+        def user_sessions(user_id, &block)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?
 
-          get "#{users_path}/#{user_id}/sessions"
+          get "#{users_path}/#{user_id}/sessions", &block
         end
 
         # Retrieve details for a user's refresh tokens.

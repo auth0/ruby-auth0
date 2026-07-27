@@ -220,3 +220,26 @@ Some notes:
 * If both `client_secret` and `client_assertion_signing_key` are specified, `client_assertion_signing_key` takes precedence
 * `client_assertion_signing_alg` is optional and defaults to `RS256` if omitted
 * Only `RS256`, `RS384` and `PS256` algorithms are supported by Auth0 currently
+
+## Read rate limit information from a response
+
+Auth0 returns `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers on Management API responses. Pass an optional block to a supported endpoint to inspect this data without changing the method's return value. This is useful for monitoring how close you are to the rate limit.
+
+```ruby
+auth0_client = Auth0Client.new(
+  client_id: 'YOUR_CLIENT_ID',
+  token: 'YOUR_API_V2_TOKEN',
+  domain: 'YOUR_DOMAIN'
+)
+
+# The return value is unchanged; the block is optional.
+sessions = auth0_client.user_sessions('auth0|USER_ID') do |response, rate_limit|
+  Rails.logger.info("Auth0 rate limit remaining: #{rate_limit.remaining}/#{rate_limit.limit}")
+  Rails.logger.info("Auth0 rate limit resets at: #{rate_limit.reset}") # a UTC Time
+end
+```
+
+The block receives:
+
+* `response` — the parsed response body (the same value the method returns)
+* `rate_limit` — an `Auth0::RateLimit` with `limit` (Integer), `remaining` (Integer), and `reset` (UTC `Time`); fields are `nil` when the corresponding header is absent

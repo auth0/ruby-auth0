@@ -657,3 +657,49 @@ end
     end
   end
 end
+
+describe Auth0::Mixins::HTTPProxy, 'rate limit block' do
+  before :each do
+    @instance = DummyClassForProxy.new
+    @instance.extend(Auth0::Mixins::HTTPProxy)
+    @instance.base_uri = 'https://auth0.com'
+    @instance.retry_count = 0
+  end
+
+  it 'yields the parsed body and rate limit info from the response headers on success' do
+    allow(RestClient::Request).to receive(:execute).and_return(
+      StubResponse.new(
+        { 'foo' => 'bar' }.to_json,
+        true,
+        200,
+        {
+          x_ratelimit_limit: '100',
+          x_ratelimit_remaining: '42',
+          x_ratelimit_reset: '1724000000'
+        }
+      )
+    )
+
+    yielded_body = nil
+    yielded_rate_limit = nil
+    result = @instance.get('/test') do |body, rate_limit|
+      yielded_body = body
+      yielded_rate_limit = rate_limit
+    end
+
+    expect(result).to eq('foo' => 'bar')
+    expect(yielded_body).to eq('foo' => 'bar')
+    expect(yielded_rate_limit).to be_a(Auth0::RateLimit)
+    expect(yielded_rate_limit.limit).to eq(100)
+    expect(yielded_rate_limit.remaining).to eq(42)
+    expect(yielded_rate_limit.reset).to eq(Time.at(1_724_000_000).utc)
+  end
+
+  it 'returns the response body unchanged and does not require a block' do
+    allow(RestClient::Request).to receive(:execute).and_return(
+      StubResponse.new({ 'foo' => 'bar' }.to_json, true, 200, {})
+    )
+
+    expect(@instance.get('/test')).to eq('foo' => 'bar')
+  end
+end

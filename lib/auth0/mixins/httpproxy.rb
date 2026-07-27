@@ -20,11 +20,11 @@ module Auth0
 
       # proxying requests from instance methods to HTTP class methods
       %i[get post post_file post_form put patch delete delete_with_body].each do |method|
-        define_method(method) do |uri, body = {}, extra_headers = {}|
+        define_method(method) do |uri, body = {}, extra_headers = {}, &block|
           body = safe_merge_body(body, extra_headers)
           token = get_token
           authorization_header(token) unless token.nil?
-          request_with_retry(method, uri, body, extra_headers)
+          request_with_retry(method, uri, body, extra_headers, &block)
         end
       end
 
@@ -69,9 +69,9 @@ module Auth0
         body
       end
 
-      def request_with_retry(method, uri, body = {}, extra_headers = {})
+      def request_with_retry(method, uri, body = {}, extra_headers = {}, &block)
         Retryable.retryable(retry_options) do
-          request(method, uri, body, extra_headers)
+          request(method, uri, body, extra_headers, &block)
         end
       end
 
@@ -101,7 +101,12 @@ module Auth0
                  end
 
         case result.code
-        when 200...226 then safe_parse_json(result.body)
+        when 200...226
+          body = safe_parse_json(result.body)
+          # Optionally expose rate limit information from the response headers
+          # without changing the return value for existing callers.
+          yield(body, Auth0::RateLimit.from_headers(result.headers)) if block_given?
+          body
         when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
         when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)
         when 403       then raise Auth0::AccessDenied.new(result.body, code: result.code, headers: result.headers)

@@ -4,6 +4,7 @@ require 'uri'
 
 require 'auth0/mixins/access_token_struct'
 require 'auth0/mixins/api_token_struct'
+require 'auth0/mixins/rate_limit_struct'
 require 'auth0/mixins/headers'
 require 'auth0/mixins/httpproxy'
 require 'auth0/mixins/initializer'
