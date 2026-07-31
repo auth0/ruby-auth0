@@ -70,9 +70,17 @@ module Auth0
       end
 
       def request_with_retry(method, uri, body = {}, extra_headers = {}, &block)
-        Retryable.retryable(retry_options) do
-          request(method, uri, body, extra_headers, &block)
+        return Retryable.retryable(retry_options) { request(method, uri, body, extra_headers) } unless block
+
+        # Capture the rate limit inside the retry loop but invoke the caller's
+        # block only after retries complete, so an exception raised by the block
+        # can never be mistaken for a failed request and trigger a retry.
+        rate_limit = nil
+        result = Retryable.retryable(retry_options) do
+          request(method, uri, body, extra_headers) { |limit| rate_limit = limit }
         end
+        block.call(result, rate_limit)
+        result
       end
 
       def request(method, uri, body = {}, extra_headers = {})
@@ -103,9 +111,11 @@ module Auth0
         case result.code
         when 200...226
           body = safe_parse_json(result.body)
-          # Optionally expose rate limit information from the response headers
-          # without changing the return value for existing callers.
-          yield(body, Auth0::RateLimit.from_headers(result.headers)) if block_given?
+          # Expose rate limit information from the response headers without
+          # changing the return value for existing callers. The block here is an
+          # internal capture; the caller's block is invoked in request_with_retry
+          # outside the retry scope.
+          yield(Auth0::RateLimit.from_headers(result.headers)) if block_given?
           body
         when 400       then raise Auth0::BadRequest.new(result.body, code: result.code, headers: result.headers)
         when 401       then raise Auth0::Unauthorized.new(result.body, code: result.code, headers: result.headers)

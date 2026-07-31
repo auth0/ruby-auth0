@@ -460,7 +460,10 @@ module Auth0
         # @param user_id [string] The user ID
         # @yield [response, rate_limit] optional block yielded with the parsed
         #   response body and an {Auth0::RateLimit} built from the response's
-        #   `x-ratelimit-*` headers. The return value is unchanged.
+        #   `x-ratelimit-*` headers. The block is only invoked on a successful
+        #   response and the return value is unchanged. On an error response
+        #   (including a 429), the rate-limit headers remain available on the
+        #   raised exception via its `#headers` and, for 429s, `#reset`.
         # @see https://auth0.com/docs/api/management/v2/users/get-sessions-for-user
         def user_sessions(user_id, &block)
           raise Auth0::MissingUserId, 'Must supply a valid user_id' if user_id.to_s.empty?

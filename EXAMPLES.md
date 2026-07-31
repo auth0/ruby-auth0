@@ -242,4 +242,14 @@ end
 The block receives:
 
 * `response` — the parsed response body (the same value the method returns)
-* `rate_limit` — an `Auth0::RateLimit` with `limit` (Integer), `remaining` (Integer), and `reset` (UTC `Time`); fields are `nil` when the corresponding header is absent
+* `rate_limit` — an `Auth0::RateLimit` with `limit` (Integer), `remaining` (Integer), and `reset` (UTC `Time`); fields are `nil` when the corresponding header is absent or non-numeric
+
+The block is only invoked on a successful response. On an error response — including a `429` (`Auth0::RateLimitEncountered`) — the rate-limit headers remain available on the raised exception via `#headers`, and the reset time via `#reset`:
+
+```ruby
+begin
+  auth0_client.user_sessions('auth0|USER_ID')
+rescue Auth0::RateLimitEncountered => e
+  Rails.logger.warn("Auth0 rate limited; retry after #{e.reset}") # a UTC Time
+end
+```

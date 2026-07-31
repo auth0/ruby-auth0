@@ -702,4 +702,16 @@ describe Auth0::Mixins::HTTPProxy, 'rate limit block' do
 
     expect(@instance.get('/test')).to eq('foo' => 'bar')
   end
+
+  it 'does not retry the request when the caller block raises' do
+    # The callback runs outside the retry scope, so an exception it raises must
+    # not be treated as a failed request (which would replay the call).
+    expect(RestClient::Request).to receive(:execute).once.and_return(
+      StubResponse.new({ 'foo' => 'bar' }.to_json, true, 200, {})
+    )
+
+    expect do
+      @instance.get('/test') { |_body, _rate_limit| raise 'callback error' }
+    end.to raise_error('callback error')
+  end
 end
