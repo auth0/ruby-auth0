@@ -17,6 +17,9 @@ module Auth0
         # Organization-specific roles, use the following endpoint: [Get user roles assigned to an Organization
         # member](https://auth0.com/docs/api/management/v2/organizations/get-organization-member-roles).
         #
+        # **Note**: Returns only direct role assignments. To also include group-based role assignments, use `GET
+        # /api/v2/users/{id}/effective-roles`.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url

@@ -149,6 +149,7 @@ class ConnectionsDirectoryProvisioningWireTest < WireMockTestCase
       id: "id",
       from: "from",
       take: 1,
+      q: "q",
       request_options: {
         additional_headers: {
           "X-Test-Id" => "connections.directory_provisioning.list_synchronized_groups.0"
@@ -160,6 +161,30 @@ class ConnectionsDirectoryProvisioningWireTest < WireMockTestCase
     verify_request_count(
       test_id: test_id,
       method: "GET",
+      url_path: "/connections/id/directory-provisioning/synchronized-groups",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_connections_directory_provisioning_add_synchronized_group_selections_with_wiremock
+    test_id = "connections.directory_provisioning.add_synchronized_group_selections.0"
+
+    @client.connections.directory_provisioning.add_synchronized_group_selections(
+      id: "id",
+      groups: [{
+        id: "id"
+      }],
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "connections.directory_provisioning.add_synchronized_group_selections.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
       url_path: "/connections/id/directory-provisioning/synchronized-groups",
       query_params: nil,
       expected: 1
@@ -184,6 +209,30 @@ class ConnectionsDirectoryProvisioningWireTest < WireMockTestCase
     verify_request_count(
       test_id: test_id,
       method: "PUT",
+      url_path: "/connections/id/directory-provisioning/synchronized-groups",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_connections_directory_provisioning_delete_synchronized_group_selections_with_wiremock
+    test_id = "connections.directory_provisioning.delete_synchronized_group_selections.0"
+
+    @client.connections.directory_provisioning.delete_synchronized_group_selections(
+      id: "id",
+      groups: [{
+        id: "id"
+      }],
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "connections.directory_provisioning.delete_synchronized_group_selections.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "DELETE",
       url_path: "/connections/id/directory-provisioning/synchronized-groups",
       query_params: nil,
       expected: 1

@@ -38,17 +38,21 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      # @option params [Boolean, nil] :include_totals
       # @option params [String, nil] :from
       # @option params [Integer, nil] :take
       # @option params [String, nil] :sort
+      # @option params [String, nil] :include_client_association_for
       #
       # @return [Auth0::Types::ListOrganizationsPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         query_params = {}
+        query_params["include_totals"] = params.fetch(:include_totals, true)
         query_params["from"] = params[:from] if params.key?(:from)
         query_params["take"] = params.fetch(:take, 50)
         query_params["sort"] = params[:sort] if params.key?(:sort)
+        query_params["include_client_association_for"] = params[:include_client_association_for] if params.key?(:include_client_association_for)
 
         Auth0::Internal::CursorItemIterator.new(
           cursor_field: :next_,
@@ -262,6 +266,11 @@ module Auth0
       # @return [Auth0::ClientGrants::Client]
       def client_grants
         @client_grants ||= Auth0::Organizations::ClientGrants::Client.new(client: @client)
+      end
+
+      # @return [Auth0::Clients::Client]
+      def clients
+        @clients ||= Auth0::Organizations::Clients::Client.new(client: @client)
       end
 
       # @return [Auth0::Connections::Client]

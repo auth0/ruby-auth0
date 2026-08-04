@@ -4,6 +4,8 @@ module Auth0
   module Connections
     module Types
       class ListConnectionsQueryParameters < Internal::Types::Model
+        field :include_totals, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
         field :from, -> { String }, optional: true, nullable: false
 
         field :take, -> { Integer }, optional: true, nullable: false

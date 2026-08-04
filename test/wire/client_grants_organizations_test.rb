@@ -17,6 +17,7 @@ class ClientGrantsOrganizationsWireTest < WireMockTestCase
 
     result = @client.client_grants.organizations.list(
       id: "id",
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

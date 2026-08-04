@@ -19,6 +19,7 @@ class UsersGroupsWireTest < WireMockTestCase
       id: "id",
       fields: "fields",
       include_fields: true,
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

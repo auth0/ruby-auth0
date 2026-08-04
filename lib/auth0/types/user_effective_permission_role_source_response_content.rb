@@ -9,6 +9,10 @@ module Auth0
 
       field :description, -> { String }, optional: true, nullable: false
 
+      field :type, -> { Auth0::Types::RoleTypeEnum }, optional: true, nullable: false
+
+      field :owner_id, -> { String }, optional: true, nullable: false
+
       field :sources, -> { Internal::Types::Array[Auth0::Types::UserEffectivePermissionRoleSourceEnum] }, optional: true, nullable: false
     end
   end

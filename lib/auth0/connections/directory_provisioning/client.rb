@@ -241,6 +241,7 @@ module Auth0
         # @option params [String] :id
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
+        # @option params [String, nil] :q
         #
         # @return [Auth0::Types::ListSynchronizedGroupsResponseContent]
         def list_synchronized_groups(request_options: {}, **params)
@@ -248,6 +249,7 @@ module Auth0
           query_params = {}
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
+          query_params["q"] = params[:q] if params.key?(:q)
 
           Auth0::Internal::CursorItemIterator.new(
             cursor_field: :next_,
@@ -278,6 +280,43 @@ module Auth0
           end
         end
 
+        # Add synchronized group selections to a directory provisioning configuration.
+        #
+        # @param request_options [Hash]
+        # @param params [Auth0::Connections::DirectoryProvisioning::Types::AddSynchronizedGroupsRequestContent]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :id
+        #
+        # @return [untyped]
+        def add_synchronized_group_selections(request_options: {}, **params)
+          params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          request_data = Auth0::Connections::DirectoryProvisioning::Types::AddSynchronizedGroupsRequestContent.new(params).to_h
+          non_body_param_names = %w[id]
+          body = request_data.except(*non_body_param_names)
+
+          request = Auth0::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
+            method: "POST",
+            path: "connections/#{URI.encode_uri_component(params[:id].to_s)}/directory-provisioning/synchronized-groups",
+            body: body,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Auth0::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          return if code.between?(200, 299)
+
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+
         # Create or replace the selected groups for a connection directory provisioning configuration.
         #
         # @param request_options [Hash]
@@ -299,6 +338,43 @@ module Auth0
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
+            path: "connections/#{URI.encode_uri_component(params[:id].to_s)}/directory-provisioning/synchronized-groups",
+            body: body,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Auth0::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          return if code.between?(200, 299)
+
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+
+        # Delete synchronized group selections for a directory provisioning configuration
+        #
+        # @param request_options [Hash]
+        # @param params [Auth0::Connections::DirectoryProvisioning::Types::DeleteSynchronizedGroupsRequestContent]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String] :id
+        #
+        # @return [untyped]
+        def delete_synchronized_group_selections(request_options: {}, **params)
+          params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          request_data = Auth0::Connections::DirectoryProvisioning::Types::DeleteSynchronizedGroupsRequestContent.new(params).to_h
+          non_body_param_names = %w[id]
+          body = request_data.except(*non_body_param_names)
+
+          request = Auth0::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
+            method: "DELETE",
             path: "connections/#{URI.encode_uri_component(params[:id].to_s)}/directory-provisioning/synchronized-groups",
             body: body,
             request_options: request_options

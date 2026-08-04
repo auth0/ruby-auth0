@@ -17,6 +17,10 @@ module Auth0
 
       field :third_party_client_access, -> { Auth0::Types::OrganizationThirdPartyClientAccessEnum }, optional: true, nullable: false
 
+      field :is_app_entitlement_active, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :client, -> { Auth0::Types::OrganizationClientAssociation }, optional: true, nullable: false
+
       field :enabled_connections, -> { Internal::Types::Array[Auth0::Types::OrganizationEnabledConnection] }, optional: true, nullable: false
     end
   end

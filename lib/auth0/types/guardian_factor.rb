@@ -8,6 +8,8 @@ module Auth0
       field :trial_expired, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :name, -> { Auth0::Types::GuardianFactorNameEnum }, optional: true, nullable: false
+
+      field :settings, -> { Auth0::Types::GuardianFactorSettings }, optional: true, nullable: false
     end
   end
 end

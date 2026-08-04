@@ -4,28 +4,34 @@ module Auth0
   class Management
     # @param token [String]
     # @param base_url [String, nil]
-    # @param timeout [Float, nil] Request timeout in seconds.
-    # @param max_retries [Integer, nil] Maximum number of request retries.
-    # @param headers [Hash, nil] Additional headers to include in requests.
+    # @param tenant_domain [String, nil]
+    # @param max_retries [Integer]
     #
     # @return [void]
-    def initialize(token:, base_url: nil, timeout: nil, max_retries: nil, headers: nil)
-      raw_client_opts = {
+    def initialize(token:, base_url: nil, tenant_domain: nil, max_retries: 2)
+      if base_url.nil? && (!tenant_domain.nil?)
+        tenant_domain_value = tenant_domain.nil? ? "{TENANT}.auth0.com" : tenant_domain
+        base_url = "https://#{tenant_domain_value}/api/v2"
+      end
+
+      @raw_client = Auth0::Internal::Http::RawClient.new(
         base_url: base_url || Auth0::Environment::DEFAULT,
         headers: {
           "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
-        }.merge(headers || {})
-      }
-      raw_client_opts[:timeout] = timeout if timeout
-      raw_client_opts[:max_retries] = max_retries if max_retries
-
-      @raw_client = Auth0::Internal::Http::RawClient.new(**raw_client_opts)
+        },
+        max_retries: max_retries
+      )
     end
 
     # @return [Auth0::Actions::Client]
     def actions
       @actions ||= Auth0::Actions::Client.new(client: @raw_client)
+    end
+
+    # @return [Auth0::Agents::Client]
+    def agents
+      @agents ||= Auth0::Agents::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Branding::Client]
@@ -249,5 +255,3 @@ module Auth0
     end
   end
 end
-
-require_relative "auth_client"

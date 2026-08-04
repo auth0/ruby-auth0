@@ -18,6 +18,9 @@ module Auth0
           # only returns the roles associated with the specified Organization; any roles assigned to the user within
           # other Organizations are not included.
           #
+          # **Note**: Returns only direct role assignments for this member. To also include group-based role
+          # assignments, use `GET /api/v2/organizations/{id}/members/{user_id}/effective-roles`.
+          #
           # @param request_options [Hash]
           # @param params [Hash]
           # @option request_options [String] :base_url

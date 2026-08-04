@@ -11,6 +11,10 @@ module Auth0
         field :include_totals, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
         field :name_filter, -> { String }, optional: true, nullable: false
+
+        field :type, -> { Auth0::Types::RoleTypeEnum }, optional: true, nullable: false
+
+        field :owner_id, -> { String }, optional: true, nullable: false
       end
     end
   end

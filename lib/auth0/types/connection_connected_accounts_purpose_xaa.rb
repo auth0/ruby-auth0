@@ -7,6 +7,8 @@ module Auth0
       field :cross_app_access, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :active, -> { Internal::Types::Boolean }, optional: false, nullable: false
+
+      field :allow_missing_user_id, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

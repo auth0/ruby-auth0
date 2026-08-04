@@ -17,6 +17,7 @@ class RolesUsersWireTest < WireMockTestCase
 
     result = @client.roles.users.list(
       id: "id",
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

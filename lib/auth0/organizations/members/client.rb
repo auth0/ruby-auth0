@@ -18,7 +18,9 @@ module Auth0
         # - Use the `fields` parameter to optionally define the specific member details retrieved. If `fields` is left
         # blank, all fields (except roles) are returned.
         # - Member roles are not sent by default. Use `fields=roles` to retrieve the roles assigned to each listed
-        # member. To use this parameter, you must include the `read:organization_member_roles` scope in the token.
+        # member. To use this parameter, you must include the `read:organization_member_roles` scope in the token. Only
+        # directly assigned roles are returned. To also include group-based role assignments, use `GET
+        # /api/v2/organizations/{id}/members/{user_id}/effective-roles`.
         #
         # This endpoint supports two types of pagination:
         #
@@ -43,6 +45,7 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        # @option params [Boolean, nil] :include_totals
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         # @option params [String, nil] :fields
@@ -52,6 +55,7 @@ module Auth0
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           query_params = {}
+          query_params["include_totals"] = params.fetch(:include_totals, true)
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
           query_params["fields"] = params[:fields] if params.key?(:fields)

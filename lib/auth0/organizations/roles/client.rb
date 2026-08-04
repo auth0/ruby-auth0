@@ -15,6 +15,11 @@ module Auth0
         def members
           @members ||= Auth0::Organizations::Roles::Members::Client.new(client: @client)
         end
+
+        # @return [Auth0::Groups::Client]
+        def groups
+          @groups ||= Auth0::Organizations::Roles::Groups::Client.new(client: @client)
+        end
       end
     end
   end
