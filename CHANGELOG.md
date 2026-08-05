@@ -1,5 +1,11 @@
 # Change Log
 
+## [v6.0.0.beta.5](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.5) (2026-08-05)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.4...v6.0.0.beta.5)
+
+**Added**
+- feat: add Agents and Organization Clients clients, Organization Level Roles, and Org-to-App Entitlement [\#777](https://github.com/auth0/ruby-auth0/pull/777) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.0.0.beta.4](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.4) (2026-07-22)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.3...v6.0.0.beta.4)
 
