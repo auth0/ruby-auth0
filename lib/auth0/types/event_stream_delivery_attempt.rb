@@ -8,6 +8,8 @@ module Auth0
       field :timestamp, -> { String }, optional: false, nullable: false
 
       field :error_message, -> { String }, optional: true, nullable: false
+
+      field :duration, -> { Integer }, optional: true, nullable: false
     end
   end
 end

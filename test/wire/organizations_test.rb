@@ -16,9 +16,11 @@ class OrganizationsWireTest < WireMockTestCase
     test_id = "organizations.list.0"
 
     result = @client.organizations.list(
+      include_totals: true,
       from: "from",
       take: 1,
       sort: "sort",
+      include_client_association_for: "include_client_association_for",
       request_options: {
         additional_headers: {
           "X-Test-Id" => "organizations.list.0"

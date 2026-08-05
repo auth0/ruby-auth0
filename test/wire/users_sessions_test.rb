@@ -17,6 +17,7 @@ class UsersSessionsWireTest < WireMockTestCase
 
     result = @client.users.sessions.list(
       user_id: "user_id",
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

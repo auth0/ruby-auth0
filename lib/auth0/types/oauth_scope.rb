@@ -9,6 +9,10 @@ module Auth0
       READ_ACTIONS = "read:actions"
       UPDATE_ACTIONS = "update:actions"
       DELETE_ACTIONS = "delete:actions"
+      CREATE_AGENTS = "create:agents"
+      READ_AGENTS = "read:agents"
+      UPDATE_AGENTS = "update:agents"
+      DELETE_AGENTS = "delete:agents"
       READ_ANOMALY_BLOCKS = "read:anomaly_blocks"
       DELETE_ANOMALY_BLOCKS = "delete:anomaly_blocks"
       READ_ATTACK_PROTECTION = "read:attack_protection"
@@ -241,6 +245,10 @@ module Auth0
       READ_VDCS_TEMPLATES = "read:vdcs_templates"
       UPDATE_VDCS_TEMPLATES = "update:vdcs_templates"
       DELETE_VDCS_TEMPLATES = "delete:vdcs_templates"
+      CREATE_ORGANIZATION_CLIENTS = "create:organization_clients"
+      READ_ORGANIZATION_CLIENTS = "read:organization_clients"
+      UPDATE_ORGANIZATION_CLIENTS = "update:organization_clients"
+      DELETE_ORGANIZATION_CLIENTS = "delete:organization_clients"
     end
   end
 end

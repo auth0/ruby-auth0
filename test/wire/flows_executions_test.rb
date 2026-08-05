@@ -17,6 +17,7 @@ class FlowsExecutionsWireTest < WireMockTestCase
 
     result = @client.flows.executions.list(
       flow_id: "flow_id",
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

@@ -10,6 +10,8 @@ module Auth0
           field :from, -> { String }, optional: true, nullable: false
 
           field :take, -> { Integer }, optional: true, nullable: false
+
+          field :q, -> { String }, optional: true, nullable: false
         end
       end
     end

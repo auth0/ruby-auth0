@@ -14,7 +14,7 @@ module Auth0
 
       field :time, -> { String }, optional: true, nullable: false
 
-      field :data, -> { String }, optional: true, nullable: false
+      field :data, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
     end
   end
 end

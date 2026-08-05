@@ -26,6 +26,8 @@ module Auth0
       # @option params [Integer, nil] :page
       # @option params [Boolean, nil] :include_totals
       # @option params [String, nil] :name_filter
+      # @option params [Auth0::Types::RoleTypeEnum, nil] :type
+      # @option params [String, nil] :owner_id
       #
       # @return [Auth0::Types::ListRolesOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
@@ -35,6 +37,8 @@ module Auth0
         query_params["page"] = params.fetch(:page, 0)
         query_params["include_totals"] = params.fetch(:include_totals, true)
         query_params["name_filter"] = params[:name_filter] if params.key?(:name_filter)
+        query_params["type"] = params[:type] if params.key?(:type)
+        query_params["owner_id"] = params[:owner_id] if params.key?(:owner_id)
 
         Auth0::Internal::OffsetItemIterator.new(
           initial_page: query_params["page"],

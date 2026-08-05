@@ -16,6 +16,7 @@ class ConnectionsWireTest < WireMockTestCase
     test_id = "connections.list.0"
 
     result = @client.connections.list(
+      include_totals: true,
       from: "from",
       take: 1,
       strategy: ["ad"],

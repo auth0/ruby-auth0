@@ -16,6 +16,7 @@ class ClientGrantsWireTest < WireMockTestCase
     test_id = "client_grants.list.0"
 
     result = @client.client_grants.list(
+      include_totals: true,
       from: "from",
       take: 1,
       audience: "audience",

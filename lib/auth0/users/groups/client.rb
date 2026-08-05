@@ -23,6 +23,7 @@ module Auth0
         # @option params [String] :id
         # @option params [String, nil] :fields
         # @option params [Boolean, nil] :include_fields
+        # @option params [Boolean, nil] :include_totals
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         #
@@ -32,6 +33,7 @@ module Auth0
           query_params = {}
           query_params["fields"] = params[:fields] if params.key?(:fields)
           query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
+          query_params["include_totals"] = params.fetch(:include_totals, true)
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
 

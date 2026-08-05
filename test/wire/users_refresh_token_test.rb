@@ -17,6 +17,7 @@ class UsersRefreshTokenWireTest < WireMockTestCase
 
     result = @client.users.refresh_token.list(
       user_id: "user_id",
+      include_totals: true,
       from: "from",
       take: 1,
       request_options: {

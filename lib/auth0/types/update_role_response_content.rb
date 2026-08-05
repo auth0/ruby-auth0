@@ -8,6 +8,10 @@ module Auth0
       field :name, -> { String }, optional: true, nullable: false
 
       field :description, -> { String }, optional: true, nullable: false
+
+      field :type, -> { Auth0::Types::RoleTypeEnum }, optional: true, nullable: false
+
+      field :owner_id, -> { String }, optional: true, nullable: false
     end
   end
 end

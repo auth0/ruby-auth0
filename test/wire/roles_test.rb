@@ -20,6 +20,8 @@ class RolesWireTest < WireMockTestCase
       page: 1,
       include_totals: true,
       name_filter: "name_filter",
+      type: "tenant",
+      owner_id: "owner_id",
       request_options: {
         additional_headers: {
           "X-Test-Id" => "roles.list.0"

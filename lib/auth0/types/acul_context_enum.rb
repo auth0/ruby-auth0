@@ -7,6 +7,7 @@ module Auth0
 
       BRANDING_SETTINGS = "branding.settings"
       BRANDING_THEMES_DEFAULT = "branding.themes.default"
+      COUNTRY_CODES = "country_codes"
       CLIENT_LOGO_URI = "client.logo_uri"
       CLIENT_DESCRIPTION = "client.description"
       ORGANIZATION_DISPLAY_NAME = "organization.display_name"

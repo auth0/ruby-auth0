@@ -15,7 +15,7 @@ class EventStreamsDeliveriesWireTest < WireMockTestCase
   def test_event_streams_deliveries_list_with_wiremock
     test_id = "event_streams.deliveries.list.0"
 
-    @client.event_streams.deliveries.list(
+    result = @client.event_streams.deliveries.list(
       id: "id",
       statuses: "statuses",
       event_types: "event_types",
@@ -29,6 +29,7 @@ class EventStreamsDeliveriesWireTest < WireMockTestCase
         }
       }
     )
+    result.pages.next_page
 
     verify_request_count(
       test_id: test_id,

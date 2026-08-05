@@ -13,6 +13,9 @@ module Auth0
 
         # Retrieve all permissions associated with the user.
         #
+        # **Note**: Returns only permissions from direct assignments and directly assigned roles. For permissions a user
+        # has via group-based role assignments, use `GET /api/v2/users/{id}/effective-permissions`.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url

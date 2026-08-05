@@ -26,7 +26,7 @@ module Auth0
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         #
-        # @return [Array[Auth0::Types::EventStreamDelivery]]
+        # @return [Auth0::Types::ListEventStreamDeliveriesResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           query_params = {}
@@ -37,23 +37,33 @@ module Auth0
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
 
-          request = Auth0::Internal::JSON::Request.new(
-            base_url: request_options[:base_url],
-            method: "GET",
-            path: "event-streams/#{URI.encode_uri_component(params[:id].to_s)}/deliveries",
-            query: query_params,
-            request_options: request_options
-          )
-          begin
-            response = @client.send(request)
-          rescue Net::HTTPRequestTimeout
-            raise Auth0::Errors::TimeoutError
+          Auth0::Internal::CursorItemIterator.new(
+            cursor_field: :next_,
+            item_field: :deliveries,
+            initial_cursor: query_params["from"]
+          ) do |next_cursor|
+            query_params["from"] = next_cursor
+            request = Auth0::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
+              method: "GET",
+              path: "event-streams/#{URI.encode_uri_component(params[:id].to_s)}/deliveries",
+              query: query_params,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Auth0::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              parsed_response = Auth0::Types::ListEventStreamDeliveriesResponseContent.load(response.body)
+              [parsed_response, response]
+            else
+              error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
           end
-          code = response.code.to_i
-          return if code.between?(200, 299)
-
-          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
         end
 
         # @param request_options [Hash]

@@ -28,6 +28,11 @@ module Auth0
       @actions ||= Auth0::Actions::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::Agents::Client]
+    def agents
+      @agents ||= Auth0::Agents::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Branding::Client]
     def branding
       @branding ||= Auth0::Branding::Client.new(client: @raw_client)
