@@ -1,6 +1,6 @@
 # V6 Migration Guide
 
-A guide to migrating from `ruby-auth0` (v5.x) to `auth0-ruby-sdk` (v6.x).
+A guide to migrating from v5.x to v6.x of the `auth0` gem.
 
 - [Overview](#overview)
   - [Authentication API](#authentication-api)

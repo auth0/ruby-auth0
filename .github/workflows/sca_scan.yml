@@ -1,9 +1,9 @@
 name: SCA
 on:
   push:
-    branches: ["master", "v6"]
+    branches: ["master", "v5"]
   pull_request:
-    branches: ["master", "v6"]
+    branches: ["master", "v5"]
 jobs:
   snyk-cli:
     uses: auth0/devsecops-tooling/.github/workflows/sca-scan.yml@main
