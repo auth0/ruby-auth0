@@ -1,0 +1,62 @@
+# Specify files that shouldn't be modified by Fern
+
+# Custom SDK files
+lib/auth0/auth_client.rb
+lib/auth0/exception.rb
+lib/auth0/algorithm.rb
+lib/auth0/client_assertion.rb
+lib/auth0/version.rb
+lib/auth0/environment.rb
+lib/auth0/mixins.rb
+lib/auth0/mixins/
+lib/auth0/api/
+lib/auth0/errors/
+lib/auth0_client.rb
+
+# Internal infrastructure (custom HTTP, iterators, JSON, multipart)
+lib/auth0/internal/
+
+# Telemetry customization
+lib/auth0/internal/http/raw_client.rb
+
+# Packaging & build
+auth0.gemspec
+custom.gemspec.rb
+Gemfile
+Gemfile.custom
+Gemfile.lock
+Rakefile
+
+# Project configuration
+.gitignore
+.version
+.shiprc
+.snyk
+.rubocop.yml
+codecov.yml
+LICENSE
+
+# Documentation
+README.md
+CHANGELOG.md
+EXAMPLES.md
+DEVELOPMENT.md
+DEPLOYMENT.md
+CODE_OF_CONDUCT.md
+RUBYGEM.md
+v6_MIGRATION_GUIDE.md
+reference.md
+
+# GitHub (entire directory - workflows, actions, templates, CODEOWNERS)
+.github/
+
+# Tests (custom only - Fern owns test/wire/)
+test/unit/
+test/test_helper.rb
+test/custom.test.rb
+
+# Examples
+examples/
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes

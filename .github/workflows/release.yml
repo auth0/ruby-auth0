@@ -17,7 +17,7 @@ jobs:
   rl-scanner:
     uses: ./.github/workflows/rl-scanner.yml
     with:
-      ruby-version: 3.2
+      ruby-version: 3.3
     secrets:
       RLSECURE_LICENSE: ${{ secrets.RLSECURE_LICENSE }}
       RLSECURE_SITE_KEY: ${{ secrets.RLSECURE_SITE_KEY }}
@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/ruby-release.yml
     needs: rl-scanner
     with:
-      ruby-version: 3.2
+      ruby-version: 3.3
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       rubygems-token: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}

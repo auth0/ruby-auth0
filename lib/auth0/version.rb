@@ -1,4 +1,5 @@
-# current version of gem
+# frozen_string_literal: true
+
 module Auth0
-  VERSION = '5.20.0'.freeze
+  VERSION = "6.0.0.beta.5"
 end

@@ -1,25 +1,24 @@
-# Examples using ruby-auth0
+# Examples
 
 ## Build a URL to Universal Login Page
 
 ```ruby
 require 'auth0'
 
-client = Auth0Client.new(
+client = Auth0::Client.new(
   client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
   client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
   domain: ENV['AUTH0_RUBY_DOMAIN'],
 )
 
-client.authorize_url 'http://localhost:3000'
+client.authorization_url 'http://localhost:3000'
 
-> => #<URI::HTTPS https://YOUR_DOMAIN/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000>
-
+# => #<URI::HTTPS https://YOUR_DOMAIN/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000>
 ```
 
 ## Management API Client
 
-As a simple example of how to get started with the management API, we'll create an admin route to point to a list of all users from Auth0:
+As a simple example of how to get started with the Management API, we'll create an admin route to point to a list of all users from Auth0:
 
 ```ruby
 # config/routes.rb
@@ -39,26 +38,24 @@ require 'auth0'
 class AllUsersController < ApplicationController
   # Get all users from Auth0 with "auth0" in their email.
   def index
-    @params = {
+    @users = auth0_client.users.list(
       q: "email:*auth0*",
-      fields: 'email,user_id,name',
+      fields: "email,user_id,name",
       include_fields: true,
       page: 0,
       per_page: 50
-    }
-    @users = auth0_client.users @params
+    )
   end
 
   private
 
   # Setup the Auth0 API connection.
   def auth0_client
-    @auth0_client ||= Auth0Client.new(
+    @auth0_client ||= Auth0::Client.new(
       client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
       client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
       domain: ENV['AUTH0_RUBY_DOMAIN'],
-      api_version: 2,
-      timeout: 15 # optional, defaults to 10
+      management_timeout: 15 # optional, defaults to 60
     )
   end
 end
@@ -71,11 +68,59 @@ Finally, we'll add a view to display the results:
 ```ruby
 # app/views/all_users/index.html.erb
 <h1>Users</h1>
-<%= debug @params %>
 <%= debug @users %>
 ```
 
-This should show the parameters passed to the `users` method and a list of users that matched the query (or an empty array if none).
+### More Management API examples
+
+```ruby
+# Create a user
+client.users.create(
+  connection: 'Username-Password-Authentication',
+  email: 'newuser@example.com',
+  password: 'SecurePassword123!'
+)
+
+# Get a user by ID
+user = client.users.get(id: 'auth0|123456')
+
+# Update a user
+client.users.update(
+  id: 'auth0|123456',
+  user_metadata: { preferred_language: 'en' }
+)
+
+# Delete a user
+client.users.delete(id: 'auth0|123456')
+
+# List roles
+client.roles.list(per_page: 10)
+
+# Create a role
+client.roles.create(name: 'editor', description: 'Content editor')
+
+# List connections
+client.connections.list(per_page: 10)
+
+# Access the underlying Auth0::Management instance directly
+management = client.management
+management.users.list(per_page: 5)
+```
+
+### Using Auth0::Management directly
+
+If you only need the Management API and already have a token, you can skip `Auth0::Client` entirely:
+
+```ruby
+management = Auth0::Management.new(
+  token: ENV['AUTH0_MANAGEMENT_API_TOKEN'],
+  base_url: 'https://YOUR_DOMAIN.auth0.com/api/v2'
+)
+
+management.users.list(q: 'email:*auth0*', per_page: 10)
+management.roles.create(name: 'admin', description: 'Administrator')
+management.organizations.list(take: 20)
+```
 
 ## Organizations
 
@@ -90,7 +135,7 @@ Configure the Authentication API client and pass your Organization ID or name to
 ```ruby
 require 'auth0'
 
-@auth0_client ||= Auth0Client.new(
+@auth0_client ||= Auth0::Client.new(
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_SECRET}',
   domain: '{YOUR_TENANT}.auth0.com',
@@ -109,7 +154,7 @@ Auth0 Organizations allow users to be invited using emailed links, which will di
 ```ruby
 require 'auth0'
 
-@auth0_client ||= Auth0Client.new(
+@auth0_client ||= Auth0::Client.new(
   client_id: '{YOUR_APPLICATION_CLIENT_ID}',
   client_secret: '{YOUR_APPLICATION_CLIENT_ID}',
   domain: '{YOUR_TENANT}.auth0.com',
@@ -122,6 +167,34 @@ universal_login_url = @auth0_client.authorization_url("https://{YOUR_APPLICATION
 })
 
 # redirect_to universal_login_url
+```
+
+### Managing Organizations via Management API
+
+```ruby
+# List organizations
+client.organizations.list(take: 50)
+
+# Create an organization
+org = client.organizations.create(
+  name: 'acme-corp',
+  display_name: 'Acme Corporation'
+)
+
+# Get an organization by name
+org = client.organizations.get_by_name(name: 'acme-corp')
+
+# Add members to an organization
+client.organizations.members.create(
+  id: org[:id],
+  members: ['auth0|user_id_1', 'auth0|user_id_2']
+)
+
+# List organization members
+client.organizations.members.list(id: org[:id], take: 50)
+
+# Delete an organization
+client.organizations.delete(id: org[:id])
 ```
 
 ## ID Token Validation
@@ -172,7 +245,7 @@ end
 
 ### Organization claim validation
 
-If an `org_id` or `org_name` claim is present in the access   token, then the claim should be validated by the API to ensure that the value received is expected or known.
+If an `org_id` or `org_name` claim is present in the access token, then the claim should be validated by the API to ensure that the value received is expected or known.
 
 In particular:
 
@@ -208,7 +281,7 @@ Specify the client assertion key when creating the Auth0 client as in the follow
 key_string = File.read 'key.pem'
 key = OpenSSL::PKey::RSA.new key_string
 
-client = Auth0Client.new(
+client = Auth0::Client.new(
   domain: 'AUTH0_DOMAIN',
   client_id: 'AUTH0_CLIENT_ID',
   client_assertion_signing_key: key,
@@ -220,3 +293,20 @@ Some notes:
 * If both `client_secret` and `client_assertion_signing_key` are specified, `client_assertion_signing_key` takes precedence
 * `client_assertion_signing_alg` is optional and defaults to `RS256` if omitted
 * Only `RS256`, `RS384` and `PS256` algorithms are supported by Auth0 currently
+
+## Custom token provider
+
+If you have your own mechanism for obtaining Management API tokens, you can provide a custom token provider:
+
+```ruby
+client = Auth0::Client.new(
+  domain: ENV['AUTH0_RUBY_DOMAIN'],
+  token_provider: -> {
+    # Fetch a token from your vault, cache, or other source
+    MyVault.get_auth0_token
+  }
+)
+
+# The token provider will be called whenever a new token is needed
+client.users.list(per_page: 10)
+```

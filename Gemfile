@@ -1,18 +1,23 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-# Specify your gem's dependencies in auth0.gemspec
+source "https://rubygems.org"
+
 gemspec
 
-group :development do
-  gem 'terminal-notifier-guard', require: false unless ENV['CIRCLECI']
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
+group :test, :development do
+  gem "rake", "~> 13.0"
+
+  gem "minitest", "~> 5.16"
+  gem "minitest-rg"
+
+  gem "rubocop", "~> 1.21"
+  gem "rubocop-minitest"
+
+  gem "pry"
+
+  gem "webmock"
 end
 
-group :test do
-  gem 'webmock', require: false
-  gem 'vcr', require: false
-  gem 'simplecov-cobertura'
-  gem 'timecop', require: false
-  gem 'pp'
-end
+# Load custom Gemfile configuration if it exists
+custom_gemfile = File.join(__dir__, "Gemfile.custom")
+eval_gemfile(custom_gemfile) if File.exist?(custom_gemfile)

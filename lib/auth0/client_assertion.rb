@@ -13,9 +13,9 @@ module Auth0
     # @param client_secret [string] The client secret
     # @param client_assertion_signing_key [PKey] The key used to sign the client assertion JWT
     # @param client_assertion_signing_alg [string] The algorithm used when signing the client assertion JWT
-    def populate_client_assertion_or_secret(hash, 
+    def populate_client_assertion_or_secret(hash,
       domain: @domain,
-      client_id: @client_id, 
+      client_id: @client_id,
       client_secret: @client_secret,
       client_assertion_signing_key: @client_assertion_signing_key,
       client_assertion_signing_alg: @client_assertion_signing_alg)

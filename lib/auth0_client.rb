@@ -1,3 +1,6 @@
-# This class is made for backward compatibility of gem
-class Auth0Client < Auth0::Client
-end
+# frozen_string_literal: true
+
+require "auth0"
+
+# Backward compatibility
+class Auth0Client < Auth0::Client; end

@@ -1,10 +1,88 @@
-inherit_from: .rubocop_todo.yml
-require:
-  - rubocop-rails
-Rails:
-  Enabled: true
+plugins:
+  - rubocop-minitest
+
 AllCops:
- Exclude:
-   - bin/**/*
-   - vendor/**/*
-   - auth0.gemspec
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  # Files ported verbatim from the legacy ruby-auth0 SDK (authentication API).
+  # Excluded to preserve exact compatibility with the original source.
+  Exclude:
+    - "examples/**/*"
+    - "lib/auth0/exception.rb"
+    - "lib/auth0/mixins/access_token_struct.rb"
+    - "lib/auth0/mixins/api_token_struct.rb"
+    - "lib/auth0/mixins/permission_struct.rb"
+    - "lib/auth0/client_assertion.rb"
+    - "lib/auth0/mixins/headers.rb"
+    - "lib/auth0/mixins/httpproxy.rb"
+    - "lib/auth0/mixins/token_management.rb"
+    - "lib/auth0/mixins/validation.rb"
+    - "lib/auth0/algorithm.rb"
+    - "lib/auth0/api/authentication_endpoints.rb"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: normalcase
+
+Style/Documentation:
+  Enabled: false
+
+Style/OneClassPerFile:
+  Exclude:
+    - "test/**/*"
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Minitest/MultipleAssertions:
+  Enabled: false
+
+Minitest/UselessAssertion:
+  Enabled: false
+
+# Dynamic snippets are code samples for documentation, not standalone Ruby files.
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - "dynamic-snippets/**/*"
+
+Layout/FirstHashElementIndentation:
+  Exclude:
+    - "dynamic-snippets/**/*"

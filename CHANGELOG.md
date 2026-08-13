@@ -1,5 +1,37 @@
 # Change Log
 
+## [v6.0.0.beta.5](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.5) (2026-08-05)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.4...v6.0.0.beta.5)
+
+**Added**
+- feat: add Agents and Organization Clients clients, Organization Level Roles, and Org-to-App Entitlement [\#777](https://github.com/auth0/ruby-auth0/pull/777) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+## [v6.0.0.beta.4](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.4) (2026-07-22)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.3...v6.0.0.beta.4)
+
+**Added**
+- feat: add Organization Role Members, Connection event streams, and Token Vault access grants [\#762](https://github.com/auth0/ruby-auth0/pull/762) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Events and Rate Limit Policies clients, remove Federated Connections Tokensets [\#767](https://github.com/auth0/ruby-auth0/pull/767) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Cross App Access and Identity Assertion grants, Branding Theme Identifiers, and Session actor [\#771](https://github.com/auth0/ruby-auth0/pull/771) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+**Breaking Changes**
+- Rename `ConnectionAttributeIdentifier` to `EmailAttributeIdentifier`; the `identifier` field on email, phone, and username attributes is now `EmailAttributeIdentifier`, `PhoneAttributeIdentifier`, and `UsernameAttributeIdentifier` respectively [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- Replace the `none` member on `PhoneProviderProtectionBackoffStrategyEnum` with `default` [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- `start`, `limit`, and `total` on `ListRolesOffsetPaginatedResponseContent` are now required [\#762](https://github.com/auth0/ruby-auth0/pull/762)
+- Remove the Federated Connections Tokensets client (`users.federated_connections_tokensets`) and the `FederatedConnectionTokenSet` type [\#767](https://github.com/auth0/ruby-auth0/pull/767)
+
+## [v6.0.0.beta.3](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.3) (2026-06-29)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.2...v6.0.0.beta.3)
+
+**Added**
+- feat: add Phone Provider Protection, Token Vault IP allowlist, and Cross App Access requesting app [\#758](https://github.com/auth0/ruby-auth0/pull/758) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+## [v6.0.0.beta.2](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.2) (2026-06-12)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.1...v6.0.0.beta.2)
+
+**Added**
+- feat: add Tenant Security Headers and Connection Session Expiry; remove Branding Phone Display [\#751](https://github.com/auth0/ruby-auth0/pull/751) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v5.20.0](https://github.com/auth0/ruby-auth0/tree/v5.20.0) (2026-05-29)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.19.0...v5.20.0)
 
@@ -12,6 +44,13 @@
 **Security**
 - chore(deps): bump jwt from 3.1.2 to 3.2.0 [\#745](https://github.com/auth0/ruby-auth0/pull/745) ([dependabot[bot]](https://github.com/apps/dependabot))
 
+## [v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.1) (2026-05-28)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.0...v6.0.0.beta.1)
+
+**Added**
+- feat: Events API, Rate Limit Policies, refresh token revocation, FedCM, DPoP GA [\#732](https://github.com/auth0/ruby-auth0/pull/732) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add SCIM Groups RBAC, User Effective Permissions/Roles, and Tenant Country Codes [\#742](https://github.com/auth0/ruby-auth0/pull/742) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v5.19.0](https://github.com/auth0/ruby-auth0/tree/v5.19.0) (2026-05-08)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v5.19.0)
 
@@ -20,6 +59,36 @@
 
 **Fixed**
 - Ship only runtime files in packaged gem to eliminate scanner false positives [\#721](https://github.com/auth0/ruby-auth0/pull/721) ([tmertens](https://github.com/tmertens))
+
+## 6.0.0-beta.0 (2026-04-30)
+
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v6.0.0.beta.0)
+
+This beta release completely rewrites the Management API client using [Fern](https://buildwithfern.com/) code generation from the Auth0 OpenAPI specification. The Authentication API is ported from v5 and maintains full feature parity.
+
+**Breaking Changes**
+- Management API client rewritten using Fern code generation
+- `Auth0Client` replaced by `Auth0::Client` (unified client for Auth + Management APIs)
+- Management API methods accessed via namespaced sub-clients (`client.users.list` instead of `client.users`)
+- API methods return strongly-typed response objects instead of raw hashes
+- List methods return paginated iterators instead of arrays
+- Non-2xx responses raise typed exceptions (`Auth0::Errors::NotFoundError`, etc.) instead of returning error hashes
+- `rest-client` dependency removed; uses `net/http` internally
+- Minimum Ruby version raised to 3.3
+
+**Added**
+- Auto-generated Management API with complete endpoint coverage from Auth0 OpenAPI spec
+- Automatic OAuth 2.0 client credentials token management
+- Built-in retry with exponential backoff for rate-limited (429) responses
+- Configurable timeouts per request via `request_options`
+- Offset-based pagination with `each` iterators for all list endpoints
+- Telemetry headers on Management API requests
+- Wire tests (WireMock-based) for all Management API endpoints
+- New examples (Sinatra API and Rails 7 API)
+- `v6_MIGRATION_GUIDE.md` for upgrading from v5
+
+**Unchanged**
+- Authentication API (login, signup, token exchange, passwordless, MFA) — ported from v5 with identical interface
 
 ## [v5.18.1](https://github.com/auth0/ruby-auth0/tree/v5.18.1) (2026-03-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.0...v5.18.1)

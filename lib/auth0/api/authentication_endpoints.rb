@@ -59,7 +59,7 @@ module Auth0
 
         request_params = {
           grant_type: 'authorization_code',
-          client_id: client_id,          
+          client_id: client_id,
           code: code,
           redirect_uri: redirect_uri
         }
@@ -378,7 +378,7 @@ module Auth0
         }.merge(parameters.fetch(:additional_parameters, {}))
 
         populate_client_assertion_or_secret(request_params)
-        
+
         request_with_retry(:post_form, '/oauth/par', request_params, {})
       end
 

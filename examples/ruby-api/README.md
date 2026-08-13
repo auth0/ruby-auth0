@@ -1,24 +1,44 @@
-# Auth0 + Ruby API Seed
+# Auth0 Ruby API Example (Sinatra)
 
-This is the seed project you need to use if you're going to create a Ruby API. You'll mostly use this API either for a SPA or a Mobile app.
+A minimal Sinatra API demonstrating authentication and management API usage with the Auth0 Ruby SDK.
 
-# Running the example
+## Setup
 
-In order to run the example you need to have ruby installed.
+1. Copy the environment file and fill in your Auth0 credentials:
 
-You also need to set the ClientSecret and ClientId for your Auth0 app as enviroment variables with the following names respectively: AUTH0_CLIENT_SECRET and AUTH0_CLIENT_ID.
+   ```bash
+   cp .env.example .env
+   ```
 
-For that, if you just create a file named .env in the directory and set the values like the following, the app will just work:
+2. Install dependencies:
 
-````bash
-# .env file
-AUTH0_CLIENT_SECRET=myCoolSecret
-AUTH0_CLIENT_ID=myCoolClientId
-````
+   ```bash
+   bundle install
+   ```
 
-Once you've set those 2 enviroment variables, run `bundle install`, then run `rackup -p 3001` and try calling [http://localhost:3001/ping](http://localhost:3001/ping)
+3. Start the server:
 
-You can then try to do a GET to [http://localhost:3001/secured/ping](http://localhost:3001/secured/ping) which will throw an error if you don't send the JWT in the header.
+   ```bash
+   bundle exec rackup -p 3001
+   ```
 
-__Note:__ if you need to enable cross-origin resource sharing, check out the [sinatra-cors_origin](
-https://github.com/britg/sinatra-cross_origin) gem.
+## Endpoints
+
+| Endpoint | Auth Required | Description |
+|----------|--------------|-------------|
+| `GET /api/public` | No | Returns a public message |
+| `GET /api/private` | Yes | Returns a message with the authenticated user's `sub` claim |
+| `GET /api/users` | Yes | Lists users from the Management API via `Auth0::Client` |
+
+## Testing
+
+```bash
+# Public endpoint
+curl http://localhost:3001/api/public
+
+# Private endpoint (replace TOKEN with a valid Auth0 access token)
+curl -H "Authorization: Bearer TOKEN" http://localhost:3001/api/private
+
+# Management API endpoint
+curl -H "Authorization: Bearer TOKEN" http://localhost:3001/api/users
+```
