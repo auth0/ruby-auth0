@@ -4,7 +4,7 @@ Ruby API client for the [Auth0](https://auth0.com) platform.
 
 [![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
 [![codecov](https://codecov.io/gh/auth0/ruby-auth0/branch/master/graph/badge.svg)](https://codecov.io/gh/auth0/ruby-auth0)
-[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](https://www.rubydoc.info/gems/auth0)
 [![MIT licensed](https://img.shields.io/dub/l/vibe-d.svg?style=flat)](https://github.com/auth0/ruby-auth0/blob/master/LICENSE)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/auth0/ruby-auth0)
 
