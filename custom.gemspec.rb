@@ -8,7 +8,7 @@
 
 def add_custom_gemspec_data(spec)
   spec.add_dependency "rest-client", "~> 2.1"
-  spec.add_dependency "jwt", "~> 2.7"
+  spec.add_dependency "jwt", ">= 2.7", "< 4.0"
   spec.add_dependency "zache", "~> 0.12"
   spec.add_dependency "addressable", "~> 2.8"
   spec.add_dependency "retryable", "~> 3.0"

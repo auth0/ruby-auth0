@@ -32,12 +32,33 @@
 **Added**
 - feat: add Tenant Security Headers and Connection Session Expiry; remove Branding Phone Display [\#751](https://github.com/auth0/ruby-auth0/pull/751) ([fern-api[bot]](https://github.com/apps/fern-api))
 
+## [v5.20.0](https://github.com/auth0/ruby-auth0/tree/v5.20.0) (2026-05-29)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.19.0...v5.20.0)
+
+**Changed**
+- Support jwt gem 3.x alongside 2.x [\#726](https://github.com/auth0/ruby-auth0/pull/726) ([dan98765](https://github.com/dan98765))
+
+**Fixed**
+- Fix YARD comment with extra space [\#637](https://github.com/auth0/ruby-auth0/pull/637) ([qtro](https://github.com/qtro))
+
+**Security**
+- chore(deps): bump jwt from 3.1.2 to 3.2.0 [\#745](https://github.com/auth0/ruby-auth0/pull/745) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.1) (2026-05-28)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.0...v6.0.0.beta.1)
 
 **Added**
 - feat: Events API, Rate Limit Policies, refresh token revocation, FedCM, DPoP GA [\#732](https://github.com/auth0/ruby-auth0/pull/732) ([fern-api[bot]](https://github.com/apps/fern-api))
 - feat: add SCIM Groups RBAC, User Effective Permissions/Roles, and Tenant Country Codes [\#742](https://github.com/auth0/ruby-auth0/pull/742) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+## [v5.19.0](https://github.com/auth0/ruby-auth0/tree/v5.19.0) (2026-05-08)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.18.1...v5.19.0)
+
+**Added**
+- Make Auth0::Client#get_token public [\#725](https://github.com/auth0/ruby-auth0/pull/725) ([ttstarck](https://github.com/ttstarck))
+
+**Fixed**
+- Ship only runtime files in packaged gem to eliminate scanner false positives [\#721](https://github.com/auth0/ruby-auth0/pull/721) ([tmertens](https://github.com/tmertens))
 
 ## 6.0.0-beta.0 (2026-04-30)
 
