@@ -4,6 +4,8 @@ on:
   pull_request:
     types:
       - closed
+      - opened # TEMP: test rl-scanner on PR
+      - synchronize # TEMP: test rl-scanner on PR
   workflow_dispatch:
 
 permissions:
