@@ -3,22 +3,14 @@
 Ruby API client for the [Auth0](https://auth0.com) platform.
 
 [![Gem Version](https://badge.fury.io/rb/auth0.svg)](http://badge.fury.io/rb/auth0)
+[![codecov](https://codecov.io/gh/auth0/ruby-auth0/branch/master/graph/badge.svg)](https://codecov.io/gh/auth0/ruby-auth0)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/auth0/ruby-auth0/master/frames)
 [![MIT licensed](https://img.shields.io/dub/l/vibe-d.svg?style=flat)](https://github.com/auth0/ruby-auth0/blob/master/LICENSE)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/auth0/ruby-auth0)
 
 <div>
-  <a href="#documentation">Documentation</a> - <a href="#getting-started">Getting started</a> - <a href="#api-reference">API reference</a> - <a href="#feedback">Feedback</a>
+📚 <a href="#documentation">Documentation</a> - 🚀 <a href="#getting-started">Getting started</a> - 💻 <a href="#api-reference">API reference</a> - 💬 <a href="#feedback">Feedback</a>
 </div>
-
-> [!NOTE]
-> **[v6.0.0.beta.1](https://github.com/auth0/ruby-auth0/releases/tag/v6.0.0.beta.1) is now available!** This release features a completely rewritten Management API client, auto-generated from the Auth0 OpenAPI spec using [Fern](https://buildwithfern.com/), with strongly-typed responses, built-in pagination, and automatic token management.
->
-> ```bash
-> gem install auth0 --pre
-> ```
->
-> We'd love your feedback - please [open an issue](https://github.com/auth0/ruby-auth0/issues/new) if you encounter any problems.
->
-> 📖 [Migration Guide](https://github.com/auth0/ruby-auth0/blob/v6/v6_MIGRATION_GUIDE.md) ・ [Changelog](https://github.com/auth0/ruby-auth0/blob/v6/CHANGELOG.md) ・ [API Reference](https://github.com/auth0/ruby-auth0/blob/v6/reference.md)
 
 ## Documentation
 
