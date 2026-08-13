@@ -34,7 +34,7 @@ jobs:
       - name: Configure Ruby
         uses: ./.github/actions/setup
         with:
-          ruby-version: ${{ inputs.ruby-version }}
+          ruby: ${{ inputs.ruby-version }}
 
       - name: Build RubyGems
         shell: bash
