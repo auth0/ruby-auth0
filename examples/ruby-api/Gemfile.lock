@@ -1,9 +1,9 @@
 PATH
   remote: ../..
   specs:
-    auth0 (0.0.0)
+    auth0 (6.0.0.beta.5)
       addressable (~> 2.8)
-      jwt (~> 2.7)
+      jwt (>= 2.7, < 4.0)
       rest-client (~> 2.1)
       retryable (~> 3.0)
       zache (~> 0.12)
@@ -19,7 +19,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.1.6)
       domain_name (~> 0.5)
-    jwt (2.10.2)
+    jwt (2.10.3)
       base64
     logger (1.7.0)
     mime-types (3.7.0)
