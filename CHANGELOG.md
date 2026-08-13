@@ -1,5 +1,35 @@
 # Change Log
 
+## [v6.0.0](https://github.com/auth0/ruby-auth0/tree/v6.0.0) (2026-08-13)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.20.0...v6.0.0)
+
+Note: As this is a major release it is recommended to understand the **Breaking Changes** section before upgrading. The [v6 Migration Guide](v6_MIGRATION_GUIDE.md) contains detailed upgrade instructions.
+
+v6.0.0 is the first stable release of the v6 line. The Management API client is now generated from Auth0's OpenAPI specification via [Fern](https://buildwithfern.com/), with strongly-typed requests and responses, built-in pagination, and automatic token management through the unified `Auth0::Client`. The Authentication API is ported from v5 and maintains full feature parity.
+
+**Breaking Changes**
+- Management API client rewritten using Fern code generation
+- `Auth0Client` replaced by `Auth0::Client` (unified client for Authentication + Management APIs; `Auth0Client` remains as a backward-compatible alias)
+- Management API methods accessed via namespaced sub-clients (`client.users.list` instead of `client.users`)
+- Method names follow a consistent pattern (`list`, `create`, `get`, `update`, `delete`), and sub-resource operations moved to dedicated sub-clients
+- All Management API methods use keyword arguments instead of positional parameters
+- API methods return strongly-typed response objects instead of raw hashes
+- List methods return paginated iterators instead of arrays
+- Non-2xx responses raise typed exceptions (`Auth0::Errors::NotFoundError`, etc.) instead of returning error hashes
+- The `api_version` parameter has been removed (v6 supports Management API v2 only)
+- `rest-client` dependency removed; uses `net/http` internally
+- Minimum Ruby version raised to 3.3
+
+**Added**
+- Auto-generated Management API with complete endpoint coverage from Auth0's OpenAPI spec
+- Automatic OAuth 2.0 client credentials token management, with a new `token_provider` option for supplying tokens from an external source
+- Built-in retry with exponential backoff for transient failures (408, 429, 5xx)
+- Automatic pagination through iterator objects for all list endpoints
+- `v6_MIGRATION_GUIDE.md` for upgrading from v5
+
+**Unchanged**
+- Authentication API (login, signup, token exchange, passwordless, MFA)
+
 ## [v6.0.0.beta.5](https://github.com/auth0/ruby-auth0/tree/v6.0.0.beta.5) (2026-08-05)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0.beta.4...v6.0.0.beta.5)
 
