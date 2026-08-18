@@ -249,6 +249,8 @@ module Auth0
       READ_ORGANIZATION_CLIENTS = "read:organization_clients"
       UPDATE_ORGANIZATION_CLIENTS = "update:organization_clients"
       DELETE_ORGANIZATION_CLIENTS = "delete:organization_clients"
+      CREATE_NETWORK_ACL_KEYS = "create:network_acl_keys"
+      READ_NETWORK_ACL_KEYS = "read:network_acl_keys"
     end
   end
 end

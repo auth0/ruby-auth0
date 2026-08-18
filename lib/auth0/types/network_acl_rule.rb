@@ -9,6 +9,8 @@ module Auth0
 
       field :not_match, -> { Auth0::Types::NetworkACLMatch }, optional: true, nullable: false
 
+      field :match_all, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :scope, -> { Auth0::Types::NetworkACLRuleScopeEnum }, optional: false, nullable: false
     end
   end

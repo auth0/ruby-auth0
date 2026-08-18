@@ -50,6 +50,8 @@ module Auth0
 
       field :userinfo_endpoint, -> { String }, optional: true, nullable: false
 
+      field :use_oauth_spec_scope, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "useOauthSpecScope"
+
       field :attribute_map, -> { Auth0::Types::ConnectionAttributeMapOkta }, optional: true, nullable: false
 
       field :domain, -> { String }, optional: true, nullable: false

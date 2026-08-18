@@ -20,6 +20,11 @@ module Auth0
         @encryption ||= Auth0::Keys::Encryption::Client.new(client: @client)
       end
 
+      # @return [Auth0::NetworkACLs::Client]
+      def network_acls
+        @network_acls ||= Auth0::Keys::NetworkACLs::Client.new(client: @client)
+      end
+
       # @return [Auth0::Signing::Client]
       def signing
         @signing ||= Auth0::Keys::Signing::Client.new(client: @client)
