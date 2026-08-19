@@ -60,6 +60,7 @@ module Auth0
       WORDPRESS = "wordpress"
       YAHOO = "yahoo"
       YANDEX = "yandex"
+      NOTION_MCP = "notion-mcp"
       AUTH0ADLDAP = "auth0-adldap"
     end
   end

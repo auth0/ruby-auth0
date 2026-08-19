@@ -10,6 +10,8 @@ module Auth0
 
       field :allowed_strategies, -> { Internal::Types::Array[Auth0::Types::ClientMyOrganizationConfigurationAllowedStrategiesEnum] }, optional: false, nullable: false
 
+      field :third_party_client_access, -> { Auth0::Types::ClientMyOrganizationThirdPartyClientAccessConfiguration }, optional: true, nullable: false
+
       field :connection_deletion_behavior, -> { Auth0::Types::ClientMyOrganizationDeletionBehaviorEnum }, optional: false, nullable: false
 
       field :invitation_landing_client_id, -> { String }, optional: true, nullable: false
