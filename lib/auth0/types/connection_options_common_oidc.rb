@@ -47,6 +47,8 @@ module Auth0
       field :upstream_params, -> { Internal::Types::Hash[String, Auth0::Types::ConnectionUpstreamAdditionalProperties] }, optional: true, nullable: false
 
       field :userinfo_endpoint, -> { String }, optional: true, nullable: false
+
+      field :use_oauth_spec_scope, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "useOauthSpecScope"
     end
   end
 end

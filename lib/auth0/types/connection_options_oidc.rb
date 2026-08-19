@@ -48,6 +48,8 @@ module Auth0
 
       field :userinfo_endpoint, -> { String }, optional: true, nullable: false
 
+      field :use_oauth_spec_scope, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "useOauthSpecScope"
+
       field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :attribute_map, -> { Auth0::Types::ConnectionAttributeMapOidc }, optional: true, nullable: false
