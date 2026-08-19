@@ -1,5 +1,11 @@
 # Change Log
 
+## [v6.1.0](https://github.com/auth0/ruby-auth0/tree/v6.1.0) (2026-08-19)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0...v6.1.0)
+
+**Added**
+- feat: add Network ACL Key read/delete, Cross App Access resource app, third-party client access, and useOauthSpecScope [\#788](https://github.com/auth0/ruby-auth0/pull/788) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.0.0](https://github.com/auth0/ruby-auth0/tree/v6.0.0) (2026-08-13)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v5.20.0...v6.0.0)
 
