@@ -1,4 +1,5 @@
 require 'json'
+require_relative '../version'
 
 module Auth0
   module Mixins

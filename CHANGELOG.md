@@ -23,7 +23,7 @@ v6.0.0 is the first stable release of the v6 line. The Management API client is 
 - List methods return paginated iterators instead of arrays
 - Non-2xx responses raise typed exceptions (`Auth0::Errors::NotFoundError`, etc.) instead of returning error hashes
 - The `api_version` parameter has been removed (v6 supports Management API v2 only)
-- `rest-client` dependency removed; uses `net/http` internally
+- Management API client uses `net/http` internally. The Authentication API still uses `rest-client`
 - Minimum Ruby version raised to 3.3
 
 **Added**
@@ -109,7 +109,7 @@ This beta release completely rewrites the Management API client using [Fern](htt
 - API methods return strongly-typed response objects instead of raw hashes
 - List methods return paginated iterators instead of arrays
 - Non-2xx responses raise typed exceptions (`Auth0::Errors::NotFoundError`, etc.) instead of returning error hashes
-- `rest-client` dependency removed; uses `net/http` internally
+- Management API client uses `net/http` internally. The Authentication API still uses `rest-client`
 - Minimum Ruby version raised to 3.3
 
 **Added**
