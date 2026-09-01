@@ -34,36 +34,69 @@ describe Auth0::Internal::Http::RawClient do
         @response
       end
     end
-  end
 
-  it "returns a RawResponse that delegates code/body and exposes rate_limit" do
-    client = Auth0::Internal::Http::RawClient.new(base_url: "https://tenant.auth0.com", max_retries: 0)
-    http_response = TestRawClient::FakeHttpResponse.new(
-      code: "200",
-      body: "{}",
-      headers: {
-        "x-ratelimit-limit" => "100",
-        "x-ratelimit-remaining" => "12",
-        "x-ratelimit-reset" => "1724000000"
-      }
-    )
-    request = Auth0::Internal::JSON::Request.new(
-      base_url: nil,
-      method: "GET",
-      path: "users",
-      query: {},
-      request_options: {}
-    )
-
-    result = client.stub(:connect, TestRawClient::FakeConnection.new(http_response)) do
-      client.send(request)
+    def self.build_request
+      Auth0::Internal::JSON::Request.new(
+        base_url: nil,
+        method: "GET",
+        path: "users",
+        query: {},
+        request_options: {}
+      )
     end
 
-    _(result).must_be_instance_of Auth0::Internal::Http::RawResponse
-    _(result.code).must_equal "200"
-    _(result.body).must_equal "{}"
-    _(result.rate_limit.limit).must_equal 100
-    _(result.rate_limit.remaining).must_equal 12
-    _(result.rate_limit.reset).must_equal Time.at(1_724_000_000).utc
+    def self.build_response
+      FakeHttpResponse.new(
+        code: "200",
+        body: "{}",
+        headers: {
+          "x-ratelimit-limit" => "100",
+          "x-ratelimit-remaining" => "12",
+          "x-ratelimit-reset" => "1724000000"
+        }
+      )
+    end
+  end
+
+  def send_with(client, response)
+    client.stub(:connect, TestRawClient::FakeConnection.new(response)) do
+      client.send(TestRawClient.build_request)
+    end
+  end
+
+  it "invokes the rate limit handler with the parsed rate limit and returns the response unchanged" do
+    captured = nil
+    client = Auth0::Internal::Http::RawClient.new(
+      base_url: "https://tenant.auth0.com",
+      max_retries: 0,
+      rate_limit_handler: ->(rate_limit) { captured = rate_limit }
+    )
+    response = TestRawClient.build_response
+
+    result = send_with(client, response)
+
+    _(result).must_be_same_as response
+    _(captured).must_be_instance_of Auth0::Internal::Http::RateLimit
+    _(captured.limit).must_equal 100
+    _(captured.remaining).must_equal 12
+    _(captured.reset).must_equal Time.at(1_724_000_000).utc
+  end
+
+  it "returns the response unchanged when no handler is configured" do
+    client = Auth0::Internal::Http::RawClient.new(base_url: "https://tenant.auth0.com", max_retries: 0)
+    response = TestRawClient.build_response
+
+    _(send_with(client, response)).must_be_same_as response
+  end
+
+  it "does not let a handler error break the request" do
+    client = Auth0::Internal::Http::RawClient.new(
+      base_url: "https://tenant.auth0.com",
+      max_retries: 0,
+      rate_limit_handler: ->(_rate_limit) { raise "boom" }
+    )
+    response = TestRawClient.build_response
+
+    _(send_with(client, response)).must_be_same_as response
   end
 end
