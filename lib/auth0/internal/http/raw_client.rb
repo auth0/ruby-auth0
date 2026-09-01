@@ -45,7 +45,9 @@ module Auth0
         end
 
         # @param request [Auth0::Internal::Http::BaseRequest] The HTTP request.
-        # @return [HTTP::Response] The HTTP response.
+        # @return [Auth0::Internal::Http::RawResponse] The HTTP response, wrapped
+        #   to expose rate limit information via #rate_limit while delegating
+        #   #code / #body / header access to the underlying response.
         def send(request)
           url = build_url(request)
           attempt = 0
@@ -74,7 +76,10 @@ module Auth0
             attempt += 1
           end
 
-          response
+          # Wrap only the final response (retry logic above operates on the raw
+          # Net::HTTPResponse). Delegates #code/#body so existing callers are
+          # unaffected, and adds #rate_limit from the response headers.
+          RawResponse.new(response)
         end
 
         # Determines if a request should be retried based on the response status code.
