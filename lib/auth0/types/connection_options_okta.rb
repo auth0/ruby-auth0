@@ -18,6 +18,8 @@ module Auth0
 
       field :dpop_signing_alg, -> { Auth0::Types::ConnectionDpopSigningAlgEnum }, optional: true, nullable: false
 
+      field :enable_pushed_authorization_requests, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :icon_url, -> { String }, optional: true, nullable: false
 
       field :id_token_session_expiry_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
@@ -29,6 +31,8 @@ module Auth0
       field :jwks_uri, -> { String }, optional: true, nullable: false
 
       field :oidc_metadata, -> { Auth0::Types::ConnectionOptionsOidcMetadata }, optional: true, nullable: false
+
+      field :pushed_authorization_request_endpoint, -> { String }, optional: true, nullable: false
 
       field :scope, -> { String }, optional: true, nullable: false
 

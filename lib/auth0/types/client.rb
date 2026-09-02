@@ -111,6 +111,8 @@ module Auth0
 
       field :express_configuration, -> { Auth0::Types::ExpressConfiguration }, optional: true, nullable: false
 
+      field :b2b_integration_configuration, -> { Auth0::Types::B2BIntegrationConfiguration }, optional: true, nullable: false
+
       field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationResponseConfiguration }, optional: true, nullable: false
 
       field :identity_assertion_authorization_grant, -> { Auth0::Types::IdentityAssertionAuthorizationGrant }, optional: true, nullable: false

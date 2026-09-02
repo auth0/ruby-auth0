@@ -6,6 +6,8 @@ module Auth0
     class EventStreamCloudEventOrgCreatedData < Internal::Types::Model
       field :object, -> { Auth0::Types::EventStreamCloudEventOrgCreatedObject }, optional: false, nullable: false
 
+      field :previous_object, -> { Auth0::Types::EventStreamCloudEventOrgCreatedPreviousObject }, optional: true, nullable: false
+
       field :context, -> { Auth0::Types::EventStreamCloudEventContext }, optional: true, nullable: false
     end
   end

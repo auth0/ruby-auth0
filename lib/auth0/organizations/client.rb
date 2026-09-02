@@ -298,6 +298,11 @@ module Auth0
         @members ||= Auth0::Organizations::Members::Client.new(client: @client)
       end
 
+      # @return [Auth0::OrganizationTemplate::Client]
+      def organization_template
+        @organization_template ||= Auth0::Organizations::OrganizationTemplate::Client.new(client: @client)
+      end
+
       # @return [Auth0::Groups::Client]
       def groups
         @groups ||= Auth0::Organizations::Groups::Client.new(client: @client)

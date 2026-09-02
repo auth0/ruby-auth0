@@ -19,6 +19,7 @@ module Auth0
       PASSWORD_HASH_MIGRATION = "password-hash-migration"
       LOGIN_POST_IDENTIFIER = "login-post-identifier"
       SIGNUP_POST_IDENTIFIER = "signup-post-identifier"
+      POST_CREDENTIAL_VALIDATION = "post-credential-validation"
     end
   end
 end

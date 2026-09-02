@@ -110,6 +110,8 @@ module Auth0
 
         field :express_configuration, -> { Auth0::Types::ExpressConfigurationOrNull }, optional: true, nullable: false
 
+        field :b2b_integration_configuration, -> { Auth0::Types::B2BIntegrationConfiguration }, optional: true, nullable: false
+
         field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationPatchConfiguration }, optional: true, nullable: false
 
         field :async_approval_notification_channels, -> { Internal::Types::Array[Auth0::Types::AsyncApprovalNotificationsChannelsEnum] }, optional: true, nullable: false

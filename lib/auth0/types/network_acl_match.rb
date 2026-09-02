@@ -26,6 +26,8 @@ module Auth0
       field :connecting_ipv4cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "connecting_ipv4_cidrs"
 
       field :connecting_ipv6cidrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "connecting_ipv6_cidrs"
+
+      field :http_message_signature, -> { Auth0::Types::NetworkAclHttpMessageSignature }, optional: true, nullable: false
     end
   end
 end

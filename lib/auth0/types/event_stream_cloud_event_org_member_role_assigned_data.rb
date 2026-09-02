@@ -6,6 +6,8 @@ module Auth0
     class EventStreamCloudEventOrgMemberRoleAssignedData < Internal::Types::Model
       field :object, -> { Auth0::Types::EventStreamCloudEventOrgMemberRoleAssignedObject }, optional: false, nullable: false
 
+      field :previous_object, -> { Auth0::Types::EventStreamCloudEventOrgMemberRoleAssignedPreviousObject }, optional: true, nullable: false
+
       field :context, -> { Auth0::Types::EventStreamCloudEventContext }, optional: true, nullable: false
     end
   end

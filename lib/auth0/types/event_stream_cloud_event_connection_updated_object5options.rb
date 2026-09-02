@@ -28,6 +28,8 @@ module Auth0
 
       field :kerberos, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
+      field :kerberos_only, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :set_user_root_attributes, -> { Auth0::Types::EventStreamCloudEventConnectionUpdatedObject5OptionsSetUserRootAttributesEnum }, optional: true, nullable: false

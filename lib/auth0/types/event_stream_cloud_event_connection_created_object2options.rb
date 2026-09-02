@@ -50,15 +50,23 @@ module Auth0
 
       field :destination_url, -> { String }, optional: true, nullable: false, api_name: "destinationUrl"
 
+      field :disable_fields_map_fix, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "disableFieldsMapFix"
+
       field :disable_signout, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "disableSignout"
 
+      field :discovery_url, -> { String }, optional: true, nullable: false
+
       field :fields_map, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false, api_name: "fieldsMap"
+
+      field :fields_map_json_raw, -> { String }, optional: true, nullable: false, api_name: "fieldsMapJsonRaw"
 
       field :global_token_revocation_jwt_iss, -> { String }, optional: true, nullable: false
 
       field :global_token_revocation_jwt_sub, -> { String }, optional: true, nullable: false
 
       field :metadata_url, -> { String }, optional: true, nullable: false, api_name: "metadataUrl"
+
+      field :oidc_metadata, -> { Auth0::Types::EventStreamCloudEventConnectionCreatedObject2OptionsOidcMetadata }, optional: true, nullable: false
 
       field :recipient_url, -> { String }, optional: true, nullable: false, api_name: "recipientUrl"
 

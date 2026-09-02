@@ -61,6 +61,23 @@ module Auth0
       YAHOO = "yahoo"
       YANDEX = "yandex"
       NOTION_MCP = "notion-mcp"
+      ASANA_MCP = "asana-mcp"
+      ATLASSIAN_MCP = "atlassian-mcp"
+      CLOUDFLARE_MCP = "cloudflare-mcp"
+      DOCUSIGN_MCP = "docusign-mcp"
+      FIGMA_MCP = "figma-mcp"
+      GITLAB_MCP = "gitlab-mcp"
+      GUSTO_MCP = "gusto-mcp"
+      HEROKU_MCP = "heroku-mcp"
+      HUBSPOT_MCP = "hubspot-mcp"
+      INTERCOM_MCP = "intercom-mcp"
+      LINEAR_MCP = "linear-mcp"
+      PAGERDUTY_MCP = "pagerduty-mcp"
+      SENTRY_MCP = "sentry-mcp"
+      SLACK_MCP = "slack-mcp"
+      SUPABASE_MCP = "supabase-mcp"
+      VERCEL_MCP = "vercel-mcp"
+      XERO_MCP = "xero-mcp"
     end
   end
 end

@@ -17,6 +17,8 @@ module Auth0
 
       field :claims_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
+      field :code_challenge_methods_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :display_values_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :dpop_signing_alg_values_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false

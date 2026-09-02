@@ -46,6 +46,8 @@ module Auth0
 
       field :disable_signout, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "disableSignout"
 
+      field :discovery_url, -> { String }, optional: true, nullable: false
+
       field :fields_map, -> { Internal::Types::Hash[String, Auth0::Types::ConnectionFieldsMapSAMLValue] }, optional: true, nullable: false, api_name: "fieldsMap"
 
       field :global_token_revocation_jwt_iss, -> { String }, optional: true, nullable: false
@@ -55,6 +57,8 @@ module Auth0
       field :metadata_url, -> { String }, optional: true, nullable: false, api_name: "metadataUrl"
 
       field :metadata_xml, -> { String }, optional: true, nullable: false, api_name: "metadataXml"
+
+      field :oidc_metadata, -> { Auth0::Types::ConnectionOptionsOidcMetadata }, optional: true, nullable: false
 
       field :recipient_url, -> { String }, optional: true, nullable: false, api_name: "recipientUrl"
 

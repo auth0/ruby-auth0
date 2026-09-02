@@ -15,6 +15,8 @@ module Auth0
       field :connection_config, -> { Auth0::Types::ConnectionProfileConfig }, optional: true, nullable: false
 
       field :strategy_overrides, -> { Auth0::Types::ConnectionProfileStrategyOverrides }, optional: true, nullable: false
+
+      field :provisioning, -> { Auth0::Types::ConnectionProfileProvisioning }, optional: true, nullable: false
     end
   end
 end
