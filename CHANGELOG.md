@@ -1,5 +1,16 @@
 # Change Log
 
+## [v6.2.0](https://github.com/auth0/ruby-auth0/tree/v6.2.0) (2026-09-02)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.1.0...v6.2.0)
+
+**Added**
+- feat: add Organization Templates, Connection Profile SCIM provisioning, and Network ACL HTTP message signatures [\#797](https://github.com/auth0/ruby-auth0/pull/797) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: support PKCE code_verifier in exchange_auth_code_for_tokens [\#791](https://github.com/auth0/ruby-auth0/pull/791) ([gagalago](https://github.com/gagalago))
+
+**Fixed**
+- fix: replace CGI.parse, removed in Ruby 4.0, with URI.decode_www_form [\#793](https://github.com/auth0/ruby-auth0/pull/793) ([gagalago](https://github.com/gagalago))
+- fix: require auth0/version so client construction works and correct rest-client changelog note [\#790](https://github.com/auth0/ruby-auth0/pull/790) ([kishore7snehil](https://github.com/kishore7snehil))
+
 ## [v6.1.0](https://github.com/auth0/ruby-auth0/tree/v6.1.0) (2026-08-19)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.0.0...v6.1.0)
 
