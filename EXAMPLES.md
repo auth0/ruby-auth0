@@ -38,8 +38,10 @@ flow = client.start_device_flow(
 puts "Go to #{flow['verification_uri']} and enter the code #{flow['user_code']}"
 
 # Poll no more frequently than the interval Auth0 returns, until the code expires.
+interval = flow['interval']
+
 tokens = loop do
-  sleep flow['interval']
+  sleep interval
 
   begin
     break client.exchange_device_code_for_tokens(flow['device_code'])
@@ -48,6 +50,10 @@ tokens = loop do
     # `authorization_pending` or `slow_down`. Anything else is terminal.
     error = JSON.parse(e.message)['error'] rescue nil
     raise unless %w[authorization_pending slow_down].include?(error)
+
+    # RFC 8628 section 3.5: on `slow_down`, add 5 seconds to the interval and
+    # keep polling at the slower rate from then on.
+    interval += 5 if error == 'slow_down'
   end
 end
 

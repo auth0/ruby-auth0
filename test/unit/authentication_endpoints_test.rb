@@ -256,7 +256,9 @@ class AuthenticationEndpointsTest < Minitest::Test
         body = JSON.parse(req.body, symbolize_names: true)
         body[:client_id] == @client_id &&
           body[:scope] == "openid profile" &&
-          body[:audience] == "https://api.example.com"
+          body[:audience] == "https://api.example.com" &&
+          !body.key?(:client_secret) &&
+          !body.key?(:client_assertion)
       end
       .to_return(
         status: 200,
@@ -264,6 +266,7 @@ class AuthenticationEndpointsTest < Minitest::Test
           "device_code" => "the_device_code",
           "user_code" => "ABCD-EFGH",
           "verification_uri" => "https://#{@domain}/activate",
+          "verification_uri_complete" => "https://#{@domain}/activate?user_code=ABCD-EFGH",
           "expires_in" => 900,
           "interval" => 5
         }.to_json,
@@ -276,6 +279,7 @@ class AuthenticationEndpointsTest < Minitest::Test
 
     assert_equal "the_device_code", result["device_code"]
     assert_equal "ABCD-EFGH", result["user_code"]
+    assert_equal "https://#{@domain}/activate?user_code=ABCD-EFGH", result["verification_uri_complete"]
     assert_equal 5, result["interval"]
   end
 
@@ -287,7 +291,9 @@ class AuthenticationEndpointsTest < Minitest::Test
         body = JSON.parse(req.body, symbolize_names: true)
         body[:grant_type] == "urn:ietf:params:oauth:grant-type:device_code" &&
           body[:device_code] == "the_device_code" &&
-          body[:client_id] == @client_id
+          body[:client_id] == @client_id &&
+          !body.key?(:client_secret) &&
+          !body.key?(:client_assertion)
       end
       .to_return(
         status: 200,

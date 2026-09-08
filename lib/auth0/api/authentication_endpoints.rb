@@ -75,6 +75,9 @@ module Auth0
       end
 
       # Start a Device Authorization flow.
+      #
+      # Device flow runs as a public client: no client_secret or client assertion is
+      # sent, and Auth0 rejects the request with `unauthorized_client` if one is.
       # @see https://auth0.com/docs/api/authentication#device-authorization-flow
       # @param scope [string] Space-separated list of requested scopes.
       # @param audience [string] Unique identifier of the target API.
@@ -92,6 +95,9 @@ module Auth0
       end
 
       # Get access and ID tokens using a device code.
+      #
+      # Device flow runs as a public client: no client_secret or client assertion is
+      # sent, and Auth0 rejects the request with `unauthorized_client` if one is.
       # @see https://auth0.com/docs/api/authentication#device-authorization-flow
       # @param device_code [string] The device code returned by start_device_flow.
       # @param client_id [string] Client ID for the application
