@@ -314,6 +314,47 @@ class AuthenticationEndpointsTest < Minitest::Test
     end
   end
 
+  def test_start_device_flow_sends_no_client_assertion
+    stub_request(:post, "https://#{@domain}/oauth/device/code")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:client_id] == @client_id &&
+          !body.key?(:client_assertion) &&
+          !body.key?(:client_assertion_type) &&
+          !body.key?(:client_secret)
+      end
+      .to_return(
+        status: 200,
+        body: { "device_code" => "the_device_code", "user_code" => "ABCD-EFGH" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_assertion_instance.send(:start_device_flow)
+
+    assert_equal "the_device_code", result["device_code"]
+  end
+
+  def test_exchange_device_code_for_tokens_sends_no_client_assertion
+    stub_request(:post, "https://#{@domain}/oauth/token")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:grant_type] == "urn:ietf:params:oauth:grant-type:device_code" &&
+          !body.key?(:client_assertion) &&
+          !body.key?(:client_assertion_type) &&
+          !body.key?(:client_secret)
+      end
+      .to_return(
+        status: 200,
+        body: { "access_token" => "test_access_token", "expires_in" => 86_400 }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_assertion_instance.send(:exchange_device_code_for_tokens, "the_device_code")
+
+    assert_kind_of Auth0::AccessToken, result
+    refute_nil result.access_token
+  end
+
   # --- exchange_refresh_token ---
 
   def test_exchange_refresh_token_with_client_secret
