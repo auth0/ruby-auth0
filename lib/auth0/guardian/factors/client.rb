@@ -82,6 +82,11 @@ module Auth0
           end
         end
 
+        # @return [Auth0::Email::Client]
+        def email
+          @email ||= Auth0::Guardian::Factors::Email::Client.new(client: @client)
+        end
+
         # @return [Auth0::Phone::Client]
         def phone
           @phone ||= Auth0::Guardian::Factors::Phone::Client.new(client: @client)

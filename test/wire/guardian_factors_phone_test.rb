@@ -126,6 +126,46 @@ class GuardianFactorsPhoneWireTest < WireMockTestCase
     )
   end
 
+  def test_guardian_factors_phone_get_with_wiremock
+    test_id = "guardian.factors.phone.get.0"
+
+    @client.guardian.factors.phone.get(request_options: {
+      additional_headers: {
+        "X-Test-Id" => "guardian.factors.phone.get.0"
+      }
+    })
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/guardian/factors/phone/settings",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_guardian_factors_phone_set_with_wiremock
+    test_id = "guardian.factors.phone.set.0"
+
+    @client.guardian.factors.phone.set(
+      otp_length: 1,
+      otp_expiration_time: 1,
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "guardian.factors.phone.set.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "PUT",
+      url_path: "/guardian/factors/phone/settings",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_guardian_factors_phone_get_templates_with_wiremock
     test_id = "guardian.factors.phone.get_templates.0"
 

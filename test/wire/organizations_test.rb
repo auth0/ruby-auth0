@@ -80,6 +80,32 @@ class OrganizationsWireTest < WireMockTestCase
     )
   end
 
+  def test_organizations_search_with_wiremock
+    test_id = "organizations.search.0"
+
+    result = @client.organizations.search(
+      q: "q",
+      parser: "scim",
+      take: 1,
+      from: "from",
+      sort: "name",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "organizations.search.0"
+        }
+      }
+    )
+    result.pages.next_page
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/organizations/search",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_organizations_get_with_wiremock
     test_id = "organizations.get.0"
 
