@@ -72,12 +72,11 @@ module Auth0
       end
 
       def request(method, uri, body = {}, extra_headers = {})
+        @headers = (@headers || {}).merge(extra_headers)
         result = if method == :get
-          @headers ||= {}
-          get_headers = @headers.merge({params: body}).merge(extra_headers)
+          get_headers = @headers.merge({params: body})
           call(:get, encode_uri(uri), timeout, get_headers)
         elsif method == :delete
-          @headers ||= {}
           delete_headers = @headers.merge({ params: body })
           call(:delete, encode_uri(uri), timeout, delete_headers)
         elsif method == :delete_with_body
@@ -85,11 +84,11 @@ module Auth0
         elsif method == :post_file
           body.merge!(multipart: true)
           # Ignore the default Content-Type headers and let the HTTP client define them
-          post_file_headers = headers.except('Content-Type') if headers != nil
+          post_file_headers = headers.except('Content-Type')
           # Actual call with the altered headers
           call(:post, encode_uri(uri), timeout, post_file_headers, body)
         elsif method == :post_form
-          form_post_headers = headers.except('Content-Type') if headers != nil
+          form_post_headers = headers.except('Content-Type')
           call(:post, encode_uri(uri), timeout, form_post_headers, body.compact)
         else
           call(method, encode_uri(uri), timeout, headers, body.to_json)
