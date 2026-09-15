@@ -74,6 +74,46 @@ module Auth0
         ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
       end
 
+      # Start a Device Authorization flow.
+      #
+      # Device flow runs as a public client: no client_secret or client assertion is
+      # sent, and Auth0 rejects the request with `unauthorized_client` if one is.
+      # @see https://auth0.com/docs/api/authentication#device-authorization-flow
+      # @param scope [string] Space-separated list of requested scopes.
+      # @param audience [string] Unique identifier of the target API.
+      # @param client_id [string] Client ID for the application
+      # @return [json] Returns device_code, user_code, verification_uri,
+      #   verification_uri_complete, expires_in and interval.
+      def start_device_flow(scope: nil, audience: nil, client_id: @client_id)
+        request_params = {
+          client_id: client_id,
+          scope: scope,
+          audience: audience
+        }
+
+        request_with_retry(:post, '/oauth/device/code', request_params)
+      end
+
+      # Get access and ID tokens using a device code.
+      #
+      # Device flow runs as a public client: no client_secret or client assertion is
+      # sent, and Auth0 rejects the request with `unauthorized_client` if one is.
+      # @see https://auth0.com/docs/api/authentication#device-authorization-flow
+      # @param device_code [string] The device code returned by start_device_flow.
+      # @param client_id [string] Client ID for the application
+      # @return [Auth0::AccessToken] Returns the access_token and id_token
+      def exchange_device_code_for_tokens(device_code, client_id: @client_id)
+        raise Auth0::InvalidParameter, 'Must provide a device code' if device_code.to_s.empty?
+
+        request_params = {
+          grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+          client_id: client_id,
+          device_code: device_code
+        }
+
+        ::Auth0::AccessToken.from_response request_with_retry(:post, '/oauth/token', request_params)
+      end
+
       # Get access and ID tokens using a refresh token.
       # @see https://auth0.com/docs/api/authentication#refresh-token
       # @param refresh_token [string] Refresh token to use. Request this with
