@@ -16,6 +16,50 @@ client.authorization_url 'http://localhost:3000'
 # => #<URI::HTTPS https://YOUR_DOMAIN/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000>
 ```
 
+## Device Authorization Flow
+
+The [Device Authorization Flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow) lets input-constrained devices, such as a CLI or a smart TV, obtain tokens by having the user complete the login in a browser elsewhere.
+
+Start the flow, show the user code to the user, then poll for the tokens until they finish:
+
+```ruby
+require 'auth0'
+
+client = Auth0::Client.new(
+  client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+  domain: ENV['AUTH0_RUBY_DOMAIN']
+)
+
+flow = client.start_device_flow(
+  scope: 'openid profile offline_access',
+  audience: 'https://api.example.com'
+)
+
+puts "Go to #{flow['verification_uri']} and enter the code #{flow['user_code']}"
+
+# Poll no more frequently than the interval Auth0 returns, until the code expires.
+interval = flow['interval']
+
+tokens = loop do
+  sleep interval
+
+  begin
+    break client.exchange_device_code_for_tokens(flow['device_code'])
+  rescue Auth0::HTTPError => e
+    # While the user has not finished, Auth0 answers with an `error` of
+    # `authorization_pending` or `slow_down`. Anything else is terminal.
+    error = JSON.parse(e.message)['error'] rescue nil
+    raise unless %w[authorization_pending slow_down].include?(error)
+
+    # RFC 8628 section 3.5: on `slow_down`, add 5 seconds to the interval and
+    # keep polling at the slower rate from then on.
+    interval += 5 if error == 'slow_down'
+  end
+end
+
+tokens.access_token
+```
+
 ## Management API Client
 
 As a simple example of how to get started with the Management API, we'll create an admin route to point to a list of all users from Auth0:
