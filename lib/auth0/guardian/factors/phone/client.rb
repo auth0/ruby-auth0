@@ -218,6 +218,72 @@ module Auth0
             end
           end
 
+          # TODO: Link this endpoint to relevant documentation when available.
+          #
+          # @param request_options [Hash]
+          # @param _params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Auth0::Types::GetPhoneFactorSettingsResponseContent]
+          def get(request_options: {}, **_params)
+            request = Auth0::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
+              method: "GET",
+              path: "guardian/factors/phone/settings",
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Auth0::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Auth0::Types::GetPhoneFactorSettingsResponseContent.load(response.body)
+            else
+              error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
+          # TODO: Link this endpoint to relevant documentation when available.
+          #
+          # @param request_options [Hash]
+          # @param params [Auth0::Guardian::Factors::Phone::Types::SetPhoneFactorSettingsRequestContent]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Auth0::Types::SetPhoneFactorSettingsResponseContent]
+          def set(request_options: {}, **params)
+            params = Auth0::Internal::Types::Utils.normalize_keys(params)
+            request = Auth0::Internal::JSON::Request.new(
+              base_url: request_options[:base_url],
+              method: "PUT",
+              path: "guardian/factors/phone/settings",
+              body: Auth0::Guardian::Factors::Phone::Types::SetPhoneFactorSettingsRequestContent.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Auth0::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Auth0::Types::SetPhoneFactorSettingsResponseContent.load(response.body)
+            else
+              error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
           # Retrieve details of the multi-factor authentication enrollment and verification templates for phone-type
           # factors available in your tenant.
           #

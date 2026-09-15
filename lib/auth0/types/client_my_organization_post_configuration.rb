@@ -15,6 +15,10 @@ module Auth0
       field :connection_deletion_behavior, -> { Auth0::Types::ClientMyOrganizationDeletionBehaviorEnum }, optional: false, nullable: false
 
       field :invitation_landing_client_id, -> { String }, optional: true, nullable: false
+
+      field :enforce_permission_ceiling, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :enforce_self_assignment_restriction, -> { Internal::Types::Boolean }, optional: true, nullable: false
     end
   end
 end

@@ -7,6 +7,8 @@ module Auth0
       field :user, -> { Auth0::Types::ResourceServerSubjectTypeAuthorizationUser }, optional: true, nullable: false
 
       field :client, -> { Auth0::Types::ResourceServerSubjectTypeAuthorizationClient }, optional: true, nullable: false
+
+      field :anonymous_user, -> { Auth0::Types::ResourceServerSubjectTypeAuthorizationAnonymousUser }, optional: true, nullable: false
     end
   end
 end
