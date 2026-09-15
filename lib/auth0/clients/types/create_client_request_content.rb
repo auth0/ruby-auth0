@@ -106,6 +106,8 @@ module Auth0
 
         field :identity_assertion_authorization_grant, -> { Auth0::Types::CreateIdentityAssertionAuthorizationGrant }, optional: true, nullable: false
 
+        field :anonymous_sessions, -> { Auth0::Types::CreateAnonymousSessions }, optional: true, nullable: false
+
         field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
         field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false

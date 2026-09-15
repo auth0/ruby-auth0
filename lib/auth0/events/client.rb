@@ -23,6 +23,13 @@ module Auth0
       # @option params [String, nil] :from_timestamp
       # @option params [Auth0::Types::EventStreamSubscribeEventsEventTypeEnum, nil] :event_type
       #
+      # @example
+      #   client.events.subscribe(
+      #     from: "from",
+      #     from_timestamp: "from_timestamp",
+      #     event_type: ["connection.created"]
+      #   )
+      #
       # @return [untyped]
       def subscribe(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)

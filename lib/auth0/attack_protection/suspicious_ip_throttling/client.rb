@@ -21,6 +21,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.attack_protection.suspicious_ip_throttling.get
+        #
         # @return [Auth0::Types::GetSuspiciousIPThrottlingSettingsResponseContent]
         def get(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
@@ -36,7 +39,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetSuspiciousIPThrottlingSettingsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetSuspiciousIPThrottlingSettingsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -52,6 +55,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_query_parameters
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @example
+        #   client.attack_protection.suspicious_ip_throttling.update
         #
         # @return [Auth0::Types::UpdateSuspiciousIPThrottlingSettingsResponseContent]
         def update(request_options: {}, **params)
@@ -70,7 +76,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::UpdateSuspiciousIPThrottlingSettingsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::UpdateSuspiciousIPThrottlingSettingsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

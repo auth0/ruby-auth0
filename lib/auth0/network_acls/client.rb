@@ -23,6 +23,13 @@ module Auth0
       # @option params [Integer, nil] :per_page
       # @option params [Boolean, nil] :include_totals
       #
+      # @example
+      #   client.network_acls.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     include_totals: true
+      #   )
+      #
       # @return [Auth0::Types::ListNetworkACLsOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -52,7 +59,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListNetworkACLsOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListNetworkACLsOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -70,6 +77,16 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.network_acls.create(
+      #     description: "description",
+      #     active: true,
+      #     rule: {
+      #       action: {},
+      #       scope: "management"
+      #     }
+      #   )
       #
       # @return [untyped]
       def create(request_options: {}, **params)
@@ -104,6 +121,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.network_acls.get(id: "id")
+      #
       # @return [Auth0::Types::GetNetworkACLsResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -120,7 +140,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetNetworkACLsResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetNetworkACLsResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -137,6 +157,17 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.network_acls.set(
+      #     id: "id",
+      #     description: "description",
+      #     active: true,
+      #     rule: {
+      #       action: {},
+      #       scope: "management"
+      #     }
+      #   )
       #
       # @return [Auth0::Types::SetNetworkACLsResponseContent]
       def set(request_options: {}, **params)
@@ -159,7 +190,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::SetNetworkACLsResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::SetNetworkACLsResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -176,6 +207,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.network_acls.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -209,6 +243,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.network_acls.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateNetworkACLResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -230,7 +267,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateNetworkACLResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateNetworkACLResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

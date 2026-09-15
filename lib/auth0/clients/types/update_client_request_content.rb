@@ -66,6 +66,8 @@ module Auth0
 
         field :identity_assertion_authorization_grant, -> { Auth0::Types::UpdateIdentityAssertionAuthorizationGrant }, optional: true, nullable: false
 
+        field :anonymous_sessions, -> { Auth0::Types::UpdateAnonymousSessions }, optional: true, nullable: false
+
         field :form_template, -> { String }, optional: true, nullable: false
 
         field :addons, -> { Auth0::Types::ClientAddons }, optional: true, nullable: false

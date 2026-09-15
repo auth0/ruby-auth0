@@ -90,6 +90,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.log_streams.list
+      #
       # @return [Array[Auth0::Types::LogStreamResponseSchema]]
       def list(request_options: {}, **_params)
         request = Auth0::Internal::JSON::Request.new(
@@ -104,10 +107,12 @@ module Auth0
           raise Auth0::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::LogStreamResponseSchema], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # Create a log stream.
@@ -316,6 +321,14 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.log_streams.create(
+      #     type: "http",
+      #     sink: {
+      #       http_endpoint: "httpEndpoint"
+      #     }
+      #   )
+      #
       # @return [Auth0::Types::CreateLogStreamResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -333,7 +346,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateLogStreamResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateLogStreamResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -502,6 +515,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.log_streams.get(id: "id")
+      #
       # @return [Auth0::Types::GetLogStreamResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -518,7 +534,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetLogStreamResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetLogStreamResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -535,6 +551,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.log_streams.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -641,6 +660,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.log_streams.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateLogStreamResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -662,7 +684,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateLogStreamResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateLogStreamResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

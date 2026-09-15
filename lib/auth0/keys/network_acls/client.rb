@@ -22,6 +22,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.keys.network_acls.list
+        #
         # @return [Auth0::Types::GetAllKeysNetworkACLsResponseContent]
         def list(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
@@ -37,7 +40,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetAllKeysNetworkACLsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetAllKeysNetworkACLsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -53,6 +56,13 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_query_parameters
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @example
+        #   client.keys.network_acls.create(
+        #     name: "name",
+        #     alg: "hmac-sha256",
+        #     value: "value"
+        #   )
         #
         # @return [Auth0::Types::CreateKeysNetworkACLsResponseContent]
         def create(request_options: {}, **params)
@@ -71,7 +81,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateKeysNetworkACLsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateKeysNetworkACLsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -89,6 +99,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.keys.network_acls.get(id: "id")
+        #
         # @return [Auth0::Types::NetworkACLKey]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -105,7 +118,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::NetworkACLKey.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::NetworkACLKey.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -122,6 +135,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.keys.network_acls.delete(id: "id")
         #
         # @return [untyped]
         def delete(request_options: {}, **params)

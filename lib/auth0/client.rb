@@ -4,23 +4,27 @@ module Auth0
   class Management
     # @param token [String]
     # @param base_url [String, nil]
-    # @param timeout [Float, nil] Request timeout in seconds.
-    # @param max_retries [Integer, nil] Maximum number of request retries.
-    # @param headers [Hash, nil] Additional headers to include in requests.
+    # @param tenant_domain [String, nil]
+    # @param max_retries [Integer]
     #
     # @return [void]
-    def initialize(token:, base_url: nil, timeout: nil, max_retries: nil, headers: nil)
-      raw_client_opts = {
+    def initialize(token:, base_url: nil, tenant_domain: nil, max_retries: 2)
+      unless tenant_domain.nil?
+        tenant_domain_value = tenant_domain.nil? ? "{TENANT}.auth0.com" : tenant_domain
+        environment_url_templates = {
+          Auth0::Environment::DEFAULT => "https://#{tenant_domain_value}/api/v2"
+        }
+        base_url = base_url.nil? ? "https://#{tenant_domain_value}/api/v2" : environment_url_templates.fetch(base_url, base_url)
+      end
+
+      @raw_client = Auth0::Internal::Http::RawClient.new(
         base_url: base_url || Auth0::Environment::DEFAULT,
         headers: {
           "X-Fern-Language" => "Ruby",
           Authorization: "Bearer #{token}"
-        }.merge(headers || {})
-      }
-      raw_client_opts[:timeout] = timeout if timeout
-      raw_client_opts[:max_retries] = max_retries if max_retries
-
-      @raw_client = Auth0::Internal::Http::RawClient.new(**raw_client_opts)
+        },
+        max_retries: max_retries
+      )
     end
 
     # @return [Auth0::Actions::Client]
@@ -103,6 +107,11 @@ module Auth0
       @groups ||= Auth0::Groups::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::Guardian::Client]
+    def guardian
+      @guardian ||= Auth0::Guardian::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Hooks::Client]
     def hooks
       @hooks ||= Auth0::Hooks::Client.new(client: @raw_client)
@@ -126,11 +135,6 @@ module Auth0
     # @return [Auth0::NetworkACLs::Client]
     def network_acls
       @network_acls ||= Auth0::NetworkACLs::Client.new(client: @raw_client)
-    end
-
-    # @return [Auth0::OrganizationTemplates::Client]
-    def organization_templates
-      @organization_templates ||= Auth0::OrganizationTemplates::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Organizations::Client]
@@ -233,9 +237,9 @@ module Auth0
       @emails ||= Auth0::Emails::Client.new(client: @raw_client)
     end
 
-    # @return [Auth0::Guardian::Client]
-    def guardian
-      @guardian ||= Auth0::Guardian::Client.new(client: @raw_client)
+    # @return [Auth0::Experimentation::Client]
+    def experimentation
+      @experimentation ||= Auth0::Experimentation::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Keys::Client]
@@ -259,5 +263,3 @@ module Auth0
     end
   end
 end
-
-require_relative "auth_client"

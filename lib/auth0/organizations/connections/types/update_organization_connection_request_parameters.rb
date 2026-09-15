@@ -19,6 +19,8 @@ module Auth0
 
           field :organization_access_level, -> { Auth0::Types::OrganizationAccessLevelEnumWithNull }, optional: true, nullable: false
 
+          field :organization_member_access_level, -> { Auth0::Types::OrganizationMemberAccessLevelEnumWithNull }, optional: true, nullable: false
+
           field :is_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
         end
       end

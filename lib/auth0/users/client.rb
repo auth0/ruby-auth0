@@ -51,6 +51,20 @@ module Auth0
       # @option params [Auth0::Types::SearchEngineVersionsEnum, nil] :search_engine
       # @option params [Boolean, nil] :primary_order
       #
+      # @example
+      #   client.users.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     include_totals: true,
+      #     sort: "sort",
+      #     connection: "connection",
+      #     fields: "fields",
+      #     include_fields: true,
+      #     q: "q",
+      #     search_engine: "v1",
+      #     primary_order: true
+      #   )
+      #
       # @return [Auth0::Types::ListUsersOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -87,7 +101,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListUsersOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListUsersOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -110,6 +124,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.users.create(connection: "connection")
+      #
       # @return [Auth0::Types::CreateUserResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -127,7 +144,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -154,6 +171,13 @@ module Auth0
       # @option params [Boolean, nil] :include_fields
       # @option params [String] :email
       #
+      # @example
+      #   client.users.list_users_by_email(
+      #     fields: "fields",
+      #     include_fields: true,
+      #     email: "email"
+      #   )
+      #
       # @return [Array[Auth0::Types::UserResponseSchema]]
       def list_users_by_email(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -175,10 +199,12 @@ module Auth0
           raise Auth0::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::UserResponseSchema], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # Retrieve user details. A list of fields to include or exclude may also be specified. For more information, see
@@ -195,6 +221,13 @@ module Auth0
       # @option params [String] :id
       # @option params [String, nil] :fields
       # @option params [Boolean, nil] :include_fields
+      #
+      # @example
+      #   client.users.get(
+      #     id: "id",
+      #     fields: "fields",
+      #     include_fields: true
+      #   )
       #
       # @return [Auth0::Types::GetUserResponseContent]
       def get(request_options: {}, **params)
@@ -217,7 +250,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -235,6 +268,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.users.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -364,6 +400,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.users.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateUserResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -385,7 +424,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -406,6 +445,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.users.regenerate_recovery_code(id: "id")
+      #
       # @return [Auth0::Types::RegenerateUsersRecoveryCodeResponseContent]
       def regenerate_recovery_code(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -422,7 +464,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::RegenerateUsersRecoveryCodeResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::RegenerateUsersRecoveryCodeResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -439,6 +481,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.users.revoke_access(id: "id")
       #
       # @return [untyped]
       def revoke_access(request_options: {}, **params)

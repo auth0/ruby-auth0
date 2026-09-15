@@ -90,6 +90,10 @@ module Auth0
       field :discovery_url, -> { String }, optional: true, nullable: false
 
       field :oidc_metadata, -> { Auth0::Types::ConnectionsOidcMetadata }, optional: true, nullable: false
+
+      field :thumbprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
+      field :thumbprints_sha384, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end
 end

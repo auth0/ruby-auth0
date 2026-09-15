@@ -51,6 +51,16 @@ module Auth0
         # @option params [String, nil] :fields
         # @option params [Boolean, nil] :include_fields
         #
+        # @example
+        #   client.organizations.members.list(
+        #     id: "id",
+        #     include_totals: true,
+        #     from: "from",
+        #     take: 1,
+        #     fields: "fields",
+        #     include_fields: true
+        #   )
+        #
         # @return [Auth0::Types::ListOrganizationMembersPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -81,7 +91,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListOrganizationMembersPaginatedResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationMembersPaginatedResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -106,6 +116,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.organizations.members.create(
+        #     id: "id",
+        #     members: ["members"]
+        #   )
         #
         # @return [untyped]
         def create(request_options: {}, **params)
@@ -141,6 +157,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.organizations.members.delete(
+        #     id: "id",
+        #     members: ["members"]
+        #   )
         #
         # @return [untyped]
         def delete(request_options: {}, **params)
