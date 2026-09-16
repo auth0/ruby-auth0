@@ -26,6 +26,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :client_id
         #
+        # @example
+        #   client.clients.credentials.list(client_id: "client_id")
+        #
         # @return [Array[Auth0::Types::ClientCredential]]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -41,10 +44,12 @@ module Auth0
             raise Auth0::Errors::TimeoutError
           end
           code = response.code.to_i
-          return if code.between?(200, 299)
-
-          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          if code.between?(200, 299)
+            Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::ClientCredential], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
         end
 
         # Create a client credential associated to your application. Credentials can be used to configure Private Key
@@ -123,6 +128,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :client_id
         #
+        # @example
+        #   client.clients.credentials.create(
+        #     client_id: "client_id",
+        #     credential_type: "public_key"
+        #   )
+        #
         # @return [Auth0::Types::PostClientCredentialResponseContent]
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -144,7 +155,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::PostClientCredentialResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::PostClientCredentialResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -167,6 +178,12 @@ module Auth0
         # @option params [String] :client_id
         # @option params [String] :credential_id
         #
+        # @example
+        #   client.clients.credentials.get(
+        #     client_id: "client_id",
+        #     credential_id: "credential_id"
+        #   )
+        #
         # @return [Auth0::Types::GetClientCredentialResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -183,7 +200,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetClientCredentialResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetClientCredentialResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -203,6 +220,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :client_id
         # @option params [String] :credential_id
+        #
+        # @example
+        #   client.clients.credentials.delete(
+        #     client_id: "client_id",
+        #     credential_id: "credential_id"
+        #   )
         #
         # @return [untyped]
         def delete(request_options: {}, **params)
@@ -239,6 +262,12 @@ module Auth0
         # @option params [String] :client_id
         # @option params [String] :credential_id
         #
+        # @example
+        #   client.clients.credentials.update(
+        #     client_id: "client_id",
+        #     credential_id: "credential_id"
+        #   )
+        #
         # @return [Auth0::Types::PatchClientCredentialResponseContent]
         def update(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -260,7 +289,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::PatchClientCredentialResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::PatchClientCredentialResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

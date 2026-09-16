@@ -59,6 +59,34 @@ class ResourceServersWireTest < WireMockTestCase
     )
   end
 
+  def test_resource_servers_search_with_wiremock
+    test_id = "resource_servers.search.0"
+
+    result = @client.resource_servers.search(
+      q: "q",
+      parser: "scim",
+      fields: "fields",
+      include_fields: true,
+      take: 1,
+      from: "from",
+      sort: "identifier",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "resource_servers.search.0"
+        }
+      }
+    )
+    result.pages.next_page
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/resource-servers/search",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_resource_servers_get_with_wiremock
     test_id = "resource_servers.get.0"
 

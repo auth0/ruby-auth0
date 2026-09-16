@@ -23,6 +23,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.guardian.factors.list
+        #
         # @return [Array[Auth0::Types::GuardianFactor]]
         def list(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
@@ -37,10 +40,12 @@ module Auth0
             raise Auth0::Errors::TimeoutError
           end
           code = response.code.to_i
-          return if code.between?(200, 299)
-
-          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          if code.between?(200, 299)
+            Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::GuardianFactor], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
         end
 
         # Update the status (i.e., enabled or disabled) of a specific multi-factor authentication factor.
@@ -53,6 +58,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Auth0::Types::GuardianFactorNameEnum] :name
+        #
+        # @example
+        #   client.guardian.factors.set(
+        #     name: "push-notification",
+        #     enabled: true
+        #   )
         #
         # @return [Auth0::Types::SetGuardianFactorResponseContent]
         def set(request_options: {}, **params)
@@ -75,11 +86,16 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::SetGuardianFactorResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
           end
+        end
+
+        # @return [Auth0::Email::Client]
+        def email
+          @email ||= Auth0::Guardian::Factors::Email::Client.new(client: @client)
         end
 
         # @return [Auth0::Phone::Client]

@@ -21,6 +21,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.sessions.get(id: "id")
+      #
       # @return [Auth0::Types::GetSessionResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -37,7 +40,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetSessionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetSessionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -54,6 +57,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.sessions.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -87,6 +93,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.sessions.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateSessionResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -108,7 +117,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateSessionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateSessionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -125,6 +134,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.sessions.revoke(id: "id")
       #
       # @return [untyped]
       def revoke(request_options: {}, **params)

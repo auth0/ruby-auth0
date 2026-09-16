@@ -20,6 +20,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.email_templates.create(template: "verify_email")
+      #
       # @return [Auth0::Types::CreateEmailTemplateResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -37,7 +40,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateEmailTemplateResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateEmailTemplateResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -58,6 +61,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [Auth0::Types::EmailTemplateNameEnum] :template_name
       #
+      # @example
+      #   client.email_templates.get(template_name: "verify_email")
+      #
       # @return [Auth0::Types::GetEmailTemplateResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -74,7 +80,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetEmailTemplateResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetEmailTemplateResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -91,6 +97,12 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [Auth0::Types::EmailTemplateNameEnum] :template_name
+      #
+      # @example
+      #   client.email_templates.set(
+      #     template_name: "verify_email",
+      #     template: "verify_email"
+      #   )
       #
       # @return [Auth0::Types::SetEmailTemplateResponseContent]
       def set(request_options: {}, **params)
@@ -113,7 +125,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::SetEmailTemplateResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::SetEmailTemplateResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -130,6 +142,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [Auth0::Types::EmailTemplateNameEnum] :template_name
+      #
+      # @example
+      #   client.email_templates.update(template_name: "verify_email")
       #
       # @return [Auth0::Types::UpdateEmailTemplateResponseContent]
       def update(request_options: {}, **params)
@@ -152,7 +167,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateEmailTemplateResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateEmailTemplateResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

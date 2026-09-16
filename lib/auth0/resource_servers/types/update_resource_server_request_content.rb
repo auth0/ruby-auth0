@@ -24,9 +24,13 @@ module Auth0
 
         field :token_lifetime, -> { Integer }, optional: true, nullable: false
 
+        field :token_lifetime_for_anonymous_access_tokens, -> { Integer }, optional: true, nullable: false
+
         field :token_dialect, -> { Auth0::Types::ResourceServerTokenDialectSchemaEnum }, optional: true, nullable: false
 
         field :enforce_policies, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+        field :access_token, -> { Auth0::Types::ResourceServerAccessToken }, optional: true, nullable: false
 
         field :token_encryption, -> { Auth0::Types::ResourceServerTokenEncryption }, optional: true, nullable: false
 

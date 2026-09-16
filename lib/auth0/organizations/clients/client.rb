@@ -31,6 +31,13 @@ module Auth0
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         #
+        # @example
+        #   client.organizations.clients.list(
+        #     id: "id",
+        #     from: "from",
+        #     take: 1
+        #   )
+        #
         # @return [Auth0::Types::ListOrganizationClientsResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -58,7 +65,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListOrganizationClientsResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationClientsResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -77,6 +84,15 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.organizations.clients.create(
+        #     id: "id",
+        #     clients: [{
+        #       client_id: "client_id",
+        #       use_for_member_access: true
+        #     }]
+        #   )
         #
         # @return [Array[Auth0::Types::OrganizationClient]]
         def create(request_options: {}, **params)
@@ -99,7 +115,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateOrganizationClientsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateOrganizationClientsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -116,6 +132,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.organizations.clients.delete(
+        #     id: "id",
+        #     clients: ["clients"]
+        #   )
         #
         # @return [untyped]
         def delete(request_options: {}, **params)
@@ -155,6 +177,12 @@ module Auth0
         # @option params [String] :id
         # @option params [String] :client_id
         #
+        # @example
+        #   client.organizations.clients.get(
+        #     id: "id",
+        #     client_id: "client_id"
+        #   )
+        #
         # @return [Auth0::Types::GetOrganizationClientResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -171,7 +199,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetOrganizationClientResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetOrganizationClientResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -189,6 +217,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         # @option params [String] :client_id
+        #
+        # @example
+        #   client.organizations.clients.update(
+        #     id: "id",
+        #     client_id: "client_id"
+        #   )
         #
         # @return [Auth0::Types::UpdateOrganizationClientResponseContent]
         def update(request_options: {}, **params)
@@ -211,7 +245,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::UpdateOrganizationClientResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::UpdateOrganizationClientResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

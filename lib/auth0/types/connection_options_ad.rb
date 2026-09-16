@@ -38,6 +38,8 @@ module Auth0
 
       field :thumbprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
+      field :thumbprints_sha384, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :upstream_params, -> { Internal::Types::Hash[String, Auth0::Types::ConnectionUpstreamAdditionalProperties] }, optional: true, nullable: false
     end
   end

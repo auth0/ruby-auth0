@@ -31,6 +31,17 @@ module Auth0
         # @option params [Boolean, nil] :include_fields
         # @option params [String, nil] :sort
         #
+        # @example
+        #   client.organizations.invitations.list(
+        #     id: "id",
+        #     page: 1,
+        #     per_page: 1,
+        #     include_totals: true,
+        #     fields: "fields",
+        #     include_fields: true,
+        #     sort: "sort"
+        #   )
+        #
         # @return [Auth0::Types::ListOrganizationInvitationsOffsetPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -63,7 +74,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListOrganizationInvitationsOffsetPaginatedResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationInvitationsOffsetPaginatedResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -86,6 +97,18 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.organizations.invitations.create(
+        #     id: "id",
+        #     inviter: {
+        #       name: "name"
+        #     },
+        #     invitee: {
+        #       email: "email"
+        #     },
+        #     client_id: "client_id"
+        #   )
+        #
         # @return [Auth0::Types::CreateOrganizationInvitationResponseContent]
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -107,7 +130,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateOrganizationInvitationResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateOrganizationInvitationResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -125,6 +148,14 @@ module Auth0
         # @option params [String] :invitation_id
         # @option params [String, nil] :fields
         # @option params [Boolean, nil] :include_fields
+        #
+        # @example
+        #   client.organizations.invitations.get(
+        #     id: "id",
+        #     invitation_id: "invitation_id",
+        #     fields: "fields",
+        #     include_fields: true
+        #   )
         #
         # @return [Auth0::Types::GetOrganizationInvitationResponseContent]
         def get(request_options: {}, **params)
@@ -147,7 +178,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetOrganizationInvitationResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetOrganizationInvitationResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -163,6 +194,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         # @option params [String] :invitation_id
+        #
+        # @example
+        #   client.organizations.invitations.delete(
+        #     id: "id",
+        #     invitation_id: "invitation_id"
+        #   )
         #
         # @return [untyped]
         def delete(request_options: {}, **params)

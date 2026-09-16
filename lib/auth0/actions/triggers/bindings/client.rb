@@ -27,6 +27,13 @@ module Auth0
           # @option params [Integer, nil] :page
           # @option params [Integer, nil] :per_page
           #
+          # @example
+          #   client.actions.triggers.bindings.list(
+          #     trigger_id: "post-login",
+          #     page: 1,
+          #     per_page: 1
+          #   )
+          #
           # @return [Auth0::Types::ListActionBindingsPaginatedResponseContent]
           def list(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -55,7 +62,7 @@ module Auth0
               end
               code = response.code.to_i
               if code.between?(200, 299)
-                parsed_response = Auth0::Types::ListActionBindingsPaginatedResponseContent.load(response.body)
+                parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListActionBindingsPaginatedResponseContent.load(response.body))
                 [parsed_response, response]
               else
                 error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -76,6 +83,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [Auth0::Types::ActionTriggerTypeEnum] :trigger_id
+          #
+          # @example
+          #   client.actions.triggers.bindings.update_many(trigger_id: "post-login")
           #
           # @return [Auth0::Types::UpdateActionBindingsResponseContent]
           def update_many(request_options: {}, **params)
@@ -98,7 +108,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdateActionBindingsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdateActionBindingsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

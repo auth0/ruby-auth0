@@ -24,6 +24,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.guardian.enrollments.create_ticket(user_id: "user_id")
+        #
         # @return [Auth0::Types::CreateGuardianEnrollmentTicketResponseContent]
         def create_ticket(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -41,7 +44,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateGuardianEnrollmentTicketResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateGuardianEnrollmentTicketResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -60,6 +63,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.guardian.enrollments.get(id: "id")
+        #
         # @return [Auth0::Types::GetGuardianEnrollmentResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -76,7 +82,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetGuardianEnrollmentResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianEnrollmentResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -95,6 +101,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.guardian.enrollments.delete(id: "id")
         #
         # @return [untyped]
         def delete(request_options: {}, **params)

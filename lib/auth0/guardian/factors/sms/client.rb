@@ -27,6 +27,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.sms.get_twilio_provider
+          #
           # @return [Auth0::Types::GetGuardianFactorsProviderSmsTwilioResponseContent]
           def get_twilio_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -42,7 +45,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorsProviderSmsTwilioResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorsProviderSmsTwilioResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -63,6 +66,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.sms.set_twilio_provider
+          #
           # @return [Auth0::Types::SetGuardianFactorsProviderSmsTwilioResponseContent]
           def set_twilio_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -80,7 +86,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderSmsTwilioResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderSmsTwilioResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -102,6 +108,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.sms.get_selected_provider
+          #
           # @return [Auth0::Types::GetGuardianFactorsProviderSmsResponseContent]
           def get_selected_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -117,7 +126,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorsProviderSmsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorsProviderSmsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -139,6 +148,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.sms.set_provider(provider: "auth0")
+          #
           # @return [Auth0::Types::SetGuardianFactorsProviderSmsResponseContent]
           def set_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -156,7 +168,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderSmsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderSmsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -178,6 +190,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.sms.get_templates
+          #
           # @return [Auth0::Types::GetGuardianFactorSmsTemplatesResponseContent, nil]
           def get_templates(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -192,10 +207,12 @@ module Auth0
               raise Auth0::Errors::TimeoutError
             end
             code = response.code.to_i
-            return if code.between?(200, 299)
-
-            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(response.body, code: code)
+            if code.between?(200, 299)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorSmsTemplatesResponseContent.load(response.body))
+            else
+              error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
           end
 
           # This endpoint has been deprecated. To complete this action, use the <a
@@ -211,6 +228,12 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.sms.set_templates(
+          #     enrollment_message: "enrollment_message",
+          #     verification_message: "verification_message"
+          #   )
           #
           # @return [Auth0::Types::SetGuardianFactorSmsTemplatesResponseContent]
           def set_templates(request_options: {}, **params)
@@ -229,7 +252,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorSmsTemplatesResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorSmsTemplatesResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

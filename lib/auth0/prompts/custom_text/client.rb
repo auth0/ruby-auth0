@@ -23,6 +23,12 @@ module Auth0
         # @option params [Auth0::Types::PromptGroupNameEnum] :prompt
         # @option params [Auth0::Types::PromptLanguageEnum] :language
         #
+        # @example
+        #   client.prompts.custom_text.get(
+        #     prompt: "login",
+        #     language: "am"
+        #   )
+        #
         # @return [Hash[String, Object]]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -39,7 +45,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetCustomTextsByLanguageResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetCustomTextsByLanguageResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -58,14 +64,26 @@ module Auth0
         # @option params [Auth0::Types::PromptGroupNameEnum] :prompt
         # @option params [Auth0::Types::PromptLanguageEnum] :language
         #
+        # @example
+        #   client.prompts.custom_text.set(
+        #     prompt: "login",
+        #     language: "am",
+        #     request: {
+        #       key: "value"
+        #     }
+        #   )
+        #
         # @return [untyped]
         def set(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          path_param_names = %i[prompt language]
+          body_params = params.except(*path_param_names)
+
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "prompts/#{URI.encode_uri_component(params[:prompt].to_s)}/custom-text/#{URI.encode_uri_component(params[:language].to_s)}",
-            body: params,
+            body: body_params,
             request_options: request_options
           )
           begin

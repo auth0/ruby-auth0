@@ -29,6 +29,18 @@ module Auth0
       # @option params [String, nil] :client_id
       # @option params [Auth0::Types::DeviceCredentialTypeEnum, nil] :type
       #
+      # @example
+      #   client.device_credentials.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     include_totals: true,
+      #     fields: "fields",
+      #     include_fields: true,
+      #     user_id: "user_id",
+      #     client_id: "client_id",
+      #     type: "public_key"
+      #   )
+      #
       # @return [Auth0::Types::ListDeviceCredentialsOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -63,7 +75,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListDeviceCredentialsOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListDeviceCredentialsOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -86,6 +98,14 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.device_credentials.create_public_key(
+      #     device_name: "device_name",
+      #     type: "public_key",
+      #     value: "value",
+      #     device_id: "device_id"
+      #   )
+      #
       # @return [Auth0::Types::CreatePublicKeyDeviceCredentialResponseContent]
       def create_public_key(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -103,7 +123,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreatePublicKeyDeviceCredentialResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreatePublicKeyDeviceCredentialResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -120,6 +140,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.device_credentials.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)

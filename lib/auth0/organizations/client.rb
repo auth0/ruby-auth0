@@ -44,6 +44,15 @@ module Auth0
       # @option params [String, nil] :sort
       # @option params [String, nil] :include_client_association_for
       #
+      # @example
+      #   client.organizations.list(
+      #     include_totals: true,
+      #     from: "from",
+      #     take: 1,
+      #     sort: "sort",
+      #     include_client_association_for: "include_client_association_for"
+      #   )
+      #
       # @return [Auth0::Types::ListOrganizationsPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -74,7 +83,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListOrganizationsPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationsPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -95,6 +104,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.organizations.create(name: "name")
+      #
       # @return [Auth0::Types::CreateOrganizationResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -112,7 +124,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateOrganizationResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateOrganizationResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -130,6 +142,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :name
       #
+      # @example
+      #   client.organizations.get_by_name(name: "name")
+      #
       # @return [Auth0::Types::GetOrganizationByNameResponseContent]
       def get_by_name(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -146,10 +161,90 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetOrganizationByNameResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetOrganizationByNameResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Retrieve details of organizations matching a search criteria. It is possible to:
+      #
+      # - Specify a search criteria for organizations
+      # - Search via `name`
+      # - Search via `display_name`
+      # - Substring matching (`contains` and `ends-with`) requires at least 3 characters
+      # - Use wildcards
+      #
+      # The `q` query parameter can be used to get organizations that match the specified criteria on `name` OR
+      # `display_name`.
+      #
+      # This endpoint supports SCIM or Lucene filter syntax with low-latency, cursor-based pagination. Use the `parser`
+      # parameter to specify "scim" or "lucene" syntax (default: "lucene").
+      #
+      # Results are eventually consistent and may not reflect recent updates immediately.
+      #
+      # **Sortable fields:** `name`, `display_name`, `created_at` (ascending only). Defaults to insertion order (oldest
+      # first).
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :q
+      # @option params [Auth0::Types::SearchParserEnum, nil] :parser
+      # @option params [Integer, nil] :take
+      # @option params [String, nil] :from
+      # @option params [Auth0::Types::OrganizationSortFieldEnum, nil] :sort
+      #
+      # @example
+      #   client.organizations.search(
+      #     q: "q",
+      #     parser: "scim",
+      #     take: 1,
+      #     from: "from",
+      #     sort: "name"
+      #   )
+      #
+      # @return [Auth0::Types::SearchOrganizationsPaginatedResponseContent]
+      def search(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        query_params = {}
+        query_params["q"] = params[:q] if params.key?(:q)
+        query_params["parser"] = params[:parser] if params.key?(:parser)
+        query_params["take"] = params.fetch(:take, 50)
+        query_params["from"] = params[:from] if params.key?(:from)
+        query_params["sort"] = params[:sort] if params.key?(:sort)
+
+        Auth0::Internal::CursorItemIterator.new(
+          cursor_field: :next_,
+          item_field: :organizations,
+          initial_cursor: query_params["from"]
+        ) do |next_cursor|
+          query_params["from"] = next_cursor
+          request = Auth0::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
+            method: "GET",
+            path: "organizations/search",
+            query: query_params,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Auth0::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::SearchOrganizationsPaginatedResponseContent.load(response.body))
+            [parsed_response, response]
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
         end
       end
 
@@ -163,6 +258,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.organizations.get(id: "id")
       #
       # @return [Auth0::Types::GetOrganizationResponseContent]
       def get(request_options: {}, **params)
@@ -180,7 +278,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetOrganizationResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetOrganizationResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -200,6 +298,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.organizations.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -235,6 +336,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.organizations.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateOrganizationResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -256,7 +360,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateOrganizationResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateOrganizationResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

@@ -55,6 +55,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.users.identities.link(id: "id")
+        #
         # @return [Array[Auth0::Types::UserIdentity]]
         def link(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -75,10 +78,12 @@ module Auth0
             raise Auth0::Errors::TimeoutError
           end
           code = response.code.to_i
-          return if code.between?(200, 299)
-
-          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          if code.between?(200, 299)
+            Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::UserIdentity], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
         end
 
         # Unlink a specific secondary account from a target user. This action requires the ID of both the target user
@@ -99,6 +104,13 @@ module Auth0
         # @option params [Auth0::Types::UserIdentityProviderEnum] :provider
         # @option params [String] :user_id
         #
+        # @example
+        #   client.users.identities.delete(
+        #     id: "id",
+        #     provider: "ad",
+        #     user_id: "user_id"
+        #   )
+        #
         # @return [Array[Auth0::Types::DeleteUserIdentityResponseContentItem]]
         def delete(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -115,7 +127,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::DeleteUserIdentityResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::DeleteUserIdentityResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

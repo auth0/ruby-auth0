@@ -103,6 +103,11 @@ module Auth0
       @groups ||= Auth0::Groups::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::Guardian::Client]
+    def guardian
+      @guardian ||= Auth0::Guardian::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Hooks::Client]
     def hooks
       @hooks ||= Auth0::Hooks::Client.new(client: @raw_client)
@@ -126,11 +131,6 @@ module Auth0
     # @return [Auth0::NetworkACLs::Client]
     def network_acls
       @network_acls ||= Auth0::NetworkACLs::Client.new(client: @raw_client)
-    end
-
-    # @return [Auth0::OrganizationTemplates::Client]
-    def organization_templates
-      @organization_templates ||= Auth0::OrganizationTemplates::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Organizations::Client]
@@ -233,9 +233,9 @@ module Auth0
       @emails ||= Auth0::Emails::Client.new(client: @raw_client)
     end
 
-    # @return [Auth0::Guardian::Client]
-    def guardian
-      @guardian ||= Auth0::Guardian::Client.new(client: @raw_client)
+    # @return [Auth0::Experimentation::Client]
+    def experimentation
+      @experimentation ||= Auth0::Experimentation::Client.new(client: @raw_client)
     end
 
     # @return [Auth0::Keys::Client]
