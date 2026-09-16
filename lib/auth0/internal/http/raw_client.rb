@@ -20,14 +20,21 @@ module Auth0
         # @return [String] The base URL for requests
         attr_reader :base_url
 
+        # @return [#call, nil] Optional callback invoked with an
+        #   {Auth0::Internal::Http::RateLimit} after every response.
+        attr_accessor :rate_limit_handler
+
         # @param base_url [String] The base url for the request.
         # @param max_retries [Integer] The number of times to retry a failed request, defaults to 2.
         # @param timeout [Float] The timeout for the request, defaults to 60.0 seconds.
         # @param headers [Hash] The headers for the request.
-        def initialize(base_url:, max_retries: 2, timeout: 60.0, headers: {})
+        # @param rate_limit_handler [#call, nil] Optional callback invoked with the
+        #   parsed rate limit (from the `x-ratelimit-*` headers) after every response.
+        def initialize(base_url:, max_retries: 2, timeout: 60.0, headers: {}, rate_limit_handler: nil)
           @base_url = base_url
           @max_retries = max_retries
           @timeout = timeout
+          @rate_limit_handler = rate_limit_handler
 
           # Auth0 telemetry in standard format
           telemetry = {
@@ -45,7 +52,7 @@ module Auth0
         end
 
         # @param request [Auth0::Internal::Http::BaseRequest] The HTTP request.
-        # @return [HTTP::Response] The HTTP response.
+        # @return [Net::HTTPResponse] The HTTP response.
         def send(request)
           url = build_url(request)
           attempt = 0
@@ -74,7 +81,21 @@ module Auth0
             attempt += 1
           end
 
+          notify_rate_limit(response)
           response
+        end
+
+        # Invokes the rate limit handler with the rate limit parsed from the
+        # response headers. Runs after retries, on every response. A handler
+        # error must never break the request, so it is swallowed.
+        # @param response [Net::HTTPResponse] The HTTP response.
+        # @return [void]
+        def notify_rate_limit(response)
+          return if @rate_limit_handler.nil?
+
+          @rate_limit_handler.call(RateLimit.from_response(response))
+        rescue StandardError
+          nil
         end
 
         # Determines if a request should be retried based on the response status code.
