@@ -1,5 +1,12 @@
 # Change Log
 
+## [v6.3.0](https://github.com/auth0/ruby-auth0/tree/v6.3.0) (2026-09-16)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.2.0...v6.3.0)
+
+**Added**
+- feat: add Experiment Center advance-ramp, Guardian AFC factor settings, and Anonymous Sessions fields; remove top-level OrganizationTemplates client [\#803](https://github.com/auth0/ruby-auth0/pull/803) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Device Authorization Flow to the Authentication API [\#794](https://github.com/auth0/ruby-auth0/pull/794) ([gagalago](https://github.com/gagalago))
+
 ## [v6.2.0](https://github.com/auth0/ruby-auth0/tree/v6.2.0) (2026-09-02)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.1.0...v6.2.0)
 
