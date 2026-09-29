@@ -39,6 +39,8 @@ module Auth0
 
       field :consent_policy, -> { Auth0::Types::ResourceServerConsentPolicyEnum }, optional: true, nullable: false
 
+      field :require_consent_non_repudiation, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :authorization_details, -> { Internal::Types::Array[Object] }, optional: true, nullable: false
 
       field :proof_of_possession, -> { Auth0::Types::ResourceServerProofOfPossession }, optional: true, nullable: false
