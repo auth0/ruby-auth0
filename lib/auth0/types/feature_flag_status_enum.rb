@@ -2,11 +2,12 @@
 
 module Auth0
   module Types
-    module OrganizationDeletionBehaviorEnum
+    module FeatureFlagStatusEnum
       extend Auth0::Internal::Types::Enum
 
-      ALLOW = "allow"
-      ALLOW_IF_EMPTY = "allow_if_empty"
+      DRAFT = "draft"
+      ACTIVE = "active"
+      ARCHIVED = "archived"
     end
   end
 end

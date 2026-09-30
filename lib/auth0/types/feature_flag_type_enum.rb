@@ -2,11 +2,11 @@
 
 module Auth0
   module Types
-    module ConnectionDeletionBehaviorEnum
+    module FeatureFlagTypeEnum
       extend Auth0::Internal::Types::Enum
 
-      ALLOW = "allow"
-      ALLOW_IF_EMPTY = "allow_if_empty"
+      AUTH0 = "auth0"
+      SELF = "self"
     end
   end
 end

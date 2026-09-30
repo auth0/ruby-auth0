@@ -10,8 +10,9 @@
     "offsetSemantics": "page-index",
     "useDefaultRequestParameterValues": true
   },
-  "originGitCommit": "147c530f85f27d4dbbec076dde0bcd7a4b17ed5c",
-  "originGitCommitIsDirty": true,
-  "invokedBy": "manual",
-  "sdkVersion": "6.2.1"
+  "originGitCommit": "d0c167e92ed941d977b98e76601bd970b0e5ecea",
+  "originGitCommitIsDirty": false,
+  "invokedBy": "ci",
+  "ciProvider": "github",
+  "sdkVersion": "6.3.1"
 }

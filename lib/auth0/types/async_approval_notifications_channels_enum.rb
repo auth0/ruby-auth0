@@ -7,6 +7,7 @@ module Auth0
 
       GUARDIAN_PUSH = "guardian-push"
       EMAIL = "email"
+      MY_ACCOUNT = "my-account"
     end
   end
 end

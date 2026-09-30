@@ -14,6 +14,7 @@ module Auth0
       EMAIL_IDENTIFIER_CHANGED = "email-identifier-changed"
       MFA_PHONE_UNENROLLED = "mfa-phone-unenrolled"
       ACCOUNT_DEACTIVATED = "account-deactivated"
+      PROFILE_CHANGED = "profile-changed"
     end
   end
 end
