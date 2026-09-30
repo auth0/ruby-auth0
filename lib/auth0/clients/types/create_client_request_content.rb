@@ -119,6 +119,8 @@ module Auth0
         field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationPostConfiguration }, optional: true, nullable: false
 
         field :async_approval_notification_channels, -> { Internal::Types::Array[Auth0::Types::AsyncApprovalNotificationsChannelsEnum] }, optional: true, nullable: false
+
+        field :oidc_support, -> { Auth0::Types::ClientOidcSupportPost }, optional: true, nullable: false
       end
     end
   end
