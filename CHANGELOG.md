@@ -1,5 +1,11 @@
 # Change Log
 
+## [v6.4.0](https://github.com/auth0/ruby-auth0/tree/v6.4.0) (2026-09-30)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.3.0...v6.4.0)
+
+**Added**
+- feat: adds Experiment Center APIs (EA), client OIDC support, and consent non-repudiation; removes organization template sub-client [\#808](https://github.com/auth0/ruby-auth0/pull/808) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.3.0](https://github.com/auth0/ruby-auth0/tree/v6.3.0) (2026-09-16)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.2.0...v6.3.0)
 
