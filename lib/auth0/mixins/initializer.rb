@@ -21,6 +21,7 @@ module Auth0
         @management_timeout = options[:management_timeout]
         @management_max_retries = options[:management_max_retries]
         @management_additional_headers = options[:management_additional_headers]
+        @management_rate_limit_handler = options[:management_rate_limit_handler]
         extend Auth0::Api::AuthenticationEndpoints
 
         @client_id = options[:client_id]
