@@ -29,6 +29,15 @@ module Auth0
               # @option params [Integer, nil] :take
               # @option params [String] :role_id
               #
+              # @example
+              #   client.organizations.members.effective_roles.sources.groups.list(
+              #     id: "id",
+              #     user_id: "user_id",
+              #     from: "from",
+              #     take: 1,
+              #     role_id: "role_id"
+              #   )
+              #
               # @return [Auth0::Types::ListOrganizationMemberRoleSourceGroupsResponseContent]
               def list(request_options: {}, **params)
                 params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -57,7 +66,7 @@ module Auth0
                   end
                   code = response.code.to_i
                   if code.between?(200, 299)
-                    parsed_response = Auth0::Types::ListOrganizationMemberRoleSourceGroupsResponseContent.load(response.body)
+                    parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationMemberRoleSourceGroupsResponseContent.load(response.body))
                     [parsed_response, response]
                   else
                     error_class = Auth0::Errors::ResponseError.subclass_for_code(code)

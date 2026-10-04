@@ -25,6 +25,13 @@ module Auth0
         # @option params [Integer, nil] :page
         # @option params [Integer, nil] :per_page
         #
+        # @example
+        #   client.actions.versions.list(
+        #     action_id: "actionId",
+        #     page: 1,
+        #     per_page: 1
+        #   )
+        #
         # @return [Auth0::Types::ListActionVersionsPaginatedResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -53,7 +60,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListActionVersionsPaginatedResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListActionVersionsPaginatedResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -75,6 +82,12 @@ module Auth0
         # @option params [String] :action_id
         # @option params [String] :id
         #
+        # @example
+        #   client.actions.versions.get(
+        #     action_id: "actionId",
+        #     id: "id"
+        #   )
+        #
         # @return [Auth0::Types::GetActionVersionResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -91,7 +104,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetActionVersionResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetActionVersionResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -112,14 +125,24 @@ module Auth0
         # @option params [String] :action_id
         # @option params [String] :id
         #
+        # @example
+        #   client.actions.versions.deploy(
+        #     action_id: "actionId",
+        #     id: "id",
+        #     request: {}
+        #   )
+        #
         # @return [Auth0::Types::DeployActionVersionResponseContent]
         def deploy(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          path_param_names = %i[action_id id]
+          body_params = params.except(*path_param_names)
+
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "POST",
             path: "actions/actions/#{URI.encode_uri_component(params[:action_id].to_s)}/versions/#{URI.encode_uri_component(params[:id].to_s)}/deploy",
-            body: params,
+            body: body_params,
             request_options: request_options
           )
           begin
@@ -129,7 +152,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::DeployActionVersionResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::DeployActionVersionResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

@@ -66,6 +66,8 @@ module Auth0
 
         field :identity_assertion_authorization_grant, -> { Auth0::Types::UpdateIdentityAssertionAuthorizationGrant }, optional: true, nullable: false
 
+        field :anonymous_sessions, -> { Auth0::Types::UpdateAnonymousSessions }, optional: true, nullable: false
+
         field :form_template, -> { String }, optional: true, nullable: false
 
         field :addons, -> { Auth0::Types::ClientAddons }, optional: true, nullable: false
@@ -109,6 +111,8 @@ module Auth0
         field :par_request_expiry, -> { Integer }, optional: true, nullable: false
 
         field :express_configuration, -> { Auth0::Types::ExpressConfigurationOrNull }, optional: true, nullable: false
+
+        field :b2b_integration_configuration, -> { Auth0::Types::B2BIntegrationConfiguration }, optional: true, nullable: false
 
         field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationPatchConfiguration }, optional: true, nullable: false
 

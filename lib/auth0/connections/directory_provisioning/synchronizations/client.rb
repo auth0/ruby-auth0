@@ -23,6 +23,9 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
           #
+          # @example
+          #   client.connections.directory_provisioning.synchronizations.create(id: "id")
+          #
           # @return [Auth0::Types::CreateDirectorySynchronizationResponseContent]
           def create(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -39,7 +42,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::CreateDirectorySynchronizationResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::CreateDirectorySynchronizationResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

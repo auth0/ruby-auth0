@@ -13,6 +13,10 @@ module Auth0
       field :show_as_button, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :is_signup_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :is_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :organization_access_level, -> { Auth0::Types::EventStreamCloudEventOrgConnectionAddedObjectOrganizationAccessLevel }, optional: true, nullable: false
     end
   end
 end

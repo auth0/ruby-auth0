@@ -21,6 +21,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.tickets.verify_email(user_id: "user_id")
+      #
       # @return [Auth0::Types::VerifyEmailTicketResponseContent]
       def verify_email(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -38,7 +41,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::VerifyEmailTicketResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::VerifyEmailTicketResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -59,6 +62,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.tickets.change_password
+      #
       # @return [Auth0::Types::ChangePasswordTicketResponseContent]
       def change_password(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -76,7 +82,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::ChangePasswordTicketResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::ChangePasswordTicketResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

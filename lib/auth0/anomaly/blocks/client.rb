@@ -24,6 +24,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Auth0::Types::AnomalyIPFormat] :id
         #
+        # @example
+        #   client.anomaly.blocks.check_ip(id: "id")
+        #
         # @return [untyped]
         def check_ip(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -57,6 +60,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Auth0::Types::AnomalyIPFormat] :id
+        #
+        # @example
+        #   client.anomaly.blocks.unblock_ip(id: "id")
         #
         # @return [untyped]
         def unblock_ip(request_options: {}, **params)

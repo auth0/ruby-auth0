@@ -23,6 +23,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.get_apns_provider
+          #
           # @return [Auth0::Types::GetGuardianFactorsProviderApnsResponseContent]
           def get_apns_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -38,7 +41,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorsProviderApnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorsProviderApnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -55,6 +58,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.set_apns_provider
           #
           # @return [Auth0::Types::SetGuardianFactorsProviderPushNotificationApnsResponseContent]
           def set_apns_provider(request_options: {}, **params)
@@ -73,7 +79,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderPushNotificationApnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderPushNotificationApnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -89,6 +95,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.update_apns_provider
           #
           # @return [Auth0::Types::UpdateGuardianFactorsProviderPushNotificationApnsResponseContent]
           def update_apns_provider(request_options: {}, **params)
@@ -107,7 +116,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdateGuardianFactorsProviderPushNotificationApnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdateGuardianFactorsProviderPushNotificationApnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -124,6 +133,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.set_fcm_provider
           #
           # @return [Hash[String, Object]]
           def set_fcm_provider(request_options: {}, **params)
@@ -142,7 +154,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderPushNotificationFcmResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderPushNotificationFcmResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -158,6 +170,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.update_fcm_provider
           #
           # @return [Hash[String, Object]]
           def update_fcm_provider(request_options: {}, **params)
@@ -176,7 +191,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdateGuardianFactorsProviderPushNotificationFcmResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdateGuardianFactorsProviderPushNotificationFcmResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -193,6 +208,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.set_fcmv1provider
           #
           # @return [Hash[String, Object]]
           def set_fcmv1provider(request_options: {}, **params)
@@ -211,7 +229,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderPushNotificationFcmv1ResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderPushNotificationFcmv1ResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -227,6 +245,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.guardian.factors.push_notification.update_fcmv1provider
           #
           # @return [Hash[String, Object]]
           def update_fcmv1provider(request_options: {}, **params)
@@ -245,7 +266,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdateGuardianFactorsProviderPushNotificationFcmv1ResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdateGuardianFactorsProviderPushNotificationFcmv1ResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -264,6 +285,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.get_sns_provider
+          #
           # @return [Auth0::Types::GetGuardianFactorsProviderSnsResponseContent]
           def get_sns_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -279,7 +303,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorsProviderSnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorsProviderSnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -298,6 +322,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.set_sns_provider
+          #
           # @return [Auth0::Types::SetGuardianFactorsProviderPushNotificationSnsResponseContent]
           def set_sns_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -315,7 +342,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderPushNotificationSnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderPushNotificationSnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -334,6 +361,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.update_sns_provider
+          #
           # @return [Auth0::Types::UpdateGuardianFactorsProviderPushNotificationSnsResponseContent]
           def update_sns_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -351,7 +381,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdateGuardianFactorsProviderPushNotificationSnsResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdateGuardianFactorsProviderPushNotificationSnsResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -370,6 +400,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.get_selected_provider
+          #
           # @return [Auth0::Types::GetGuardianFactorsProviderPushNotificationResponseContent]
           def get_selected_provider(request_options: {}, **_params)
             request = Auth0::Internal::JSON::Request.new(
@@ -385,7 +418,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetGuardianFactorsProviderPushNotificationResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetGuardianFactorsProviderPushNotificationResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -404,6 +437,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           #
+          # @example
+          #   client.guardian.factors.push_notification.set_provider(provider: "guardian")
+          #
           # @return [Auth0::Types::SetGuardianFactorsProviderPushNotificationResponseContent]
           def set_provider(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -421,7 +457,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::SetGuardianFactorsProviderPushNotificationResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::SetGuardianFactorsProviderPushNotificationResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

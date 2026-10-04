@@ -47,6 +47,8 @@ module Auth0
 
       field :enabled_locales, -> { Internal::Types::Array[Auth0::Types::SupportedLocales] }, optional: true, nullable: false
 
+      field :access_token, -> { Auth0::Types::ResourceServerAccessToken }, optional: true, nullable: false
+
       field :security_headers, -> { Auth0::Types::TenantSettingsNullableSecurityHeaders }, optional: true, nullable: false
 
       field :session_cookie, -> { Auth0::Types::SessionCookieSchema }, optional: true, nullable: false

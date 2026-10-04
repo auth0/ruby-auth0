@@ -29,6 +29,13 @@ module Auth0
         # @option params [Integer, nil] :take
         # @option params [String, nil] :from
         #
+        # @example
+        #   client.connections.clients.get(
+        #     id: "id",
+        #     take: 1,
+        #     from: "from"
+        #   )
+        #
         # @return [Auth0::Types::GetConnectionEnabledClientsResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -56,7 +63,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::GetConnectionEnabledClientsResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::GetConnectionEnabledClientsResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -74,14 +81,26 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.connections.clients.update(
+        #     id: "id",
+        #     request: [{
+        #       client_id: "client_id",
+        #       status: true
+        #     }]
+        #   )
+        #
         # @return [untyped]
         def update(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          path_param_names = %i[id]
+          body_params = params.except(*path_param_names)
+
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PATCH",
             path: "connections/#{URI.encode_uri_component(params[:id].to_s)}/clients",
-            body: params,
+            body: body_params,
             request_options: request_options
           )
           begin

@@ -106,15 +106,21 @@ module Auth0
 
         field :identity_assertion_authorization_grant, -> { Auth0::Types::CreateIdentityAssertionAuthorizationGrant }, optional: true, nullable: false
 
+        field :anonymous_sessions, -> { Auth0::Types::CreateAnonymousSessions }, optional: true, nullable: false
+
         field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
         field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false
 
         field :express_configuration, -> { Auth0::Types::ExpressConfiguration }, optional: true, nullable: false
 
+        field :b2b_integration_configuration, -> { Auth0::Types::B2BIntegrationConfiguration }, optional: true, nullable: false
+
         field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationPostConfiguration }, optional: true, nullable: false
 
         field :async_approval_notification_channels, -> { Internal::Types::Array[Auth0::Types::AsyncApprovalNotificationsChannelsEnum] }, optional: true, nullable: false
+
+        field :oidc_support, -> { Auth0::Types::ClientOidcSupportPost }, optional: true, nullable: false
       end
     end
   end

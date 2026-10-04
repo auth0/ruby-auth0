@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+module Auth0
+  module Guardian
+    module Factors
+      module Email
+        module Types
+          class SetEmailFactorSettingsRequestContent < Internal::Types::Model
+            field :otp_length, -> { Integer }, optional: false, nullable: false
+
+            field :otp_expiration_time, -> { Integer }, optional: false, nullable: false
+          end
+        end
+      end
+    end
+  end
+end

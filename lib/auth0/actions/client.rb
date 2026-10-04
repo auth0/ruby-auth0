@@ -26,6 +26,16 @@ module Auth0
       # @option params [Integer, nil] :per_page
       # @option params [Boolean, nil] :installed
       #
+      # @example
+      #   client.actions.list(
+      #     trigger_id: "post-login",
+      #     action_name: "actionName",
+      #     deployed: true,
+      #     page: 1,
+      #     per_page: 1,
+      #     installed: true
+      #   )
+      #
       # @return [Auth0::Types::ListActionsPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -58,7 +68,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListActionsPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListActionsPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -78,6 +88,14 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.actions.create(
+      #     name: "name",
+      #     supported_triggers: [{
+      #       id: "post-login"
+      #     }]
+      #   )
+      #
       # @return [Auth0::Types::CreateActionResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -95,7 +113,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateActionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateActionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -113,6 +131,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.actions.get(id: "id")
+      #
       # @return [Auth0::Types::GetActionResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -129,7 +150,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetActionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetActionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -148,6 +169,12 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       # @option params [Boolean, nil] :force
+      #
+      # @example
+      #   client.actions.delete(
+      #     id: "id",
+      #     force: true
+      #   )
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -186,6 +213,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.actions.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateActionResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -207,7 +237,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateActionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateActionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -227,6 +257,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.actions.deploy(id: "id")
+      #
       # @return [Auth0::Types::DeployActionResponseContent]
       def deploy(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -243,7 +276,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::DeployActionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::DeployActionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -261,6 +294,14 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.actions.test(
+      #     id: "id",
+      #     payload: {
+      #       key: "value"
+      #     }
+      #   )
       #
       # @return [Auth0::Types::TestActionResponseContent]
       def test(request_options: {}, **params)
@@ -283,7 +324,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::TestActionResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::TestActionResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

@@ -29,6 +29,15 @@ module Auth0
             # @option params [String] :resource_server_identifier
             # @option params [String] :permission_name
             #
+            # @example
+            #   client.users.effective_permissions.sources.roles.list(
+            #     id: "id",
+            #     from: "from",
+            #     take: 1,
+            #     resource_server_identifier: "resource_server_identifier",
+            #     permission_name: "permission_name"
+            #   )
+            #
             # @return [Auth0::Types::ListUserEffectivePermissionRoleSourcesResponseContent]
             def list(request_options: {}, **params)
               params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -58,7 +67,7 @@ module Auth0
                 end
                 code = response.code.to_i
                 if code.between?(200, 299)
-                  parsed_response = Auth0::Types::ListUserEffectivePermissionRoleSourcesResponseContent.load(response.body)
+                  parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListUserEffectivePermissionRoleSourcesResponseContent.load(response.body))
                   [parsed_response, response]
                 else
                   error_class = Auth0::Errors::ResponseError.subclass_for_code(code)

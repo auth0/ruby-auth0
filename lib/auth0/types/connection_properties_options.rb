@@ -70,6 +70,10 @@ module Auth0
 
       field :dpop_signing_alg, -> { Auth0::Types::ConnectionDpopSigningAlgEnum }, optional: true, nullable: false
 
+      field :enable_pushed_authorization_requests, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :pushed_authorization_request_endpoint, -> { String }, optional: true, nullable: false
+
       field :token_endpoint_auth_method, -> { Auth0::Types::ConnectionTokenEndpointAuthMethodEnum }, optional: true, nullable: false
 
       field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false
@@ -83,6 +87,10 @@ module Auth0
       field :discovery_url, -> { String }, optional: true, nullable: false
 
       field :oidc_metadata, -> { Auth0::Types::ConnectionsOidcMetadata }, optional: true, nullable: false
+
+      field :thumbprints, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
+      field :thumbprints_sha384, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end
 end

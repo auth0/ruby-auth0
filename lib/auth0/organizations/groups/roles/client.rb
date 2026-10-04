@@ -26,6 +26,14 @@ module Auth0
           # @option params [String, nil] :from
           # @option params [Integer, nil] :take
           #
+          # @example
+          #   client.organizations.groups.roles.list(
+          #     organization_id: "organization_id",
+          #     group_id: "group_id",
+          #     from: "from",
+          #     take: 1
+          #   )
+          #
           # @return [Auth0::Types::ListOrganizationGroupRolesResponseContent]
           def list(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -53,7 +61,7 @@ module Auth0
               end
               code = response.code.to_i
               if code.between?(200, 299)
-                parsed_response = Auth0::Types::ListOrganizationGroupRolesResponseContent.load(response.body)
+                parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListOrganizationGroupRolesResponseContent.load(response.body))
                 [parsed_response, response]
               else
                 error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -73,6 +81,13 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :organization_id
           # @option params [String] :group_id
+          #
+          # @example
+          #   client.organizations.groups.roles.create(
+          #     organization_id: "organization_id",
+          #     group_id: "group_id",
+          #     roles: ["roles"]
+          #   )
           #
           # @return [untyped]
           def create(request_options: {}, **params)
@@ -111,6 +126,13 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :organization_id
           # @option params [String] :group_id
+          #
+          # @example
+          #   client.organizations.groups.roles.delete(
+          #     organization_id: "organization_id",
+          #     group_id: "group_id",
+          #     roles: ["roles"]
+          #   )
           #
           # @return [untyped]
           def delete(request_options: {}, **params)

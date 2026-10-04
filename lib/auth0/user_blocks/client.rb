@@ -24,6 +24,12 @@ module Auth0
       # @option params [String] :identifier
       # @option params [Boolean, nil] :consider_brute_force_enablement
       #
+      # @example
+      #   client.user_blocks.list_by_identifier(
+      #     identifier: "identifier",
+      #     consider_brute_force_enablement: true
+      #   )
+      #
       # @return [Auth0::Types::ListUserBlocksByIdentifierResponseContent]
       def list_by_identifier(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -45,7 +51,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::ListUserBlocksByIdentifierResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::ListUserBlocksByIdentifierResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -66,6 +72,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :identifier
+      #
+      # @example
+      #   client.user_blocks.delete_by_identifier(identifier: "identifier")
       #
       # @return [untyped]
       def delete_by_identifier(request_options: {}, **params)
@@ -106,6 +115,12 @@ module Auth0
       # @option params [String] :id
       # @option params [Boolean, nil] :consider_brute_force_enablement
       #
+      # @example
+      #   client.user_blocks.list(
+      #     id: "id",
+      #     consider_brute_force_enablement: true
+      #   )
+      #
       # @return [Auth0::Types::ListUserBlocksResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -126,7 +141,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::ListUserBlocksResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::ListUserBlocksResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -147,6 +162,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.user_blocks.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)

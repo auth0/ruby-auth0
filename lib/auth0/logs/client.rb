@@ -64,6 +64,17 @@ module Auth0
       # @option params [Boolean, nil] :include_totals
       # @option params [String, nil] :search
       #
+      # @example
+      #   client.logs.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     sort: "sort",
+      #     fields: "fields",
+      #     include_fields: true,
+      #     include_totals: true,
+      #     search: "search"
+      #   )
+      #
       # @return [Auth0::Types::ListLogOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -97,7 +108,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListLogOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListLogOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -117,6 +128,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.logs.get(id: "id")
+      #
       # @return [Auth0::Types::GetLogResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -133,7 +147,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetLogResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetLogResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

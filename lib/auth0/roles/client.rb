@@ -29,6 +29,16 @@ module Auth0
       # @option params [Auth0::Types::RoleTypeEnum, nil] :type
       # @option params [String, nil] :owner_id
       #
+      # @example
+      #   client.roles.list(
+      #     per_page: 1,
+      #     page: 1,
+      #     include_totals: true,
+      #     name_filter: "name_filter",
+      #     type: "tenant",
+      #     owner_id: "owner_id"
+      #   )
+      #
       # @return [Auth0::Types::ListRolesOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -61,7 +71,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListRolesOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListRolesOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -83,6 +93,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.roles.create(name: "name")
+      #
       # @return [Auth0::Types::CreateRoleResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -100,7 +113,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateRoleResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateRoleResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -119,6 +132,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.roles.get(id: "id")
+      #
       # @return [Auth0::Types::GetRoleResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -135,7 +151,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetRoleResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetRoleResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -153,6 +169,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.roles.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -187,6 +206,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.roles.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateRoleResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -208,7 +230,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateRoleResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateRoleResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

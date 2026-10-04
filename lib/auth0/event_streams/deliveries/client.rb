@@ -26,6 +26,17 @@ module Auth0
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         #
+        # @example
+        #   client.event_streams.deliveries.list(
+        #     id: "id",
+        #     statuses: "statuses",
+        #     event_types: "event_types",
+        #     date_from: "date_from",
+        #     date_to: "date_to",
+        #     from: "from",
+        #     take: 1
+        #   )
+        #
         # @return [Auth0::Types::ListEventStreamDeliveriesResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -57,7 +68,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListEventStreamDeliveriesResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListEventStreamDeliveriesResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -76,6 +87,12 @@ module Auth0
         # @option params [String] :id
         # @option params [String] :event_id
         #
+        # @example
+        #   client.event_streams.deliveries.get_history(
+        #     id: "id",
+        #     event_id: "event_id"
+        #   )
+        #
         # @return [Auth0::Types::GetEventStreamDeliveryHistoryResponseContent]
         def get_history(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -92,7 +109,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetEventStreamDeliveryHistoryResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetEventStreamDeliveryHistoryResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

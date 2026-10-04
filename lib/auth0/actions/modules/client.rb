@@ -23,6 +23,12 @@ module Auth0
         # @option params [Integer, nil] :page
         # @option params [Integer, nil] :per_page
         #
+        # @example
+        #   client.actions.modules.list(
+        #     page: 1,
+        #     per_page: 1
+        #   )
+        #
         # @return [Auth0::Types::GetActionModulesResponseContent]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -51,7 +57,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::GetActionModulesResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::GetActionModulesResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -70,6 +76,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.actions.modules.create(
+        #     name: "name",
+        #     code: "code"
+        #   )
+        #
         # @return [Auth0::Types::CreateActionModuleResponseContent]
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -87,7 +99,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateActionModuleResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateActionModuleResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -105,6 +117,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.actions.modules.get(id: "id")
+        #
         # @return [Auth0::Types::GetActionModuleResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -121,7 +136,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetActionModuleResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetActionModuleResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -138,6 +153,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.actions.modules.delete(id: "id")
         #
         # @return [untyped]
         def delete(request_options: {}, **params)
@@ -171,6 +189,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.actions.modules.update(id: "id")
+        #
         # @return [Auth0::Types::UpdateActionModuleResponseContent]
         def update(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -192,7 +213,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::UpdateActionModuleResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::UpdateActionModuleResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -212,6 +233,13 @@ module Auth0
         # @option params [String] :id
         # @option params [Integer, nil] :page
         # @option params [Integer, nil] :per_page
+        #
+        # @example
+        #   client.actions.modules.list_actions(
+        #     id: "id",
+        #     page: 1,
+        #     per_page: 1
+        #   )
         #
         # @return [Auth0::Types::GetActionModuleActionsResponseContent]
         def list_actions(request_options: {}, **params)
@@ -241,7 +269,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::GetActionModuleActionsResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::GetActionModuleActionsResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -261,6 +289,12 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
+        #
+        # @example
+        #   client.actions.modules.rollback(
+        #     id: "id",
+        #     module_version_id: "module_version_id"
+        #   )
         #
         # @return [Auth0::Types::RollbackActionModuleResponseContent]
         def rollback(request_options: {}, **params)
@@ -283,7 +317,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::RollbackActionModuleResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::RollbackActionModuleResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

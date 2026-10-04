@@ -24,6 +24,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.users.authenticators.delete_all(id: "id")
+        #
         # @return [untyped]
         def delete_all(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)

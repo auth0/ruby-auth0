@@ -50,6 +50,8 @@ module Auth0
 
       field :upstream_params, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
 
+      field :use_oauth_spec_scope, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "useOauthSpecScope"
+
       field :userinfo_endpoint, -> { String }, optional: true, nullable: false
 
       field :attribute_map, -> { Auth0::Types::EventStreamCloudEventConnectionDeletedObject0OptionsAttributeMap }, optional: true, nullable: false

@@ -39,6 +39,8 @@ module Auth0
 
       field :op_tos_uri, -> { String }, optional: true, nullable: false
 
+      field :pushed_authorization_request_endpoint, -> { String }, optional: true, nullable: false
+
       field :registration_endpoint, -> { String }, optional: true, nullable: false
 
       field :request_object_encryption_alg_values_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false
@@ -50,6 +52,8 @@ module Auth0
       field :request_parameter_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :request_uri_parameter_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :require_pushed_authorization_requests, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :require_request_uri_registration, -> { Internal::Types::Boolean }, optional: true, nullable: false
 

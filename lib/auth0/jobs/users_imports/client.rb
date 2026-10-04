@@ -25,31 +25,39 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.jobs.users_imports.create
+        #
         # @return [Auth0::Types::CreateImportUsersResponseContent]
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
           body = Internal::Multipart::FormData.new
 
-          body.add_part(params[:users].to_form_data_part(name: "users")) if params[:users]
-          if params[:connection_id]
+          if params[:users]
+            body.add_file(
+              name: "users",
+              file: params[:users]
+            )
+          end
+          unless params[:connection_id].nil?
             body.add(
               name: "connection_id",
               value: params[:connection_id]
             )
           end
-          if params[:upsert]
+          unless params[:upsert].nil?
             body.add(
               name: "upsert",
               value: params[:upsert]
             )
           end
-          if params[:external_id]
+          unless params[:external_id].nil?
             body.add(
               name: "external_id",
               value: params[:external_id]
             )
           end
-          if params[:send_completion_email]
+          unless params[:send_completion_email].nil?
             body.add(
               name: "send_completion_email",
               value: params[:send_completion_email]
@@ -70,7 +78,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateImportUsersResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateImportUsersResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

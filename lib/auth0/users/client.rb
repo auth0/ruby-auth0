@@ -10,28 +10,35 @@ module Auth0
         @client = client
       end
 
-      # Retrieve details of users. It is possible to:
+      # This endpoint retrieves details of users. It's best suited to interactive, best-effort search and lookups where
+      # slightly stale results are acceptable. With it, you can:
       #
-      # - Specify a search criteria for users
+      # - Specify search criteria for users
       # - Sort the users to be returned
       # - Select the fields to be returned
       # - Specify the number of users to retrieve per page and the page index
       #
+      # This endpoint is **not suited for use in critical paths**. It is eventually consistent and runs under a short
+      # (~2 second) query time limit, so results can be stale and heavy queries can return a 503.
       #
+      # - Do not use this endpoint for authentication, account linking, or logic inside login-flow Actions. Instead,
+      # [look users up directly by ID or
+      # email](https://auth0.com/docs/manage-users/user-search/get-users-by-id-or-email#management-api) to get their
+      # current state.
+      # - Do not use this endpoint to keep an external system in sync with user data. Instead, subscribe to [Event
+      # Streams](https://auth0.com/docs/customize/events/sync-data-across-systems) to receive every change as it
+      # happens.
+      # - Do not use this endpoint to enumerate or export your entire user base. Instead, run a [bulk user
+      # export](https://auth0.com/docs/manage-users/user-migration/bulk-user-exports) to retrieve the full set.
       #
-      # The `q` query parameter can be used to get users that match the specified criteria [using query string
-      # syntax.](https://auth0.com/docs/users/search/v3/query-syntax)
+      # Use the `q` query parameter to match users with [query string
+      # syntax](https://auth0.com/docs/manage-users/user-search/user-search-query-syntax). For full instructions and
+      # guidance, see [How to List and Search
+      # Users](https://auth0.com/docs/manage-users/user-search/list-and-search-users).
       #
-      # [Learn more about searching for users.](https://auth0.com/docs/users/search/v3)
-      #
-      # Read about [best practices](https://auth0.com/docs/users/search/best-practices) when working with the API
-      # endpoints for retrieving users.
-      #
-      #
-      #
-      # Auth0 limits the number of users you can return. If you exceed this threshold, please redefine your search, use
-      # the [export job](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_exports), or the [User Import /
-      # Export](https://auth0.com/docs/extensions/user-import-export) extension.
+      # For efficient queries, prefer indexed top-level fields and exact matches. Certain kinds of queries can be slow
+      # and may time out, such as filtering on freeform or multi-value fields (like user-defined attributes in
+      # `app_metadata` or `user_metadata`) or using leading wildcards.
       #
       # @param request_options [Hash]
       # @param params [Hash]
@@ -50,6 +57,20 @@ module Auth0
       # @option params [String, nil] :q
       # @option params [Auth0::Types::SearchEngineVersionsEnum, nil] :search_engine
       # @option params [Boolean, nil] :primary_order
+      #
+      # @example
+      #   client.users.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     include_totals: true,
+      #     sort: "sort",
+      #     connection: "connection",
+      #     fields: "fields",
+      #     include_fields: true,
+      #     q: "q",
+      #     search_engine: "v1",
+      #     primary_order: true
+      #   )
       #
       # @return [Auth0::Types::ListUsersOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
@@ -87,7 +108,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListUsersOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListUsersOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -110,6 +131,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.users.create(connection: "connection")
+      #
       # @return [Auth0::Types::CreateUserResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -127,7 +151,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -154,6 +178,13 @@ module Auth0
       # @option params [Boolean, nil] :include_fields
       # @option params [String] :email
       #
+      # @example
+      #   client.users.list_users_by_email(
+      #     fields: "fields",
+      #     include_fields: true,
+      #     email: "email"
+      #   )
+      #
       # @return [Array[Auth0::Types::UserResponseSchema]]
       def list_users_by_email(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -175,10 +206,12 @@ module Auth0
           raise Auth0::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::UserResponseSchema], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # Retrieve user details. A list of fields to include or exclude may also be specified. For more information, see
@@ -195,6 +228,13 @@ module Auth0
       # @option params [String] :id
       # @option params [String, nil] :fields
       # @option params [Boolean, nil] :include_fields
+      #
+      # @example
+      #   client.users.get(
+      #     id: "id",
+      #     fields: "fields",
+      #     include_fields: true
+      #   )
       #
       # @return [Auth0::Types::GetUserResponseContent]
       def get(request_options: {}, **params)
@@ -217,7 +257,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -235,6 +275,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.users.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -364,6 +407,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.users.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateUserResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -385,7 +431,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateUserResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateUserResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -406,6 +452,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.users.regenerate_recovery_code(id: "id")
+      #
       # @return [Auth0::Types::RegenerateUsersRecoveryCodeResponseContent]
       def regenerate_recovery_code(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -422,7 +471,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::RegenerateUsersRecoveryCodeResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::RegenerateUsersRecoveryCodeResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -439,6 +488,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.users.revoke_access(id: "id")
       #
       # @return [untyped]
       def revoke_access(request_options: {}, **params)

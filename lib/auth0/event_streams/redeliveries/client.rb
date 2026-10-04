@@ -20,6 +20,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.event_streams.redeliveries.create(id: "id")
+        #
         # @return [Auth0::Types::CreateEventStreamRedeliveryResponseContent]
         def create(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -41,7 +44,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::CreateEventStreamRedeliveryResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::CreateEventStreamRedeliveryResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -57,6 +60,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         # @option params [String] :event_id
+        #
+        # @example
+        #   client.event_streams.redeliveries.create_by_id(
+        #     id: "id",
+        #     event_id: "event_id"
+        #   )
         #
         # @return [untyped]
         def create_by_id(request_options: {}, **params)

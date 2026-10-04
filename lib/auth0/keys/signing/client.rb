@@ -21,6 +21,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
+        # @example
+        #   client.keys.signing.list
+        #
         # @return [Array[Auth0::Types::SigningKeys]]
         def list(request_options: {}, **_params)
           request = Auth0::Internal::JSON::Request.new(
@@ -35,10 +38,12 @@ module Auth0
             raise Auth0::Errors::TimeoutError
           end
           code = response.code.to_i
-          return if code.between?(200, 299)
-
-          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(response.body, code: code)
+          if code.between?(200, 299)
+            Auth0::Internal::Types::Utils.coerce(Internal::Types::Array[Auth0::Types::SigningKeys], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
         end
 
         # Rotate the application signing key of your tenant.
@@ -50,6 +55,9 @@ module Auth0
         # @option request_options [Hash{String => Object}] :additional_query_parameters
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @example
+        #   client.keys.signing.rotate
         #
         # @return [Auth0::Types::RotateSigningKeysResponseContent]
         def rotate(request_options: {}, **_params)
@@ -66,7 +74,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::RotateSigningKeysResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::RotateSigningKeysResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -84,6 +92,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :kid
         #
+        # @example
+        #   client.keys.signing.get(kid: "kid")
+        #
         # @return [Auth0::Types::GetSigningKeysResponseContent]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -100,7 +111,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetSigningKeysResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetSigningKeysResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -118,6 +129,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :kid
         #
+        # @example
+        #   client.keys.signing.revoke(kid: "kid")
+        #
         # @return [Auth0::Types::RevokedSigningKeysResponseContent]
         def revoke(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -134,7 +148,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::RevokedSigningKeysResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::RevokedSigningKeysResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

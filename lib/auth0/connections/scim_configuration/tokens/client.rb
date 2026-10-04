@@ -23,6 +23,9 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
           #
+          # @example
+          #   client.connections.scim_configuration.tokens.get(id: "id")
+          #
           # @return [Array[Auth0::Types::SCIMTokenItem]]
           def get(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -39,7 +42,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetSCIMTokensResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetSCIMTokensResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -56,6 +59,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
+          #
+          # @example
+          #   client.connections.scim_configuration.tokens.create(id: "id")
           #
           # @return [Auth0::Types::CreateSCIMTokenResponseContent]
           def create(request_options: {}, **params)
@@ -78,7 +84,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::CreateSCIMTokenResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::CreateSCIMTokenResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -96,6 +102,12 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
           # @option params [String] :token_id
+          #
+          # @example
+          #   client.connections.scim_configuration.tokens.delete(
+          #     id: "id",
+          #     token_id: "tokenId"
+          #   )
           #
           # @return [untyped]
           def delete(request_options: {}, **params)

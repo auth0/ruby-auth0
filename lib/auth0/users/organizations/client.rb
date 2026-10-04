@@ -14,6 +14,24 @@ module Auth0
         # Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For
         # more information, review [Auth0 Organizations](https://auth0.com/docs/manage-users/organizations).
         #
+        # This endpoint supports two types of pagination:
+        #
+        # - Offset pagination
+        # - Checkpoint pagination
+        #
+        # Checkpoint pagination must be used if you need to retrieve more than 1000 organizations.
+        #
+        # **Checkpoint Pagination**
+        #
+        # To search by checkpoint, use the following parameters:
+        #
+        # - `from`: Optional id from which to start selection.
+        # - `take`: The total number of entries to retrieve when using the `from` parameter. Defaults to 50.
+        #
+        # **Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If
+        # there are more results, a `next` value is included in the response. You can use this for subsequent API calls.
+        # When `next` is no longer included in the response, no pages are remaining.
+        #
         # @param request_options [Hash]
         # @param params [Hash]
         # @option request_options [String] :base_url
@@ -25,6 +43,14 @@ module Auth0
         # @option params [Integer, nil] :page
         # @option params [Integer, nil] :per_page
         # @option params [Boolean, nil] :include_totals
+        #
+        # @example
+        #   client.users.organizations.list(
+        #     id: "id",
+        #     page: 1,
+        #     per_page: 1,
+        #     include_totals: true
+        #   )
         #
         # @return [Auth0::Types::ListUserOrganizationsOffsetPaginatedResponseContent]
         def list(request_options: {}, **params)
@@ -55,7 +81,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              parsed_response = Auth0::Types::ListUserOrganizationsOffsetPaginatedResponseContent.load(response.body)
+              parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListUserOrganizationsOffsetPaginatedResponseContent.load(response.body))
               [parsed_response, response]
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)

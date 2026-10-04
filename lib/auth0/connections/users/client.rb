@@ -24,6 +24,12 @@ module Auth0
         # @option params [String] :id
         # @option params [String] :email
         #
+        # @example
+        #   client.connections.users.delete_by_email(
+        #     id: "id",
+        #     email: "email"
+        #   )
+        #
         # @return [untyped]
         def delete_by_email(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)

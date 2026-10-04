@@ -61,6 +61,14 @@ module Auth0
       YAHOO = "yahoo"
       YANDEX = "yandex"
       NOTION_MCP = "notion-mcp"
+      ASANA = "asana"
+      ATLASSIAN = "atlassian"
+      CLOUDFLARE_MCP = "cloudflare-mcp"
+      GITLAB = "gitlab"
+      HUBSPOT_MCP = "hubspot-mcp"
+      LINEAR_MCP = "linear-mcp"
+      SENTRY_MCP = "sentry-mcp"
+      SLACK = "slack"
       AUTH0ADLDAP = "auth0-adldap"
     end
   end

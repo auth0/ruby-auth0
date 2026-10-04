@@ -34,6 +34,7 @@ module Auth0
       RESET_PASSWORD_MFA_WEBAUTHN_ROAMING_CHALLENGE = "reset-password-mfa-webauthn-roaming-challenge"
       CUSTOM_FORM = "custom-form"
       CONSENT = "consent"
+      CONSENT_TENANT_SCOPES = "consent-tenant-scopes"
       CUSTOMIZED_CONSENT = "customized-consent"
       LOGOUT = "logout"
       LOGOUT_COMPLETE = "logout-complete"

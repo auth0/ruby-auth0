@@ -30,6 +30,18 @@ module Auth0
       # @option params [Auth0::Types::ClientGrantSubjectTypeEnum, nil] :subject_type
       # @option params [Auth0::Types::ClientGrantDefaultForEnum, nil] :default_for
       #
+      # @example
+      #   client.client_grants.list(
+      #     include_totals: true,
+      #     from: "from",
+      #     take: 1,
+      #     audience: "audience",
+      #     client_id: "client_id",
+      #     allow_any_organization: true,
+      #     subject_type: "client",
+      #     default_for: "third_party_clients"
+      #   )
+      #
       # @return [Auth0::Types::ListClientGrantPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -63,7 +75,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListClientGrantPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListClientGrantPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -83,6 +95,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       #
+      # @example
+      #   client.client_grants.create(audience: "audience")
+      #
       # @return [Auth0::Types::CreateClientGrantResponseContent]
       def create(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -100,7 +115,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateClientGrantResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateClientGrantResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -120,6 +135,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.client_grants.get(id: "id")
+      #
       # @return [Auth0::Types::GetClientGrantResponseContent]
       def get(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -136,7 +154,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetClientGrantResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetClientGrantResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -155,6 +173,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.client_grants.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -188,6 +209,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.client_grants.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateClientGrantResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -209,7 +233,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateClientGrantResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateClientGrantResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

@@ -23,6 +23,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.users.multifactor.invalidate_remember_browser(id: "id")
+        #
         # @return [untyped]
         def invalidate_remember_browser(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -56,6 +59,12 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         # @option params [Auth0::Types::UserMultifactorProviderEnum] :provider
+        #
+        # @example
+        #   client.users.multifactor.delete_provider(
+        #     id: "id",
+        #     provider: "duo"
+        #   )
         #
         # @return [untyped]
         def delete_provider(request_options: {}, **params)

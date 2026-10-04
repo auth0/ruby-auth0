@@ -248,6 +248,113 @@ class AuthenticationEndpointsTest < Minitest::Test
     refute_nil result.access_token
   end
 
+  # --- start_device_flow ---
+
+  def test_start_device_flow_requests_a_device_code
+    stub_request(:post, "https://#{@domain}/oauth/device/code")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:client_id] == @client_id &&
+          body[:scope] == "openid profile" &&
+          body[:audience] == "https://api.example.com" &&
+          !body.key?(:client_secret) &&
+          !body.key?(:client_assertion)
+      end
+      .to_return(
+        status: 200,
+        body: {
+          "device_code" => "the_device_code",
+          "user_code" => "ABCD-EFGH",
+          "verification_uri" => "https://#{@domain}/activate",
+          "verification_uri_complete" => "https://#{@domain}/activate?user_code=ABCD-EFGH",
+          "expires_in" => 900,
+          "interval" => 5
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_secret_instance.send(
+      :start_device_flow, scope: "openid profile", audience: "https://api.example.com"
+    )
+
+    assert_equal "the_device_code", result["device_code"]
+    assert_equal "ABCD-EFGH", result["user_code"]
+    assert_equal "https://#{@domain}/activate?user_code=ABCD-EFGH", result["verification_uri_complete"]
+    assert_equal 5, result["interval"]
+  end
+
+  # --- exchange_device_code_for_tokens ---
+
+  def test_exchange_device_code_for_tokens
+    stub_request(:post, "https://#{@domain}/oauth/token")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:grant_type] == "urn:ietf:params:oauth:grant-type:device_code" &&
+          body[:device_code] == "the_device_code" &&
+          body[:client_id] == @client_id &&
+          !body.key?(:client_secret) &&
+          !body.key?(:client_assertion)
+      end
+      .to_return(
+        status: 200,
+        body: { "id_token" => "id_token", "access_token" => "test_access_token", "expires_in" => 86_400 }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_secret_instance.send(:exchange_device_code_for_tokens, "the_device_code")
+
+    assert_kind_of Auth0::AccessToken, result
+    refute_nil result.access_token
+    refute_nil result.id_token
+  end
+
+  def test_exchange_device_code_for_tokens_raises_on_empty
+    assert_raises(Auth0::InvalidParameter) do
+      @client_secret_instance.send(:exchange_device_code_for_tokens, "")
+    end
+  end
+
+  def test_start_device_flow_sends_no_client_assertion
+    stub_request(:post, "https://#{@domain}/oauth/device/code")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:client_id] == @client_id &&
+          !body.key?(:client_assertion) &&
+          !body.key?(:client_assertion_type) &&
+          !body.key?(:client_secret)
+      end
+      .to_return(
+        status: 200,
+        body: { "device_code" => "the_device_code", "user_code" => "ABCD-EFGH" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_assertion_instance.send(:start_device_flow)
+
+    assert_equal "the_device_code", result["device_code"]
+  end
+
+  def test_exchange_device_code_for_tokens_sends_no_client_assertion
+    stub_request(:post, "https://#{@domain}/oauth/token")
+      .with do |req|
+        body = JSON.parse(req.body, symbolize_names: true)
+        body[:grant_type] == "urn:ietf:params:oauth:grant-type:device_code" &&
+          !body.key?(:client_assertion) &&
+          !body.key?(:client_assertion_type) &&
+          !body.key?(:client_secret)
+      end
+      .to_return(
+        status: 200,
+        body: { "access_token" => "test_access_token", "expires_in" => 86_400 }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    result = @client_assertion_instance.send(:exchange_device_code_for_tokens, "the_device_code")
+
+    assert_kind_of Auth0::AccessToken, result
+    refute_nil result.access_token
+  end
+
   # --- exchange_refresh_token ---
 
   def test_exchange_refresh_token_with_client_secret

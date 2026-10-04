@@ -21,6 +21,9 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [Boolean, nil] :disabled
           #
+          # @example
+          #   client.branding.phone.templates.list(disabled: true)
+          #
           # @return [Auth0::Types::ListPhoneTemplatesResponseContent]
           def list(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -41,7 +44,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::ListPhoneTemplatesResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::ListPhoneTemplatesResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -55,6 +58,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_query_parameters
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @example
+          #   client.branding.phone.templates.create
           #
           # @return [Auth0::Types::CreatePhoneTemplateResponseContent]
           def create(request_options: {}, **params)
@@ -73,7 +79,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::CreatePhoneTemplateResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::CreatePhoneTemplateResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -88,6 +94,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
+          #
+          # @example
+          #   client.branding.phone.templates.get(id: "id")
           #
           # @return [Auth0::Types::GetPhoneTemplateResponseContent]
           def get(request_options: {}, **params)
@@ -105,7 +114,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::GetPhoneTemplateResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::GetPhoneTemplateResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -120,6 +129,9 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
+          #
+          # @example
+          #   client.branding.phone.templates.delete(id: "id")
           #
           # @return [untyped]
           def delete(request_options: {}, **params)
@@ -151,6 +163,9 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
           #
+          # @example
+          #   client.branding.phone.templates.update(id: "id")
+          #
           # @return [Auth0::Types::UpdatePhoneTemplateResponseContent]
           def update(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -172,7 +187,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::UpdatePhoneTemplateResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::UpdatePhoneTemplateResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -188,14 +203,25 @@ module Auth0
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
           #
+          # @example
+          #   client.branding.phone.templates.reset(
+          #     id: "id",
+          #     request: {
+          #       key: "value"
+          #     }
+          #   )
+          #
           # @return [Auth0::Types::ResetPhoneTemplateResponseContent]
           def reset(request_options: {}, **params)
             params = Auth0::Internal::Types::Utils.normalize_keys(params)
+            path_param_names = %i[id]
+            body_params = params.except(*path_param_names)
+
             request = Auth0::Internal::JSON::Request.new(
               base_url: request_options[:base_url],
               method: "PATCH",
               path: "branding/phone/templates/#{URI.encode_uri_component(params[:id].to_s)}/reset",
-              body: params,
+              body: body_params,
               request_options: request_options
             )
             begin
@@ -205,7 +231,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::ResetPhoneTemplateResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::ResetPhoneTemplateResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)
@@ -220,6 +246,12 @@ module Auth0
           # @option request_options [Hash{String => Object}] :additional_body_parameters
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String] :id
+          #
+          # @example
+          #   client.branding.phone.templates.test(
+          #     id: "id",
+          #     to: "to"
+          #   )
           #
           # @return [Auth0::Types::CreatePhoneTemplateTestNotificationResponseContent]
           def test(request_options: {}, **params)
@@ -242,7 +274,7 @@ module Auth0
             end
             code = response.code.to_i
             if code.between?(200, 299)
-              Auth0::Types::CreatePhoneTemplateTestNotificationResponseContent.load(response.body)
+              (response.body.to_s.empty? ? nil : Auth0::Types::CreatePhoneTemplateTestNotificationResponseContent.load(response.body))
             else
               error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(response.body, code: code)

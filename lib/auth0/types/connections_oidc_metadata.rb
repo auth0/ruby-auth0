@@ -76,6 +76,10 @@ module Auth0
 
       field :end_session_endpoint, -> { String }, optional: true, nullable: false
 
+      field :pushed_authorization_request_endpoint, -> { String }, optional: true, nullable: false
+
+      field :require_pushed_authorization_requests, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :dpop_signing_alg_values_supported, -> { Internal::Types::Array[String] }, optional: true, nullable: false
     end
   end

@@ -22,6 +22,13 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String] :id
         #
+        # @example
+        #   client.users.risk_assessments.clear(
+        #     id: "id",
+        #     connection: "connection",
+        #     assessors: ["new-device"]
+        #   )
+        #
         # @return [untyped]
         def clear(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)

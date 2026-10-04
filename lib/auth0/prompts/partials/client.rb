@@ -22,6 +22,9 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Auth0::Types::PartialGroupsEnum] :prompt
         #
+        # @example
+        #   client.prompts.partials.get(prompt: "login")
+        #
         # @return [Hash[String, Object]]
         def get(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -38,7 +41,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::GetPartialsResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::GetPartialsResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -56,14 +59,25 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Auth0::Types::PartialGroupsEnum] :prompt
         #
+        # @example
+        #   client.prompts.partials.set(
+        #     prompt: "login",
+        #     request: {
+        #       key: "value"
+        #     }
+        #   )
+        #
         # @return [untyped]
         def set(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          path_param_names = %i[prompt]
+          body_params = params.except(*path_param_names)
+
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "prompts/#{URI.encode_uri_component(params[:prompt].to_s)}/partials",
-            body: params,
+            body: body_params,
             request_options: request_options
           )
           begin

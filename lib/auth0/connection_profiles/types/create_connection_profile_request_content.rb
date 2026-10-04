@@ -16,6 +16,8 @@ module Auth0
 
         field :strategy_overrides, -> { Auth0::Types::ConnectionProfileStrategyOverrides }, optional: true, nullable: false
 
+        field :provisioning, -> { Auth0::Types::ConnectionProfileProvisioning }, optional: true, nullable: false
+
         field :cross_app_access_resource_app, -> { Auth0::Types::ConnectionProfileCrossAppAccessResourceApp }, optional: true, nullable: false
       end
     end

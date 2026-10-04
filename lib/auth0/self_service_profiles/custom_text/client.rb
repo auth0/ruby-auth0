@@ -25,6 +25,13 @@ module Auth0
         # @option params [Auth0::Types::SelfServiceProfileCustomTextLanguageEnum] :language
         # @option params [Auth0::Types::SelfServiceProfileCustomTextPageEnum] :page
         #
+        # @example
+        #   client.self_service_profiles.custom_text.list(
+        #     id: "id",
+        #     language: "en",
+        #     page: "get-started"
+        #   )
+        #
         # @return [Hash[String, String]]
         def list(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -41,7 +48,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::ListSelfServiceProfileCustomTextResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::ListSelfServiceProfileCustomTextResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)
@@ -62,14 +69,27 @@ module Auth0
         # @option params [Auth0::Types::SelfServiceProfileCustomTextLanguageEnum] :language
         # @option params [Auth0::Types::SelfServiceProfileCustomTextPageEnum] :page
         #
+        # @example
+        #   client.self_service_profiles.custom_text.set(
+        #     id: "id",
+        #     language: "en",
+        #     page: "get-started",
+        #     request: {
+        #       key: "value"
+        #     }
+        #   )
+        #
         # @return [Hash[String, String]]
         def set(request_options: {}, **params)
           params = Auth0::Internal::Types::Utils.normalize_keys(params)
+          path_param_names = %i[id language page]
+          body_params = params.except(*path_param_names)
+
           request = Auth0::Internal::JSON::Request.new(
             base_url: request_options[:base_url],
             method: "PUT",
             path: "self-service-profiles/#{URI.encode_uri_component(params[:id].to_s)}/custom-text/#{URI.encode_uri_component(params[:language].to_s)}/#{URI.encode_uri_component(params[:page].to_s)}",
-            body: params,
+            body: body_params,
             request_options: request_options
           )
           begin
@@ -79,7 +99,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Auth0::Types::SetSelfServiceProfileCustomTextResponseContent.load(response.body)
+            (response.body.to_s.empty? ? nil : Auth0::Types::SetSelfServiceProfileCustomTextResponseContent.load(response.body))
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

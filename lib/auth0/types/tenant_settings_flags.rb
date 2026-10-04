@@ -54,6 +54,8 @@ module Auth0
 
       field :genai_trial, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
+      field :local_resource_discovery, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :enable_dynamic_client_registration, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :disable_management_api_sms_obfuscation, -> { Internal::Types::Boolean }, optional: true, nullable: false

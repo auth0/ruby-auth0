@@ -7,6 +7,8 @@ module Auth0
       field :enabled_features, -> { Internal::Types::Array[Auth0::Types::EnabledFeaturesEnum] }, optional: true, nullable: false
 
       field :connection_config, -> { Auth0::Types::ConnectionProfileStrategyOverridesConnectionConfig }, optional: true, nullable: false
+
+      field :provisioning, -> { Auth0::Types::ConnectionProfileStrategyOverridesProvisioning }, optional: true, nullable: false
     end
   end
 end

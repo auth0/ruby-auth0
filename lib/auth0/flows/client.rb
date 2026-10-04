@@ -23,6 +23,15 @@ module Auth0
       # @option params [Auth0::Types::ListFlowsRequestParametersHydrateEnum, nil] :hydrate
       # @option params [Boolean, nil] :synchronous
       #
+      # @example
+      #   client.flows.list(
+      #     page: 1,
+      #     per_page: 1,
+      #     include_totals: true,
+      #     hydrate: ["form_count"],
+      #     synchronous: true
+      #   )
+      #
       # @return [Auth0::Types::ListFlowsOffsetPaginatedResponseContent]
       def list(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -54,7 +63,7 @@ module Auth0
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            parsed_response = Auth0::Types::ListFlowsOffsetPaginatedResponseContent.load(response.body)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::ListFlowsOffsetPaginatedResponseContent.load(response.body))
             [parsed_response, response]
           else
             error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
@@ -70,6 +79,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_query_parameters
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @example
+      #   client.flows.create(name: "name")
       #
       # @return [Auth0::Types::CreateFlowResponseContent]
       def create(request_options: {}, **params)
@@ -88,7 +100,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::CreateFlowResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::CreateFlowResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -104,6 +116,12 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       # @option params [Auth0::Types::GetFlowRequestParametersHydrateEnum, nil] :hydrate
+      #
+      # @example
+      #   client.flows.get(
+      #     id: "id",
+      #     hydrate: ["form_count"]
+      #   )
       #
       # @return [Auth0::Types::GetFlowResponseContent]
       def get(request_options: {}, **params)
@@ -125,7 +143,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::GetFlowResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::GetFlowResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -140,6 +158,9 @@ module Auth0
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
+      #
+      # @example
+      #   client.flows.delete(id: "id")
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
@@ -171,6 +192,9 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :id
       #
+      # @example
+      #   client.flows.update(id: "id")
+      #
       # @return [Auth0::Types::UpdateFlowResponseContent]
       def update(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
@@ -192,7 +216,7 @@ module Auth0
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Auth0::Types::UpdateFlowResponseContent.load(response.body)
+          (response.body.to_s.empty? ? nil : Auth0::Types::UpdateFlowResponseContent.load(response.body))
         else
           error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
