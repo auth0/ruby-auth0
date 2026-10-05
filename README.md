@@ -104,6 +104,7 @@ client = Auth0::Client.new(
 | `management_timeout` | Float | Timeout in seconds for Management API calls. | `60` |
 | `management_max_retries` | Integer | Maximum retries for Management API calls. | `2` |
 | `management_additional_headers` | Hash | Additional HTTP headers for Management API calls. | `nil` |
+| `rate_limit_handler` | `#call` | Callback invoked with an `Auth0::Internal::Http::RateLimit` after every Management and Authentication API response, for monitoring rate-limit headroom. See [Rate Limit Monitoring](#rate-limit-monitoring). | `nil` |
 
 #### Accessing the Management Client Directly
 
@@ -282,6 +283,23 @@ client.users.list(
   }
 )
 ```
+
+### Rate Limit Monitoring
+
+Auth0 returns `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers on API responses. Pass a `rate_limit_handler` to be notified of this data after every Management **and** Authentication API response, so you can monitor how close you are to the limit (for example, emit a metric and alert before you run out):
+
+```ruby
+client = Auth0::Client.new(
+  domain: ENV['AUTH0_RUBY_DOMAIN'],
+  client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+  client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
+  rate_limit_handler: lambda do |rate_limit|
+    StatsD.gauge('auth0.rate_limit.remaining', rate_limit.remaining) if rate_limit.remaining
+  end
+)
+```
+
+The handler receives an `Auth0::Internal::Http::RateLimit` with `#limit`, `#remaining` (Integers), and `#reset` (a UTC `Time`); each is `nil` when the corresponding header is absent or non-numeric. It is invoked on every response — including the `429`s that trigger an automatic retry — so you can observe the point at which the limit was reached. The return value of your API call is unchanged, and an exception raised inside the handler is caught (and warned) so it can never break a request.
 
 ### Errors
 

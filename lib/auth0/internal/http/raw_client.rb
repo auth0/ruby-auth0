@@ -76,6 +76,10 @@ module Auth0
 
             response = conn.request(http_request)
 
+            # Notify on every response, including the 429s that trigger a retry,
+            # so a handler watching `remaining` sees the point where it ran out.
+            notify_rate_limit(response)
+
             break unless should_retry?(response, attempt)
 
             delay = retry_delay(response, attempt)
@@ -83,21 +87,20 @@ module Auth0
             attempt += 1
           end
 
-          notify_rate_limit(response)
           response
         end
 
         # Invokes the rate limit handler with the rate limit parsed from the
-        # response headers. Runs after retries, on every response. A handler
-        # error must never break the request, so it is swallowed.
+        # response headers. A handler error must never break the request, so it
+        # is swallowed, but a warning is emitted so a broken handler is visible.
         # @param response [Net::HTTPResponse] The HTTP response.
         # @return [void]
         def notify_rate_limit(response)
           return if @rate_limit_handler.nil?
 
-          @rate_limit_handler.call(RateLimit.from_response(response))
-        rescue StandardError
-          nil
+          @rate_limit_handler.call(RateLimit.from_http_response(response))
+        rescue StandardError => e
+          warn "[auth0] rate_limit_handler raised #{e.class}: #{e.message}"
         end
 
         # Determines if a request should be retried based on the response status code.

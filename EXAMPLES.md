@@ -166,6 +166,26 @@ management.roles.create(name: 'admin', description: 'Administrator')
 management.organizations.list(take: 20)
 ```
 
+### Monitoring rate limits
+
+Pass a `rate_limit_handler` to observe Auth0's `x-ratelimit-*` headers after every Management and Authentication API response, without changing the return value of your calls:
+
+```ruby
+client = Auth0::Client.new(
+  domain: ENV['AUTH0_RUBY_DOMAIN'],
+  client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+  client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
+  rate_limit_handler: lambda do |rate_limit|
+    # rate_limit.limit / rate_limit.remaining (Integers), rate_limit.reset (UTC Time)
+    Rails.logger.info("Auth0 rate limit: #{rate_limit.remaining}/#{rate_limit.limit}, resets at #{rate_limit.reset}")
+  end
+)
+
+client.users.get(id: 'auth0|123456') # handler fires with this response's rate limit
+```
+
+The handler is invoked on every response, including the `429`s that trigger an automatic retry. An error raised inside the handler is caught (and warned) so it never breaks the request.
+
 ## Organizations
 
 [Organizations](https://auth0.com/docs/organizations) is a set of features that provide better support for developers who build and maintain SaaS and Business-to-Business (B2B) applications.
