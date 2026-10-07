@@ -112,7 +112,7 @@ module Auth0
 
       raw_client = management.instance_variable_get(:@raw_client)
       unless raw_client.respond_to?(:rate_limit_handler=)
-        raise Auth0::Unsupported,
+        raise Auth0::Exception,
               "Unable to attach rate_limit_handler: the management client does not expose a compatible raw client. " \
               "This usually means the ruby-auth0 internals changed; please report it."
       end
