@@ -24,6 +24,12 @@ describe Auth0::Internal::Types::Model do
     field :type, String, default: "example"
   end
 
+  class ExampleWithBooleans < Auth0::Internal::Types::Model
+    field :blocked, Auth0::Internal::Types::Boolean, optional: true
+    field :active, Auth0::Internal::Types::Boolean, optional: true, api_name: "isActive"
+    field :enabled, Auth0::Internal::Types::Boolean, optional: true, default: false
+  end
+
   class ExampleChild < Auth0::Internal::Types::Model
     field :value, String
   end
@@ -109,6 +115,42 @@ describe Auth0::Internal::Types::Model do
 
       assert_equal 2014, example.year
       refute_respond_to example, :yearOfRelease
+    end
+
+    it "preserves false values on construction and in to_h" do
+      example = ExampleWithBooleans.new(blocked: false, active: false)
+
+      assert_same false, example.blocked
+      assert_same false, example.active
+      assert_same false, example.to_h["blocked"]
+      assert_same false, example.to_h["isActive"]
+    end
+
+    it "preserves false values when loaded from JSON" do
+      example = ExampleWithBooleans.load('{"blocked":false,"isActive":false}')
+
+      assert_same false, example.blocked
+      assert_same false, example.active
+    end
+
+    it "keeps an explicit false instead of falling back to the default" do
+      assert_same false, ExampleWithBooleans.new.enabled
+      assert_same true, ExampleWithBooleans.new(enabled: true).enabled
+      assert_same false, ExampleWithBooleans.new(enabled: false).enabled
+    end
+
+    it "falls back to the field name when the api_name value is nil" do
+      example = ExampleWithBooleans.new(isActive: nil, active: true)
+
+      assert_same true, example.active
+      refute_respond_to example, :isActive
+    end
+
+    it "does not leak a consumed key into extra fields" do
+      example = ExampleWithBooleans.new(isActive: false, active: true)
+
+      assert_same false, example.active
+      refute ExampleWithBooleans.extra_fields.key?(:active)
     end
   end
 
