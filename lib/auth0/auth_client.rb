@@ -91,8 +91,33 @@ module Auth0
         opts[:max_retries] = @management_max_retries if @management_max_retries
         opts[:headers] = @management_additional_headers if @management_additional_headers
         @_management = Auth0::Management.new(**opts)
+        attach_rate_limit_handler(@_management)
       end
       @_management
+    end
+
+    private
+
+    # Attaches the configured rate limit handler to the management client's
+    # underlying raw client. Management is generated and builds its own raw
+    # client, so we set the handler on it after construction.
+    #
+    # Fails loudly if the raw client can't be found: Management is regenerated
+    # and could rename/restructure `@raw_client`, and silently skipping would
+    # turn the feature off with no signal.
+    # @param management [Auth0::Management]
+    # @return [void]
+    def attach_rate_limit_handler(management)
+      return if @rate_limit_handler.nil?
+
+      raw_client = management.instance_variable_get(:@raw_client)
+      unless raw_client.respond_to?(:rate_limit_handler=)
+        raise Auth0::Exception,
+              "Unable to attach rate_limit_handler: the management client does not expose a compatible raw client. " \
+              "This usually means the ruby-auth0 internals changed; please report it."
+      end
+
+      raw_client.rate_limit_handler = @rate_limit_handler
     end
   end
 end
