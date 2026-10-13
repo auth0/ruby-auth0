@@ -106,6 +106,34 @@ class ClientsWireTest < WireMockTestCase
     )
   end
 
+  def test_clients_search_with_wiremock
+    test_id = "clients.search.0"
+
+    result = @client.clients.search(
+      q: "q",
+      parser: "scim",
+      fields: "fields",
+      include_fields: true,
+      take: 1,
+      from: "from",
+      sort: "name",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "clients.search.0"
+        }
+      }
+    )
+    result.pages.next_page
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/clients/search",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_clients_get_with_wiremock
     test_id = "clients.get.0"
 

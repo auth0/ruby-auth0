@@ -21,7 +21,14 @@ module Auth0
       # @option request_options [Integer] :timeout_in_seconds
       #
       # @example
-      #   client.email_templates.create(template: "verify_email")
+      #   client.email_templates.create(
+      #     template: "verify_email",
+      #     body: nil,
+      #     from: nil,
+      #     subject: nil,
+      #     syntax: nil,
+      #     enabled: nil
+      #   )
       #
       # @return [Auth0::Types::CreateEmailTemplateResponseContent]
       def create(request_options: {}, **params)
@@ -101,7 +108,12 @@ module Auth0
       # @example
       #   client.email_templates.set(
       #     template_name: "verify_email",
-      #     template: "verify_email"
+      #     template: "verify_email",
+      #     body: nil,
+      #     from: nil,
+      #     subject: nil,
+      #     syntax: nil,
+      #     enabled: nil
       #   )
       #
       # @return [Auth0::Types::SetEmailTemplateResponseContent]

@@ -8,6 +8,8 @@ module Auth0
 
       field :connected_accounts, -> { Auth0::Types::ConnectionConnectedAccountsPurpose }, optional: true, nullable: false
 
+      field :display_name, -> { String }, optional: false, nullable: false
+
       field :id, -> { String }, optional: false, nullable: false
 
       field :realms, -> { Internal::Types::Array[String] }, optional: true, nullable: false
@@ -15,8 +17,6 @@ module Auth0
       field :name, -> { String }, optional: false, nullable: false
 
       field :enabled_clients, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
-      field :display_name, -> { String }, optional: true, nullable: false
 
       field :is_domain_connection, -> { Internal::Types::Boolean }, optional: true, nullable: false
 

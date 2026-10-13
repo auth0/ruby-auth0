@@ -5,6 +5,8 @@ module Auth0
     # Provisioning settings for a connection profile strategy override.
     class ConnectionProfileStrategyOverridesProvisioning < Internal::Types::Model
       field :scim, -> { Auth0::Types::ConnectionProfileProvisioningSCIM }, optional: true, nullable: false
+
+      field :google_workspace, -> { Auth0::Types::ConnectionProfileProvisioningGoogleWorkspace }, optional: true, nullable: false
     end
   end
 end

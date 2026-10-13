@@ -121,26 +121,4 @@ class ExperimentationFeatureFlagsWireTest < WireMockTestCase
       expected: 1
     )
   end
-
-  def test_experimentation_feature_flags_update_status_with_wiremock
-    test_id = "experimentation.feature_flags.update_status.0"
-
-    @client.experimentation.feature_flags.update_status(
-      id: "id",
-      status: "draft",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "experimentation.feature_flags.update_status.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "POST",
-      url_path: "/experimentation/feature-flags/id/status",
-      query_params: nil,
-      expected: 1
-    )
-  end
 end
