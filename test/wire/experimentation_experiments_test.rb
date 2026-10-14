@@ -146,28 +146,6 @@ class ExperimentationExperimentsWireTest < WireMockTestCase
     )
   end
 
-  def test_experimentation_experiments_update_status_with_wiremock
-    test_id = "experimentation.experiments.update_status.0"
-
-    @client.experimentation.experiments.update_status(
-      id: "id",
-      status: "active",
-      request_options: {
-        additional_headers: {
-          "X-Test-Id" => "experimentation.experiments.update_status.0"
-        }
-      }
-    )
-
-    verify_request_count(
-      test_id: test_id,
-      method: "POST",
-      url_path: "/experimentation/experiments/id/status",
-      query_params: nil,
-      expected: 1
-    )
-  end
-
   def test_experimentation_experiments_validate_with_wiremock
     test_id = "experimentation.experiments.validate.0"
 

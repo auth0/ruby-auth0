@@ -278,52 +278,6 @@ module Auth0
           end
         end
 
-        # Transitions an experiment through its lifecycle: draft → active, active → paused, paused → active,
-        # active/paused → completed. Activation runs full readiness validation.
-        #
-        # @param request_options [Hash]
-        # @param params [Auth0::Experimentation::Experiments::Types::UpdateExperimentStatusRequestContent]
-        # @option request_options [String] :base_url
-        # @option request_options [Hash{String => Object}] :additional_headers
-        # @option request_options [Hash{String => Object}] :additional_query_parameters
-        # @option request_options [Hash{String => Object}] :additional_body_parameters
-        # @option request_options [Integer] :timeout_in_seconds
-        # @option params [String] :id
-        #
-        # @example
-        #   client.experimentation.experiments.update_status(
-        #     id: "id",
-        #     status: "active"
-        #   )
-        #
-        # @return [Auth0::Types::UpdateExperimentStatusResponseContent]
-        def update_status(request_options: {}, **params)
-          params = Auth0::Internal::Types::Utils.normalize_keys(params)
-          request_data = Auth0::Experimentation::Experiments::Types::UpdateExperimentStatusRequestContent.new(params).to_h
-          non_body_param_names = %w[id]
-          body = request_data.except(*non_body_param_names)
-
-          request = Auth0::Internal::JSON::Request.new(
-            base_url: request_options[:base_url],
-            method: "POST",
-            path: "experimentation/experiments/#{URI.encode_uri_component(params[:id].to_s)}/status",
-            body: body,
-            request_options: request_options
-          )
-          begin
-            response = @client.send(request)
-          rescue Net::HTTPRequestTimeout
-            raise Auth0::Errors::TimeoutError
-          end
-          code = response.code.to_i
-          if code.between?(200, 299)
-            (response.body.to_s.empty? ? nil : Auth0::Types::UpdateExperimentStatusResponseContent.load(response.body))
-          else
-            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(response.body, code: code)
-          end
-        end
-
         # Checks whether an experiment is ready to be activated. Returns is_valid boolean and an errors array describing
         # any blockers. Read-only; no state is modified.
         #

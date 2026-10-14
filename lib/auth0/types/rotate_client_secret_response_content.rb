@@ -123,6 +123,8 @@ module Auth0
 
       field :anonymous_sessions, -> { Auth0::Types::AnonymousSessions }, optional: true, nullable: false
 
+      field :enforce_anon_session_transfer_network_binding, -> { Auth0::Types::ClientAnonymousSessionTransferNetworkBindingEnum }, optional: true, nullable: false
+
       field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
       field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false
@@ -134,6 +136,8 @@ module Auth0
       field :external_metadata_type, -> { Auth0::Types::ClientExternalMetadataTypeEnum }, optional: true, nullable: false
 
       field :external_metadata_created_by, -> { Auth0::Types::ClientExternalMetadataCreatedByEnum }, optional: true, nullable: false
+
+      field :external_metadata_status, -> { Auth0::Types::ClientExternalMetadataStatusEnum }, optional: true, nullable: false
 
       field :external_client_id, -> { String }, optional: true, nullable: false
 

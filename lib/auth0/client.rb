@@ -43,6 +43,11 @@ module Auth0
       @client_grants ||= Auth0::ClientGrants::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::ClientProfiles::Client]
+    def client_profiles
+      @client_profiles ||= Auth0::ClientProfiles::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Clients::Client]
     def clients
       @clients ||= Auth0::Clients::Client.new(client: @raw_client)

@@ -12,6 +12,8 @@ module Auth0
           field :description, -> { String }, optional: true, nullable: false
 
           field :rules, -> { Internal::Types::Array[Auth0::Types::SegmentRule] }, optional: true, nullable: false
+
+          field :status, -> { Auth0::Types::SegmentStatusEnum }, optional: true, nullable: false
         end
       end
     end

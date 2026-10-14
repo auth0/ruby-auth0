@@ -4,6 +4,8 @@ module Auth0
   module Types
     # Response for connections with strategy=oidc
     class ConnectionResponseContentOidc < Internal::Types::Model
+      field :display_name, -> { String }, optional: false, nullable: false
+
       field :id, -> { String }, optional: false, nullable: false
 
       field :realms, -> { Internal::Types::Array[String] }, optional: true, nullable: false
@@ -11,8 +13,6 @@ module Auth0
       field :name, -> { String }, optional: false, nullable: false
 
       field :enabled_clients, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
-      field :display_name, -> { String }, optional: true, nullable: false
 
       field :is_domain_connection, -> { Internal::Types::Boolean }, optional: true, nullable: false
 

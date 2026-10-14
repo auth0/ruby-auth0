@@ -7,6 +7,7 @@ module Auth0
 
       SCIM = "scim"
       UNIVERSAL_LOGOUT = "universal_logout"
+      DIRECTORY_SYNC = "directory_sync"
     end
   end
 end

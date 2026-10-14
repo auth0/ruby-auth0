@@ -69,11 +69,15 @@ module Auth0
 
       field :authorization_response_iss_parameter_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
+      field :dpop_strict_refresh_token_binding, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
       field :skip_non_verifiable_callback_uri_confirmation_prompt, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :resource_parameter_profile, -> { Auth0::Types::TenantSettingsResourceParameterProfile }, optional: true, nullable: false
 
       field :client_id_metadata_document_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
+      field :client_id_metadata_document_dynamic_registration_supported, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :phone_consolidated_experience, -> { Internal::Types::Boolean }, optional: true, nullable: false
 

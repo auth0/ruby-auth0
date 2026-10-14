@@ -30,6 +30,11 @@ module Auth0
         @captcha ||= Auth0::AttackProtection::Captcha::Client.new(client: @client)
       end
 
+      # @return [Auth0::CaptchaPolicies::Client]
+      def captcha_policies
+        @captcha_policies ||= Auth0::AttackProtection::CaptchaPolicies::Client.new(client: @client)
+      end
+
       # @return [Auth0::PhoneProviderProtection::Client]
       def phone_provider_protection
         @phone_provider_protection ||= Auth0::AttackProtection::PhoneProviderProtection::Client.new(client: @client)

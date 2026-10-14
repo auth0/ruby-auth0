@@ -17,6 +17,8 @@ module Auth0
       field :is_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :organization_access_level, -> { Auth0::Types::EventStreamCloudEventOrgConnectionUpdatedPreviousObjectOrganizationAccessLevel }, optional: true, nullable: false
+
+      field :organization_member_access_level, -> { Auth0::Types::EventStreamCloudEventOrgConnectionUpdatedPreviousObjectOrganizationMemberAccessLevel }, optional: true, nullable: false
     end
   end
 end
