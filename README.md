@@ -299,7 +299,7 @@ client = Auth0::Client.new(
 )
 ```
 
-The handler receives an object with `#limit`, `#remaining` (Integers), and `#reset` (a UTC `Time`); each is `nil` when the corresponding header is absent or non-numeric. It is invoked on every response, including the `429`s that trigger an automatic retry, so you can observe the point at which the limit was reached. The return value of your API call is unchanged, and an exception raised inside the handler is caught (and warned) so it can never break a request.
+The handler receives an object with `#limit`, `#remaining` (Integers), and `#reset` (a UTC `Time`). Each is `nil` when the corresponding header is absent or non-numeric. It is invoked on every response, including the `429`s that trigger an automatic retry, so you can observe the point at which the limit was reached. The return value of your API call is unchanged, and an exception raised inside the handler is caught (and warned) so it can never break a request.
 
 ### Errors
 

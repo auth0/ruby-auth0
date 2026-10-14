@@ -85,13 +85,16 @@ module Auth0
     def management
       current_token = get_token
       if @_management.nil? || @_management_token != current_token
-        @_management_token = current_token
         opts = { token: current_token, base_url: "#{@base_uri}/api/v2" }
         opts[:timeout] = @management_timeout if @management_timeout
         opts[:max_retries] = @management_max_retries if @management_max_retries
         opts[:headers] = @management_additional_headers if @management_additional_headers
-        @_management = Auth0::Management.new(**opts)
-        attach_rate_limit_handler(@_management)
+        management = Auth0::Management.new(**opts)
+        # Attach before caching so a failed attach doesn't leave a handler-less
+        # management cached (the next call would then skip the rebuild).
+        attach_rate_limit_handler(management)
+        @_management = management
+        @_management_token = current_token
       end
       @_management
     end

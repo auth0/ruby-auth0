@@ -110,7 +110,7 @@ describe Auth0::Internal::Http::RawClient do
     _(send_through(client, response)).must_be_same_as response
   end
 
-  it "does not let a handler error break the request" do
+  it "warns but does not let a handler error break the request" do
     client = Auth0::Internal::Http::RawClient.new(
       base_url: "https://tenant.auth0.com",
       max_retries: 0,
@@ -118,6 +118,8 @@ describe Auth0::Internal::Http::RawClient do
     )
     response = TestRawClient.ok(remaining: 5)
 
-    _(send_through(client, response)).must_be_same_as response
+    assert_output(nil, /rate_limit_handler raised/) do
+      _(send_through(client, response)).must_be_same_as response
+    end
   end
 end

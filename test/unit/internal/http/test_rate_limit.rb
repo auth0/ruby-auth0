@@ -80,8 +80,10 @@ describe Auth0::Internal::Http::RateLimit do
       _(received).must_be_same_as rate_limit
     end
 
-    it "swallows a handler error so it can't break the caller" do
-      TestRateLimit::RateLimit.deliver(->(_rl) { raise "boom" }, rate_limit) # no error raised
+    it "swallows a handler error (warning) so it can't break the caller" do
+      assert_output(nil, /rate_limit_handler raised/) do
+        TestRateLimit::RateLimit.deliver(->(_rl) { raise "boom" }, rate_limit)
+      end
     end
   end
 
