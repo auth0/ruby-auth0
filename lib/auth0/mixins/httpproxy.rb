@@ -97,8 +97,8 @@ module Auth0
         end
 
         # Surface rate limit for each response, including 429 retries. `call`
-        # can return nil (e.g. a dropped connection), so guard on a real response.
-        if @rate_limit_handler && result.respond_to?(:headers)
+        # returns nil for some errors (e.g. a dropped connection), so skip it then.
+        if @rate_limit_handler && !result.nil?
           rate_limit = Auth0::Internal::Http::RateLimit.from_headers(result.headers)
           Auth0::Internal::Http::RateLimit.deliver(@rate_limit_handler, rate_limit)
         end
