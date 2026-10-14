@@ -104,7 +104,7 @@ client = Auth0::Client.new(
 | `management_timeout` | Float | Timeout in seconds for Management API calls. | `60` |
 | `management_max_retries` | Integer | Maximum retries for Management API calls. | `2` |
 | `management_additional_headers` | Hash | Additional HTTP headers for Management API calls. | `nil` |
-| `rate_limit_handler` | `#call` | Callback for monitoring rate-limit headroom. See [Rate Limit Monitoring](#rate-limit-monitoring). | `nil` |
+| `rate_limit_handler` | `#call` | Callback for [rate-limit monitoring](#rate-limit-monitoring). | `nil` |
 
 #### Accessing the Management Client Directly
 
