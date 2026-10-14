@@ -1,5 +1,14 @@
 # Change Log
 
+## [v6.5.0](https://github.com/auth0/ruby-auth0/tree/v6.5.0) (2026-10-14)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.4.0...v6.5.0)
+
+**Added**
+- feat: add Client Profiles, Captcha Policies, and client and client grant search, and remove update_status from experiments and feature flags [\#812](https://github.com/auth0/ruby-auth0/pull/812) ([fern-api[bot]](https://github.com/apps/fern-api))
+
+**Fixed**
+- fix: preserve false values in model fields [\#811](https://github.com/auth0/ruby-auth0/pull/811) ([kishore7snehil](https://github.com/kishore7snehil))
+
 ## [v6.4.0](https://github.com/auth0/ruby-auth0/tree/v6.4.0) (2026-09-30)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.3.0...v6.4.0)
 
