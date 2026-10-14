@@ -11,6 +11,8 @@ module Auth0
 
       field :type, -> { Auth0::Types::SegmentTypeEnum }, optional: false, nullable: false
 
+      field :status, -> { Auth0::Types::SegmentStatusEnum }, optional: false, nullable: false
+
       field :rules, -> { Internal::Types::Array[Auth0::Types::SegmentRule] }, optional: false, nullable: false
 
       field :created_at, -> { String }, optional: false, nullable: false

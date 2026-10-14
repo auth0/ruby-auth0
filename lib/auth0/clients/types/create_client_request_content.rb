@@ -108,6 +108,8 @@ module Auth0
 
         field :anonymous_sessions, -> { Auth0::Types::CreateAnonymousSessions }, optional: true, nullable: false
 
+        field :enforce_anon_session_transfer_network_binding, -> { Auth0::Types::ClientAnonymousSessionTransferNetworkBindingEnum }, optional: true, nullable: false
+
         field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
         field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false

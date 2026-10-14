@@ -17,6 +17,11 @@ class EmailTemplatesWireTest < WireMockTestCase
 
     @client.email_templates.create(
       template: "verify_email",
+      body: nil,
+      from: nil,
+      subject: nil,
+      syntax: nil,
+      enabled: nil,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "email_templates.create.0"
@@ -60,6 +65,11 @@ class EmailTemplatesWireTest < WireMockTestCase
     @client.email_templates.set(
       template_name: "verify_email",
       template: "verify_email",
+      body: nil,
+      from: nil,
+      subject: nil,
+      syntax: nil,
+      enabled: nil,
       request_options: {
         additional_headers: {
           "X-Test-Id" => "email_templates.set.0"

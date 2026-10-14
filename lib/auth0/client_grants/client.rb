@@ -122,6 +122,78 @@ module Auth0
         end
       end
 
+      # Search client grants using SCIM or Lucene filter syntax with low-latency, eventually consistent results. Use the
+      # parser parameter to specify "scim" or "lucene" syntax (default: "lucene"). This endpoint provides an alternative
+      # to the standard GET /client-grants endpoint with better performance for complex queries.
+      # Results may not reflect recent updates immediately.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :q
+      # @option params [Auth0::Types::SearchParserEnum, nil] :parser
+      # @option params [String, nil] :fields
+      # @option params [Boolean, nil] :include_fields
+      # @option params [Integer, nil] :take
+      # @option params [String, nil] :from
+      # @option params [Auth0::Types::ClientGrantSortFieldEnum, nil] :sort
+      #
+      # @example
+      #   client.client_grants.search(
+      #     q: "q",
+      #     parser: "scim",
+      #     fields: "fields",
+      #     include_fields: true,
+      #     take: 1,
+      #     from: "from",
+      #     sort: "audience"
+      #   )
+      #
+      # @return [Auth0::Types::SearchClientGrantsResponseContent]
+      def search(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        query_params = {}
+        query_params["q"] = params[:q] if params.key?(:q)
+        query_params["parser"] = params[:parser] if params.key?(:parser)
+        query_params["fields"] = params[:fields] if params.key?(:fields)
+        query_params["include_fields"] = params[:include_fields] if params.key?(:include_fields)
+        query_params["take"] = params.fetch(:take, 50)
+        query_params["from"] = params[:from] if params.key?(:from)
+        query_params["sort"] = params[:sort] if params.key?(:sort)
+
+        Auth0::Internal::CursorItemIterator.new(
+          cursor_field: :next_,
+          item_field: :client_grants,
+          initial_cursor: query_params["from"]
+        ) do |next_cursor|
+          query_params["from"] = next_cursor
+          request = Auth0::Internal::JSON::Request.new(
+            base_url: request_options[:base_url],
+            method: "GET",
+            path: "client-grants/search",
+            query: query_params,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Auth0::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            parsed_response = (response.body.to_s.empty? ? nil : Auth0::Types::SearchClientGrantsResponseContent.load(response.body))
+            [parsed_response, response]
+          else
+            error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+      end
+
       # Retrieve a single [client
       # grant](https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants), including the
       # scopes associated with the application/API pair.

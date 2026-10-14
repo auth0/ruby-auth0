@@ -18,6 +18,8 @@ module Auth0
           field :default_config, -> { Auth0::Types::DefaultConfigEnum }, optional: true, nullable: false
 
           field :levels, -> { Internal::Types::Array[Integer] }, optional: true, nullable: false
+
+          field :status, -> { Auth0::Types::ExperimentTransitionStatusEnum }, optional: true, nullable: false
         end
       end
     end

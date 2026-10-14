@@ -2,18 +2,19 @@
 
 module Auth0
   module Types
-    class UpdateFeatureFlagStatusResponseContent < Internal::Types::Model
+    # An attack protection policy override for CAPTCHA.
+    class AttackProtectionCaptchaPolicy < Internal::Types::Model
       field :id, -> { String }, optional: false, nullable: false
 
       field :name, -> { String }, optional: false, nullable: false
 
       field :description, -> { String }, optional: true, nullable: false
 
-      field :type, -> { Auth0::Types::FeatureFlagTypeEnum }, optional: false, nullable: false
+      field :priority, -> { Integer }, optional: false, nullable: false
 
-      field :status, -> { Auth0::Types::FeatureFlagStatusEnum }, optional: false, nullable: false
+      field :match, -> { Auth0::Types::AttackProtectionCaptchaPolicyMatch }, optional: false, nullable: false
 
-      field :parameters, -> { Internal::Types::Hash[String, Auth0::Types::FeatureFlagConfigParam] }, optional: true, nullable: false
+      field :action, -> { Auth0::Types::AttackProtectionCaptchaPolicyAction }, optional: false, nullable: false
 
       field :created_at, -> { String }, optional: false, nullable: false
 

@@ -5,6 +5,8 @@ module Auth0
     class PreviewCimdMetadataResponseContent < Internal::Types::Model
       field :client_id, -> { String }, optional: true, nullable: false
 
+      field :external_metadata_created_by, -> { Auth0::Types::CimdExternalMetadataCreatedByEnum }, optional: true, nullable: false
+
       field :errors, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
       field :validation, -> { Auth0::Types::CimdValidationResult }, optional: true, nullable: false
