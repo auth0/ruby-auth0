@@ -56,6 +56,33 @@ describe Auth0::Internal::Http::RateLimit do
       _(rate_limit.remaining).must_be_nil
       _(rate_limit.reset).must_be_nil
     end
+
+    it "handles nil headers" do
+      rate_limit = TestRateLimit::RateLimit.from_headers(nil)
+
+      _(rate_limit.limit).must_be_nil
+      _(rate_limit.remaining).must_be_nil
+      _(rate_limit.reset).must_be_nil
+    end
+  end
+
+  describe ".deliver" do
+    let(:rate_limit) { TestRateLimit::RateLimit.from_headers(x_ratelimit_remaining: "5") }
+
+    it "does nothing when the handler is nil" do
+      TestRateLimit::RateLimit.deliver(nil, rate_limit) # no error
+    end
+
+    it "calls the handler with the rate limit" do
+      received = nil
+      TestRateLimit::RateLimit.deliver(->(rl) { received = rl }, rate_limit)
+
+      _(received).must_be_same_as rate_limit
+    end
+
+    it "swallows a handler error so it can't break the caller" do
+      TestRateLimit::RateLimit.deliver(->(_rl) { raise "boom" }, rate_limit) # no error raised
+    end
   end
 
   describe ".from_http_response" do

@@ -98,15 +98,12 @@ module Auth0
 
     private
 
-    # Attaches the configured rate limit handler to the management client's
-    # underlying raw client. Management is generated and builds its own raw
-    # client, so we set the handler on it after construction.
-    #
-    # Fails loudly if the raw client can't be found: Management is regenerated
-    # and could rename/restructure `@raw_client`, and silently skipping would
-    # turn the feature off with no signal.
+    # Attaches the configured rate limit handler to the management client's raw
+    # client. Fails loudly rather than silently skipping, so a future change to
+    # the generated client's internals surfaces instead of quietly disabling it.
     # @param management [Auth0::Management]
     # @return [void]
+    # @raise [Auth0::Exception] if the management client exposes no compatible raw client
     def attach_rate_limit_handler(management)
       return if @rate_limit_handler.nil?
 
@@ -114,7 +111,7 @@ module Auth0
       unless raw_client.respond_to?(:rate_limit_handler=)
         raise Auth0::Exception,
               "Unable to attach rate_limit_handler: the management client does not expose a compatible raw client. " \
-              "This usually means the ruby-auth0 internals changed; please report it."
+              "This likely means the ruby-auth0 internals changed. Please report it."
       end
 
       raw_client.rate_limit_handler = @rate_limit_handler

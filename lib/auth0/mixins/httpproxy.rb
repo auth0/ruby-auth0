@@ -96,9 +96,11 @@ module Auth0
           call(method, encode_uri(uri), timeout, headers, body.to_json)
         end
 
-        # Notify on every response, including the 429s that trigger a retry, so
-        # a handler watching `remaining` sees the point where it ran out.
-        notify_rate_limit(result)
+        # Surface rate limit for each response, including 429 retries.
+        if @rate_limit_handler
+          rate_limit = Auth0::Internal::Http::RateLimit.from_headers(result.headers)
+          Auth0::Internal::Http::RateLimit.deliver(@rate_limit_handler, rate_limit)
+        end
 
         case result.code
         when 200...226 then safe_parse_json(result.body)
@@ -110,17 +112,6 @@ module Auth0
         when 500       then raise Auth0::ServerError.new(result.body, code: result.code, headers: result.headers)
         else           raise Auth0::Unsupported.new(result.body, code: result.code, headers: result.headers)
         end
-      end
-
-      # Invokes the rate limit handler with the rate limit parsed from the
-      # response headers. A handler error must never break the request, so it is
-      # swallowed, but a warning is emitted so a broken handler is visible.
-      def notify_rate_limit(result)
-        return if @rate_limit_handler.nil?
-
-        @rate_limit_handler.call(Auth0::Internal::Http::RateLimit.from_headers(result.headers))
-      rescue StandardError => e
-        warn "[auth0] rate_limit_handler raised #{e.class}: #{e.message}"
       end
 
       def call(method, url, timeout, headers, body = nil)

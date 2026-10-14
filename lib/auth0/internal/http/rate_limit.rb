@@ -57,6 +57,25 @@ module Auth0
           )
         end
 
+        # Invokes the handler with the given rate limit. A handler error must
+        # never break the caller's request, so it is rescued and warned rather
+        # than raised. Parsing happens before this call, so a parsing bug is not
+        # misattributed to the handler.
+        #
+        # @param handler [#call, nil] the configured rate limit handler
+        # @param rate_limit [Auth0::Internal::Http::RateLimit]
+        # @return [void]
+        def self.deliver(handler, rate_limit)
+          return if handler.nil?
+
+          handler.call(rate_limit)
+        rescue StandardError => e
+          warn "[auth0] rate_limit_handler raised #{e.class}: #{e.message}"
+        end
+
+        # @param limit [String, nil] raw `x-ratelimit-limit` value
+        # @param remaining [String, nil] raw `x-ratelimit-remaining` value
+        # @param reset [String, nil] raw `x-ratelimit-reset` value
         # @return [Auth0::Internal::Http::RateLimit]
         def self.build(limit, remaining, reset)
           reset_epoch = to_integer(reset)
@@ -71,6 +90,9 @@ module Auth0
 
         # Parse an integer header value, returning nil for blank or non-numeric
         # input (so a malformed header is never silently reported as 0).
+        #
+        # @param value [String, nil] the raw header value
+        # @return [Integer, nil]
         def self.to_integer(value)
           Integer(value.to_s.strip, exception: false)
         end

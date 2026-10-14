@@ -22,6 +22,10 @@ describe Auth0::Client do
     _(raw_client_for(build_client).rate_limit_handler).must_be_nil
   end
 
+  it "raises when the handler does not respond to #call" do
+    _(-> { build_client(rate_limit_handler: "not-callable") }).must_raise ArgumentError
+  end
+
   it "re-attaches the handler after a token change rebuilds the management client" do
     handler = ->(_rate_limit) {}
     client = build_client(rate_limit_handler: handler)

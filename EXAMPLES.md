@@ -166,9 +166,9 @@ management.roles.create(name: 'admin', description: 'Administrator')
 management.organizations.list(take: 20)
 ```
 
-### Monitoring rate limits
+## Rate Limit Monitoring
 
-Pass a `rate_limit_handler` to observe Auth0's `x-ratelimit-*` headers after every Management and Authentication API response, without changing the return value of your calls:
+Pass a `rate_limit_handler` when building an `Auth0::Client` to observe Auth0's `x-ratelimit-*` headers, without changing the return value of your calls. It covers Management API calls and the Authentication API calls made through the client's HTTP layer (it is not available on `Auth0::Management` directly):
 
 ```ruby
 client = Auth0::Client.new(

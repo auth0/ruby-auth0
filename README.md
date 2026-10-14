@@ -104,7 +104,7 @@ client = Auth0::Client.new(
 | `management_timeout` | Float | Timeout in seconds for Management API calls. | `60` |
 | `management_max_retries` | Integer | Maximum retries for Management API calls. | `2` |
 | `management_additional_headers` | Hash | Additional HTTP headers for Management API calls. | `nil` |
-| `rate_limit_handler` | `#call` | Callback invoked with an `Auth0::Internal::Http::RateLimit` after every Management and Authentication API response, for monitoring rate-limit headroom. See [Rate Limit Monitoring](#rate-limit-monitoring). | `nil` |
+| `rate_limit_handler` | `#call` | Callback for monitoring rate-limit headroom. See [Rate Limit Monitoring](#rate-limit-monitoring). | `nil` |
 
 #### Accessing the Management Client Directly
 
@@ -286,7 +286,7 @@ client.users.list(
 
 ### Rate Limit Monitoring
 
-Auth0 returns `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers on API responses. Pass a `rate_limit_handler` to be notified of this data after every Management **and** Authentication API response, so you can monitor how close you are to the limit (for example, emit a metric and alert before you run out):
+Auth0 returns `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers on API responses. Pass a `rate_limit_handler` when building an `Auth0::Client` to be notified of this data, so you can monitor how close you are to the limit (for example, emit a metric and alert before you run out). It covers Management API calls and the Authentication API calls made through the client's HTTP layer (the JWKS fetch used by `validate_id_token` goes through a separate object and is not reported). It is not available on `Auth0::Management` directly.
 
 ```ruby
 client = Auth0::Client.new(
@@ -299,7 +299,7 @@ client = Auth0::Client.new(
 )
 ```
 
-The handler receives an `Auth0::Internal::Http::RateLimit` with `#limit`, `#remaining` (Integers), and `#reset` (a UTC `Time`); each is `nil` when the corresponding header is absent or non-numeric. It is invoked on every response — including the `429`s that trigger an automatic retry — so you can observe the point at which the limit was reached. The return value of your API call is unchanged, and an exception raised inside the handler is caught (and warned) so it can never break a request.
+The handler receives an object with `#limit`, `#remaining` (Integers), and `#reset` (a UTC `Time`); each is `nil` when the corresponding header is absent or non-numeric. It is invoked on every response, including the `429`s that trigger an automatic retry, so you can observe the point at which the limit was reached. The return value of your API call is unchanged, and an exception raised inside the handler is caught (and warned) so it can never break a request.
 
 ### Errors
 
