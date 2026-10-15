@@ -1,13 +1,14 @@
 require "addressable/uri"
 require "retryable"
 require_relative "../exception.rb"
+require_relative "../internal/http/rate_limit"
 
 module Auth0
   module Mixins
     # here's the proxy for Rest calls based on rest-client, we're building all request on that gem
     # for now, if you want to feel free to use your own http client
     module HTTPProxy
-      attr_accessor :headers, :base_uri, :timeout, :retry_count
+      attr_accessor :headers, :base_uri, :timeout, :retry_count, :rate_limit_handler
       DEFAULT_RETRIES = 3
       MAX_ALLOWED_RETRIES = 10
       MAX_REQUEST_RETRY_JITTER = 250
@@ -93,6 +94,13 @@ module Auth0
           call(:post, encode_uri(uri), timeout, form_post_headers, body.compact)
         else
           call(method, encode_uri(uri), timeout, headers, body.to_json)
+        end
+
+        # Surface rate limit for each response, including 429 retries. `call`
+        # returns nil for some errors (e.g. a dropped connection), so skip it then.
+        if @rate_limit_handler && !result.nil?
+          rate_limit = Auth0::Internal::Http::RateLimit.from_headers(result.headers)
+          Auth0::Internal::Http::RateLimit.deliver(@rate_limit_handler, rate_limit)
         end
 
         case result.code

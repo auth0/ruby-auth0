@@ -85,14 +85,39 @@ module Auth0
     def management
       current_token = get_token
       if @_management.nil? || @_management_token != current_token
-        @_management_token = current_token
         opts = { token: current_token, base_url: "#{@base_uri}/api/v2" }
         opts[:timeout] = @management_timeout if @management_timeout
         opts[:max_retries] = @management_max_retries if @management_max_retries
         opts[:headers] = @management_additional_headers if @management_additional_headers
-        @_management = Auth0::Management.new(**opts)
+        management = Auth0::Management.new(**opts)
+        # Attach before caching so a failed attach doesn't leave a handler-less
+        # management cached (the next call would then skip the rebuild).
+        attach_rate_limit_handler(management)
+        @_management = management
+        @_management_token = current_token
       end
       @_management
+    end
+
+    private
+
+    # Attaches the configured rate limit handler to the management client's raw
+    # client. Fails loudly rather than silently skipping, so a future change to
+    # the generated client's internals surfaces instead of quietly disabling it.
+    # @param management [Auth0::Management]
+    # @return [void]
+    # @raise [Auth0::Exception] if the management client exposes no compatible raw client
+    def attach_rate_limit_handler(management)
+      return if @rate_limit_handler.nil?
+
+      raw_client = management.instance_variable_get(:@raw_client)
+      unless raw_client.respond_to?(:rate_limit_handler=)
+        raise Auth0::Exception,
+              "Unable to attach rate_limit_handler: the management client does not expose a compatible raw client. " \
+              "This likely means the ruby-auth0 internals changed. Please report it."
+      end
+
+      raw_client.rate_limit_handler = @rate_limit_handler
     end
   end
 end
