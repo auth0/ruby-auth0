@@ -1,64 +1,10 @@
 # DO NOT EDIT MANUALLY - Managed by Fern Replay
 version: "1.0"
 generations:
-  - commit_sha: 78ff190749feb3803b4e9629d57294e4b09d3ead
-    tree_hash: c3e180060dcea59de5c4290a242c66639e5cecff
-    timestamp: 2026-07-14T04:31:08.668Z
+  - commit_sha: 1af018d42213a5a5a4a5857b8ee326c968405184
+    tree_hash: 26cc3589bfbfef3bd26972743969ea67451c2a23
+    timestamp: 2026-10-27T11:22:31.372Z
     cli_version: unknown
     generator_versions: {}
-  - commit_sha: 6caf043a4469185ba0f690eb2da7c6889138f4d7
-    tree_hash: dbc1a9fac4f5566751f2760dc8e1191d47892bd5
-    timestamp: 2026-07-14T04:31:09.152Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.13.1
-  - commit_sha: 428032101d1791fe97573af36427e664fe4e1e88
-    tree_hash: 231d5c443ba4120855bd439d858060fc178043cd
-    timestamp: 2026-07-15T09:11:13.405Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.13.1
-  - commit_sha: d8a88028849ce519e8fdc20765c78e367f372110
-    tree_hash: 3e4eff170915344776a2c1e921a378a13c54afd1
-    timestamp: 2026-07-21T07:06:12.329Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.17.8
-  - commit_sha: ff82f16a518e8ee51b23570ed1a303f3c070ff02
-    tree_hash: 6b4ba82c8dbe3556b6c8e7dd4f7c4d32671aa12a
-    timestamp: 2026-08-04T06:22:44.311Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.17.8
-  - commit_sha: 1cfe82c679b6122773317ebd41bff24b09388b3d
-    tree_hash: a7034ef350a9bfaa17781b64316723f688b91e18
-    timestamp: 2026-08-19T06:07:50.024Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.17.8
-  - commit_sha: 78116dc530cd08317c9323863f3127c2fdec29ee
-    tree_hash: d0d935e417bf22e33c1c1eb9c6c43371d35907c0
-    timestamp: 2026-09-02T09:27:17.154Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.17.8
-  - commit_sha: 83074ed870797568e512cc7f0fb71dc679cdd7f4
-    tree_hash: cbc5c6ccd2dfd5be3b5d68f7bc45a51e62fa6704
-    timestamp: 2026-09-15T12:33:08.051Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.24.1
-  - commit_sha: ddd12c1ca38e6c93db2c1d30e4194a2ecbca03ba
-    tree_hash: fa2bf11afbbd64aff874ac158dfaf67412ee73d7
-    timestamp: 2026-09-29T05:46:29.187Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.24.1
-  - commit_sha: 3ee763815dcd7a7a39f5c3c7c6bd40d4de0014d6
-    tree_hash: 0ce0997d753141426376e5ff1dcc183ea138c84e
-    timestamp: 2026-10-13T10:24:06.305Z
-    cli_version: unknown
-    generator_versions:
-      fernapi/fern-ruby-sdk: 1.24.1
-current_generation: 3ee763815dcd7a7a39f5c3c7c6bd40d4de0014d6
+current_generation: 1af018d42213a5a5a4a5857b8ee326c968405184
 patches: []
