@@ -13,6 +13,7 @@ module Auth0
       WEBAUTHN_ROAMING = "webauthn-roaming"
       WEBAUTHN_PLATFORM = "webauthn-platform"
       RECOVERY_CODE = "recovery-code"
+      PASSKEY = "passkey"
     end
   end
 end

@@ -88,7 +88,8 @@ module Auth0
         #   client.experimentation.experiments.create(
         #     name: "name",
         #     feature_flag_id: "feature_flag_id",
-        #     authentication_flow: "authentication"
+        #     authentication_flow: "authentication",
+        #     allocation_strategy: "percentage"
         #   )
         #
         # @return [Auth0::Types::CreateExperimentResponseContent]

@@ -11,9 +11,9 @@ module Auth0
 
       field :mode, -> { Auth0::Types::BruteForceProtectionModeEnum }, optional: true, nullable: false
 
-      field :max_attempts, -> { Integer }, optional: true, nullable: false
-
       field :form_submission_mode, -> { Auth0::Types::BruteForceProtectionFormSubmissionModeEnum }, optional: true, nullable: false
+
+      field :max_attempts, -> { Integer }, optional: true, nullable: false
     end
   end
 end

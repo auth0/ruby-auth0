@@ -52,6 +52,8 @@ module Auth0
       field :authorization_policy, -> { Auth0::Types::ResourceServerAuthorizationPolicy }, optional: true, nullable: false
 
       field :client_id, -> { String }, optional: true, nullable: false
+
+      field :type, -> { Auth0::Types::ResourceServerTypeEnum }, optional: true, nullable: false
     end
   end
 end

@@ -3,7 +3,7 @@
 module Auth0
   module Types
     module UpdateVariationOverridesMap
-      # UpdateVariationOverridesMap is an alias for Hash
+      # UpdateVariationOverridesMap is an alias for Object
 
       # @option str [String]
       #

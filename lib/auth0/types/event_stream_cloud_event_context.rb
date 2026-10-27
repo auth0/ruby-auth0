@@ -15,6 +15,8 @@ module Auth0
       field :request, -> { Auth0::Types::EventStreamCloudEventContextRequest }, optional: true, nullable: false
 
       field :tenant, -> { Auth0::Types::EventStreamCloudEventContextTenant }, optional: false, nullable: false
+
+      field :transaction, -> { Auth0::Types::EventStreamCloudEventContextTransaction }, optional: true, nullable: false
     end
   end
 end

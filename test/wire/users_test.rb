@@ -152,6 +152,71 @@ class UsersWireTest < WireMockTestCase
     )
   end
 
+  def test_users_list_consent_signing_keys_with_wiremock
+    test_id = "users.list_consent_signing_keys.0"
+
+    @client.users.list_consent_signing_keys(
+      id: "id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "users.list_consent_signing_keys.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/users/id/consent-signing-keys",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_users_get_consent_signing_key_with_wiremock
+    test_id = "users.get_consent_signing_key.0"
+
+    @client.users.get_consent_signing_key(
+      id: "id",
+      kid: "kid",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "users.get_consent_signing_key.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/users/id/consent-signing-keys/kid",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_users_delete_consent_signing_key_with_wiremock
+    test_id = "users.delete_consent_signing_key.0"
+
+    @client.users.delete_consent_signing_key(
+      id: "id",
+      kid: "kid",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "users.delete_consent_signing_key.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "DELETE",
+      url_path: "/users/id/consent-signing-keys/kid",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_users_regenerate_recovery_code_with_wiremock
     test_id = "users.regenerate_recovery_code.0"
 

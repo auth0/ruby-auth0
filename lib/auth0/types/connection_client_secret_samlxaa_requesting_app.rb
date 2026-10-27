@@ -2,8 +2,8 @@
 
 module Auth0
   module Types
-    module ListAttackProtectionCaptchaPoliciesResponseContent
-      # ListAttackProtectionCaptchaPoliciesResponseContent is an alias for Array
+    module ConnectionClientSecretSamlxaaRequestingApp
+      # ConnectionClientSecretSamlxaaRequestingApp is an alias for String
 
       # @option str [String]
       #

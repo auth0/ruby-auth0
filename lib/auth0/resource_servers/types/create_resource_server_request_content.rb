@@ -45,6 +45,8 @@ module Auth0
         field :subject_type_authorization, -> { Auth0::Types::ResourceServerSubjectTypeAuthorization }, optional: true, nullable: false
 
         field :authorization_policy, -> { Auth0::Types::ResourceServerAuthorizationPolicy }, optional: true, nullable: false
+
+        field :type, -> { Auth0::Types::ResourceServerTypeEnum }, optional: true, nullable: false
       end
     end
   end
