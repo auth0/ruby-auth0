@@ -90,6 +90,26 @@ describe Auth0::Mixins::HTTPProxy do
     _(seen).must_equal [1, 0, 99]
   end
 
+  it "does not call the handler (or warn) when call returns nil for a dropped connection" do
+    called = false
+    proxy = DummyProxy.new(
+      base_uri: "https://tenant.auth0.com",
+      rate_limit_handler: ->(_rate_limit) { called = true }
+    )
+    stub_request(:get, "https://tenant.auth0.com/userinfo").to_raise(RestClient::ServerBrokeConnection)
+
+    # The nil response still fails downstream as before, but the failure must come
+    # from `nil.code` in the status dispatch, not `nil.headers` in the notify path.
+    # (Without the guard, this would raise NoMethodError for `headers` instead.)
+    error = nil
+    assert_output(nil, "") do
+      error = _(-> { proxy.request(:get, "/userinfo") }).must_raise NoMethodError
+    end
+
+    _(error.name).must_equal :code
+    _(called).must_equal false
+  end
+
   it "swallows and warns when the handler raises, without breaking the request" do
     proxy = DummyProxy.new(
       base_uri: "https://tenant.auth0.com",
