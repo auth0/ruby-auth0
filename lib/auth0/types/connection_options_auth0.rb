@@ -28,6 +28,8 @@ module Auth0
 
       field :mfa, -> { Auth0::Types::ConnectionMfa }, optional: true, nullable: false
 
+      field :otp_settings, -> { Auth0::Types::ConnectionOtpSettings }, optional: true, nullable: false
+
       field :passkey_options, -> { Auth0::Types::ConnectionPasskeyOptions }, optional: true, nullable: false
 
       field :password_policy, -> { Auth0::Types::ConnectionPasswordPolicyEnum }, optional: true, nullable: false, api_name: "passwordPolicy"

@@ -16,6 +16,8 @@ module Auth0
 
       field :strategy, -> { Auth0::Types::CreateConnectionRequestContentSAMLStrategy }, optional: false, nullable: false
 
+      field :cross_app_access_requesting_app, -> { Auth0::Types::CrossAppAccessRequestingApp }, optional: true, nullable: false
+
       field :cross_app_access_resource_app, -> { Auth0::Types::ConnectionCrossAppAccessResourceApp }, optional: true, nullable: false
 
       field :options, -> { Auth0::Types::ConnectionOptionsSAML }, optional: true, nullable: false

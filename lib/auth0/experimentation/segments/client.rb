@@ -23,12 +23,14 @@ module Auth0
         # @option params [String, nil] :from
         # @option params [Integer, nil] :take
         # @option params [Auth0::Types::SegmentTypeFilterEnum, nil] :type
+        # @option params [Auth0::Types::SegmentStatusEnum, nil] :status
         #
         # @example
         #   client.experimentation.segments.list(
         #     from: "from",
         #     take: 1,
-        #     type: "auth0"
+        #     type: "auth0",
+        #     status: "active"
         #   )
         #
         # @return [Auth0::Types::ListSegmentsResponseContent]
@@ -38,6 +40,7 @@ module Auth0
           query_params["from"] = params[:from] if params.key?(:from)
           query_params["take"] = params.fetch(:take, 50)
           query_params["type"] = params[:type] if params.key?(:type)
+          query_params["status"] = params[:status] if params.key?(:status)
 
           Auth0::Internal::CursorItemIterator.new(
             cursor_field: :next_,

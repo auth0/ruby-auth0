@@ -10,6 +10,8 @@ module Auth0
           field :take, -> { Integer }, optional: true, nullable: false
 
           field :type, -> { Auth0::Types::SegmentTypeFilterEnum }, optional: true, nullable: false
+
+          field :status, -> { Auth0::Types::SegmentStatusEnum }, optional: true, nullable: false
         end
       end
     end

@@ -15,7 +15,7 @@ module Auth0
 
           field :default_config, -> { Auth0::Types::DefaultConfigEnum }, optional: true, nullable: false
 
-          field :allocation_strategy, -> { Auth0::Types::AllocationStrategyEnum }, optional: true, nullable: false
+          field :allocation_strategy, -> { Auth0::Types::AllocationStrategyEnum }, optional: false, nullable: false
 
           field :allocations, -> { Internal::Types::Array[Auth0::Types::AllocationRequestItem] }, optional: true, nullable: false
 

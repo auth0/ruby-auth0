@@ -25,6 +25,8 @@ module Auth0
 
       field :custom_scripts, -> { Auth0::Types::ConnectionCustomScripts }, optional: true, nullable: false, api_name: "customScripts"
 
+      field :otp_settings, -> { Auth0::Types::ConnectionOtpSettings }, optional: true, nullable: false
+
       field :authentication_methods, -> { Auth0::Types::ConnectionAuthenticationMethods }, optional: true, nullable: false
 
       field :passkey_options, -> { Auth0::Types::ConnectionPasskeyOptions }, optional: true, nullable: false

@@ -40,6 +40,10 @@ module Auth0
 
       field :non_persistent_attrs, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
+      field :client_id, -> { String }, optional: true, nullable: false
+
+      field :client_secret, -> { String }, optional: true, nullable: false
+
       field :debug, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :deflate, -> { Internal::Types::Boolean }, optional: true, nullable: false

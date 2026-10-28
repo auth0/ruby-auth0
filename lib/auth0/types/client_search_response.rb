@@ -119,6 +119,8 @@ module Auth0
 
       field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
 
+      field :oidc_support, -> { Auth0::Types::ClientOidcSupport }, optional: true, nullable: false
+
       field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false
 
       field :resource_server_identifier, -> { String }, optional: true, nullable: false

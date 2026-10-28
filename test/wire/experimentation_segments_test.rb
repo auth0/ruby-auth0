@@ -19,6 +19,7 @@ class ExperimentationSegmentsWireTest < WireMockTestCase
       from: "from",
       take: 1,
       type: "auth0",
+      status: "active",
       request_options: {
         additional_headers: {
           "X-Test-Id" => "experimentation.segments.list.0"

@@ -438,6 +438,126 @@ module Auth0
         end
       end
 
+      # Retrieve all consent signing keys registered for a user. Returns an empty array when the user has no keys
+      # registered.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      #
+      # @example
+      #   client.users.list_consent_signing_keys(id: "id")
+      #
+      # @return [Array[Auth0::Types::ConsentSigningKey]]
+      def list_consent_signing_keys(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        request = Auth0::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "users/#{URI.encode_uri_component(params[:id].to_s)}/consent-signing-keys",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Auth0::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Auth0::Types::ListUserConsentSigningKeysResponseContent.load(response.body))
+        else
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Retrieve a single consent signing key for a user by its key identifier (kid). Returns 404 if the key does not
+      # exist.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      # @option params [String] :kid
+      #
+      # @example
+      #   client.users.get_consent_signing_key(
+      #     id: "id",
+      #     kid: "kid"
+      #   )
+      #
+      # @return [Auth0::Types::ConsentSigningKey]
+      def get_consent_signing_key(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        request = Auth0::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "users/#{URI.encode_uri_component(params[:id].to_s)}/consent-signing-keys/#{URI.encode_uri_component(params[:kid].to_s)}",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Auth0::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Auth0::Types::ConsentSigningKey.load(response.body))
+        else
+          error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Remove a single consent signing key for a user by its key identifier (kid). The operation is idempotent and
+      # returns 204 whether or not the key existed.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :id
+      # @option params [String] :kid
+      #
+      # @example
+      #   client.users.delete_consent_signing_key(
+      #     id: "id",
+      #     kid: "kid"
+      #   )
+      #
+      # @return [untyped]
+      def delete_consent_signing_key(request_options: {}, **params)
+        params = Auth0::Internal::Types::Utils.normalize_keys(params)
+        request = Auth0::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "DELETE",
+          path: "users/#{URI.encode_uri_component(params[:id].to_s)}/consent-signing-keys/#{URI.encode_uri_component(params[:kid].to_s)}",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Auth0::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        return if code.between?(200, 299)
+
+        error_class = Auth0::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(response.body, code: code)
+      end
+
       # Remove an existing multi-factor authentication (MFA) [recovery
       # code](https://auth0.com/docs/secure/multi-factor-authentication/reset-user-mfa) and generate a new one. If a
       # user cannot access the original device or account used for MFA enrollment, they can use a recovery code to
