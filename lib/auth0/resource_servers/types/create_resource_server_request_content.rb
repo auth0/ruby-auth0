@@ -46,6 +46,8 @@ module Auth0
 
         field :authorization_policy, -> { Auth0::Types::ResourceServerAuthorizationPolicy }, optional: true, nullable: false
 
+        field :agent_subject_claims, -> { Auth0::Types::ResourceServerAgentSubjectClaimsSchemaEnum }, optional: true, nullable: false
+
         field :type, -> { Auth0::Types::ResourceServerTypeEnum }, optional: true, nullable: false
       end
     end

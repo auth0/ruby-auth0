@@ -22,6 +22,8 @@ module Auth0
 
         field :external_client_id, -> { String }, optional: true, nullable: false
 
+        field :agent_id, -> { String }, optional: true, nullable: false
+
         field :q, -> { String }, optional: true, nullable: false
       end
     end

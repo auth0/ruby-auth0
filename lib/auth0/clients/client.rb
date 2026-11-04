@@ -54,6 +54,7 @@ module Auth0
       # @option params [Boolean, nil] :is_first_party
       # @option params [String, nil] :app_type
       # @option params [String, nil] :external_client_id
+      # @option params [String, nil] :agent_id
       # @option params [String, nil] :q
       #
       # @example
@@ -67,6 +68,7 @@ module Auth0
       #     is_first_party: true,
       #     app_type: "app_type",
       #     external_client_id: "external_client_id",
+      #     agent_id: "agent_id",
       #     q: "q"
       #   )
       #
@@ -83,6 +85,7 @@ module Auth0
         query_params["is_first_party"] = params[:is_first_party] if params.key?(:is_first_party)
         query_params["app_type"] = params[:app_type] if params.key?(:app_type)
         query_params["external_client_id"] = params[:external_client_id] if params.key?(:external_client_id)
+        query_params["agent_id"] = params[:agent_id] if params.key?(:agent_id)
         query_params["q"] = params[:q] if params.key?(:q)
 
         Auth0::Internal::OffsetItemIterator.new(

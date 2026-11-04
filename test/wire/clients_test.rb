@@ -25,6 +25,7 @@ class ClientsWireTest < WireMockTestCase
       is_first_party: true,
       app_type: "app_type",
       external_client_id: "external_client_id",
+      agent_id: "agent_id",
       q: "q",
       request_options: {
         additional_headers: {

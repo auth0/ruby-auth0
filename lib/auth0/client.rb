@@ -151,6 +151,11 @@ module Auth0
       @organizations ||= Auth0::Organizations::Client.new(client: @raw_client)
     end
 
+    # @return [Auth0::Portals::Client]
+    def portals
+      @portals ||= Auth0::Portals::Client.new(client: @raw_client)
+    end
+
     # @return [Auth0::Prompts::Client]
     def prompts
       @prompts ||= Auth0::Prompts::Client.new(client: @raw_client)

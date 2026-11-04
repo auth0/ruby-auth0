@@ -51,6 +51,8 @@ module Auth0
 
       field :client_id, -> { String }, optional: true, nullable: false
 
+      field :agent_subject_claims, -> { Auth0::Types::ResourceServerAgentSubjectClaimsResponseEnum }, optional: true, nullable: false
+
       field :type, -> { Auth0::Types::ResourceServerTypeEnum }, optional: true, nullable: false
     end
   end
