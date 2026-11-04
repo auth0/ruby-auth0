@@ -76,6 +76,12 @@ module Auth0
 
       field :sign_out_endpoint, -> { String }, optional: true, nullable: false, api_name: "signOutEndpoint"
 
+      field :token_endpoint_auth_method, -> { Auth0::Types::ConnectionTokenEndpointAuthMethodEnum }, optional: true, nullable: false
+
+      field :token_endpoint_auth_signing_alg, -> { Auth0::Types::ConnectionTokenEndpointAuthSigningAlgEnum }, optional: true, nullable: false
+
+      field :token_endpoint_jwtca_aud_format, -> { Auth0::Types::ConnectionTokenEndpointJwtcaAudFormatEnumOidc }, optional: true, nullable: false
+
       field :user_id_attribute, -> { String }, optional: true, nullable: false
     end
   end

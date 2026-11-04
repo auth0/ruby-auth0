@@ -13,6 +13,8 @@ module Auth0
       field :organization_discovery_methods, -> { Auth0::Types::ClientProfileClientConfigurationOrganizationDiscoveryMethods }, optional: true, nullable: false
 
       field :require_proof_of_possession, -> { Auth0::Types::ClientProfileClientConfigurationRequireProofOfPossession }, optional: true, nullable: false
+
+      field :oidc_support, -> { Auth0::Types::ClientProfileClientConfigurationOidcSupport }, optional: true, nullable: false
     end
   end
 end

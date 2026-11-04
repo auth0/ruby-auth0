@@ -122,6 +122,8 @@ module Auth0
 
         field :async_approval_notification_channels, -> { Internal::Types::Array[Auth0::Types::AsyncApprovalNotificationsChannelsEnum] }, optional: true, nullable: false
 
+        field :agent_id, -> { String }, optional: true, nullable: false
+
         field :oidc_support, -> { Auth0::Types::ClientOidcSupportPost }, optional: true, nullable: false
       end
     end

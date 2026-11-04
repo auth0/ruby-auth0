@@ -124,6 +124,8 @@ module Auth0
 
         field :redirection_policy, -> { Auth0::Types::ClientRedirectionPolicyEnum }, optional: true, nullable: false
 
+        field :agent_id, -> { String }, optional: true, nullable: false
+
         field :oidc_support, -> { Auth0::Types::ClientOidcSupportPatch }, optional: true, nullable: false
       end
     end

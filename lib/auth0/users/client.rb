@@ -438,7 +438,7 @@ module Auth0
         end
       end
 
-      # Retrieve all consent signing keys registered for a user. Returns an empty array when the user has no keys
+      # Retrieve all consent signing keys registered for a user. Returns an empty `keys` array when the user has no keys
       # registered.
       #
       # @param request_options [Hash]
@@ -453,7 +453,7 @@ module Auth0
       # @example
       #   client.users.list_consent_signing_keys(id: "id")
       #
-      # @return [Array[Auth0::Types::ConsentSigningKey]]
+      # @return [Auth0::Types::ListUserConsentSigningKeysResponseContent]
       def list_consent_signing_keys(request_options: {}, **params)
         params = Auth0::Internal::Types::Utils.normalize_keys(params)
         request = Auth0::Internal::JSON::Request.new(

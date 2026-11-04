@@ -2,22 +2,8 @@
 
 module Auth0
   module Types
-    module ListUserConsentSigningKeysResponseContent
-      # ListUserConsentSigningKeysResponseContent is an alias for Array
-
-      # @option str [String]
-      #
-      # @return [untyped]
-      def self.load(str)
-        ::JSON.parse(str)
-      end
-
-      # @option value [untyped]
-      #
-      # @return [String]
-      def self.dump(value)
-        ::JSON.generate(value)
-      end
+    class ListUserConsentSigningKeysResponseContent < Internal::Types::Model
+      field :keys, -> { Internal::Types::Array[Auth0::Types::ConsentSigningKey] }, optional: false, nullable: false
     end
   end
 end

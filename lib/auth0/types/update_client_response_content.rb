@@ -141,6 +141,8 @@ module Auth0
 
       field :external_metadata_status, -> { Auth0::Types::ClientExternalMetadataStatusEnum }, optional: true, nullable: false
 
+      field :agent_id, -> { String }, optional: true, nullable: false
+
       field :external_client_id, -> { String }, optional: true, nullable: false
 
       field :jwks_uri, -> { String }, optional: true, nullable: false
