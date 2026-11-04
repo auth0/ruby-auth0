@@ -1,5 +1,13 @@
 # Change Log
 
+## [v6.6.0](https://github.com/auth0/ruby-auth0/tree/v6.6.0) (2026-11-04)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.5.0...v6.6.0)
+
+**Added**
+- feat!: add Portals, Client agent_id and agent subject claims, and wrap Consent Signing Keys list response [\#824](https://github.com/auth0/ruby-auth0/pull/824) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Consent Signing Keys, OTP Settings, Resource Server type and Management tenant_domain, and remove Captcha Policies [\#821](https://github.com/auth0/ruby-auth0/pull/821) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: expose Management API rate limit info via a client callback [\#774](https://github.com/auth0/ruby-auth0/pull/774) ([ProdigyTom](https://github.com/ProdigyTom))
+
 ## [v6.5.0](https://github.com/auth0/ruby-auth0/tree/v6.5.0) (2026-10-14)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.4.0...v6.5.0)
 
