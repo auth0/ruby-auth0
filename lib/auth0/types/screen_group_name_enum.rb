@@ -35,6 +35,7 @@ module Auth0
       CUSTOM_FORM = "custom-form"
       CONSENT = "consent"
       CONSENT_TENANT_SCOPES = "consent-tenant-scopes"
+      PENDING_CONSENT = "pending-consent"
       CUSTOMIZED_CONSENT = "customized-consent"
       LOGOUT = "logout"
       LOGOUT_COMPLETE = "logout-complete"
