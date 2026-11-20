@@ -89,6 +89,10 @@ module Auth0
 
       field :use_oauth_spec_scope, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "useOauthSpecScope"
 
+      field :client_id, -> { String }, optional: true, nullable: false
+
+      field :allowed_audiences, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+
       field :discovery_url, -> { String }, optional: true, nullable: false
 
       field :oidc_metadata, -> { Auth0::Types::ConnectionsOidcMetadata }, optional: true, nullable: false

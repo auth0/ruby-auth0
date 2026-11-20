@@ -52,8 +52,6 @@ module Auth0
 
       field :improved_signup_bot_detection_in_classic, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
-      field :genai_trial, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
       field :local_resource_discovery, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
       field :enable_dynamic_client_registration, -> { Internal::Types::Boolean }, optional: true, nullable: false

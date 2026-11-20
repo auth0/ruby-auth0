@@ -111,6 +111,8 @@ module Auth0
 
       field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationResponseConfiguration }, optional: true, nullable: false
 
+      field :google_account_linking, -> { Auth0::Types::GoogleAccountLinkingConfiguration }, optional: true, nullable: false
+
       field :identity_assertion_authorization_grant, -> { Auth0::Types::IdentityAssertionAuthorizationGrant }, optional: true, nullable: false
 
       field :anonymous_sessions, -> { Auth0::Types::AnonymousSessions }, optional: true, nullable: false

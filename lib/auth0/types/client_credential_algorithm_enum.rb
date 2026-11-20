@@ -8,6 +8,8 @@ module Auth0
       RS256 = "RS256"
       RS384 = "RS384"
       PS256 = "PS256"
+      ES256 = "ES256"
+      PS384 = "PS384"
     end
   end
 end

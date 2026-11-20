@@ -25,6 +25,8 @@ module Auth0
 
           field :third_party_client_access_config, -> { Auth0::Types::ThirdPartyClientAccessConfig }, optional: true, nullable: false
 
+          field :universal_logout_config, -> { Auth0::Types::SelfServiceProfileSSOTicketUniversalLogoutConfig }, optional: true, nullable: false
+
           field :enabled_features, -> { Auth0::Types::SelfServiceProfileSSOTicketEnabledFeatures }, optional: true, nullable: false
         end
       end
