@@ -2,8 +2,8 @@
 
 module Auth0
   module Types
-    # OIDC support configuration for a client. Controls whether OIDC flows are allowed and which scopes the client may
-    # request.
+    # Controls whether the client can receive ID tokens and use the UserInfo endpoint, and which user profile
+    # information it can request through OIDC scopes.
     class ClientOidcSupportPost < Internal::Types::Model
       field :is_allowed, -> { Internal::Types::Boolean }, optional: false, nullable: false
 
