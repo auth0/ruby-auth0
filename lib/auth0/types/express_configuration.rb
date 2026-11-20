@@ -21,6 +21,8 @@ module Auth0
       field :admin_login_domain, -> { String }, optional: false, nullable: false
 
       field :oin_submission_id, -> { String }, optional: true, nullable: false
+
+      field :okta_oin_listing_url, -> { String }, optional: true, nullable: false
     end
   end
 end

@@ -6,6 +6,7 @@ module Auth0
       extend Auth0::Internal::Types::Enum
 
       UNIVERSAL_COMMERCE_PROTOCOL_SERVER = "universal_commerce_protocol_server"
+      MODEL_CONTEXT_PROTOCOL_SERVER = "model_context_protocol_server"
     end
   end
 end

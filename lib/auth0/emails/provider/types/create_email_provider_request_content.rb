@@ -11,7 +11,7 @@ module Auth0
 
           field :default_from_address, -> { String }, optional: true, nullable: false
 
-          field :credentials, -> { Auth0::Types::EmailProviderCredentialsSchema }, optional: false, nullable: false
+          field :credentials, -> { Auth0::Types::EmailProviderCredentialsSchema }, optional: true, nullable: false
 
           field :settings, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
         end

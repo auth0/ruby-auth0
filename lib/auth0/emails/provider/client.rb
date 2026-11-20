@@ -94,12 +94,7 @@ module Auth0
         # @option request_options [Integer] :timeout_in_seconds
         #
         # @example
-        #   client.emails.provider.create(
-        #     name: "mailgun",
-        #     credentials: {
-        #       api_key: "api_key"
-        #     }
-        #   )
+        #   client.emails.provider.create(name: "mailgun")
         #
         # @return [Auth0::Types::CreateEmailProviderResponseContent]
         def create(request_options: {}, **params)
