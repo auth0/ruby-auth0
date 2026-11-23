@@ -24,5 +24,355 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-ruby-sdk: 1.24.1
-current_generation: 8f16c5ba6ce970469e504f47fbe5605b379de124
-patches: []
+  - commit_sha: 487253cd95fb1305c370bf0973df6d53933310b6
+    tree_hash: dd91d8b7b6ceb2adad8f927f904c401ef91d81b9
+    timestamp: 2026-11-20T12:35:07.175Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-ruby-sdk: 1.24.1
+current_generation: 487253cd95fb1305c370bf0973df6d53933310b6
+patches:
+  - id: patch-5a1782fc
+    content_hash: sha256:8aea3ea0a93faa21d0607694f46b315971db566c5f330f592ae3a221b3e45335
+    original_commit: 5a1782fc06064e114f3c868c806d09f5bcb84e4b
+    original_message: Restore Management client options and auth_client require
+    original_author: Snehil Kishore <snehil.kishore@okta.com>
+    base_generation: 487253cd95fb1305c370bf0973df6d53933310b6
+    files:
+      - lib/auth0/client.rb
+    patch_content: |
+      diff --git a/lib/auth0/client.rb b/lib/auth0/client.rb
+      index 96eb01a7..7f110150 100644
+      --- a/lib/auth0/client.rb
+      +++ b/lib/auth0/client.rb
+      @@ -4,27 +4,31 @@ module Auth0
+         class Management
+           # @param token [String]
+           # @param base_url [String, nil]
+      -    # @param tenant_domain [String, nil]
+      -    # @param max_retries [Integer]
+      +    # @param tenant_domain [String, nil] Tenant domain, such as "example.auth0.com", used to build the base URL.
+      +    # @param timeout [Float, nil] Request timeout in seconds.
+      +    # @param max_retries [Integer] Maximum number of request retries, defaults to 2.
+      +    # @param headers [Hash, nil] Additional headers to include in requests.
+           #
+           # @return [void]
+      -    def initialize(token:, base_url: nil, tenant_domain: nil, max_retries: 2)
+      +    def initialize(token:, base_url: nil, tenant_domain: nil, timeout: nil, max_retries: 2, headers: nil)
+             unless tenant_domain.nil?
+      -        tenant_domain_value = tenant_domain.nil? ? "{TENANT}.auth0.com" : tenant_domain
+               environment_url_templates = {
+      -          Auth0::Environment::DEFAULT => "https://#{tenant_domain_value}/api/v2"
+      +          Auth0::Environment::DEFAULT => "https://#{tenant_domain}/api/v2"
+               }
+      -        base_url = base_url.nil? ? "https://#{tenant_domain_value}/api/v2" : environment_url_templates.fetch(base_url, base_url)
+      +        base_url = base_url.nil? ? "https://#{tenant_domain}/api/v2" : environment_url_templates.fetch(base_url, base_url)
+             end
+       
+      -      @raw_client = Auth0::Internal::Http::RawClient.new(
+      +      raw_client_opts = {
+               base_url: base_url || Auth0::Environment::DEFAULT,
+               headers: {
+                 "X-Fern-Language" => "Ruby",
+                 Authorization: "Bearer #{token}"
+      -        },
+      -        max_retries: max_retries
+      -      )
+      +        }.merge(headers || {})
+      +      }
+      +      raw_client_opts[:timeout] = timeout if timeout
+      +      raw_client_opts[:max_retries] = max_retries if max_retries
+      +
+      +      @raw_client = Auth0::Internal::Http::RawClient.new(**raw_client_opts)
+           end
+       
+           # @return [Auth0::Actions::Client]
+      @@ -273,3 +277,5 @@ module Auth0
+           end
+         end
+       end
+      +
+      +require_relative "auth_client"
+    theirs_snapshot:
+      lib/auth0/client.rb: |
+        # frozen_string_literal: true
+
+        module Auth0
+          class Management
+            # @param token [String]
+            # @param base_url [String, nil]
+            # @param tenant_domain [String, nil] Tenant domain, such as "example.auth0.com", used to build the base URL.
+            # @param timeout [Float, nil] Request timeout in seconds.
+            # @param max_retries [Integer] Maximum number of request retries, defaults to 2.
+            # @param headers [Hash, nil] Additional headers to include in requests.
+            #
+            # @return [void]
+            def initialize(token:, base_url: nil, tenant_domain: nil, timeout: nil, max_retries: 2, headers: nil)
+              unless tenant_domain.nil?
+                environment_url_templates = {
+                  Auth0::Environment::DEFAULT => "https://#{tenant_domain}/api/v2"
+                }
+                base_url = base_url.nil? ? "https://#{tenant_domain}/api/v2" : environment_url_templates.fetch(base_url, base_url)
+              end
+
+              raw_client_opts = {
+                base_url: base_url || Auth0::Environment::DEFAULT,
+                headers: {
+                  "X-Fern-Language" => "Ruby",
+                  Authorization: "Bearer #{token}"
+                }.merge(headers || {})
+              }
+              raw_client_opts[:timeout] = timeout if timeout
+              raw_client_opts[:max_retries] = max_retries if max_retries
+
+              @raw_client = Auth0::Internal::Http::RawClient.new(**raw_client_opts)
+            end
+
+            # @return [Auth0::Actions::Client]
+            def actions
+              @actions ||= Auth0::Actions::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Agents::Client]
+            def agents
+              @agents ||= Auth0::Agents::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Branding::Client]
+            def branding
+              @branding ||= Auth0::Branding::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::ClientGrants::Client]
+            def client_grants
+              @client_grants ||= Auth0::ClientGrants::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::ClientProfiles::Client]
+            def client_profiles
+              @client_profiles ||= Auth0::ClientProfiles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Clients::Client]
+            def clients
+              @clients ||= Auth0::Clients::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::ConnectionProfiles::Client]
+            def connection_profiles
+              @connection_profiles ||= Auth0::ConnectionProfiles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Connections::Client]
+            def connections
+              @connections ||= Auth0::Connections::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::CustomDomains::Client]
+            def custom_domains
+              @custom_domains ||= Auth0::CustomDomains::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::DeviceCredentials::Client]
+            def device_credentials
+              @device_credentials ||= Auth0::DeviceCredentials::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::EmailTemplates::Client]
+            def email_templates
+              @email_templates ||= Auth0::EmailTemplates::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::EventStreams::Client]
+            def event_streams
+              @event_streams ||= Auth0::EventStreams::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Events::Client]
+            def events
+              @events ||= Auth0::Events::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Flows::Client]
+            def flows
+              @flows ||= Auth0::Flows::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Forms::Client]
+            def forms
+              @forms ||= Auth0::Forms::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::UserGrants::Client]
+            def user_grants
+              @user_grants ||= Auth0::UserGrants::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Groups::Client]
+            def groups
+              @groups ||= Auth0::Groups::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Guardian::Client]
+            def guardian
+              @guardian ||= Auth0::Guardian::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Hooks::Client]
+            def hooks
+              @hooks ||= Auth0::Hooks::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Jobs::Client]
+            def jobs
+              @jobs ||= Auth0::Jobs::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::LogStreams::Client]
+            def log_streams
+              @log_streams ||= Auth0::LogStreams::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Logs::Client]
+            def logs
+              @logs ||= Auth0::Logs::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::NetworkACLs::Client]
+            def network_acls
+              @network_acls ||= Auth0::NetworkACLs::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Organizations::Client]
+            def organizations
+              @organizations ||= Auth0::Organizations::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Portals::Client]
+            def portals
+              @portals ||= Auth0::Portals::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Prompts::Client]
+            def prompts
+              @prompts ||= Auth0::Prompts::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::RateLimitPolicies::Client]
+            def rate_limit_policies
+              @rate_limit_policies ||= Auth0::RateLimitPolicies::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::RefreshTokens::Client]
+            def refresh_tokens
+              @refresh_tokens ||= Auth0::RefreshTokens::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::ResourceServers::Client]
+            def resource_servers
+              @resource_servers ||= Auth0::ResourceServers::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Roles::Client]
+            def roles
+              @roles ||= Auth0::Roles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Rules::Client]
+            def rules
+              @rules ||= Auth0::Rules::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::RulesConfigs::Client]
+            def rules_configs
+              @rules_configs ||= Auth0::RulesConfigs::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::SelfServiceProfiles::Client]
+            def self_service_profiles
+              @self_service_profiles ||= Auth0::SelfServiceProfiles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Sessions::Client]
+            def sessions
+              @sessions ||= Auth0::Sessions::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Stats::Client]
+            def stats
+              @stats ||= Auth0::Stats::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::SupplementalSignals::Client]
+            def supplemental_signals
+              @supplemental_signals ||= Auth0::SupplementalSignals::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Tickets::Client]
+            def tickets
+              @tickets ||= Auth0::Tickets::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::TokenExchangeProfiles::Client]
+            def token_exchange_profiles
+              @token_exchange_profiles ||= Auth0::TokenExchangeProfiles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::UserAttributeProfiles::Client]
+            def user_attribute_profiles
+              @user_attribute_profiles ||= Auth0::UserAttributeProfiles::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::UserBlocks::Client]
+            def user_blocks
+              @user_blocks ||= Auth0::UserBlocks::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Users::Client]
+            def users
+              @users ||= Auth0::Users::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Anomaly::Client]
+            def anomaly
+              @anomaly ||= Auth0::Anomaly::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::AttackProtection::Client]
+            def attack_protection
+              @attack_protection ||= Auth0::AttackProtection::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Emails::Client]
+            def emails
+              @emails ||= Auth0::Emails::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Experimentation::Client]
+            def experimentation
+              @experimentation ||= Auth0::Experimentation::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Keys::Client]
+            def keys
+              @keys ||= Auth0::Keys::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::RiskAssessments::Client]
+            def risk_assessments
+              @risk_assessments ||= Auth0::RiskAssessments::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::Tenants::Client]
+            def tenants
+              @tenants ||= Auth0::Tenants::Client.new(client: @raw_client)
+            end
+
+            # @return [Auth0::VerifiableCredentials::Client]
+            def verifiable_credentials
+              @verifiable_credentials ||= Auth0::VerifiableCredentials::Client.new(client: @raw_client)
+            end
+          end
+        end
+
+        require_relative "auth_client"

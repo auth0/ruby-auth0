@@ -8,6 +8,8 @@ module Auth0
 
       field :custom, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
+      field :match_type, -> { Auth0::Types::PasswordDictionaryMatchTypeEnum }, optional: true, nullable: false
+
       field :default, -> { Auth0::Types::PasswordDefaultDictionariesEnum }, optional: true, nullable: false
     end
   end

@@ -24,6 +24,9 @@ module Auth0
       USER_NOTIFICATION = "user.notification"
       USER_SUCCESS = "user.success"
       ACTIONS = "actions"
+      AGENT_GATEWAY_AUTHENTICATION_FAIL = "agent_gateway.authentication.fail"
+      AGENT_GATEWAY_OPERATION_FAIL = "agent_gateway.operation.fail"
+      AGENT_GATEWAY_OPERATION_SUCCESS = "agent_gateway.operation.success"
       OTHER = "other"
     end
   end

@@ -39,9 +39,6 @@ class EmailsProviderWireTest < WireMockTestCase
 
     @client.emails.provider.create(
       name: "mailgun",
-      credentials: {
-        api_key: "api_key"
-      },
       request_options: {
         additional_headers: {
           "X-Test-Id" => "emails.provider.create.0"

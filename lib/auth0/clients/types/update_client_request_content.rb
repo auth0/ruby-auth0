@@ -118,6 +118,8 @@ module Auth0
 
         field :my_organization_configuration, -> { Auth0::Types::ClientMyOrganizationPatchConfiguration }, optional: true, nullable: false
 
+        field :google_account_linking, -> { Auth0::Types::GoogleAccountLinkingConfigurationOrNull }, optional: true, nullable: false
+
         field :async_approval_notification_channels, -> { Internal::Types::Array[Auth0::Types::AsyncApprovalNotificationsChannelsEnum] }, optional: true, nullable: false
 
         field :third_party_security_mode, -> { Auth0::Types::ClientThirdPartySecurityModeEnum }, optional: true, nullable: false
