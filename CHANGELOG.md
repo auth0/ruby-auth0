@@ -1,5 +1,12 @@
 # Change Log
 
+## [v6.7.0](https://github.com/auth0/ruby-auth0/tree/v6.7.0) (2026-11-23)
+[Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.6.0...v6.7.0)
+
+**Added**
+- feat!: add Google Account Linking, OIN listing URL and Universal Logout config, and remove genai_trial tenant flag [\#834](https://github.com/auth0/ruby-auth0/pull/834) ([fern-api[bot]](https://github.com/apps/fern-api))
+- feat: add Passkey Signup Behavior and Pending Consent screen [\#830](https://github.com/auth0/ruby-auth0/pull/830) ([fern-api[bot]](https://github.com/apps/fern-api))
+
 ## [v6.6.0](https://github.com/auth0/ruby-auth0/tree/v6.6.0) (2026-11-04)
 [Full Changelog](https://github.com/auth0/ruby-auth0/compare/v6.5.0...v6.6.0)
 
