@@ -3,7 +3,7 @@
 module Auth0
   module Types
     class AssociateOrganizationClientGrantResponseContent < Internal::Types::Model
-      field :id, -> { String }, optional: true, nullable: false
+      field :grant_id, -> { String }, optional: true, nullable: false
 
       field :client_id, -> { String }, optional: true, nullable: false
 
