@@ -30,14 +30,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-ruby-sdk: 1.24.1
-current_generation: 487253cd95fb1305c370bf0973df6d53933310b6
+  - commit_sha: fd2705dd12e4adc9de48bfb1b7bcaf2365b1b31c
+    tree_hash: 82d6d039af9ea1b32391137477935840e9dafa9b
+    timestamp: 2026-11-24T05:38:35.502Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-ruby-sdk: 1.24.1
+current_generation: fd2705dd12e4adc9de48bfb1b7bcaf2365b1b31c
 patches:
   - id: patch-5a1782fc
     content_hash: sha256:8aea3ea0a93faa21d0607694f46b315971db566c5f330f592ae3a221b3e45335
     original_commit: 5a1782fc06064e114f3c868c806d09f5bcb84e4b
     original_message: Restore Management client options and auth_client require
     original_author: Snehil Kishore <snehil.kishore@okta.com>
-    base_generation: 487253cd95fb1305c370bf0973df6d53933310b6
+    base_generation: fd2705dd12e4adc9de48bfb1b7bcaf2365b1b31c
     files:
       - lib/auth0/client.rb
     patch_content: |
@@ -376,3 +382,4 @@ patches:
         end
 
         require_relative "auth_client"
+    user_owned: true
