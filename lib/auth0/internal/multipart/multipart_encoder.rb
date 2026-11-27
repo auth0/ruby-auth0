@@ -47,10 +47,17 @@ module Auth0
 
         # Encode the given FormData object into a multipart/form-data payload.
         #
+        # Each call starts from an empty body and keeps the same boundary, so the
+        # payload can be encoded again when a request is retried.
+        #
         # @param form_data [FormData] The form data to encode
         # @return [String] The encoded body.
         def encode(form_data)
           return "" if form_data.parts.empty?
+
+          @body = String.new
+          @closed = false
+          @first_field = true
 
           form_data.parts.each do |part|
             write_part(part)
